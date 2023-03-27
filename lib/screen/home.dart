@@ -59,7 +59,9 @@ class HomeScreen extends StatelessWidget {
                   onTap: () {
                     Clipboard.setData(ClipboardData(text: projectUrl));
                     displaySnackBar(
-                        context, 'copied to clipboard: $projectUrl');
+                      context,
+                      'copied to clipboard: $projectUrl',
+                    );
                   },
                 ),
               ),
