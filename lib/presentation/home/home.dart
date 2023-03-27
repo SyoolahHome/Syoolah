@@ -1,39 +1,52 @@
 import 'package:ditto/presentation/home/widgets/logo.dart';
 import 'package:flutter/material.dart';
-
-import '../../BottomBar.dart';
-import '../../scan.dart';
+import '../../constants/colors.dart';
+import '../../widget/margined_body.dart';
 import 'widgets/go_button.dart';
 import 'widgets/name_field.dart';
+import 'widgets/or_divider.dart';
 import 'widgets/private_key_label.dart';
 import 'widgets/title.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    const heightSeparator = 10.0;
+
     return Scaffold(
-      backgroundColor: Colors.teal,
-      body: Center(
-          child: Column(
-        children: const <Widget>[
-          Logo(),
-          ScreenTitle(),
-          NameField(),
-          SizedBox(height: 20),
-          GoButton(),
-          SizedBox(height: 60),
-          PrivateKeyLabel(),
-        ],
-      )),
+      backgroundColor: AppColors.teal,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height,
+            minHeight: MediaQuery.of(context).size.height,
+            maxWidth: MediaQuery.of(context).size.width,
+            minWidth: MediaQuery.of(context).size.width,
+          ),
+          child: MarginedBody(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                SizedBox(height: heightSeparator * 3),
+                Spacer(),
+                Logo(),
+                // ScreenTitle(),
+                Spacer(),
+                NameField(),
+                SizedBox(height: heightSeparator),
+                GoButton(),
+                SizedBox(height: heightSeparator * 1.5),
+                OrDivider(),
+                SizedBox(height: heightSeparator * 1.5),
+                PrivateKeyLabel(),
+                SizedBox(height: heightSeparator * 2),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

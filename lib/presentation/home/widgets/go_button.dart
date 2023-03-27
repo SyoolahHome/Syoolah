@@ -1,5 +1,7 @@
+import 'package:ditto/constants/colors.dart';
 import 'package:ditto/constants/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../BottomBar.dart';
 
@@ -12,24 +14,44 @@ class GoButton extends StatelessWidget {
   final EdgeInsets padding;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.tealAccent,
-      ),
-      padding: padding,
-      child: InkWell(
-        child: const Text(
-          AppStrings.go,
-          style: TextStyle(color: Colors.black, fontSize: 20),
+    final scaffoldColor =
+        context.findAncestorWidgetOfExactType<Scaffold>()!.backgroundColor;
+
+    return Stack(
+      alignment: Alignment.centerRight,
+      children: <Widget>[
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomBar()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.white.withOpacity(0.95),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: Text(
+              AppStrings.continueText,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: scaffoldColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+          ),
         ),
-        onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomBar()),
-          );
-        },
-      ),
+        Container(
+          margin: const EdgeInsets.only(right: 10),
+          child: Icon(
+            FlutterRemix.arrow_right_fill,
+            color: scaffoldColor,
+          ),
+        )
+      ],
     );
   }
 }

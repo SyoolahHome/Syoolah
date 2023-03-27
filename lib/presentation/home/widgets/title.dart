@@ -7,12 +7,11 @@ class ScreenTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       AppStrings.homeTitle,
-      style: TextStyle(
-        fontSize: 22,
-        fontWeight: FontWeight.w700,
-      ),
+      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: Colors.white,
+          ),
     );
   }
 }
