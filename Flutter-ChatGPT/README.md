@@ -12,11 +12,13 @@ and the Flutter guide for
 -->
 
 ## ChatGPT Application with flutter
-ChatGPT is a chatbot launched by OpenAI in November 2022. It is built on top 
-of OpenAI's GPT-3.5 family of large language models, and is fine-tuned with both 
+
+ChatGPT is a chatbot launched by OpenAI in November 2022. It is built on top
+of OpenAI's GPT-3.5 family of large language models, and is fine-tuned with both
 supervised and reinforcement learning techniques.
 
 ## Install Package
+
 ```dart
 chat_gpt: 2.0.4
 ```
@@ -24,14 +26,15 @@ chat_gpt: 2.0.4
 ## Example
 
 Create ChatGPT Instance
- - Parameter
-   - Token
-     - Your secret API keys are listed below. Please note that we do not display your secret API keys again after you generate them. 
-     - Do not share your API key with others, or expose it in the browser or other client-side code. In order to protect the security of your account, OpenAI may also automatically rotate any API key that we've found has leaked publicly.
-     - https://beta.openai.com/account/api-keys
-  - OrgId
-     - Identifier for this organization sometimes used in API requests
-     - https://beta.openai.com/account/org-settings
+
+- Parameter
+  - Token
+    - Your secret API keys are listed below. Please note that we do not display your secret API keys again after you generate them.
+    - Do not share your API key with others, or expose it in the browser or other client-side code. In order to protect the security of your account, OpenAI may also automatically rotate any API key that we've found has leaked publicly.
+    - https://beta.openai.com/account/api-keys
+- OrgId
+  - Identifier for this organization sometimes used in API requests
+  - https://beta.openai.com/account/org-settings
 
 ```dart
 final openAI = OpenAI.instance.build(token: token,baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 5)),isLogger: true);
@@ -62,6 +65,7 @@ final request = CompleteText(prompt: translateEngToThai(word: ''),
 ```
 
 - Complete with StreamBuilder
+
 ```dart
 final tController = StreamController<CTResponse?>.broadcast();
 
@@ -77,7 +81,7 @@ StreamBuilder<CTResponse?>(
  stream: tController.stream,
  builder: (context, snapshot) {
    final data = snapshot.data;
-   if(snapshot.connectionState == ConnectionState.done) return something 
+   if(snapshot.connectionState == ConnectionState.done) return something
    if(snapshot.connectionState == ConnectionState.waiting) return something
    return something
 })
@@ -97,8 +101,9 @@ StreamBuilder<CTResponse?>(
 }
 ```
 
-- Example Q&A 
+- Example Q&A
   - Answer questions based on existing knowledge.
+
 ```dart
 final request = CompleteText(prompt:'What is human life expectancy in the United States?'),
                 model: kTranslateModelV3, maxTokens: 200);
@@ -108,8 +113,9 @@ final request = CompleteText(prompt:'What is human life expectancy in the United
            print("$err");
 });
 ```
+
 - Request
- 
+
 ```dart
 Q: What is human life expectancy in the United States?
 ```
@@ -135,7 +141,6 @@ A: Human life expectancy in the United States is 78 years.
 }
 ```
 
-
 - Generate Image
   - prompt
     - A text description of the desired image(s). The maximum length is 1000 characters.
@@ -147,8 +152,9 @@ A: Human life expectancy in the United States is 78 years.
     - The format in which the generated images are returned. Must be one of url or b64_json.
   - user
     - A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
-- 
+-
 - Generate with stream
+
 ```dart
   openAI = OpenAI
         .instance
@@ -168,7 +174,9 @@ final request = GenerateImage(prompt,2);
 /// cancel stream controller
 openAI.genImgClose();
 ```
+
 - Generate with feature
+
 ```dart
   void _generateImage() {
   const prompt = "cat eating snake blue red.";
@@ -179,10 +187,9 @@ openAI.genImgClose();
 }
 ```
 
-
 - Model List
-  - List and describe the various models available in the API. You can refer to the Models documentation to 
-  understand what models are available and the differences between them.
+  - List and describe the various models available in the API. You can refer to the Models documentation to
+    understand what models are available and the differences between them.
   - https://beta.openai.com/docs/api-reference/models
 
 ```dart
@@ -190,8 +197,8 @@ final models = await openAI.listModel();
 ```
 
 - Engine List
-  - Lists the currently available (non-finetuned) models, and provides basic 
-  information about each one such as the owner and availability.
+  - Lists the currently available (non-finetuned) models, and provides basic
+    information about each one such as the owner and availability.
   - https://beta.openai.com/docs/api-reference/engines
 
 ```dart
@@ -427,7 +434,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
               size: 22.0,
             ),
             const Icon(
-              Icons.person,
+              FlutterRemix.user_line,
               color: Colors.indigoAccent,
               size: 22.0,
             )
@@ -574,7 +581,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
 <img src="https://scontent.fkkc3-1.fna.fbcdn.net/v/t39.30808-6/321956306_528473869217638_4959635231571092650_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=YumrmcfO7jAAX9N9Ygd&tn=aWCijFs0IEeQXzfE&_nc_ht=scontent.fkkc3-1.fna&oh=00_AfCQk9ebz2qnPl2pshugchDnaEXMPe6rogXpdzc3UCfcmg&oe=63EF77E4" width="350" height="760">
 
 ### Video Tutorials
- - <a href='https://www.youtube.com/watch?v=qUEUMxGW_0Q&ab_channel=idealBy'>Flutter Chat bot</a>
 
- - <a href='https://www.youtube.com/watch?v=z25HfnEi2zQ&t=1s&ab_channel=idealBy'>Flutter Generate Image</a>
- 
+- <a href='https://www.youtube.com/watch?v=qUEUMxGW_0Q&ab_channel=idealBy'>Flutter Chat bot</a>
+
+- <a href='https://www.youtube.com/watch?v=z25HfnEi2zQ&t=1s&ab_channel=idealBy'>Flutter Generate Image</a>

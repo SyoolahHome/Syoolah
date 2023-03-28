@@ -4,6 +4,7 @@ import 'package:ditto/widget/the_wall.dart';
 // import '../../../Desktop/Flutter_App/chatbot-chatgpt/lib/widgets/the_wall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
@@ -48,7 +49,7 @@ class _MessagesState extends State<Messages> {
                 borderRadius: BorderRadius.circular(100)),
             tooltip: 'Send an event',
             heroTag: "send_event",
-            child: const Icon(Icons.message),
+            child: const Icon(FlutterRemix.chat_2_line),
             onPressed: () {
               Navigator.push(
                 context,

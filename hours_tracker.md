@@ -9,4 +9,4 @@
 # 11:00 - 12:00
 
 - Moved the bottom bar long widget scren to a tree of sub-widgets, refactoration of code, improvement & Edit of UI, fixed the overflow-bottom issue while typing in the text field.
-- made the bottom bar screen consistent with the bottom bar items.
+- Made the bottom bar screen consistent with the bottom bar items.

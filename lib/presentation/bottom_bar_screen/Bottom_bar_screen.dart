@@ -1,7 +1,8 @@
 import 'package:ditto/Messages.dart';
-import 'package:ditto/home.dart';
+import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../globalChats.dart';
 import '../../model/bottom_bat_item.dart';
@@ -21,12 +22,12 @@ class BottomBarState extends State<BottomBar> {
     const BottomBarItem(
       screen: Home(),
       label: 'Home',
-      icon: Icons.home,
+      icon: FlutterRemix.home_4_line,
     ),
     const BottomBarItem(
       screen: Messages(),
       label: 'Messages',
-      icon: Icons.message,
+      icon: FlutterRemix.message_3_line,
     ),
     // BottomBarItem(
     //   screen: AddNewPost(),
@@ -36,12 +37,12 @@ class BottomBarState extends State<BottomBar> {
     const BottomBarItem(
       screen: GlobalChatRelays(),
       label: 'Global',
-      icon: Icons.chat,
+      icon: FlutterRemix.list_check_2,
     ),
     const BottomBarItem(
       screen: Profile(),
       label: 'Profile',
-      icon: Icons.person,
+      icon: FlutterRemix.user_line,
     ),
   ];
 

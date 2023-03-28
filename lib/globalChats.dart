@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class GlobalChatRelays extends StatefulWidget {
@@ -17,16 +16,15 @@ class _GlobalChatRelaysState extends State<GlobalChatRelays> {
         backgroundColor: Colors.teal,
         centerTitle: true,
         leading: InkWell(
-          child: const Icon(
-              Icons.arrow_back),
-          onTap: (){
+          child: const Icon(Icons.arrow_back),
+          onTap: () {
             Navigator.pop(context);
           },
         ),
         elevation: 0,
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 40),
+        margin: const EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: const [
             Padding(
