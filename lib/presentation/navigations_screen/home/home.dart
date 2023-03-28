@@ -15,10 +15,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      drawer:
-          CustomDrawer(items: GeneralDrawerItems.drawerListTileItems(context)),
+      drawer: CustomDrawer(
+        items: GeneralDrawerItems.drawerListTileItems(context),
+      ),
       body: Center(
-        child: Column(children: const <Widget>[SizedBox(height: 50)]),
+        child: Column(
+          children: const <Widget>[
+            SizedBox(height: 50),
+          ],
+        ),
       ),
     );
   }

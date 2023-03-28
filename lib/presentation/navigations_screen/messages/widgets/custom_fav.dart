@@ -18,8 +18,9 @@ class CustomFAB extends StatelessWidget {
         FloatingActionButton(
           backgroundColor: Colors.teal,
           shape: RoundedRectangleBorder(
-              side: const BorderSide(color: buttonBorderColor, width: 3),
-              borderRadius: BorderRadius.circular(100)),
+            side: const BorderSide(color: buttonBorderColor, width: 3),
+            borderRadius: BorderRadius.circular(100),
+          ),
           tooltip: 'Send an event',
           heroTag: "send_event",
           child: const Icon(FlutterRemix.chat_2_line),

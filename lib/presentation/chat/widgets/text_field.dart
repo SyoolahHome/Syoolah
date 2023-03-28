@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../constants/colors.dart';
+import '../../../constants/strings.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -9,6 +13,7 @@ class CustomTextField extends StatelessWidget {
 
   final TextEditingController controller;
   final void Function() onSubmit;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,27 +22,23 @@ class CustomTextField extends StatelessWidget {
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
         child: Row(
-          children: [
+          children: <Widget>[
             Expanded(
               child: TextField(
                 autofocus: true,
                 controller: controller,
                 onSubmitted: (value) => onSubmit(),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white.withOpacity(0.2),
-                  hintStyle: const TextStyle(fontSize: 14),
-                  hintText: "Type anything",
-                  border: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 0, style: BorderStyle.none)),
-                  contentPadding: const EdgeInsets.only(left: 20),
+                decoration: const InputDecoration(
+                  hintText: AppStrings.typeHere,
                 ),
               ),
             ),
             IconButton(
               onPressed: () => onSubmit(),
-              icon: const Icon(Icons.send_rounded, color: Colors.black),
+              icon: const Icon(
+                FlutterRemix.send_plane_2_line,
+                color: AppColors.black,
+              ),
             ),
           ],
         ),

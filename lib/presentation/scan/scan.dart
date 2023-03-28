@@ -6,7 +6,7 @@ import 'widgets/button.dart';
 import 'widgets/key_field.dart';
 
 class ScanKey extends StatelessWidget {
-  const ScanKey({Key? key}) : super(key: key);
+  const ScanKey({super.key}) ;
 
   @override
   Widget build(BuildContext context) {

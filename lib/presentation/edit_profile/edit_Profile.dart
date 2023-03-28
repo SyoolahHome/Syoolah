@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../bottom_bar_screen/Bottom_bar_screen.dart';
+import '../bottom_bar_screen/bottom_bar_screen.dart';
 import 'widgets/edit_field.dart';
 import 'widgets/save_button.dart';
 import 'widgets/top_bar.dart';

@@ -8,4 +8,7 @@ abstract class AppStrings {
   static const String yourPrivateKey = "Your private key";
   static const String writeYourKey = "paste your key here..";
   static const String scan = "Scan";
+  static const String typeHere = "Type here..";
+  static const String loading = "loading";
+  static const String globalMessages = "Global Messages";
 }

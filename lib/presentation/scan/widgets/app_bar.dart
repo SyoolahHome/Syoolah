@@ -8,6 +8,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    const logoSize = 50.0;
+
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -18,7 +20,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           Navigator.pop(context);
         },
       ),
-      title: const Logo(logoSize: 50),
+      title: const Logo(logoSize: logoSize),
     );
   }
 

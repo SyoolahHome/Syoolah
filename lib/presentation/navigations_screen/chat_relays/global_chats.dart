@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/strings.dart';
 import 'widgets/app_bar.dart';
 
 class GlobalChatRelays extends StatelessWidget {
@@ -9,16 +10,12 @@ class GlobalChatRelays extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: Center(child: Text("Loading.....")),
-            )
-          ],
-        ),
+      body: Column(
+        children: const <Widget>[
+          Center(
+            child: Text(AppStrings.loading),
+          )
+        ],
       ),
     );
   }

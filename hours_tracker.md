@@ -16,3 +16,4 @@
 
 - Moved the profile long widget to a tree of sub-widgets, refactoration of code.
 - Moved the chat, about and new post long widgets to a tree of sub-widgets, refactoration of code.
+- separated partially Strings, colors, variables to single source of edit for reeuasbility.

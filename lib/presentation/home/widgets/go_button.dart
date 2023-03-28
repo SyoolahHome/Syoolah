@@ -3,7 +3,7 @@ import 'package:ditto/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../bottom_bar_screen/Bottom_bar_screen.dart';
+import '../../bottom_bar_screen/bottom_bar_screen.dart';
 
 class GoButton extends StatelessWidget {
   const GoButton({

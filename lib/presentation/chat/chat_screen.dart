@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import '../../constants/colors.dart';
 import 'widgets/text_field.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -78,10 +79,10 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Chatbot Playground'),
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 55, 201, 165),
+        backgroundColor: AppColors.teal,
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
