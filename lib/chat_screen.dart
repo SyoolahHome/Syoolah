@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:ditto/widget/chat_message.dart';
+import 'package:ditto/presentation/general/widget/chat_message.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';

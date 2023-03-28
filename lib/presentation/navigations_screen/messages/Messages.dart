@@ -1,6 +1,6 @@
 import 'package:ditto/screen/event.dart';
 import 'package:ditto/screen/profil.dart';
-import 'package:ditto/widget/the_wall.dart';
+import 'package:ditto/presentation/general/widget/the_wall.dart';
 // import '../../../Desktop/Flutter_App/chatbot-chatgpt/lib/widgets/the_wall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

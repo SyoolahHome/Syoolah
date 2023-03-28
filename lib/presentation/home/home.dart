@@ -1,7 +1,7 @@
 import 'package:ditto/presentation/home/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
-import '../../widget/margined_body.dart';
+import '../general/widget/margined_body.dart';
 import 'widgets/go_button.dart';
 import 'widgets/name_field.dart';
 import 'widgets/or_divider.dart';

@@ -1,5 +1,5 @@
 import 'package:ditto/constants/colors.dart';
-import 'package:ditto/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/button.dart';

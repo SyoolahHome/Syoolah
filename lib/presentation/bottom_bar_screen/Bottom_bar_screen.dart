@@ -1,5 +1,5 @@
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
-import 'package:ditto/profile.dart';
+import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 

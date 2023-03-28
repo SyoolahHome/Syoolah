@@ -12,7 +12,7 @@ import '../constants/constants.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 import '../services/utils/utils.dart';
-import '../widget/the_wall.dart';
+import '../presentation/general/widget/the_wall.dart';
 
 final db = sqlite3.openInMemory();
 
