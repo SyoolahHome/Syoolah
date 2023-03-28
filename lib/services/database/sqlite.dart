@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ditto/database/utils.dart';
+import 'package:ditto/services/database/utils.dart';
 import 'package:nostr/nostr.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'package:path_provider/path_provider.dart';

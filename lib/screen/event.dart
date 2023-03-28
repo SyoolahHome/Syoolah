@@ -1,5 +1,4 @@
 import 'package:ditto/model/profile.dart';
-import 'package:ditto/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:nostr/nostr.dart';
@@ -7,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../constants/constants.dart';
+import '../services/utils/utils.dart';
 
 Future<void> sendEvent(Uri relay, Event event) async {
   WebSocketChannel channel = WebSocketChannel.connect(relay);
@@ -84,16 +84,16 @@ class EventScreenState extends State<EventScreen> {
                         try {
                           await sendEvent(Uri.parse(profil.relay), event);
                           if (!mounted) return;
-                          displaySnackBar(context, "Event is sent");
+                          AppUtils.displaySnackBar(context, "Event is sent");
                           Navigator.of(context).pop(false);
                         } catch (e) {
-                          displaySnackBar(
+                          AppUtils.displaySnackBar(
                             context,
                             "Event not sent: $e",
                           );
                         }
                       } else {
-                        displaySnackBar(
+                        AppUtils.displaySnackBar(
                           context,
                           'Please fill a private key in your profile',
                         );

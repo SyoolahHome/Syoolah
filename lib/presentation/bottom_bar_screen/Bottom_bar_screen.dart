@@ -17,9 +17,6 @@ class BottomBar extends StatefulWidget {
 class BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
   final List<BottomBarItem> items = [
     const BottomBarItem(
       screen: Home(),
@@ -63,9 +60,7 @@ class BottomBarState extends State<BottomBar> {
         selectedIndex: _selectedIndex,
         onElementTap: _onItemTapped,
       ),
-      body: Center(
-        child: items.elementAt(_selectedIndex).screen,
-      ),
+      body: items.elementAt(_selectedIndex).screen,
     );
   }
 }

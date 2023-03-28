@@ -1,7 +1,8 @@
 import 'package:ditto/constants/constants.dart';
-import 'package:ditto/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../services/utils/utils.dart';
 
 class TweetWidget extends StatelessWidget {
   final String avatar;
@@ -58,7 +59,7 @@ class TweetWidget extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    displaySnackBar(context, "Soon In sha'Allah");
+                    AppUtils.displaySnackBar(context, "Soon In sha'Allah");
                   },
                 ),
               ),
@@ -81,7 +82,7 @@ class TweetWidget extends StatelessWidget {
                                 onTap: () {
                                   Clipboard.setData(
                                       ClipboardData(text: pubkey));
-                                  displaySnackBar(
+                                  AppUtils.displaySnackBar(
                                       context, 'Copied to clipboard: $pubkey');
                                 },
                               ),
@@ -101,7 +102,7 @@ class TweetWidget extends StatelessWidget {
                             color: Colors.white70,
                           ),
                           onPressed: () {
-                            displaySnackBar(
+                            AppUtils.displaySnackBar(
                               context,
                               "I'm useless for the moment",
                             );

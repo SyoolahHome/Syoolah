@@ -1,13 +1,13 @@
 import 'package:ditto/main.dart';
 import 'package:ditto/model/profile.dart';
 import 'package:ditto/screen/home.dart';
-import 'package:ditto/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:nostr/nostr.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/constants.dart';
+import '../services/utils/utils.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({super.key});
@@ -94,7 +94,7 @@ class ProfilScreenState extends State<ProfilScreen> {
                           String error =
                               "Private key not supported because of a bug in dart-bip340, github issue copied to your clipboard \nPlease try another one";
                           logger.e(error);
-                          displaySnackBar(context, error);
+                          AppUtils.displaySnackBar(context, error);
                           Clipboard.setData(
                             const ClipboardData(
                               text:
@@ -127,7 +127,7 @@ class ProfilScreenState extends State<ProfilScreen> {
                           onTap: () {
                             Clipboard.setData(
                                 ClipboardData(text: pubkeyInput.text));
-                            displaySnackBar(context,
+                            AppUtils.displaySnackBar(context,
                                 'Copied to clipboard: ${pubkeyInput.text}');
                           },
                         ),

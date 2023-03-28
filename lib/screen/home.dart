@@ -2,7 +2,6 @@ import 'package:ditto/model/profile.dart';
 import 'package:ditto/screen/event.dart';
 import 'package:ditto/screen/profil.dart';
 // import '../../../../Desktop/Flutter_App/chatbot-chatgpt/lib/widgets/the_wall.dart';
-import 'package:ditto/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +10,7 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import '../constants/constants.dart';
 import 'package:sqlite3/sqlite3.dart';
 
+import '../services/utils/utils.dart';
 import '../widget/the_wall.dart';
 
 final db = sqlite3.openInMemory();
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                   child: Text(projectUrl),
                   onTap: () {
                     Clipboard.setData(ClipboardData(text: projectUrl));
-                    displaySnackBar(
+                    AppUtils.displaySnackBar(
                       context,
                       'copied to clipboard: $projectUrl',
                     );
