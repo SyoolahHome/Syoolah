@@ -1,10 +1,10 @@
 import 'package:ditto/edit_Profile.dart';
 import 'package:ditto/main.dart';
+import 'package:ditto/presentation/navigations_screen/messages/Messages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import 'Messages.dart';
 import 'about.dart';
 import 'globalChats.dart';
 
@@ -12,10 +12,10 @@ class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
   @override
-  _ProfileState createState() => _ProfileState();
+  ProfileState createState() => ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class ProfileState extends State<Profile> {
   int _profileSegmentationValue = 0;
   final Map<int, Widget> _profileTabs = <int, Widget>{
     0: const Padding(

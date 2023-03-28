@@ -1,4 +1,3 @@
-import 'package:ditto/Messages.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/profile.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../globalChats.dart';
 import '../../model/bottom_bat_item.dart';
+import '../navigations_screen/messages/Messages.dart';
 import 'widgets/bottom_bar.dart';
 
 class BottomBar extends StatefulWidget {
