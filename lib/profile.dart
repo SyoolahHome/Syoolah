@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import 'about.dart';
-import 'globalChats.dart';
+import 'presentation/navigations_screen/chat_relays/global_chats.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -23,15 +23,22 @@ class ProfileState extends State<Profile> {
         child: Text(
           "Posts",
           style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white70),
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: Colors.white70,
+          ),
         )),
     1: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Text(
-          "Replies",
-          style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white70),
-        )),
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        "Replies",
+        style: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+          color: Colors.white70,
+        ),
+      ),
+    ),
     2: const Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
         child: Text("Likes",

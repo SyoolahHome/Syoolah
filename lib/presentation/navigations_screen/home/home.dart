@@ -1,9 +1,7 @@
 import 'package:ditto/about.dart';
-import 'package:ditto/globalChats.dart';
+import 'package:ditto/presentation/navigations_screen/chat_relays/global_chats.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../constants/colors.dart';
 import '../../../model/drawer_list_tile.dart';
 import '../messages/Messages.dart';
 import 'widgets/app_bar.dart';
