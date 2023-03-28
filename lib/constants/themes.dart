@@ -6,6 +6,11 @@ abstract class AppThemes {
   static ThemeData primary = ThemeData(
     useMaterial3: true,
     primarySwatch: Colors.blue,
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: AppColors.teal,
+      indicatorColor: AppColors.white.withOpacity(0.3),
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColors.white.withOpacity(0.3),
       filled: true,

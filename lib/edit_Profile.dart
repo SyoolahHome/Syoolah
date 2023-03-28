@@ -2,7 +2,7 @@
 import 'package:ditto/profile.dart';
 import 'package:flutter/material.dart';
 
-import 'BottomBar.dart';
+import 'presentation/bottom_bar_screen/Bottom_bar_screen.dart';
 import 'Messages.dart';
 
 class EditProfile extends StatefulWidget {

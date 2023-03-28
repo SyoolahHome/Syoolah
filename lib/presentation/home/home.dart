@@ -6,7 +6,6 @@ import 'widgets/go_button.dart';
 import 'widgets/name_field.dart';
 import 'widgets/or_divider.dart';
 import 'widgets/private_key_label.dart';
-import 'widgets/title.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
