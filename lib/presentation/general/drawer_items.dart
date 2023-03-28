@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../about.dart';
+import '../about/about.dart';
 import '../../model/drawer_list_tile.dart';
 import '../navigations_screen/chat_relays/global_chats.dart';
 import '../navigations_screen/messages/Messages.dart';
