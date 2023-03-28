@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../edit_Profile.dart';
+import '../../../edit_profile/edit_Profile.dart';
 
 class ProfileAndEdit extends StatelessWidget {
   const ProfileAndEdit({super.key});

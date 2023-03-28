@@ -11,4 +11,8 @@
 - Moved the bottom bar long widget screen to a tree of sub-widgets, refactoration of code, improvement & Edit of UI.
 - Made the bottom bar screen consistent with the bottom bar items in the home screen.
 - Moved the messages long widget to a tree of sub-widgets, refactoration of code, improvement & Edit of UI.
--
+
+
+#  2:00 - 3:00 
+- Moved the profile long widget to a tree of sub-widgets, refactoration of code, improvement & Edit of UI.
+- 
