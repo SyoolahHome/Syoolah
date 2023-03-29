@@ -1,6 +1,8 @@
 import 'package:ditto/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../../constants/strings.dart';
 
 class NameField extends StatelessWidget {
@@ -10,6 +12,8 @@ class NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AuthCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -21,8 +25,11 @@ class NameField extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 5),
-        const TextField(
-          decoration: InputDecoration(
+        TextField(
+          style: TextStyle(color: Colors.white),
+          focusNode: context.read<AuthCubit>().nameFocusNode!,
+          controller: cubit.nameController,
+          decoration: const InputDecoration(
             hintText: AppStrings.writeYourNameHere,
           ),
         ),

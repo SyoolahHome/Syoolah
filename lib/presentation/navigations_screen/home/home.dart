@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nostr/nostr.dart';
 import '../../general/drawer_items.dart';
 import 'widgets/app_bar.dart';
 import '../../general/widget/custom_drawer.dart';
@@ -20,8 +21,13 @@ class _HomeState extends State<Home> {
       ),
       body: Center(
         child: Column(
-          children: const <Widget>[
-            SizedBox(height: 50),
+          children: <Widget>[
+            TextButton(
+              onPressed: () {
+              },
+              child: const Text('Click'),
+            ),
+            const SizedBox(height: 50),
           ],
         ),
       ),

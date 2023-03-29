@@ -13,7 +13,7 @@ import 'package:sqlite3/sqlite3.dart';
 import '../../../constants/constants.dart';
 import '../../../model/profile.dart';
 import 'widgets/app_bar.dart';
-import 'widgets/custom_fav.dart';
+import 'widgets/custom_fabs.dart';
 
 final db = sqlite3.openInMemory();
 

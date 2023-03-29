@@ -1,3 +1,4 @@
+import 'package:ditto/presentation/navigations_screen/messages/widgets/single_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -15,37 +16,30 @@ class CustomFAB extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        FloatingActionButton(
-          backgroundColor: Colors.teal,
-          shape: RoundedRectangleBorder(
-            side: const BorderSide(color: buttonBorderColor, width: 3),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          tooltip: 'Send an event',
-          heroTag: "send_event",
-          child: const Icon(FlutterRemix.chat_2_line),
+        SingleFAB(
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const EventScreen()),
+              MaterialPageRoute(
+                builder: (context) => const EventScreen(),
+              ),
             );
           },
+          heroTag: "send_event",
+          toolTip: 'Send an event',
+          icon: FlutterRemix.chat_2_line,
         ),
         const SizedBox(height: 10),
-        FloatingActionButton(
-          backgroundColor: Colors.teal,
-          shape: RoundedRectangleBorder(
-              side: const BorderSide(color: buttonBorderColor, width: 3),
-              borderRadius: BorderRadius.circular(100)),
-          tooltip: 'Edit your profil',
-          heroTag: "profil",
-          child: const Icon(Icons.vpn_key),
+        SingleFAB(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProfilScreen()),
             );
           },
+          heroTag: "profil",
+          toolTip: 'Edit your profil',
+          icon: FlutterRemix.chat_2_line,
         ),
       ],
     );

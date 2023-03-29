@@ -11,4 +11,9 @@ abstract class AppStrings {
   static const String typeHere = "Type here..";
   static const String loading = "loading";
   static const String globalMessages = "Global Messages";
+  static const String pleaseEnterName = "Please enter your name";
+  static const String start = "Start";
+  static const String keyGeneratedSuccessfullyText =
+      "Your private key has been generated successfully, you can now start using the app";
+  static const String privateKeyCopied = 'Private key copied to clipboard';
 }

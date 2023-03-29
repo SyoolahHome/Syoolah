@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'colors.dart';
 
@@ -41,5 +42,6 @@ abstract class AppThemes {
         fontWeight: FontWeight.normal,
       ),
     ),
+    textTheme: GoogleFonts.latoTextTheme(),
   );
 }

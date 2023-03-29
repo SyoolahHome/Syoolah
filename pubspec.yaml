@@ -29,6 +29,8 @@ dependencies:
   progress_indicators: ^1.0.0
   flutter_bloc:
   flutter_remix:
+  hive_flutter: ^1.1.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
