@@ -1,36 +1,21 @@
 import 'package:ditto/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../../constants/strings.dart';
 
-class KeyField extends StatefulWidget {
+class KeyField extends StatelessWidget {
   const KeyField({
     super.key,
   });
 
   @override
-  State<KeyField> createState() => _KeyFieldState();
-}
-
-class _KeyFieldState extends State<KeyField> {
-  TextEditingController? _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controller!.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AuthCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -43,7 +28,7 @@ class _KeyFieldState extends State<KeyField> {
         ),
         const SizedBox(height: 5),
         TextField(
-          controller: _controller,
+          controller: cubit.existentKeyController,
           decoration: InputDecoration(
             hintText: AppStrings.writeYourKey,
             suffixIcon: GestureDetector(
@@ -51,7 +36,7 @@ class _KeyFieldState extends State<KeyField> {
                 Clipboard.getData('text/plain').then(
                   (value) {
                     if (value != null && value.text != null) {
-                      _controller!.text = value.text!;
+                      cubit.existentKeyController!.text = value.text!;
                     }
                   },
                 );

@@ -8,6 +8,12 @@ import '../../buisness_logic/private_key_gen_success_cubit/private_key_gen_succe
 import '../../constants/colors.dart';
 import '../../constants/strings.dart';
 import '../../services/utils/paths.dart';
+import 'widgets/button.dart';
+import 'widgets/field_suffix.dart';
+import 'widgets/key_field.dart';
+import 'widgets/key_section.dart';
+import 'widgets/success_icon.dart';
+import 'widgets/success_text.dart';
 
 class PrivateKeyGenSuccess extends StatelessWidget {
   const PrivateKeyGenSuccess({super.key});
@@ -23,104 +29,16 @@ class PrivateKeyGenSuccess extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              const Spacer(),
-              Icon(
-                FlutterRemix.checkbox_circle_line,
-                color: AppColors.teal,
-                size: 75,
-              ),
-              const SizedBox(height: heightSeparator),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  AppStrings.keyGeneratedSuccessfullyText,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.normal,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const Spacer(),
-              BlocBuilder<PrivateKeyGenSuccessCubit, PrivateKeyGenSuccessState>(
-                  builder: (context, state) {
-                return Stack(
-                  alignment: Alignment.centerRight,
-                  children: <Widget>[
-                    TextField(
-                      obscureText: state.isPasswordVisible,
-                      controller: TextEditingController(text: state.privateKey),
-                      style: Theme.of(context).textTheme.labelSmall,
-                      enabled: false,
-                      decoration: InputDecoration(
-                        fillColor: AppColors.lighGrey,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          color: AppColors.lighGrey,
-                          child: IconButton(
-                            icon: Icon(
-                              state.isPasswordVisible
-                                  ? FlutterRemix.eye_close_line
-                                  : FlutterRemix.eye_line,
-                              color: AppColors.teal,
-                            ),
-                            onPressed: () {
-                              context
-                                  .read<PrivateKeyGenSuccessCubit>()
-                                  .togglePrivateKeyFieldVisibility();
-                            },
-                          ),
-                        ),
-                        Container(
-                          color: AppColors.lighGrey,
-                          child: IconButton(
-                            icon: Icon(
-                              FlutterRemix.file_copy_2_line,
-                              color: AppColors.teal,
-                            ),
-                            onPressed: () {
-                              context
-                                  .read<PrivateKeyGenSuccessCubit>()
-                                  .copyPrivateKey(context);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              }),
-              const Spacer(),
-              SizedBox(
-                height: 45,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Future.delayed(kThemeAnimationDuration, () {
-                      Navigator.pushReplacementNamed(context, Paths.bottomBar);
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.teal.withOpacity(0.95),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    AppStrings.start,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: heightSeparator),
+            children: const <Widget>[
+              Spacer(),
+              SuccessIcon(),
+              SizedBox(height: heightSeparator),
+              SuccessText(),
+              Spacer(),
+              KeySection(),
+              Spacer(),
+              StartButton(),
+              SizedBox(height: heightSeparator),
             ],
           ),
         ),

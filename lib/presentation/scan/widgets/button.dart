@@ -14,30 +14,56 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffoldColor =
         context.findAncestorWidgetOfExactType<Scaffold>()!.backgroundColor;
+    final cubit = context.read<AuthCubit>();
 
-    return Stack(
-      alignment: Alignment.centerRight,
-      children: <Widget>[
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.white.withOpacity(0.95),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.shouldRedirectDirectly) {
+          Navigator.of(context).pushNamed(Paths.bottomBar);
+        }
+      },
+      builder: (context, state) {
+        return Stack(
+          alignment: Alignment.centerRight,
+          children: <Widget>[
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  cubit.handleExistentKey();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.white.withOpacity(0.95),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  AppStrings.continueText,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: scaffoldColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
               ),
             ),
-            child: Text(
-              AppStrings.continueText,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: scaffoldColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-          ),
-        ),
-      ],
+            if (state.isSavingExistentKey)
+              Container(
+                width: 20,
+                height: 20,
+                margin: context
+                    .findAncestorWidgetOfExactType<MarginedBody>()!
+                    .margin,
+                child: CircularProgressIndicator(
+                  color: context
+                      .findAncestorWidgetOfExactType<Scaffold>()!
+                      .backgroundColor,
+                  strokeWidth: 1.75,
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

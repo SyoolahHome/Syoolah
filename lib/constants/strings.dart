@@ -14,6 +14,8 @@ abstract class AppStrings {
   static const String pleaseEnterName = "Please enter your name";
   static const String start = "Start";
   static const String keyGeneratedSuccessfullyText =
-      "Your private key has been generated successfully, you can now start using the app";
-  static const String privateKeyCopied = 'Private key copied to clipboard';
+      "Your private key has been generated successfully, you can now start using the app.";
+  static const String privateKeyCopied = 'Private key copied to clipboard.';
+  static const String pleaseEnterKey = 'Please enter your private key';
+  static const String invalidKey = "The key you entered is invalid.";
 }

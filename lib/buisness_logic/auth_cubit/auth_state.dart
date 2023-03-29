@@ -4,12 +4,16 @@ part of 'auth_cubit.dart';
 class AuthState extends Equatable {
   final bool isGeneratingNewPrivateKey;
   final bool shouldRedirectAfterGeneratingPrivateKey;
+  final bool isSavingExistentKey;
+  final bool shouldRedirectDirectly;
   final String? error;
 
   const AuthState({
-    required this.isGeneratingNewPrivateKey,
-    required this.shouldRedirectAfterGeneratingPrivateKey,
+    this.isGeneratingNewPrivateKey = false,
+    this.shouldRedirectAfterGeneratingPrivateKey = false,
+    this.isSavingExistentKey = false,
     this.error,
+    this.shouldRedirectDirectly = false,
   });
 
   @override
@@ -17,12 +21,16 @@ class AuthState extends Equatable {
         isGeneratingNewPrivateKey,
         shouldRedirectAfterGeneratingPrivateKey,
         error,
+        isSavingExistentKey,
+        shouldRedirectDirectly,
       ];
 
   AuthState copyWith({
     bool? isGeneratingNewPrivateKey,
     bool? shouldRedirectAfterGeneratingPrivateKey,
     String? error,
+    bool? isSavingExistentKey,
+    bool? shouldRedirectDirectly,
   }) {
     return AuthState(
       isGeneratingNewPrivateKey:
@@ -31,13 +39,13 @@ class AuthState extends Equatable {
           shouldRedirectAfterGeneratingPrivateKey ??
               this.shouldRedirectAfterGeneratingPrivateKey,
       error: error ?? this.error,
+      isSavingExistentKey: isSavingExistentKey ?? this.isSavingExistentKey,
+      shouldRedirectDirectly:
+          shouldRedirectDirectly ?? this.shouldRedirectDirectly,
     );
   }
 }
 
 class AuthInitial extends AuthState {
-  const AuthInitial({
-    super.isGeneratingNewPrivateKey = false,
-    super.shouldRedirectAfterGeneratingPrivateKey = false,
-  });
+  const AuthInitial();
 }

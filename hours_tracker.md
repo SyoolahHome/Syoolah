@@ -17,3 +17,9 @@
 - Moved the profile long widget to a tree of sub-widgets, refactoration of code.
 - Moved the chat, about and new post long widgets to a tree of sub-widgets, refactoration of code.
 - separated partially Strings, colors, variables to single source of edit for reeuasbility.
+
+# 1:30 - 2:30
+
+- Implemented the main auth screen which generates a private key (with bottom-sheet of success) for the user with his name, and the locale caching of it for future use
+- Implemented the auth screen for existent keys with caching as well for future use.
+- refactored auth screen to chunks of sub widgets of both screens
