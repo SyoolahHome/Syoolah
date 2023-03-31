@@ -74,6 +74,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const AuthInitial());
 
       return;
+    } finally {
+      emit(const AuthInitial());
     }
   }
 }

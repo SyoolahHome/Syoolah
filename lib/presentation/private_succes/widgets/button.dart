@@ -15,7 +15,7 @@ class StartButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pop();
-          Future.delayed(kThemeAnimationDuration, () {
+          Future.delayed(Duration.zero, () {
             Navigator.pushReplacementNamed(context, Paths.bottomBar);
           });
         },

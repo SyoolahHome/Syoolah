@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../../constants/colors.dart';
 import '../../../model/bottom_bat_item.dart';
 
@@ -19,16 +21,32 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 65.0;
 
-    return NavigationBar(
-      height: height,
-      selectedIndex: selectedIndex,
-      onDestinationSelected: onElementTap,
-      destinations: items.indexedMap((index, item) {
-        return NavigationDestination(
-          icon: Icon(item.icon, color: AppColors.white),
-          label: item.label,
-        );
-      }).toList(),
+    return BlocBuilder<HomePageAfterLoginCubit, HomePageAfterLoginState>(
+      builder: (context, state) {
+        if (state.didConnectedToRelaysAndSubscribedToTopics) {
+          return NavigationBar(
+            height: height,
+            selectedIndex: selectedIndex,
+            onDestinationSelected: onElementTap,
+            destinations: items.indexedMap((index, item) {
+              return NavigationDestination(
+                icon: Icon(item.icon, color: AppColors.white),
+                label: item.label,
+              );
+            }).toList(),
+          );
+        } else if (state.isLoading) {
+          return Container(
+            height: height,
+            color: AppColors.white,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else {
+          return Text("readhed here");
+        }
+      },
     );
   }
 }
