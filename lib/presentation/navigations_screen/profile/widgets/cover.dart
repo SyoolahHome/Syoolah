@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../../../main.dart';
 
 class ProfileCover extends StatelessWidget {
-  const ProfileCover({super.key});
+  const ProfileCover({
+    super.key,
+    required this.coverUrl,
+  });
 
+  final String coverUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,8 +18,8 @@ class ProfileCover extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: const AssetImage(
-            "assets/back.jpeg",
+          image: NetworkImage(
+            coverUrl,
           ),
           fit: BoxFit.cover,
           colorFilter:
@@ -36,12 +42,16 @@ class ProfileCover extends StatelessWidget {
                     child: InkWell(
                       child: const Text("Logout"),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MyApp(),
-                          ),
-                        );
+                        context.read<AuthCubit>().signOut();
+                      },
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: "Copy Private Key",
+                    child: InkWell(
+                      child: const Text("Copy Private Key"),
+                      onTap: () {
+                        context.read<AuthCubit>().copyPrivateKey();
                       },
                     ),
                   )

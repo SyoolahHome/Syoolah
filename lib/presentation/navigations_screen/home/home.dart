@@ -10,7 +10,6 @@ import 'package:nostr/nostr.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../../main.dart';
-import '../../../model/event.dart';
 import '../../general/drawer_items.dart';
 import 'widgets/app_bar.dart';
 import '../../general/widget/custom_drawer.dart';
@@ -33,58 +32,17 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Column(
           children: <Widget>[
+            
             TextButton(
-              onPressed: () async {
-                final key = NostrService.instance.generateKeys();
-                LocalDatabase.instance.setPrivateKey(key);
-
-                final event = NostrEvent.fromPartialData(
-                  kind: 0,
-                  keyChain: Keychain(key),
-                  content: jsonEncode({"name": "test name"}),
-                );
-                final serialized = event.serialized();
-
-                HttpOverrides.global = MyHttpOverrides();
-
-                Future<WebSocket> fws =
-                    WebSocket.connect("wss://relay.damus.io");
-                fws.then(
-                  (WebSocket ws) {
-                    ws.listen((d) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(d.toString()),
-                        ),
-                      );
-                    }, onError: (e) {
-                      print("error");
-                      print(e);
-                    }, onDone: () {
-                      print('in onDone');
-                      ws.close();
-                    });
-
-                    print("sending: $serialized");
-                    ws.add(jsonEncode(serialized));
-                  },
-                );
+              onPressed: () {
+                NostrService.instance.sendReq();
               },
-              child: const Text('publish request to relay'),
+              child: Text("clci,"),
             ),
             const SizedBox(height: 50),
           ],
         ),
       ),
     );
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
   }
 }

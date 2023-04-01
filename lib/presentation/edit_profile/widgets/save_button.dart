@@ -1,32 +1,32 @@
+import 'package:ditto/constants/strings.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/colors.dart';
 import '../../bottom_bar_screen/bottom_bar_screen.dart';
 
 class SaveButton extends StatelessWidget {
-  const SaveButton({super.key});
+  const SaveButton({
+    super.key,
+    required this.onTap,
+  });
 
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.cyan,
-      ),
-      padding: const EdgeInsets.all(10),
-      child: InkWell(
-        child: const Center(
-          child: Text(
-            "Save",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-            ),
-          ),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.teal,
         ),
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const BottomBar()));
-        },
+        onPressed: onTap,
+        child: Text(
+          AppStrings.save,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColors.white,
+              ),
+        ),
       ),
     );
   }

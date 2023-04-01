@@ -18,4 +18,7 @@ abstract class AppStrings {
   static const String privateKeyCopied = 'Private key copied to clipboard.';
   static const String pleaseEnterKey = 'Please enter your private key';
   static const String invalidKey = "The key you entered is invalid.";
+  static const couldNotCopyKey = "Could not copy key to clipboard.";
+  static const editProfile = "Edit Profile";
+  static const save = "Save";
 }

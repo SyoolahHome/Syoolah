@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 import '../../../edit_profile/edit_Profile.dart';
 
 class ProfileAndEdit extends StatelessWidget {
-  const ProfileAndEdit({super.key});
+  const ProfileAndEdit({
+    super.key,
+    required this.profileUrl,
+    required this.onEditTap,
+  });
 
+  final String profileUrl;
+  final VoidCallback onEditTap;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        const CircleAvatar(
+        CircleAvatar(
           radius: 45,
-          backgroundImage: AssetImage("assets/profile.jpeg"),
+          backgroundImage: NetworkImage(
+            profileUrl,
+          ),
         ),
         Container(
           width: 100,
@@ -25,14 +33,7 @@ class ProfileAndEdit extends StatelessWidget {
               border: Border.all(color: Colors.blue)),
           child: Center(
             child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditProfile(),
-                  ),
-                );
-              },
+              onTap: onEditTap,
               child: const Text(
                 "Edit",
                 style: TextStyle(

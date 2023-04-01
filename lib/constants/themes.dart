@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
 
 abstract class AppThemes {
-  static ThemeData primary = ThemeData(
+  static ThemeData primary = ThemeData.light().copyWith(
     useMaterial3: true,
-    primarySwatch: Colors.blue,
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.teal,
       indicatorColor: AppColors.white.withOpacity(0.3),
@@ -43,5 +42,9 @@ abstract class AppThemes {
       ),
     ),
     textTheme: GoogleFonts.latoTextTheme(),
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.teal,
+      iconTheme: const IconThemeData(color: AppColors.white),
+    ),
   );
 }

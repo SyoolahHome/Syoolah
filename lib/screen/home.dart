@@ -67,9 +67,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            TheWallWidget(
-              channel: WebSocketChannel.connect(Uri.parse(profil.relay)),
-            ),
+            // TheWallWidget(
+            //   channel: WebSocketChannel.connect(Uri.parse(profil.relay)),
+            // ),
           ],
         ),
       ),

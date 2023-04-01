@@ -30,8 +30,8 @@ class LocalDatabase implements LocalDatabaseBase {
     await Hive.openBox(dbName);
   }
 
-  Future<void> setPrivateKey(String key) {
-    return setValue("privateKey", key);
+  Future<void> setPrivateKey(String? value) {
+    return setValue("privateKey", value);
   }
 
   Future<void> setName(String name) {
@@ -48,7 +48,22 @@ class LocalDatabase implements LocalDatabaseBase {
     ]);
   }
 
-  String getPrivateKey() {
-    return getValue("privateKey") as String;
+  String? getPrivateKey() {
+    return getValue("privateKey");
+  }
+
+  @override
+  Stream getStream(String key) {
+    return Hive.box(dbName).watch(key: key).map((event) => event.value);
+  }
+
+  Stream<String?> getPrivateKeyStream() {
+    return getStream("privateKey").map((event) => event);
+  }
+
+  @override
+  Future<void> deletePrivateKey() async {
+    await deleteValue("privateKey");
+    print(getPrivateKey());
   }
 }

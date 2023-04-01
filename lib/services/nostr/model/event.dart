@@ -14,8 +14,9 @@ class NostrEvent extends Equatable {
   final String pubkey;
   final int createdAt;
   final List tags;
+  String? subscriptionId;
 
-  const NostrEvent({
+  NostrEvent({
     required this.id,
     required this.kind,
     required this.content,
@@ -23,6 +24,7 @@ class NostrEvent extends Equatable {
     required this.pubkey,
     required this.createdAt,
     required this.tags,
+    this.subscriptionId,
   });
 
   @override
@@ -34,6 +36,7 @@ class NostrEvent extends Equatable {
         pubkey,
         createdAt,
         tags,
+        subscriptionId,
       ];
 
   Map<String, dynamic> _toMap() {
@@ -78,6 +81,28 @@ class NostrEvent extends Equatable {
     );
   }
 
+  factory NostrEvent.fromRelayMessage(String data) {
+    assert(canBeDeserializedEvent(data));
+    final decoded = jsonDecode(data) as List;
+
+    final event = decoded.last as Map<String, dynamic>;
+    return NostrEvent(
+      id: event['id'] as String,
+      kind: event['kind'] as int,
+      content: event['content'] as String,
+      sig: event['sig'] as String,
+      pubkey: event['pubkey'] as String,
+      createdAt: event['created_at'] as int,
+      tags: event['tags'] as List,
+      subscriptionId: decoded.length == 3 ? decoded[1] as String : null,
+    );
+  }
+  static bool canBeDeserializedEvent(String dataFromRelay) {
+    final decoded = jsonDecode(dataFromRelay) as List;
+
+    return decoded.first == "EVENT";
+  }
+
   static String getEventId({
     required int kind,
     required String content,
@@ -95,7 +120,7 @@ class NostrEvent extends Equatable {
     return id;
   }
 
-  List serialized() {
-    return ["EVENT", _toMap()];
+  String serialized() {
+    return jsonEncode(["EVENT", _toMap()]);
   }
 }

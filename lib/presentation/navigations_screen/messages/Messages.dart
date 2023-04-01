@@ -32,9 +32,10 @@ class MessagesState extends State<Messages> {
       appBar: const CustomAppBar(),
       floatingActionButton: const CustomFAB(),
       body: SingleChildScrollView(
-        child: TheWallWidget(
-          channel: WebSocketChannel.connect(Uri.parse(profil.relay)),
-        ),
+        child: Text(""),
+        // child: TheWallWidget(
+        //   channel: WebSocketChannel.connect(Uri.parse(profil.relay)),
+        // ),
       ),
     );
   }

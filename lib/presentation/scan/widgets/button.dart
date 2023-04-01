@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
 
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state.shouldRedirectDirectly) {
+        if (state.authenticated) {
           Navigator.of(context).pushNamed(Paths.bottomBar);
         }
       },

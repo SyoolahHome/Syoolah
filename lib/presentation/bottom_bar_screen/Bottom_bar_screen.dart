@@ -36,7 +36,12 @@ class BottomBarState extends State<BottomBar> {
         selectedIndex: _selectedIndex,
         onElementTap: _onItemTapped,
       ),
-      body: GeneralBottomBar.items.elementAt(_selectedIndex).screen,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: GeneralBottomBar.items.map((BottomBarItem item) {
+          return item.screen;
+        }).toList(),
+      ),
     );
   }
 }

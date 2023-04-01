@@ -2,27 +2,25 @@ part of 'auth_cubit.dart';
 
 @immutable
 class AuthState extends Equatable {
-  final bool isGeneratingNewPrivateKey;
-  final bool shouldRedirectAfterGeneratingPrivateKey;
-  final bool isSavingExistentKey;
-  final bool shouldRedirectDirectly;
+  final bool authenticated;
   final String? error;
+  final bool isGeneratingNewPrivateKey;
+  final bool isSavingExistentKey;
 
   const AuthState({
-    this.isGeneratingNewPrivateKey = false,
-    this.shouldRedirectAfterGeneratingPrivateKey = false,
-    this.isSavingExistentKey = false,
     this.error,
-    this.shouldRedirectDirectly = false,
+    this.authenticated = false,
+    this.isGeneratingNewPrivateKey = false,
+    this.isSavingExistentKey = false,
   });
 
   @override
   List<Object?> get props => [
-        isGeneratingNewPrivateKey,
-        shouldRedirectAfterGeneratingPrivateKey,
         error,
+        authenticated,
+        isGeneratingNewPrivateKey,
         isSavingExistentKey,
-        shouldRedirectDirectly,
+         
       ];
 
   AuthState copyWith({
@@ -30,18 +28,14 @@ class AuthState extends Equatable {
     bool? shouldRedirectAfterGeneratingPrivateKey,
     String? error,
     bool? isSavingExistentKey,
-    bool? shouldRedirectDirectly,
+    bool? authenticated,
   }) {
     return AuthState(
+      error: error ?? this.error,
+      authenticated: authenticated ?? this.authenticated,
       isGeneratingNewPrivateKey:
           isGeneratingNewPrivateKey ?? this.isGeneratingNewPrivateKey,
-      shouldRedirectAfterGeneratingPrivateKey:
-          shouldRedirectAfterGeneratingPrivateKey ??
-              this.shouldRedirectAfterGeneratingPrivateKey,
-      error: error ?? this.error,
       isSavingExistentKey: isSavingExistentKey ?? this.isSavingExistentKey,
-      shouldRedirectDirectly:
-          shouldRedirectDirectly ?? this.shouldRedirectDirectly,
     );
   }
 }

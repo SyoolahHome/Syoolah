@@ -25,7 +25,7 @@ class GoButton extends StatelessWidget {
 
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state.shouldRedirectAfterGeneratingPrivateKey) {
+        if (state.authenticated) {
           BottomSheets.showPrivateKeyGenSuccess(context).then((_) {
             // if (context.read<AuthCubit>().nameFocusNode!.hasFocus) {
             context.read<AuthCubit>().nameFocusNode!.unfocus();
@@ -44,7 +44,7 @@ class GoButton extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  context.read<AuthCubit>().generatePrivateKey();
+                  context.read<AuthCubit>().authenticate();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.white.withOpacity(0.95),

@@ -93,7 +93,6 @@ class ProfilScreenState extends State<ProfilScreen> {
                         } catch (e) {
                           String error =
                               "Private key not supported because of a bug in dart-bip340, github issue copied to your clipboard \nPlease try another one";
-                          logger.e(error);
                           AppUtils.displaySnackBar(context, error);
                           Clipboard.setData(
                             const ClipboardData(

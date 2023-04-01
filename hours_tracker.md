@@ -23,3 +23,9 @@
 - Implemented the main auth screen which generates a private key (with bottom-sheet of success) for the user with his name, and the locale caching of it for future use
 - Implemented the auth screen for existent keys with caching as well for future use.
 - refactored auth screen to chunks of sub widgets of both screens
+
+# 2:00 - 3:00
+
+- Implemented metadata setting after user creates account (private key).
+- implementation of retrieval of that data for profile page.
+- More refactoring of the global code.
