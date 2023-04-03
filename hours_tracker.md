@@ -29,3 +29,7 @@
 - Implemented metadata setting after user creates account (private key).
 - implementation of retrieval of that data for profile page.
 - More refactoring of the global code.
+
+# 3:00 - 3:00
+
+- Implemented update profile metadata mechanism/UI.

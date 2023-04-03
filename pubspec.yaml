@@ -8,36 +8,37 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.0 <4.0.0"
+  sdk: ">=2.18.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  provider: ^6.0.5
-  nostr: ^1.3.3
-  web_socket_channel: ^2.3.0
-  logger: ^1.1.0
-  google_fonts: ^4.0.3
-  crypto: ^3.0.2
-  sqlite3_flutter_libs: ^0.5.12
-  sqlite3: ^1.9.1
-  path_provider: ^2.0.12
-  chat_gpt_sdk:
-    path: ./Flutter-ChatGPT
-  progress_indicators: ^1.0.0
+  cupertino_icons:
+  provider:
+  nostr:
+  web_socket_channel:
+  logger:
+  google_fonts:
+  crypto:
+  sqlite3_flutter_libs:
+  sqlite3:
+  path_provider:
+
+  progress_indicators:
   flutter_bloc:
   flutter_remix:
-  hive_flutter: ^1.1.0
-  equatable: ^2.0.5
-  convert: ^3.1.1
+  hive_flutter:
+  equatable:
+  convert:
+  nostr_client:
+    path: ./nostr_client
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints:
 
 flutter:
   # The following line ensures that the Material Icons font is

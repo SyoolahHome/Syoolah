@@ -33,12 +33,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: <Widget>[
             
-            TextButton(
-              onPressed: () {
-                NostrService.instance.sendReq();
-              },
-              child: Text("clci,"),
-            ),
+            
             const SizedBox(height: 50),
           ],
         ),

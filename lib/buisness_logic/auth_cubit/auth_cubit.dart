@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 import 'package:nostr/nostr.dart';
+import 'package:nostr_client/nostr/core/key_pairs.dart';
 
+import '../../model/user_meta_data.dart';
 import '../../services/database/local/local.dart';
 import '../../services/nostr/nostr.dart';
 
@@ -26,9 +28,15 @@ class AuthCubit extends Cubit<AuthState> {
   void authenticate() async {
     try {
       await generatePrivateKey();
-      await NostrService.instance.init();
+
       NostrService.instance.setCurrentUserMetaData(
-        name: nameController!.text,
+        metadata: UserMetaData(
+          name: nameController!.text,
+          username: nameController!.text,
+          picture: null,
+          banner: null,
+          about: null,
+        ),
         creationDate: DateTime.now(),
       );
       emit(state.copyWith(authenticated: true));
@@ -51,7 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
 
     emit(state.copyWith(isGeneratingNewPrivateKey: true));
-    final privateKey = NostrService.instance.generateKeys();
+    final privateKey = NostrKeyPairs.generate().private;
 
     await LocalDatabase.instance.setAuthInformations(
       key: privateKey,

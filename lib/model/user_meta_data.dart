@@ -1,11 +1,26 @@
-class UserMetaData {
-  final String username;
-  final String name;
-  final String picture;
-  final String banner;
-  final String about;
+import 'package:equatable/equatable.dart';
 
-  UserMetaData({
+/// {@template user_meta_data}
+/// This class is responsible for handling the user's metadata.
+/// {@endtemplate}
+class UserMetaData extends Equatable {
+  /// The username of the user
+  final String username;
+
+  /// The name of the user
+  final String name;
+
+  /// The picture of the user
+  final String? picture;
+
+  /// The banner of the user
+  final String? banner;
+
+  /// The about of the user
+  final String? about;
+
+  /// {@macro user_meta_data}
+  const UserMetaData({
     required this.name,
     required this.picture,
     required this.banner,
@@ -13,6 +28,8 @@ class UserMetaData {
     required this.about,
   });
 
+  /// {@macro user_meta_data}
+  /// Instantiate a [UserMetaData] from a json.
   factory UserMetaData.fromJson(Map<String, dynamic> json) {
     return UserMetaData(
       name: json['name'] ?? UserMetaData.placeholder().name,
@@ -23,8 +40,10 @@ class UserMetaData {
     );
   }
 
+  /// {@macro user_meta_data}
+  /// Instantiate a [UserMetaData] from a placeholder.
   factory UserMetaData.placeholder() {
-    return UserMetaData(
+    return const UserMetaData(
       name: "No Name",
       picture: "https://ui-avatars.com/api/?name=Elon+Musk",
       banner: "https://picsum.photos/200/300",
@@ -32,6 +51,8 @@ class UserMetaData {
       about: "No About",
     );
   }
+
+  /// This will return a json representation of the [UserMetaData] that can be sent to the relays.
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -41,4 +62,7 @@ class UserMetaData {
       'about': about,
     };
   }
+
+  @override
+  List<Object?> get props => [name, picture, banner, username, about];
 }

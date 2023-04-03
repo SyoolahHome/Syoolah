@@ -3,6 +3,7 @@ import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/nostr/nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:nostr/nostr.dart';
 
 part 'edit_profile_state.dart';
 
@@ -30,11 +31,13 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   void saveEdits() {
     NostrService.instance.setCurrentUserMetaData(
-      name: nameController!.text,
-      username: usernameController!.text,
-      picture: pictureController!.text,
-      banner: bannerController!.text,
-      about: aboutController!.text,
+      metadata: UserMetaData(
+        name: nameController!.text,
+        username: usernameController!.text,
+        picture: pictureController!.text,
+        banner: bannerController!.text,
+        about: aboutController!.text,
+      ),
     );
   }
 

@@ -1,114 +1,88 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:core';
-import 'dart:io';
 
-import 'package:convert/convert.dart';
-import 'package:crypto/crypto.dart';
-import 'package:ditto/services/database/local/local.dart';
-import 'package:ditto/services/nostr/base/nostr.dart';
-import 'package:flutter/material.dart';
-import 'package:nostr/nostr.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:nostr_client/nostr/core/key_pairs.dart';
+import 'package:nostr_client/nostr/core/utils.dart';
+import 'package:nostr_client/nostr/model/event.dart';
+import 'package:nostr_client/nostr/nostr.dart';
+import 'package:nostr_client/nostr_client.dart';
 
-import 'model/event.dart';
-import 'model/request.dart';
+import '../../model/user_meta_data.dart';
+import '../database/local/local.dart';
 
-final relaysUrl = 'wss://relay.damus.io';
-
-final NostrService _instance = NostrService._();
-
-class NostrService implements NostrServiceBase {
+class NostrService {
+  static final NostrService _instance = NostrService._();
   static NostrService get instance => _instance;
-
-  final _streamController = StreamController<NostrEvent>.broadcast();
-
-  Stream<NostrEvent> get stream => _streamController.stream;
-
   NostrService._();
 
-  WebSocket? ws;
-
-  WebSocket get wsChannel {
-    assert(ws != null);
-
-    return ws!;
-  }
-
-  @override
-  String generateKeys() {
-    final keyChain = Keychain.generate();
-
-    return keyChain.private;
-  }
-
   Future<void> init() async {
-    ws = await WebSocket.connect("wss://relay.damus.io");
-
-    wsChannel.listen((d) {
-      print("received: $d");
-      final canBeDeserializedEvent = NostrEvent.canBeDeserializedEvent(d);
-
-      if (canBeDeserializedEvent) {
-        _streamController.sink.add(NostrEvent.fromRelayMessage(d));
-      }
-    }, onError: (e) {
-      print("error");
-      print(e);
-    }, onDone: () {
-      print('in onDone');
-      ws!.close();
-    });
+    await Nostr.instance.init(relaysUrl: [
+      'wss://relay.damus.io',
+    ]);
   }
 
   void setCurrentUserMetaData({
-    required String name,
-    String? username,
-    String? picture,
-    String? banner,
-    String? about,
+    required UserMetaData metadata,
     DateTime? creationDate,
   }) {
-    final keyChain = Keychain(LocalDatabase.instance.getPrivateKey()!);
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
 
     final event = NostrEvent.fromPartialData(
       kind: 0,
-      keyChain: keyChain,
+      keyPairs: nostrKeyPairs,
       content: jsonEncode({
-        "name": name,
+        "name": metadata.name,
         "creationDate": (creationDate ?? DateTime.now()).toIso8601String(),
-        if (picture != null) "picture": picture,
-        if (banner != null) "banner": banner,
-        if (about != null) "about": about,
-        if (username != null) "username": username,
+        "picture": metadata.picture,
+        "banner": metadata.banner,
+        "about": metadata.about,
+        "username": metadata.username,
       }),
     );
 
-    final serialized = event.serialized();
-
-    debugPrint("sending metadata event: $serialized");
-    wsChannel.add(serialized);
+    Nostr.instance.sendEventToRelays(event);
   }
 
-  sendReq() {}
+  Stream<NostrEvent> allRelaysTextNoteStreamOfCurrentUser() {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
 
-  @override
+    final metaDataSubscription = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: metaDataSubscription,
+      filters: [
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [1],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
   Stream<NostrEvent> currentUserMetaDataStream() {
-    final keyChain = Keychain(LocalDatabase.instance.getPrivateKey()!);
-    final metaDataSubscription = generate64RandomHexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
 
-    final requestWithFilter = Request(metaDataSubscription, [
-      Filter(
-        authors: [keyChain.public],
-        kinds: [0],
-        since: 1674063680,
-        limit: 450,
-      )
-    ]);
-    wsChannel.add(requestWithFilter.serialize());
+    final randomId = NostrClientUtils.random64HexChars();
 
-    return stream.where((event) {
-      return event.subscriptionId == metaDataSubscription;
-    });
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: [
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [0],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
   }
 }

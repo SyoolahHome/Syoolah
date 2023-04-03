@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:ditto/presentation/navigations_screen/profile/widgets/profile_widget_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:nostr_client/nostr_client.dart';
 import '../../../model/user_meta_data.dart';
-import '../../../services/nostr/model/event.dart';
 import '../../../services/nostr/nostr.dart';
 import '../../../services/utils/paths.dart';
 import '../../edit_profile/edit_Profile.dart';
@@ -55,10 +55,10 @@ class ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         ProfileCover(
-                          coverUrl: metadata.banner,
+                          coverUrl: metadata.banner!,
                         ),
                         ProfileAndEdit(
-                          profileUrl: metadata.picture,
+                          profileUrl: metadata.picture!,
                           onEditTap: () {
                             Navigator.pushNamed(
                               context,

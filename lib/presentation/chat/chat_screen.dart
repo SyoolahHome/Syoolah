@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:ditto/presentation/general/widget/chat_message.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +18,12 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController _inputMessage = TextEditingController();
   List<ChatMessage> _messages = [];
-  OpenAI? openAI;
 
   StreamSubscription? subscription;
   bool isTyping = false;
 
   @override
   void initState() {
-    openAI = OpenAI.instance;
     super.initState();
   }
 
@@ -46,31 +43,9 @@ class _ChatScreenState extends State<ChatScreen> {
     });
     _inputMessage.clear();
 
-    final request = CompleteText(
-      prompt: chatMessage.text,
-      model: "text-",
-      maxTokens: 200,
-    );
 
-    openAI!
-        // .builder('write the path here from Open AI', orgId: '')
-        .onCompletionStream(request: request)
-        .listen((response) {
-      ChatMessage botMessage =
-          ChatMessage(text: response!.choices[0].text, sender: "🤖");
-
-      setState(() {
-        isTyping = false;
-        try {
-          if (kDebugMode) {
-            print(response.choices[0].text);
-          }
-          _messages.insert(0, botMessage);
-        } catch (e) {
-          print('Failed');
-        }
-      });
-    });
+   
+     
   }
 
   @override

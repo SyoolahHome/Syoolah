@@ -18,7 +18,6 @@ import 'constants/themes.dart';
 import 'presentation/general/auth_app_handler.dart';
 import 'presentation/home/home.dart';
 
-
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
