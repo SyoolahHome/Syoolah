@@ -19,21 +19,13 @@ import 'widgets/profile_and_dart.dart';
 import 'widgets/profile_informations.dart';
 import 'widgets/sliding_tabs.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  ProfileState createState() => ProfileState();
-}
-
-class ProfileState extends State<Profile> {
-  int _profileSegmentationValue = 0;
-
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit(
         NostrService.instance.currentUserTextNotesStream(),
+        NostrService.instance.currentUserMetaDataStream(),
       ),
       child: Scaffold(
         drawer: CustomDrawer(
@@ -42,63 +34,62 @@ class ProfileState extends State<Profile> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              StreamBuilder<NostrEvent>(
-                  stream: NostrService.instance.currentUserMetaDataStream(),
-                  builder: (context, snapshot) {
-                    final event = snapshot.data;
-                    UserMetaData metadata;
-                    if (event == null) {
-                      metadata = UserMetaData.placeholder();
-                    } else {
-                      metadata = UserMetaData.fromJson(
-                        jsonDecode(event.content) as Map<String, dynamic>,
-                      );
-                    }
-
-                    return Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ProfileCover(
-                              coverUrl: metadata.banner!,
-                            ),
-                            ProfileAndEdit(
-                              profileUrl: metadata.picture!,
-                              onEditTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Paths.editProfile,
-                                  arguments: metadata,
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 20),
-                            ProfileName(
-                              name: metadata.name,
-                              username: metadata.username,
-                            ),
-                            CurrentUserPubKey(pubKey: event?.pubkey ?? ""),
-                            const ProfileInformations(),
-                            const SizedBox(height: 20),
-                            SlidingTabs(
-                              profileTabs: GeneralProfileTabs.profileTabs,
-                              profileSegmentationValue:
-                                  _profileSegmentationValue,
-                              onValueChanged: (changeTab) {
-                                setState(() {
-                                  _profileSegmentationValue = changeTab!;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+              BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  final event = state.currentUserMetadata;
+                  UserMetaData metadata;
+                  if (event == null) {
+                    metadata = UserMetaData.placeholder();
+                  } else {
+                    metadata = UserMetaData.fromJson(
+                      jsonDecode(event.content) as Map<String, dynamic>,
                     );
-                  }),
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          ProfileCover(
+                            coverUrl: metadata.banner!,
+                          ),
+                          ProfileAndEdit(
+                            profileUrl: metadata.picture!,
+                            onEditTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Paths.editProfile,
+                                arguments: metadata,
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          ProfileName(
+                            name: metadata.name,
+                            username: metadata.username,
+                          ),
+                          CurrentUserPubKey(pubKey: event?.pubkey ?? ""),
+                          const ProfileInformations(),
+                          const SizedBox(height: 20),
+                          SlidingTabs(
+                            profileTabs: GeneralProfileTabs.profileTabs,
+                            profileSegmentationValue: 0,
+                            onValueChanged: (changeTab) {
+                              // setState(() {
+                              //   _profileSegmentationValue = changeTab!;
+                              // });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
               ProfileWidgetBuilder(
-                profileSegmentationValue: _profileSegmentationValue,
+                profileSegmentationValue: 0,
               ),
             ],
           ),

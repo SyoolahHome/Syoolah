@@ -3,19 +3,21 @@ part of 'profile_cubit.dart';
 
 class ProfileState extends Equatable {
   final List<NostrEvent> currentUserPosts;
+  final NostrEvent? currentUserMetadata;
   const ProfileState({
     this.currentUserPosts = const [],
+    this.currentUserMetadata,
   });
 
   @override
-  List<Object> get props => [
-        currentUserPosts,
-      ];
+  List<Object?> get props => [currentUserPosts, currentUserMetadata];
 
   ProfileState copyWith({
     List<NostrEvent>? currentUserPosts,
+    NostrEvent? currentUserMetadata,
   }) {
     return ProfileState(
+      currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
       currentUserPosts: currentUserPosts ?? this.currentUserPosts,
     );
   }
