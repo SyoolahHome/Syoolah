@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../../constants/colors.dart';
 import '../../../model/bottom_bat_item.dart';
+import '../../../services/bottom_sheet/bottom_sheet.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({
@@ -29,10 +31,23 @@ class CustomBottomBar extends StatelessWidget {
             selectedIndex: selectedIndex,
             onDestinationSelected: onElementTap,
             destinations: items.indexedMap((index, item) {
-              return NavigationDestination(
+              Widget possibleWidget = NavigationDestination(
                 icon: Icon(item.icon, color: AppColors.white),
                 label: item.label,
               );
+              if (item.icon == FlutterRemix.add_line) {
+                possibleWidget = GestureDetector(
+                  onTap: () {
+                    BottomSheetService.showCreatePostBottomSheet(context);
+                  },
+                  child: AbsorbPointer(
+                    absorbing: true,
+                    child: possibleWidget,
+                  ),
+                );
+              }
+
+              return possibleWidget;
             }).toList(),
           );
         } else if (state.isLoading) {
@@ -44,7 +59,7 @@ class CustomBottomBar extends StatelessWidget {
             ),
           );
         } else {
-          return Text("readhed here");
+          return const Text("readhed here");
         }
       },
     );

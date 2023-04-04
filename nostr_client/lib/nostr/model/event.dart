@@ -13,7 +13,7 @@ class NostrEvent extends Equatable {
   final String content;
   final String sig;
   final String pubkey;
-  final int createdAt;
+  final DateTime createdAt;
   final List tags;
   String? subscriptionId;
 
@@ -47,7 +47,7 @@ class NostrEvent extends Equatable {
       'content': content,
       'sig': sig,
       'pubkey': pubkey,
-      'created_at': createdAt,
+      'created_at': createdAt.millisecondsSinceEpoch ~/ 1000,
       'tags': tags,
     };
   }
@@ -56,16 +56,18 @@ class NostrEvent extends Equatable {
     required int kind,
     required String content,
     required NostrKeyPairs keyPairs,
+    List<List<String>>? tags,
+    DateTime? createdAt,
   }) {
-    final createdAt = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    final tags = [];
     final pubkey = keyPairs.public;
+    final tagsToUse = tags ?? [];
+    final createdAtToUse = createdAt ?? DateTime.now();
 
     final id = getEventId(
       kind: kind,
       content: content,
-      createdAt: createdAt,
-      tags: tags,
+      createdAt: createdAtToUse,
+      tags: tagsToUse,
       pubkey: pubkey,
     );
 
@@ -77,8 +79,8 @@ class NostrEvent extends Equatable {
       content: content,
       sig: sig,
       pubkey: pubkey,
-      createdAt: createdAt,
-      tags: tags,
+      createdAt: createdAtToUse,
+      tags: tagsToUse,
     );
   }
 
@@ -93,7 +95,9 @@ class NostrEvent extends Equatable {
       content: event['content'] as String,
       sig: event['sig'] as String,
       pubkey: event['pubkey'] as String,
-      createdAt: event['created_at'] as int,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(
+        event['created_at'] * 1000,
+      ),
       tags: event['tags'] as List,
       subscriptionId: decoded.length == 3 ? decoded[1] as String : null,
     );
@@ -107,11 +111,18 @@ class NostrEvent extends Equatable {
   static String getEventId({
     required int kind,
     required String content,
-    required int createdAt,
+    required DateTime createdAt,
     required List tags,
     required String pubkey,
   }) {
-    List data = [0, pubkey, createdAt, kind, tags, content];
+    List data = [
+      0,
+      pubkey,
+      createdAt.millisecondsSinceEpoch ~/ 1000,
+      kind,
+      tags,
+      content
+    ];
 
     final serializedEvent = jsonEncode(data);
     final bytes = utf8.encode(serializedEvent);

@@ -6,8 +6,8 @@ import 'dart:io';
 import 'base/nostr.dart';
 import 'core/key_pairs.dart';
 import 'core/registry.dart';
+import 'model/request/close.dart';
 import 'model/event.dart';
-import 'model/request/filter.dart';
 import 'model/request/request.dart';
 
 /// {@template nostr_service}
@@ -72,7 +72,7 @@ class Nostr implements NostrServiceBase {
     required NostrRequest request,
   }) {
     final serialized = request.serialized();
-    
+
     for (WebSocket relayWebSocket in NostrRegistry.allRelayWebSockets()) {
       relayWebSocket.add(serialized);
     }
@@ -80,5 +80,14 @@ class Nostr implements NostrServiceBase {
     return stream.where((event) {
       return event.subscriptionId == request.subscriptionId;
     });
+  }
+
+  void unsubscribeFromEvents(String subscriptionId) {
+    final close = NostrRequestClose(subscriptionId: subscriptionId);
+    final serialized = close.serialized();
+
+    for (WebSocket relayWebSocket in NostrRegistry.allRelayWebSockets()) {
+      relayWebSocket.add(serialized);
+    }
   }
 }

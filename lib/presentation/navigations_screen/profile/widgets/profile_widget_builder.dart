@@ -1,4 +1,8 @@
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:ditto/services/nostr/nostr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostr_client/nostr_client.dart';
 
 class ProfileWidgetBuilder extends StatelessWidget {
   const ProfileWidgetBuilder({
@@ -11,8 +15,15 @@ class ProfileWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (profileSegmentationValue) {
       case 0:
-        return const Center(
-            child: Text("Posts Loading ...", style: TextStyle(fontSize: 25)));
+        return BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            return Column(
+              children: state.currentUserPosts.map((e) {
+                return Text(e.content);
+              }).toList(),
+            );
+          },
+        );
         break;
       case 1:
         return const Center(

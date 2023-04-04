@@ -1,9 +1,5 @@
+import 'dart:async';
 import 'dart:convert';
-
-import 'package:nostr_client/nostr/core/key_pairs.dart';
-import 'package:nostr_client/nostr/core/utils.dart';
-import 'package:nostr_client/nostr/model/event.dart';
-import 'package:nostr_client/nostr/nostr.dart';
 import 'package:nostr_client/nostr_client.dart';
 
 import '../../model/user_meta_data.dart';
@@ -44,27 +40,6 @@ class NostrService {
     Nostr.instance.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> allRelaysTextNoteStreamOfCurrentUser() {
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
-
-    final metaDataSubscription = NostrClientUtils.random64HexChars();
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: metaDataSubscription,
-      filters: [
-        NostrFilter(
-          authors: [nostrKeyPairs.public],
-          kinds: const [1],
-          since: DateTime.now().subtract(const Duration(days: 100)),
-        )
-      ],
-    );
-
-    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
-  }
-
   Stream<NostrEvent> currentUserMetaDataStream() {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
@@ -84,5 +59,76 @@ class NostrService {
     );
 
     return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
+  void sendTextNoteFromCurrentUser({
+    required String text,
+    DateTime? creationDate,
+    List<List<String>>? tags,
+  }) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: 1,
+      keyPairs: nostrKeyPairs,
+      content: text,
+      tags: tags,
+      createdAt: creationDate,
+    );
+
+    Nostr.instance.sendEventToRelays(event);
+  }
+
+  Stream<NostrEvent> currentUserTextNotesStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [1],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
+  Stream<NostrEvent> textNotesFeed() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          kinds: const [1],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
+  void followUserWithPubKey(String pubKey) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: 2,
+      keyPairs: nostrKeyPairs,
+      content: pubKey,
+    );
+
+    Nostr.instance.sendEventToRelays(event);
   }
 }

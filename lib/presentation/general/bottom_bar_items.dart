@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/bottom_bat_item.dart';
@@ -7,28 +8,28 @@ import '../navigations_screen/messages/Messages.dart';
 import '../navigations_screen/profile/profile.dart';
 
 abstract class GeneralBottomBar {
-   static final List<BottomBarItem> items = [
-    const BottomBarItem(
+  static const List<BottomBarItem> items = <BottomBarItem>[
+    BottomBarItem(
       screen: Home(),
       label: 'Home',
       icon: FlutterRemix.home_4_line,
     ),
-    const BottomBarItem(
+    BottomBarItem(
       screen: Messages(),
       label: 'Messages',
       icon: FlutterRemix.message_3_line,
     ),
-    // BottomBarItem(
-    //   screen: AddNewPost(),
-    //   label: 'Add New Post',
-    //   icon: Icons.add,
-    // ),
-    const BottomBarItem(
+    BottomBarItem(
+      screen: SizedBox(),
+      label: 'Add New Post',
+      icon: FlutterRemix.add_line,
+    ),
+    BottomBarItem(
       screen: GlobalChatRelays(),
       label: 'Global',
       icon: FlutterRemix.list_check_2,
     ),
-    const BottomBarItem(
+    BottomBarItem(
       screen: Profile(),
       label: 'Profile',
       icon: FlutterRemix.user_line,
