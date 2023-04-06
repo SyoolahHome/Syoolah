@@ -12,7 +12,7 @@ class FileUpload {
       );
       request.files.add(
         http.MultipartFile(
-          'file',
+          'fileToUpload',
           file.readAsBytes().asStream(),
           file.lengthSync(),
           filename: file.path.split('/').last,
@@ -24,14 +24,25 @@ class FileUpload {
       final responseData = await response.stream.toBytes();
       final responseString = String.fromCharCodes(responseData);
 
-      // extract the url of the file from the response with a regex: "/https:\/\/nostr\.build\/(?:i|av)\/nostr\.build_[a-z0-9]{64}\.[a-z0-9]+/i".
-      final url = RegExp(
-        r'/https:\/\/nostr\.build\/(?:i|av)\/nostr\.build_[a-z0-9]{64}\.[a-z0-9]+/i',
-      ).firstMatch(responseString)!.group(0)!;
+      final contextFilteredString = responseString
+          .replaceAll("\n", "")
+          .replaceAll(" ", "")
+          .split('"')
+          .where((elem) => elem.contains("https://nostr.build"))
+          .where((elem) => elem.contains(getFileExtension(file)))
+          .toList();
 
-      return url;
+      RegExp exp = RegExp(r'>(.+?)</b></span>');
+      Match match = exp.firstMatch(contextFilteredString.toString())!;
+      String link = match.group(1)!;
+
+      return link.trim();
     } catch (e) {
       rethrow;
     }
+  }
+
+  String getFileExtension(File file) {
+    return file.path.split('.').last;
   }
 }

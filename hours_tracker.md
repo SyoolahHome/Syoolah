@@ -37,9 +37,15 @@
 # 2222222
 
 # 8
+
 - Implemented the basic tab for showing the current user posts/notes that shows directly text format of it. will be used for more advanced implementation
 - Implemented more consistent way to manage relays websocket to get/send data from/to, will be very easy to implmeent a feature that ket the users manage them manually (adding, removing relays...)
 
-## 9 - 10 
+## 9 - 10
+
 - Implemented a global feed page that will be used easily for generating more customized feeds
 - Implemented a basic bottom sheet that allow the user to add a new post/note to the relays
+
+## 11
+
+Added file upload method with that is based also on Nostr with nostr.build

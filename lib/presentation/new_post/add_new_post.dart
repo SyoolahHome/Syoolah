@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'widgets/button.dart';
+import 'widgets/image.dart';
 import 'widgets/post_field.dart';
 import 'widgets/title.dart';
 
@@ -20,16 +21,19 @@ class AddNewPost extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             body: MarginedBody(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: const <Widget>[
-                  SizedBox(height: height * 2),
-                  AddNewPostTitle(),
-                  PostField(),
-                  PostButton(),
-                  SizedBox(height: height * 2),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const <Widget>[
+                    SizedBox(height: height * 2),
+                    AddNewPostTitle(),
+                    PostField(),
+                    PostImage(),
+                    PostButton(),
+                    SizedBox(height: height * 2),
+                  ],
+                ),
               ),
             ),
           );
