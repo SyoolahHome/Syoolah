@@ -16,6 +16,9 @@ class NostrFilter extends Equatable {
   /// a list of event ids that are referenced in an "e" tag to filter with.
   final List<String>? e;
 
+  /// a list of event ids that are referenced in an "e" tag to filter with.
+  final List<String>? t;
+
   /// a list of pubkeys that are referenced in a "p" tag to filter with.
   final List<String>? p;
 
@@ -35,6 +38,7 @@ class NostrFilter extends Equatable {
     this.kinds,
     this.e,
     this.p,
+    this.t,
     this.since,
     this.until,
     this.limit,

@@ -5,11 +5,13 @@ class HomePageAfterLoginState extends Equatable {
   final bool didConnectedToRelaysAndSubscribedToTopics;
   final bool isLoading;
   final String? error;
+  final List<NostrEvent> feedPosts;
 
   const HomePageAfterLoginState({
     this.didConnectedToRelaysAndSubscribedToTopics = false,
     this.isLoading = false,
     this.error,
+    this.feedPosts = const [],
   });
 
   @override
@@ -17,12 +19,14 @@ class HomePageAfterLoginState extends Equatable {
         didConnectedToRelaysAndSubscribedToTopics,
         isLoading,
         error,
+        feedPosts,
       ];
 
   HomePageAfterLoginState copyWith({
     bool? didConnectedToRelaysAndSubscribedToTopics,
     bool? isLoading,
     String? error,
+    List<NostrEvent>? feedPosts,
   }) {
     return HomePageAfterLoginState(
       didConnectedToRelaysAndSubscribedToTopics:
@@ -30,6 +34,7 @@ class HomePageAfterLoginState extends Equatable {
               this.didConnectedToRelaysAndSubscribedToTopics,
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,
+      feedPosts: feedPosts ?? this.feedPosts,
     );
   }
 }

@@ -48,11 +48,11 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthCubit>(
-            create: (context) => AuthCubit(),
+            create: (context) => Routing.authCubit,
             lazy: false,
           ),
           BlocProvider<HomePageAfterLoginCubit>(
-            create: (context) => HomePageAfterLoginCubit(),
+            create: (context) => Routing.homePageAfterLoginCubit,
             lazy: false,
           ),
         ],

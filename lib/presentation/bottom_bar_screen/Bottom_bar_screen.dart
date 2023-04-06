@@ -12,8 +12,11 @@ import '../navigations_screen/messages/Messages.dart';
 import 'widgets/bottom_bar.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
-
+  final HomePageAfterLoginCubit cubit;
+  const BottomBar({
+    Key? key,
+    required this.cubit,
+  }) : super(key: key);
   @override
   BottomBarState createState() => BottomBarState();
 }
@@ -29,18 +32,21 @@ class BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.white70,
-      bottomNavigationBar: CustomBottomBar(
-        items: GeneralBottomBar.items,
-        selectedIndex: _selectedIndex,
-        onElementTap: _onItemTapped,
-      ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: GeneralBottomBar.items.map((BottomBarItem item) {
-          return item.screen;
-        }).toList(),
+    return BlocProvider.value(
+      value: widget.cubit,
+      child: Scaffold(
+        // backgroundColor: Colors.white70,
+        bottomNavigationBar: CustomBottomBar(
+          items: GeneralBottomBar.items,
+          selectedIndex: _selectedIndex,
+          onElementTap: _onItemTapped,
+        ),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: GeneralBottomBar.items.map((BottomBarItem item) {
+            return item.screen;
+          }).toList(),
+        ),
       ),
     );
   }

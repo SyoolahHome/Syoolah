@@ -24,7 +24,6 @@ dependencies:
   sqlite3_flutter_libs:
   sqlite3:
   path_provider:
-
   progress_indicators:
   flutter_bloc:
   flutter_remix:
@@ -33,6 +32,8 @@ dependencies:
   convert:
   nostr_client:
     path: ./nostr_client
+  image_picker:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:

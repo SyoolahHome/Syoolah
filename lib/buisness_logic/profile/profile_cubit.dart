@@ -8,10 +8,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   Stream<NostrEvent> currentUserPostsStream;
   Stream<NostrEvent> currentUserMetadataStream;
 
-  ProfileCubit(
-    this.currentUserPostsStream,
-    this.currentUserMetadataStream,
-  ) : super(ProfileInitial()) {
+  ProfileCubit({
+    required this.currentUserPostsStream,
+    required this.currentUserMetadataStream,
+  }) : super(ProfileInitial()) {
     handleStreams();
   }
 
@@ -31,7 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void _handleCurrentUserPosts() {
-    currentUserMetadataStream.listen((event) {
+    currentUserPostsStream.listen((event) {
       emit(
         state.copyWith(
           currentUserPosts: [...state.currentUserPosts, event],

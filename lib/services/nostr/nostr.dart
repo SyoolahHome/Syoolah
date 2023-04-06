@@ -110,7 +110,8 @@ class NostrService {
       filters: <NostrFilter>[
         NostrFilter(
           kinds: const [1],
-          since: DateTime.now().subtract(const Duration(days: 100)),
+          since: DateTime.now().subtract(const Duration(minutes: 2)),
+          until: DateTime.now(),
         )
       ],
     );
