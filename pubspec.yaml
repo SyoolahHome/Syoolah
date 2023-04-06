@@ -34,6 +34,7 @@ dependencies:
     path: ./nostr_client
   image_picker:
   cached_network_image:
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

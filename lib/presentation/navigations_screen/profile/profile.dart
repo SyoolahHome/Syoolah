@@ -95,12 +95,10 @@ class Profile extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 500,
-                    child: Flexible(
-                      child: TabBarView(
-                        children: GeneralProfileTabs.profileTabsItems.map((e) {
-                          return e.widget;
-                        }).toList(),
-                      ),
+                    child: TabBarView(
+                      children: GeneralProfileTabs.profileTabsItems.map((e) {
+                        return e.widget;
+                      }).toList(),
                     ),
                   ),
                 ],
