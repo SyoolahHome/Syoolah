@@ -8,6 +8,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:nostr_client/nostr_client.dart';
 
 import '../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
@@ -28,11 +29,15 @@ class NoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<NoteCardCubit>.value(
       value: NoteCardCubit(
-        note: note,
-        currentUserMetadataStream:
-            NostrService.instance.userMetadata(note.event.pubkey),
-      ),
+          note: note,
+          currentUserMetadataStream:
+              NostrService.instance.userMetadata(note.event.pubkey),
+          noteLikesStream: NostrService.instance.noteLikes(
+            postEventId: note.event.id,
+          )),
       child: Builder(builder: (context) {
+        final cubit = context.read<NoteCardCubit>();
+
         return BlocBuilder<NoteCardCubit, NoteCardState>(
             builder: (context, state) {
           UserMetaData noteOwnerMetadata;
@@ -44,6 +49,11 @@ class NoteCard extends StatelessWidget {
               jsonDecode(state.noteOwnerMetadata!.content)
                   as Map<String, dynamic>,
             );
+          }
+          final noteLikes = state.noteLikes;
+          int likes = noteLikes.length;
+          if (state.localLiked) {
+            likes += 1;
           }
           return Container(
             width: double.infinity,
@@ -81,6 +91,22 @@ class NoteCard extends StatelessWidget {
                       )
                       .toList(),
                   text: note.noteOnly,
+                ),
+                IconButton(
+                  onPressed: () {
+                    if (!cubit.isUserAlreadyLiked()) {
+                      cubit.likeNote();
+                    }
+                  },
+                  icon: const Icon(FlutterRemix.add_box_line),
+                ),
+                Text(
+                  likes.toString(),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: state.localLiked || cubit.isUserAlreadyLiked()
+                            ? Colors.red
+                            : null,
+                      ),
                 ),
               ],
             ),

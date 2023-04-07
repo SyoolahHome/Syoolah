@@ -14,7 +14,7 @@ class NostrEvent extends Equatable {
   final String sig;
   final String pubkey;
   final DateTime createdAt;
-  final List tags;
+  final List<List<String>> tags;
   String? subscriptionId;
 
   NostrEvent({
@@ -98,7 +98,15 @@ class NostrEvent extends Equatable {
       createdAt: DateTime.fromMillisecondsSinceEpoch(
         event['created_at'] * 1000,
       ),
-      tags: event['tags'] as List,
+      tags: List<List<String>>.from((event['tags'] as List)
+          .map(
+            (nestedElem) => (nestedElem as List)
+                .map(
+                  (nestedElemContent) => nestedElemContent.toString(),
+                )
+                .toList(),
+          )
+          .toList()),
       subscriptionId: decoded.length == 3 ? decoded[1] as String : null,
     );
   }

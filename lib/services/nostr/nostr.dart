@@ -190,4 +190,44 @@ class NostrService {
       request: requestWithFilter,
     );
   }
+
+  void likePost(String postEventId) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: 7,
+      keyPairs: nostrKeyPairs,
+      content: "+",
+      tags: [
+        ["e", postEventId],
+        ["p", nostrKeyPairs.public],
+      ],
+      createdAt: DateTime.now(),
+    );
+
+    Nostr.instance.sendEventToRelays(event);
+  }
+
+  Stream<NostrEvent> noteLikes({
+    required String postEventId,
+  }) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          e: [postEventId],
+          kinds: const [7],
+          until: DateTime.now().add(Duration(days: 10)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
 }
