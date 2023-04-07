@@ -15,7 +15,7 @@ class Note extends Equatable {
     this.imageLinks = const [],
   });
 
-  factory Note.fromEvent(NostrEvent event) {
+  factory Note.fromEvent(NostrEvent event, ) {
     final links = extractLinks(event.content);
     final noteOnly = removeLinksFromInitial(event.content);
     final imageLinks = filterImageLinks(links);

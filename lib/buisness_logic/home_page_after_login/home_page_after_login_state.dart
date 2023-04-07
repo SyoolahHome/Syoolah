@@ -1,17 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: , sort_constructors_first
 part of 'home_page_after_login_cubit.dart';
 
 class HomePageAfterLoginState extends Equatable {
   final bool didConnectedToRelaysAndSubscribedToTopics;
   final bool isLoading;
   final String? error;
-  final List<NostrEvent> feedPosts;
+  final Map<String, NostrEvent> allUsersMetadata;
 
   const HomePageAfterLoginState({
     this.didConnectedToRelaysAndSubscribedToTopics = false,
     this.isLoading = false,
     this.error,
-    this.feedPosts = const [],
+    this.allUsersMetadata = const {},
   });
 
   @override
@@ -19,14 +19,14 @@ class HomePageAfterLoginState extends Equatable {
         didConnectedToRelaysAndSubscribedToTopics,
         isLoading,
         error,
-        feedPosts,
+        allUsersMetadata,
       ];
 
   HomePageAfterLoginState copyWith({
     bool? didConnectedToRelaysAndSubscribedToTopics,
     bool? isLoading,
     String? error,
-    List<NostrEvent>? feedPosts,
+    Map<String, NostrEvent>? allUsersMetadata,
   }) {
     return HomePageAfterLoginState(
       didConnectedToRelaysAndSubscribedToTopics:
@@ -34,7 +34,7 @@ class HomePageAfterLoginState extends Equatable {
               this.didConnectedToRelaysAndSubscribedToTopics,
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,
-      feedPosts: feedPosts ?? this.feedPosts,
+      allUsersMetadata: allUsersMetadata ?? this.allUsersMetadata,
     );
   }
 }

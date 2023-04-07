@@ -76,6 +76,7 @@ class NostrFilter extends Equatable {
       if (kinds != null) 'kinds': kinds,
       if (e != null) '#e': e,
       if (p != null) '#p': p,
+      if (t != null) '#t': t,
       if (since != null) 'since': since!.millisecondsSinceEpoch ~/ 1000,
       if (until != null) 'until': until!.millisecondsSinceEpoch ~/ 1000,
       if (limit != null) 'limit': limit,

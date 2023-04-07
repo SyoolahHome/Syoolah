@@ -40,6 +40,23 @@ class NostrService {
     Nostr.instance.sendEventToRelays(event);
   }
 
+  Stream<NostrEvent> userMetadata(String pubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: [
+        NostrFilter(
+          authors: [pubKey],
+          kinds: const [0],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
   Stream<NostrEvent> currentUserMetaDataStream() {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
@@ -110,13 +127,36 @@ class NostrService {
       filters: <NostrFilter>[
         NostrFilter(
           kinds: const [1],
-          since: DateTime.now().subtract(const Duration(minutes: 2)),
-          until: DateTime.now(),
+          t: const ["anas", "gwhyyy"],
+          since: DateTime.now().subtract(const Duration(days: 30)),
         )
       ],
     );
 
     return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+  }
+
+  Stream getFollowedPeople() {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [3],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
   }
 
   void followUserWithPubKey(String pubKey) {
@@ -125,11 +165,29 @@ class NostrService {
     );
 
     final event = NostrEvent.fromPartialData(
-      kind: 2,
+      kind: 3,
       keyPairs: nostrKeyPairs,
       content: pubKey,
     );
 
     Nostr.instance.sendEventToRelays(event);
+  }
+
+  Stream<NostrEvent> allUsersMetadata() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          kinds: const [0],
+          since: DateTime.now().subtract(const Duration(days: 100)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
   }
 }

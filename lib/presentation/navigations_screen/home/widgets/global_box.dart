@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../../../constants/colors.dart';
+import '../../../../services/nostr/nostr.dart';
 import '../../../../services/utils/paths.dart';
 
 class GlobalBox extends StatelessWidget {

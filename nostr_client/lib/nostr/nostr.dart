@@ -6,8 +6,10 @@ import 'dart:io';
 import 'base/nostr.dart';
 import 'core/key_pairs.dart';
 import 'core/registry.dart';
+import 'core/utils.dart';
 import 'model/request/close.dart';
 import 'model/event.dart';
+import 'model/request/eose.dart';
 import 'model/request/request.dart';
 
 /// {@template nostr_service}
@@ -44,16 +46,16 @@ class Nostr implements NostrServiceBase {
         webSocket: await WebSocket.connect(relay),
       );
       NostrRegistry.getRelayWebSocket(relayUrl: relay)!.listen((d) {
-        print("received: $d");
-
         if (NostrEvent.canBeDeserializedEvent(d)) {
           _streamController.sink.add(NostrEvent.fromRelayMessage(d));
         }
       }, onError: (e) {
         print("relay with url $relay errored: $e");
+        NostrClientUtils.log(
+            "web socket of relay with $relay had anerror: $e ");
       }, onDone: () {
         NostrRegistry.getRelayWebSocket(relayUrl: relay)!.close();
-        print("relay with url $relay closed");
+        NostrClientUtils.log("web socket of relay with $relay is closed ");
       });
     }
   }
@@ -72,7 +74,6 @@ class Nostr implements NostrServiceBase {
     required NostrRequest request,
   }) {
     final serialized = request.serialized();
-
     for (WebSocket relayWebSocket in NostrRegistry.allRelayWebSockets()) {
       relayWebSocket.add(serialized);
     }

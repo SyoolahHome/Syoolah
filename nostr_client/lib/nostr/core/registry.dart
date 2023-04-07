@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:nostr_client/nostr/core/utils.dart';
+
 import '../nostr.dart';
 
 /// This is responsible for registering and retrieving relays [WebSocket]s that are connected to the app.

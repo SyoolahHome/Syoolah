@@ -3,6 +3,6 @@ abstract class NostrConstants {
   static const String request = 'REQ';
   static const String notice = 'NOTICE';
   static const String ok = 'OK';
-  static const close = 'CLOSE';
-  
+  static const String close = 'CLOSE';
+  static const String eose = "EOSE";
 }
