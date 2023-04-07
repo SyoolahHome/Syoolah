@@ -63,6 +63,10 @@ class UserMetaData extends Equatable {
     };
   }
 
+  String nameToShow() {
+    return name;
+  }
+
   @override
   List<Object?> get props => [name, picture, banner, username, about];
 }

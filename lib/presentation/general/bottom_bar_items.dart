@@ -15,7 +15,7 @@ abstract class GeneralBottomBar {
       icon: FlutterRemix.home_4_line,
     ),
     BottomBarItem(
-      screen: Messages(),
+      screen: Scaffold(),
       label: 'Messages',
       icon: FlutterRemix.message_3_line,
     ),

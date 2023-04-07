@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditto/constants/colors.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostr_client/nostr_client.dart';
@@ -11,6 +13,8 @@ import 'package:nostr_client/nostr_client.dart';
 import '../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../model/note.dart';
 import '../../../services/nostr/nostr.dart';
+import 'note_avatat_and_name.dart';
+import 'note_contents.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({
@@ -22,11 +26,12 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteCardCubit>(
-      create: (context) => NoteCardCubit(
-          note: note,
-          currentUserMetadataStream:
-              NostrService.instance.userMetadata(note.event.pubkey)),
+    return BlocProvider<NoteCardCubit>.value(
+      value: NoteCardCubit(
+        note: note,
+        currentUserMetadataStream:
+            NostrService.instance.userMetadata(note.event.pubkey),
+      ),
       child: Builder(builder: (context) {
         return BlocBuilder<NoteCardCubit, NoteCardState>(
             builder: (context, state) {
@@ -56,30 +61,26 @@ class NoteCard extends StatelessWidget {
               ),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(height: 10),
-                Text(noteOwnerMetadata.name),
-                Text(note.event.createdAt.toString()),
-                const SizedBox(height: 10),
-                Text(
-                  note.noteOnly,
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.labelLarge,
+                NoteAvatarAndName(
+                  avatarUrl: noteOwnerMetadata.picture!,
+                  nameToShow: noteOwnerMetadata.nameToShow(),
+                  dateTimeToShow: note.event.createdAt.toReadableString(),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                      children: note.imageLinks.map(
-                    (link) {
-                      return Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        child: CachedNetworkImage(
-                          imageUrl: link,
-                          height: 120,
-                        ),
-                      );
-                    },
-                  ).toList()),
+                Divider(
+                  color: AppColors.grey.withOpacity(0.5),
+                ),
+                const SizedBox(height: 15),
+                NoteContents(
+                  heroTag: note.event.createdAt.toString(),
+                  imageLinks: note.imageLinks
+                      .map(
+                        (link) => link,
+                      )
+                      .toList(),
+                  text: note.noteOnly,
                 ),
               ],
             ),

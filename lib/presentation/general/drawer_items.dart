@@ -19,12 +19,7 @@ abstract class GeneralDrawerItems {
           icon: FlutterRemix.chat_2_line,
           label: 'Messages',
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Messages(),
-              ),
-            );
+         
           },
         ),
         DrawerListTimeItem(

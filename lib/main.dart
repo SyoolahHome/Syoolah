@@ -41,28 +41,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => MProfile()),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthCubit>(
-            create: (context) => Routing.authCubit,
-            lazy: false,
-          ),
-          BlocProvider<HomePageAfterLoginCubit>(
-            create: (context) => Routing.homePageAfterLoginCubit,
-            lazy: false,
-          ),
-        ],
-        child: MaterialApp(
-          routes: Routing.routes,
-          initialRoute: Paths.main,
-          title: AppStrings.appName,
-          debugShowCheckedModeBanner: false,
-          theme: AppThemes.primary,
+        BlocProvider<AuthCubit>(
+          create: (context) => Routing.authCubit,
+          lazy: false,
         ),
+        BlocProvider<HomePageAfterLoginCubit>.value(
+          value: Routing.homePageAfterLoginCubit,
+        ),
+      ],
+      child: MaterialApp(
+        routes: Routing.routes,
+        initialRoute: Paths.main,
+        title: AppStrings.appName,
+        debugShowCheckedModeBanner: false,
+        theme: AppThemes.primary,
       ),
     );
   }
