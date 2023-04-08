@@ -6,6 +6,7 @@ abstract class BottomSheetService {
   static showCreatePostBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
       shape: const RoundedRectangleBorder(

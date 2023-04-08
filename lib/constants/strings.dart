@@ -1,4 +1,7 @@
 abstract class AppStrings {
+  static const String error = "Something went wrong, try again";
+  static const String postCreatedSuccessfully = "Post Created Successfully";
+  static const String selectedImage = "Selected Image";
   static const String chooseCategories = "Choose Categories";
   static const String yourPost = "Your Post";
   static const String createNewPost = "Create New Post";

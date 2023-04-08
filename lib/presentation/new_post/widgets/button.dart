@@ -5,9 +5,12 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/add_new_post/add_new_post_cubit.dart';
 import '../../../constants/colors.dart';
+import '../../../services/utils/snackbars.dart';
 
 class PostButton extends StatelessWidget {
-  const PostButton({super.key});
+  const PostButton({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +27,44 @@ class PostButton extends StatelessWidget {
             FlutterRemix.image_add_line,
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            cubit.createNote();
+        BlocConsumer<AddNewPostCubit, AddNewPostState>(
+          listener: (_, state) {
+            if (state.success != null) {
+              Navigator.maybePop(context);
+              SnackBars.text(context, state.success!);
+            }
+            if (state.error != null) {
+              SnackBars.text(context, state.error!);
+            }
           },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.teal),
-          ),
-          child: Text(
-            AppStrings.createNewPost,
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: AppColors.white,
+          builder: (_, state) {
+            return SizedBox(
+              width: 150,
+              child: ElevatedButton(
+                onPressed: () {
+                  cubit.createNote();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.teal),
                 ),
-          ),
+                child: state.isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: AppColors.white,
+                          strokeWidth: 1.2,
+                        ),
+                      )
+                    : Text(
+                        AppStrings.createNewPost,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              color: AppColors.white,
+                            ),
+                      ),
+              ),
+            );
+          },
         ),
       ],
     );

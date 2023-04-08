@@ -17,7 +17,9 @@ class PostField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const Text(AppStrings.yourPost),
-        const SizedBox(height: 5),
+        const SizedBox(
+          height: 5,
+        ),
         TextField(
           controller: cubit.textController,
           decoration: InputDecoration(

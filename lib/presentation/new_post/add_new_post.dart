@@ -19,32 +19,38 @@ class AddNewPost extends StatelessWidget {
     const height = 10.0;
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height * .85,
+      height: 575,
       width: MediaQuery.of(context).size.width,
       child: BlocProvider<AddNewPostCubit>(
         create: (context) => AddNewPostCubit(
           categories: [...AppConfigs.categories],
         ),
         child: Builder(
-          builder: (context) {
+          builder: (_) {
             return Scaffold(
               body: MarginedBody(
                 child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
-                      SizedBox(height: height * 2),
-                      AddNewPostTitle(),
-                      Divider(color: AppColors.grey, thickness: 0.2),
-                      SizedBox(height: height),
-                      PostField(),
-                      SizedBox(height: height * 2),
-                      CategoriesSelect(),
-                      PostImage(),
-                      PostButton(),
-                      SizedBox(height: height * 2),
-                    ],
+                  child: SizedBox(
+                    height: 575,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const <Widget>[
+                        SizedBox(height: height * 2),
+                        AddNewPostTitle(),
+                        Divider(color: AppColors.grey, thickness: 0.2),
+                        SizedBox(height: height),
+                        PostField(),
+                        SizedBox(height: height * 2),
+                        CategoriesSelect(),
+                        SizedBox(height: height * 2),
+                        PostImage(),
+                        Spacer(),
+                        PostButton(),
+                        SizedBox(height: height * 2),
+                      ],
+                    ),
                   ),
                 ),
               ),

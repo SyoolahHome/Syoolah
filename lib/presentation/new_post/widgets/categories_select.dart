@@ -32,7 +32,8 @@ class CategoriesSelect extends StatelessWidget {
                 final isSelected = current.isSelected;
                 return Container(
                   margin: const EdgeInsets.only(right: 5),
-                  child: ChoiceChip(
+                  child: FilterChip(
+                    backgroundColor: isSelected ? null : AppColors.lighGrey,
                     onSelected: (value) {
                       cubit.onSelected(index, value);
                     },
@@ -51,7 +52,7 @@ class CategoriesSelect extends StatelessWidget {
                     ),
                     side: BorderSide(
                       color: isSelected ? AppColors.teal : Colors.transparent,
-                      width: 0.5,
+                      width: 0.75,
                     ),
                     labelStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
