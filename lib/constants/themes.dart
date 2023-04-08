@@ -46,5 +46,13 @@ abstract class AppThemes {
       backgroundColor: AppColors.teal,
       iconTheme: const IconThemeData(color: AppColors.white),
     ),
+    chipTheme: ChipThemeData(
+      selectedColor: AppColors.teal.withOpacity(0.1),
+      checkmarkColor: AppColors.teal,
+      iconTheme: const IconThemeData(
+        grade: 5,
+        size: 20,
+      ),
+    ),
   );
 }

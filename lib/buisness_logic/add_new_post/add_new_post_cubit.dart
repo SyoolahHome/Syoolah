@@ -7,12 +7,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../model/feed_category.dart';
+
 part 'add_new_post_state.dart';
 
 class AddNewPostCubit extends Cubit<AddNewPostState> {
   TextEditingController? textController;
-
-  AddNewPostCubit() : super(AddNewPostInitial()) {
+  List<FeedCategory> categories;
+  AddNewPostCubit({
+    required this.categories,
+  }) : super(AddNewPostInitial(categories: categories)) {
     textController = TextEditingController();
   }
 
@@ -50,5 +54,18 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   Future<void> close() {
     textController!.dispose();
     return super.close();
+  }
+
+  void onSelected(int selectedIndex, bool value) {
+    List<FeedCategory> newList = [];
+    for (int index = 0; index < state.categories.length; index++) {
+      if (selectedIndex != index) {
+        newList.add(state.categories[index]);
+      } else {
+        final selectedItem = state.categories[index];
+        newList.add(selectedItem.copyWith(isSelected: value));
+      }
+    }
+    emit(state.copyWith(categories: newList));
   }
 }

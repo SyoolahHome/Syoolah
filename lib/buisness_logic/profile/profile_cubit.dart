@@ -7,10 +7,12 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   Stream<NostrEvent> currentUserPostsStream;
   Stream<NostrEvent> currentUserMetadataStream;
+  Stream<NostrEvent> currentUserLikedPosts;
 
   ProfileCubit({
     required this.currentUserPostsStream,
     required this.currentUserMetadataStream,
+    required this.currentUserLikedPosts,
   }) : super(ProfileInitial()) {
     handleStreams();
   }
@@ -18,6 +20,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   void handleStreams() {
     _handleCurrentUserPosts();
     _handleCurrentUserMetadata();
+    _handleCurrentUserLikedPosts();
   }
 
   void _handleCurrentUserMetadata() {
@@ -35,6 +38,17 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(
         state.copyWith(
           currentUserPosts: [...state.currentUserPosts, event],
+        ),
+      );
+    });
+  }
+
+
+  void _handleCurrentUserLikedPosts() {
+      currentUserLikedPosts.listen((event) {
+      emit(
+        state.copyWith(
+          currentUserLikedPosts: [...state.currentUserLikedPosts, event],
         ),
       );
     });

@@ -230,4 +230,25 @@ class NostrService {
       request: requestWithFilter,
     );
   }
+
+  Stream<NostrEvent> currentUserLikes() {
+    final randomId = NostrClientUtils.random64HexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [7],
+          until: DateTime.now().add(Duration(days: 10)),
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
 }

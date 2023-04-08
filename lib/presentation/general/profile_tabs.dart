@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/tab_item.dart';
+import '../navigations_screen/profile/widgets/current_user_likes.dart';
 import '../navigations_screen/profile/widgets/current_user_posts.dart';
 
 abstract class GeneralProfileTabs {
@@ -11,15 +12,15 @@ abstract class GeneralProfileTabs {
       widget: CurrentUserPosts(),
     ),
     TabItem(
-      label: "Replies",
+      label: "reposts",
       widget: Center(
-        child: Text("Replies"),
+        child: Text("reposts"),
       ),
     ),
     TabItem(
       label: "Likes",
       widget: Center(
-        child: Text("Likes"),
+        child: CurrentUserLikes(),
       ),
     ),
   ];

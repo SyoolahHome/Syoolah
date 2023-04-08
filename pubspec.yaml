@@ -36,6 +36,7 @@ dependencies:
   cached_network_image:
   http: ^0.13.5
   timeago: ^3.4.0
+  dart_openai: ^1.9.1
 
 dev_dependencies:
   flutter_test:

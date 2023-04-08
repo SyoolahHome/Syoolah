@@ -49,3 +49,9 @@
 ## 11
 
 Added file upload method with that is based also on Nostr with nostr.build
+
+# 12-13
+
+IMplemented the show of the user's name/username, avatar, and date of the post he created in the post UI.
+
+Implemented the reaction (like) functionality for posts & tested it

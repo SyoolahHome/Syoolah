@@ -1,3 +1,4 @@
+import 'package:ditto/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,18 +12,32 @@ class PostField extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddNewPostCubit>();
 
-    return TextField(
-      controller: cubit.textController,
-      decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.all(10) + const EdgeInsets.symmetric(vertical: 20),
-        fillColor: AppColors.lighGrey,
-        filled: true,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const Text(AppStrings.yourPost),
+        const SizedBox(height: 5),
+        TextField(
+          controller: cubit.textController,
+          decoration: InputDecoration(
+            hintText: AppStrings.typeHere,
+            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: AppColors.grey,
+                ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 25,
+            ),
+            fillColor: AppColors.lighGrey,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

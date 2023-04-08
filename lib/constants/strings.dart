@@ -1,4 +1,6 @@
 abstract class AppStrings {
+  static const String chooseCategories = "Choose Categories";
+  static const String yourPost = "Your Post";
   static const String createNewPost = "Create New Post";
   static const String addNewPost = "Add New Post";
   static const String globalFeed = "Global Feed";

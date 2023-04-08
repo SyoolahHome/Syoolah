@@ -14,12 +14,13 @@ class PostButton extends StatelessWidget {
     final cubit = context.read<AddNewPostCubit>();
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
           onPressed: () {
             cubit.addImage();
           },
-          icon: Icon(
+          icon: const Icon(
             FlutterRemix.image_add_line,
           ),
         ),

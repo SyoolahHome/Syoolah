@@ -3,22 +3,28 @@ part of 'add_new_post_cubit.dart';
 
 class AddNewPostState extends Equatable {
   final File? pickedImage;
-  const AddNewPostState({
-    this.pickedImage,
-  });
+  final List<FeedCategory> categories;
+  const AddNewPostState({this.pickedImage, this.categories = const []});
 
   @override
   List<Object?> get props => [
         pickedImage,
+        categories,
       ];
 
   AddNewPostState copyWith({
     File? pickedImage,
+    List<FeedCategory>? categories,
   }) {
     return AddNewPostState(
       pickedImage: pickedImage ?? this.pickedImage,
+      categories: categories ?? this.categories,
     );
   }
 }
 
-class AddNewPostInitial extends AddNewPostState {}
+class AddNewPostInitial extends AddNewPostState {
+  const AddNewPostInitial({
+    required super.categories,
+  });
+}

@@ -1,9 +1,12 @@
+import 'package:ditto/constants/configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/add_new_post/add_new_post_cubit.dart';
+import '../../constants/colors.dart';
 import 'widgets/button.dart';
+import 'widgets/categories_select.dart';
 import 'widgets/image.dart';
 import 'widgets/post_field.dart';
 import 'widgets/title.dart';
@@ -15,29 +18,39 @@ class AddNewPost extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return BlocProvider<AddNewPostCubit>(
-      create: (context) => AddNewPostCubit(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            body: MarginedBody(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    SizedBox(height: height * 2),
-                    AddNewPostTitle(),
-                    PostField(),
-                    PostImage(),
-                    PostButton(),
-                    SizedBox(height: height * 2),
-                  ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .85,
+      width: MediaQuery.of(context).size.width,
+      child: BlocProvider<AddNewPostCubit>(
+        create: (context) => AddNewPostCubit(
+          categories: [...AppConfigs.categories],
+        ),
+        child: Builder(
+          builder: (context) {
+            return Scaffold(
+              body: MarginedBody(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const <Widget>[
+                      SizedBox(height: height * 2),
+                      AddNewPostTitle(),
+                      Divider(color: AppColors.grey, thickness: 0.2),
+                      SizedBox(height: height),
+                      PostField(),
+                      SizedBox(height: height * 2),
+                      CategoriesSelect(),
+                      PostImage(),
+                      PostButton(),
+                      SizedBox(height: height * 2),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

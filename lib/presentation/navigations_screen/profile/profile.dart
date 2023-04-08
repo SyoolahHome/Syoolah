@@ -27,6 +27,7 @@ class Profile extends StatelessWidget {
             NostrService.instance.currentUserTextNotesStream(),
         currentUserMetadataStream:
             NostrService.instance.currentUserMetaDataStream(),
+            currentUserLikedPosts: NostrService.instance.currentUserLikes(), 
       ),
       child: DefaultTabController(
         length: GeneralProfileTabs.profileTabsItems.length,
