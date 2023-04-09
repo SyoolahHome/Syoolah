@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostr_client/nostr_client.dart';
@@ -8,7 +10,7 @@ part 'note_comments_state.dart';
 
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   Stream<NostrEvent> noteCommentsStream;
-
+  StreamSubscription? _noteCommentsStreamSubscription;
   NoteCommentsCubit({
     required this.noteCommentsStream,
   }) : super(NoteCommentsInitial()) {
@@ -16,9 +18,15 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   }
 
   void _handleStreams() {
-    noteCommentsStream.listen((event) {
+    _noteCommentsStreamSubscription = noteCommentsStream.listen((event) {
       emit(state.copyWith(noteComments: [...state.noteComments, event]));
     });
+  }
+
+  @override
+  Future<void> close() {
+    _noteCommentsStreamSubscription!.cancel();
+    return super.close();
   }
 
   void noteComment({

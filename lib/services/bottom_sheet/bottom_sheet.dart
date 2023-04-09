@@ -1,7 +1,7 @@
 import 'package:ditto/model/note.dart';
 import 'package:flutter/material.dart';
 
-import '../../presentation/general/widget/note_comments_section.dart';
+import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/new_post/add_new_post.dart';
 
 abstract class BottomSheetService {

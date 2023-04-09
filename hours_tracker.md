@@ -41,12 +41,12 @@
 - Implemented the basic tab for showing the current user posts/notes that shows directly text format of it. will be used for more advanced implementation
 - Implemented more consistent way to manage relays websocket to get/send data from/to, will be very easy to implmeent a feature that ket the users manage them manually (adding, removing relays...)
 
-## 9 - 10
+# 9 - 10
 
 - Implemented a global feed page that will be used easily for generating more customized feeds
 - Implemented a basic bottom sheet that allow the user to add a new post/note to the relays
 
-## 11
+# 11
 
 Added file upload method with that is based also on Nostr with nostr.build
 
@@ -61,3 +61,7 @@ Implemented the reaction (like) functionality for posts & tested it
 Implementation of single or multo images select and categories selection when posting and adding a new post to relays.
 
 Improved the UI of the add new post bottom sheet, with error and success handling with snackbars.
+
+# 16
+
+Imlemntation of a comments section screen for each post, not completed yet but the basic functionality is there.
