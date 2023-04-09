@@ -30,10 +30,6 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     noteLikesStream.listen((event) {
       emit(state.copyWith(noteLikes: [...state.noteLikes, event]));
     });
-
-    // noteCommentsStream.listen((event) {
-    //   emit(state.copyWith(noteComments: [...state.noteComments, event]));
-    // });
   }
 
   void likeNote() {

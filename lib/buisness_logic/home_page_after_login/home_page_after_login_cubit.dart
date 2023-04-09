@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostr_client/nostr_client.dart';
@@ -6,8 +5,6 @@ import 'package:nostr_client/nostr_client.dart';
 part 'home_page_after_login_state.dart';
 
 class HomePageAfterLoginCubit extends Cubit<HomePageAfterLoginState> {
-
-
   HomePageAfterLoginCubit() : super(const HomePageAfterLoginInitial()) {
     connectToRelaysAndSubscribeToTopics();
   }
@@ -22,22 +19,4 @@ class HomePageAfterLoginCubit extends Cubit<HomePageAfterLoginState> {
       emit(state.copyWith(isLoading: false));
     }
   }
-
- 
-    // allUsersMetadataStream.listen(
-    //   (event) {
-    //     if (!state.allUsersMetadata.containsKey(event.pubkey)) {
-    //       emit(
-    //         state.copyWith(
-    //           allUsersMetadata: {
-    //             ...state.allUsersMetadata,
-    //             event.pubkey: event,
-    //           },
-    //        ),
-    //  }
-
-    //  }
-    // },
-    // );
-  
 }

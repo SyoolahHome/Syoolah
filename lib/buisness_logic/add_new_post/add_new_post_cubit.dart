@@ -20,25 +20,34 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     required this.categories,
   }) : super(AddNewPostInitial(categories: categories)) {
     textController = TextEditingController();
-    // 
+    //
+  }
+
+  bool _noteImagesExists() {
+    return state.pickedImages != null && state.pickedImages!.isNotEmpty;
+  }
+
+  Future<String> _uploadImagesAndGetNewNoteResult() async {
+    String result = "";
+
+    for (int index = 0; index < state.pickedImages!.length; index++) {
+      final currentUploadedImageLink = await FileUpload()(
+        state.pickedImages![index],
+      );
+      result += "\n$currentUploadedImageLink";
+    }
+
+    return result;
   }
 
   void createNote() async {
     try {
-      emit(state.copyWith(
-        isLoading: true,
-        pickedImages: state.pickedImages,
-      ));
+      emit(state.copyWith(isLoading: true, pickedImages: state.pickedImages));
       String resultNote = textController!.text;
-
-      if (state.pickedImages != null && state.pickedImages!.isNotEmpty) {
-        for (int index = 0; index < state.pickedImages!.length; index++) {
-          final currentUploadedImageLink = await FileUpload()(
-            state.pickedImages![index],
-          );
-          resultNote += "\n$currentUploadedImageLink";
-        }
+      if (_noteImagesExists()) {
+        resultNote += await _uploadImagesAndGetNewNoteResult();
       }
+
       NostrService.instance.sendTextNoteFromCurrentUser(
         text: resultNote,
         tags: [
@@ -58,19 +67,23 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     }
   }
 
-  void addImage() async {
+  Future<void> addImage() async {
     try {
       final imagePicker = ImagePicker();
-      final images = await imagePicker.pickMultiImage(
-          // source: ImageSource.gallery
-          );
+      final images = await imagePicker.pickMultiImage();
       emit(
         state.copyWith(
           pickedImages: images.map((xf) => File(xf.path)).toList(),
         ),
       );
     } catch (e) {
-      print(e);
+      emit(state.copyWith(error: AppStrings.error));
+    } finally {
+      emit(state.copyWith(
+        error: null,
+        success: null,
+        isLoading: false,
+      ));
     }
   }
 
@@ -81,7 +94,8 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   }
 
   void onSelected(int selectedIndex, bool value) {
-    List<FeedCategory> newList = [];
+    final newList = <FeedCategory>[];
+
     for (int index = 0; index < state.categories.length; index++) {
       if (selectedIndex != index) {
         newList.add(state.categories[index]);

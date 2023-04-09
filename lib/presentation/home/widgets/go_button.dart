@@ -31,8 +31,9 @@ class GoButton extends StatelessWidget {
             context.read<AuthCubit>().nameFocusNode!.unfocus();
             // }
           });
-        }
-        if (state.error != null) {
+        } else if (state.isSignedOut) {
+          Navigator.of(context).pushNamed(Paths.main);
+        } else if (state.error != null) {
           SnackBars.text(context, state.error!);
         }
       },

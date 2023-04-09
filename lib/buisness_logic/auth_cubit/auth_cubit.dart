@@ -3,7 +3,6 @@ import 'package:ditto/constants/strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
 import 'package:nostr/nostr.dart';
 import 'package:nostr_client/nostr/core/key_pairs.dart';
 
@@ -25,10 +24,9 @@ class AuthCubit extends Cubit<AuthState> {
     nameFocusNode = FocusNode();
   }
 
-  void authenticate() async {
+  Future<void> authenticate() async {
     try {
-      await generatePrivateKey();
-
+      await _generatePrivateKeyAndSetInfoToNostr();
       NostrService.instance.setCurrentUserMetaData(
         metadata: UserMetaData(
           name: nameController!.text,
@@ -37,7 +35,6 @@ class AuthCubit extends Cubit<AuthState> {
           banner: null,
           about: null,
         ),
-        creationDate: DateTime.now(),
       );
       emit(state.copyWith(authenticated: true));
     } catch (e) {
@@ -47,22 +44,19 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> generatePrivateKey() async {
-    emit(state.copyWith(
-      isGeneratingNewPrivateKey: true,
-    ));
+  Future<void> _generatePrivateKeyAndSetInfoToNostr() async {
+    emit(state.copyWith(isGeneratingNewPrivateKey: true));
     if (nameController!.text.isEmpty) {
       emit(state.copyWith(error: AppStrings.pleaseEnterName));
       emit(const AuthInitial());
-
-      return;
+      throw Exception(AppStrings.pleaseEnterName);
     }
 
-    emit(state.copyWith(isGeneratingNewPrivateKey: true));
-    final privateKey = NostrKeyPairs.generate().private;
+    final newGeneratedPair = NostrKeyPairs.generate();
+    final privateKey = newGeneratedPair.private;
 
     await LocalDatabase.instance.setAuthInformations(
-      key: privateKey,
+      key: privateKey, 
       name: nameController!.text,
     );
 
@@ -77,7 +71,7 @@ class AuthCubit extends Cubit<AuthState> {
     return super.close();
   }
 
-  handleExistentKey() async {
+  Future<void> handleExistentKey() async {
     if (existentKeyController!.text.isEmpty) {
       emit(state.copyWith(error: AppStrings.pleaseEnterKey));
       emit(const AuthInitial());
@@ -86,7 +80,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
 
     try {
-      final keyChain = Keychain(existentKeyController!.text);
+      final keyChain = NostrKeyPairs(private: existentKeyController!.text);
       LocalDatabase.instance.setPrivateKey(keyChain.private);
       emit(state.copyWith(authenticated: true));
     } catch (e) {
@@ -101,6 +95,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void signOut() {
     LocalDatabase.instance.setPrivateKey(null);
+    emit(state.copyWith(isSignedOut: true));
   }
 
   void copyPrivateKey() {

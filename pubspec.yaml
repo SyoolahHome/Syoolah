@@ -16,7 +16,6 @@ dependencies:
 
   cupertino_icons:
   provider:
-  nostr:
   web_socket_channel:
   logger:
   google_fonts:

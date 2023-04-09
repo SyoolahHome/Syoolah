@@ -6,12 +6,14 @@ class AuthState extends Equatable {
   final String? error;
   final bool isGeneratingNewPrivateKey;
   final bool isSavingExistentKey;
+  final bool isSignedOut;
 
   const AuthState({
     this.error,
     this.authenticated = false,
     this.isGeneratingNewPrivateKey = false,
     this.isSavingExistentKey = false,
+    this.isSignedOut = false,
   });
 
   @override
@@ -20,7 +22,7 @@ class AuthState extends Equatable {
         authenticated,
         isGeneratingNewPrivateKey,
         isSavingExistentKey,
-         
+        isSignedOut,
       ];
 
   AuthState copyWith({
@@ -29,6 +31,7 @@ class AuthState extends Equatable {
     String? error,
     bool? isSavingExistentKey,
     bool? authenticated,
+    bool? isSignedOut,
   }) {
     return AuthState(
       error: error ?? this.error,
@@ -36,6 +39,7 @@ class AuthState extends Equatable {
       isGeneratingNewPrivateKey:
           isGeneratingNewPrivateKey ?? this.isGeneratingNewPrivateKey,
       isSavingExistentKey: isSavingExistentKey ?? this.isSavingExistentKey,
+      isSignedOut: isSignedOut ?? this.isSignedOut,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/strings.dart';
 import '../../../services/utils/paths.dart';
+import '../../../services/utils/snackbars.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key});
@@ -20,6 +21,10 @@ class CustomButton extends StatelessWidget {
       listener: (context, state) {
         if (state.authenticated) {
           Navigator.of(context).pushNamed(Paths.bottomBar);
+        } else if (state.isSignedOut) {
+          Navigator.of(context).pushNamed(Paths.main);
+        } else if (state.error != null) {
+          SnackBars.text(context, state.error!);
         }
       },
       builder: (context, state) {
