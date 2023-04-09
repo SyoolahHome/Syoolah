@@ -64,7 +64,13 @@ class UserMetaData extends Equatable {
   }
 
   String nameToShow() {
-    return name;
+    if (username != null && username!.isNotEmpty) {
+      return "@$username";
+    } else if (name != null && name!.isNotEmpty) {
+      return name!;
+    } else {
+      return "No Name";
+    }
   }
 
   @override

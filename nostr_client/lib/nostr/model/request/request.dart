@@ -26,7 +26,10 @@ class NostrRequest extends Equatable {
     var theFilters = jsonEncode(filters.map((item) => item.toMap()).toList());
 
     var header = jsonEncode([NostrConstants.request, subscriptionId]);
-    return '${header.substring(0, header.length - 1)},${theFilters.substring(1, theFilters.length)}';
+    final result =
+        '${header.substring(0, header.length - 1)},${theFilters.substring(1, theFilters.length)}';
+
+    return result;
   }
 
   /// Deserialize a request

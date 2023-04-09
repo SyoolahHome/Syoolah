@@ -31,37 +31,46 @@ class PostImage extends StatelessWidget {
                           (index) {
                         final current = state.pickedImages![index];
 
-                        return Container(
-                          margin: const EdgeInsets.only(right: 5),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                child: Image.file(
-                                  current,
-                                  height: 70,
-                                  width: 70,
-                                  fit: BoxFit.cover,
+                        return AnimatedSwitcher(
+                          transitionBuilder: (child, animation) =>
+                              ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          ),
+                          duration: const Duration(milliseconds: 300),
+                          child: Container(
+                            key: ValueKey(current.path),
+                            margin: const EdgeInsets.only(right: 5),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                  child: Image.file(
+                                    current,
+                                    height: 70,
+                                    width: 70,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                iconSize: 15,
-                                // padding: EdgeInsets.zero,
+                                IconButton(
+                                  iconSize: 15,
+                                  // padding: EdgeInsets.zero,
 
-                                style: IconButton.styleFrom(
-                                    backgroundColor:
-                                        AppColors.black.withOpacity(0.05)),
-                                color: Colors.red,
-                                onPressed: () {
-                                  cubit.removePickedImage(index);
-                                },
-                                icon: const Icon(
-                                  FlutterRemix.delete_bin_2_line,
+                                  style: IconButton.styleFrom(
+                                      backgroundColor:
+                                          AppColors.black.withOpacity(0.05)),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    cubit.removePickedImage(index);
+                                  },
+                                  icon: const Icon(
+                                    FlutterRemix.delete_bin_2_line,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }),

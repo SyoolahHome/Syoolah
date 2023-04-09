@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:hashtagable/hashtagable.dart';
 
 import '../../../constants/colors.dart';
 
@@ -21,44 +22,48 @@ class NoteContents extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          text,
+        const SizedBox(height: 5),
+        HashTagText(
+          text: text,
           textAlign: TextAlign.left,
-          style: Theme.of(context).textTheme.labelLarge,
+          basicStyle: Theme.of(context).textTheme.labelLarge!,
+          decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: AppColors.teal,
+              ),
         ),
-        const SizedBox(height: 15),
-        Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: imageLinks.map(
-                  (link) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ImageFullView(
-                              heroTag: heroTag,
-                              link: link,
-                            ),
+        const SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: imageLinks.map(
+                (link) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ImageFullView(
+                            heroTag: heroTag,
+                            link: link,
                           ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: ImageContent(
-                          heroTag: heroTag,
-                          link: link,
-                          size: 150,
                         ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: ImageContent(
+                        heroTag: heroTag,
+                        link: link,
+                        size: 75,
+                        fit: BoxFit.cover,
                       ),
-                    );
-                  },
-                ).toList()),
-          ),
+                    ),
+                  );
+                },
+              ).toList()),
         ),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -70,20 +75,25 @@ class ImageContent extends StatelessWidget {
     required this.link,
     required this.heroTag,
     this.size,
+    this.fit = BoxFit.none,
   });
 
   final String link;
   final String heroTag;
   final double? size;
-
+  final BoxFit fit;
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: heroTag,
-      child: CachedNetworkImage(
-        imageUrl: link,
-        height: size,
-        width: size,
+      tag: link + heroTag,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        child: CachedNetworkImage(
+          imageUrl: link,
+          height: size,
+          width: size,
+          fit: fit,
+        ),
       ),
     );
   }
@@ -106,8 +116,9 @@ class ImageFullView extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           ImageContent(
-            heroTag: heroTag ,
+            heroTag: heroTag,
             link: link,
+            fit: BoxFit.fitWidth,
           ),
           AppBar(
             elevation: 0,

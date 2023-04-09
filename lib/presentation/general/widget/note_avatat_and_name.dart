@@ -1,4 +1,6 @@
 import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/strings.dart';
+import 'package:ditto/services/nostr/nostr.dart';
 import 'package:flutter/material.dart';
 
 class NoteAvatarAndName extends StatelessWidget {
@@ -18,9 +20,18 @@ class NoteAvatarAndName extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        CircleAvatar(
-          backgroundImage: NetworkImage(avatarUrl),
-          radius: 22.5,
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+            border: Border.all(
+              color: AppColors.teal,
+              width: 1,
+            ),
+          ),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(avatarUrl),
+            radius: 21.5,
+          ),
         ),
         const SizedBox(width: 10),
         Column(
@@ -30,6 +41,7 @@ class NoteAvatarAndName extends StatelessWidget {
               nameToShow,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: AppColors.black.withOpacity(0.85),
+                    fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 5),
@@ -40,7 +52,23 @@ class NoteAvatarAndName extends StatelessWidget {
                   ),
             ),
           ],
-        )
+        ),
+        const Spacer(),
+        ElevatedButton(
+          onPressed: () {
+          },
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            backgroundColor: AppColors.teal,
+          ),
+          child: Text(
+            AppStrings.follow,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
       ],
     );
   }

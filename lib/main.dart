@@ -7,16 +7,9 @@ import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
-import 'package:ditto/model/profile.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'constants/strings.dart';
 import 'constants/themes.dart';
-import 'presentation/general/auth_app_handler.dart';
-import 'presentation/home/home.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override

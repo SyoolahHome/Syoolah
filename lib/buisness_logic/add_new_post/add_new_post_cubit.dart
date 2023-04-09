@@ -20,6 +20,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     required this.categories,
   }) : super(AddNewPostInitial(categories: categories)) {
     textController = TextEditingController();
+    // 
   }
 
   void createNote() async {

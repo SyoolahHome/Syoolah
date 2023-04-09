@@ -14,6 +14,7 @@ import 'package:nostr_client/nostr_client.dart';
 import '../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../model/note.dart';
 import '../../../services/nostr/nostr.dart';
+import 'note_actions.dart';
 import 'note_avatat_and_name.dart';
 import 'note_contents.dart';
 
@@ -27,14 +28,19 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteCardCubit>.value(
-      value: NoteCardCubit(
-          note: note,
-          currentUserMetadataStream:
-              NostrService.instance.userMetadata(note.event.pubkey),
-          noteLikesStream: NostrService.instance.noteLikes(
-            postEventId: note.event.id,
-          )),
+    return BlocProvider<NoteCardCubit>(
+      create: (context) => NoteCardCubit(
+        note: note,
+        currentUserMetadataStream:
+            NostrService.instance.userMetadata(note.event.pubkey),
+        noteLikesStream: NostrService.instance.noteLikes(
+          postEventId: note.event.id,
+        ),
+        // noteCommentsStream: NostrService.instance.noteComments(
+        //   postEventId: note.event.id,
+        //   note: note,
+        // ),
+      ),
       child: Builder(builder: (context) {
         final cubit = context.read<NoteCardCubit>();
 
@@ -50,11 +56,7 @@ class NoteCard extends StatelessWidget {
                   as Map<String, dynamic>,
             );
           }
-          final noteLikes = state.noteLikes;
-          int likes = noteLikes.length;
-          if (state.localLiked) {
-            likes += 1;
-          }
+
           return Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(
@@ -79,12 +81,19 @@ class NoteCard extends StatelessWidget {
                   nameToShow: noteOwnerMetadata.nameToShow(),
                   dateTimeToShow: note.event.createdAt.toReadableString(),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    NostrService.instance.addCommentToPost(
+                        postEventId: note.event.id, text: "aaaa");
+                  },
+                  child: Text("test"),
+                ),
+
                 Divider(
                   color: AppColors.grey.withOpacity(0.5),
                 ),
-                const SizedBox(height: 15),
                 NoteContents(
-                  heroTag: note.event.createdAt.toString(),
+                  heroTag: note.event.uniqueTag(),
                   imageLinks: note.imageLinks
                       .map(
                         (link) => link,
@@ -92,22 +101,17 @@ class NoteCard extends StatelessWidget {
                       .toList(),
                   text: note.noteOnly,
                 ),
-                IconButton(
-                  onPressed: () {
-                    if (!cubit.isUserAlreadyLiked()) {
-                      cubit.likeNote();
-                    }
-                  },
-                  icon: const Icon(FlutterRemix.add_box_line),
-                ),
-                Text(
-                  likes.toString(),
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: state.localLiked || cubit.isUserAlreadyLiked()
-                            ? Colors.red
-                            : null,
-                      ),
-                ),
+
+                NoteActions(note: note),
+
+                // Text(
+                //   likes.toString(),
+                //   style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                //         color: state.localLiked || cubit.isUserAlreadyLiked()
+                //             ? Colors.red
+                //             : null,
+                //       ),
+                // ),
               ],
             ),
           );

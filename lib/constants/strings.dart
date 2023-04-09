@@ -1,4 +1,6 @@
 abstract class AppStrings {
+  static const String comments = "Comments";
+  static const String follow = "Follow";
   static const String error = "Something went wrong, try again";
   static const String postCreatedSuccessfully = "Post Created Successfully";
   static const String selectedImage = "Selected Image";
@@ -29,4 +31,8 @@ abstract class AppStrings {
   static const couldNotCopyKey = "Could not copy key to clipboard.";
   static const editProfile = "Edit Profile";
   static const save = "Save";
+
+  static commentsN(int n) {
+    return "$comments ($n)";
+  }
 }

@@ -11,11 +11,13 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   Note note;
   Stream<NostrEvent> currentUserMetadataStream;
   Stream<NostrEvent> noteLikesStream;
+  // Stream<NostrEvent> noteCommentsStream;
 
   NoteCardCubit({
     required this.note,
     required this.currentUserMetadataStream,
     required this.noteLikesStream,
+    // required this.noteCommentsStream,
   }) : super(NoteCardInitial()) {
     _handleStreams();
   }
@@ -28,6 +30,10 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     noteLikesStream.listen((event) {
       emit(state.copyWith(noteLikes: [...state.noteLikes, event]));
     });
+
+    // noteCommentsStream.listen((event) {
+    //   emit(state.copyWith(noteComments: [...state.noteComments, event]));
+    // });
   }
 
   void likeNote() {
@@ -42,6 +48,5 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     final likers = state.noteLikes.map((e) => e.pubkey);
     final isUserLikers = likers.contains(pubKey);
     return isUserLikers;
-    
   }
 }

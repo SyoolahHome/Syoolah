@@ -143,4 +143,10 @@ class NostrEvent extends Equatable {
   String serialized() {
     return jsonEncode(["EVENT", _toMap()]);
   }
+
+  String uniqueTag() {
+    // make a unique tag for this event.
+
+    return "$id$createdAt$subscriptionId$pubkey";
+  }
 }

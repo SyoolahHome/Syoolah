@@ -37,6 +37,7 @@ dependencies:
   http: ^0.13.5
   timeago: ^3.4.0
   dart_openai: ^1.9.1
+  hashtagable: ^2.1.0
 
 dev_dependencies:
   flutter_test:

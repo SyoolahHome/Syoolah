@@ -33,6 +33,9 @@ class Nostr implements NostrServiceBase {
   @override
   String generateKeys() {
     final nostrKeyPairs = NostrKeyPairs.generate();
+    NostrClientUtils.log(
+      "generated key pairs, whis it's public keyis: ${nostrKeyPairs.public}",
+    );
 
     return nostrKeyPairs.private;
   }
@@ -45,17 +48,30 @@ class Nostr implements NostrServiceBase {
         relayUrl: relay,
         webSocket: await WebSocket.connect(relay),
       );
+      NostrClientUtils.log("websocket for relay with $relay is registered");
       NostrRegistry.getRelayWebSocket(relayUrl: relay)!.listen((d) {
         if (NostrEvent.canBeDeserializedEvent(d)) {
           _streamController.sink.add(NostrEvent.fromRelayMessage(d));
+          NostrClientUtils.log(
+              "received event with content: ${NostrEvent.fromRelayMessage(d).content} from relay: $relay");
+        } else {
+          NostrClientUtils.log(
+              "received non-event message from relay: $relay, message: $d");
         }
+        // else if (NostrEOSE.canBeDeserialized(d)) {
+        //   print(
+        //       "EOS from relay $relay with id: ${NostrEOSE.fromRelayMessage(d).subscriptionId}");
+        // }
       }, onError: (e) {
-        print("relay with url $relay errored: $e");
         NostrClientUtils.log(
-            "web socket of relay with $relay had anerror: $e ");
+            "web socket of relay with $relay had an error: $e");
       }, onDone: () {
-        NostrRegistry.getRelayWebSocket(relayUrl: relay)!.close();
-        NostrClientUtils.log("web socket of relay with $relay is closed ");
+        // NostrRegistry.getRelayWebSocket(relayUrl: relay)!.close();
+        NostrClientUtils.log("""
+web socket of relay with $relay is done:
+close code: ${NostrRegistry.getRelayWebSocket(relayUrl: relay)!.closeCode}.
+close reason: ${NostrRegistry.getRelayWebSocket(relayUrl: relay)!.closeReason}.
+""");
       });
     }
   }
@@ -66,6 +82,8 @@ class Nostr implements NostrServiceBase {
 
     for (WebSocket relayWebSocket in NostrRegistry.allRelayWebSockets()) {
       relayWebSocket.add(serialized);
+      NostrClientUtils.log(
+          "event with id: ${event.id} is sent to registered relays.");
     }
   }
 

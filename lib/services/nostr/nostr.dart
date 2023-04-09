@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:nostr_client/nostr_client.dart';
 
+import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
 import '../database/local/local.dart';
 
@@ -250,5 +251,54 @@ class NostrService {
     return Nostr.instance.subscribeToEvents(
       request: requestWithFilter,
     );
+  }
+
+  Stream<NostrEvent> noteComments({
+    required String postEventId,
+    required Note note,
+  }) {
+    final randomId = NostrClientUtils.random64HexChars();
+    print("post: " + note.noteOnly + ", random: " + randomId);
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          e: [postEventId],
+          kinds: const [1],
+        ),
+      ],
+    );
+
+    final stream = Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+
+    stream.listen((event) {
+      print("comment: " + event.content + ", random: " + randomId);
+    });
+
+    return stream;
+  }
+
+  void addCommentToPost({
+    required String postEventId,
+    required String text,
+  }) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: 1,
+      keyPairs: nostrKeyPairs,
+      content: text,
+      tags: [
+        // ["p", nostrKeyPairs.public],
+        ["e", postEventId],
+      ],
+    );
+
+    Nostr.instance.sendEventToRelays(event);
   }
 }

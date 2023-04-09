@@ -55,3 +55,9 @@ Added file upload method with that is based also on Nostr with nostr.build
 IMplemented the show of the user's name/username, avatar, and date of the post he created in the post UI.
 
 Implemented the reaction (like) functionality for posts & tested it
+
+# 14 - 15
+
+Implementation of single or multo images select and categories selection when posting and adding a new post to relays.
+
+Improved the UI of the add new post bottom sheet, with error and success handling with snackbars.
