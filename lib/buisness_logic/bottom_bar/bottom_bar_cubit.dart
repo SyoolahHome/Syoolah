@@ -1,14 +1,19 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/bottom_bat_item.dart';
-import '../navigations_screen/chat_relays/global_chats.dart';
-import '../navigations_screen/home/home.dart';
-import '../navigations_screen/messages/Messages.dart';
-import '../navigations_screen/profile/profile.dart';
+import '../../presentation/navigations_screen/chat_relays/global_chats.dart';
+import '../../presentation/navigations_screen/home/home.dart';
+import '../../presentation/navigations_screen/profile/profile.dart';
 
-abstract class GeneralBottomBar {
-  static const List<BottomBarItem> items = <BottomBarItem>[
+part 'bottom_bar_state.dart';
+
+class BottomBarCubit extends Cubit<int> {
+  BottomBarCubit() : super(0);
+
+  final List<BottomBarItem> items = const <BottomBarItem>[
     BottomBarItem(
       screen: Home(),
       label: 'Home',
@@ -35,4 +40,8 @@ abstract class GeneralBottomBar {
       icon: FlutterRemix.user_line,
     ),
   ];
+  
+  void onItemTapped(int index) {
+    emit(index);
+  }
 }

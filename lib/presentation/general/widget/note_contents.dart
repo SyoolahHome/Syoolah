@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hashtagable/hashtagable.dart';
 
 import '../../../constants/colors.dart';
@@ -93,6 +92,8 @@ class ImageContent extends StatelessWidget {
           height: size,
           width: size,
           fit: fit,
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+          placeholder: (context, url) => const CircularProgressIndicator(),
         ),
       ),
     );

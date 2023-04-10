@@ -50,10 +50,10 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
       NostrService.instance.sendTextNoteFromCurrentUser(
         text: resultNote,
-        tags: [
-          ["t", "anas"],
-          ["t", "gwhyyy"],
-        ],
+        tags: state.categories
+            .where((e) => e.isSelected)
+            .map((e) => ["t", e.name])
+            .toList(),
       );
       emit(state.copyWith(success: AppStrings.postCreatedSuccessfully));
     } catch (e) {
@@ -83,6 +83,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         error: null,
         success: null,
         isLoading: false,
+        pickedImages: state.pickedImages,
       ));
     }
   }

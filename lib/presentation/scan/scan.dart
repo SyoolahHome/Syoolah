@@ -4,7 +4,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/database/local/local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostr/nostr.dart';
+
 import 'widgets/app_bar.dart';
 import 'widgets/button.dart';
 import 'widgets/key_field.dart';

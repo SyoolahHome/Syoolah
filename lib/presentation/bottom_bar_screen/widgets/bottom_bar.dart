@@ -32,18 +32,42 @@ class CustomBottomBar extends StatelessWidget {
             onDestinationSelected: onElementTap,
             destinations: items.indexedMap((index, item) {
               Widget possibleWidget = NavigationDestination(
-                icon: Icon(item.icon, color: AppColors.white),
+                icon: Icon(
+                  item.icon,
+                  color: AppColors.white,
+                  size: 19,
+                ),
                 label: item.label,
               );
               if (item.icon == FlutterRemix.add_line) {
-                possibleWidget = GestureDetector(
-                  onTap: () {
-                    BottomSheetService.showCreatePostBottomSheet(context);
-                  },
-                  child: AbsorbPointer(
-                    absorbing: true,
-                    child: possibleWidget,
-                  ),
+                possibleWidget = Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        BottomSheetService.showCreatePostBottomSheet(context);
+                      },
+                      child: AbsorbPointer(
+                        absorbing: true,
+                        child: possibleWidget,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: 30,
+                      height: 1.5,
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                      ),
+                      child: Text(
+                        "Create",
+                        style: TextStyle(
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
 

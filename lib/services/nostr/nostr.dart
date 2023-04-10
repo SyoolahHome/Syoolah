@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ditto/constants/strings.dart';
 import 'package:nostr_client/nostr_client.dart';
 
 import '../../model/note.dart';
@@ -300,5 +301,161 @@ class NostrService {
     );
 
     Nostr.instance.sendEventToRelays(event);
+  }
+
+  Stream<NostrEvent> quranFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.quran],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> duaFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.dua],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> hadithFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.hadith],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> shariaFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.sharia],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> fiqhFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.fiqh],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> sirahFeedStream() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const [AppStrings.sirah],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> globalFeed() {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          t: const <String>[
+            AppStrings.quran,
+            AppStrings.dua,
+            AppStrings.hadith,
+            AppStrings.sharia,
+            AppStrings.fiqh,
+            AppStrings.sirah,
+          ],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> followingsFeed({
+    required List<String> followings,
+  }) {
+    final randomId = NostrClientUtils.random64HexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: followings,
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.subscribeToEvents(
+      request: requestWithFilter,
+    );
   }
 }

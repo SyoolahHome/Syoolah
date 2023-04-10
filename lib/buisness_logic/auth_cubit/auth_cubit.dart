@@ -3,7 +3,6 @@ import 'package:ditto/constants/strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nostr/nostr.dart';
 import 'package:nostr_client/nostr/core/key_pairs.dart';
 
 import '../../model/user_meta_data.dart';
@@ -47,16 +46,15 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> _generatePrivateKeyAndSetInfoToNostr() async {
     emit(state.copyWith(isGeneratingNewPrivateKey: true));
     if (nameController!.text.isEmpty) {
-      emit(state.copyWith(error: AppStrings.pleaseEnterName));
       emit(const AuthInitial());
-      throw Exception(AppStrings.pleaseEnterName);
+      throw AppStrings.pleaseEnterName;
     }
 
     final newGeneratedPair = NostrKeyPairs.generate();
     final privateKey = newGeneratedPair.private;
 
     await LocalDatabase.instance.setAuthInformations(
-      key: privateKey, 
+      key: privateKey,
       name: nameController!.text,
     );
 

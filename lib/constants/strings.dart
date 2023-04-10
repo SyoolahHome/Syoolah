@@ -1,4 +1,14 @@
 abstract class AppStrings {
+  static const String quran = "Quran";
+  static const String dua = "Dua";
+  static const String sharia = "Sharia";
+  static const String hadith = "Hadith";
+  static const String fiqh = "Fiqh";
+  static const String sirah = "Sirah";
+  static const String followings = "Followings";
+  static const feeds = "Feeds";
+  static const categorizedFeeds = "Categorized Feeds";
+  static const globalFeeds = "Global Feeds";
   static const String comments = "Comments";
   static const String follow = "Follow";
   static const String error = "Something went wrong, try again";
@@ -9,6 +19,7 @@ abstract class AppStrings {
   static const String createNewPost = "Create New Post";
   static const String addNewPost = "Add New Post";
   static const String globalFeed = "Global Feed";
+  static const String globalFeedDescrition = "Global Feed Description";
   static const String appName = 'Application Name';
   static const String homeTitle = "Hajji";
   static const String writeYourNameHere = "Write your name here..";
@@ -31,8 +42,9 @@ abstract class AppStrings {
   static const couldNotCopyKey = "Could not copy key to clipboard.";
   static const editProfile = "Edit Profile";
   static const save = "Save";
-
   static commentsN(int n) {
     return "$comments ($n)";
   }
+
+  static String feedOfName(String name) => "$name's Feed";
 }

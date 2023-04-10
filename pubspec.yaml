@@ -37,6 +37,8 @@ dependencies:
   timeago: ^3.4.0
   dart_openai: ^1.9.1
   hashtagable: ^2.1.0
+  transitioned_indexed_stack: ^1.0.2
+  flutter_islamic_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:

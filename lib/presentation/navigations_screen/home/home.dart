@@ -1,25 +1,25 @@
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import 'package:ditto/constants/configs.dart';
+import 'package:ditto/constants/strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/nostr/nostr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostr/nostr.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:nostr_client/nostr/nostr.dart';
+import 'package:nostr_client/nostr_client.dart';
+import '../../../services/utils/paths.dart';
 import '../../general/drawer_items.dart';
+import '../../general/widget/title.dart';
 import 'widgets/app_bar.dart';
 import '../../general/widget/custom_drawer.dart';
 import 'widgets/following.dart';
 import 'widgets/global_box.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
+  const Home({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +29,45 @@ class _HomeState extends State<Home> {
       ),
       body: MarginedBody(
         child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20),
-              GlobalBox(),
-              SizedBox(height: 5),
-              FollowingBox(),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  final user =
-                      "6c211d132bfb928a1a116a09d5e9c02d80d6e53c8c4d57888f04e81eb0897d68";
-                  NostrService.instance.followUserWithPubKey(user);
-                },
-                child: Text('Test'),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+               
+                const SizedBox(height: 20),
+                const HeadTitle(title: AppStrings.globalFeeds),
+                const SizedBox(height: 10),
+                FeedBox(
+                  icon: FlutterRemix.global_line,
+                  title: "Global Feed",
+                  description: "Feed of all the posts from all the users",
+                  onTap: () {
+                    Navigator.pushNamed(context, Paths.globalFeed);
+                  },
+                ),
+                FeedBox(
+                  icon: FlutterRemix.user_add_line,
+                  title: "Followings Feed",
+                  description: "Feed of all the people you follow",
+                  onTap: () {
+                    Navigator.pushNamed(context, Paths.followingFeed);
+                  },
+                ),
+                const SizedBox(height: 20),
+                const HeadTitle(title: AppStrings.categorizedFeeds),
+                const SizedBox(height: 10),
+                ...List.generate(AppConfigs.categories.length, (index) {
+                  final current = AppConfigs.categories[index];
+                  return FeedBox(
+                    icon: current.icon,
+                    description: current.description,
+                    title: current.name,
+                    onTap: () {
+                      Navigator.pushNamed(context, current.path);
+                    },
+                  );
+                }),
+              ],
+            ),
           ),
         ),
       ),

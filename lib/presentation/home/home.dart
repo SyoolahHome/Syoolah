@@ -1,9 +1,7 @@
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/presentation/home/widgets/logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants/colors.dart';
-import '../../services/utils/paths.dart';
 import '../general/auth_app_handler.dart';
 import '../general/widget/margined_body.dart';
 import 'widgets/go_button.dart';
@@ -17,6 +15,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const heightSeparator = 10.0;
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
 
     return AuthenticationStreamHandler(
       child: Scaffold(
@@ -24,10 +25,10 @@ class MyHomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height,
-              minHeight: MediaQuery.of(context).size.height,
-              maxWidth: MediaQuery.of(context).size.width,
-              minWidth: MediaQuery.of(context).size.width,
+              maxHeight: screenHeight,
+              minHeight: screenHeight,
+              maxWidth: screenWidth,
+              minWidth: screenWidth,
             ),
             child: MarginedBody(
               child: Column(

@@ -36,10 +36,6 @@ class NoteCard extends StatelessWidget {
         noteLikesStream: NostrService.instance.noteLikes(
           postEventId: note.event.id,
         ),
-        // noteCommentsStream: NostrService.instance.noteComments(
-        //   postEventId: note.event.id,
-        //   note: note,
-        // ),
       ),
       child: Builder(builder: (context) {
         final cubit = context.read<NoteCardCubit>();

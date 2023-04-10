@@ -1,29 +1,40 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostr_client/nostr_client.dart';
 
 part 'global_feed_state.dart';
 
-class GlobalFeedCubit extends Cubit<GlobalFeedState> {
+class FeedCubit extends Cubit<GlobalFeedState> {
   Stream<NostrEvent> feedPostsStream;
-
-  GlobalFeedCubit({
+  StreamSubscription? _streamSubscription;
+  FeedCubit({
     required this.feedPostsStream,
   }) : super(GlobalFeedInitial()) {
     handleStreams();
   }
 
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
+  }
+
   void handleStreams() {
+    _streamSubscription?.cancel();
     feedPostsStream.listen(
       (event) {
         final sortedList = [...state.feedPosts, event].reversed.toList();
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
-        emit(
-          state.copyWith(
-            feedPosts: sortedList,
-          ),
-        );
+        if (!isClosed) {
+          emit(
+            state.copyWith(
+              feedPosts: sortedList,
+            ),
+          );
+        }
       },
     );
   }

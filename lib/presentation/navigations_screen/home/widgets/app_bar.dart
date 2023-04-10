@@ -9,11 +9,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
       iconTheme: const IconThemeData(
-        color: AppColors.white,
+        color: AppColors.black,
         size: 20,
       ),
-      backgroundColor: AppColors.teal,
+      backgroundColor: Colors.transparent,
       leading: IconButton(
         onPressed: () => Scaffold.of(context).openDrawer(),
         icon: const Icon(FlutterRemix.menu_line),

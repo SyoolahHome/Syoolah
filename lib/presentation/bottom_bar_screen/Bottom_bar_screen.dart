@@ -1,52 +1,44 @@
-import 'package:ditto/presentation/navigations_screen/home/home.dart';
-import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+import 'package:transitioned_indexed_stack/transitioned_indexed_stack.dart';
 
+import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
-import '../general/bottom_bar_items.dart';
-import '../navigations_screen/chat_relays/global_chats.dart';
 import '../../model/bottom_bat_item.dart';
-import '../navigations_screen/messages/Messages.dart';
 import 'widgets/bottom_bar.dart';
 
-class BottomBar extends StatefulWidget {
-  final HomePageAfterLoginCubit cubit;
+class BottomBar extends StatelessWidget {
   const BottomBar({
-    Key? key,
+    super.key,
     required this.cubit,
-  }) : super(key: key);
-  @override
-  BottomBarState createState() => BottomBarState();
-}
-
-class BottomBarState extends State<BottomBar> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  });
+  final HomePageAfterLoginCubit cubit;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: widget.cubit,
-      child: Scaffold(
-        // backgroundColor: Colors.white70,
-        bottomNavigationBar: CustomBottomBar(
-          items: GeneralBottomBar.items,
-          selectedIndex: _selectedIndex,
-          onElementTap: _onItemTapped,
-        ),
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: GeneralBottomBar.items.map((BottomBarItem item) {
-            return item.screen;
-          }).toList(),
-        ),
+      value: cubit,
+      child: BlocProvider(
+        create: (context) => BottomBarCubit(),
+        child: Builder(builder: (context) {
+          final cubit = context.read<BottomBarCubit>();
+          return BlocBuilder<BottomBarCubit, int>(builder: (context, state) {
+            return Scaffold(
+              // backgroundColor: Colors.white70,
+              bottomNavigationBar: CustomBottomBar(
+                items: cubit.items,
+                selectedIndex: state,
+                onElementTap: cubit.onItemTapped,
+              ),
+              body: FadeIndexedStack(
+                index: state,
+                children: cubit.items.map((BottomBarItem item) {
+                  return item.screen;
+                },).toList(),
+              ),
+            );
+          });
+        }),
       ),
     );
   }

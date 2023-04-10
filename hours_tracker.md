@@ -65,3 +65,7 @@ Improved the UI of the add new post bottom sheet, with error and success handlin
 # 16
 
 Imlemntation of a comments section screen for each post, not completed yet but the basic functionality is there.
+
+# 17
+
+- global refactoring of the code, fixing some minor bugs in the whole app.
