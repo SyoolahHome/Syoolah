@@ -5,10 +5,16 @@ class ProfileState extends Equatable {
   final List<NostrEvent> currentUserPosts;
   final List<NostrEvent> currentUserLikedPosts;
   final NostrEvent? currentUserMetadata;
+  final File? pickedAvatarImage;
+  final File? pickedBannerImage;
+  final String? error;
   const ProfileState({
+    this.error,
     this.currentUserPosts = const [],
     this.currentUserLikedPosts = const [],
     this.currentUserMetadata,
+    this.pickedAvatarImage,
+    this.pickedBannerImage,
   });
 
   @override
@@ -16,18 +22,27 @@ class ProfileState extends Equatable {
         currentUserPosts,
         currentUserMetadata,
         currentUserLikedPosts,
+        pickedAvatarImage,
+        pickedBannerImage,
+        error,
       ];
 
   ProfileState copyWith({
     List<NostrEvent>? currentUserPosts,
     List<NostrEvent>? currentUserLikedPosts,
     NostrEvent? currentUserMetadata,
+    File? pickedAvatarImage,
+    File? pickedBannerImage,
+    String? error,
   }) {
     return ProfileState(
+      pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
+      pickedBannerImage: pickedBannerImage ?? this.pickedBannerImage,
       currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
       currentUserPosts: currentUserPosts ?? this.currentUserPosts,
       currentUserLikedPosts:
           currentUserLikedPosts ?? this.currentUserLikedPosts,
+      error: error ?? this.error,
     );
   }
 }

@@ -32,22 +32,21 @@ class Home extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-               
                 const SizedBox(height: 20),
                 const HeadTitle(title: AppStrings.globalFeeds),
                 const SizedBox(height: 10),
                 FeedBox(
                   icon: FlutterRemix.global_line,
-                  title: "Global Feed",
-                  description: "Feed of all the posts from all the users",
+                  title: AppStrings.globalFeed,
+                  description: AppStrings.globalFeedDescription,
                   onTap: () {
                     Navigator.pushNamed(context, Paths.globalFeed);
                   },
                 ),
                 FeedBox(
                   icon: FlutterRemix.user_add_line,
-                  title: "Followings Feed",
-                  description: "Feed of all the people you follow",
+                  title: AppStrings.followingsFeed,
+                  description: AppStrings.followingsFeedDescription,
                   onTap: () {
                     Navigator.pushNamed(context, Paths.followingFeed);
                   },

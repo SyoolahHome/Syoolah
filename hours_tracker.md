@@ -50,7 +50,7 @@
 
 Added file upload method with that is based also on Nostr with nostr.build
 
-# 12-13
+# 12 - 13
 
 IMplemented the show of the user's name/username, avatar, and date of the post he created in the post UI.
 
@@ -69,3 +69,9 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 # 17
 
 - global refactoring of the code, fixing some minor bugs in the whole app.
+
+# 18
+
+- Implementation of multiple feeds in addition of the global's for the user homepage, with rebuild fir a simple UI with custom islamic icons...
+
+- Implementation for custom categories selection when adding posts to the targetted feeds.

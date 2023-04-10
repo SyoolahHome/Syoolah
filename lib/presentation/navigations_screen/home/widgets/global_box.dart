@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
 import '../../../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../../../constants/colors.dart';
 
@@ -20,56 +21,81 @@ class FeedBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        width: double.infinity,
-        height: 85,
-        child: Card(
-          elevation: 0.0,
-          color: AppColors.lighGrey,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          title,
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
+    return BlocProvider<FeedBoxCubit>(
+      create: (state) => FeedBoxCubit(),
+      child: BlocBuilder<FeedBoxCubit, FeedBoxState>(
+        builder: (context, state) {
+          final cubit = context.read<FeedBoxCubit>();
+          return GestureDetector(
+            onTap: onTap,
+            onPanCancel: cubit.unHighlightBox,
+            onPanDown: (details) {
+              cubit.highlightBox();
+            },
+            onPanEnd: (details) {
+              cubit.unHighlightBox();
+            },
+            onPanStart: (details) {
+              cubit.highlightBox();
+            },
+            child: SizedBox(
+              width: double.infinity,
+              height: 85,
+              child: AnimatedContainer(
+                padding: EdgeInsets.symmetric(
+                  horizontal: state.isHighlighted ? 15 : 10,
+                ),
+                margin: const EdgeInsets.only(bottom: 10),
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: state.isHighlighted
+                      ? AppColors.mediumGrey
+                      : AppColors.lighGrey,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
                                     color: AppColors.black.withOpacity(0.95),
                                     fontWeight: FontWeight.bold,
                                   ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          description,
-                          style:
-                              Theme.of(context).textTheme.labelSmall!.copyWith(
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              description,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .copyWith(
                                     color: AppColors.black.withOpacity(0.95),
                                   ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    const Spacer(),
+                    Icon(icon, color: AppColors.teal),
+                  ],
                 ),
-                const Spacer(),
-                Icon(icon, color: AppColors.teal),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

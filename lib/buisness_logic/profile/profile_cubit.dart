@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:ditto/constants/strings.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nostr_client/nostr_client.dart';
 
 part 'profile_state.dart';
@@ -43,14 +47,41 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-
   void _handleCurrentUserLikedPosts() {
-      currentUserLikedPosts.listen((event) {
+    currentUserLikedPosts.listen((event) {
       emit(
         state.copyWith(
           currentUserLikedPosts: [...state.currentUserLikedPosts, event],
         ),
       );
     });
+  }
+
+  Future<void> pickAvatar() async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      emit(
+        state.copyWith(pickedAvatarImage: File(pickedImage!.path)),
+      );
+    } catch (e) {
+      emit(state.copyWith(error: AppStrings.error));
+    } finally {
+      emit(state.copyWith(error: null));
+    }
+  }
+
+  Future<void> pickBanner() async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      emit(state.copyWith(pickedBannerImage: File(pickedImage!.path)));
+    } catch (e) {
+      emit(state.copyWith(error: AppStrings.error));
+    } finally {
+      emit(state.copyWith(error: null));
+    }
   }
 }

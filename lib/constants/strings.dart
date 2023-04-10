@@ -1,4 +1,10 @@
 abstract class AppStrings {
+  static const followingsFeed = "Followings Feed";
+  static const String followingsFeedDescription =
+      "Feed of all the people you follow";
+      
+  static const String globalFeedDescription =
+      "Feed of all the posts from all the users";
   static const String quran = "Quran";
   static const String dua = "Dua";
   static const String sharia = "Sharia";
