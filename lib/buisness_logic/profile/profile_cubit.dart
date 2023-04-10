@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 part 'profile_state.dart';
 

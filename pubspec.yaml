@@ -29,8 +29,9 @@ dependencies:
   hive_flutter:
   equatable:
   convert:
-  nostr_client:
-    path: ./nostr_client
+  dart_nostr:
+    git: https://github.com/anasfik/nostr.git
+
   image_picker:
   cached_network_image:
   http: ^0.13.5

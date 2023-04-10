@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 class Note extends Equatable {
   final NostrEvent event;
@@ -15,7 +15,9 @@ class Note extends Equatable {
     this.imageLinks = const [],
   });
 
-  factory Note.fromEvent(NostrEvent event, ) {
+  factory Note.fromEvent(
+    NostrEvent event,
+  ) {
     final links = extractLinks(event.content);
     final noteOnly = removeLinksFromInitial(event.content);
     final imageLinks = filterImageLinks(links);

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
 
-import '../../../constants/colors.dart';
+import '../../../../../constants/colors.dart';
 
 class NoteContents extends StatelessWidget {
   const NoteContents({

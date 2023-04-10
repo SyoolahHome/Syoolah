@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
-import 'package:nostr_client/nostr_client.dart';
+import 'package:flutter/material.dart';
 
 import '../../services/nostr/nostr.dart';
 
@@ -11,9 +12,12 @@ part 'note_comments_state.dart';
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   Stream<NostrEvent> noteCommentsStream;
   StreamSubscription? _noteCommentsStreamSubscription;
+  TextEditingController? commentTextController;
+
   NoteCommentsCubit({
     required this.noteCommentsStream,
   }) : super(NoteCommentsInitial()) {
+    commentTextController = TextEditingController();
     _handleStreams();
   }
 
@@ -37,5 +41,13 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
       postEventId: postEventId,
       text: text,
     );
+  }
+
+  void postComment(String postEventId) {
+    NostrService.instance.addCommentToPost(
+      postEventId: postEventId,
+      text: commentTextController!.text,
+    );
+    commentTextController!.clear();
   }
 }

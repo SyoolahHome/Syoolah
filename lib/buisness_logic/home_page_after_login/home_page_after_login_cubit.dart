@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 part 'home_page_after_login_state.dart';
 

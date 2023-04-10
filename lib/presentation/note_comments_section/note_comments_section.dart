@@ -4,30 +4,24 @@ import 'package:ditto/constants/colors.dart';
 import 'package:ditto/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 import '../../buisness_logic/note_comments/note_comments_cubit.dart';
 import '../../model/note.dart';
 import '../../services/nostr/nostr.dart';
 import 'widgets/comment_field.dart';
 
-class NoteCommentsSection extends StatefulWidget {
+class NoteCommentsSection extends StatelessWidget {
   const NoteCommentsSection({super.key, required this.note});
 
   final Note note;
 
   @override
-  State<NoteCommentsSection> createState() => _NoteCommentsSectionState();
-}
-
-class _NoteCommentsSectionState extends State<NoteCommentsSection> {
-  @override
   Widget build(BuildContext context) {
-    final id = widget.note.event.id;
+    final id = note.event.id;
     return BlocProvider<NoteCommentsCubit>(
       create: (context) => NoteCommentsCubit(
         noteCommentsStream: NostrService.instance.noteComments(
-          note: widget.note,
+          note: note,
           postEventId: id,
         ),
       ),
@@ -61,7 +55,7 @@ class _NoteCommentsSectionState extends State<NoteCommentsSection> {
                         },
                       ),
                     ),
-                    const CommentField(),
+                    CommentField(noteId: note.event.id),
                   ],
                 ),
               );

@@ -1,6 +1,6 @@
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/services/utils/paths.dart';
-import 'package:nostr_client/nostr/model/event.dart';
 
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../buisness_logic/global_feed/global_feed_cubit.dart';

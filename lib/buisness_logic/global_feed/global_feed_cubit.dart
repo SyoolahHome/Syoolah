@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 part 'global_feed_state.dart';
 

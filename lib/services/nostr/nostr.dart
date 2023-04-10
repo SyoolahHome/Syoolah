@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
-import 'package:nostr_client/nostr_client.dart';
 
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
@@ -13,7 +13,7 @@ class NostrService {
   NostrService._();
 
   Future<void> init() async {
-    await Nostr.instance.init(relaysUrl: [
+    await Nostr.instance.service.init(relaysUrl: [
       'wss://relay.damus.io',
     ]);
   }
@@ -39,7 +39,7 @@ class NostrService {
       }),
     );
 
-    Nostr.instance.sendEventToRelays(event);
+    Nostr.instance.service.sendEventToRelays(event);
   }
 
   Stream<NostrEvent> userMetadata(String pubKey) {
@@ -56,7 +56,8 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+    return Nostr.instance.service
+        .startEventsSubscription(request: requestWithFilter);
   }
 
   Stream<NostrEvent> currentUserMetaDataStream() {
@@ -77,7 +78,8 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+    return Nostr.instance.service
+        .startEventsSubscription(request: requestWithFilter);
   }
 
   void sendTextNoteFromCurrentUser({
@@ -97,7 +99,7 @@ class NostrService {
       createdAt: creationDate,
     );
 
-    Nostr.instance.sendEventToRelays(event);
+    Nostr.instance.service.sendEventToRelays(event);
   }
 
   Stream<NostrEvent> currentUserTextNotesStream() {
@@ -118,7 +120,8 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+    return Nostr.instance.service
+        .startEventsSubscription(request: requestWithFilter);
   }
 
   Stream<NostrEvent> textNotesFeed() {
@@ -135,7 +138,8 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(request: requestWithFilter);
+    return Nostr.instance.service
+        .startEventsSubscription(request: requestWithFilter);
   }
 
   Stream getFollowedPeople() {
@@ -156,7 +160,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -172,7 +176,7 @@ class NostrService {
       content: pubKey,
     );
 
-    Nostr.instance.sendEventToRelays(event);
+    Nostr.instance.service.sendEventToRelays(event);
   }
 
   Stream<NostrEvent> allUsersMetadata() {
@@ -188,7 +192,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -209,7 +213,7 @@ class NostrService {
       createdAt: DateTime.now(),
     );
 
-    Nostr.instance.sendEventToRelays(event);
+    Nostr.instance.service.sendEventToRelays(event);
   }
 
   Stream<NostrEvent> noteLikes({
@@ -228,7 +232,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -249,7 +253,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -271,7 +275,7 @@ class NostrService {
       ],
     );
 
-    final stream = Nostr.instance.subscribeToEvents(
+    final stream = Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
 
@@ -300,7 +304,7 @@ class NostrService {
       ],
     );
 
-    Nostr.instance.sendEventToRelays(event);
+    Nostr.instance.service.sendEventToRelays(event);
   }
 
   Stream<NostrEvent> quranFeedStream() {
@@ -316,7 +320,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -334,7 +338,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -352,7 +356,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -370,7 +374,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -388,7 +392,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -406,7 +410,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -431,7 +435,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }
@@ -454,7 +458,7 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.subscribeToEvents(
+    return Nostr.instance.service.startEventsSubscription(
       request: requestWithFilter,
     );
   }

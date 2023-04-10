@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class OrDivider extends StatelessWidget {
-  const OrDivider({super.key});
+  const OrDivider({
+    super.key,
+    this.onlyDivider = false,
+  });
 
+  final bool onlyDivider;
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -26,15 +30,17 @@ class OrDivider extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 5),
-          Text(
-            'OR',
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
-          ),
-          const SizedBox(width: 5),
+          if (onlyDivider) ...[
+            const SizedBox(width: 5),
+            Text(
+              'OR',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+            const SizedBox(width: 5),
+          ],
           Expanded(
             child: Container(
               height: 1,

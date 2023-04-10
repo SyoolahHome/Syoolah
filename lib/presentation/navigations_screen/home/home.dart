@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:nostr_client/nostr/nostr.dart';
-import 'package:nostr_client/nostr_client.dart';
 import '../../../services/utils/paths.dart';
 import '../../general/drawer_items.dart';
 import '../../general/widget/title.dart';
