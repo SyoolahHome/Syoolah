@@ -75,3 +75,9 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 - Implementation of multiple feeds in addition of the global's for the user homepage, with rebuild fir a simple UI with custom islamic icons...
 
 - Implementation for custom categories selection when adding posts to the targetted feeds.
+
+# 19-20
+
+implementation of the UI and partial implementation of the custom advanced search for feeds, containing the search bar, search options, and a date range picker to search for posts in a specific date range.
+
+- refactoring more widgets to be more reusable and more consistent with the app's.

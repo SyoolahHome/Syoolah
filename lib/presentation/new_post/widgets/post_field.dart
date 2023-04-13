@@ -5,6 +5,7 @@ import 'package:hashtagable/widgets/hashtag_text_field.dart';
 
 import '../../../buisness_logic/add_new_post/add_new_post_cubit.dart';
 import '../../../constants/colors.dart';
+import '../../general/text_field.dart';
 
 class PostField extends StatelessWidget {
   const PostField({super.key});
@@ -13,37 +14,9 @@ class PostField extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddNewPostCubit>();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        const Text(AppStrings.yourPost),
-        const SizedBox(
-          height: 5,
-        ),
-        HashTagTextField(
-          decoratedStyle: TextStyle(
-            color: AppColors.teal,
-          ),
-          controller: cubit.textController,
-          decoration: InputDecoration(
-            hintText: AppStrings.typeHere,
-            hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: AppColors.grey,
-                ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 25,
-            ),
-            fillColor: AppColors.lighGrey,
-            filled: true,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-          ),
-        ),
-      ],
+    return CustomTextField(
+      label: AppStrings.yourPost,
+      controller: cubit.textController!,
     );
   }
 }

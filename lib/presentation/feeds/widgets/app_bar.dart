@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../../constants/colors.dart';
-import '../../../constants/strings.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -31,7 +32,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: AppColors.black,
             size: 20,
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            context.read<FeedCubit>().showSearch(context);
+          },
         ),
       ],
     );

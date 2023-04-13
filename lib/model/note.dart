@@ -37,7 +37,8 @@ class Note extends Equatable {
         links,
         imageLinks,
       ];
-}
+
+  }
 
 List<String> extractLinks(String inputString) {
   RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');

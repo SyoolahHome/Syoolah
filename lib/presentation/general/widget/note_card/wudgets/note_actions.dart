@@ -6,8 +6,8 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../model/note.dart';
-import '../../../../../services/bottom_sheet/bottom_sheet.dart';
 import '../../../../note_comments_section/note_comments_section.dart';
+import 'note_vreation_ago.dart';
 
 class NoteActions extends StatelessWidget {
   const NoteActions({
@@ -24,61 +24,12 @@ class NoteActions extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.teal.withOpacity(.1),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    FlutterRemix.time_line,
-                    size: 12.5,
-                    color: AppColors.teal,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    note.event.createdAt.toReadableString(),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 10,
-                          color: AppColors.teal,
-                        ),
-                  ),
-                ],
-              ),
-            ),
+            NoteDateOfCreationAgo(createdAt: note.event.createdAt),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocBuilder<NoteCardCubit, NoteCardState>(
-                  builder: (context, state) {
-                    return Action(
-                      icon: FlutterRemix.chat_1_line,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider.value(
-                              value: cubit,
-                              child: NoteCommentsSection(
-                                note: note,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      bgColor: AppColors.grey.withOpacity(.2),
-                      color: AppColors.black,
-                      text: 10.toString(),
-                    );
-                  },
-                ),
-                const SizedBox(width: 15),
                 BlocBuilder<NoteCardCubit, NoteCardState>(
                   builder: (context, state) {
                     final noteLikes = state.noteLikes;
@@ -104,6 +55,29 @@ class NoteActions extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(width: 10),
+                BlocBuilder<NoteCardCubit, NoteCardState>(
+                  builder: (context, state) {
+                    return Action(
+                      icon: FlutterRemix.chat_1_line,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: cubit,
+                              child: NoteCommentsSection(
+                                note: note,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      bgColor: AppColors.grey.withOpacity(.2),
+                      color: AppColors.black,
+                    );
+                  },
+                ),
               ],
             ),
           ],
@@ -119,14 +93,14 @@ class Action extends StatelessWidget {
     required this.onTap,
     required this.bgColor,
     required this.color,
-    required this.text,
+    this.text,
     required this.icon,
   });
 
   final void Function() onTap;
   final Color bgColor;
   final Color color;
-  final String text;
+  final String? text;
   final IconData icon;
 
   @override
@@ -138,8 +112,8 @@ class Action extends StatelessWidget {
           onTap: onTap,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            width: 35,
-            height: 35,
+            width: 25,
+            height: 25,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -148,19 +122,21 @@ class Action extends StatelessWidget {
             child: Center(
               child: Icon(
                 icon,
-                size: 15,
+                size: 12.5,
                 color: color,
               ),
             ),
           ),
         ),
-        const SizedBox(width: 2.5),
-        Text(
-          text,
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: color,
-              ),
-        ),
+        if (text != null) ...[
+          const SizedBox(width: 1.5),
+          Text(
+            text!,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: color,
+                ),
+          ),
+        ]
       ],
     );
   }

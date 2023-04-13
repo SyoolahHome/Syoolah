@@ -1,19 +1,12 @@
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditto/constants/colors.dart';
 import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../../model/note.dart';
 import '../../../../services/nostr/nostr.dart';
 import '../../../home/widgets/or_divider.dart';
-import '../margined_body.dart';
 import 'wudgets/note_actions.dart';
 import 'wudgets/note_avatat_and_name.dart';
 import 'wudgets/note_bg.dart';
@@ -29,8 +22,8 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteCardCubit>(
-      create: (context) => NoteCardCubit(
+    return BlocProvider<NoteCardCubit>.value(
+      value: NoteCardCubit(
         note: note,
         currentUserMetadataStream:
             NostrService.instance.userMetadata(note.event.pubkey),
@@ -61,6 +54,10 @@ class NoteCard extends StatelessWidget {
                     NoteAvatarAndName(
                       avatarUrl: noteOwnerMetadata.picture!,
                       nameToShow: noteOwnerMetadata.nameToShow(),
+                      memeberShipStartedAt:
+                          state.noteOwnerMetadata?.createdAt ??
+                              note.event.createdAt ??
+                              DateTime.now(),
                     ),
                     const OrDivider(onlyDivider: true),
                     NoteContents(

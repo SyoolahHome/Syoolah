@@ -1,8 +1,14 @@
 abstract class AppStrings {
+  static const reset = "Reset";
+  static const String pick = "Pick";
+  static const dateRange = "Date Range";
+  static const String searchOptions = "Search Options";
+  static const customizeSearch = "Customize Search";
+  static const search = "Search";
   static const followingsFeed = "Followings Feed";
   static const String followingsFeedDescription =
       "Feed of all the people you follow";
-      
+
   static const String globalFeedDescription =
       "Feed of all the posts from all the users";
   static const String quran = "Quran";

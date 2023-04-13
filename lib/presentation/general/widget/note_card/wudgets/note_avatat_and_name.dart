@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditto/constants/colors.dart';
 import 'package:ditto/constants/strings.dart';
 import 'package:ditto/services/nostr/nostr.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'note_follow_button.dart';
@@ -13,10 +14,12 @@ class NoteAvatarAndName extends StatelessWidget {
     super.key,
     required this.avatarUrl,
     required this.nameToShow,
+    required this.memeberShipStartedAt,
   });
 
   final String avatarUrl;
   final String nameToShow;
+  final DateTime memeberShipStartedAt;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,7 +28,19 @@ class NoteAvatarAndName extends StatelessWidget {
       children: <Widget>[
         NoteOwnerAvatar(avatarUrl: avatarUrl),
         const SizedBox(width: 10),
-        NoteOwnerUsername(nameToShow: nameToShow),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NoteOwnerUsername(nameToShow: nameToShow),
+            Text(
+              memeberShipStartedAt.memberForTime(),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: AppColors.grey,
+                    letterSpacing: 0.1,
+                  ),
+            )
+          ],
+        ),
         const Spacer(),
         const NoteFollowButton(),
       ],
