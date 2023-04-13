@@ -31,12 +31,12 @@ class FileUpload {
           .where((elem) => elem.contains("https://nostr.build"))
           .where((elem) => elem.contains(getFileExtension(file)))
           .toList();
+      assert(contextFilteredString.length == 1);
 
-      RegExp exp = RegExp(r'>(.+?)</b></span>');
-      Match match = exp.firstMatch(contextFilteredString.toString())!;
-      String link = match.group(1)!;
-
-      return link.trim();
+      return extractLinkFromHttpsToFileExtension(
+        contextFilteredString.first,
+        getFileExtension(file),
+      );
     } catch (e) {
       rethrow;
     }
@@ -45,4 +45,17 @@ class FileUpload {
   String getFileExtension(File file) {
     return file.path.split('.').last;
   }
+}
+
+String extractLinkFromHttpsToFileExtension(String text, String extension) {
+  // cut only link from text that starts by http and ends with the .png or .jpg extension.
+  final indexOfHttps = text.indexOf('https');
+  final indexOfExtension = text.indexOf(extension);
+
+  final substringedLink = text.substring(
+    indexOfHttps,
+    indexOfExtension + extension.length,
+  );
+
+  return substringedLink.trim();
 }

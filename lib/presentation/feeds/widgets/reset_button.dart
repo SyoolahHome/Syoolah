@@ -20,6 +20,7 @@ class ResetButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
+        Navigator.of(context).pop();
         context.read<FeedCubit>().resetSearch();
       },
       child: Text(

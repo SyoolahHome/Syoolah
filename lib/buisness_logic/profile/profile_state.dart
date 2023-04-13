@@ -5,16 +5,23 @@ class ProfileState extends Equatable {
   final List<NostrEvent> currentUserPosts;
   final List<NostrEvent> currentUserLikedPosts;
   final NostrEvent? currentUserMetadata;
+  final List<TabItem> profileTabsItems;
   final File? pickedAvatarImage;
   final File? pickedBannerImage;
   final String? error;
+  final int followersCount;
+  final int followingCount;
+
   const ProfileState({
+    this.profileTabsItems = const [],
     this.error,
     this.currentUserPosts = const [],
     this.currentUserLikedPosts = const [],
     this.currentUserMetadata,
     this.pickedAvatarImage,
     this.pickedBannerImage,
+    this.followersCount = 0,
+    this.followingCount = 0,
   });
 
   @override
@@ -25,6 +32,9 @@ class ProfileState extends Equatable {
         pickedAvatarImage,
         pickedBannerImage,
         error,
+        profileTabsItems,
+        followersCount,
+        followingCount,
       ];
 
   ProfileState copyWith({
@@ -34,6 +44,9 @@ class ProfileState extends Equatable {
     File? pickedAvatarImage,
     File? pickedBannerImage,
     String? error,
+    List<TabItem>? profileTabsItems,
+    int? followersCount,
+    int? followingCount,
   }) {
     return ProfileState(
       pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
@@ -43,8 +56,15 @@ class ProfileState extends Equatable {
       currentUserLikedPosts:
           currentUserLikedPosts ?? this.currentUserLikedPosts,
       error: error ?? this.error,
+      profileTabsItems: profileTabsItems ?? this.profileTabsItems,
+      followersCount: followersCount ?? this.followersCount,
+      followingCount: followingCount ?? this.followingCount,
     );
   }
 }
 
-class ProfileInitial extends ProfileState {}
+class ProfileInitial extends ProfileState {
+  const ProfileInitial({
+    required super.profileTabsItems,
+  });
+}

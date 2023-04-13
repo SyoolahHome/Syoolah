@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../../../main.dart';
+import '../../../../model/user_meta_data.dart';
 
 class ProfileCover extends StatelessWidget {
   const ProfileCover({
     super.key,
-    required this.coverUrl,
+    required this.metadata,
   });
 
-  final String coverUrl;
+  final UserMetaData metadata;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class ProfileCover extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            coverUrl,
+            metadata.banner!,
           ),
           fit: BoxFit.cover,
           colorFilter:

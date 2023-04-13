@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
@@ -5,62 +7,48 @@ import '../../../constants/strings.dart';
 import '../../../model/note.dart';
 import '../../general/widget/margined_body.dart';
 import '../../general/widget/note_card/note_card.dart';
+import 'feed_page_heading.dart';
 
 class NotesListView extends StatelessWidget {
-  const NotesListView({super.key, required this.notes, required this.feedName});
+  const NotesListView({
+    super.key,
+    required this.notes,
+    this.feedName,
+  });
 
   final List<Note> notes;
-  final String feedName;
+  final String? feedName;
+
   @override
   Widget build(BuildContext context) {
-    return MarginedBody(
-      child: ListView.builder(
-        itemCount: notes.length + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                children: [
-                  Text(
-                    AppStrings.feedOfName(feedName),
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.teal.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: AnimatedSwitcher(
-                      transitionBuilder: (child, animation) => ScaleTransition(
-                        scale: animation,
-                        child: child,
-                      ),
-                      duration: const Duration(milliseconds: 300),
-                      child: Text(
-                        (notes.length - 1).toString(),
-                        key: ValueKey(notes.length),
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: AppColors.teal,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+    if (feedName != null) {
+      return MarginedBody(
+        child: ListView.builder(
+          itemCount: notes.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return FeedPageHeading(
+                feedName: feedName!,
+                notesLength: max(notes.length - 1, 0),
+              );
+            }
+            return NoteCard(
+              note: notes[index - 1],
             );
-          }
-          return NoteCard(
-            note: notes[index - 1],
-          );
-        },
-      ),
-    );
+          },
+        ),
+      );
+    } else {
+      return MarginedBody(
+        child: ListView.builder(
+          itemCount: notes.length,
+          itemBuilder: (context, index) {
+            return NoteCard(
+              note: notes[index],
+            );
+          },
+        ),
+      );
+    }
   }
 }

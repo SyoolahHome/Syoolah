@@ -1,14 +1,19 @@
 abstract class AppStrings {
-  static const reset = "Reset";
+  static const String myProfile = "My Profile";
+  static const String noImagesToCopy = "No images to copy";
+  static const String followings = "Followings";
+  static const String followers = "Followers";
+  static const String copySuccess = 'Copied to clipboard';
+  static const String copyError = 'Error copying to clipboard';
+  static const String reset = "Reset";
   static const String pick = "Pick";
-  static const dateRange = "Date Range";
+  static const String dateRange = "Date Range";
   static const String searchOptions = "Search Options";
-  static const customizeSearch = "Customize Search";
-  static const search = "Search";
-  static const followingsFeed = "Followings Feed";
+  static const String customizeSearch = "Customize Search";
+  static const String search = "Search";
+  static const String followingsFeed = "Followings Feed";
   static const String followingsFeedDescription =
       "Feed of all the people you follow";
-
   static const String globalFeedDescription =
       "Feed of all the posts from all the users";
   static const String quran = "Quran";
@@ -17,10 +22,9 @@ abstract class AppStrings {
   static const String hadith = "Hadith";
   static const String fiqh = "Fiqh";
   static const String sirah = "Sirah";
-  static const String followings = "Followings";
-  static const feeds = "Feeds";
-  static const categorizedFeeds = "Categorized Feeds";
-  static const globalFeeds = "Global Feeds";
+  static const String feeds = "Feeds";
+  static const String categorizedFeeds = "Categorized Feeds";
+  static const String globalFeeds = "Global Feeds";
   static const String comments = "Comments";
   static const String follow = "Follow";
   static const String error = "Something went wrong, try again";

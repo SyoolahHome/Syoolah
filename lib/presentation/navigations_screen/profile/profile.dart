@@ -1,113 +1,92 @@
 import 'dart:convert';
-
-import 'package:ditto/presentation/navigations_screen/profile/widgets/profile_widget_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../model/user_meta_data.dart';
 import '../../../services/nostr/nostr.dart';
-import '../../../services/utils/paths.dart';
-import '../../general/drawer_items.dart';
-import '../../general/profile_tabs.dart';
 import '../../general/widget/custom_drawer.dart';
-import 'widgets/cover.dart';
-import 'widgets/current_user_py_key.dart';
+import '../../home/widgets/or_divider.dart';
+import 'widgets/about.dart';
+
+import 'widgets/app_bar.dart';
 import 'widgets/name.dart';
 import 'widgets/profile_and_dart.dart';
-import 'widgets/profile_informations.dart';
+import 'widgets/tab_view.dart';
+import 'widgets/tabs.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const height = 10.0;
+
     return BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit(
         currentUserPostsStream:
             NostrService.instance.currentUserTextNotesStream(),
         currentUserMetadataStream:
             NostrService.instance.currentUserMetaDataStream(),
-            currentUserLikedPosts: NostrService.instance.currentUserLikes(), 
+        currentUserLikedPosts: NostrService.instance.currentUserLikes(),
       ),
-      child: DefaultTabController(
-        length: GeneralProfileTabs.profileTabsItems.length,
-        child: Builder(
-          builder: (context) {
-            return Scaffold(
-              drawer: CustomDrawer(
-                items: GeneralDrawerItems.drawerListTileItems(context),
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    BlocBuilder<ProfileCubit, ProfileState>(
-                      builder: (context, state) {
-                        final event = state.currentUserMetadata;
-                        UserMetaData metadata;
-                        if (event == null) {
-                          metadata = UserMetaData.placeholder();
-                        } else {
-                          metadata = UserMetaData.fromJson(
-                            jsonDecode(event.content) as Map<String, dynamic>,
-                          );
-                        }
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<ProfileCubit>();
 
-                        return Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                ProfileCover(
-                                  coverUrl: metadata.banner!,
-                                ),
-                                ProfileAndEdit(
-                                  profileUrl: metadata.picture!,
-                                  onEditTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      Paths.editProfile,
-                                      arguments: metadata,
-                                    );
-                                  },
-                                ),
-                                const SizedBox(height: 20),
-                                ProfileName(
-                                  name: metadata.name,
-                                  username: metadata.username,
-                                ),
-                                CurrentUserPubKey(pubKey: event?.pubkey ?? ""),
-                                const ProfileInformations(),
-                                const SizedBox(height: 20),
-                                TabBar(
-                                  tabs: GeneralProfileTabs.profileTabsItems.map(
-                                    (e) {
-                                      return Tab(
-                                        text: e.label,
-                                      );
-                                    },
-                                  ).toList(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+          return DefaultTabController(
+            length: cubit.state.profileTabsItems.length,
+            child: Builder(
+              builder: (context) {
+                return Scaffold(
+                  appBar: const CustomAppBar(),
+                  drawer: const CustomDrawer(),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        BlocBuilder<ProfileCubit, ProfileState>(
+                          builder: (context, state) {
+                            final event = state.currentUserMetadata;
+                            UserMetaData metadata;
+
+                            metadata = UserMetaData.fromJson(
+                              jsonDecode(event?.content ?? "{}")
+                                  as Map<String, dynamic>,
+                            );
+
+                            return Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  // ProfileCover(metadata: metadata),
+                                  ProfileHeader(
+                                    metadata: metadata,
+                                    followersCount: state.followersCount,
+                                    followingCount: state.followingCount,
+                                  ),
+                                  const SizedBox(height: height * 3),
+                                  ProfileName(metadata: metadata),
+                                  const SizedBox(height: height),
+                                  ProfileAbout(metadata: metadata),
+                                  const SizedBox(height: height * 2),
+                                  const OrDivider(color: Colors.black),
+                                  const SizedBox(height: height * 2),
+                                  const ProfileTabs(),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        const ProfileTabView(),
+                      ],
                     ),
-                    SizedBox(
-                      height: 500,
-                      child: TabBarView(
-                        children: GeneralProfileTabs.profileTabsItems.map((e) {
-                          return e.widget;
-                        }).toList(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

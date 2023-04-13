@@ -6,6 +6,9 @@ import 'package:ditto/constants/strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../model/tab_item.dart';
+import '../../presentation/general/profile_tabs.dart';
+
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -17,7 +20,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.currentUserPostsStream,
     required this.currentUserMetadataStream,
     required this.currentUserLikedPosts,
-  }) : super(ProfileInitial()) {
+  }) : super(const ProfileInitial(
+          profileTabsItems: GeneralProfileTabs.profileTabsItems,
+        )) {
     handleStreams();
   }
 

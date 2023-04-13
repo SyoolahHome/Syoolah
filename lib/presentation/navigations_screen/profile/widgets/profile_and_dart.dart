@@ -1,49 +1,44 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditto/constants/strings.dart';
+import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/follow_info.dart';
 import 'package:flutter/material.dart';
 
-import '../../../edit_profile/edit_Profile.dart';
+import '../../../../constants/colors.dart';
+import '../../../../services/utils/paths.dart';
+import 'avatar.dart';
+import 'avatar_border.dart';
+import 'avatar_neon.dart';
+import 'avatar_neon_border.dart';
 
-class ProfileAndEdit extends StatelessWidget {
-  const ProfileAndEdit({
+class ProfileHeader extends StatelessWidget {
+  const ProfileHeader({
     super.key,
-    required this.profileUrl,
-    required this.onEditTap,
+    required this.metadata,
+    required this.followersCount,
+    required this.followingCount,
   });
 
-  final String profileUrl;
-  final VoidCallback onEditTap;
+  final int followersCount;
+  final int followingCount;
+  final UserMetaData metadata;
+
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        CircleAvatar(
-          radius: 45,
-          backgroundImage: NetworkImage(
-            profileUrl,
-          ),
+        FollowInfo(label: AppStrings.followings, count: followingCount),
+        Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            const ProfileAvatarNeon(),
+            const ProfileAvatarNeonBorder(),
+            const ProfileAvatarBorder(),
+            ProfileAvatar(picture: metadata.picture!),
+          ],
         ),
-        Container(
-          width: 100,
-          height: 35,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white70,
-              border: Border.all(color: Colors.blue)),
-          child: Center(
-            child: InkWell(
-              onTap: onEditTap,
-              child: const Text(
-                "Edit",
-                style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        )
+        FollowInfo(label: AppStrings.followers, count: followersCount),
       ],
     );
   }

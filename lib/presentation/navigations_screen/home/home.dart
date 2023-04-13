@@ -22,9 +22,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      drawer: CustomDrawer(
-        items: GeneralDrawerItems.drawerListTileItems(context),
-      ),
+      drawer: const CustomDrawer(),
       body: MarginedBody(
         child: Center(
           child: SingleChildScrollView(

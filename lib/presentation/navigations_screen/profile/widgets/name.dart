@@ -1,28 +1,34 @@
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 class ProfileName extends StatelessWidget {
-  const ProfileName({
-    super.key,
-    required this.name,
-    required this.username,
-  });
+  const ProfileName({super.key, required this.metadata});
 
-  final String name;
-  final String username;
+  final UserMetaData metadata;
   @override
   Widget build(BuildContext context) {
-    final String toShow;
-    if (name.isEmpty) {
-      toShow = username;
-    } else {
-      toShow = name;
-    }
-    return Text(
-      toShow,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
+    final String toShow = metadata.nameToShow();
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          toShow,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(width: 5),
+        const Icon(
+          Icons.verified,
+          color: Colors.green,
+          size: 15,
+        ),
+      ],
     );
   }
 }

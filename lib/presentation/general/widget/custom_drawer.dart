@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../model/drawer_list_tile.dart';
+import '../drawer_items.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
     super.key,
-    required this.items,
   });
 
-  final List<DrawerListTimeItem> items;
   @override
   Widget build(BuildContext context) {
+    final items = GeneralDrawerItems.drawerListTileItems(context);
+
     return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(0)),

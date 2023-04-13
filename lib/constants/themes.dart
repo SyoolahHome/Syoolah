@@ -54,5 +54,20 @@ abstract class AppThemes {
         size: 20,
       ),
     ),
+    tabBarTheme: TabBarTheme(
+      labelStyle: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+      ),
+      labelColor: AppColors.teal,
+      indicatorColor: AppColors.teal,
+      indicatorSize: TabBarIndicatorSize.label,
+      splashFactory: NoSplash.splashFactory,
+      overlayColor: MaterialStateProperty.all(AppColors.lighGrey),
+    ),
   );
 }

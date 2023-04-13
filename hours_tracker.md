@@ -76,8 +76,32 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 
 - Implementation for custom categories selection when adding posts to the targetted feeds.
 
+# 3333333333333333
+
 # 19-20
 
-implementation of the UI and partial implementation of the custom advanced search for feeds, containing the search bar, search options, and a date range picker to search for posts in a specific date range.
+- Implementation of the UI and partial implementation of the custom advanced search for feeds, containing the search bar, search options, and a date range picker to search for posts in a specific date range.
 
 - refactoring more widgets to be more reusable and more consistent with the app's.
+
+# 21-22
+
+- Implementation of the advanced search feature for feeds, it contains options for:
+
+  - search by user public keys.
+  - search by content of posts/notes.
+  - search by specific date notations of Nostr date formats.
+  - search by specific hashtags.
+  - search for posts/notes that includes images.
+  - search for posts in a specific date range.
+    in addition if a reset button to reset the search options to default automatically.
+
+- refactoring and separation of the code widgets to be more consistent and more reusable.
+
+# 23
+
+- Implementation of note cards methods for:
+  - copying the note content.
+  - copying the note id.
+  - copying the note owner public key.
+  - copying the whole serialized note event.

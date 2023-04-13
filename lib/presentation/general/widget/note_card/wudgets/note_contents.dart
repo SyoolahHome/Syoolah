@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
 
 import '../../../../../constants/colors.dart';
+import 'image_content.dart';
+import 'image_full_view..dart';
 
 class NoteContents extends StatelessWidget {
   const NoteContents({
@@ -64,69 +66,6 @@ class NoteContents extends StatelessWidget {
         ),
         const SizedBox(height: 20),
       ],
-    );
-  }
-}
-
-class ImageContent extends StatelessWidget {
-  const ImageContent({
-    super.key,
-    required this.link,
-    required this.heroTag,
-    this.size,
-    this.fit = BoxFit.none,
-  });
-
-  final String link;
-  final String heroTag;
-  final double? size;
-  final BoxFit fit;
-  @override
-  Widget build(BuildContext context) {
-    return Hero(
-      tag: link + heroTag,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: CachedNetworkImage(
-          imageUrl: link,
-          height: size,
-          width: size,
-          fit: fit,
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          placeholder: (context, url) => const CircularProgressIndicator(),
-        ),
-      ),
-    );
-  }
-}
-
-class ImageFullView extends StatelessWidget {
-  const ImageFullView({
-    super.key,
-    required this.link,
-    required this.heroTag,
-  });
-
-  final String link;
-  final String heroTag;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          ImageContent(
-            heroTag: heroTag,
-            link: link,
-            fit: BoxFit.fitWidth,
-          ),
-          AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-          ),
-        ],
-      ),
     );
   }
 }
