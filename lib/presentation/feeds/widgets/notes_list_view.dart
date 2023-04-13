@@ -43,7 +43,7 @@ class NotesListView extends StatelessWidget {
                       ),
                       duration: const Duration(milliseconds: 300),
                       child: Text(
-                        notes.length.toString(),
+                        (notes.length - 1).toString(),
                         key: ValueKey(notes.length),
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: AppColors.teal,

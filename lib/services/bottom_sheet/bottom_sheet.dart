@@ -50,9 +50,7 @@ abstract class BottomSheetService {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (context) {
-        return SearchSections(
-          cubit: cubit,
-        );
+        return SearchSections(cubit: cubit);
       },
     );
   }

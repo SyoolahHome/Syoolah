@@ -6,6 +6,7 @@ import 'note.dart';
 
 class SearchOption extends Equatable {
   final String name;
+  final bool useSearchQuery;
   final bool isSelected;
   final List<Note> Function(List<Note> feedPosts, String search) searchFunction;
 
@@ -13,6 +14,7 @@ class SearchOption extends Equatable {
     required this.name,
     required this.isSelected,
     required this.searchFunction,
+    required this.useSearchQuery,
   });
 
   @override
@@ -20,10 +22,12 @@ class SearchOption extends Equatable {
         name,
         isSelected,
         searchFunction,
+        useSearchQuery,
       ];
 
   SearchOption copyWith({
     String? name,
+    bool? useSearchQuery,
     bool? isSelected,
     List<Note> Function(List<Note> feedPosts, String search)? searchFunction,
   }) {
@@ -31,6 +35,7 @@ class SearchOption extends Equatable {
       name: name ?? this.name,
       isSelected: isSelected ?? this.isSelected,
       searchFunction: searchFunction ?? this.searchFunction,
+      useSearchQuery: useSearchQuery ?? this.useSearchQuery,
     );
   }
 }

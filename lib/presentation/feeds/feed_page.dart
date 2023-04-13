@@ -35,15 +35,17 @@ class GeneralFeed extends StatelessWidget {
             return BlocBuilder<FeedCubit, GlobalFeedState>(
               builder: (context, state) {
                 if (state.searchedFeedNotesPosts.isNotEmpty) {
-                  NotesListView(
+                  return NotesListView(
                     feedName: feedName,
                     notes: state.searchedFeedNotesPosts,
                   );
+                } else {
+                  return NotesListView(
+                    feedName: feedName,
+                    notes:
+                        state.feedPosts.map((e) => Note.fromEvent(e)).toList(),
+                  );
                 }
-                return NotesListView(
-                  feedName: feedName,
-                  notes: state.feedPosts.map((e) => Note.fromEvent(e)).toList(),
-                );
               },
             );
           },

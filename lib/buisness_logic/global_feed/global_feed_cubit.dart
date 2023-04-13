@@ -24,6 +24,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
               SearchOption(
                 name: "Search usernames",
                 isSelected: false,
+                useSearchQuery: true,
                 searchFunction: (noteList, string) => noteList
                     .where(
                       (note) => note.event.pubkey
@@ -35,6 +36,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
               SearchOption(
                 name: 'Search Posts contents',
                 isSelected: false,
+                useSearchQuery: true,
                 searchFunction: (noteList, string) => noteList
                     .where(
                       (note) => note.event.content
@@ -46,6 +48,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
               SearchOption(
                 name: 'Search Posts dates',
                 isSelected: false,
+                useSearchQuery: true,
                 searchFunction: (noteList, string) => noteList
                     .where(
                       (note) =>
@@ -58,6 +61,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
               ),
               SearchOption(
                 name: 'Search hashtags',
+                useSearchQuery: true,
                 isSelected: false,
                 searchFunction: (noteList, string) => noteList
                     .where(
@@ -70,6 +74,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
               SearchOption(
                 name: 'Only posts with images',
                 isSelected: false,
+                useSearchQuery: false,
                 searchFunction: (noteList, string) => noteList
                     .where(
                       (note) => note.imageLinks.isNotEmpty,
@@ -150,25 +155,27 @@ class FeedCubit extends Cubit<GlobalFeedState> {
 
   void executeSearch() {
     try {
-      List<Note> notesResult =
-          state.feedPosts.map((e) => Note.fromEvent(e)).toList();
+      List<Note> notes = state.feedPosts.map((e) => Note.fromEvent(e)).toList();
+      Set<Note> notesResults = {};
 
-      for (final option in state.searchOptions) {
-        if (option.isSelected) {
-          notesResult = option.searchFunction(
-            notesResult,
-            searchController!.text,
-          );
+      for (final option in state.searchOptions.where((e) => e.isSelected)) {
+        if (option.useSearchQuery) {
+          if (searchController!.text.isNotEmpty) {
+            notesResults
+                .addAll(option.searchFunction(notes, searchController!.text));
+          }
+        } else {
+          notesResults.addAll(option.searchFunction(notes, ""));
         }
       }
 
       if (state.dateRange != null) {
-        notesResult = notesResult.where((note) {
+        notes = notes.where((note) {
           return note.event.createdAt.isAfter(state.dateRange!.start) &&
               note.event.createdAt.isBefore(state.dateRange!.end);
         }).toList();
       }
-      emit(state.copyWith(searchedFeedNotesPosts: notesResult));
+      emit(state.copyWith(searchedFeedNotesPosts: notesResults.toList()));
     } catch (e) {
       print(e);
     }
