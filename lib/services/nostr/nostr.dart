@@ -484,7 +484,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          e: [noteId],
+          ids: [noteId],
           kinds: const [1],
         )
       ],
