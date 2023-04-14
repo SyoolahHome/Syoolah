@@ -13,9 +13,21 @@ class NostrService {
   NostrService._();
 
   Future<void> init() async {
-    await Nostr.instance.relaysService.init(relaysUrl: [
-      'wss://relay.damus.io',
-    ]);
+    await Nostr.instance.relaysService.init(
+      relaysUrl: [
+        'wss://eden.nostr.land',
+        'wss://nostr.fmt.wiz.biz',
+        'wss://relay.damus.io',
+        'wss://nostr-pub.wellorder.net',
+        'wss://relay.nostr.info',
+        'wss://offchain.pub',
+        'wss://nos.lol',
+        // 'wss://brb.io', // throws error
+        'wss://relay.snort.social',
+        'wss://relay.current.fyi',
+        'wss://nostr.relayer.se',
+      ],
+    );
   }
 
   void setCurrentUserMetaData({

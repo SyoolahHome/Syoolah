@@ -10,13 +10,10 @@ class ProfileTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
 
-    return SizedBox(
-      height: 500,
-      child: TabBarView(
-        children: cubit.state.profileTabsItems.map((e) {
-          return e.widget;
-        }).toList(),
-      ),
+    return TabBarView(
+      children: cubit.state.profileTabsItems.map((e) {
+        return e.widget;
+      }).toList(),
     );
   }
 }

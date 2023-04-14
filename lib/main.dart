@@ -23,7 +23,7 @@ class MyHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
-  
+
   await LocalDatabase.instance.init();
   await NostrService.instance.init();
 

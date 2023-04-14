@@ -13,6 +13,11 @@ class CurrentUserPosts extends StatelessWidget {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         return NotesListView(
+          
+          shrinkWrap: true,
+          feedName: "My Posts",
+          hideCount: true,
+          physics: const NeverScrollableScrollPhysics(),
           notes: state.currentUserPosts.map((e) => Note.fromEvent(e)).toList(),
         );
       },

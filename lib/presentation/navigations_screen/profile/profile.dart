@@ -37,13 +37,14 @@ class Profile extends StatelessWidget {
             length: cubit.state.profileTabsItems.length,
             child: Builder(
               builder: (context) {
-                return Scaffold(
-                  appBar: const CustomAppBar(),
-                  drawer: const CustomDrawer(),
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        BlocBuilder<ProfileCubit, ProfileState>(
+                return NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
+                    return [
+                      const SliverToBoxAdapter(
+                        child: CustomAppBar(),
+                      ),
+                      SliverToBoxAdapter(
+                        child: BlocBuilder<ProfileCubit, ProfileState>(
                           builder: (context, state) {
                             final event = state.currentUserMetadata;
                             UserMetaData metadata;
@@ -78,10 +79,10 @@ class Profile extends StatelessWidget {
                             );
                           },
                         ),
-                        const ProfileTabView(),
-                      ],
-                    ),
-                  ),
+                      ),
+                    ];
+                  },
+                  body: const ProfileTabView(),
                 );
               },
             ),
