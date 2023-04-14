@@ -9,9 +9,11 @@ class NoteContainer extends StatelessWidget {
   const NoteContainer({
     super.key,
     required this.child,
+    this.margin,
   });
 
   final Widget child;
+  final EdgeInsets? margin;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FeedBoxCubit>(
@@ -40,9 +42,10 @@ class NoteContainer extends StatelessWidget {
                   horizontal: MarginedBody.defaultMargin.horizontal / 2,
                   vertical: MarginedBody.defaultMargin.horizontal / 4,
                 ),
-                margin: EdgeInsets.symmetric(
-                  vertical: MarginedBody.defaultMargin.horizontal / 4,
-                ),
+                margin: margin ??
+                    EdgeInsets.only(
+                      bottom: MarginedBody.defaultMargin.horizontal / 2,
+                    ),
                 decoration: BoxDecoration(
                   color: state.isHighlighted
                       ? AppColors.lighGrey.withOpacity(0.5)

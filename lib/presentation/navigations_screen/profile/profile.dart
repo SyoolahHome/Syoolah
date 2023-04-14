@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../buisness_logic/profile/profile_cubit.dart';
@@ -39,10 +40,8 @@ class Profile extends StatelessWidget {
               builder: (context) {
                 return NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) {
-                    return [
-                      const SliverToBoxAdapter(
-                        child: CustomAppBar(),
-                      ),
+                    return <Widget>[
+                      const SliverToBoxAdapter(child: CustomAppBar()),
                       SliverToBoxAdapter(
                         child: BlocBuilder<ProfileCubit, ProfileState>(
                           builder: (context, state) {
@@ -54,12 +53,12 @@ class Profile extends StatelessWidget {
                                   as Map<String, dynamic>,
                             );
 
-                            return Padding(
-                              padding: const EdgeInsets.all(18.0),
+                            return MarginedBody(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
+                                  const SizedBox(height: height * 2),
                                   // ProfileCover(metadata: metadata),
                                   ProfileHeader(
                                     metadata: metadata,
@@ -82,7 +81,11 @@ class Profile extends StatelessWidget {
                       ),
                     ];
                   },
-                  body: const ProfileTabView(),
+                  body: MediaQuery.removePadding(
+                    removeTop: true,
+                    context: context,
+                    child: const ProfileTabView(),
+                  ),
                 );
               },
             ),

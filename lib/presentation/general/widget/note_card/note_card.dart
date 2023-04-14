@@ -16,10 +16,11 @@ class NoteCard extends StatelessWidget {
   const NoteCard({
     super.key,
     required this.note,
+    this.cardMargin,
   });
 
   final Note note;
-
+  final EdgeInsets? cardMargin;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NoteCardCubit>.value(
@@ -47,6 +48,7 @@ class NoteCard extends StatelessWidget {
               }
 
               return NoteContainer(
+                margin: cardMargin,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

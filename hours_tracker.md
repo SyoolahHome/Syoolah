@@ -105,3 +105,9 @@ Imlemntation of a comments section screen for each post, not completed yet but t
   - copying the note id.
   - copying the note owner public key.
   - copying the whole serialized note event.
+
+## 24-25
+
+- Implementation of the profile current user's posts/notes screen, which shows the user's posts/notes in a list view with the ability to copy the note content, note id, note owner public key, and the whole serialized note event as well.
+
+- Fixing the major scrolling overflow issue in the profile screen, caused by other nested scroll views.

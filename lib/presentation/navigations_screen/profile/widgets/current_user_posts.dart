@@ -13,7 +13,6 @@ class CurrentUserPosts extends StatelessWidget {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         return NotesListView(
-          
           shrinkWrap: true,
           feedName: "My Posts",
           hideCount: true,

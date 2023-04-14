@@ -54,6 +54,7 @@ abstract class AppThemes {
         size: 20,
       ),
     ),
+    
     tabBarTheme: TabBarTheme(
       labelStyle: const TextStyle(
         fontSize: 15,

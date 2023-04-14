@@ -8,8 +8,8 @@ class ProfileAvatarNeon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 65,
-      height: 65,
+      width: 62.5,
+      height: 62.5,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: <BoxShadow>[

@@ -1,4 +1,7 @@
 abstract class AppStrings {
+  static const String posts = "posts";
+  static const String reposts = "reposts";
+  static const String likes = "likes";
   static const String myProfile = "My Profile";
   static const String noImagesToCopy = "No images to copy";
   static const String followings = "Followings";

@@ -474,4 +474,24 @@ class NostrService {
       request: requestWithFilter,
     );
   }
+
+  Stream<NostrEvent> noteStreamById({
+    required String noteId,
+  }) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          e: [noteId],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
 }
