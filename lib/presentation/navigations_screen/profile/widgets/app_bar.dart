@@ -29,9 +29,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: AppColors.black,
           ),
           onPressed: () {
-            cubit.onMorePressed(context, onEditProfile: () {
-              Navigator.of(context).pushNamed(Paths.editProfile);
-            });
+            cubit.onMorePressed(
+              context,
+              onEditProfile: () {
+                Navigator.of(context).pushNamed(Paths.editProfile);
+              },
+            );
           },
         ),
       ],

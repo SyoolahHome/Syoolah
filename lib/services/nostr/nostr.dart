@@ -27,7 +27,6 @@ class NostrService {
         'wss://relay.current.fyi',
         'wss://nostr.relayer.se',
       ],
-       
     );
   }
 
@@ -271,12 +270,53 @@ class NostrService {
     );
   }
 
+  Stream<NostrEvent> currentUserFollowings() {
+    final randomId = NostrClientUtils.random64HexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [3],
+          until: DateTime.now().add(const Duration(days: 10)),
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> currentUserFollowers() {
+    final randomId = NostrClientUtils.random64HexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          p: [nostrKeyPairs.public],
+          kinds: const [3],
+          until: DateTime.now().add(const Duration(days: 10)),
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
   Stream<NostrEvent> noteComments({
     required String postEventId,
     required Note note,
   }) {
     final randomId = NostrClientUtils.random64HexChars();
-    print("post: " + note.noteOnly + ", random: " + randomId);
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -494,5 +534,20 @@ class NostrService {
     return Nostr.instance.relaysService.startEventsSubscription(
       request: requestWithFilter,
     );
+  }
+
+  void setFollowingsEvent(NostrEvent newEvent) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: newEvent.kind,
+      keyPairs: nostrKeyPairs,
+      content: newEvent.content,
+      tags: newEvent.tags,
+    );
+
+    Nostr.instance.relaysService.sendEventToRelays(event);
   }
 }

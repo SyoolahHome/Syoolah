@@ -1,3 +1,4 @@
+import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/constants/configs.dart';
 import 'package:ditto/constants/strings.dart';
@@ -36,7 +37,11 @@ class Home extends StatelessWidget {
                   title: AppStrings.globalFeed,
                   description: AppStrings.globalFeedDescription,
                   onTap: () {
-                    Navigator.pushNamed(context, Paths.globalFeed);
+                    Navigator.pushNamed(
+                      context,
+                      Paths.globalFeed,
+                      arguments: context.read<GlobalCubit>(),
+                    );
                   },
                 ),
                 FeedBox(
@@ -44,7 +49,11 @@ class Home extends StatelessWidget {
                   title: AppStrings.followingsFeed,
                   description: AppStrings.followingsFeedDescription,
                   onTap: () {
-                    Navigator.pushNamed(context, Paths.followingFeed);
+                    Navigator.pushNamed(
+                      context,
+                      Paths.followingFeed,
+                      arguments: context.read<GlobalCubit>(),
+                    );
                   },
                 ),
                 const SizedBox(height: 20),
@@ -57,7 +66,11 @@ class Home extends StatelessWidget {
                     description: current.description,
                     title: current.name,
                     onTap: () {
-                      Navigator.pushNamed(context, current.path);
+                      Navigator.pushNamed(
+                        context,
+                        current.path,
+                        arguments: context.read<GlobalCubit>(),
+                      );
                     },
                   );
                 }),

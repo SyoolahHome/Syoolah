@@ -43,6 +43,7 @@ abstract class AppStrings {
   static const String globalFeeds = "Global Feeds";
   static const String comments = "Comments";
   static const String follow = "Follow";
+  static const String unfollow = "Unfollow";
   static const String error = "Something went wrong, try again";
   static const String postCreatedSuccessfully = "Post Created Successfully";
   static const String selectedImage = "Selected Image";

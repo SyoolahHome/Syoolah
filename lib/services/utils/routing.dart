@@ -21,14 +21,14 @@ abstract class Routing {
     Paths.bottomBar: (context) => BottomBar(cubit: homePageAfterLoginCubit),
     Paths.main: (context) => const MyHomePage(),
     Paths.editProfile: (context) => EditProfile(),
-    Paths.quranFeed: (context) => const QuranFeed(),
-    Paths.duaFeed: (context) => const DuaFeed(),
-    Paths.shariaFeed: (context) => const ShariaFeed(),
-    Paths.hadithFeed: (context) => const HadithFeed(),
-    Paths.fiqhFeed: (context) => const FiqhFeed(),
-    Paths.sirahFeed: (context) => const SirahFeed(),
-    Paths.globalFeed: (context) => const GlobalFeed(),
-    Paths.followingFeed: (context) => const FollowingsFeed(),
+    Paths.quranFeed: (context) =>  QuranFeed(),
+    Paths.duaFeed: (context) =>  DuaFeed(),
+    Paths.shariaFeed: (context) =>  ShariaFeed(),
+    Paths.hadithFeed: (context) =>  HadithFeed(),
+    Paths.fiqhFeed: (context) =>  FiqhFeed(),
+    Paths.sirahFeed: (context) =>  SirahFeed(),
+    Paths.globalFeed: (context) => GlobalFeed(),
+    Paths.followingFeed: (context) =>  FollowingsFeed(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

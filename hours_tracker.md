@@ -131,3 +131,11 @@ Imlemntation of a comments section screen for each post, not completed yet but t
   - Copying the user's metadata as json string.
   - copying the user's profile avatar url.
   - Copying the user's profile username.
+
+# 29
+
+- Implementation of followings mechanism in the app, which allow users to follow other users.
+
+# 30
+
+- Implementation of the followings feed which will show all the posts/notes of the users that the current user is following.

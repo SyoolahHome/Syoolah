@@ -31,6 +31,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   Future<void> setPrivateKey(String? value) {
+    
     return setValue("privateKey", value);
   }
 

@@ -44,8 +44,8 @@ class ProfileOptionsWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 onTap: () {
-                  current.onPressed();
                   Navigator.of(context).pop();
+                  current.onPressed();
                 },
               );
             },
