@@ -11,7 +11,8 @@ class ProfileState extends Equatable {
   final String? error;
   final int followersCount;
   final int followingCount;
-
+  final double profileAvatarScale;
+  final bool isLoading;
   const ProfileState({
     this.profileTabsItems = const [],
     this.error,
@@ -22,6 +23,8 @@ class ProfileState extends Equatable {
     this.pickedBannerImage,
     this.followersCount = 0,
     this.followingCount = 0,
+    this.profileAvatarScale = 1.0,
+    this.isLoading = false,
   });
 
   @override
@@ -35,6 +38,8 @@ class ProfileState extends Equatable {
         profileTabsItems,
         followersCount,
         followingCount,
+        profileAvatarScale,
+        isLoading,
       ];
 
   ProfileState copyWith({
@@ -47,6 +52,8 @@ class ProfileState extends Equatable {
     List<TabItem>? profileTabsItems,
     int? followersCount,
     int? followingCount,
+    double? profileAvatarScale,
+    bool? isLoading,
   }) {
     return ProfileState(
       pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
@@ -59,6 +66,8 @@ class ProfileState extends Equatable {
       profileTabsItems: profileTabsItems ?? this.profileTabsItems,
       followersCount: followersCount ?? this.followersCount,
       followingCount: followingCount ?? this.followingCount,
+      profileAvatarScale: profileAvatarScale ?? this.profileAvatarScale,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 }

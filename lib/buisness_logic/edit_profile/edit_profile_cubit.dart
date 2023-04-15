@@ -40,6 +40,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
   }
 
+  void updateAvatar() {}
   void _init() {
     nameController = TextEditingController(text: metaData.name);
     usernameController = TextEditingController(text: metaData.username);

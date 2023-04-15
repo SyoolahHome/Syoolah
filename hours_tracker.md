@@ -111,3 +111,7 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 - Implementation of the profile current user's posts/notes screen, which shows the user's posts/notes in a list view with the ability to copy the note content, note id, note owner public key, and the whole serialized note event as well.
 
 - Fixing the major scrolling overflow issue in the profile screen, caused by other nested scroll views.
+
+# 26
+
+- Implemented likes posts tab section in the user profile screen.

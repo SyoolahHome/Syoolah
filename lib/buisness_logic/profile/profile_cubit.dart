@@ -1,13 +1,20 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
+import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
+import 'package:ditto/services/utils/file_upload.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../model/tab_item.dart';
 import '../../presentation/general/profile_tabs.dart';
+import '../../services/nostr/nostr.dart';
+import '../../services/utils/alerts.dart';
 
 part 'profile_state.dart';
 
@@ -62,7 +69,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  Future<void> pickAvatar() async {
+  Future<void> pickAvatarFromGallery() async {
     try {
       final imagePicker = ImagePicker();
       final pickedImage =
@@ -77,6 +84,73 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  Future<void> pickAvatarFromCamera() async {
+    try {
+      final imagePicker = ImagePicker();
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.camera);
+      emit(
+        state.copyWith(pickedAvatarImage: File(pickedImage!.path)),
+      );
+    } catch (e) {
+      emit(state.copyWith(error: AppStrings.error));
+    } finally {
+      emit(state.copyWith(
+        error: null,
+      ));
+    }
+  }
+
+  Future<void> removeAvatar() async {
+    emit(state.copyWith(pickedAvatarImage: null));
+    try {
+      final currentUsermetadata = UserMetaData.fromJson(
+        jsonDecode(state.currentUserMetadata?.content ?? "{}")
+            as Map<String, dynamic>,
+      );
+
+      NostrService.instance.setCurrentUserMetaData(
+        metadata: currentUsermetadata.copyWith(
+          picture: "",
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(error: AppStrings.error));
+    } finally {
+      emit(state.copyWith(error: null));
+    }
+  }
+
+  Future<bool> uploadPictureAndSet() async {
+    try {
+      if (state.pickedAvatarImage == null) {
+        return false;
+      }
+      emit(state.copyWith(isLoading: true));
+      final uploadedAvatarUrl = await FileUpload()(state.pickedAvatarImage!);
+
+      final currentUsermetadata = UserMetaData.fromJson(
+        jsonDecode(state.currentUserMetadata?.content ?? "{}")
+            as Map<String, dynamic>,
+      );
+
+      NostrService.instance.setCurrentUserMetaData(
+          metadata: currentUsermetadata.copyWith(
+        picture: uploadedAvatarUrl,
+      ));
+
+      return true;
+    } catch (e) {
+      emit(state.copyWith(error: AppStrings.error));
+      return false;
+    } finally {
+      emit(state.copyWith(
+        error: null,
+        isLoading: false,
+      ));
+    }
+  }
+
   Future<void> pickBanner() async {
     try {
       final imagePicker = ImagePicker();
@@ -88,5 +162,29 @@ class ProfileCubit extends Cubit<ProfileState> {
     } finally {
       emit(state.copyWith(error: null));
     }
+  }
+
+  void scaleAvatarDown() {
+    emit(state.copyWith(profileAvatarScale: 0.95));
+  }
+
+  void scaleAvatarToNormal() {
+    emit(state.copyWith(profileAvatarScale: 1.0));
+  }
+
+  void showAvatarMenu(
+    BuildContext context, {
+    required Future<void> Function() onEnd,
+    required BlocBase cubit,
+  }) {
+    AlertsService.showAvatarMenu(
+      context,
+      onPickFromGallery: pickAvatarFromGallery,
+      onTakePhoto: pickAvatarFromCamera,
+      onAvatarPickedOrTaken: uploadPictureAndSet,
+      onRemove: removeAvatar,
+      onEnd: onEnd,
+      cubit: cubit,
+    );
   }
 }

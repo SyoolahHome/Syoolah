@@ -1,4 +1,9 @@
 abstract class AppStrings {
+  static const takeFromGallery = 'Choose from gallery';
+  static const takeFromCamera = 'Take from camera';
+  static const removeAvatar = 'Remove avatar';
+  static const changeAvatar = 'Change avatar';
+  static const String close = "Close";
   static const String posts = "posts";
   static const String reposts = "reposts";
   static const String likes = "likes";
@@ -61,6 +66,7 @@ abstract class AppStrings {
   static const couldNotCopyKey = "Could not copy key to clipboard.";
   static const editProfile = "Edit Profile";
   static const save = "Save";
+
   static commentsN(int n) {
     return "$comments ($n)";
   }
