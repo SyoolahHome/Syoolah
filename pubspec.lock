@@ -134,10 +134,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bf7afad2ce3118f723072db60414bade6ea22fcd
+      resolved-ref: b7c8c8d3f3010541e0bea3bdc307f199f8d5a892
       url: "https://github.com/anasfik/nostr.git"
     source: git
-    version: "1.0.1-dev"
+    version: "1.0.2-dev"
   dart_openai:
     dependency: "direct main"
     description:
@@ -317,18 +317,18 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
-      sha256: "8b0efbf350ba4f2be1531d629396a994983d0c02f4a82a128aed84d954b90cfa"
+      sha256: f202f5d730eb8219e35e80c4461fb3a779940ad30ce8fde1586df756e3af25e6
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.7+2"
+    version: "0.8.7+3"
   image_picker_android:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: dfb5b0f28b8786fcc662b7ed42bfb4b82a6cbbd74da1958384b10d40bdf212a7
+      sha256: "1ea6870350f56af8dab716459bd9d5dc76947e29e07a2ba1d0c172eaaf4f269c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.6+6"
+    version: "0.8.6+7"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -445,10 +445,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "019f18c9c10ae370b08dce1f3e3b73bc9f58e7f087bb5e921f06529438ac0ae7"
+      sha256: da97262be945a72270513700a92b39dd2f4a54dad55d061687e2e37a6390366a
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.24"
+    version: "2.0.25"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -509,10 +509,10 @@ packages:
     dependency: transitive
     description:
       name: pointycastle
-      sha256: c3120a968135aead39699267f4c74bc9a08e4e909e86bc1b0af5bfd78691123c
+      sha256: "7c1e5f0d23c9016c5bbd8b1473d0d3fb3fc851b876046039509e18e0c7485f2c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.2"
+    version: "3.7.3"
   process:
     dependency: transitive
     description:

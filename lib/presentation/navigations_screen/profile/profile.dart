@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../model/user_meta_data.dart';
 import '../../../services/nostr/nostr.dart';
-import '../../general/widget/custom_drawer.dart';
 import '../../home/widgets/or_divider.dart';
 import 'widgets/about.dart';
 

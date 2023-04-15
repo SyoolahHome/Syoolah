@@ -9,10 +9,12 @@ class ProfileState extends Equatable {
   final File? pickedAvatarImage;
   final File? pickedBannerImage;
   final String? error;
+
   final int followersCount;
   final int followingCount;
   final double profileAvatarScale;
   final bool isLoading;
+
   const ProfileState({
     this.profileTabsItems = const [],
     this.error,

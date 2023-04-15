@@ -7,10 +7,14 @@ import 'package:ditto/constants/strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
 import 'package:ditto/services/utils/file_upload.dart';
+import 'package:ditto/services/utils/snackbars.dart';
+import 'package:ditto/services/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../model/profile_option.dart';
 import '../../model/tab_item.dart';
 import '../../presentation/general/profile_tabs.dart';
 import '../../services/nostr/nostr.dart';
@@ -175,6 +179,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   void showAvatarMenu(
     BuildContext context, {
     required Future<void> Function() onEnd,
+    required void Function() onFullView,
     required BlocBase cubit,
   }) {
     AlertsService.showAvatarMenu(
@@ -185,6 +190,73 @@ class ProfileCubit extends Cubit<ProfileState> {
       onRemove: removeAvatar,
       onEnd: onEnd,
       cubit: cubit,
+      onFullView: onFullView,
+    );
+  }
+
+  void onMorePressed(
+    BuildContext context, {
+    required void Function() onEditProfile,
+  }) {
+    final metadata = UserMetaData.fromJson(jsonDecode(
+      state.currentUserMetadata?.content ?? "{}",
+    ) as Map<String, dynamic>);
+
+    BottomSheetService.showProfileBottomSheet(
+      context,
+      options: [
+        ProfileOption(
+          title: AppStrings.editProfile,
+          icon: FlutterRemix.pencil_line,
+          onPressed: onEditProfile,
+        ),
+        ProfileOption(
+          title: AppStrings.copyPubKey,
+          icon: FlutterRemix.file_code_line,
+          onPressed: () {
+            AppUtils.copy(state.currentUserMetadata!.pubkey, onSuccess: () {
+              SnackBars.text(context, AppStrings.copySuccess);
+            });
+          },
+        ),
+        ProfileOption(
+          title: AppStrings.copyMetaDataEvent,
+          icon: FlutterRemix.file_code_line,
+          onPressed: () {
+            AppUtils.copy(state.currentUserMetadata!.content, onSuccess: () {
+              SnackBars.text(context, AppStrings.copySuccess);
+            });
+          },
+        ),
+        ProfileOption(
+          title: AppStrings.copyProfileEvent,
+          icon: FlutterRemix.file_code_line,
+          onPressed: () {
+            AppUtils.copy(state.currentUserMetadata!.serialized(),
+                onSuccess: () {
+              SnackBars.text(context, AppStrings.copySuccess);
+            });
+          },
+        ),
+        ProfileOption(
+          title: AppStrings.copyImageUrl,
+          icon: FlutterRemix.file_code_line,
+          onPressed: () {
+            AppUtils.copy(metadata.picture!, onSuccess: () {
+              SnackBars.text(context, AppStrings.copySuccess);
+            });
+          },
+        ),
+        ProfileOption(
+          title: AppStrings.copyUsername,
+          icon: FlutterRemix.file_code_line,
+          onPressed: () {
+            AppUtils.copy(metadata.username, onSuccess: () {
+              SnackBars.text(context, AppStrings.copySuccess);
+            });
+          },
+        ),
+      ],
     );
   }
 }

@@ -24,7 +24,6 @@ class BottomBar extends StatelessWidget {
           final cubit = context.read<BottomBarCubit>();
           return BlocBuilder<BottomBarCubit, int>(builder: (context, state) {
             return Scaffold(
-              // backgroundColor: Colors.white70,
               bottomNavigationBar: CustomBottomBar(
                 items: cubit.items,
                 selectedIndex: state,
@@ -32,9 +31,11 @@ class BottomBar extends StatelessWidget {
               ),
               body: FadeIndexedStack(
                 index: state,
-                children: cubit.items.map((BottomBarItem item) {
-                  return item.screen;
-                },).toList(),
+                children: cubit.items.map(
+                  (BottomBarItem item) {
+                    return item.screen;
+                  },
+                ).toList(),
               ),
             );
           });

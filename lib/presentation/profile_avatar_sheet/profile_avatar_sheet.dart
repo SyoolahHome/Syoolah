@@ -15,6 +15,7 @@ class AvatarSheetWidget extends StatelessWidget {
     required this.onAvatarPickedOrTaken,
     required this.cubitContext,
     required this.cubit,
+    required this.onFullView,
   });
   final BuildContext cubitContext;
   final Future<void> Function() onPickFromGallery;
@@ -22,6 +23,7 @@ class AvatarSheetWidget extends StatelessWidget {
   final Future<void> Function() onRemove;
   final Future<void> Function() onEnd;
   final Future<bool> Function() onAvatarPickedOrTaken;
+  final void Function() onFullView;
   final BlocBase cubit;
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,13 @@ class AvatarSheetWidget extends StatelessWidget {
                   firstChild: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
+                      ListTile(
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
+                        leading: const Icon(FlutterRemix.image_2_line),
+                        title: const Text(AppStrings.fullImageView),
+                        onTap: onFullView,
+                      ),
                       ListTile(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),

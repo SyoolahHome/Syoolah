@@ -15,6 +15,7 @@ abstract class AlertsService {
     required Future<bool> Function() onAvatarPickedOrTaken,
     required Future<void> Function() onEnd,
     required BlocBase cubit,
+    required void Function() onFullView,
   }) {
     return showDialog(
       context: context,
@@ -41,6 +42,7 @@ abstract class AlertsService {
             onAvatarPickedOrTaken: onAvatarPickedOrTaken,
             onEnd: onEnd,
             cubit: cubit,
+            onFullView: onFullView,
           ),
         );
       },

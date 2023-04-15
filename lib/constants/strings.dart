@@ -1,5 +1,13 @@
 abstract class AppStrings {
+  static const profileOptions = 'Profile options';
+  static const fullImageView = 'Full image view';
+  static const copyPubKey = 'Copy public key';
+  static const copyMetaDataEvent = 'Copy profile metadata event';
+  static const copyProfileEvent = 'Copy profile event';
+  static const copyImageUrl = 'Copy image url';
+  static const copyUsername = 'Copy username';
   static const takeFromGallery = 'Choose from gallery';
+
   static const takeFromCamera = 'Take from camera';
   static const removeAvatar = 'Remove avatar';
   static const changeAvatar = 'Change avatar';

@@ -115,3 +115,19 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 # 26
 
 - Implemented likes posts tab section in the user profile screen.
+
+# 27
+
+- Implementation of the profile avatar picking up from gallery or from the camera directly, then uploading ir to the nostr.build and setting it up in the profile metadata which will update the user's avatar in the app.
+- Implementation the feature of deleting the profile totally for the user profile avatar.
+- Implemented the feature of openeing the profile avatar in full screen mode.
+
+# 28
+
+- Implementation of the user's profile options bottom sheet, which allow users to:
+  - navigate to the screen for editing the other profile metadata and informations.
+  - Copy the user's public key.
+  - Copying the user's metadata event.
+  - Copying the user's metadata as json string.
+  - copying the user's profile avatar url.
+  - Copying the user's profile username.

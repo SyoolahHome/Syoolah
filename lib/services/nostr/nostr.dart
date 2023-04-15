@@ -27,6 +27,7 @@ class NostrService {
         'wss://relay.current.fyi',
         'wss://nostr.relayer.se',
       ],
+       
     );
   }
 
