@@ -2,6 +2,7 @@ import 'package:ditto/constants/strings.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import '../model/feed_category.dart';
+import '../model/search_option.dart';
 
 abstract class AppConfigs {
   static final List<FeedCategory> categories = [
@@ -46,6 +47,67 @@ abstract class AppConfigs {
       isSelected: false,
       name: AppStrings.sirah,
       description: "This feed contains Quran",
+    ),
+  ];
+
+  static final feedsSearchOptions = [
+    SearchOption(
+      name: "Search usernames",
+      isSelected: false,
+      useSearchQuery: true,
+      searchFunction: (noteList, string) => noteList
+          .where(
+            (note) =>
+                note.event.pubkey.toLowerCase().contains(string.toLowerCase()),
+          )
+          .toList(),
+    ),
+    SearchOption(
+      name: 'Search Posts contents',
+      isSelected: false,
+      useSearchQuery: true,
+      searchFunction: (noteList, string) => noteList
+          .where(
+            (note) =>
+                note.event.content.toLowerCase().contains(string.toLowerCase()),
+          )
+          .toList(),
+    ),
+    SearchOption(
+      name: 'Search Posts dates',
+      isSelected: false,
+      useSearchQuery: true,
+      searchFunction: (noteList, string) => noteList
+          .where(
+            (note) =>
+                note.event.createdAt.toString().contains(string) ||
+                note.event.createdAt.millisecondsSinceEpoch
+                    .toString()
+                    .contains(string),
+          )
+          .toList(),
+    ),
+    SearchOption(
+      name: 'Search hashtags',
+      useSearchQuery: true,
+      isSelected: false,
+      searchFunction: (noteList, string) => noteList
+          .where(
+            (note) => note.event.content
+                .toLowerCase()
+                .contains('#$string'.toLowerCase()),
+          )
+          .toList(),
+    ),
+    SearchOption(
+      name: 'Only posts with images',
+      isSelected: false,
+      useSearchQuery: false,
+      searchFunction: (noteList, string) => noteList
+          .where(
+            (note) => note.imageLinks.isNotEmpty,
+          )
+          .toList(),
     ),
   ];
 }

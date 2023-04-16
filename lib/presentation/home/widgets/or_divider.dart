@@ -4,11 +4,11 @@ class OrDivider extends StatelessWidget {
   const OrDivider({
     super.key,
     this.onlyDivider = false,
-    this.color = Colors.white,
+    this.color,
   });
 
   final bool onlyDivider;
-  final Color color;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -25,8 +25,8 @@ class OrDivider extends StatelessWidget {
                   end: Alignment.centerLeft,
                   begin: Alignment.centerRight,
                   colors: [
-                    color.withOpacity(0.55),
-                    color.withOpacity(0.1),
+                    (color ?? Theme.of(context).dividerColor).withOpacity(0.55),
+                    (color ?? Theme.of(context).dividerColor).withOpacity(0.1),
                   ],
                 ),
               ),
@@ -51,8 +51,8 @@ class OrDivider extends StatelessWidget {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    color.withOpacity(0.55),
-                    color.withOpacity(0.1),
+                    (color ?? Theme.of(context).dividerColor).withOpacity(0.55),
+                    (color ?? Theme.of(context).dividerColor).withOpacity(0.1),
                   ],
                 ),
               ),

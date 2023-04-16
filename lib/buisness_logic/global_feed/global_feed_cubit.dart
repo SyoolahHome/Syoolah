@@ -5,6 +5,7 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/configs.dart';
 import '../../model/note.dart';
 import '../../model/search_option.dart';
 import '../../services/bottom_sheet/bottom_sheet.dart';
@@ -15,99 +16,30 @@ class FeedCubit extends Cubit<GlobalFeedState> {
   TextEditingController? searchController;
   Stream<NostrEvent> feedPostsStream;
   StreamSubscription? _streamSubscription;
+  ScrollController? scrollController;
 
   FeedCubit({
     required this.feedPostsStream,
-  }) : super(
-          GlobalFeedInitial(
-            searchOptions: [
-              SearchOption(
-                name: "Search usernames",
-                isSelected: false,
-                useSearchQuery: true,
-                searchFunction: (noteList, string) => noteList
-                    .where(
-                      (note) => note.event.pubkey
-                          .toLowerCase()
-                          .contains(string.toLowerCase()),
-                    )
-                    .toList(),
-              ),
-              SearchOption(
-                name: 'Search Posts contents',
-                isSelected: false,
-                useSearchQuery: true,
-                searchFunction: (noteList, string) => noteList
-                    .where(
-                      (note) => note.event.content
-                          .toLowerCase()
-                          .contains(string.toLowerCase()),
-                    )
-                    .toList(),
-              ),
-              SearchOption(
-                name: 'Search Posts dates',
-                isSelected: false,
-                useSearchQuery: true,
-                searchFunction: (noteList, string) => noteList
-                    .where(
-                      (note) =>
-                          note.event.createdAt.toString().contains(string) ||
-                          note.event.createdAt.millisecondsSinceEpoch
-                              .toString()
-                              .contains(string),
-                    )
-                    .toList(),
-              ),
-              SearchOption(
-                name: 'Search hashtags',
-                useSearchQuery: true,
-                isSelected: false,
-                searchFunction: (noteList, string) => noteList
-                    .where(
-                      (note) => note.event.content
-                          .toLowerCase()
-                          .contains('#$string'.toLowerCase()),
-                    )
-                    .toList(),
-              ),
-              SearchOption(
-                name: 'Only posts with images',
-                isSelected: false,
-                useSearchQuery: false,
-                searchFunction: (noteList, string) => noteList
-                    .where(
-                      (note) => note.imageLinks.isNotEmpty,
-                    )
-                    .toList(),
-              ),
-            ],
-          ),
-        ) {
-    searchController = TextEditingController();
-    handleStreams();
+  }) : super(GlobalFeedInitial(searchOptions: AppConfigs.feedsSearchOptions)) {
+    _init();
   }
 
   @override
   Future<void> close() {
     searchController?.dispose();
     _streamSubscription?.cancel();
+
     return super.close();
   }
 
-  void handleStreams() {
-    _streamSubscription?.cancel();
+  void _handleStreams() {
     feedPostsStream.listen(
       (event) {
         final sortedList = [...state.feedPosts, event].reversed.toList();
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
         if (!isClosed) {
-          emit(
-            state.copyWith(
-              feedPosts: sortedList,
-            ),
-          );
+          emit(state.copyWith(feedPosts: sortedList));
         }
       },
     );
@@ -118,23 +50,20 @@ class FeedCubit extends Cubit<GlobalFeedState> {
   }
 
   void selectedSearchOption(int index, bool value) {
-    List<SearchOption> searchOptions = [];
+    final searchOptions = <SearchOption>[];
 
     for (int i = 0; i < state.searchOptions.length; i++) {
-      if (i == index) {
-        searchOptions.add(
-          state.searchOptions[i].copyWith(
-            isSelected: value,
-          ),
-        );
+      final current = state.searchOptions[i];
+      final isSelectedItem = i == index;
+
+      if (isSelectedItem) {
+        searchOptions.add(current.copyWith(isSelected: value));
       } else {
-        searchOptions.add(state.searchOptions[i]);
+        searchOptions.add(current);
       }
     }
 
-    emit(
-      state.copyWith(searchOptions: searchOptions),
-    );
+    emit(state.copyWith(searchOptions: searchOptions));
   }
 
   void pickDateRange(BuildContext context) async {
@@ -145,11 +74,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
     );
 
     if (rangeDate != null) {
-      emit(
-        state.copyWith(
-          dateRange: rangeDate,
-        ),
-      );
+      emit(state.copyWith(dateRange: rangeDate));
     }
   }
 
@@ -171,8 +96,11 @@ class FeedCubit extends Cubit<GlobalFeedState> {
 
       if (state.dateRange != null) {
         notes = notes.where((note) {
-          return note.event.createdAt.isAfter(state.dateRange!.start) &&
-              note.event.createdAt.isBefore(state.dateRange!.end);
+          final isAfter = note.event.createdAt.isAfter(state.dateRange!.start);
+          final isBefore = note.event.createdAt.isBefore(state.dateRange!.end);
+          final isIncluded = isAfter && isBefore;
+
+          return isIncluded;
         }).toList();
       }
       emit(state.copyWith(searchedFeedNotesPosts: notesResults.toList()));
@@ -193,5 +121,18 @@ class FeedCubit extends Cubit<GlobalFeedState> {
         feedPosts: state.feedPosts,
       ),
     );
+  }
+
+  void _init() {
+    searchController = TextEditingController();
+    scrollController = ScrollController();
+    scrollController!.addListener(() {
+      if (scrollController!.position.pixels != 0) {
+        emit(state.copyWith(shouldShowScrollToTopButton: true));
+      } else {
+        emit(state.copyWith(shouldShowScrollToTopButton: false));
+      }
+    });
+    _handleStreams();
   }
 }

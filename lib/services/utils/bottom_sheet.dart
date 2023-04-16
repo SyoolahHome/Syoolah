@@ -7,12 +7,6 @@ abstract class BottomSheets {
     return showModalBottomSheet(
       isScrollControlled: false,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-      ),
-      
       context: context,
       builder: (context) {
         return const PrivateKeyGenSuccess();

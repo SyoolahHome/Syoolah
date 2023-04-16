@@ -12,6 +12,7 @@ class NotesListView extends StatelessWidget {
   const NotesListView({
     super.key,
     required this.notes,
+    this.scrollController,
     this.feedName,
     this.physics,
     this.shrinkWrap = false,
@@ -25,6 +26,8 @@ class NotesListView extends StatelessWidget {
   final bool shrinkWrap;
   final bool hideCount;
   final EdgeInsets? cardMargin;
+  final ScrollController? scrollController;
+
   @override
   Widget build(BuildContext context) {
     final nothingToShow = Text(
@@ -55,6 +58,7 @@ class NotesListView extends StatelessWidget {
           return ListView.builder(
             physics: physics,
             shrinkWrap: shrinkWrap,
+            controller: scrollController,
             itemCount: notes.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) {

@@ -14,9 +14,6 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
       builder: (context) {
         return const AddNewPost();
       },
@@ -32,9 +29,6 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
       builder: (context) {
         return Container();
       },
@@ -47,9 +41,6 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
       builder: (context) {
         return SearchSections(cubit: cubit);
       },
@@ -65,9 +56,6 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
@@ -85,9 +73,6 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       isScrollControlled: true,
       clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,

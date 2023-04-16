@@ -48,15 +48,12 @@ class GoButton extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.white.withOpacity(0.95),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  foregroundColor: AppColors.tealLight,
                 ),
                 child: Text(
                   AppStrings.continueText,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: scaffoldColor,
-                        fontWeight: FontWeight.w500,
+                        color: AppColors.teal,
                       ),
                 ),
               ),

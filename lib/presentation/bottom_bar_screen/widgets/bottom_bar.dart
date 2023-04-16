@@ -23,69 +23,74 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 65.0;
 
-    return BlocBuilder<HomePageAfterLoginCubit, HomePageAfterLoginState>(
-      builder: (context, state) {
-        if (state.didConnectedToRelaysAndSubscribedToTopics) {
-          return NavigationBar(
-            height: height,
-            selectedIndex: selectedIndex,
-            onDestinationSelected: onElementTap,
-            destinations: items.indexedMap((index, item) {
-              Widget possibleWidget = NavigationDestination(
-                icon: Icon(
-                  item.icon,
-                  color: AppColors.white,
-                  size: 19,
-                ),
-                label: item.label,
-              );
-              if (item.icon == FlutterRemix.add_line) {
-                possibleWidget = Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        BottomSheetService.showCreatePostBottomSheet(context);
-                      },
-                      child: AbsorbPointer(
-                        absorbing: true,
-                        child: possibleWidget,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: 30,
-                      height: 1.5,
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                      ),
-                      child: const Text(
-                        "Create",
-                        style: TextStyle(
-                          color: AppColors.white,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        navigationBarTheme: Theme.of(context).navigationBarTheme.copyWith(
+              
+            ),
+      ),
+      child: BlocBuilder<HomePageAfterLoginCubit, HomePageAfterLoginState>(
+        builder: (context, state) {
+          if (state.didConnectedToRelaysAndSubscribedToTopics) {
+            return NavigationBar(
+              height: height,
+              selectedIndex: selectedIndex,
+              onDestinationSelected: onElementTap,
+              destinations: items.indexedMap((index, item) {
+                Widget possibleWidget = NavigationDestination(
+                  icon: Icon(
+                    item.icon,
+                  ),
+                  label: item.label,
+                );
+                if (item.icon == FlutterRemix.add_line) {
+                  possibleWidget = Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          BottomSheetService.showCreatePostBottomSheet(context);
+                        },
+                        child: AbsorbPointer(
+                          absorbing: true,
+                          child: possibleWidget,
                         ),
                       ),
-                    ),
-                  ],
-                );
-              }
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        width: 30,
+                        height: 1.5,
+                        decoration: const BoxDecoration(
+                          color: AppColors.white,
+                        ),
+                        child: const Text(
+                          "Create",
+                          style: TextStyle(
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
 
-              return possibleWidget;
-            }).toList(),
-          );
-        } else if (state.isLoading) {
-          return Container(
-            height: height,
-            color: AppColors.white,
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else {
-          return const Text("readhed here");
-        }
-      },
+                return possibleWidget;
+              }).toList(),
+            );
+          } else if (state.isLoading) {
+            return Container(
+              height: height,
+              color: AppColors.white,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else {
+            return const Text("readhed here");
+          }
+        },
+      ),
     );
   }
 }
