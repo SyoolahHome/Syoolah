@@ -8,7 +8,6 @@ import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../../services/utils/bottom_sheet.dart';
 import '../../../services/utils/paths.dart';
 import '../../../services/utils/snackbars.dart';
-import '../../bottom_bar_screen/bottom_bar_screen.dart';
 import '../../general/widget/margined_body.dart';
 
 class GoButton extends StatelessWidget {

@@ -1,6 +1,5 @@
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 class ProfileName extends StatelessWidget {
   const ProfileName({super.key, required this.metadata});

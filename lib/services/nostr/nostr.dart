@@ -239,7 +239,7 @@ class NostrService {
         NostrFilter(
           e: [postEventId],
           kinds: const [7],
-          until: DateTime.now().add(Duration(days: 10)),
+          until: DateTime.now().add(const Duration(days: 10)),
         )
       ],
     );
@@ -260,7 +260,7 @@ class NostrService {
         NostrFilter(
           authors: [nostrKeyPairs.public],
           kinds: const [7],
-          until: DateTime.now().add(Duration(days: 10)),
+          until: DateTime.now().add(const Duration(days: 10)),
         )
       ],
     );
@@ -333,7 +333,7 @@ class NostrService {
     );
 
     stream.listen((event) {
-      print("comment: " + event.content + ", random: " + randomId);
+      print("comment: ${event.content}, random: $randomId");
     });
 
     return stream;
@@ -548,6 +548,10 @@ class NostrService {
       tags: newEvent.tags,
     );
 
+    Nostr.instance.relaysService.sendEventToRelays(event);
+  }
+
+  void reSendNote(NostrEvent event) {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 }

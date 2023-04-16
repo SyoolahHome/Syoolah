@@ -60,7 +60,7 @@ class CustomBottomBar extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: AppColors.white,
                       ),
-                      child: Text(
+                      child: const Text(
                         "Create",
                         style: TextStyle(
                           color: AppColors.white,

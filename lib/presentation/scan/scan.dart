@@ -1,9 +1,6 @@
-import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/constants/colors.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/services/database/local/local.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/app_bar.dart';
 import 'widgets/button.dart';

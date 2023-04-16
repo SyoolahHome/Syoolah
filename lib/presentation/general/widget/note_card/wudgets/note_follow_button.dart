@@ -15,23 +15,17 @@ class NoteFollowButton extends StatelessWidget {
   final Note note;
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<GlobalCubit>();
     return BlocBuilder<GlobalCubit, GlobalState>(
       builder: (context, state) {
-        final isNoteOwnerFollowed = state.currentUserFollowing?.tags
-                .map((elem) => elem[1])
-                .contains(note.event.pubkey) ??
-            false;
+        final isNoteOwnerFollowed =
+            cubit.isNoteOwnerFollowed(note.event.pubkey);
+
         return SizedBox(
           height: 27.5,
           child: ElevatedButton(
             onPressed: () {
-              final cubit = context.read<GlobalCubit>();
-
-              if (isNoteOwnerFollowed) {
-                cubit.unfollowUser(note.event.pubkey);
-              } else {
-                cubit.followUser(note.event.pubkey);
-              }
+              cubit.handleFollowButtonTap(note.event.pubkey);
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,

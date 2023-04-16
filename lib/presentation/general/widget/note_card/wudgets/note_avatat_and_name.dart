@@ -1,7 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditto/constants/colors.dart';
-import 'package:ditto/constants/strings.dart';
-import 'package:ditto/services/nostr/nostr.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 

@@ -205,12 +205,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     BottomSheetService.showProfileBottomSheet(
       context,
       options: [
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.editProfile,
           icon: FlutterRemix.pencil_line,
           onPressed: onEditProfile,
         ),
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.copyPubKey,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
@@ -219,7 +219,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             });
           },
         ),
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.copyMetaDataEvent,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
@@ -228,7 +228,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             });
           },
         ),
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.copyProfileEvent,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
@@ -238,7 +238,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             });
           },
         ),
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.copyImageUrl,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
@@ -247,7 +247,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             });
           },
         ),
-        ProfileOption(
+        BottomSheetOption(
           title: AppStrings.copyUsername,
           icon: FlutterRemix.file_code_line,
           onPressed: () {

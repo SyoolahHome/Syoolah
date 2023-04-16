@@ -4,7 +4,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../about/about.dart';
 import '../../model/drawer_list_tile.dart';
 import '../navigations_screen/chat_relays/global_chats.dart';
-import '../navigations_screen/messages/Messages.dart';
 
 abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [

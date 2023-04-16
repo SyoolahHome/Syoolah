@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'image_content.dart';
-import 'note_contents.dart';
 
 class ImageFullView extends StatelessWidget {
   const ImageFullView({

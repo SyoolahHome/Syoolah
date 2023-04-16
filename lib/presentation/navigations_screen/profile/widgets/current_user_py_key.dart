@@ -1,4 +1,3 @@
-import 'package:ditto/services/database/local/local.dart';
 import 'package:flutter/material.dart';
 
 class CurrentUserPubKey extends StatelessWidget {

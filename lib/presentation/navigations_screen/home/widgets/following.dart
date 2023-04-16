@@ -20,7 +20,7 @@ class FollowingBox extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 10,
             ),
             child: Column(

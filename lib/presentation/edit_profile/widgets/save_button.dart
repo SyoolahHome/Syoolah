@@ -1,9 +1,7 @@
 import 'package:ditto/constants/strings.dart';
-import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
-import '../../bottom_bar_screen/bottom_bar_screen.dart';
 
 class SaveButton extends StatelessWidget {
   const SaveButton({

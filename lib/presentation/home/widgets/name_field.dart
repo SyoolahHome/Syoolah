@@ -26,7 +26,7 @@ class NameField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextField(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           focusNode: context.read<AuthCubit>().nameFocusNode!,
           controller: cubit.nameController,
           decoration: const InputDecoration(

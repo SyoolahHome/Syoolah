@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/constants.dart';

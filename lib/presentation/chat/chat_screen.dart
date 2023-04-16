@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:ditto/presentation/general/widget/chat_message.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -16,8 +15,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  TextEditingController _inputMessage = TextEditingController();
-  List<ChatMessage> _messages = [];
+  final TextEditingController _inputMessage = TextEditingController();
+  final List<ChatMessage> _messages = [];
 
   StreamSubscription? subscription;
   bool isTyping = false;
@@ -67,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, index) {
                   return _messages[index];
                 },
-                separatorBuilder: (context, index) => SizedBox(height: 17),
+                separatorBuilder: (context, index) => const SizedBox(height: 17),
               ),
             ),
           ),

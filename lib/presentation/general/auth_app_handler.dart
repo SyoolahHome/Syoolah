@@ -1,9 +1,6 @@
-import 'dart:async';
 
-import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/database/local/local.dart';
 
 class AuthenticationStreamHandler extends StatefulWidget {
   const AuthenticationStreamHandler({

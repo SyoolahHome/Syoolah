@@ -1,4 +1,5 @@
 import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
+import 'package:ditto/model/note.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +10,13 @@ class NoteContainer extends StatelessWidget {
   const NoteContainer({
     super.key,
     required this.child,
+    required this.note,
     this.margin,
   });
 
   final Widget child;
   final EdgeInsets? margin;
+  final Note note;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FeedBoxCubit>(
@@ -34,6 +37,15 @@ class NoteContainer extends StatelessWidget {
               },
               onPanStart: (details) {
                 feedBoxCubit.highlightBox();
+              },
+              onLongPress: () {
+                feedBoxCubit.showOptions(
+                  context,
+                  note: note,
+                 onCommentsSectionTapped: () {
+                    
+                 }
+                );
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),

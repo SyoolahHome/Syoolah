@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 
 import 'note.dart';

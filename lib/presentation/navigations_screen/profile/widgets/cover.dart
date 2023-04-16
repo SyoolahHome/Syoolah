@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../../main.dart';
 import '../../../../model/user_meta_data.dart';
 
 class ProfileCover extends StatelessWidget {

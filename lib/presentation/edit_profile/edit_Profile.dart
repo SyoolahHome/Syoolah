@@ -3,7 +3,6 @@ import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants/colors.dart';
-import '../bottom_bar_screen/bottom_bar_screen.dart';
 import 'widgets/edit_field.dart';
 import 'widgets/save_button.dart';
 import 'widgets/top_bar.dart';

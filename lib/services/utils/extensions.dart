@@ -39,12 +39,12 @@ extension DateTimeExt on DateTime {
   }
 
   String get formatted {
-    return '${this.day}/${this.month}/${this.year}';
+    return '$day/$month/$year';
   }
 }
 
 // extension for capitalize().
 
 extension StringExt on String {
-  String get capitalized => '${this[0].toUpperCase()}${this.substring(1)}';
+  String get capitalized => '${this[0].toUpperCase()}${substring(1)}';
 }

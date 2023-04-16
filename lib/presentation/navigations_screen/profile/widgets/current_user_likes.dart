@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/liked_note/liked_note_cubit.dart';
-import '../../../../model/note.dart';
-import '../../../feeds/widgets/notes_list_view.dart';
 import '../../../general/widget/margined_body.dart';
 import '../../../general/widget/note_card/note_card.dart';
 

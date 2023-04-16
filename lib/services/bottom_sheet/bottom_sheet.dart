@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../model/profile_option.dart';
 import '../../presentation/feeds/widgets/search.dart';
-import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/new_post/add_new_post.dart';
 import '../../presentation/profile_options/profile_options.dart';
 
@@ -59,7 +58,7 @@ abstract class BottomSheetService {
 
   static Future<void> showProfileBottomSheet(
     BuildContext context, {
-    required List<ProfileOption> options,
+    required List<BottomSheetOption> options,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -70,7 +69,27 @@ abstract class BottomSheetService {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (context) {
-        return ProfileOptionsWidget(
+        return BottomSheetOptionsWidget(
+          options: options,
+        );
+      },
+    );
+  }
+
+  static Future<void> showNoteCardSheet(
+    BuildContext context, {
+    required List<BottomSheetOption> options,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (context) {
+        return BottomSheetOptionsWidget(
           options: options,
         );
       },

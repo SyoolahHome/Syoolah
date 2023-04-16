@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
-import '../../../model/drawer_list_tile.dart';
 import '../drawer_items.dart';
 
 class CustomDrawer extends StatelessWidget {

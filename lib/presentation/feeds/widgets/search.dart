@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../general/widget/bottom_sheet_title_with_button.dart';
 import 'action_button.dart';
 import 'date_range_picker.dart';
-import 'search_button.dart';
 import 'search_field.dart';
 import 'search_options_builder.dart';
 

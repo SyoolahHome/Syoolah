@@ -1,4 +1,3 @@
-import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../model/note.dart';
+import '../../../../../services/utils/paths.dart';
 import '../../../../note_comments_section/note_comments_section.dart';
 import 'note_vreation_ago.dart';
 
@@ -61,17 +61,11 @@ class NoteActions extends StatelessWidget {
                     return Action(
                       icon: FlutterRemix.chat_1_line,
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider.value(
-                              value: cubit,
-                              child: NoteCommentsSection(
-                                note: note,
-                              ),
-                            ),
-                          ),
-                        );
+                        Navigator.of(context)
+                            .pushNamed(Paths.commentsSection, arguments: {
+                          'note': note,
+                          'cubit': cubit,
+                        });
                       },
                       bgColor: AppColors.grey.withOpacity(.2),
                       color: AppColors.black,

@@ -1,18 +1,16 @@
-import 'package:ditto/constants/strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/profile_option.dart';
 import 'widgets/profile_title.dart';
 
-class ProfileOptionsWidget extends StatelessWidget {
-  const ProfileOptionsWidget({
+class BottomSheetOptionsWidget extends StatelessWidget {
+  const BottomSheetOptionsWidget({
     super.key,
     required this.options,
   });
 
-  final List<ProfileOption> options;
+  final List<BottomSheetOption> options;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class ProfileOptionsWidget extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: height * 2),
           const MarginedBody(
-            child: ProfileOptionsTitle(),
+            child: BottomSheetOptionsTitle(),
           ),
           const SizedBox(height: height * 2),
           ...List.generate(

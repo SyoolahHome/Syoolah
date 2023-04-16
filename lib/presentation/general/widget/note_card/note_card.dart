@@ -48,6 +48,7 @@ class NoteCard extends StatelessWidget {
               }
 
               return NoteContainer(
+                note: note,
                 margin: cardMargin,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,8 +60,7 @@ class NoteCard extends StatelessWidget {
                       nameToShow: noteOwnerMetadata.nameToShow(),
                       memeberShipStartedAt:
                           state.noteOwnerMetadata?.createdAt ??
-                              note.event.createdAt ??
-                              DateTime.now(),
+                              note.event.createdAt,
                     ),
                     const OrDivider(onlyDivider: true),
                     NoteContents(

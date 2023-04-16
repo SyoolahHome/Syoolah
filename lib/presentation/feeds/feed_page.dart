@@ -1,15 +1,11 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/colors.dart';
-import '../../constants/strings.dart';
 import '../../model/note.dart';
 
 import '../../services/utils/routing.dart';
-import '../general/widget/note_card/note_card.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/notes_list_view.dart';
 

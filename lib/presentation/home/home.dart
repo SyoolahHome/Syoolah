@@ -1,4 +1,3 @@
-import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/presentation/home/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';

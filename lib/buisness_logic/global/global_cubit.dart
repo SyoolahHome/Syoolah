@@ -11,6 +11,13 @@ class GlobalCubit extends Cubit<GlobalState> {
   Stream<NostrEvent> currentUserFollowing;
   Stream<NostrEvent> currentUserFollowers;
 
+  bool isNoteOwnerFollowed(String pubkey) {
+    return state.currentUserFollowing?.tags
+            .map((elem) => elem[1])
+            .contains(pubkey) ??
+        false;
+  }
+
   GlobalCubit({
     required this.currentUserFollowing,
     required this.currentUserFollowers,
@@ -63,5 +70,13 @@ class GlobalCubit extends Cubit<GlobalState> {
     ]);
 
     NostrService.instance.setFollowingsEvent(newEvent);
+  }
+
+  void handleFollowButtonTap(String pubkey) {
+    if (isNoteOwnerFollowed(pubkey)) {
+      unfollowUser(pubkey);
+    } else {
+      followUser(pubkey);
+    }
   }
 }

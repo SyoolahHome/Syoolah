@@ -15,20 +15,22 @@ import '../../presentation/feeds/hadith_feed.dart';
 import '../../presentation/feeds/sharia_feed.dart';
 import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/home/home.dart';
+import '../../presentation/note_comments_section/note_comments_section.dart';
 
 abstract class Routing {
   static final routes = {
     Paths.bottomBar: (context) => BottomBar(cubit: homePageAfterLoginCubit),
     Paths.main: (context) => const MyHomePage(),
     Paths.editProfile: (context) => EditProfile(),
-    Paths.quranFeed: (context) =>  QuranFeed(),
-    Paths.duaFeed: (context) =>  DuaFeed(),
-    Paths.shariaFeed: (context) =>  ShariaFeed(),
-    Paths.hadithFeed: (context) =>  HadithFeed(),
-    Paths.fiqhFeed: (context) =>  FiqhFeed(),
-    Paths.sirahFeed: (context) =>  SirahFeed(),
+    Paths.quranFeed: (context) => QuranFeed(),
+    Paths.duaFeed: (context) => DuaFeed(),
+    Paths.shariaFeed: (context) => ShariaFeed(),
+    Paths.hadithFeed: (context) => HadithFeed(),
+    Paths.fiqhFeed: (context) => FiqhFeed(),
+    Paths.sirahFeed: (context) => SirahFeed(),
     Paths.globalFeed: (context) => GlobalFeed(),
-    Paths.followingFeed: (context) =>  FollowingsFeed(),
+    Paths.followingFeed: (context) => FollowingsFeed(),
+    Paths.commentsSection: (context) => NoteCommentsSection(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

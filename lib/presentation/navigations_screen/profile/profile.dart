@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

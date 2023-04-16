@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({Key? key, required this.text, required this.sender})
+  const ChatMessage({Key? key, required this.text, required this.sender})
       : super(key: key);
 
   final String text;

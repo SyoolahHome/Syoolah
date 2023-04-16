@@ -1,5 +1,11 @@
 abstract class AppStrings {
-  static const profileOptions = 'Profile options';
+  static const openCommentsSections = 'Open comments sections';
+  static const copyNoteEventId = 'Copy note event id';
+  static const copyNoteEvent = 'Copy note event';
+  static const copyNoteContent = 'Copy note content';
+  static const resendToRelays = 'Resend to relays';
+
+  static const BottomSheetOptions = 'Options';
   static const fullImageView = 'Full image view';
   static const copyPubKey = 'Copy public key';
   static const copyMetaDataEvent = 'Copy profile metadata event';

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class ProfileOption extends Equatable {
+class BottomSheetOption extends Equatable {
   final String title;
   final IconData icon;
   final String? successMessage;
@@ -9,7 +9,7 @@ class ProfileOption extends Equatable {
 
   final void Function() onPressed;
 
-  const ProfileOption({
+  const BottomSheetOption({
     required this.title,
     required this.icon,
     required this.onPressed,

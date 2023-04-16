@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/nostr/nostr.dart';

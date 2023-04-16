@@ -1,20 +1,14 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
-import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/constants/configs.dart';
 import 'package:ditto/constants/strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/services/database/local/local.dart';
-import 'package:ditto/services/nostr/nostr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import '../../../services/utils/paths.dart';
-import '../../general/drawer_items.dart';
 import '../../general/widget/title.dart';
 import 'widgets/app_bar.dart';
 import '../../general/widget/custom_drawer.dart';
-import 'widgets/following.dart';
 import 'widgets/global_box.dart';
 
 class Home extends StatelessWidget {
