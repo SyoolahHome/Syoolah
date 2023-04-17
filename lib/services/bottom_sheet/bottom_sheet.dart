@@ -3,6 +3,7 @@ import 'package:ditto/model/note.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/profile_option.dart';
+import '../../presentation/add_relay/add_relay.dart';
 import '../../presentation/feeds/widgets/search.dart';
 import '../../presentation/new_post/add_new_post.dart';
 import '../../presentation/profile_options/profile_options.dart';
@@ -76,6 +77,23 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
+        );
+      },
+    );
+  }
+
+  static void showAddRelaySheet({
+    required BuildContext context,
+    required Future<void> Function() onAdd,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return AddRelayWidget(
+          onAdd: onAdd,
         );
       },
     );

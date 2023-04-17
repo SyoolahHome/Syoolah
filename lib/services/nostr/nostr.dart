@@ -3,30 +3,27 @@ import 'dart:convert';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
 
+import '../../buisness_logic/app/app_cubit.dart';
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
 import '../database/local/local.dart';
+import '../utils/routing.dart';
 
 class NostrService {
   static final NostrService _instance = NostrService._();
   static NostrService get instance => _instance;
   NostrService._();
 
-  Future<void> init() async {
+  Future<void> init({
+    List<String>? relaysUrls,
+    bool isReconnecting = false,
+  }) async {
+    final defaultRelaysUrls =
+        Routing.appCubit.state.relaysConfigurations.map((e) => e.url).toList();
+
     await Nostr.instance.relaysService.init(
-      relaysUrl: [
-        'wss://eden.nostr.land',
-        'wss://nostr.fmt.wiz.biz',
-        'wss://relay.damus.io',
-        'wss://nostr-pub.wellorder.net',
-        'wss://relay.nostr.info',
-        'wss://offchain.pub',
-        'wss://nos.lol',
-        // 'wss://brb.io', // throws error
-        'wss://relay.snort.social',
-        'wss://relay.current.fyi',
-        'wss://nostr.relayer.se',
-      ],
+      relaysUrl: relaysUrls ?? defaultRelaysUrls,
+      // isReconnecting: isReconnecting,
     );
   }
 

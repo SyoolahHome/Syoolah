@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/nostr/nostr.dart';
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<HomePageAfterLoginCubit>.value(
           value: Routing.homePageAfterLoginCubit,
+        ),
+        BlocProvider<AppCubit>.value(
+          value: Routing.appCubit,
         ),
       ],
       child: MaterialApp(

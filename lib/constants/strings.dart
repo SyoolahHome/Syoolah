@@ -1,23 +1,33 @@
 abstract class AppStrings {
-  static const openCommentsSections = 'Open comments sections';
-  static const copyNoteEventId = 'Copy note event id';
-  static const copyNoteEvent = 'Copy note event';
-  static const copyNoteContent = 'Copy note content';
-  static const resendToRelays = 'Resend to relays';
+  static const String close = 'Close';
+  static const String cancel = 'Cancel';
+  static const String ok = 'Ok';
+  static const remove = 'Remove';
+  static const reconnect = "Reconnect";
+  static const reconnecting = "Reconnecting...";
+  static const String add = "Add";
+  static const String relayUrlHint = "wss://relay.damus.io";
+  static const String addRelay = 'Add relay';
+  static const String addRelayUrlLabel = 'relay web socket url';
+  static const String manageRelays = 'Manage your relays configuration';
+  static const String openCommentsSections = 'Open comments sections';
+  static const String copyNoteEventId = 'Copy note event id';
+  static const String copyNoteEvent = 'Copy note event';
+  static const String copyNoteContent = 'Copy note content';
+  static const String resendToRelays = 'Resend to relays';
+  static const String invalidUrl = 'Invalid url';
+  static const String BottomSheetOptions = 'Options';
+  static const String fullImageView = 'Full image view';
+  static const String copyPubKey = 'Copy public key';
+  static const String copyMetaDataEvent = 'Copy profile metadata event';
+  static const String copyProfileEvent = 'Copy profile event';
+  static const String copyImageUrl = 'Copy image url';
+  static const String copyUsername = 'Copy username';
+  static const String takeFromGallery = 'Choose from gallery';
 
-  static const BottomSheetOptions = 'Options';
-  static const fullImageView = 'Full image view';
-  static const copyPubKey = 'Copy public key';
-  static const copyMetaDataEvent = 'Copy profile metadata event';
-  static const copyProfileEvent = 'Copy profile event';
-  static const copyImageUrl = 'Copy image url';
-  static const copyUsername = 'Copy username';
-  static const takeFromGallery = 'Choose from gallery';
-
-  static const takeFromCamera = 'Take from camera';
-  static const removeAvatar = 'Remove avatar';
-  static const changeAvatar = 'Change avatar';
-  static const String close = "Close";
+  static const String takeFromCamera = 'Take from camera';
+  static const String removeAvatar = 'Remove avatar';
+  static const String changeAvatar = 'Change avatar';
   static const String posts = "posts";
   static const String reposts = "reposts";
   static const String likes = "likes";
@@ -87,4 +97,7 @@ abstract class AppStrings {
   }
 
   static String feedOfName(String name) => "$name's Feed";
+  static String removeRelay(String url) {
+    return 'Remove relay\n$url?';
+  }
 }

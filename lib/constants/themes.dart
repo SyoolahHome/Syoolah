@@ -118,7 +118,10 @@ abstract class AppThemes {
     textTheme: GoogleFonts.latoTextTheme(),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.teal,
-      iconTheme: const IconThemeData(color: AppColors.white),
+      iconTheme: const IconThemeData(
+        color: AppColors.black,
+        size: 20,
+      ),
     ),
     chipTheme: ChipThemeData(
       selectedColor: AppColors.teal.withOpacity(0.1),
@@ -142,6 +145,41 @@ abstract class AppThemes {
       indicatorSize: TabBarIndicatorSize.label,
       splashFactory: NoSplash.splashFactory,
       overlayColor: MaterialStateProperty.all(AppColors.lighGrey),
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.green.withOpacity(0.25);
+          }
+          return Colors.red.withOpacity(0.25);
+        },
+      ),
+      overlayColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.green.withOpacity(0.5);
+          }
+          return Colors.red.withOpacity(0.5);
+        },
+      ),
+      thumbColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.green;
+          }
+          return Colors.red;
+        },
+      ),
+      thumbIcon: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return const Icon(Icons.check);
+          }
+          return const Icon(Icons.close);
+        },
+      ),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
   );
 }

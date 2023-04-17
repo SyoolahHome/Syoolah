@@ -4,24 +4,31 @@ import '../../constants/colors.dart';
 import '../../constants/strings.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key,
-      required this.controller,
-      required this.label,
-      this.contentPadding,
-      this.suffix});
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.contentPadding,
+    this.suffix,
+    this.hint,
+  });
 
   final TextEditingController controller;
   final String label;
   final EdgeInsets? contentPadding;
   final Widget? suffix;
+  final String? hint;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(label),
+        Text(label,
+            style: TextStyle(
+              color: Theme.of(context).hintColor,
+            )),
         const SizedBox(height: 5),
         Stack(
           alignment: Alignment.centerRight,
@@ -32,7 +39,7 @@ class CustomTextField extends StatelessWidget {
               ),
               controller: controller,
               decoration: InputDecoration(
-                hintText: AppStrings.typeHere,
+                hintText: hint ?? AppStrings.typeHere,
                 hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: AppColors.grey,
                     ),

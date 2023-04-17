@@ -2,6 +2,7 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/services/utils/paths.dart';
 
+import '../../buisness_logic/app/app_cubit.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
@@ -16,6 +17,7 @@ import '../../presentation/feeds/sharia_feed.dart';
 import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/home/home.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
+import '../../presentation/relays_config/relays_config.dart';
 
 abstract class Routing {
   static final routes = {
@@ -31,11 +33,12 @@ abstract class Routing {
     Paths.globalFeed: (context) => GlobalFeed(),
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),
+    Paths.relaysConfig: (context) => const RelaysConfig(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();
-
   static final authCubit = AuthCubit();
+  static final appCubit = AppCubit();
 
   static FeedCubit feedCubit({
     required Stream<NostrEvent> feedPostsStream,

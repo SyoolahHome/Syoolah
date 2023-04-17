@@ -139,3 +139,11 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 # 30
 
 - Implementation of the followings feed which will show all the posts/notes of the users that the current user is following.
+
+# 31-32
+
+- Implementation of relays configuration, where a user can:
+  - Toggle the relay on/off ti be used or not in the app.
+  - Add new relays to the app.
+  - Reconnect to relays if the connection is lost or when the relay is added in order to apply changes in the Nostr service.
+  - Remove relays from the app.

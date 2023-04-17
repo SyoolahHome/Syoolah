@@ -47,4 +47,33 @@ extension DateTimeExt on DateTime {
 
 extension StringExt on String {
   String get capitalized => '${this[0].toUpperCase()}${substring(1)}';
+
+  bool get isValidWebSocketSchema {
+    // WebSocket URL should start with "ws://" or "wss://"
+    if (!startsWith("ws://") && !startsWith("wss://")) {
+      return false;
+    }
+
+    // WebSocket URL should contain at least one "/"
+    if (!contains("/")) {
+      return false;
+    }
+
+    // WebSocket URL should not contain spaces
+    if (contains(" ")) {
+      return false;
+    }
+
+    // WebSocket URL should not contain any invalid characters
+    RegExp regex = RegExp(
+      r"^[a-zA-Z0-9\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+$",
+    );
+
+    if (!regex.hasMatch(this)) {
+      return false;
+    }
+
+    // WebSocket URL is valid
+    return true;
+  }
 }

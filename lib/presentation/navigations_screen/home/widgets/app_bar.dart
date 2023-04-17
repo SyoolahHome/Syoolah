@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../constants/colors.dart';
+import 'relays_widget.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -12,7 +13,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       iconTheme: const IconThemeData(
         color: AppColors.black,
-        size: 20,
       ),
       backgroundColor: Colors.transparent,
       leading: IconButton(
@@ -20,10 +20,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         icon: const Icon(FlutterRemix.menu_line),
       ),
       actions: const <Widget>[
-        Icon(FlutterRemix.search_2_line),
+        RelaysWidget(),
         SizedBox(width: 20),
-        Icon(FlutterRemix.heart_2_line),
-        SizedBox(width: 20),
+        Icon(FlutterRemix.heart_2_line, size: 22),
+        SizedBox(width: 10),
       ],
     );
   }
