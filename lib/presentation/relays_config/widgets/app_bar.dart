@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/strings.dart';
 import '../../navigations_screen/home/widgets/relays_widget.dart';
 import 'add_relay_icon.dart';
 import 'reconnect_button.dart';

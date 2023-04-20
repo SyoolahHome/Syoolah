@@ -7,7 +7,7 @@ import '../../buisness_logic/global/global_cubit.dart';
 import '../../constants/strings.dart';
 
 class DuaFeed extends StatelessWidget {
-   DuaFeed({super.key});
+  DuaFeed({super.key});
 
   GlobalCubit? globalCubit;
 

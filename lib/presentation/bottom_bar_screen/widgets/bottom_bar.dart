@@ -25,9 +25,7 @@ class CustomBottomBar extends StatelessWidget {
 
     return Theme(
       data: Theme.of(context).copyWith(
-        navigationBarTheme: Theme.of(context).navigationBarTheme.copyWith(
-              
-            ),
+        navigationBarTheme: Theme.of(context).navigationBarTheme.copyWith(),
       ),
       child: BlocBuilder<HomePageAfterLoginCubit, HomePageAfterLoginState>(
         builder: (context, state) {

@@ -8,8 +8,8 @@ import 'widgets/name_field.dart';
 import 'widgets/or_divider.dart';
 import 'widgets/private_key_label.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class KeyAuth extends StatelessWidget {
+  const KeyAuth({super.key});
 
   @override
   Widget build(BuildContext context) {

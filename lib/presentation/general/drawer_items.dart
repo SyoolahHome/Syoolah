@@ -17,9 +17,7 @@ abstract class GeneralDrawerItems {
         DrawerListTimeItem(
           icon: FlutterRemix.chat_2_line,
           label: 'Messages',
-          onTap: () {
-         
-          },
+          onTap: () {},
         ),
         DrawerListTimeItem(
           icon: FlutterRemix.camera_lens_line,

@@ -41,10 +41,6 @@ class _ChatScreenState extends State<ChatScreen> {
       isTyping = true;
     });
     _inputMessage.clear();
-
-
-   
-     
   }
 
   @override
@@ -66,7 +62,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, index) {
                   return _messages[index];
                 },
-                separatorBuilder: (context, index) => const SizedBox(height: 17),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 17),
               ),
             ),
           ),

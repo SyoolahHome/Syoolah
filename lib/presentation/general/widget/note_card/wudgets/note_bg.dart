@@ -39,13 +39,8 @@ class NoteContainer extends StatelessWidget {
                 feedBoxCubit.highlightBox();
               },
               onLongPress: () {
-                feedBoxCubit.showOptions(
-                  context,
-                  note: note,
-                 onCommentsSectionTapped: () {
-                    
-                 }
-                );
+                feedBoxCubit.showOptions(context,
+                    note: note, onCommentsSectionTapped: () {});
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),

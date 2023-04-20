@@ -18,7 +18,7 @@ dependencies:
   provider:
   web_socket_channel:
   logger:
-  google_fonts:
+  google_fonts: ^4.0.3
   crypto:
   sqlite3_flutter_libs:
   sqlite3:
@@ -42,10 +42,12 @@ dependencies:
   transitioned_indexed_stack: ^1.0.2
   flutter_islamic_icons: ^1.0.2
   process_run: ^0.12.5+3
+  flutter_animate: ^4.1.1+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  dart_code_metrics:
 
   flutter_lints:
 

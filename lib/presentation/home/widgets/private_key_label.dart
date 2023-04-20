@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/strings.dart';
+import '../../../services/utils/paths.dart';
 import '../../scan/scan.dart';
 
 class PrivateKeyLabel extends StatelessWidget {
@@ -11,10 +12,7 @@ class PrivateKeyLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ScanKey()),
-        );
+        Navigator.of(context).pushNamed(Paths.existentKeyAuth);
       },
       child: Text(
         AppStrings.privateKeyAccess,

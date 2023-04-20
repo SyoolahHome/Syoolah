@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';

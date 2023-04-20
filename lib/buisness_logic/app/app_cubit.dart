@@ -102,7 +102,7 @@ class AppCubit extends Cubit<AppState> {
   }) {
     AlertsService.showRemoveRelayDialog(
       context,
-       relayConfig: relayConfig,
+      relayConfig: relayConfig,
       onRemove: () {
         removeRelay(relayConfig);
       },

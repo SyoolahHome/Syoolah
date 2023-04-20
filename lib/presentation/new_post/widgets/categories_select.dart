@@ -1,4 +1,3 @@
-
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'package:ditto/constants/colors.dart';
 import 'package:flutter/material.dart';

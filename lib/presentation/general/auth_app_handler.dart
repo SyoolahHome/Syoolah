@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 class AuthenticationStreamHandler extends StatefulWidget {
   const AuthenticationStreamHandler({
@@ -24,7 +22,7 @@ class _AuthenticationStreamHandlerState
     //   if (event != null) {
     //     Navigator.pushNamed(context, Paths.bottomBar);
     //   } else {
-    //     Navigator.of(context).pushNamed(Paths.main);
+    //     Navigator.of(context).pushNamed(Paths.keyAuth);
     //   }
     // });
 

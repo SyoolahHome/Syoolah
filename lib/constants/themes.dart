@@ -115,9 +115,9 @@ abstract class AppThemes {
         fontWeight: FontWeight.normal,
       ),
     ),
-    textTheme: GoogleFonts.latoTextTheme(),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.teal,
+      surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(
         color: AppColors.black,
         size: 20,

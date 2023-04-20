@@ -6,7 +6,9 @@ import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/nostr/nostr.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'constants/strings.dart';
@@ -23,6 +25,10 @@ class MyHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
+
+  Animate.restartOnHotReload = kDebugMode;
+
+  Animate.defaultCurve = Curves.easeInOut;
 
   await LocalDatabase.instance.init();
   await NostrService.instance.init();
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         routes: Routing.routes,
-        initialRoute: Paths.main,
+        initialRoute: Paths.onBoarding,
         title: AppStrings.appName,
         debugShowCheckedModeBanner: false,
         theme: AppThemes.primary,

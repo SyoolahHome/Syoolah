@@ -1,6 +1,10 @@
 abstract class Paths {
+  static const String authChoose = '/auth_choose';
+  static const String existentKeyAuth = '/existentKeyAuth';
+  static const String onBoarding = '/onBoarding';
+  static const String onBoardingSearch = '/onBoardingSearch';
   static const String bottomBar = '/bottomBar';
-  static const String main = '/main';
+  static const String keyAuth = '/keyAuth';
   static const String globalFeed = '/globalFeed';
   static const String editProfile = '/editProfile';
   static const String quranFeed = '/quranFeed';
@@ -12,4 +16,5 @@ abstract class Paths {
   static const String followingFeed = '/followingFeed';
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';
+  static const String aboutMunawarah = '/aboutMunawarah';
 }

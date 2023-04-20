@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
 
-import '../../buisness_logic/app/app_cubit.dart';
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
 import '../database/local/local.dart';

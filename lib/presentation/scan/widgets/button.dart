@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
         if (state.authenticated) {
           Navigator.of(context).pushNamed(Paths.bottomBar);
         } else if (state.isSignedOut) {
-          Navigator.of(context).pushNamed(Paths.main);
+          Navigator.of(context).pushNamed(Paths.keyAuth);
         } else if (state.error != null) {
           SnackBars.text(context, state.error!);
         }

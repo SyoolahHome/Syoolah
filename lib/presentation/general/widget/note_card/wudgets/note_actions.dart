@@ -6,7 +6,6 @@ import '../../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../model/note.dart';
 import '../../../../../services/utils/paths.dart';
-import '../../../../note_comments_section/note_comments_section.dart';
 import 'note_vreation_ago.dart';
 
 class NoteActions extends StatelessWidget {

@@ -25,4 +25,20 @@ abstract class AppUtils {
       onEnd?.call();
     }
   }
+
+  static String appLogoSelector(AppLogoStyle style) {
+    switch (style) {
+      case AppLogoStyle.white:
+        return 'assets/logo/white_no_bg.png';
+      case AppLogoStyle.black:
+        return 'assets/logo/black_no_bg.png';
+      default:
+        throw Exception('Invalid AppLogoStyle');
+    }
+  }
+}
+
+enum AppLogoStyle {
+  white,
+  black,
 }

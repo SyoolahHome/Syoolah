@@ -15,7 +15,7 @@
 //   Widget build(BuildContext context) {
 //     switch (profileSegmentationValue) {
 //       case 0:
-//         return 
+//         return
 //         break;
 //       case 1:
 //         return const Center(

@@ -40,7 +40,7 @@ class BottomBarCubit extends Cubit<int> {
       icon: FlutterRemix.user_line,
     ),
   ];
-  
+
   void onItemTapped(int index) {
     emit(index);
   }
