@@ -17,9 +17,9 @@ class MunawarahShortDescription extends StatelessWidget {
       ],
       child: Text(
         AppStrings.appDescrition,
-        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              // color: AppColors.white.withOpacity(0.75),
-              fontWeight: FontWeight.w300,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: AppColors.black.withOpacity(0.9),
+              fontWeight: FontWeight.w400,
             ),
         textAlign: TextAlign.center,
       ),

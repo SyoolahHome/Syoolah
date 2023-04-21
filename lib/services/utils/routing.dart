@@ -20,6 +20,7 @@ import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/home/home.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/onboarding/onboarding.dart';
+import '../../presentation/onboarding_relays/onboarding_relays.dart';
 import '../../presentation/onboarding_search/onboarding_search.dart';
 import '../../presentation/relays_config/relays_config.dart';
 import '../../presentation/scan/scan.dart';
@@ -44,6 +45,7 @@ abstract class Routing {
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentKeyAuth: (context) => const ExistentKeyAuth(),
+    Paths.onBoardingRelays : (context) => const OnBoardingRelays(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

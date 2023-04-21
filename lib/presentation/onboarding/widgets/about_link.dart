@@ -22,8 +22,8 @@ class AboutMinawarah extends StatelessWidget {
         child: Center(
           child: Text(
             AppStrings.aboutMunawarah,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).primaryColor,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  // color: Theme.of(context).primaryColor,
                   decoration: TextDecoration.underline,
                 ),
           ),

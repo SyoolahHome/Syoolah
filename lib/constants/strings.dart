@@ -1,4 +1,5 @@
 abstract class AppStrings {
+  static const String availableRelays = 'Available relays';
   static const String create = 'Create';
   static const String login = 'Login';
   static const String createNewAcc = 'I am new here!';
@@ -12,8 +13,7 @@ abstract class AppStrings {
   static const String searchUsers = 'Search users';
   static const String aboutMunawarah = "What Munawarah solves?";
   static const String aboutMunawarahWe = "What we solves?";
-  static const String appDescrition =
-      "Lorem Ipsum is simply dummy text of the\nprinting";
+  static const String appDescrition = "Tons of questions,\nTons of answers";
   static const String getStarted = "Get Started";
 
   static const String close = 'Close';

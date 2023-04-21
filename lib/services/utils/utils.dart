@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'routing.dart';
+
 abstract class AppUtils {
   static void displaySnackBar(BuildContext context, String content) {
     SnackBar snackBar = SnackBar(
@@ -34,6 +36,16 @@ abstract class AppUtils {
         return 'assets/logo/black_no_bg.png';
       default:
         throw Exception('Invalid AppLogoStyle');
+    }
+  }
+
+  static Widget widgetFromRoutePath(String path, BuildContext context) {
+    final navigator = Navigator.of(context);
+
+    if (Routing.routes[path] != null) {
+      return Routing.routes[path]!(context);
+    } else {
+      throw Exception('Invalid route path');
     }
   }
 }

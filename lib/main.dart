@@ -31,7 +31,7 @@ Future<void> main() async {
   Animate.defaultCurve = Curves.easeInOut;
 
   await LocalDatabase.instance.init();
-  await NostrService.instance.init();
+  NostrService.instance.init();
 
   runApp(const MyApp());
 }

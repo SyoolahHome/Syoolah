@@ -18,10 +18,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: const <Widget>[
-          RelaysWidget(),
-          SizedBox(width: 10),
-          SearchIcon(),
-          SizedBox(width: 20),
         ],
       ),
     );

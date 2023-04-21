@@ -6,12 +6,14 @@ import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../../constants/colors.dart';
 import '../../../services/utils/paths.dart';
 
-class SearchIcon extends StatelessWidget {
-  const SearchIcon({
+class ProfileIcon extends StatelessWidget {
+  const ProfileIcon({
     super.key,
     this.color,
   });
+
   final Color? color;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<OnBoardingCubit>();
@@ -20,9 +22,7 @@ class SearchIcon extends StatelessWidget {
       tag: 'onBoardingSearch',
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: () {
-          cubit.showSearchSheet(context);
-        },
+        onTap: () {},
         splashFactory: NoSplash.splashFactory,
         child: Container(
           clipBehavior: Clip.hardEdge,
@@ -32,7 +32,7 @@ class SearchIcon extends StatelessWidget {
             color: AppColors.black.withOpacity(0.05),
           ),
           child: Icon(
-            FlutterRemix.search_line,
+            FlutterRemix.user_2_line,
             color: color ?? AppColors.black.withOpacity(0.75),
             size: 17.5,
           ),

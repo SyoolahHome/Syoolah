@@ -1,3 +1,5 @@
+import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
+import 'package:ditto/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,20 +13,25 @@ class RelaysWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<OnBoardingCubit>();
+
     return InkWell(
-      borderRadius: BorderRadius.circular(100),
+      borderRadius: BorderRadius.circular(10),
       onTap: () {
-        Navigator.of(context).pushNamed(Paths.onBoardingSearch);
+        cubit.showRelaysSheet(context);
       },
       splashFactory: NoSplash.splashFactory,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 17.5, vertical: 7.5),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(100),
+          color: AppColors.black.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
+            final activeRelays =
+                state.relaysConfigurations.map((e) => e.isActive);
+
             return GestureDetector(
               onTap: () {
                 if (ModalRoute.of(context)?.settings.name !=
@@ -34,18 +41,18 @@ class RelaysWidget extends StatelessWidget {
               },
               child: Row(
                 children: <Widget>[
-                  Text(
-                    "${state.relaysConfigurations.map((e) => e.isActive).length}",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(width: 5),
+                  // Text(
+                  //   activeRelays.length.toString(),
+                  //   style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  //         color: AppColors.black.withOpacity(0.75),
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  // ),
+                  // const SizedBox(width: 5),
                   Icon(
                     FlutterRemix.cloud_line,
-                    size: 20,
-                    color: Theme.of(context).primaryColor,
+                    size: 17.5,
+                    color: AppColors.black.withOpacity(0.75),
                   )
                 ],
               ),

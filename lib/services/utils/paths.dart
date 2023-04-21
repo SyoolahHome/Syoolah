@@ -17,4 +17,5 @@ abstract class Paths {
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';
   static const String aboutMunawarah = '/aboutMunawarah';
+  static const String onBoardingRelays = '/onBoardingRelays';
 }

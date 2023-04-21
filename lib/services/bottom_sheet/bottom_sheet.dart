@@ -1,5 +1,8 @@
+import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/model/note.dart';
+import 'package:ditto/model/relat_configuration.dart';
+import 'package:ditto/services/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/profile_option.dart';
@@ -7,6 +10,7 @@ import '../../presentation/add_relay/add_relay.dart';
 import '../../presentation/feeds/widgets/search.dart';
 import '../../presentation/new_post/add_new_post.dart';
 import '../../presentation/profile_options/profile_options.dart';
+import '../utils/paths.dart';
 
 abstract class BottomSheetService {
   static showCreatePostBottomSheet(BuildContext context) {
@@ -94,6 +98,49 @@ abstract class BottomSheetService {
       builder: (context) {
         return AddRelayWidget(
           onAdd: onAdd,
+        );
+      },
+    );
+  }
+
+  static Future<void> showOnBoardingSearchSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return AppUtils.widgetFromRoutePath(Paths.onBoardingSearch, context);
+      },
+    );
+  }
+
+  static Future<void> showOnBoardingRelaysSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return AppUtils.widgetFromRoutePath(Paths.onBoardingRelays, context);
+      },
+    );
+  }
+
+  static void showRelayOptionsSheet({
+    required BuildContext context,
+    required RelayConfiguration relay,
+    required List<BottomSheetOption> options,
+    RelayInformations? relayInformations,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return BottomSheetOptionsWidget(
+          options: options,
         );
       },
     );

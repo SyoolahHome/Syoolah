@@ -10,18 +10,15 @@ class AnimatedLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+
     return Animate(
-      delay: const Duration(milliseconds: 200),
-      effects: const <Effect>[
-        FadeEffect(),
-        SlideEffect(
-          begin: const Offset(0, 0.5),
-        )
-      ],
-      child: CachedNetworkImage(
-        imageUrl: AppUtils.appLogoSelector(AppLogoStyle.black),
-        width: 140,
+      delay: const Duration(milliseconds: 400),
+      effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
+      child: Image.asset(
+        AppUtils.appLogoSelector(AppLogoStyle.black),
+        width: mq.size.width * .55,
       ),
     );
-  } 
+  }
 }

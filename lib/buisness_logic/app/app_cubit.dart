@@ -1,12 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
 import 'package:ditto/services/nostr/nostr.dart';
 import 'package:ditto/services/utils/alerts.dart';
 import 'package:ditto/services/utils/extensions.dart';
+import 'package:ditto/services/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/configs.dart';
+import '../../model/profile_option.dart';
 import '../../model/relat_configuration.dart';
 
 part 'app_state.dart';
@@ -21,10 +25,15 @@ class AppCubit extends Cubit<AppState> {
               .toList(),
         )) {
     relayUrlController = TextEditingController()
-      ..addListener(() {
-        emit(state.copyWith(
-            isValidUrl: relayUrlController!.text.isValidWebSocketSchema));
-      });
+      ..addListener(
+        () {
+          emit(
+            state.copyWith(
+              isValidUrl: relayUrlController!.text.isValidWebSocketSchema,
+            ),
+          );
+        },
+      );
   }
 
   List<String> get relaysUrls =>
@@ -106,6 +115,83 @@ class AppCubit extends Cubit<AppState> {
       onRemove: () {
         removeRelay(relayConfig);
       },
+    );
+  }
+
+  void showRelayOptionsSheet(
+    BuildContext context, {
+    required RelayConfiguration relay,
+    RelayInformations? relayInformations,
+  }) {
+    BottomSheetService.showRelayOptionsSheet(
+      context: context,
+      relay: relay,
+      relayInformations: relayInformations,
+      options: [
+        BottomSheetOption(
+          title: "Name: ${relayInformations?.name}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.name ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Description: ${relayInformations?.description}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.description ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Author: ${relayInformations?.pubkey}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.pubkey ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Contact: ${relayInformations?.contact}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.contact ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Software: ${relayInformations?.software}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.software ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Version: ${relayInformations?.version}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.version ?? '',
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "Supported Nips: ${relayInformations?.supportedNips}",
+          icon: FlutterRemix.file_copy_2_line,
+          onPressed: () {
+            AppUtils.copy(
+              relayInformations?.supportedNips.toString() ?? '',
+            );
+          },
+        ),
+      ],
     );
   }
 }

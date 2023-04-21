@@ -22,13 +22,14 @@ class GetStarted extends StatelessWidget {
         children: <Widget>[
           SizedBox(
             width: double.infinity,
-            height: 40,
+            height: 45,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(Paths.authChoose);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: AppColors.black,
+                elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
