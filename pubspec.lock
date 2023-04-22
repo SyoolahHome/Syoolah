@@ -190,7 +190,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a0d0e69205103a4f4b094a5952ae7eabeaed6808
+      resolved-ref: cc4bd66672ca04b481644d40e0aa12e385697194
       url: "https://github.com/anasfik/nostr.git"
     source: git
     version: "1.0.6"
@@ -405,10 +405,10 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
-      sha256: f202f5d730eb8219e35e80c4461fb3a779940ad30ce8fde1586df756e3af25e6
+      sha256: "3da954c3b8906d82ecb50fd5e2b5401758f06d5678904eed6cbc06172283a263"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.7+3"
+    version: "0.8.7+4"
   image_picker_android:
     dependency: transitive
     description:

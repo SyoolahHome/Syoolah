@@ -13,13 +13,13 @@ class NoteAvatarAndName extends StatelessWidget {
     required this.avatarUrl,
     required this.nameToShow,
     required this.memeberShipStartedAt,
-    required this.note,
+    this.note,
   });
 
   final String avatarUrl;
   final String nameToShow;
   final DateTime memeberShipStartedAt;
-  final Note note;
+  final Note? note;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -42,7 +42,7 @@ class NoteAvatarAndName extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        NoteFollowButton(note: note),
+        if (note != null) NoteFollowButton(note: note!),
       ],
     );
   }

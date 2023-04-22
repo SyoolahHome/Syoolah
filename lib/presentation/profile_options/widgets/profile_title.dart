@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import '../../general/widget/bottom_sheet_title_with_button.dart';
 
 class BottomSheetOptionsTitle extends StatelessWidget {
-  const BottomSheetOptionsTitle({super.key});
+  const BottomSheetOptionsTitle({
+    super.key,
+    required this.title,
+  });
 
+  final String? title;
   @override
   Widget build(BuildContext context) {
-    return const BottomSheetTitleWithIconButton(
-      title: AppStrings.BottomSheetOptions,
+    return BottomSheetTitleWithIconButton(
+      title: title ?? AppStrings.BottomSheetOptions,
     );
   }
 }

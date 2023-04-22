@@ -6,6 +6,7 @@ import '../../buisness_logic/app/app_cubit.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import '../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../presentation/about_munawarah/about_munawarah.dart';
 import '../../presentation/auth_choose/auth_choose.dart';
 import '../../presentation/bottom_bar_screen/bottom_bar_screen.dart';
@@ -18,6 +19,7 @@ import '../../presentation/feeds/hadith_feed.dart';
 import '../../presentation/feeds/sharia_feed.dart';
 import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/home/home.dart';
+import '../../presentation/navigations_screen/profile/profile.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/onboarding/onboarding.dart';
 import '../../presentation/onboarding_relays/onboarding_relays.dart';
@@ -45,12 +47,13 @@ abstract class Routing {
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentKeyAuth: (context) => const ExistentKeyAuth(),
-    Paths.onBoardingRelays : (context) => const OnBoardingRelays(),
+    Paths.onBoardingRelays: (context) => const OnBoardingRelays(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();
   static final authCubit = AuthCubit();
   static final appCubit = AppCubit();
+  static final onBoardingCubit = OnBoardingCubit();
 
   static FeedCubit feedCubit({
     required Stream<NostrEvent> feedPostsStream,

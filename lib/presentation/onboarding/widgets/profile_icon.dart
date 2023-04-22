@@ -19,7 +19,7 @@ class ProfileIcon extends StatelessWidget {
     final cubit = context.read<OnBoardingCubit>();
 
     return Hero(
-      tag: 'onBoardingSearch',
+      tag: '',
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () {},

@@ -7,9 +7,11 @@ class BottomSheetTitleWithIconButton extends StatelessWidget {
   const BottomSheetTitleWithIconButton({
     super.key,
     required this.title,
+    this.onPop,
   });
 
   final String title;
+  final VoidCallback? onPop;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,6 +29,7 @@ class BottomSheetTitleWithIconButton extends StatelessWidget {
           icon: const Icon(FlutterRemix.close_line),
           onPressed: () {
             Navigator.pop(context);
+            onPop?.call();
           },
         ),
       ],

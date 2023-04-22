@@ -19,30 +19,54 @@ class RelayBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.only(bottom: 15.0),
-      title: Text(
-        relay.url +
-            (relayInformations == null ? '' : ' - ${relayInformations!.name}'),
-        style: Theme.of(context).textTheme.titleSmall,
+      onTap: () {
+        Routing.appCubit.showRelayOptionsSheet(
+          context,
+          relay: relay,
+          relayInformations: relayInformations,
+        );
+      },
+      contentPadding: const EdgeInsets.only(bottom: 5.0),
+      title: RichText(
+        text: TextSpan(
+          text: relay.url,
+          style: Theme.of(context).textTheme.titleSmall,
+          children: [
+            TextSpan(
+              text: (relayInformations == null
+                  ? ''
+                  : ' - ${relayInformations!.name}'),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+          ],
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: Text(
-        relayInformations?.description ?? '',
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: AppColors.black.withOpacity(1),
-              fontWeight: FontWeight.w300,
-            ),
+      visualDensity: VisualDensity.compact,
+      subtitle: Container(
+        margin: const EdgeInsets.only(top: 7.5),
+        child: Text(
+          relayInformations?.description ?? '',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColors.black.withOpacity(1),
+                fontWeight: FontWeight.w300,
+              ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
-      trailing: IconButton(
-        onPressed: () {
+      trailing: GestureDetector(
+        onTap: () {
           Routing.appCubit.showRelayOptionsSheet(
             context,
             relay: relay,
             relayInformations: relayInformations,
           );
         },
-        icon: const Icon(FlutterRemix.more_2_line),
+        child: const Icon(FlutterRemix.more_2_line),
       ),
     );
   }

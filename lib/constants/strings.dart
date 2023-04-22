@@ -10,7 +10,7 @@ abstract class AppStrings {
       'You will be redirected to login with your existent key';
   static const String searchUsersHint = 'Ex: bob@example.com';
   static const String identifierOrPuKey = 'Identifier or public key';
-  static const String searchUsers = 'Search users';
+  static const String searchUser = 'Search A user';
   static const String aboutMunawarah = "What Munawarah solves?";
   static const String aboutMunawarahWe = "What we solves?";
   static const String appDescrition = "Tons of questions,\nTons of answers";

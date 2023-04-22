@@ -550,4 +550,100 @@ class NostrService {
   void reSendNote(NostrEvent event) {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
+
+  Future<String> getPubKeyFromEmail(String identifier) async {
+    return await Nostr.instance.relaysService.pubKeyFromIdentifierNip05(
+      internetIdentifier: identifier,
+    );
+  }
+
+  Stream<NostrEvent> userTextNotesStream(String userProfilePubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [userProfilePubKey],
+          kinds: const [1],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> userMetaDataStream(String userProfilePubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [userProfilePubKey],
+          kinds: const [0],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> userLikes(String userProfilePubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [userProfilePubKey],
+          kinds: const [7],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> userFollowers(String userProfilePubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          p: [userProfilePubKey],
+          kinds: const [3],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  Stream<NostrEvent> userFollowing(String userProfilePubKey) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [userProfilePubKey],
+          kinds: const [3],
+        ),
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
 }

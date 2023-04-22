@@ -20,6 +20,8 @@ class UserMetaData extends Equatable {
   /// The about of the user
   final String? about;
 
+  final String? displayName;
+
   /// {@macro user_meta_data}
   const UserMetaData({
     required this.name,
@@ -27,6 +29,7 @@ class UserMetaData extends Equatable {
     required this.banner,
     required this.username,
     required this.about,
+    this.displayName,
   });
 
   /// {@macro user_meta_data}
@@ -40,13 +43,16 @@ class UserMetaData extends Equatable {
       }
     });
 
-    return UserMetaData(
+    final metadta = UserMetaData(
       name: json['name'] ?? UserMetaData.placeholder().name,
       picture: json['picture'] ?? UserMetaData.placeholder().picture,
       banner: json['banner'] ?? UserMetaData.placeholder().banner,
       username: json['username'] ?? UserMetaData.placeholder().username,
       about: json['about'] ?? UserMetaData.placeholder().about,
+      displayName: json['display_name'],
     );
+
+    return metadta;
   }
 
   /// {@macro user_meta_data}
@@ -73,10 +79,12 @@ class UserMetaData extends Equatable {
   }
 
   String nameToShow() {
-    if (username.isNotEmpty) {
-      return "@$username";
-    } else if (name.isNotEmpty) {
+    if (name.isNotEmpty) {
       return name;
+    } else if (username.isNotEmpty) {
+      return "@$username";
+    } else if (displayName != null) {
+      return displayName!;
     } else {
       return "No Name";
     }

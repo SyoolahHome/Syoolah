@@ -127,7 +127,7 @@ class AppCubit extends Cubit<AppState> {
       context: context,
       relay: relay,
       relayInformations: relayInformations,
-      options: [
+      options: <BottomSheetOption>[
         BottomSheetOption(
           title: "Name: ${relayInformations?.name}",
           icon: FlutterRemix.file_copy_2_line,

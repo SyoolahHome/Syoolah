@@ -1,5 +1,8 @@
+import 'package:ditto/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../../constants/strings.dart';
 
 class SearchField extends StatelessWidget {
@@ -7,9 +10,18 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<OnBoardingCubit>();
+
     return TextField(
+      controller: cubit.searchController,
       decoration: InputDecoration(
         hintText: AppStrings.searchUsersHint,
+        filled: true,
+        fillColor: AppColors.lighGrey,
+        hintStyle: const TextStyle(
+          color: AppColors.grey,
+          fontSize: 15,
+        ),
       ),
     );
   }

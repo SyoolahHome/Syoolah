@@ -8,10 +8,11 @@ class BottomSheetOptionsWidget extends StatelessWidget {
   const BottomSheetOptionsWidget({
     super.key,
     required this.options,
+    this.title,
   });
 
   final List<BottomSheetOption> options;
-
+  final String? title;
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
@@ -21,8 +22,10 @@ class BottomSheetOptionsWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const SizedBox(height: height * 2),
-          const MarginedBody(
-            child: BottomSheetOptionsTitle(),
+          MarginedBody(
+            child: BottomSheetOptionsTitle(
+              title: title,
+            ),
           ),
           const SizedBox(height: height * 2),
           ...List.generate(

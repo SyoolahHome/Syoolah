@@ -140,6 +140,7 @@ abstract class BottomSheetService {
       clipBehavior: Clip.hardEdge,
       builder: (context) {
         return BottomSheetOptionsWidget(
+          title: relayInformations?.name,
           options: options,
         );
       },

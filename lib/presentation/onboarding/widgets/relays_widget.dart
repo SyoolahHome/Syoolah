@@ -15,51 +15,57 @@ class RelaysWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<OnBoardingCubit>();
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () {
-        cubit.showRelaysSheet(context);
-      },
-      splashFactory: NoSplash.splashFactory,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 17.5, vertical: 7.5),
-        decoration: BoxDecoration(
-          color: AppColors.black.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: BlocBuilder<AppCubit, AppState>(
-          builder: (context, state) {
-            final activeRelays =
-                state.relaysConfigurations.map((e) => e.isActive);
-
-            return GestureDetector(
-              onTap: () {
-                if (ModalRoute.of(context)?.settings.name !=
-                    Paths.relaysConfig) {
-                  Navigator.of(context).pushNamed(Paths.relaysConfig);
-                }
-              },
-              child: Row(
-                children: <Widget>[
-                  // Text(
-                  //   activeRelays.length.toString(),
-                  //   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  //         color: AppColors.black.withOpacity(0.75),
-                  //         fontWeight: FontWeight.bold,
-                  //       ),
-                  // ),
-                  // const SizedBox(width: 5),
-                  Icon(
-                    FlutterRemix.cloud_line,
-                    size: 17.5,
-                    color: AppColors.black.withOpacity(0.75),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: Colors.white, elevation: 0),
       ),
+      child: Builder(builder: (context) {
+        return InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {
+            cubit.showRelaysSheet(context);
+          },
+          splashFactory: NoSplash.splashFactory,
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 17.5, vertical: 7.5),
+            decoration: BoxDecoration(
+              color: AppColors.black.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: BlocBuilder<AppCubit, AppState>(
+              builder: (context, state) {
+                final activeRelays =
+                    state.relaysConfigurations.map((e) => e.isActive);
+
+                return GestureDetector(
+                  onTap: () {
+                    cubit.showRelaysSheet(context);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      // Text(
+                      //   activeRelays.length.toString(),
+                      //   style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      //         color: AppColors.black.withOpacity(0.75),
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      // ),
+                      // const SizedBox(width: 5),
+                      Icon(
+                        FlutterRemix.cloud_line,
+                        size: 17.5,
+                        color: AppColors.black.withOpacity(0.75),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -40,8 +40,7 @@ abstract class AppUtils {
   }
 
   static Widget widgetFromRoutePath(String path, BuildContext context) {
-    final navigator = Navigator.of(context);
-
+    
     if (Routing.routes[path] != null) {
       return Routing.routes[path]!(context);
     } else {

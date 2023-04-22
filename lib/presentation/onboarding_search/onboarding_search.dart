@@ -1,43 +1,99 @@
+import 'dart:convert';
+
+import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
+import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/profile_options/widgets/profile_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/strings.dart';
+import '../../model/user_meta_data.dart';
+import '../../services/utils/paths.dart';
+import '../../services/utils/routing.dart';
+import '../general/widget/note_card/wudgets/note_avatat_and_name.dart';
+import '../home/widgets/or_divider.dart';
 import '../onboarding/widgets/search_icon.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/search_field.dart';
 
 class OnBoardingSearch extends StatelessWidget {
-  const OnBoardingSearch({super.key});
+  const OnBoardingSearch({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return Scaffold(
-      appBar: const CustomAppBar(),
-      backgroundColor: AppColors.black,
-      floatingActionButton: FloatingActionButton(
-        heroTag: null,
-        onPressed: () {},
-        child: const SearchIcon(color: Colors.white),
-      ),
-      body: MarginedBody(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: height * 3),
-            Text(
-              AppStrings.identifierOrPuKey,
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Colors.white ?? Theme.of(context).hintColor,
+    return BlocProvider<OnBoardingCubit>.value(
+      value: Routing.onBoardingCubit,
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<OnBoardingCubit>();
+
+          return BlocBuilder<OnBoardingCubit, OnBoardingState>(
+            builder: (context, state) {
+              return SizedBox(
+                height: 575,
+                child: Scaffold(
+                  floatingActionButton: state.shouldShowSearchButton
+                      ? FloatingActionButton(
+                          onPressed: () {
+                            cubit.executeSearch();
+                          },
+                          child: const Icon(FlutterRemix.search_line),
+                        )
+                      : null,
+                  body: MarginedBody(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: height * 2),
+                        BottomSheetTitleWithIconButton(
+                          title: AppStrings.searchUser,
+                          onPop: () {
+                            cubit.resetSearch();
+                          },
+                        ),
+                        const SizedBox(height: height * 2),
+                        const Text(AppStrings.identifierOrPuKey),
+                        const SizedBox(height: height),
+                        const SearchField(),
+                        const SizedBox(height: height * 2),
+                        const Center(
+                          child: OrDivider(
+                            onlyDivider: false,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        const SizedBox(height: height * 2),
+                        if (state.searchedUser != null)
+                          Builder(builder: (context) {
+                            final searchedUserMetadata = UserMetaData.fromJson(
+                                jsonDecode(state.searchedUser!.content));
+
+                            return GestureDetector(
+                              onTap: () {},
+                              child: NoteAvatarAndName(
+                                avatarUrl: searchedUserMetadata.picture!,
+                                memeberShipStartedAt:
+                                    state.searchedUser!.createdAt,
+                                nameToShow: searchedUserMetadata.nameToShow(),
+                              ),
+                            );
+                          }),
+                      ],
+                    ),
                   ),
-            ),
-            const SizedBox(height: height),
-            const SearchField(),
-          ],
-        ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

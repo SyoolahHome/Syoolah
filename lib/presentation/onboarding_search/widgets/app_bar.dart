@@ -10,13 +10,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        AppStrings.searchUsers,
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: AppColors.white,
-            ),
-      ),
-      backgroundColor: Colors.transparent,
+      title: Text(AppStrings.searchUser,
+          style: Theme.of(context).textTheme.labelLarge),
+      backgroundColor: AppColors.lighGrey,
       elevation: 0,
       leading: IconButton(
         icon: Icon(

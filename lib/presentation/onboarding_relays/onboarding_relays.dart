@@ -14,31 +14,37 @@ class OnBoardingRelays extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return MarginedBody(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const SizedBox(height: height * 2),
-          const BottomSheetTitleWithIconButton(
-              title: AppStrings.availableRelays),
-          const SizedBox(height: height * 2),
-          ...List.generate(
-            Routing.appCubit.state.relaysConfigurations.length,
-            (index) {
-              final relay = Routing.appCubit.state.relaysConfigurations[index];
-              return FutureBuilder(
-                future: Nostr.instance.relaysService
-                    .relayInformationsDocumentNip11(relayUrl: relay.url),
-                builder: (context, snapshot) {
-                  return RelayBox(
-                    relay: relay,
-                    relayInformations: snapshot.data,
+    return SizedBox(
+      height: 575,
+      child: MarginedBody(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const SizedBox(height: height * 2),
+              const BottomSheetTitleWithIconButton(
+                  title: AppStrings.availableRelays),
+              const SizedBox(height: height * 2),
+              ...List.generate(
+                Routing.appCubit.state.relaysConfigurations.length,
+                (index) {
+                  final relay =
+                      Routing.appCubit.state.relaysConfigurations[index];
+                  return FutureBuilder(
+                    future: Nostr.instance.relaysService
+                        .relayInformationsDocumentNip11(relayUrl: relay.url),
+                    builder: (context, snapshot) {
+                      return RelayBox(
+                        relay: relay,
+                        relayInformations: snapshot.data,
+                      );
+                    },
                   );
                 },
-              );
-            },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

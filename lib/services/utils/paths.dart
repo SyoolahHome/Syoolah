@@ -18,4 +18,5 @@ abstract class Paths {
   static const String relaysConfig = '/relaysConfig';
   static const String aboutMunawarah = '/aboutMunawarah';
   static const String onBoardingRelays = '/onBoardingRelays';
+  static const String foreignProfile = '/foreignProfile';
 }
