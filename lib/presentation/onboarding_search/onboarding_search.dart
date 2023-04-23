@@ -5,6 +5,7 @@ import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/profile_options/widgets/profile_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -60,14 +61,38 @@ class OnBoardingSearch extends StatelessWidget {
                           },
                         ),
                         const SizedBox(height: height * 2),
-                        const Text(AppStrings.identifierOrPuKey),
+                        Animate(
+                          delay: const Duration(milliseconds: 200),
+                          effects: const <Effect>[
+                            FadeEffect(),
+                            SlideEffect(
+                              begin: Offset(0, 0.5),
+                            )
+                          ],
+                          child: Text(
+                            AppStrings.identifierOrPuKey,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: Theme.of(context).hintColor),
+                          ),
+                        ),
                         const SizedBox(height: height),
                         const SearchField(),
                         const SizedBox(height: height * 2),
-                        const Center(
-                          child: OrDivider(
-                            onlyDivider: false,
-                            color: AppColors.black,
+                        Animate(
+                          delay: const Duration(milliseconds: 600),
+                          effects: const <Effect>[
+                            FadeEffect(),
+                            SlideEffect(
+                              begin: Offset(0, 0.5),
+                            )
+                          ],
+                          child: const Center(
+                            child: OrDivider(
+                              onlyDivider: false,
+                              color: AppColors.black,
+                            ),
                           ),
                         ),
                         const SizedBox(height: height * 2),

@@ -165,4 +165,23 @@ abstract class BottomSheetService {
       },
     );
   }
+
+  static void showRouteAsBottomSheet(
+    String route,
+    BuildContext context, {
+    double? height,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return SizedBox(
+          height: height,
+          child: AppUtils.widgetFromRoutePath(route, context),
+        );
+      },
+    );
+  }
 }

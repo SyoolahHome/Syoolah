@@ -16,10 +16,12 @@ class AuthChoose extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
+    final isShownInBottomSheet =
+        ModalRoute.of(context)?.settings.name != Paths.authChoose;
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          const CustomAppBar(),
+          if (!isShownInBottomSheet) const CustomAppBar(),
           MarginedBody(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

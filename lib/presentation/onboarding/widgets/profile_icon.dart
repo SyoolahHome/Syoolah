@@ -1,3 +1,4 @@
+import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -22,7 +23,13 @@ class ProfileIcon extends StatelessWidget {
       tag: '',
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: () {},
+        onTap: () {
+          BottomSheetService.showRouteAsBottomSheet(
+            Paths.authChoose,
+            context,
+            height: 575,
+          );
+        },
         splashFactory: NoSplash.splashFactory,
         child: Container(
           clipBehavior: Clip.hardEdge,

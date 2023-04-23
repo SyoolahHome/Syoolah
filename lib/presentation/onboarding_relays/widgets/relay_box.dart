@@ -78,56 +78,54 @@ class RelayBox extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        trailing: Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FutureBuilder(
-                future: WebSocket.connect(relay.url),
-                builder: (context, snapshot) {
-                  final isLoading =
-                      snapshot.connectionState == ConnectionState.waiting;
-                  Color connectingColor;
-                  if (snapshot.hasError) {
-                    connectingColor = Colors.red;
-                  } else if (snapshot.hasData) {
-                    connectingColor = Colors.green;
-                  } else {
-                    connectingColor = AppColors.grey;
-                  }
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: 7.5,
-                    height: 7.5,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: connectingColor,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(width: 10),
-              GestureDetector(
-                onTap: () {
-                  Routing.appCubit.showRelayOptionsSheet(
-                    context,
-                    relay: relay,
-                    relayInformations: relayInformations,
-                  );
-                },
-                child: Animate(
-                  effects: const <Effect>[
-                    FadeEffect(),
-                  ],
-                  delay: Duration(milliseconds: lastIndex * 200),
-                  child: const Icon(
-                    FlutterRemix.more_2_line,
-                    color: AppColors.black,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FutureBuilder(
+              future: WebSocket.connect(relay.url),
+              builder: (context, snapshot) {
+                final isLoading =
+                    snapshot.connectionState == ConnectionState.waiting;
+                Color connectingColor;
+                if (snapshot.hasError) {
+                  connectingColor = Colors.red;
+                } else if (snapshot.hasData) {
+                  connectingColor = Colors.green;
+                } else {
+                  connectingColor = AppColors.grey;
+                }
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: connectingColor,
                   ),
+                );
+              },
+            ),
+            const SizedBox(width: 10),
+            GestureDetector(
+              onTap: () {
+                Routing.appCubit.showRelayOptionsSheet(
+                  context,
+                  relay: relay,
+                  relayInformations: relayInformations,
+                );
+              },
+              child: Animate(
+                effects: const <Effect>[
+                  FadeEffect(),
+                ],
+                delay: Duration(milliseconds: lastIndex * 200),
+                child: const Icon(
+                  FlutterRemix.more_2_line,
+                  color: AppColors.black,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
