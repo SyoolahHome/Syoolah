@@ -7,6 +7,7 @@ import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
 import '../../../../constants/colors.dart';
 import '../../../constants/strings.dart';
 import '../../../services/utils/paths.dart';
+import '../../general/widget/button.dart';
 
 class AuthChooseBox extends StatelessWidget {
   const AuthChooseBox({
@@ -33,7 +34,7 @@ class AuthChooseBox extends StatelessWidget {
         FadeEffect(),
       ],
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           color: AppColors.lighGrey,
@@ -57,20 +58,36 @@ class AuthChooseBox extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.w300,
                         color: AppColors.black.withOpacity(0.85),
                       ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 15),
-                Icon(
-                  FlutterRemix.arrow_right_line,
-                  size: 15,
-                  color: Theme.of(context).primaryColor,
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      FlutterRemix.arrow_right_line,
+                      size: 15,
+                    ),
+                    Animate(
+                      delay: const Duration(milliseconds: 1500),
+                      effects: <Effect>[
+                        FadeEffect(),
+                      ],
+                      child: MunawarahButton(
+                        isSmall: true,
+                        onTap: onTap,
+                        text: buttonText,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

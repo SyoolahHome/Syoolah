@@ -5,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/colors.dart';
 import '../../../services/utils/paths.dart';
+import '../../general/widget/button.dart';
 
 class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
@@ -23,26 +24,11 @@ class GetStarted extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: 45,
-            child: ElevatedButton(
-              onPressed: () {
+            child: MunawarahButton(
+              onTap:  () {
                 Navigator.of(context).pushNamed(Paths.authChoose);
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.black,
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                foregroundColor: AppColors.white.withOpacity(0.4),
-              ),
-              child: const Text(
-                AppStrings.getStarted,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+              text: AppStrings.getStarted,
             ),
           ),
           Animate(

@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../model/profile_option.dart';
 import 'widgets/profile_title.dart';
@@ -17,42 +18,69 @@ class BottomSheetOptionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const SizedBox(height: height * 2),
-          MarginedBody(
-            child: BottomSheetOptionsTitle(
-              title: title,
+    return Container(
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(height: height * 2),
+            MarginedBody(child: BottomSheetOptionsTitle(title: title)),
+            const SizedBox(height: height * 2),
+            ...List.generate(
+              options.length,
+              (index) {
+                final current = options[index];
+                return Animate(
+                  delay: Duration(milliseconds: 200 + (index * 200)),
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    SlideEffect(begin: Offset(0, 0.45)),
+                  ],
+                  child: ListTile(
+                    trailing: current.trailing ,
+                    dense: false,
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: MarginedBody.defaultMargin,
+                    leading: Icon(current.icon, size: 17.5),
+                    title: Builder(builder: (context) {
+                      final title = current.title;
+                      if (title.split(':').length >= 2) {
+                        return Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "${title.split(':')[0]} : ",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                            TextSpan(
+                              text: title.split(':')[1],
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ]),
+                        );
+                      } else {
+                        return Text(
+                          title,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        );
+                      }
+                    }),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      current.onPressed();
+                    },
+                  ),
+                );
+              },
             ),
-          ),
-          const SizedBox(height: height * 2),
-          ...List.generate(
-            options.length,
-            (index) {
-              final current = options[index];
-              return ListTile(
-                dense: false,
-                visualDensity: VisualDensity.compact,
-                contentPadding: MarginedBody.defaultMargin,
-                leading: Icon(
-                  current.icon,
-                  size: 17.5,
-                ),
-                title: Text(
-                  current.title,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  current.onPressed();
-                },
-              );
-            },
-          ),
-          const SizedBox(height: height * 2),
-        ],
+            const SizedBox(height: height * 2),
+          ],
+        ),
       ),
     );
   }

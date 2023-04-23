@@ -18,12 +18,14 @@ class BottomSheetTitleWithIconButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(
-          title,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.black,
-                fontWeight: FontWeight.bold,
-              ),
+        Expanded(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: AppColors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
         IconButton(
           icon: const Icon(FlutterRemix.close_line),

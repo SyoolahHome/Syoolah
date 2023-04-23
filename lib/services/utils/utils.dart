@@ -40,12 +40,15 @@ abstract class AppUtils {
   }
 
   static Widget widgetFromRoutePath(String path, BuildContext context) {
-    
     if (Routing.routes[path] != null) {
       return Routing.routes[path]!(context);
     } else {
       throw Exception('Invalid route path');
     }
+  }
+
+  static void changeLocale(BuildContext context, Locale locale) {
+    throw UnimplementedError();
   }
 }
 

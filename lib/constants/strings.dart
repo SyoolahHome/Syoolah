@@ -1,11 +1,12 @@
 abstract class AppStrings {
-  static const String availableRelays = 'Available relays';
+  static const String translations = 'Translations';
+  static const String connectedRelays = 'Connected Relays';
   static const String create = 'Create';
   static const String login = 'Login';
-  static const String createNewAcc = 'I am new here!';
+  static const String createNewAcc = 'Create a new key pair.';
   static const String createNewAccDescription =
-      'You will be redirected to create a new account and get your keys';
-  static const String alreadyHaveAKey = 'I already have a key!';
+      'You will be redirected to create a new account/key pair and get your keys';
+  static const String alreadyHaveAKey = 'Authenticate with existing key';
   static const String alreadyHaveAKeyDescription =
       'You will be redirected to login with your existent key';
   static const String searchUsersHint = 'Ex: bob@example.com';
@@ -75,6 +76,7 @@ abstract class AppStrings {
   static const String categorizedFeeds = "Categorized Feeds";
   static const String globalFeeds = "Global Feeds";
   static const String comments = "Comments";
+  static const String relays = "Relays";
   static const String follow = "Follow";
   static const String unfollow = "Unfollow";
   static const String error = "Something went wrong, try again";
@@ -121,6 +123,7 @@ At Munawarah, we're upgrading trust in Islam with cryptographic keys that make i
 
 We're building a world that's impossible to hack intentions - a world where intentions aren't determined by how much money you make (or wish you could) but one where total strangers can trust each other without fear of getting scammed for the 1st time since the days of the Prophet (PBUH) when the holy Kabbah once served as a vault to exchange goods between parting caravans.
 """;
+
   static commentsN(int n) {
     return "$comments ($n)";
   }
@@ -128,5 +131,12 @@ We're building a world that's impossible to hack intentions - a world where inte
   static String feedOfName(String name) => "$name's Feed";
   static String removeRelay(String url) {
     return 'Remove relay\n$url?';
+  }
+
+  static String relayName(String? name) {
+    if (name == null) {
+      return 'Unnamed';
+    }
+    return "$name's relay";
   }
 }

@@ -27,8 +27,7 @@ class AboutMunawarahContent extends StatelessWidget {
             child: Text(
               current,
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: AppColors.white.withOpacity(0.85),
-                    // fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w300,
                   ),
             ),
           );

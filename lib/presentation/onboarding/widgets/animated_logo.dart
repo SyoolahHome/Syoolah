@@ -15,9 +15,27 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
+      child: MunawarahLogo(
+        width: mq.size.width * .55,
+      ),
+    );
+  }
+}
+
+class MunawarahLogo extends StatelessWidget {
+  const MunawarahLogo({
+    super.key,
+    required this.width,
+  });
+
+  final double width;
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: "MunawarahLogo",
       child: Image.asset(
         AppUtils.appLogoSelector(AppLogoStyle.black),
-        width: mq.size.width * .55,
+        width: width,
       ),
     );
   }

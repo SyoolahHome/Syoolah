@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/strings.dart';
@@ -8,12 +9,19 @@ class AboutMunawarahTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      AppStrings.aboutMunawarahWe,
-      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: AppColors.white,
-            fontWeight: FontWeight.w400,
-          ),
+    return Animate(
+      delay: const Duration(milliseconds: 200),
+      effects: const <Effect>[
+        FadeEffect(),
+        SlideEffect(begin: Offset(0, 0.45)),
+      ],
+      child: Text(
+        AppStrings.aboutMunawarahWe,
+        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+              color: AppColors.black,
+            ),
+      ),
     );
   }
 }

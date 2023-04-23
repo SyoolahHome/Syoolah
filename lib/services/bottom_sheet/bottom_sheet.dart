@@ -1,5 +1,6 @@
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
+import 'package:ditto/constants/strings.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/model/relat_configuration.dart';
 import 'package:ditto/services/utils/utils.dart';
@@ -140,7 +141,25 @@ abstract class BottomSheetService {
       clipBehavior: Clip.hardEdge,
       builder: (context) {
         return BottomSheetOptionsWidget(
-          title: relayInformations?.name,
+          title: AppStrings.relayName(relayInformations?.name),
+          options: options,
+        );
+      },
+    );
+  }
+
+  static void showOnBoardingTranslationsSheet(
+    BuildContext context, {
+    required List<BottomSheetOption> options,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (context) {
+        return BottomSheetOptionsWidget(
+          title: AppStrings.translations,
           options: options,
         );
       },

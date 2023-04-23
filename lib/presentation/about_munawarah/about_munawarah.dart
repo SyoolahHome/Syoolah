@@ -15,7 +15,6 @@ class AboutMunawarah extends StatelessWidget {
     const height = 10.0;
 
     return Scaffold(
-      backgroundColor: AppColors.black,
       appBar: const CustomAppBar(),
       body: MarginedBody(
         margin: MarginedBody.defaultMargin +
@@ -28,7 +27,9 @@ class AboutMunawarah extends StatelessWidget {
               SizedBox(height: height * 3),
               AboutMunawarahTitle(),
               SizedBox(height: height * 3),
-              Center(child: OrDivider(onlyDivider: false, color: Colors.white)),
+              Center(
+                child: OrDivider(onlyDivider: false, color: AppColors.black),
+              ),
               SizedBox(height: height * 3),
               AboutMunawarahContent(),
               SizedBox(height: height * 3),

@@ -12,6 +12,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../constants/configs.dart';
 import '../../model/profile_option.dart';
 import '../../model/relat_configuration.dart';
+import '../../presentation/general/widget/button.dart';
 
 part 'app_state.dart';
 
@@ -190,6 +191,72 @@ class AppCubit extends Cubit<AppState> {
               relayInformations?.supportedNips.toString() ?? '',
             );
           },
+        ),
+      ],
+    );
+  }
+
+  void showTranslationsSheet(BuildContext context) {
+    MunawarahButton applyButton(String text, Locale locale) {
+      return MunawarahButton(
+        isSmall: true,
+        text: text,
+        onTap: () {
+          AppUtils.changeLocale(context, Locale('en'));
+        },
+      );
+    }
+
+    BottomSheetService.showOnBoardingTranslationsSheet(
+      context,
+      options: [
+        BottomSheetOption(
+          title: 'English',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Apply', Locale('en')),
+        ),
+        BottomSheetOption(
+          title: 'Français',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Appliquer', Locale('fr')),
+        ),
+        BottomSheetOption(
+          title: 'German',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Anwenden', Locale('de')),
+        ),
+        BottomSheetOption(
+          title: 'Italian',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Applicare', Locale('it')),
+        ),
+        BottomSheetOption(
+          title: 'Spanish',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Aplicar', Locale('es')),
+        ),
+        BottomSheetOption(
+          title: 'Portuguese',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Aplicar', Locale('pt')),
+        ),
+        BottomSheetOption(
+          title: 'Russian',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('Применить', Locale('ru')),
+        ),
+        BottomSheetOption(
+          title: 'Chinese',
+          icon: FlutterRemix.arrow_right_line,
+          onPressed: () {},
+          trailing: applyButton('应用', Locale('zh')),
         ),
       ],
     );

@@ -6,7 +6,7 @@ class BottomSheetOption extends Equatable {
   final IconData icon;
   final String? successMessage;
   final String? errorMessage;
-
+  final Widget? trailing;
   final void Function() onPressed;
 
   const BottomSheetOption({
@@ -14,6 +14,7 @@ class BottomSheetOption extends Equatable {
     required this.icon,
     required this.onPressed,
     this.successMessage,
+    this.trailing,
     this.errorMessage,
   });
 
@@ -24,5 +25,6 @@ class BottomSheetOption extends Equatable {
         onPressed,
         successMessage,
         errorMessage,
+        trailing,
       ];
 }

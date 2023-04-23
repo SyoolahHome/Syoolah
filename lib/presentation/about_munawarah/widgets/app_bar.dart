@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/colors.dart';
+import '../../onboarding/widgets/animated_logo.dart';
 import '../../onboarding/widgets/get_started.dart';
 import '../../onboarding/widgets/title.dart';
 
@@ -12,17 +13,17 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      title: MunawarahTitle(
-        animate: false,
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: AppColors.white,
-            ),
-      ),
+      title: const MunawarahLogo(width: 50),
+      // MunawarahTitle(
+      //   animate: false,
+      //   style: Theme.of(context).textTheme.labelLarge?.copyWith(),
+      // ),
+      titleSpacing: 5.0,
       elevation: 0,
       leading: IconButton(
         icon: Icon(
           FlutterRemix.arrow_left_line,
-          color: Theme.of(context).primaryColor,
+          // color: Theme.of(context).primaryColor,
         ),
         onPressed: () {
           Navigator.of(context).pop();

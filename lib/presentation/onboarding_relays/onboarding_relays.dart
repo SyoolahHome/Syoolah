@@ -4,6 +4,7 @@ import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'widgets/relay_box.dart';
 
@@ -16,14 +17,17 @@ class OnBoardingRelays extends StatelessWidget {
 
     return SizedBox(
       height: 575,
-      child: MarginedBody(
-        child: SingleChildScrollView(
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               const SizedBox(height: height * 2),
-              const BottomSheetTitleWithIconButton(
-                  title: AppStrings.availableRelays),
+              const MarginedBody(
+                child: BottomSheetTitleWithIconButton(
+                  title: AppStrings.connectedRelays,
+                ),
+              ),
               const SizedBox(height: height * 2),
               ...List.generate(
                 Routing.appCubit.state.relaysConfigurations.length,
@@ -34,9 +38,19 @@ class OnBoardingRelays extends StatelessWidget {
                     future: Nostr.instance.relaysService
                         .relayInformationsDocumentNip11(relayUrl: relay.url),
                     builder: (context, snapshot) {
-                      return RelayBox(
-                        relay: relay,
-                        relayInformations: snapshot.data,
+                      return Animate(
+                        delay: Duration(milliseconds: 200 + (index * 200)),
+                        effects: const <Effect>[
+                          FadeEffect(),
+                          SlideEffect(begin: Offset(0, 0.45)),
+                        ],
+                        child: RelayBox(
+                          lastIndex: Routing.appCubit.state
+                              .relaysConfigurations.length,
+                          index: index,
+                          relay: relay,
+                          relayInformations: snapshot.data,
+                        ),
                       );
                     },
                   );

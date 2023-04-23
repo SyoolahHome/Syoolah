@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'dark_mode_icon.dart';
 import 'profile_icon.dart';
 import 'relays_widget.dart';
 import 'search_icon.dart';
+import 'translate_icon.dart';
 
 class OnboardingActions extends StatelessWidget {
   const OnboardingActions({super.key});
@@ -22,9 +24,13 @@ class OnboardingActions extends StatelessWidget {
         children: const <Widget>[
           RelaysWidget(),
           SizedBox(width: height),
+          ProfileIcon(),
+          SizedBox(width: height),
           SearchIcon(),
           SizedBox(width: height),
-          ProfileIcon(),
+          DarkIcon(),
+          SizedBox(width: height),
+          TranslateIcon(),
         ],
       ),
     );
