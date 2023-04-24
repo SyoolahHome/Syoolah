@@ -121,6 +121,7 @@ class OnBoardingSearch extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {},
                               child: NoteAvatarAndName(
+                                userPubKey: state.searchedUser!.pubkey,
                                 avatarUrl: searchedUserMetadata.picture!,
                                 memeberShipStartedAt:
                                     state.searchedUser!.createdAt,

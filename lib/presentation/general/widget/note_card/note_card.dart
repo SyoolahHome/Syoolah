@@ -55,6 +55,7 @@ class NoteCard extends StatelessWidget {
                   children: <Widget>[
                     const SizedBox(height: 10),
                     NoteAvatarAndName(
+                      userPubKey: state.noteOwnerMetadata!.pubkey,
                       note: note,
                       avatarUrl: noteOwnerMetadata.picture!,
                       nameToShow: noteOwnerMetadata.nameToShow(),

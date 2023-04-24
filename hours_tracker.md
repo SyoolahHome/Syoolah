@@ -171,5 +171,5 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 
 - Implementation of a simple profile sheet that give the user the ability to been redirected to euther the authentication with existent key or to create a new key pair.
 - Implementation of a search bottom sheet where a user can put a pubKey or a Nostr identifier and expect to see a relevant user (profile) for that pubKey or identifier.
-- Added the placeholder sheets for the dark mode switcher and the language switcher.
+- Added the placeholder sheets for the dark mode switcher and the language switcher.&
 - Re-implemented the whole oboarding first screen UI with fancy animations and simple effective UI.

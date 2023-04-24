@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../buisness_logic/cubit/users_list_to_follow_cubit.dart';
 import '../../../constants/colors.dart';
+import '../../../services/nostr/nostr.dart';
 
 class UsersListToFollow extends StatelessWidget {
   const UsersListToFollow({
@@ -18,7 +19,11 @@ class UsersListToFollow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UsersListToFollowCubit>(
-      create: (context) => UsersListToFollowCubit(pubKeys),
+      create: (context) => UsersListToFollowCubit(
+        pubKeys: pubKeys,
+        currentUserFollowing: NostrService.instance.currentUserFollowings(),
+        currentUserFollowers: NostrService.instance.currentUserFollowers(),
+      ),
       child: Builder(
         builder: (context) {
           return BlocBuilder<UsersListToFollowCubit, UsersListToFollowState>(
@@ -41,6 +46,7 @@ class UsersListToFollow extends StatelessWidget {
                     return Container(
                       margin: const EdgeInsets.all(15),
                       child: NoteAvatarAndName(
+                        userPubKey: current.pubkey,
                         avatarUrl: metadata.picture!,
                         nameToShow: metadata.nameToShow(),
                         memeberShipStartedAt: current.createdAt,
