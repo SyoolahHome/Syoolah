@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/colors.dart';
@@ -8,10 +9,16 @@ class SuccessIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      FlutterRemix.checkbox_circle_line,
-      color: AppColors.teal,
-      size: 75,
+    return Animate(
+      delay: 0.ms,
+      effects: const <Effect>[
+        FadeEffect(),
+        SlideEffect(begin: Offset(0, 0.5)),
+      ],
+      child: Icon(
+        FlutterRemix.checkbox_circle_line,
+        size: 75,
+      ),
     );
   }
 }

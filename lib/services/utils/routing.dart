@@ -18,7 +18,7 @@ import '../../presentation/feeds/global_feed.dart';
 import '../../presentation/feeds/hadith_feed.dart';
 import '../../presentation/feeds/sharia_feed.dart';
 import '../../presentation/feeds/sirah_feed.dart';
-import '../../presentation/home/home.dart';
+import '../../presentation/sign_up/sign_up.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/onboarding/onboarding.dart';
@@ -31,7 +31,7 @@ abstract class Routing {
   static final routes = {
     Paths.bottomBar: (context) => BottomBar(cubit: homePageAfterLoginCubit),
     Paths.onBoarding: (context) => const OnBoarding(),
-    Paths.keyAuth: (context) => const KeyAuth(),
+    Paths.SignUp: (context) => const SignUp(),
     Paths.editProfile: (context) => EditProfile(),
     Paths.quranFeed: (context) => QuranFeed(),
     Paths.duaFeed: (context) => DuaFeed(),
@@ -46,7 +46,7 @@ abstract class Routing {
     Paths.aboutMunawarah: (context) => const AboutMunawarah(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
-    Paths.existentKeyAuth: (context) => const ExistentKeyAuth(),
+    Paths.existentSignUp: (context) => const ExistentSignUp(),
     Paths.onBoardingRelays: (context) => const OnBoardingRelays(),
   };
 

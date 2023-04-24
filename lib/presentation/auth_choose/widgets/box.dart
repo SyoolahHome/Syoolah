@@ -12,7 +12,6 @@ import '../../general/widget/button.dart';
 class AuthChooseBox extends StatelessWidget {
   const AuthChooseBox({
     super.key,
-    required this.onTap,
     required this.title,
     required this.description,
     required this.icon,
@@ -20,7 +19,6 @@ class AuthChooseBox extends StatelessWidget {
     required this.targetRoutePath,
   });
 
-  final VoidCallback onTap;
   final String title;
   final String description;
   final IconData icon;
@@ -28,6 +26,10 @@ class AuthChooseBox extends StatelessWidget {
   final String targetRoutePath;
   @override
   Widget build(BuildContext context) {
+    void onTap() {
+      Navigator.of(context).pushNamed(targetRoutePath);
+    }
+
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: <Effect>[
@@ -41,9 +43,7 @@ class AuthChooseBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed(targetRoutePath);
-          },
+          onTap: onTap,
           child: Align(
             alignment: Alignment.centerLeft,
             child: Column(

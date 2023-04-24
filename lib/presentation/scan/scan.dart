@@ -6,8 +6,8 @@ import 'widgets/app_bar.dart';
 import 'widgets/button.dart';
 import 'widgets/key_field.dart';
 
-class ExistentKeyAuth extends StatelessWidget {
-  const ExistentKeyAuth({
+class ExistentSignUp extends StatelessWidget {
+  const ExistentSignUp({
     super.key,
   });
 

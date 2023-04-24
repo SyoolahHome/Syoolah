@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../model/user_meta_data.dart';
 import '../../../services/nostr/nostr.dart';
-import '../../home/widgets/or_divider.dart';
+import '../../sign_up/widgets/or_divider.dart';
 import 'widgets/about.dart';
 
 import 'widgets/app_bar.dart';

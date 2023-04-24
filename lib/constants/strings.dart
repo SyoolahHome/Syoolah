@@ -1,4 +1,35 @@
 abstract class AppStrings {
+  static const recommendToFollow = 'We recommend to follow';
+  static const recommendToFollowSubtitle = 'We recommend to follow';
+
+  static const publicKeyCopied = 'Public key copied to clipboard';
+  static const yourPublicKey = "Your public key";
+  static const yourPublicKeySubtitle =
+      "This is your public key, you can share it with anyone you want to reach.";
+  static const hintUsername = "@username";
+  static const yourUsername = "Your final username";
+  static const yourUsernameSubtitle =
+      "Pick a username for your profile; it will be public and visible to everyone";
+  static const yourProfileImage = "Your profile image";
+  static const yourProfileImageSubtitle =
+      "Pick a profile image for your profile; it will be public and visible to everyone";
+
+  static const String recommendedOneLines = 'Recommended 1-2 lines';
+  static const String yourBio = "Your bio";
+
+  static const String whatAboutYouSubtitle =
+      "Thunk of this like your profile bio, recommended 1-2 lines";
+  static const String whatAboutYou = "What about you?";
+
+  static const String whatIsYourName = "What is your name?";
+  static const whatIsYourNameSubtitle =
+      "This name will be set in your profile and used in Munawarah";
+  static const String welcomeSubtitle =
+      'We are happy that you\'re joining us at Munawarah, We will take you through a few steps to get you started.';
+  static const String finishThisStepFirst =
+      'Finish this step first to continue';
+  static const String welcome = "Welcome";
+  static const String chooseAuth = 'Get Inside!';
   static const String translations = 'Translations';
   static const String connectedRelays = 'Connected Relays';
   static const String create = 'Create';
@@ -8,7 +39,7 @@ abstract class AppStrings {
       'You will be redirected to create a new account/key pair and get your keys';
   static const String alreadyHaveAKey = 'Authenticate with existing key';
   static const String alreadyHaveAKeyDescription =
-      'You will be redirected to login with your existent key';
+      'You will be redirected to authenticate with your existent key and get in directly';
   static const String searchUsersHint = 'Ex: bob@example.com';
   static const String identifierOrPuKey = 'Identifier or public key';
   static const String searchUser = 'Search A user';
@@ -95,6 +126,8 @@ abstract class AppStrings {
   static const String privateKeyAccess = "Private Key access";
   static const String yourName = "Your name";
   static const String yourPrivateKey = "Your private key";
+  static const yourPrivateKeySubtitle =
+      "Your private key is the key that will allow you to access your account, it is very important that you keep it safe and secure, you can show it, copy it to your clipboard and save it in a safe place from the button below.";
   static const String writeYourKey = "paste your key here..";
   static const String scan = "Scan";
   static const String typeHere = "Type here..";

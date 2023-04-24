@@ -1,11 +1,12 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/home/widgets/or_divider.dart';
+import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/presentation/navigations_screen/home/widgets/global_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/strings.dart';
 import '../../services/utils/paths.dart';
+import '../general/widget/bottom_sheet_title_with_button.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/box.dart';
 
@@ -21,18 +22,31 @@ class AuthChoose extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          if (!isShownInBottomSheet) const CustomAppBar(),
+          if (isShownInBottomSheet) ...[
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: height * 2),
+              child: MarginedBody(
+                child: BottomSheetTitleWithIconButton(
+                  title: AppStrings.chooseAuth,
+                ),
+              ),
+            ),
+          ] else ...[
+            const CustomAppBar(),
+          ],
           MarginedBody(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                AuthChooseBox(
+                if (!isShownInBottomSheet) ...[
+                  const SizedBox(height: kToolbarHeight),
+                ],
+                const AuthChooseBox(
                   buttonText: AppStrings.create,
                   icon: FlutterRemix.arrow_right_line,
                   title: AppStrings.createNewAcc,
                   description: AppStrings.createNewAccDescription,
-                  onTap: () {},
-                  targetRoutePath: Paths.keyAuth,
+                  targetRoutePath: Paths.SignUp,
                 ),
                 const SizedBox(height: height * 3),
                 OrDivider(
@@ -40,13 +54,12 @@ class AuthChoose extends StatelessWidget {
                   color: Theme.of(context).primaryColorDark,
                 ),
                 const SizedBox(height: height * 3),
-                AuthChooseBox(
-                  targetRoutePath: Paths.existentKeyAuth,
+                const AuthChooseBox(
+                  targetRoutePath: Paths.existentSignUp,
                   buttonText: AppStrings.login,
                   icon: FlutterRemix.arrow_right_line,
                   title: AppStrings.alreadyHaveAKey,
                   description: AppStrings.alreadyHaveAKeyDescription,
-                  onTap: () {},
                 ),
               ],
             ),

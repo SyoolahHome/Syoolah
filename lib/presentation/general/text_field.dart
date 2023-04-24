@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.contentPadding,
     this.suffix,
     this.hint,
+    this.isMultiline = false,
   });
 
   final TextEditingController controller;
@@ -18,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final Widget? suffix;
   final String? hint;
-
+  final bool isMultiline;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,6 +35,9 @@ class CustomTextField extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: <Widget>[
             HashTagTextField(
+              
+              minLines: 1,
+              maxLines: isMultiline ? 5 : 1,
               decoratedStyle: TextStyle(
                 color: AppColors.teal,
               ),

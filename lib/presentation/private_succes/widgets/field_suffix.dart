@@ -18,7 +18,6 @@ class FieldSuffixIcon extends StatelessWidget {
       child: IconButton(
         icon: Icon(
           icon,
-          color: AppColors.teal,
         ),
         onPressed: onPressed,
       ),

@@ -22,7 +22,7 @@ class _AuthenticationStreamHandlerState
     //   if (event != null) {
     //     Navigator.pushNamed(context, Paths.bottomBar);
     //   } else {
-    //     Navigator.of(context).pushNamed(Paths.keyAuth);
+    //     Navigator.of(context).pushNamed(Paths.SignUp);
     //   }
     // });
 

@@ -28,7 +28,7 @@ class NameField extends StatelessWidget {
         TextField(
           style: const TextStyle(color: Colors.white),
           focusNode: context.read<AuthCubit>().nameFocusNode!,
-          controller: cubit.nameController,
+          // controller: cubit.nameController,
           decoration: const InputDecoration(
             hintText: AppStrings.writeYourNameHere,
           ),

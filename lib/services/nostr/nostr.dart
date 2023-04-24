@@ -646,4 +646,22 @@ class NostrService {
       request: requestWithFilter,
     );
   }
+
+  Stream<NostrEvent> usersListMetadata(List<String> pubKeys) {
+    final randomId = NostrClientUtils.random64HexChars();
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: pubKeys,
+          kinds: const [0],
+        ),
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
 }

@@ -22,6 +22,7 @@ class SearchField extends StatelessWidget {
         )
       ],
       child: TextField(
+        focusNode: cubit.searchNodeFocus,
         controller: cubit.searchController,
         decoration: InputDecoration(
           hintText: AppStrings.searchUsersHint,

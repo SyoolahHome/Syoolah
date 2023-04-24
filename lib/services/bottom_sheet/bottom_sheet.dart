@@ -10,6 +10,7 @@ import '../../model/profile_option.dart';
 import '../../presentation/add_relay/add_relay.dart';
 import '../../presentation/feeds/widgets/search.dart';
 import '../../presentation/new_post/add_new_post.dart';
+import '../../presentation/private_succes/private_key_gen_success.dart';
 import '../../presentation/profile_options/profile_options.dart';
 import '../utils/paths.dart';
 
@@ -181,6 +182,16 @@ abstract class BottomSheetService {
           height: height,
           child: AppUtils.widgetFromRoutePath(route, context),
         );
+      },
+    );
+  }
+  static Future<dynamic> showPrivateKeyGenSuccess(BuildContext context) {
+    return showModalBottomSheet(
+      isScrollControlled: false,
+      clipBehavior: Clip.hardEdge,
+      context: context,
+      builder: (context) {
+        return const PrivateKeyGenSuccess();
       },
     );
   }

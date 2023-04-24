@@ -14,10 +14,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       title: const MunawarahLogo(width: 50),
-      // MunawarahTitle(
-      //   animate: false,
-      //   style: Theme.of(context).textTheme.labelLarge?.copyWith(),
-      // ),
       titleSpacing: 5.0,
       elevation: 0,
       leading: IconButton(

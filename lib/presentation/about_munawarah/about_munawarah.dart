@@ -1,5 +1,5 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/home/widgets/or_divider.dart';
+import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';

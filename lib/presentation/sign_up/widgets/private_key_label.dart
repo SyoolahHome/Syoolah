@@ -12,7 +12,7 @@ class PrivateKeyLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(Paths.existentKeyAuth);
+        Navigator.of(context).pushNamed(Paths.existentSignUp);
       },
       child: Text(
         AppStrings.privateKeyAccess,

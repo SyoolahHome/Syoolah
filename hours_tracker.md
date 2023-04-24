@@ -147,3 +147,29 @@ Imlemntation of a comments section screen for each post, not completed yet but t
   - Add new relays to the app.
   - Reconnect to relays if the connection is lost or when the relay is added in order to apply changes in the Nostr service.
   - Remove relays from the app.
+
+# 33
+
+- Implementation of tha onboarding skeleton for the app, which will be used to show the user some app's features and advantages and how to use it.
+
+# 34
+
+- Implementation of the relays informations (about) bottom sheet, which will give the options:
+  - show some general relay informations such as name, decription..
+  - show the connectivity status of the relay so the user will know if a relay is able to connect to or not.
+  - another nested options shet where the user can see/copy the selected relay informations:
+    - relay name.
+    - relay description.
+    - relay author public key.
+    - relay contact
+    - relay software that is used to run the relay.
+    - relay software version.
+    - relay's sipported nips.
+- Implementation if the dynamic copy functionality for it's informations.
+
+# 35 - 36
+
+- Implementation of a simple profile sheet that give the user the ability to been redirected to euther the authentication with existent key or to create a new key pair.
+- Implementation of a search bottom sheet where a user can put a pubKey or a Nostr identifier and expect to see a relevant user (profile) for that pubKey or identifier.
+- Added the placeholder sheets for the dark mode switcher and the language switcher.
+- Re-implemented the whole oboarding first screen UI with fancy animations and simple effective UI.

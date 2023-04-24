@@ -13,6 +13,7 @@ part 'on_boarding_state.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   TextEditingController? searchController;
+  FocusNode? searchNodeFocus;
   StreamSubscription? userSearchSub;
   OnBoardingCubit() : super(OnBoardingInitial()) {
     _init();
@@ -27,6 +28,8 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   void _init() {
+    searchNodeFocus = FocusNode();
+
     searchController = TextEditingController()
       ..addListener(() {
         final isNotEmpty = searchController!.text.isNotEmpty;
@@ -40,17 +43,37 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   Future<void> executeSearch() async {
+    searchNodeFocus!.unfocus();
     if (userSearchSub != null) {
       userSearchSub!.cancel();
       userSearchSub = null;
     }
     String pubKey;
     if (searchController!.text.contains("@")) {
+      if (searchController!.text.split("@").length != 2) {
+        emit(
+          state.copyWith(
+            error:
+                "the search query is not a valid identifier, it should be like an email",
+          ),
+        );
+        return;
+      }
       pubKey = await NostrService.instance
           .getPubKeyFromEmail(searchController!.text);
     } else {
+      if (searchController!.text.length != 64) {
+        emit(
+          state.copyWith(
+            error:
+                "the search query is not a valid identifier or 64 hex string (pubkey)",
+          ),
+        );
+        return;
+      }
       pubKey = searchController!.text;
     }
+
     try {
       final userStream = NostrService.instance.userMetadata(pubKey);
       userSearchSub = userStream.listen(
@@ -59,12 +82,22 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
         },
       );
     } catch (e) {
-      print(e);
+      emit(state.copyWith(error: e.toString()));
+    } finally {
+      emit(state.copyWith(error: null));
     }
   }
 
   void resetSearch() {
     searchController!.clear();
     emit(state.copyWith(searchedUser: null));
+  }
+
+  @override
+  Future<void> close() {
+    searchNodeFocus!.dispose();
+    searchController!.dispose();
+    userSearchSub?.cancel();
+    return super.close();
   }
 }

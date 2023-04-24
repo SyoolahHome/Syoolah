@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
 import '../../../../model/note.dart';
 import '../../../../services/nostr/nostr.dart';
-import '../../../home/widgets/or_divider.dart';
+import '../../../sign_up/widgets/or_divider.dart';
 import 'wudgets/note_actions.dart';
 import 'wudgets/note_avatat_and_name.dart';
 import 'wudgets/note_bg.dart';

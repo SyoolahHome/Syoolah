@@ -3,7 +3,7 @@ import 'package:ditto/services/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../home/widgets/logo.dart';
+import '../../sign_up/widgets/logo.dart';
 
 class AnimatedLogo extends StatelessWidget {
   const AnimatedLogo({super.key});
@@ -26,17 +26,24 @@ class MunawarahLogo extends StatelessWidget {
   const MunawarahLogo({
     super.key,
     required this.width,
+    this.isHero = true,
   });
 
   final double width;
+  final bool isHero;
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: "MunawarahLogo",
-      child: Image.asset(
-        AppUtils.appLogoSelector(AppLogoStyle.black),
-        width: width,
-      ),
+    final widget = Image.asset(
+      AppUtils.appLogoSelector(AppLogoStyle.black),
+      width: width,
     );
+    if (isHero) {
+      return Hero(
+        tag: "MunawarahLogo",
+        child: widget,
+      );
+    } else {
+      return widget;
+    }
   }
 }

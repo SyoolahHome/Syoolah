@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../onboarding/widgets/animated_logo.dart';
+
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
 
@@ -8,6 +10,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
+      title: const MunawarahLogo(width: 50),
+      titleSpacing: 5.0,
       elevation: 0,
       leading: IconButton(
         icon: const Icon(FlutterRemix.arrow_left_line),

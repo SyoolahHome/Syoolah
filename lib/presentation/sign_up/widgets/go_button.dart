@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../services/utils/bottom_sheet.dart';
 import '../../../services/utils/paths.dart';
 import '../../../services/utils/snackbars.dart';
 import '../../general/widget/margined_body.dart';
@@ -25,13 +24,8 @@ class GoButton extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state.authenticated) {
-          BottomSheets.showPrivateKeyGenSuccess(context).then((_) {
-            // if (context.read<AuthCubit>().nameFocusNode!.hasFocus) {
-            context.read<AuthCubit>().nameFocusNode!.unfocus();
-            // }
-          });
         } else if (state.isSignedOut) {
-          Navigator.of(context).pushNamed(Paths.keyAuth);
+          Navigator.of(context).pushNamed(Paths.SignUp);
         } else if (state.error != null) {
           SnackBars.text(context, state.error!);
         }
@@ -43,9 +37,7 @@ class GoButton extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  context.read<AuthCubit>().authenticate();
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.white.withOpacity(0.95),
                   foregroundColor: AppColors.tealLight,
