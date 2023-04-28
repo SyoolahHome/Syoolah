@@ -28,12 +28,14 @@ class FeedCubit extends Cubit<GlobalFeedState> {
   Future<void> close() {
     searchController?.dispose();
     _streamSubscription?.cancel();
+    scrollController?.dispose();
 
+    print("FeedCubit close");
     return super.close();
   }
 
   void _handleStreams() {
-    feedPostsStream.listen(
+    _streamSubscription = feedPostsStream.listen(
       (event) {
         final sortedList = [...state.feedPosts, event].reversed.toList();
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));

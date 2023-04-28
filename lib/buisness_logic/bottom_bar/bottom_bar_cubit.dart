@@ -18,26 +18,31 @@ class BottomBarCubit extends Cubit<int> {
       screen: Home(),
       label: 'Home',
       icon: FlutterRemix.home_4_line,
+      selectedIcon: FlutterRemix.home_4_fill,
     ),
     BottomBarItem(
       screen: Scaffold(),
       label: 'Messages',
       icon: FlutterRemix.message_3_line,
+      selectedIcon: FlutterRemix.message_3_fill,
     ),
     BottomBarItem(
       screen: SizedBox(),
-      label: 'Add New Post',
+      label: 'New',
       icon: FlutterRemix.add_line,
+      selectedIcon: FlutterRemix.add_fill,
     ),
     BottomBarItem(
       screen: GlobalChatRelays(),
       label: 'Global',
       icon: FlutterRemix.list_check_2,
+      selectedIcon: FlutterRemix.list_check,
     ),
     BottomBarItem(
       screen: Profile(),
       label: 'Profile',
       icon: FlutterRemix.user_line,
+      selectedIcon: FlutterRemix.user_fill,
     ),
   ];
 

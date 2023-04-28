@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,60 +24,86 @@ class NoteCard extends StatelessWidget {
   final EdgeInsets? cardMargin;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteCardCubit>.value(
-      value: NoteCardCubit(
-        note: note,
-        currentUserMetadataStream:
-            NostrService.instance.userMetadata(note.event.pubkey),
-        noteLikesStream: NostrService.instance.noteLikes(
-          postEventId: note.event.id,
-        ),
-      ),
-      child: Builder(
-        builder: (context) {
-          return BlocBuilder<NoteCardCubit, NoteCardState>(
-            builder: (context, state) {
-              UserMetaData noteOwnerMetadata;
-
-              if (state.noteOwnerMetadata == null) {
-                noteOwnerMetadata = UserMetaData.placeholder();
-              } else {
-                noteOwnerMetadata = UserMetaData.fromJson(
-                  jsonDecode(state.noteOwnerMetadata!.content)
-                      as Map<String, dynamic>,
-                );
-              }
-
-              return NoteContainer(
-                note: note,
-                margin: cardMargin,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 10),
-                    NoteAvatarAndName(
-                      userPubKey: state.noteOwnerMetadata!.pubkey,
-                      note: note,
-                      avatarUrl: noteOwnerMetadata.picture!,
-                      nameToShow: noteOwnerMetadata.nameToShow(),
-                      memeberShipStartedAt:
-                          state.noteOwnerMetadata?.createdAt ??
-                              note.event.createdAt,
-                    ),
-                    const OrDivider(onlyDivider: true),
-                    NoteContents(
-                      heroTag: note.event.uniqueTag(),
-                      imageLinks: note.imageLinks,
-                      text: note.noteOnly,
-                    ),
-                    NoteActions(note: note),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+    return NoteContainer(
+      note: note,
+      margin: cardMargin,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 10),
+          NoteAvatarAndName(
+            userPubKey: "",
+            note: note,
+            avatarUrl: UserMetaData.placeholder().picture!,
+            nameToShow: "nameToShow",
+            memeberShipStartedAt:
+                DateTime.now().subtract(const Duration(days: 1)),
+          ),
+          // const OrDivider(onlyDivider: true),
+          NoteContents(
+            heroTag: note.event.uniqueTag(),
+            imageLinks: note.imageLinks,
+            text: note.noteOnly,
+          ),
+          NoteActions(note: note),
+        ],
       ),
     );
+    // return BlocProvider<NoteCardCubit>.value(
+    //   value: NoteCardCubit(
+    //     note: note,
+    //     currentUserMetadataStream:
+    //         NostrService.instance.userMetadata(note.event.pubkey),
+    //     noteLikesStream: Stream<NostrEvent>.empty() ??
+    //         NostrService.instance.noteLikes(
+    //           postEventId: note.event.id,
+    //         ),
+    //   ),
+    //   child: Builder(
+    //     builder: (context) {
+    //       return BlocBuilder<NoteCardCubit, NoteCardState>(
+    //         builder: (context, state) {
+    //           UserMetaData noteOwnerMetadata;
+
+    //           if (state.noteOwnerMetadata == null) {
+    //             noteOwnerMetadata = UserMetaData.placeholder();
+    //           } else {
+    //             noteOwnerMetadata = UserMetaData.fromJson(
+    //               jsonDecode(state.noteOwnerMetadata!.content)
+    //                   as Map<String, dynamic>,
+    //             );
+    //           }
+
+    //           return NoteContainer(
+    //             note: note,
+    //             margin: cardMargin,
+    //             child: Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               children: <Widget>[
+    //                 const SizedBox(height: 10),
+    //                 NoteAvatarAndName(
+    //                   userPubKey: state.noteOwnerMetadata?.pubkey ?? "",
+    //                   note: note,
+    //                   avatarUrl: noteOwnerMetadata.picture!,
+    //                   nameToShow: noteOwnerMetadata.nameToShow(),
+    //                   memeberShipStartedAt:
+    //                       state.noteOwnerMetadata?.createdAt ??
+    //                           note.event.createdAt,
+    //                 ),
+    //                 // const OrDivider(onlyDivider: true),
+    //                 NoteContents(
+    //                   heroTag: note.event.uniqueTag(),
+    //                   imageLinks: note.imageLinks,
+    //                   text: note.noteOnly,
+    //                 ),
+    //                 NoteActions(note: note),
+    //               ],
+    //             ),
+    //           );
+    //         },
+    //       );
+    //     },
+    //   ),
+    // );
   }
 }

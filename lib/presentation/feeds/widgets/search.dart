@@ -23,24 +23,27 @@ class SearchSections extends StatelessWidget {
 
     return BlocProvider<FeedCubit>.value(
       value: cubit,
-      child: MarginedBody(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const <Widget>[
-            SizedBox(height: height * 2),
-            BottomSheetTitleWithIconButton(
-              title: AppStrings.customizeSearch,
-            ),
-            SizedBox(height: height),
-            SearchField(),
-            SizedBox(height: height * 2),
-            SearchOptionsBuilder(),
-            SizedBox(height: height * 2),
-            DateRangePicker(),
-            SizedBox(height: height * 4),
-            ActionButtons(),
-            SizedBox(height: height * 2),
-          ],
+      child: Container(
+        color: Colors.white,
+        child: MarginedBody(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const <Widget>[
+              SizedBox(height: height * 2),
+              BottomSheetTitleWithIconButton(
+                title: AppStrings.customizeSearch,
+              ),
+              SizedBox(height: height),
+              SearchField(),
+              SizedBox(height: height * 2),
+              SearchOptionsBuilder(),
+              SizedBox(height: height * 2),
+              DateRangePicker(),
+              SizedBox(height: height * 4),
+              ActionButtons(),
+              SizedBox(height: height * 2),
+            ],
+          ),
         ),
       ),
     );

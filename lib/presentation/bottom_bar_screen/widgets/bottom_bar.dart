@@ -31,6 +31,7 @@ class CustomBottomBar extends StatelessWidget {
         builder: (context, state) {
           if (state.didConnectedToRelaysAndSubscribedToTopics) {
             return NavigationBar(
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
               height: height,
               selectedIndex: selectedIndex,
               onDestinationSelected: onElementTap,
@@ -39,13 +40,14 @@ class CustomBottomBar extends StatelessWidget {
                   icon: Icon(
                     item.icon,
                   ),
+                  selectedIcon: Icon(item.selectedIcon),
                   label: item.label,
                 );
                 if (item.icon == FlutterRemix.add_line) {
                   possibleWidget = Stack(
                     clipBehavior: Clip.none,
                     alignment: Alignment.bottomCenter,
-                    children: [
+                    children: <Widget>[
                       GestureDetector(
                         onTap: () {
                           BottomSheetService.showCreatePostBottomSheet(context);
@@ -56,9 +58,9 @@ class CustomBottomBar extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(bottom: 5),
-                        width: 30,
-                        height: 1.5,
+                        margin: const EdgeInsets.only(bottom: 0.5),
+                        width: 2.5,
+                        height: 2.5,
                         decoration: const BoxDecoration(
                           color: AppColors.white,
                         ),

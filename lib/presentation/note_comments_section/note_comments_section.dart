@@ -8,6 +8,7 @@ import '../../buisness_logic/note_comments/note_comments_cubit.dart';
 import '../../model/note.dart';
 import '../../services/nostr/nostr.dart';
 import 'widgets/comment_field.dart';
+import 'widgets/comment_widget.dart';
 
 class NoteCommentsSection extends StatelessWidget {
   NoteCommentsSection({
@@ -41,6 +42,8 @@ class NoteCommentsSection extends StatelessWidget {
               builder: (context, state) {
                 return Scaffold(
                   appBar: AppBar(
+                    iconTheme: const IconThemeData(color: AppColors.white),
+                    centerTitle: true,
                     title: Text(
                       AppStrings.commentsN(state.noteComments.length),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -56,6 +59,10 @@ class NoteCommentsSection extends StatelessWidget {
                           itemCount: state.noteComments.length,
                           itemBuilder: (context, index) {
                             final current = state.noteComments[index];
+                            return CommentWidget(
+                              commentEvent: current,
+                              index: index,
+                            );
                             return ListTile(
                               title: Text(current.content),
                               subtitle: Text(current.pubkey),

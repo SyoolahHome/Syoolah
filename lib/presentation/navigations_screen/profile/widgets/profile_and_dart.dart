@@ -23,7 +23,7 @@ class ProfileHeader extends StatelessWidget {
           builder: (context, state) {
             return FollowInfo(
               label: AppStrings.followings,
-              count: state.currentUserFollowing?.tags.length ?? -1,
+              count: state.currentUserFollowing?.tags.length ?? 0,
             );
           },
         ),
@@ -32,7 +32,7 @@ class ProfileHeader extends StatelessWidget {
           builder: (context, state) {
             return FollowInfo(
               label: AppStrings.followers,
-              count: state.currentUserFollowers?.tags.length ?? -1,
+              count: state.currentUserFollowers?.tags.length ?? 0,
             );
           },
         ),

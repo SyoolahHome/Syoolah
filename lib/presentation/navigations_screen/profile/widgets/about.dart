@@ -13,7 +13,7 @@ class ProfileAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      metadata.about! * 12,
+      metadata.about!,
       style: Theme.of(context)
           .textTheme
           .bodyMedium!

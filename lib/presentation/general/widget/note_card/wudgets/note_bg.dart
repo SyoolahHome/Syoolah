@@ -55,8 +55,8 @@ class NoteContainer extends StatelessWidget {
                     ),
                 decoration: BoxDecoration(
                   color: state.isHighlighted
-                      ? AppColors.lighGrey.withOpacity(0.5)
-                      : AppColors.lighGrey,
+                      ? AppColors.lighGrey.withOpacity(0.3)
+                      : AppColors.lighGrey.withOpacity(0.6),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),

@@ -20,6 +20,7 @@ import '../../presentation/sign_up/widgets/avatar_upload.dart';
 import '../../presentation/sign_up/widgets/users_list_to_follow.dart';
 import '../../services/database/local/local.dart';
 import '../../services/nostr/nostr.dart';
+import '../../services/utils/file_upload.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -37,13 +38,19 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> authenticate() async {
     try {
       await _generatePrivateKeyAndSetInfoToNostr();
+      String? imageLink;
+      if (state.pickedImage != null) {
+        imageLink = await FileUpload()(state.pickedImage!);
+      }
+
       NostrService.instance.setCurrentUserMetaData(
         metadata: UserMetaData(
-          name: nameController!.text,
-          username: nameController!.text,
-          picture: null,
           banner: null,
-          about: null,
+          name: nameController!.text,
+          username: usernameController!.text,
+          displayName: nameController!.text,
+          picture: imageLink,
+          about: bioController!.text,
         ),
       );
       emit(state.copyWith(authenticated: true));
@@ -272,7 +279,7 @@ class AuthCubit extends Cubit<AuthState> {
             widgetBody: const UsersListToFollow(
               pubKeys: <String>[
                 "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
-                    "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+                "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
                 "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
               ],
             ),

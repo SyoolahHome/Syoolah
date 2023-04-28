@@ -54,12 +54,4 @@ abstract class Routing {
   static final authCubit = AuthCubit();
   static final appCubit = AppCubit();
   static final onBoardingCubit = OnBoardingCubit();
-
-  static FeedCubit feedCubit({
-    required Stream<NostrEvent> feedPostsStream,
-  }) {
-    return FeedCubit(
-      feedPostsStream: feedPostsStream,
-    );
-  }
 }

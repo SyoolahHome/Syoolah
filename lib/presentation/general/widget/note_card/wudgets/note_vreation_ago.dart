@@ -8,16 +8,17 @@ class NoteDateOfCreationAgo extends StatelessWidget {
   const NoteDateOfCreationAgo({
     super.key,
     required this.createdAt,
+    this.isSmall = false,
   });
 
   final DateTime createdAt;
-
+  final bool isSmall;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
+      padding: EdgeInsets.symmetric(
+        horizontal: isSmall ? 5 : 10,
+        vertical: isSmall ? 2.5 : 5,
       ),
       decoration: BoxDecoration(
         color: AppColors.teal.withOpacity(.1),
@@ -27,14 +28,14 @@ class NoteDateOfCreationAgo extends StatelessWidget {
         children: [
           Icon(
             FlutterRemix.time_line,
-            size: 12.5,
+            size: isSmall ? 9 : 12.5,
             color: AppColors.teal,
           ),
-          const SizedBox(width: 5),
+          SizedBox(width: isSmall ? 2.5 : 5),
           Text(
             createdAt.toReadableString(),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 10,
+                  fontSize: isSmall ? 7.5 : 10,
                   color: AppColors.teal,
                 ),
           ),

@@ -75,6 +75,7 @@ class UserMetaData extends Equatable {
       'banner': banner,
       'username': username,
       'about': about,
+      'display_name': displayName,
     };
   }
 

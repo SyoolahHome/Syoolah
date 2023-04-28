@@ -17,6 +17,7 @@ class AuthChooseBox extends StatelessWidget {
     required this.icon,
     required this.buttonText,
     required this.targetRoutePath,
+    required this.additionalDelay,
   });
 
   final String title;
@@ -24,6 +25,7 @@ class AuthChooseBox extends StatelessWidget {
   final IconData icon;
   final String buttonText;
   final String targetRoutePath;
+  final Duration additionalDelay;
   @override
   Widget build(BuildContext context) {
     void onTap() {
@@ -32,7 +34,7 @@ class AuthChooseBox extends StatelessWidget {
 
     return Animate(
       delay: const Duration(milliseconds: 400),
-      effects: <Effect>[
+      effects: const <Effect>[
         FadeEffect(),
       ],
       child: Container(
@@ -77,7 +79,8 @@ class AuthChooseBox extends StatelessWidget {
                       size: 15,
                     ),
                     Animate(
-                      delay: const Duration(milliseconds: 1500),
+                      delay:
+                          const Duration(milliseconds: 1500) + additionalDelay,
                       effects: <Effect>[
                         FadeEffect(),
                       ],

@@ -30,9 +30,9 @@ class FeedPageHeading extends StatelessWidget {
           const Spacer(),
           if (!hideCount)
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(7.5),
               decoration: BoxDecoration(
-                color: AppColors.teal.withOpacity(0.2),
+                color: AppColors.teal.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: AnimatedSwitcher(

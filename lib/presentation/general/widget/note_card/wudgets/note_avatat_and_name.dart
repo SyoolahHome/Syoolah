@@ -1,6 +1,7 @@
 import 'package:ditto/buisness_logic/cubit/users_list_to_follow_cubit.dart';
 import 'package:ditto/constants/colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ class NoteAvatarAndName extends StatelessWidget {
     required this.memeberShipStartedAt,
     this.note,
     required this.userPubKey,
+    this.showFollowButton = false,
   });
 
   final String avatarUrl;
@@ -25,6 +27,7 @@ class NoteAvatarAndName extends StatelessWidget {
   final DateTime memeberShipStartedAt;
   final Note? note;
   final String userPubKey;
+  final bool showFollowButton;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -47,9 +50,10 @@ class NoteAvatarAndName extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        if (note != null) ...[
-          NoteFollowButton(note: note!),
-        ] else ...[
+        // if (note != null) ...[
+        //   NoteFollowButton(note: note!),
+        // ],
+        if (showFollowButton) ...[
           MunawarahButton(
             isSmall: true,
             text: context

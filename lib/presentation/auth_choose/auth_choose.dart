@@ -2,6 +2,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/presentation/navigations_screen/home/widgets/global_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/strings.dart';
@@ -41,7 +42,8 @@ class AuthChoose extends StatelessWidget {
                 if (!isShownInBottomSheet) ...[
                   const SizedBox(height: kToolbarHeight),
                 ],
-                const AuthChooseBox(
+                AuthChooseBox(
+                  additionalDelay: 0.ms,
                   buttonText: AppStrings.create,
                   icon: FlutterRemix.arrow_right_line,
                   title: AppStrings.createNewAcc,
@@ -54,7 +56,8 @@ class AuthChoose extends StatelessWidget {
                   color: Theme.of(context).primaryColorDark,
                 ),
                 const SizedBox(height: height * 3),
-                const AuthChooseBox(
+                AuthChooseBox(
+                  additionalDelay: 200.ms,
                   targetRoutePath: Paths.existentSignUp,
                   buttonText: AppStrings.login,
                   icon: FlutterRemix.arrow_right_line,

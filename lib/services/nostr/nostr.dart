@@ -480,13 +480,19 @@ class NostrService {
             AppStrings.sirah,
           ],
           kinds: const [1],
+          limit: 1,
         )
       ],
     );
 
-    return Nostr.instance.relaysService.startEventsSubscription(
+    final stream = Nostr.instance.relaysService.startEventsSubscription(
       request: requestWithFilter,
     );
+
+    stream.listen((event) {
+      print("global: ${event.content}, random: $randomId");
+    });
+    return stream;
   }
 
   Stream<NostrEvent> followingsFeed({

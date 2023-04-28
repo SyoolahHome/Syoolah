@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../buisness_logic/cubit/users_list_to_follow_cubit.dart';
@@ -43,13 +44,21 @@ class UsersListToFollow extends StatelessWidget {
                     final metadata =
                         UserMetaData.fromJson(jsonDecode(current.content));
 
-                    return Container(
-                      margin: const EdgeInsets.all(15),
-                      child: NoteAvatarAndName(
-                        userPubKey: current.pubkey,
-                        avatarUrl: metadata.picture!,
-                        nameToShow: metadata.nameToShow(),
-                        memeberShipStartedAt: current.createdAt,
+                    return Animate(
+                      delay: Duration(milliseconds: 200 + index * 200),
+                      effects: const <Effect>[
+                        FadeEffect(),
+                        SlideEffect(begin: Offset(0, 0.5))
+                      ],
+                      child: Container(
+                        margin: const EdgeInsets.all(15),
+                        child: NoteAvatarAndName(
+                          userPubKey: current.pubkey,
+                          showFollowButton: true,
+                          avatarUrl: metadata.picture!,
+                          nameToShow: metadata.nameToShow(),
+                          memeberShipStartedAt: current.createdAt,
+                        ),
                       ),
                     );
                   },

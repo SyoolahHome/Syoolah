@@ -70,6 +70,11 @@ abstract class AppThemes {
     useMaterial3: true,
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.teal,
+      labelTextStyle: MaterialStateProperty.all(TextStyle(
+        color: AppColors.white.withOpacity(0.85),
+        fontWeight: FontWeight.w500,
+        fontSize: 12,
+      )),
       indicatorColor: AppColors.white.withOpacity(0.3),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       iconTheme: MaterialStateProperty.all(

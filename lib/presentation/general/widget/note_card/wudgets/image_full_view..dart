@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import 'image_content.dart';
 
@@ -24,9 +25,15 @@ class ImageFullView extends StatelessWidget {
             fit: BoxFit.fitWidth,
           ),
           AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-          ),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              iconTheme: const IconThemeData(color: Colors.white),
+              leading: IconButton(
+                icon: const Icon(FlutterRemix.close_line),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )),
         ],
       ),
     );

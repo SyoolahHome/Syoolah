@@ -1,3 +1,4 @@
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -9,8 +10,12 @@ import '../../../../services/utils/paths.dart';
 import '../../../general/widget/title.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    required this.userMetadata,
+  });
 
+  final UserMetaData userMetadata;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
@@ -32,7 +37,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             cubit.onMorePressed(
               context,
               onEditProfile: () {
-                Navigator.of(context).pushNamed(Paths.editProfile);
+                Navigator.of(context).pushNamed(
+                  Paths.editProfile,
+                  arguments: userMetadata,
+                );
               },
             );
           },

@@ -25,7 +25,6 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
   }) : super(UsersListToFollowInitial()) {
     _handleCurrentUserFollowers();
     _handleCurrentUserFollowing();
-
     _handleContacts(pubKeys);
   }
 
@@ -89,8 +88,8 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
         final newList = [
           ...state.pubKeysMetadata,
           event,
-        ];
-        // .removeDuplicatedEvents();
+        ]
+        .removeDuplicatedEvents();
         emit(
           state.copyWith(pubKeysMetadata: newList),
         );

@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/presentation/sign_up/widgets/logo.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,7 +130,9 @@ class SignUp extends StatelessWidget {
                           height: 45,
                           child: MunawarahButton(
                             text: isLastView
-                                ? AppStrings.start
+                                ? Routing.authCubit.state.authenticated
+                                    ? AppStrings.start
+                                    : "loading.."
                                 : AppStrings.continueText,
                             onTap: () {
                               if (!current.nextViewAllower()) {
