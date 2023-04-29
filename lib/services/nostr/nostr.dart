@@ -218,7 +218,6 @@ class NostrService {
         ["e", postEventId],
         ["p", nostrKeyPairs.public],
       ],
-      createdAt: DateTime.now(),
     );
 
     Nostr.instance.relaysService.sendEventToRelays(event);
@@ -235,7 +234,6 @@ class NostrService {
         NostrFilter(
           e: [postEventId],
           kinds: const [7],
-          until: DateTime.now().add(const Duration(days: 10)),
         )
       ],
     );

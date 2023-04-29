@@ -22,7 +22,9 @@ class GeneralFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FeedCubit>(
-      create: (context) => FeedCubit(feedPostsStream: feedPostsStream),
+      create: (context) => FeedCubit(
+        feedPostsStream: feedPostsStream,
+      ),
       child: Scaffold(
         appBar: CustomAppBar(feedName: feedName),
         floatingActionButton: BlocBuilder<FeedCubit, GlobalFeedState>(

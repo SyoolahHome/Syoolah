@@ -50,9 +50,9 @@ class NoteAvatarAndName extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        // if (note != null) ...[
-        //   NoteFollowButton(note: note!),
-        // ],
+        if (note != null) ...[
+          NoteFollowButton(note: note!),
+        ],
         if (showFollowButton) ...[
           MunawarahButton(
             isSmall: true,

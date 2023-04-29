@@ -27,17 +27,19 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   void _handleStreams() {
     currentUserMetadataStream.listen((event) {
-      emit(state.copyWith(noteOwnerMetadata: event));
+      if (!isClosed) {
+        emitIfOpen(state.copyWith(noteOwnerMetadata: event));
+      }
     });
 
     noteLikesStream.listen((event) {
-      emit(state.copyWith(noteLikes: [...state.noteLikes, event]));
+      emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
     });
   }
 
   void likeNote() {
     NostrService.instance.likePost(note.event.id);
-    emit(state.copyWith(localLiked: true));
+    emitIfOpen(state.copyWith(localLiked: true));
   }
 
   bool isUserAlreadyLiked() {
@@ -52,9 +54,10 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   void copyNoteId() async {
     await AppUtils.copy(
       note.event.id,
-      onSuccess: () => emit(state.copyWith(success: AppStrings.copySuccess)),
-      onError: () => emit(state.copyWith(error: AppStrings.copyError)),
-      onEnd: () => emit(state.copyWith(success: null, error: null)),
+      onSuccess: () =>
+          emitIfOpen(state.copyWith(success: AppStrings.copySuccess)),
+      onError: () => emitIfOpen(state.copyWith(error: AppStrings.copyError)),
+      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
     );
   }
 
@@ -62,40 +65,50 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     if (note.imageLinks.isNotEmpty) {
       await AppUtils.copy(
         note.imageLinks.join('\n'),
-        onSuccess: () => emit(state.copyWith(success: AppStrings.copySuccess)),
-        onError: () => emit(state.copyWith(error: AppStrings.copyError)),
-        onEnd: () => emit(state.copyWith(success: null, error: null)),
+        onSuccess: () =>
+            emitIfOpen(state.copyWith(success: AppStrings.copySuccess)),
+        onError: () => emitIfOpen(state.copyWith(error: AppStrings.copyError)),
+        onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
       );
     } else {
-      emit(state.copyWith(error: AppStrings.noImagesToCopy));
-      emit(state.copyWith(error: null));
+      emitIfOpen(state.copyWith(error: AppStrings.noImagesToCopy));
+      emitIfOpen(state.copyWith(error: null));
     }
   }
 
   void copyNoteEvent() async {
     await AppUtils.copy(
       note.event.serialized(),
-      onSuccess: () => emit(state.copyWith(success: AppStrings.copySuccess)),
-      onError: () => emit(state.copyWith(error: AppStrings.copyError)),
-      onEnd: () => emit(state.copyWith(success: null, error: null)),
+      onSuccess: () =>
+          emitIfOpen(state.copyWith(success: AppStrings.copySuccess)),
+      onError: () => emitIfOpen(state.copyWith(error: AppStrings.copyError)),
+      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
     );
   }
 
   void copyNoteOwnerPubKey() async {
     await AppUtils.copy(
       note.event.pubkey,
-      onSuccess: () => emit(state.copyWith(success: AppStrings.copySuccess)),
-      onError: () => emit(state.copyWith(error: AppStrings.copyError)),
-      onEnd: () => emit(state.copyWith(success: null, error: null)),
+      onSuccess: () =>
+          emitIfOpen(state.copyWith(success: AppStrings.copySuccess)),
+      onError: () => emitIfOpen(state.copyWith(error: AppStrings.copyError)),
+      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
     );
   }
 
   void copyNoteContent() async {
     await AppUtils.copy(
       note.noteOnly,
-      onSuccess: () => emit(state.copyWith(success: AppStrings.copySuccess)),
-      onError: () => emit(state.copyWith(error: AppStrings.copyError)),
-      onEnd: () => emit(state.copyWith(success: null, error: null)),
+      onSuccess: () =>
+          emitIfOpen(state.copyWith(success: AppStrings.copySuccess)),
+      onError: () => emitIfOpen(state.copyWith(error: AppStrings.copyError)),
+      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
     );
+  }
+
+  void emitIfOpen(NoteCardState copyWith) {
+    if (!isClosed) {
+      emit(copyWith);
+    }
   }
 }

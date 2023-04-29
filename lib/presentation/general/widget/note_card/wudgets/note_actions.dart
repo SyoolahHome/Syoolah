@@ -17,7 +17,7 @@ class NoteActions extends StatelessWidget {
   final Note note;
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.read<NoteCardCubit>();
+    final cubit = context.read<NoteCardCubit>();
 
     return Center(
       child: SizedBox(
@@ -29,54 +29,48 @@ class NoteActions extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Action(
-                  icon: FlutterRemix.heart_2_fill,
-                  onTap: () {
-                    // if (!cubit.isUserAlreadyLiked()) {
-                    //   cubit.likeNote();
-                    // }
-                  },
-                  bgColor:
-                      //  state.localLiked || cubit.isUserAlreadyLiked()
-                      //     ? Colors.red.withOpacity(.1)
-                      //     :
-                      AppColors.grey.withOpacity(.2),
-                  color:
-                      //  state.localLiked || cubit.isUserAlreadyLiked()
-                      //     ? Colors.red
-                      //     :
-                      AppColors.black,
-                  text: "-2",
-                ),
-                // BlocBuilder<NoteCardCubit, NoteCardState>(
-                //   builder: (context, state) {
-                //     final noteLikes = state.noteLikes;
-                //     int likes = noteLikes.length;
-                //     if (state.localLiked) {
-                //       likes += 1;
-                //     }
+                BlocBuilder<NoteCardCubit, NoteCardState>(
+                  builder: (context, state) {
+                    final noteLikes = state.noteLikes;
+                    int likes = noteLikes.length;
+                    if (state.localLiked) {
+                      // likes += 1;
+                    }
 
-                //     return
-                //   },
-                // ),
-                const SizedBox(width: 10),
-                Action(
-                  icon: FlutterRemix.chat_1_line,
-                  onTap: () {
-                    // Navigator.of(context)
-                    //     .pushNamed(Paths.commentsSection, arguments: {
-                    //   'note': note,
-                    //   'cubit': cubit,
-                    // });
+                    return Action(
+                      icon: FlutterRemix.heart_2_fill,
+                      onTap: () {
+                        if (!cubit.isUserAlreadyLiked()) {
+                          cubit.likeNote();
+                        }
+                      },
+                      bgColor: state.localLiked || cubit.isUserAlreadyLiked()
+                          ? Colors.red.withOpacity(.1)
+                          : AppColors.grey.withOpacity(.2),
+                      color: state.localLiked || cubit.isUserAlreadyLiked()
+                          ? Colors.red
+                          : AppColors.black,
+                      text: likes.toString(),
+                    );
                   },
-                  bgColor: AppColors.grey.withOpacity(.2),
-                  color: AppColors.black,
                 ),
-                // BlocBuilder<NoteCardCubit, NoteCardState>(
-                //   builder: (context, state) {
-                //     return
-                //   },
-                // ),
+                const SizedBox(width: 10),
+                BlocBuilder<NoteCardCubit, NoteCardState>(
+                  builder: (context, state) {
+                    return Action(
+                      icon: FlutterRemix.chat_1_line,
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(Paths.commentsSection, arguments: {
+                          'note': note,
+                          'cubit': cubit,
+                        });
+                      },
+                      bgColor: AppColors.grey.withOpacity(.2),
+                      color: AppColors.black,
+                    );
+                  },
+                ),
               ],
             ),
           ],
