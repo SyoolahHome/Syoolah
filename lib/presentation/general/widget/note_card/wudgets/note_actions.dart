@@ -38,6 +38,7 @@ class NoteActions extends StatelessWidget {
                     }
 
                     return Action(
+                      key: ValueKey(note.event.uniqueTag()),
                       icon: FlutterRemix.heart_2_fill,
                       onTap: () {
                         if (!cubit.isUserAlreadyLiked()) {

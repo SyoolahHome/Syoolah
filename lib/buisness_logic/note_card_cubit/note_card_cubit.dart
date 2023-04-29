@@ -111,4 +111,13 @@ class NoteCardCubit extends Cubit<NoteCardState> {
       emit(copyWith);
     }
   }
+
+  @override
+  Future<void> close() {
+    currentUserMetadataStream.drain();
+    noteLikesStream.drain();
+    print('NoteCardCubit of note with id ${note.event.id} closed');
+
+    return super.close();
+  }
 }
