@@ -2,7 +2,7 @@ import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../general/widget/margined_body.dart';
 import '../general/widget/title.dart';
 import 'widgets/app_bar.dart';

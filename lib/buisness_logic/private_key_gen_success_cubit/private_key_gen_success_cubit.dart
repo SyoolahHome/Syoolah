@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../../services/database/local/local.dart';
 
 part 'private_key_gen_success_state.dart';

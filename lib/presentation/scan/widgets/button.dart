@@ -3,8 +3,8 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants/colors.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_colors.dart';
+import '../../../constants/app_strings.dart';
 import '../../../services/utils/paths.dart';
 import '../../../services/utils/snackbars.dart';
 

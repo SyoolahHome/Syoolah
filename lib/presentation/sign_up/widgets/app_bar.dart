@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../onboarding/widgets/animated_logo.dart';
 import 'page_view_tracker.dart';
 

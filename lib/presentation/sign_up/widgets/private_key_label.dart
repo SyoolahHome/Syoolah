@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_colors.dart';
+import '../../../constants/app_strings.dart';
 import '../../../services/utils/paths.dart';
 import '../../scan/scan.dart';
 

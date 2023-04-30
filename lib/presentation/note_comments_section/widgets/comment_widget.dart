@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../general/widget/note_card/wudgets/note_vreation_ago.dart';
 
 class CommentWidget extends StatelessWidget {

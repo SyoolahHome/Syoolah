@@ -5,22 +5,32 @@ import 'package:equatable/equatable.dart';
 /// This class is responsible for handling the user's metadata.
 /// {@endtemplate}
 class UserMetaData extends Equatable {
-  /// The username of the user
+  /// The username of the user.
   final String username;
 
-  /// The name of the user
+  /// The name of the user.
   final String name;
 
-  /// The picture of the user
+  /// The picture of the user.
   final String? picture;
 
-  /// The banner of the user
+  /// The banner of the user.
   final String? banner;
 
-  /// The about of the user
+  /// The about of the user.
   final String? about;
 
   final String? displayName;
+
+  @override
+  List<Object?> get props => [
+        name,
+        picture,
+        banner,
+        username,
+        about,
+        displayName,
+      ];
 
   /// {@macro user_meta_data}
   const UserMetaData({
@@ -43,7 +53,7 @@ class UserMetaData extends Equatable {
       }
     });
 
-    final metadta = UserMetaData(
+    return UserMetaData(
       name: json['name'] ?? UserMetaData.placeholder().name,
       picture: json['picture'] ?? UserMetaData.placeholder().picture,
       banner: json['banner'] ?? UserMetaData.placeholder().banner,
@@ -51,8 +61,6 @@ class UserMetaData extends Equatable {
       about: json['about'] ?? UserMetaData.placeholder().about,
       displayName: json['display_name'],
     );
-
-    return metadta;
   }
 
   /// {@macro user_meta_data}
@@ -85,14 +93,11 @@ class UserMetaData extends Equatable {
     } else if (username.isNotEmpty) {
       return "@$username";
     } else if (displayName != null) {
-      return displayName!;
+      return displayName ?? "No Name";
     } else {
       return "No Name";
     }
   }
-
-  @override
-  List<Object?> get props => [name, picture, banner, username, about];
 
   UserMetaData copyWith({
     String? username,
@@ -102,10 +107,10 @@ class UserMetaData extends Equatable {
     String? about,
   }) {
     return UserMetaData(
-      username: username ?? this.username,
       name: name ?? this.name,
       picture: picture ?? this.picture,
       banner: banner ?? this.banner,
+      username: username ?? this.username,
       about: about ?? this.about,
     );
   }

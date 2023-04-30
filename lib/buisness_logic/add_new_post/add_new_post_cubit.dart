@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/services/nostr/nostr.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:equatable/equatable.dart';

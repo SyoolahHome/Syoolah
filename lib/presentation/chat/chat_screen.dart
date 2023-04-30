@@ -4,7 +4,7 @@ import 'package:ditto/presentation/general/widget/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../../constants/colors.dart';
+import '../../constants/app_colors.dart';
 import 'widgets/text_field.dart';
 
 class ChatScreen extends StatefulWidget {

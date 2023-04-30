@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../../model/tab_item.dart';
 import '../navigations_screen/profile/widgets/current_user_likes.dart';
 import '../navigations_screen/profile/widgets/current_user_posts.dart';

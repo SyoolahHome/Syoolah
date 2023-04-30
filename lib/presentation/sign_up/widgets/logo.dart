@@ -1,7 +1,7 @@
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 
 class Logo extends StatelessWidget {
   const Logo({

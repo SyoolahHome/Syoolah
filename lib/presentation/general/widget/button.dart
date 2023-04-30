@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 
 class MunawarahButton extends StatelessWidget {
   const MunawarahButton({

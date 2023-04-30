@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hashtagable/widgets/hashtag_text_field.dart';
-import '../../constants/colors.dart';
-import '../../constants/strings.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_strings.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({

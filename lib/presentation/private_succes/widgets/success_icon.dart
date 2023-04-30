@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 
 class SuccessIcon extends StatelessWidget {
   const SuccessIcon({super.key});

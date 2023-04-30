@@ -4,9 +4,7 @@ import 'package:ditto/services/nostr/nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-part 'edit_profile_state.dart';
-
-class EditProfileCubit extends Cubit<EditProfileState> {
+class EditProfileCubit extends Cubit<Null> {
   TextEditingController? nameController;
   TextEditingController? usernameController;
   TextEditingController? pictureController;
@@ -14,7 +12,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   TextEditingController? aboutController;
 
   UserMetaData metaData;
-  EditProfileCubit(this.metaData) : super(EditProfileInitial()) {
+  EditProfileCubit(this.metaData) : super(null) {
     _init();
   }
 
@@ -41,7 +39,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
   }
 
-  void updateAvatar() {}
   void _init() {
     nameController = TextEditingController(text: metaData.name);
     usernameController = TextEditingController(text: metaData.username);

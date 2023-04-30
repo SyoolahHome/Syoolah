@@ -4,7 +4,7 @@ import 'package:ditto/services/nostr/nostr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 
 class FollowingsFeed extends StatelessWidget {
   FollowingsFeed({super.key});

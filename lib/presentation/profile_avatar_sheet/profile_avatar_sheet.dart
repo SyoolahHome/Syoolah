@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../buisness_logic/profile/profile_cubit.dart';
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 
 class AvatarSheetWidget extends StatelessWidget {
   const AvatarSheetWidget({

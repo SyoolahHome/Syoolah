@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 
 class ScreenTitle extends StatelessWidget {
   const ScreenTitle({super.key});

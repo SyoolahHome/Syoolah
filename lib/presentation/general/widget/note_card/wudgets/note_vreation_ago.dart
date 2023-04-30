@@ -2,7 +2,7 @@ import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../../constants/colors.dart';
+import '../../../../../constants/app_colors.dart';
 
 class NoteDateOfCreationAgo extends StatelessWidget {
   const NoteDateOfCreationAgo({

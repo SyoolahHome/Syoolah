@@ -1,5 +1,5 @@
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/routing.dart';
@@ -45,8 +45,8 @@ class OnBoardingRelays extends StatelessWidget {
                           SlideEffect(begin: Offset(0, 0.45)),
                         ],
                         child: RelayBox(
-                          lastIndex: Routing.appCubit.state
-                              .relaysConfigurations.length,
+                          lastIndex: Routing
+                              .appCubit.state.relaysConfigurations.length,
                           index: index,
                           relay: relay,
                           relayInformations: snapshot.data,

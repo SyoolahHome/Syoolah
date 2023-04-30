@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../../services/utils/paths.dart';
 import '../general/widget/bottom_sheet_title_with_button.dart';
 import 'widgets/app_bar.dart';

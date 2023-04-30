@@ -1,9 +1,9 @@
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/strings.dart';
-import '../../model/relat_configuration.dart';
+import '../../constants/app_strings.dart';
+import '../../model/relay_configuration.dart';
 import '../../presentation/general/widget/text_button.dart';
 import '../../presentation/general/widget/title.dart';
 import '../../presentation/profile_avatar_sheet/profile_avatar_sheet.dart';

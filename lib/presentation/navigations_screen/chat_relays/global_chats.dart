@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 import 'widgets/app_bar.dart';
 
 class GlobalChatRelays extends StatelessWidget {

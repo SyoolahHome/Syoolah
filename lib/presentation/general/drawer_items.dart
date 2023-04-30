@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../about/about.dart';
-import '../../model/drawer_list_tile.dart';
+import '../../model/drawer_list_time_item.dart';
 import '../navigations_screen/chat_relays/global_chats.dart';
 
 abstract class GeneralDrawerItems {

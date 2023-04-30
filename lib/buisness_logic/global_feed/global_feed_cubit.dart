@@ -5,7 +5,7 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/configs.dart';
+import '../../constants/app_configs.dart';
 import '../../model/note.dart';
 import '../../model/search_option.dart';
 import '../../services/bottom_sheet/bottom_sheet.dart';
@@ -120,8 +120,8 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   void _init() {
     searchController = TextEditingController();
     scrollController = ScrollController();
-    scrollController!.addListener(() {
-      if (scrollController!.position.pixels != 0) {
+    scrollController?.addListener(() {
+      if (scrollController?.position.pixels != 0) {
         emit(state.copyWith(shouldShowScrollToTopButton: true));
       } else {
         emit(state.copyWith(shouldShowScrollToTopButton: false));

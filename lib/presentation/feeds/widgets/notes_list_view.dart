@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../../model/note.dart';
 import '../../general/widget/margined_body.dart';
 import '../../general/widget/note_card/note_card.dart';

@@ -1,9 +1,9 @@
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../../services/utils/paths.dart';
 import '../../general/widget/button.dart';
 
@@ -25,7 +25,7 @@ class GetStarted extends StatelessWidget {
             width: double.infinity,
             height: 45,
             child: MunawarahButton(
-              onTap:  () {
+              onTap: () {
                 Navigator.of(context).pushNamed(Paths.authChoose);
               },
               text: AppStrings.getStarted,

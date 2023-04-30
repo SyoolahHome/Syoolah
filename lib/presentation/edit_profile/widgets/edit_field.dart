@@ -1,4 +1,4 @@
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class EditField extends StatelessWidget {

@@ -10,8 +10,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/colors.dart';
-import '../../constants/strings.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_strings.dart';
 import '../../model/user_meta_data.dart';
 import '../../services/utils/paths.dart';
 import '../../services/utils/routing.dart';

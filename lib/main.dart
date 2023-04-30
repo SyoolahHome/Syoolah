@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
-import 'constants/strings.dart';
-import 'constants/themes.dart';
+import 'constants/app_strings.dart';
+import 'constants/app_themes.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override

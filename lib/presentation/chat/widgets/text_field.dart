@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_colors.dart';
+import '../../../constants/app_strings.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({

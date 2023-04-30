@@ -1,8 +1,8 @@
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/note.dart';
-import 'package:ditto/model/relat_configuration.dart';
+import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/services/utils/utils.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import '../model/feed_category.dart';
@@ -10,56 +10,56 @@ abstract class AppConfigs {
     'wss://nostr.fmt.wiz.biz',
     'wss://relay.damus.io',
     'wss://nostr-pub.wellorder.net',
-    // 'wss://relay.nostr.info',
+    'wss://relay.nostr.info',
     'wss://offchain.pub',
     'wss://nos.lol',
-    // 'wss://brb.io', // throws error
+    'wss://brb.io',
     'wss://relay.snort.social',
     'wss://relay.current.fyi',
     'wss://nostr.relayer.se',
   ];
   static final List<FeedCategory> categories = [
     const FeedCategory(
-      path: Paths.quranFeed,
-      icon: FlutterIslamicIcons.quran,
-      isSelected: false,
       name: AppStrings.quran,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.quran,
+      isSelected: false,
+      path: Paths.quranFeed,
     ),
     const FeedCategory(
-      path: Paths.duaFeed,
-      icon: FlutterIslamicIcons.prayer,
-      isSelected: false,
       name: AppStrings.dua,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.prayer,
+      isSelected: false,
+      path: Paths.duaFeed,
     ),
     const FeedCategory(
-      path: Paths.shariaFeed,
-      icon: FlutterIslamicIcons.kowtow,
-      isSelected: false,
       name: AppStrings.sharia,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.kowtow,
+      isSelected: false,
+      path: Paths.shariaFeed,
     ),
     const FeedCategory(
-      path: Paths.hadithFeed,
-      icon: FlutterIslamicIcons.sajadah,
-      isSelected: false,
       name: AppStrings.hadith,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.sajadah,
+      isSelected: false,
+      path: Paths.hadithFeed,
     ),
     const FeedCategory(
-      path: Paths.fiqhFeed,
-      icon: FlutterIslamicIcons.family,
-      isSelected: false,
       name: AppStrings.fiqh,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.family,
+      isSelected: false,
+      path: Paths.fiqhFeed,
     ),
     const FeedCategory(
-      path: Paths.sirahFeed,
-      icon: FlutterIslamicIcons.solidMuslim,
-      isSelected: false,
       name: AppStrings.sirah,
       description: "This feed contains Quran",
+      icon: FlutterIslamicIcons.solidMuslim,
+      isSelected: false,
+      path: Paths.sirahFeed,
     ),
   ];
 
@@ -67,60 +67,49 @@ abstract class AppConfigs {
     SearchOption(
       name: "Search usernames",
       isSelected: false,
-      useSearchQuery: true,
       searchFunction: (noteList, string) => noteList
-          .where(
-            (note) =>
-                note.event.pubkey.toLowerCase().contains(string.toLowerCase()),
-          )
+          .where((note) =>
+              note.event.pubkey.toLowerCase().contains(string.toLowerCase()))
           .toList(),
+      useSearchQuery: true,
     ),
     SearchOption(
       name: 'Search Posts contents',
       isSelected: false,
-      useSearchQuery: true,
       searchFunction: (noteList, string) => noteList
-          .where(
-            (note) =>
-                note.event.content.toLowerCase().contains(string.toLowerCase()),
-          )
+          .where((note) =>
+              note.event.content.toLowerCase().contains(string.toLowerCase()))
           .toList(),
+      useSearchQuery: true,
     ),
     SearchOption(
       name: 'Search Posts dates',
       isSelected: false,
-      useSearchQuery: true,
       searchFunction: (noteList, string) => noteList
-          .where(
-            (note) =>
-                note.event.createdAt.toString().contains(string) ||
-                note.event.createdAt.millisecondsSinceEpoch
-                    .toString()
-                    .contains(string),
-          )
+          .where((note) =>
+              note.event.createdAt.toString().contains(string) ||
+              note.event.createdAt.millisecondsSinceEpoch
+                  .toString()
+                  .contains(string))
           .toList(),
+      useSearchQuery: true,
     ),
     SearchOption(
       name: 'Search hashtags',
-      useSearchQuery: true,
       isSelected: false,
       searchFunction: (noteList, string) => noteList
-          .where(
-            (note) => note.event.content
-                .toLowerCase()
-                .contains('#$string'.toLowerCase()),
-          )
+          .where((note) => note.event.content
+              .toLowerCase()
+              .contains('#$string'.toLowerCase()))
           .toList(),
+      useSearchQuery: true,
     ),
     SearchOption(
       name: 'Only posts with images',
       isSelected: false,
+      searchFunction: (noteList, string) =>
+          noteList.where((note) => note.imageLinks.isNotEmpty).toList(),
       useSearchQuery: false,
-      searchFunction: (noteList, string) => noteList
-          .where(
-            (note) => note.imageLinks.isNotEmpty,
-          )
-          .toList(),
     ),
   ];
 }

@@ -3,7 +3,7 @@ import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../../services/utils/routing.dart';
 import '../general/widget/margined_body.dart';
 import 'widgets/add_button.dart';

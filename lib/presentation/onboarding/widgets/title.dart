@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../constants/colors.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_colors.dart';
+import '../../../constants/app_strings.dart';
 
 class MunawarahTitle extends StatelessWidget {
   const MunawarahTitle({
@@ -21,7 +21,6 @@ class MunawarahTitle extends StatelessWidget {
             ..apply(
               bodyColor: Colors.black,
               displayColor: Colors.black,
-              
             )),
       child: Hero(
         tag: "${AppStrings.appName}title",

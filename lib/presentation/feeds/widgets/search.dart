@@ -1,5 +1,5 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 
 class FieldSuffixIcon extends StatelessWidget {
   const FieldSuffixIcon({

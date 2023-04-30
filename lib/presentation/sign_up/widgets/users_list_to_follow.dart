@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../buisness_logic/cubit/users_list_to_follow_cubit.dart';
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../../services/nostr/nostr.dart';
 
 class UsersListToFollow extends StatelessWidget {

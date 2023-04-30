@@ -5,13 +5,13 @@ class RelayConfiguration extends Equatable {
   final String url;
   final bool isActive;
 
+  @override
+  List<Object?> get props => [url, isActive];
+
   const RelayConfiguration({
     required this.url,
     this.isActive = true,
   });
-
-  @override
-  List<Object?> get props => [url, isActive];
 
   RelayConfiguration copyWith({
     String? url,

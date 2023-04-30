@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 import '../../../services/utils/snackbars.dart';
 
 class AddButton extends StatelessWidget {

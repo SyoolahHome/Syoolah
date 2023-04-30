@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 import '../../model/bottom_sheet_option.dart';
 
 part 'feed_box_state.dart';

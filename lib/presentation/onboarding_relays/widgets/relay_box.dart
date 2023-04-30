@@ -6,8 +6,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
-import '../../../model/relat_configuration.dart';
+import '../../../constants/app_colors.dart';
+import '../../../model/relay_configuration.dart';
 import '../../../services/utils/routing.dart';
 import '../../general/widget/margined_body.dart';
 

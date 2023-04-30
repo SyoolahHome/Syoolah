@@ -3,7 +3,7 @@ import 'package:ditto/model/note.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../constants/colors.dart';
+import '../../../../../constants/app_colors.dart';
 import '../../margined_body.dart';
 
 class NoteContainer extends StatelessWidget {

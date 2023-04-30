@@ -1,11 +1,11 @@
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 
 class KeyField extends StatelessWidget {
   const KeyField({

@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/profile/profile_cubit.dart';
-import '../../../../constants/colors.dart';
-import '../../../../constants/strings.dart';
+import '../../../../constants/app_colors.dart';
+import '../../../../constants/app_strings.dart';
 import '../../../../services/utils/paths.dart';
 import '../../../general/widget/title.dart';
 

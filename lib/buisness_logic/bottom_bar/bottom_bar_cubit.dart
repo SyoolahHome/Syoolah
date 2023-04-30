@@ -3,12 +3,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../model/bottom_bat_item.dart';
+import '../../model/bottom_bar_item.dart';
 import '../../presentation/navigations_screen/chat_relays/global_chats.dart';
 import '../../presentation/navigations_screen/home/home.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
-
-part 'bottom_bar_state.dart';
 
 class BottomBarCubit extends Cubit<int> {
   final List<BottomBarItem> items = const <BottomBarItem>[

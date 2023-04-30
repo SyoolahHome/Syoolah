@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 
 class SuccessText extends StatelessWidget {
   const SuccessText({super.key});

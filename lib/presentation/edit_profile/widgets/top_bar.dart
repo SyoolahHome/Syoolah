@@ -1,5 +1,5 @@
-import 'package:ditto/constants/colors.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {

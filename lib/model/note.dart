@@ -4,9 +4,17 @@ import 'package:equatable/equatable.dart';
 
 class Note extends Equatable {
   final NostrEvent event;
-  late List<String> links;
+  List<String> links;
   final List<String> imageLinks;
-  late String noteOnly;
+  String noteOnly;
+
+  @override
+  List<Object?> get props => [
+        event,
+        noteOnly,
+        links,
+        imageLinks,
+      ];
 
   Note({
     required this.event,
@@ -25,41 +33,38 @@ class Note extends Equatable {
     return Note(
       event: event,
       links: links,
-      imageLinks: imageLinks,
       noteOnly: noteOnly,
+      imageLinks: imageLinks,
     );
   }
 
-  @override
-  List<Object?> get props => [
-        event,
-        noteOnly,
-        links,
-        imageLinks,
-      ];
-}
+  static List<String> extractLinks(String inputString) {
+    RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');
+    Iterable<Match> matches = linkRegex.allMatches(inputString);
+    List<String> links = [];
+    for (Match match in matches) {
+      final group = match.group(0);
+      if (group != null) {
+        links.add(group);
+      }
+    }
 
-List<String> extractLinks(String inputString) {
-  RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');
-  Iterable<Match> matches = linkRegex.allMatches(inputString);
-  List<String> links = [];
-  for (Match match in matches) {
-    links.add(match.group(0)!);
+    return links;
   }
-  return links;
-}
 
-String removeLinksFromInitial(String inputString) {
-  RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');
-  return inputString.replaceAll(linkRegex, '').trim();
-}
+  static String removeLinksFromInitial(String inputString) {
+    RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');
 
-List<String> filterImageLinks(List<String> links) {
-  return links
-      .where((link) =>
-          link.endsWith('.png') ||
-          link.endsWith('.jpg') ||
-          link.endsWith('.jpeg') ||
-          link.endsWith('.gif'))
-      .toList();
+    return inputString.replaceAll(linkRegex, '').trim();
+  }
+
+  static List<String> filterImageLinks(List<String> links) {
+    return links
+        .where((link) =>
+            link.endsWith('.png') ||
+            link.endsWith('.jpg') ||
+            link.endsWith('.jpeg') ||
+            link.endsWith('.gif'))
+        .toList();
+  }
 }

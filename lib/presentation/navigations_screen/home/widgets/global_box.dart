@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
-import '../../../../constants/colors.dart';
+import '../../../../constants/app_colors.dart';
 
 class FeedBox extends StatelessWidget {
   const FeedBox({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
 
-import '../../../../../constants/colors.dart';
+import '../../../../../constants/app_colors.dart';
 import 'image_content.dart';
 import 'image_full_view..dart';
 

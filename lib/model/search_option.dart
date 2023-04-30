@@ -9,13 +9,6 @@ class SearchOption extends Equatable {
   final bool isSelected;
   final List<Note> Function(List<Note> feedPosts, String search) searchFunction;
 
-  const SearchOption({
-    required this.name,
-    required this.isSelected,
-    required this.searchFunction,
-    required this.useSearchQuery,
-  });
-
   @override
   List<Object?> get props => [
         name,
@@ -23,6 +16,13 @@ class SearchOption extends Equatable {
         searchFunction,
         useSearchQuery,
       ];
+
+  const SearchOption({
+    required this.name,
+    required this.isSelected,
+    required this.searchFunction,
+    required this.useSearchQuery,
+  });
 
   SearchOption copyWith({
     String? name,

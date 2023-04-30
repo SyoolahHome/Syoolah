@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
-import '../../../model/relat_configuration.dart';
+import '../../../constants/app_colors.dart';
+import '../../../model/relay_configuration.dart';
 import '../../../services/utils/routing.dart';
 import '../../general/widget/margined_body.dart';
 

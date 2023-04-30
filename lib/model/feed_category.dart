@@ -9,14 +9,6 @@ class FeedCategory extends Equatable {
   final bool isSelected;
   final IconData icon;
 
-  const FeedCategory({
-    required this.name,
-    required this.description,
-    required this.icon,
-    required this.isSelected,
-    required this.path,
-  });
-
   @override
   List<Object?> get props => [
         name,
@@ -26,6 +18,14 @@ class FeedCategory extends Equatable {
         path,
       ];
 
+  const FeedCategory({
+    required this.name,
+    required this.description,
+    required this.icon,
+    required this.isSelected,
+    required this.path,
+  });
+
   FeedCategory copyWith({
     String? name,
     String? description,
@@ -34,11 +34,11 @@ class FeedCategory extends Equatable {
     String? path,
   }) {
     return FeedCategory(
-      path: path ?? this.path,
-      icon: icon ?? this.icon,
-      description: description ?? this.description,
       name: name ?? this.name,
+      description: description ?? this.description,
+      icon: icon ?? this.icon,
       isSelected: isSelected ?? this.isSelected,
+      path: path ?? this.path,
     );
   }
 }

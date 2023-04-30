@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
-import '../../../../../constants/colors.dart';
+import '../../../../../constants/app_colors.dart';
 import '../../../../../model/note.dart';
 import '../../../../../services/utils/paths.dart';
 import 'note_vreation_ago.dart';

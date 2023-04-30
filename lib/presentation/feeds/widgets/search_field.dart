@@ -1,10 +1,10 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/colors.dart';
+import '../../../constants/app_colors.dart';
 import '../../general/text_field.dart';
 
 class SearchField extends StatelessWidget {

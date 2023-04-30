@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/global/global_cubit.dart';
-import '../../constants/strings.dart';
+import '../../constants/app_strings.dart';
 
 class QuranFeed extends StatelessWidget {
   QuranFeed({super.key});

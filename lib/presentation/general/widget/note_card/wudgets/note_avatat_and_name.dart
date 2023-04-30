@@ -1,5 +1,5 @@
 import 'package:ditto/buisness_logic/cubit/users_list_to_follow_cubit.dart';
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/database/local/local.dart';
 import 'package:ditto/services/utils/extensions.dart';

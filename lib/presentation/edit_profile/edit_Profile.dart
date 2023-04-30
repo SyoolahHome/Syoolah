@@ -2,7 +2,7 @@ import 'package:ditto/buisness_logic/edit_profile/edit_profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../constants/colors.dart';
+import '../../constants/app_colors.dart';
 import 'widgets/edit_field.dart';
 import 'widgets/save_button.dart';
 import 'widgets/top_bar.dart';

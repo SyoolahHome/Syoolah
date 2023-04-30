@@ -1,9 +1,9 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 
 class CategoriesSelect extends StatelessWidget {
   const CategoriesSelect({super.key});

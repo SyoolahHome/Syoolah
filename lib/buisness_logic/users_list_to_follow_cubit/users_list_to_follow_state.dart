@@ -5,12 +5,6 @@ class UsersListToFollowState extends Equatable {
   final NostrEvent? currentUserFollowers;
   final List<NostrEvent> pubKeysMetadata;
 
-  const UsersListToFollowState({
-    this.currentUserFollowing,
-    this.currentUserFollowers,
-    this.pubKeysMetadata = const [],
-  });
-
   @override
   List<Object?> get props => [
         pubKeysMetadata,
@@ -18,15 +12,21 @@ class UsersListToFollowState extends Equatable {
         currentUserFollowers,
       ];
 
+  const UsersListToFollowState({
+    this.currentUserFollowing,
+    this.currentUserFollowers,
+    this.pubKeysMetadata = const [],
+  });
+
   UsersListToFollowState copyWith({
     List<NostrEvent>? pubKeysMetadata,
     NostrEvent? currentUserFollowing,
     NostrEvent? currentUserFollowers,
   }) {
     return UsersListToFollowState(
-      pubKeysMetadata: pubKeysMetadata ?? this.pubKeysMetadata,
-      currentUserFollowers: currentUserFollowers ?? this.currentUserFollowers,
       currentUserFollowing: currentUserFollowing ?? this.currentUserFollowing,
+      currentUserFollowers: currentUserFollowers ?? this.currentUserFollowers,
+      pubKeysMetadata: pubKeysMetadata ?? this.pubKeysMetadata,
     );
   }
 }

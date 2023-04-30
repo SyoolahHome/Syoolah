@@ -2,7 +2,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/colors.dart';
+import '../../constants/app_colors.dart';
 import 'widgets/about_content.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/title.dart';

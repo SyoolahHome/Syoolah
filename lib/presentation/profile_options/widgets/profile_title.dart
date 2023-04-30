@@ -1,4 +1,4 @@
-import 'package:ditto/constants/strings.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../general/widget/bottom_sheet_title_with_button.dart';

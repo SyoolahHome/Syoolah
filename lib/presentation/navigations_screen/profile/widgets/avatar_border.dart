@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../constants/app_colors.dart';
 
 class ProfileAvatarBorder extends StatelessWidget {
   const ProfileAvatarBorder({super.key});

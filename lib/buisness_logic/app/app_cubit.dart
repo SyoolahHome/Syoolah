@@ -9,9 +9,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/configs.dart';
+import '../../constants/app_configs.dart';
 import '../../model/bottom_sheet_option.dart';
-import '../../model/relat_configuration.dart';
+import '../../model/relay_configuration.dart';
 import '../../presentation/general/widget/button.dart';
 
 part 'app_state.dart';

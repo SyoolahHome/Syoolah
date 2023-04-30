@@ -1,10 +1,10 @@
-import 'package:ditto/constants/colors.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});

@@ -7,16 +7,16 @@ class TabItem extends Equatable {
   final String label;
   final IconData icon;
 
-  const TabItem({
-    required this.widget,
-    required this.label,
-    required this.icon,
-  });
-
   @override
   List<Object?> get props => [
         widget,
         label,
         icon,
       ];
+
+  const TabItem({
+    required this.widget,
+    required this.label,
+    required this.icon,
+  });
 }

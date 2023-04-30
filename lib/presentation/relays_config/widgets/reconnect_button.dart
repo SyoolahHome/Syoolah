@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/strings.dart';
+import '../../../constants/app_strings.dart';
 import '../../../services/utils/routing.dart';
 import '../../../services/utils/snackbars.dart';
 

@@ -1,10 +1,10 @@
-import 'package:ditto/constants/configs.dart';
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/add_new_post/add_new_post_cubit.dart';
-import '../../constants/colors.dart';
+import '../../constants/app_colors.dart';
 import 'widgets/button.dart';
 import 'widgets/categories_select.dart';
 import 'widgets/image.dart';
