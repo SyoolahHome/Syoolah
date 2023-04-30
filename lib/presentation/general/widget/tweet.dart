@@ -1,8 +1,7 @@
-import 'package:ditto/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../services/utils/utils.dart';
+import '../../../services/utils/app_utils.dart';
 
 class TweetWidget extends StatelessWidget {
   final String avatar;
@@ -52,7 +51,7 @@ class TweetWidget extends StatelessWidget {
                 child: InkWell(
                   child: CircleAvatar(
                     radius: 22,
-                    backgroundColor: buttonBorderColor,
+                    backgroundColor: Theme.of(context).primaryColor,
                     child: CircleAvatar(
                       radius: 20,
                       backgroundColor: Color(setColor()),

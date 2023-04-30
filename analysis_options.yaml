@@ -1,11 +1,16 @@
 include: package:lint/analysis_options.yaml
 
 analyzer:
-  plugins:
-    - dart_code_metrics
-  exclude: 
-    - 'constants/**'
 
+  plugins:
+    - dart_code_metrics:
+        exclude:   
+          - 'constants/**'
+          - 'nostr/**'
+          - 'presentation/**'
+          - 'presentation/*'
+          - 'presentation'
+          - 'nostr/'
 
 dart_code_metrics:
   rules:

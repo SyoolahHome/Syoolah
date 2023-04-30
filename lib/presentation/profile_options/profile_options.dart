@@ -72,7 +72,8 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                     }),
                     onTap: () {
                       Navigator.of(context).pop();
-                      current.onPressed();
+                      final onPressed = current.onPressed;
+                      if (onPressed != null) onPressed;
                     },
                   ),
                 );

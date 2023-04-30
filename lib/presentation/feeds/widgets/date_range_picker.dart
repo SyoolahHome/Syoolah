@@ -11,7 +11,7 @@ class DateRangePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeedCubit, GlobalFeedState>(
+    return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class DateRangePicker extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all(AppColors.teal),
                 ),
                 onPressed: () {
-                  context.read<FeedCubit>().pickDateRange(context);
+                  context.read<GlobalFeedCubit>().pickDateRange(context);
                 },
                 child: const Text(
                   AppStrings.pick,

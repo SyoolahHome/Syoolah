@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/note_comments/note_comments_cubit.dart';
 import '../../model/note.dart';
-import '../../services/nostr/nostr.dart';
+import '../../services/nostr/nostr_service.dart';
 import 'widgets/comment_field.dart';
 import 'widgets/comment_widget.dart';
 

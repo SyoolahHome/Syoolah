@@ -1,9 +1,9 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/model/note.dart';
-import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
-import 'package:ditto/services/nostr/nostr.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/snackbars.dart';
-import 'package:ditto/services/utils/utils.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,10 +55,12 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           AppUtils.copy(
             note.event.id,
             onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             },
             onError: () {
-              SnackBars.text(context, AppStrings.copyError);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copyError);
             },
           );
         },
@@ -70,10 +72,12 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           AppUtils.copy(
             note.event.serialized(),
             onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             },
             onError: () {
-              SnackBars.text(context, AppStrings.copyError);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copyError);
             },
           );
         },
@@ -85,10 +89,12 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           AppUtils.copy(
             note.noteOnly,
             onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             },
             onError: () {
-              SnackBars.text(context, AppStrings.copyError);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copyError);
             },
           );
         },

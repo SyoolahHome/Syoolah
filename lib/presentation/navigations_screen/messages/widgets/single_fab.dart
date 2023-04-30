@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../constants/app_colors.dart';
-import '../../../../constants/constants.dart';
 
 class SingleFAB extends StatelessWidget {
   const SingleFAB({
@@ -22,7 +21,7 @@ class SingleFAB extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: AppColors.teal,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: buttonBorderColor, width: 3),
+        side: BorderSide(color: Theme.of(context).primaryColor, width: 3),
         borderRadius: BorderRadius.circular(100),
       ),
       tooltip: toolTip,

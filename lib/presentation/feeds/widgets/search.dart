@@ -16,12 +16,12 @@ class SearchSections extends StatelessWidget {
     required this.cubit,
   });
 
-  final FeedCubit cubit;
+  final GlobalFeedCubit cubit;
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return BlocProvider<FeedCubit>.value(
+    return BlocProvider<GlobalFeedCubit>.value(
       value: cubit,
       child: Container(
         color: Colors.white,

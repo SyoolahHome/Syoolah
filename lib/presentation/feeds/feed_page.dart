@@ -21,13 +21,13 @@ class GeneralFeed extends StatelessWidget {
   final Stream<NostrEvent> feedPostsStream;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FeedCubit>(
-      create: (context) => FeedCubit(
+    return BlocProvider<GlobalFeedCubit>(
+      create: (context) => GlobalFeedCubit(
         feedPostsStream: feedPostsStream,
       ),
       child: Scaffold(
         appBar: CustomAppBar(feedName: feedName),
-        floatingActionButton: BlocBuilder<FeedCubit, GlobalFeedState>(
+        floatingActionButton: BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
           builder: (context, state) {
             return AnimatedScale(
               duration: const Duration(milliseconds: 200),
@@ -41,9 +41,9 @@ class GeneralFeed extends StatelessWidget {
         ),
         body: Builder(
           builder: (context) {
-            final cubit = context.read<FeedCubit>();
+            final cubit = context.read<GlobalFeedCubit>();
 
-            return BlocBuilder<FeedCubit, GlobalFeedState>(
+            return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
               builder: (context, state) {
                 if (state.searchedFeedNotesPosts.isNotEmpty) {
                   return NotesListView(

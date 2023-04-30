@@ -1,11 +1,11 @@
-import 'package:ditto/buisness_logic/cubit/users_list_to_follow_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
-import 'package:ditto/services/database/local/local.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../buisness_logic/users_list_to_follow_cubit/users_list_to_follow_cubit.dart';
 import '../../../../../model/note.dart';
 import 'note_follow_button.dart';
 import 'note_owner_avatar.dart';

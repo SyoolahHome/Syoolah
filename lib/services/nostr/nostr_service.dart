@@ -5,7 +5,7 @@ import 'package:ditto/constants/app_strings.dart';
 
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
-import '../database/local/local.dart';
+import '../database/local/local_database.dart';
 import '../utils/routing.dart';
 
 class NostrService {
@@ -15,14 +15,12 @@ class NostrService {
 
   Future<void> init({
     List<String>? relaysUrls,
-    bool isReconnecting = false,
   }) async {
     final defaultRelaysUrls =
         Routing.appCubit.state.relaysConfigurations.map((e) => e.url).toList();
 
     await Nostr.instance.relaysService.init(
       relaysUrl: relaysUrls ?? defaultRelaysUrls,
-      // isReconnecting: isReconnecting,
     );
   }
 

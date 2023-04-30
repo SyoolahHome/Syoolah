@@ -6,10 +6,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:ditto/services/utils/snackbars.dart';
-import 'package:ditto/services/utils/utils.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -18,8 +18,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../model/bottom_sheet_option.dart';
 import '../../model/tab_item.dart';
 import '../../presentation/general/profile_tabs.dart';
-import '../../services/nostr/nostr.dart';
-import '../../services/utils/alerts.dart';
+import '../../services/nostr/nostr_service.dart';
+import '../../services/utils/alerts_service.dart';
 
 part 'profile_state.dart';
 
@@ -193,7 +193,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_code_line,
           onPressed: () {
             AppUtils.copy(currentUserMetadataPubkey ?? "", onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             });
           },
         ),
@@ -202,7 +203,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_code_line,
           onPressed: () {
             AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             });
           },
         ),
@@ -213,7 +215,8 @@ class ProfileCubit extends Cubit<ProfileState> {
             AppUtils.copy(
               currentUserMetadata?.serialized() ?? "",
               onSuccess: () {
-                SnackBars.text(context, AppStrings.copySuccess);
+                final shownSnackbarController =
+                    SnackBars.text(context, AppStrings.copySuccess);
               },
             );
           },
@@ -223,7 +226,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_code_line,
           onPressed: () {
             AppUtils.copy(metadata.picture ?? "", onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             });
           },
         ),
@@ -232,7 +236,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_code_line,
           onPressed: () {
             AppUtils.copy(metadata.username, onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
+              final shownSnackbarController =
+                  SnackBars.text(context, AppStrings.copySuccess);
             });
           },
         ),

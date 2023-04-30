@@ -12,7 +12,7 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<FeedCubit>();
+    final cubit = context.read<GlobalFeedCubit>();
 
     return CustomTextField(
       label: AppStrings.search,

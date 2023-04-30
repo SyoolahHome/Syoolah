@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../constants/app_configs.dart';
 import '../../model/note.dart';
 import '../../model/search_option.dart';
-import '../../services/bottom_sheet/bottom_sheet.dart';
+import '../../services/bottom_sheet/bottom_sheet_service.dart';
 
 part 'global_feed_state.dart';
 

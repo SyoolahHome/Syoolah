@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../buisness_logic/cubit/users_list_to_follow_cubit.dart';
+import '../../../buisness_logic/users_list_to_follow_cubit/users_list_to_follow_cubit.dart';
 import '../../../constants/app_colors.dart';
-import '../../../services/nostr/nostr.dart';
+import '../../../services/nostr/nostr_service.dart';
 
 class UsersListToFollow extends StatelessWidget {
   const UsersListToFollow({

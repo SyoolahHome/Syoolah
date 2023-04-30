@@ -6,7 +6,7 @@ import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../buisness_logic/global/global_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../model/bottom_bar_item.dart';
-import '../../services/nostr/nostr.dart';
+import '../../services/nostr/nostr_service.dart';
 import 'widgets/bottom_bar.dart';
 
 class BottomBar extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
-import 'package:ditto/services/nostr/nostr.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

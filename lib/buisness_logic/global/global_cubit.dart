@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/services/database/local/local.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../services/nostr/nostr.dart';
+import '../../services/nostr/nostr_service.dart';
 
 part 'global_state.dart';
 

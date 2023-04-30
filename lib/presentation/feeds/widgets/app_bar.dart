@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             size: 20,
           ),
           onPressed: () {
-            context.read<FeedCubit>().showSearch(context);
+            context.read<GlobalFeedCubit>().showSearch(context);
           },
         ),
       ],

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../constants/app_strings.dart';
-import '../../services/database/local/local.dart';
+import '../../services/database/local/local_database.dart';
 
 part 'private_key_gen_success_state.dart';
 
@@ -25,16 +25,17 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
     ));
   }
 
-  void copyPrivateKey(BuildContext context) async {
+  copyPrivateKey(BuildContext context) async {
     try {
       await Clipboard.setData(ClipboardData(text: state.privateKey));
-      SnackBars.text(context, AppStrings.privateKeyCopied);
+
+      return SnackBars.text(context, AppStrings.privateKeyCopied);
     } catch (e) {
-      SnackBars.text(context, e.toString());
+      return SnackBars.text(context, e.toString());
     }
   }
 
-  void copyPublicKey(context) async {
+  copyPublicKey(context) async {
     try {
       final privateKey = LocalDatabase.instance.getPrivateKey();
       if (privateKey == null) {
@@ -48,9 +49,9 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
         ),
       );
 
-      SnackBars.text(context, AppStrings.publicKeyCopied);
+      return SnackBars.text(context, AppStrings.publicKeyCopied);
     } catch (e) {
-      SnackBars.text(context, e.toString());
+      return SnackBars.text(context, e.toString());
     }
   }
 }

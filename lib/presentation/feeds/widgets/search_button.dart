@@ -17,7 +17,7 @@ class SearchButton extends StatelessWidget {
       ),
       onPressed: () {
         Navigator.of(context).pop();
-        context.read<FeedCubit>().executeSearch();
+        context.read<GlobalFeedCubit>().executeSearch();
       },
       icon: const Icon(
         FlutterRemix.search_2_line,

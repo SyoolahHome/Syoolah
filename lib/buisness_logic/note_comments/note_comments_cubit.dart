@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/nostr/nostr.dart';
+import '../../services/nostr/nostr_service.dart';
 
 part 'note_comments_state.dart';
 

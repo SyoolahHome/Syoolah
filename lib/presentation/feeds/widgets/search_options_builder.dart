@@ -11,9 +11,9 @@ class SearchOptionsBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<FeedCubit>();
+    final cubit = context.read<GlobalFeedCubit>();
 
-    return BlocBuilder<FeedCubit, GlobalFeedState>(
+    return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 
-import 'base/local.dart';
+import 'base/local_database_base.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
   final String dbName = "local_database";
@@ -15,7 +15,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   @override
-  dynamic getValue(String key) {
+  getValue(String key) {
     return Hive.box(dbName).get(key);
   }
 
@@ -25,9 +25,10 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   @override
-  Future<void> init() async {
+  Future<Box> init() async {
     await Hive.initFlutter();
-    await Hive.openBox(dbName);
+
+    return await Hive.openBox(dbName);
   }
 
   Future<void> setPrivateKey(String? value) {

@@ -1,8 +1,10 @@
+// ignore_for_file: avoid-ignoring-return-values, prefer-match-file-name
 import 'package:dart_openai/openai.dart';
 
 class OpenAIService {
   static final OpenAIService _instance = OpenAIService._();
   static OpenAIService get instance => _instance;
+
   OpenAIService._() {
     OpenAI.apiKey = "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";
   }

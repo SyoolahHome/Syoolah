@@ -5,7 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../../constants/app_colors.dart';
 import '../../../model/bottom_bar_item.dart';
-import '../../../services/bottom_sheet/bottom_sheet.dart';
+import '../../../services/bottom_sheet/bottom_sheet_service.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({

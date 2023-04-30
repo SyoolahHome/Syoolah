@@ -22,30 +22,30 @@ abstract class AlertsService {
     return showDialog(
       context: context,
       builder: (context) {
+        final textOpacity = 0.5;
+
         return AlertDialog(
-          actions: <Widget>[
-            CustomTextButton(
-              text: AppStrings.close,
-              textColor: AppColors.black.withOpacity(0.5),
-              onTap: () => Navigator.of(context).pop(),
-            ),
-          ],
-          contentPadding: const EdgeInsets.only(top: 16),
-          insetPadding: EdgeInsets.zero,
-          actionsPadding: const EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
-          actionsAlignment: MainAxisAlignment.end,
           content: AvatarSheetWidget(
-            cubitContext: context,
             onPickFromGallery: onPickFromGallery,
             onTakePhoto: onTakePhoto,
             onRemove: onRemove,
-            onAvatarPickedOrTaken: onAvatarPickedOrTaken,
             onEnd: onEnd,
+            onAvatarPickedOrTaken: onAvatarPickedOrTaken,
+            cubitContext: context,
             cubit: cubit,
             onFullView: onFullView,
           ),
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: AppStrings.close,
+              onTap: () => Navigator.of(context).pop(),
+              textColor: AppColors.black.withOpacity(textOpacity),
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
         );
       },
     );
@@ -59,33 +59,31 @@ abstract class AlertsService {
     return showDialog(
       context: context,
       builder: (context) {
+        final textOpacity = 0.5;
+
         return AlertDialog(
-          title: HeadTitle(
-            title: AppStrings.removeRelay(relayConfig.url),
-          ),
+          title: HeadTitle(title: AppStrings.removeRelay(relayConfig.url)),
+          contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
             CustomTextButton(
               text: AppStrings.cancel,
-              textColor: AppColors.black.withOpacity(0.5),
               onTap: () {
                 Navigator.of(context).pop();
               },
+              textColor: AppColors.black.withOpacity(textOpacity),
             ),
             CustomTextButton(
               text: AppStrings.remove,
-              textColor: Colors.red,
               onTap: () {
                 onRemove();
                 Navigator.of(context).pop();
               },
+              textColor: Colors.red,
             ),
           ],
-          contentPadding: const EdgeInsets.only(top: 16),
-          insetPadding: EdgeInsets.zero,
-          actionsPadding: const EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
           actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
         );
       },
     );

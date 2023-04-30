@@ -3,7 +3,7 @@ import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/model/relay_configuration.dart';
-import 'package:ditto/services/utils/utils.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/bottom_sheet_option.dart';
@@ -18,12 +18,12 @@ abstract class BottomSheetService {
   static showCreatePostBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return const AddNewPost();
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
@@ -33,24 +33,24 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return Container();
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static showSearch(BuildContext context, FeedCubit cubit) {
+  static showSearch(BuildContext context, GlobalFeedCubit cubit) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return SearchSections(cubit: cubit);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
@@ -60,14 +60,12 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
-        return BottomSheetOptionsWidget(
-          options: options,
-        );
+        return BottomSheetOptionsWidget(options: options);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
@@ -77,123 +75,119 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
-        return BottomSheetOptionsWidget(
-          options: options,
-        );
+        return BottomSheetOptionsWidget(options: options);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static void showAddRelaySheet({
+  static Future<void> showAddRelaySheet({
     required BuildContext context,
     required Future<void> Function() onAdd,
   }) {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
-        return AddRelayWidget(
-          onAdd: onAdd,
-        );
+        return AddRelayWidget(onAdd: onAdd);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static Future<void> showOnBoardingSearchSheet(BuildContext context) {
+  static Future<void> showOnBoardingSearchSheet(BuildContext context) async {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return AppUtils.widgetFromRoutePath(Paths.onBoardingSearch, context);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
   static Future<void> showOnBoardingRelaysSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return AppUtils.widgetFromRoutePath(Paths.onBoardingRelays, context);
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static void showRelayOptionsSheet({
+  static Future<void> showRelayOptionsSheet({
     required BuildContext context,
     required RelayConfiguration relay,
     required List<BottomSheetOption> options,
     RelayInformations? relayInformations,
   }) {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return BottomSheetOptionsWidget(
-          title: AppStrings.relayName(relayInformations?.name),
           options: options,
+          title: AppStrings.relayName(relayInformations?.name),
         );
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static void showOnBoardingTranslationsSheet(
+  static Future<void> showOnBoardingTranslationsSheet(
     BuildContext context, {
     required List<BottomSheetOption> options,
   }) {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return BottomSheetOptionsWidget(
-          title: AppStrings.translations,
           options: options,
+          title: AppStrings.translations,
         );
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static void showRouteAsBottomSheet(
+  static Future<void> showRouteAsBottomSheet(
     String route,
     BuildContext context, {
     double? height,
   }) {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
-      isScrollControlled: true,
-      clipBehavior: Clip.hardEdge,
       builder: (context) {
         return SizedBox(
           height: height,
           child: AppUtils.widgetFromRoutePath(route, context),
         );
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 
-  static Future<dynamic> showPrivateKeyGenSuccess(BuildContext context) {
+  static Future showPrivateKeyGenSuccess(BuildContext context) {
     return showModalBottomSheet(
-      isScrollControlled: false,
-      clipBehavior: Clip.hardEdge,
       context: context,
       builder: (context) {
         return const PrivateKeyGenSuccess();
       },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: false,
     );
   }
 }

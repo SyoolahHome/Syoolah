@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
-import 'package:ditto/services/bottom_sheet/bottom_sheet.dart';
-import 'package:ditto/services/nostr/nostr.dart';
-import 'package:ditto/services/utils/alerts.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/utils/extensions.dart';
-import 'package:ditto/services/utils/utils.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -80,8 +80,7 @@ class AppCubit extends Cubit<AppState> {
         .where((relay) => relay.isActive)
         .map((relay) => relay.url)
         .toList();
-    NostrService.instance
-        .init(relaysUrls: activeSelectedRelaysUrls, isReconnecting: true);
+    NostrService.instance.init(relaysUrls: activeSelectedRelaysUrls);
     emit(state.copyWith(isReconnecting: false));
   }
 
