@@ -18,6 +18,7 @@ class OnBoardingRelays extends StatelessWidget {
     return SizedBox(
       height: 575,
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -49,7 +50,7 @@ class OnBoardingRelays extends StatelessWidget {
                               .appCubit.state.relaysConfigurations.length,
                           index: index,
                           relay: relay,
-                          relayInformations: snapshot.data,
+                          snapshot: snapshot,
                         ),
                       );
                     },

@@ -19,7 +19,7 @@ class AboutMunawarahTitle extends StatelessWidget {
         AppStrings.aboutMunawarahWe,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w500,
-              color: AppColors.black,
+              color: Theme.of(context).colorScheme.background,
             ),
       ),
     );

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/app_colors.dart';
+import '../../../constants/app_strings.dart';
 import '../../../model/relay_configuration.dart';
 import '../../../services/utils/routing.dart';
 import '../../general/widget/margined_body.dart';
@@ -15,30 +16,37 @@ class RelayBox extends StatelessWidget {
   const RelayBox({
     super.key,
     required this.relay,
-    required this.relayInformations,
+    required this.snapshot,
     required this.index,
     required this.lastIndex,
   });
 
   final RelayConfiguration relay;
-  final RelayInformations? relayInformations;
+  final AsyncSnapshot? snapshot;
   final int index;
   final int lastIndex;
+
+  void onRelayBoxTap(BuildContext context) {
+    if (!snapshot!.hasData) {
+      return;
+    }
+
+    return Routing.appCubit.showRelayOptionsSheet(
+      context,
+      relay: relay,
+      relayInformations: snapshot!.data,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       color: index % 2 == 0
-          ? AppColors.lighGrey.withOpacity(.45)
+          ? AppColors.lighGrey.withOpacity(.1)
           : Colors.transparent,
       child: ListTile(
-        onTap: () {
-          Routing.appCubit.showRelayOptionsSheet(
-            context,
-            relay: relay,
-            relayInformations: relayInformations,
-          );
-        },
+        onTap: () => onRelayBoxTap(context),
         splashColor: Colors.transparent,
         contentPadding:
             const EdgeInsets.only(bottom: 5.0) + MarginedBody.defaultMargin,
@@ -52,9 +60,9 @@ class RelayBox extends StatelessWidget {
               style: Theme.of(context).textTheme.titleSmall,
               children: [
                 TextSpan(
-                  text: (relayInformations == null
-                      ? ''
-                      : ' - ${relayInformations!.name}'),
+                  text: snapshot?.hasData ?? false
+                      ? ' - ${snapshot!.data!.name}'
+                      : AppStrings.relayNameError,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w300,
                       ),
@@ -69,7 +77,9 @@ class RelayBox extends StatelessWidget {
         subtitle: Container(
           margin: const EdgeInsets.only(top: 7.5),
           child: Text(
-            relayInformations?.description ?? '',
+            snapshot?.hasData ?? false
+                ? snapshot!.data!.description
+                : AppStrings.relayDescriptionError,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: AppColors.black.withOpacity(1),
                   fontWeight: FontWeight.w300,
@@ -106,22 +116,22 @@ class RelayBox extends StatelessWidget {
               },
             ),
             const SizedBox(width: 10),
-            GestureDetector(
-              onTap: () {
-                Routing.appCubit.showRelayOptionsSheet(
-                  context,
-                  relay: relay,
-                  relayInformations: relayInformations,
-                );
-              },
-              child: Animate(
-                effects: const <Effect>[
-                  FadeEffect(),
-                ],
-                delay: Duration(milliseconds: lastIndex * 200),
-                child: const Icon(
-                  FlutterRemix.more_2_line,
-                  color: AppColors.black,
+            IgnorePointer(
+              ignoring: snapshot!.hasData,
+              child: Opacity(
+                opacity: (snapshot?.hasData ?? false) ? 1 : 0.25,
+                child: GestureDetector(
+                  onTap: () => onRelayBoxTap(context),
+                  child: Animate(
+                    effects: const <Effect>[
+                      FadeEffect(),
+                    ],
+                    delay: Duration(milliseconds: lastIndex * 200),
+                    child: Icon(
+                      FlutterRemix.more_2_line,
+                      color: Theme.of(context).colorScheme.background,
+                    ),
+                  ),
                 ),
               ),
             ),

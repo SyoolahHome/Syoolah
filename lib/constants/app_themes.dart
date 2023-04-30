@@ -16,6 +16,8 @@ abstract class AppThemes {
       background: AppColors.black,
       onBackground: AppColors.white,
       surface: AppColors.white.withOpacity(0.4),
+      onSurface: Colors.white,
+      onInverseSurface: AppColors.lighGrey.withOpacity(.45),
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -50,7 +52,7 @@ abstract class AppThemes {
       backgroundColor: AppColors.teal,
       splashColor: AppColors.tealLight,
     ),
-    dividerColor: AppColors.white,
+    dividerColor: AppColors.black,
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: AppColors.lighGrey,
       elevation: 0,
@@ -195,6 +197,8 @@ abstract class AppThemes {
       background: AppColors.white,
       onBackground: AppColors.black,
       surface: AppColors.black.withOpacity(0.4),
+      onSurface: Colors.black87,
+      onInverseSurface: AppColors.lighGrey.withOpacity(.45),
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -209,7 +213,7 @@ abstract class AppThemes {
       showUnselectedLabels: false,
     ),
     brightness: Brightness.dark,
-    cardColor: AppColors.lighGrey,
+    cardColor: AppColors.lighGrey.withOpacity(0.15),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0,
@@ -231,7 +235,7 @@ abstract class AppThemes {
     ),
     dividerColor: AppColors.white,
     bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: AppColors.lighGrey,
+      backgroundColor: Colors.black87,
       elevation: 0,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(

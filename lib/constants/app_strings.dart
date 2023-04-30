@@ -1,4 +1,7 @@
 abstract class AppStrings {
+  static const relayNameError = ' Can\'t load relay name';
+  static const relayDescriptionError = ' Can\'t load relay description';
+
   static const recommendToFollow = 'We recommend to follow';
   static const recommendToFollowSubtitle = 'We recommend to follow';
 

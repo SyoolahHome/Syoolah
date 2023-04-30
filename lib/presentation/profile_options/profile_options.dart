@@ -19,7 +19,7 @@ class BottomSheetOptionsWidget extends StatelessWidget {
     const height = 10.0;
 
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).bottomSheetTheme.backgroundColor,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -42,26 +42,32 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                     dense: false,
                     visualDensity: VisualDensity.compact,
                     contentPadding: MarginedBody.defaultMargin,
-                    leading: Icon(current.icon, size: 17.5),
+                    leading: Icon(
+                      current.icon,
+                      size: 17.5,
+                      color: Theme.of(context).colorScheme.background,
+                    ),
                     title: Builder(builder: (context) {
                       final title = current.title;
                       if (title.split(':').length >= 2) {
                         return Text.rich(
-                          TextSpan(children: [
-                            TextSpan(
-                              text: "${title.split(':')[0]} : ",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                            TextSpan(
-                              text: title.split(':')[1],
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ]),
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "${title.split(':')[0]} : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                              TextSpan(
+                                text: title.split(':')[1],
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                            ],
+                          ),
                         );
                       } else {
                         return Text(

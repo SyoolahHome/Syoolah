@@ -22,13 +22,16 @@ class BottomSheetTitleWithIconButton extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppColors.black,
+                  color: Theme.of(context).colorScheme.background,
                   fontWeight: FontWeight.bold,
                 ),
           ),
         ),
         IconButton(
-          icon: const Icon(FlutterRemix.close_line),
+          icon: Icon(
+            FlutterRemix.close_line,
+            color: Theme.of(context).colorScheme.background,
+          ),
           onPressed: () {
             Navigator.pop(context);
             onPop?.call();

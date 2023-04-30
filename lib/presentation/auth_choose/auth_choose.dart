@@ -17,9 +17,9 @@ class AuthChoose extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
-
     final isShownInBottomSheet =
         ModalRoute.of(context)?.settings.name != Paths.authChoose;
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -53,7 +53,7 @@ class AuthChoose extends StatelessWidget {
                 const SizedBox(height: height * 3),
                 OrDivider(
                   onlyDivider: true,
-                  color: Theme.of(context).primaryColorDark,
+                  // color: Theme.of(context).primaryColorDark,
                 ),
                 const SizedBox(height: height * 3),
                 AuthChooseBox(

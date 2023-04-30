@@ -13,6 +13,7 @@ class OrDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
+    final _localColor = color ?? Theme.of(context).dividerColor;
 
     return Animate(
       delay: const Duration(milliseconds: 1000),
@@ -29,10 +30,8 @@ class OrDivider extends StatelessWidget {
                     end: Alignment.centerLeft,
                     begin: Alignment.centerRight,
                     colors: [
-                      (color ?? Theme.of(context).dividerColor)
-                          .withOpacity(0.55),
-                      (color ?? Theme.of(context).dividerColor)
-                          .withOpacity(0.1),
+                      _localColor.withOpacity(0.55),
+                      _localColor.withOpacity(0.1),
                     ],
                   ),
                 ),
@@ -43,7 +42,7 @@ class OrDivider extends StatelessWidget {
               Text(
                 'OR',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: color,
+                      color: _localColor,
                       fontWeight: FontWeight.w300,
                     ),
               ),
@@ -57,10 +56,8 @@ class OrDivider extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      (color ?? Theme.of(context).dividerColor)
-                          .withOpacity(0.55),
-                      (color ?? Theme.of(context).dividerColor)
-                          .withOpacity(0.1),
+                      _localColor.withOpacity(0.55),
+                      _localColor.withOpacity(0.1),
                     ],
                   ),
                 ),

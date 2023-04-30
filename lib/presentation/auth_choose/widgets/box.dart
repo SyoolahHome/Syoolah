@@ -41,7 +41,7 @@ class AuthChooseBox extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-          color: AppColors.lighGrey,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: InkWell(
@@ -56,7 +56,10 @@ class AuthChooseBox extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: AppColors.black.withOpacity(0.95),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .background
+                            .withOpacity(0.95),
                         fontWeight: FontWeight.w500,
                       ),
                 ),
@@ -65,7 +68,10 @@ class AuthChooseBox extends StatelessWidget {
                   description,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontWeight: FontWeight.w300,
-                        color: AppColors.black.withOpacity(0.85),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .background
+                            .withOpacity(0.95),
                       ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
