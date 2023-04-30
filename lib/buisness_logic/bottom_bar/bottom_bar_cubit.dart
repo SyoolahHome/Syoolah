@@ -11,8 +11,6 @@ import '../../presentation/navigations_screen/profile/profile.dart';
 part 'bottom_bar_state.dart';
 
 class BottomBarCubit extends Cubit<int> {
-  BottomBarCubit() : super(0);
-
   final List<BottomBarItem> items = const <BottomBarItem>[
     BottomBarItem(
       screen: Home(),
@@ -45,6 +43,7 @@ class BottomBarCubit extends Cubit<int> {
       selectedIcon: FlutterRemix.user_fill,
     ),
   ];
+  BottomBarCubit() : super(0);
 
   void onItemTapped(int index) {
     emit(index);

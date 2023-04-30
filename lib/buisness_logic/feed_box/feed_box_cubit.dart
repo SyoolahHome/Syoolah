@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/strings.dart';
-import '../../model/profile_option.dart';
+import '../../model/bottom_sheet_option.dart';
 
 part 'feed_box_state.dart';
 
@@ -32,12 +32,11 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
   }) {
     final cubit = context.read<GlobalCubit>();
 
+    final isFollowed = cubit.isNoteOwnerFollowed(note.event.pubkey);
     BottomSheetService.showNoteCardSheet(context, options: [
       BottomSheetOption(
-        title: cubit.isNoteOwnerFollowed(note.event.pubkey)
-            ? AppStrings.unfollow
-            : AppStrings.follow,
-        icon: cubit.isNoteOwnerFollowed(note.event.pubkey)
+        title: isFollowed ? AppStrings.unfollow : AppStrings.follow,
+        icon: isFollowed
             ? FlutterRemix.user_unfollow_line
             : FlutterRemix.user_follow_line,
         onPressed: () {

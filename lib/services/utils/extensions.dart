@@ -1,4 +1,28 @@
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+extension Extensions on List<NostrEvent> {
+  List<NostrEvent> removeDuplicatedEvents() {
+    final List<NostrEvent> result = [];
+
+    for (final event in this) {
+      if (result.isEmpty) {
+        result.add(event);
+      } else {
+        final isDuplicated = result.any(
+          (element) {
+            return element.pubkey == event.pubkey;
+          },
+        );
+        if (!isDuplicated) {
+          result.add(event);
+        }
+      }
+    }
+
+    return result;
+  }
+}
 
 extension DateTimeExt on DateTime {
   String toReadableString() {
@@ -42,8 +66,6 @@ extension DateTimeExt on DateTime {
     return '$day/$month/$year';
   }
 }
-
-// extension for capitalize().
 
 extension StringExt on String {
   String get capitalized => '${this[0].toUpperCase()}${substring(1)}';

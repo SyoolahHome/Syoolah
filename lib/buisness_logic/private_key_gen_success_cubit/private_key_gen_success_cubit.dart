@@ -15,7 +15,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
       : super(PrivateKeyGenSuccessInitial(
           privateKey: LocalDatabase.instance.getPrivateKey(),
           publicKey: Nostr.instance.keysService.derivePublicKey(
-            privateKey: LocalDatabase.instance.getPrivateKey()!,
+            privateKey: LocalDatabase.instance.getPrivateKey() ?? "",
           ),
         ));
 
@@ -37,11 +37,14 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
   void copyPublicKey(context) async {
     try {
       final privateKey = LocalDatabase.instance.getPrivateKey();
+      if (privateKey == null) {
+        return;
+      }
       await Clipboard.setData(
         ClipboardData(
           text: state.publicKey ??
               Nostr.instance.keysService
-                  .derivePublicKey(privateKey: privateKey!),
+                  .derivePublicKey(privateKey: privateKey),
         ),
       );
 

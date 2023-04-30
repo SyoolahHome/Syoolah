@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
@@ -10,9 +11,9 @@ import '../../services/nostr/nostr.dart';
 part 'note_comments_state.dart';
 
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
+  TextEditingController? commentTextController;
   Stream<NostrEvent> noteCommentsStream;
   StreamSubscription? _noteCommentsStreamSubscription;
-  TextEditingController? commentTextController;
 
   NoteCommentsCubit({
     required this.noteCommentsStream,
@@ -21,15 +22,10 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
     _handleStreams();
   }
 
-  void _handleStreams() {
-    _noteCommentsStreamSubscription = noteCommentsStream.listen((event) {
-      emit(state.copyWith(noteComments: [...state.noteComments, event]));
-    });
-  }
-
   @override
   Future<void> close() {
-    _noteCommentsStreamSubscription!.cancel();
+    _noteCommentsStreamSubscription?.cancel();
+
     return super.close();
   }
 
@@ -44,10 +40,21 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   }
 
   void postComment(String postEventId) {
+    final comment = commentTextController?.text;
+    if (comment == null || comment.isEmpty) {
+      return;
+    }
+
     NostrService.instance.addCommentToPost(
       postEventId: postEventId,
-      text: commentTextController!.text,
+      text: comment,
     );
-    commentTextController!.clear();
+    commentTextController?.clear();
+  }
+
+  void _handleStreams() {
+    _noteCommentsStreamSubscription = noteCommentsStream.listen((event) {
+      emit(state.copyWith(noteComments: [...state.noteComments, event]));
+    });
   }
 }

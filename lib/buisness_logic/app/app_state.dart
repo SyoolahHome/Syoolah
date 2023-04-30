@@ -5,12 +5,6 @@ class AppState extends Equatable {
   final List<RelayConfiguration> relaysConfigurations;
   final bool isReconnecting;
   final bool isValidUrl;
-  const AppState({
-    this.relaysConfigurations = const [],
-    this.isReconnecting = false,
-    this.isValidUrl = false,
-  });
-
   @override
   List<Object> get props => [
         isReconnecting,
@@ -18,15 +12,21 @@ class AppState extends Equatable {
         isValidUrl,
       ];
 
+  const AppState({
+    this.relaysConfigurations = const [],
+    this.isReconnecting = false,
+    this.isValidUrl = false,
+  });
+
   AppState copyWith({
     bool? isReconnecting,
     List<RelayConfiguration>? relaysConfigurations,
     bool? isValidUrl,
   }) {
     return AppState(
-      isValidUrl: isValidUrl ?? this.isValidUrl,
-      isReconnecting: isReconnecting ?? this.isReconnecting,
       relaysConfigurations: relaysConfigurations ?? this.relaysConfigurations,
+      isReconnecting: isReconnecting ?? this.isReconnecting,
+      isValidUrl: isValidUrl ?? this.isValidUrl,
     );
   }
 }

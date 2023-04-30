@@ -9,7 +9,7 @@ class HomePageAfterLoginCubit extends Cubit<HomePageAfterLoginState> {
     connectToRelaysAndSubscribeToTopics();
   }
 
-  void connectToRelaysAndSubscribeToTopics() async {
+  void connectToRelaysAndSubscribeToTopics() {
     try {
       emit(state.copyWith(isLoading: true));
       emit(state.copyWith(didConnectedToRelaysAndSubscribedToTopics: true));

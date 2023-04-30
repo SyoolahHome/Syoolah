@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/strings.dart';
@@ -14,27 +16,16 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   Note note;
   Stream<NostrEvent> currentUserMetadataStream;
   Stream<NostrEvent> noteLikesStream;
-  // Stream<NostrEvent> noteCommentsStream;
+
+  StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
+  StreamSubscription<NostrEvent>? _noteLikesSubscription;
 
   NoteCardCubit({
     required this.note,
     required this.currentUserMetadataStream,
     required this.noteLikesStream,
-    // required this.noteCommentsStream,
   }) : super(NoteCardInitial()) {
     _handleStreams();
-  }
-
-  void _handleStreams() {
-    currentUserMetadataStream.listen((event) {
-      if (!isClosed) {
-        emitIfOpen(state.copyWith(noteOwnerMetadata: event));
-      }
-    });
-
-    noteLikesStream.listen((event) {
-      emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
-    });
   }
 
   void likeNote() {
@@ -43,12 +34,14 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   }
 
   bool isUserAlreadyLiked() {
-    String pubKey =
-        NostrKeyPairs(private: LocalDatabase.instance.getPrivateKey()!).public;
-
+    final currentUserPrivateKey = LocalDatabase.instance.getPrivateKey();
+    if (currentUserPrivateKey == null) {
+      return false;
+    }
+    String pubKey = NostrKeyPairs(private: currentUserPrivateKey).public;
     final likers = state.noteLikes.map((e) => e.pubkey);
-    final isUserLikers = likers.contains(pubKey);
-    return isUserLikers;
+
+    return likers.contains(pubKey);
   }
 
   void copyNoteId() async {
@@ -114,10 +107,21 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   @override
   Future<void> close() {
-    currentUserMetadataStream.drain();
-    noteLikesStream.drain();
-    print('NoteCardCubit of note with id ${note.event.id} closed');
+    _currentUserMetadataSubscription?.cancel();
+    _noteLikesSubscription?.cancel();
 
     return super.close();
+  }
+
+  void _handleStreams() {
+    _currentUserMetadataSubscription =
+        currentUserMetadataStream.listen((event) {
+      if (!isClosed) {
+        emitIfOpen(state.copyWith(noteOwnerMetadata: event));
+      }
+    });
+    _noteLikesSubscription = noteLikesStream.listen((event) {
+      emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
+    });
   }
 }

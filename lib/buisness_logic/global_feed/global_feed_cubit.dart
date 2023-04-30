@@ -12,13 +12,13 @@ import '../../services/bottom_sheet/bottom_sheet.dart';
 
 part 'global_feed_state.dart';
 
-class FeedCubit extends Cubit<GlobalFeedState> {
+class GlobalFeedCubit extends Cubit<GlobalFeedState> {
+  ScrollController? scrollController;
   TextEditingController? searchController;
   Stream<NostrEvent> feedPostsStream;
   StreamSubscription? _streamSubscription;
-  ScrollController? scrollController;
 
-  FeedCubit({
+  GlobalFeedCubit({
     required this.feedPostsStream,
   }) : super(GlobalFeedInitial(searchOptions: AppConfigs.feedsSearchOptions)) {
     _init();
@@ -31,24 +31,12 @@ class FeedCubit extends Cubit<GlobalFeedState> {
     scrollController?.dispose();
 
     print("FeedCubit close");
+
     return super.close();
   }
 
-  void _handleStreams() {
-    _streamSubscription = feedPostsStream.listen(
-      (event) {
-        final sortedList = [...state.feedPosts, event].reversed.toList();
-        sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-
-        if (!isClosed) {
-          emit(state.copyWith(feedPosts: sortedList));
-        }
-      },
-    );
-  }
-
   void showSearch(BuildContext context) {
-    BottomSheetService.showSearch(context, this);
+    return BottomSheetService.showSearch(context, this);
   }
 
   void selectedSearchOption(int index, bool value) {
@@ -85,11 +73,11 @@ class FeedCubit extends Cubit<GlobalFeedState> {
       List<Note> notes = state.feedPosts.map((e) => Note.fromEvent(e)).toList();
       Set<Note> notesResults = {};
 
+      final searchQuery = searchController?.text ?? "";
       for (final option in state.searchOptions.where((e) => e.isSelected)) {
         if (option.useSearchQuery) {
-          if (searchController!.text.isNotEmpty) {
-            notesResults
-                .addAll(option.searchFunction(notes, searchController!.text));
+          if (searchQuery.isNotEmpty) {
+            notesResults.addAll(option.searchFunction(notes, searchQuery));
           }
         } else {
           notesResults.addAll(option.searchFunction(notes, ""));
@@ -98,11 +86,15 @@ class FeedCubit extends Cubit<GlobalFeedState> {
 
       if (state.dateRange != null) {
         notes = notes.where((note) {
-          final isAfter = note.event.createdAt.isAfter(state.dateRange!.start);
-          final isBefore = note.event.createdAt.isBefore(state.dateRange!.end);
-          final isIncluded = isAfter && isBefore;
+          final dateRange = state.dateRange;
+          if (dateRange == null) {
+            return false;
+          }
 
-          return isIncluded;
+          final isAfter = note.event.createdAt.isAfter(dateRange.start);
+          final isBefore = note.event.createdAt.isBefore(dateRange.end);
+
+          return isAfter && isBefore;
         }).toList();
       }
       emit(state.copyWith(searchedFeedNotesPosts: notesResults.toList()));
@@ -112,7 +104,7 @@ class FeedCubit extends Cubit<GlobalFeedState> {
   }
 
   void resetSearch() {
-    searchController!.clear();
+    searchController?.clear();
     emit(
       state.copyWith(
         searchedFeedNotesPosts: [],
@@ -136,5 +128,18 @@ class FeedCubit extends Cubit<GlobalFeedState> {
       }
     });
     _handleStreams();
+  }
+
+  void _handleStreams() {
+    _streamSubscription = feedPostsStream.listen(
+      (event) {
+        final sortedList = [...state.feedPosts, event].reversed.toList();
+        sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+        if (!isClosed) {
+          emit(state.copyWith(feedPosts: sortedList));
+        }
+      },
+    );
   }
 }

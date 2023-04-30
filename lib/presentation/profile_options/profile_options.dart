@@ -2,7 +2,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../model/profile_option.dart';
+import '../../model/bottom_sheet_option.dart';
 import 'widgets/profile_title.dart';
 
 class BottomSheetOptionsWidget extends StatelessWidget {
@@ -38,7 +38,7 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                     SlideEffect(begin: Offset(0, 0.45)),
                   ],
                   child: ListTile(
-                    trailing: current.trailing ,
+                    trailing: current.trailing,
                     dense: false,
                     visualDensity: VisualDensity.compact,
                     contentPadding: MarginedBody.defaultMargin,

@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -7,16 +8,7 @@ class BottomSheetOption extends Equatable {
   final String? successMessage;
   final String? errorMessage;
   final Widget? trailing;
-  final void Function() onPressed;
-
-  const BottomSheetOption({
-    required this.title,
-    required this.icon,
-    required this.onPressed,
-    this.successMessage,
-    this.trailing,
-    this.errorMessage,
-  });
+  final void Function()? onPressed;
 
   @override
   List<Object?> get props => [
@@ -27,4 +19,13 @@ class BottomSheetOption extends Equatable {
         errorMessage,
         trailing,
       ];
+
+  const BottomSheetOption({
+    required this.title,
+    required this.icon,
+    this.onPressed,
+    this.successMessage,
+    this.trailing,
+    this.errorMessage,
+  });
 }

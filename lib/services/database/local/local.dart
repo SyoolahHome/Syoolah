@@ -66,4 +66,21 @@ class LocalDatabase implements LocalDatabaseBase {
     await deleteValue("privateKey");
     print(getPrivateKey());
   }
+
+  Stream<bool> themeStateListenable() {
+    return getStream("themeState").map((event) => event as bool);
+  }
+
+  Future<void> setThemeState(bool value) {
+    return setValue("themeState", value);
+  }
+
+  bool getThemeState() {
+    return getValue("themeState") ?? false;
+  }
+
+  void toggleThemeState() {
+    final currentThemeState = getThemeState();
+    setThemeState(!currentThemeState);
+  }
 }

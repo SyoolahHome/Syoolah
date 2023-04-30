@@ -2,26 +2,38 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/services/database/local/local.dart';
+import 'package:ditto/services/nostr/nostr.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../services/nostr/nostr.dart';
+import '../../services/database/local/local.dart';
 
-part 'global_state.dart';
+part 'users_list_to_follow_state.dart';
 
-class GlobalCubit extends Cubit<GlobalState> {
+class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
   Stream<NostrEvent> currentUserFollowing;
   Stream<NostrEvent> currentUserFollowers;
-
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
+  StreamSubscription<NostrEvent>? _usersListMetadataSubscription;
 
-  GlobalCubit({
-    required this.currentUserFollowing,
+  UsersListToFollowCubit({
+    required List<String> pubKeys,
     required this.currentUserFollowers,
-  }) : super(GlobalInitial()) {
+    required this.currentUserFollowing,
+  }) : super(UsersListToFollowInitial()) {
     _handleCurrentUserFollowers();
     _handleCurrentUserFollowing();
+    _handleContacts(pubKeys);
+  }
+
+  @override
+  Future<void> close() {
+    _currentUserFollowersSubscription?.cancel();
+    _currentUserFollowingSubscription?.cancel();
+    _usersListMetadataSubscription?.cancel();
+
+    return super.close();
   }
 
   bool isNoteOwnerFollowed(String pubkey) {
@@ -34,19 +46,17 @@ class GlobalCubit extends Cubit<GlobalState> {
   void followUser(String pubKey) {
     NostrEvent newEvent;
 
-    final currentUserPrivateKey = LocalDatabase.instance.getPrivateKey();
-
-    if (currentUserPrivateKey == null) {
+    final contactListNostrEventKind = 3;
+    final curerntUserPrivateKey = LocalDatabase.instance.getPrivateKey();
+    if (curerntUserPrivateKey == null) {
       return;
     }
 
     if (state.currentUserFollowing == null) {
-      final nostrEventContactListKind = 3;
-
       newEvent = NostrEvent.fromPartialData(
-        kind: nostrEventContactListKind,
+        kind: contactListNostrEventKind,
         content: "",
-        keyPairs: NostrKeyPairs(private: currentUserPrivateKey),
+        keyPairs: NostrKeyPairs(private: curerntUserPrivateKey),
         tags: [
           ["p", pubKey],
         ],
@@ -57,10 +67,11 @@ class GlobalCubit extends Cubit<GlobalState> {
         return;
       }
 
-      newEvent = currentUserFollowing.copyWith(tags: [
-        ...currentUserFollowing.tags,
-        ["p", pubKey],
-      ]);
+      final newUserFollowTag = ["p", pubKey];
+
+      newEvent = currentUserFollowing.copyWith(
+        tags: [...currentUserFollowing.tags, newUserFollowTag],
+      );
     }
 
     NostrService.instance.setFollowingsEvent(newEvent);
@@ -97,5 +108,20 @@ class GlobalCubit extends Cubit<GlobalState> {
     _currentUserFollowingSubscription = currentUserFollowing.listen((event) {
       emit(state.copyWith(currentUserFollowing: event));
     });
+  }
+
+  void _handleContacts(List<String> pubKeys) {
+    _usersListMetadataSubscription =
+        NostrService.instance.usersListMetadata(pubKeys).listen(
+      (event) {
+        final newList = [
+          ...state.pubKeysMetadata,
+          event,
+        ].removeDuplicatedEvents();
+        emit(
+          state.copyWith(pubKeysMetadata: newList),
+        );
+      },
+    );
   }
 }

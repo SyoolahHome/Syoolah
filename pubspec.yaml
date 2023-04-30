@@ -48,7 +48,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  dart_code_metrics:
+  dart_code_metrics: ^5.7.2
 
   flutter_lints:
 

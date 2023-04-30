@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../../constants/colors.dart';
+import '../../../services/database/local/local.dart';
 import '../../../services/utils/paths.dart';
 
 class DarkIcon extends StatelessWidget {
@@ -20,7 +21,9 @@ class DarkIcon extends StatelessWidget {
 
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      onTap: () {},
+      onTap: () {
+        LocalDatabase.instance.toggleThemeState();
+      },
       splashFactory: NoSplash.splashFactory,
       child: Container(
         clipBehavior: Clip.hardEdge,

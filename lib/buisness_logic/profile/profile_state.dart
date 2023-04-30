@@ -15,20 +15,6 @@ class ProfileState extends Equatable {
   final double profileAvatarScale;
   final bool isLoading;
 
-  const ProfileState({
-    this.profileTabsItems = const [],
-    this.error,
-    this.currentUserPosts = const [],
-    this.currentUserLikedPosts = const [],
-    this.currentUserMetadata,
-    this.pickedAvatarImage,
-    this.pickedBannerImage,
-    this.followersCount = 0,
-    this.followingCount = 0,
-    this.profileAvatarScale = 1.0,
-    this.isLoading = false,
-  });
-
   @override
   List<Object?> get props => [
         currentUserPosts,
@@ -44,6 +30,20 @@ class ProfileState extends Equatable {
         isLoading,
       ];
 
+  const ProfileState({
+    this.profileTabsItems = const [],
+    this.error,
+    this.currentUserPosts = const [],
+    this.currentUserLikedPosts = const [],
+    this.currentUserMetadata,
+    this.pickedAvatarImage,
+    this.pickedBannerImage,
+    this.followersCount = 0,
+    this.followingCount = 0,
+    this.profileAvatarScale = 1.0,
+    this.isLoading = false,
+  });
+
   ProfileState copyWith({
     List<NostrEvent>? currentUserPosts,
     List<NostrEvent>? currentUserLikedPosts,
@@ -58,14 +58,14 @@ class ProfileState extends Equatable {
     bool? isLoading,
   }) {
     return ProfileState(
-      pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
-      pickedBannerImage: pickedBannerImage ?? this.pickedBannerImage,
-      currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
+      profileTabsItems: profileTabsItems ?? this.profileTabsItems,
+      error: error ?? this.error,
       currentUserPosts: currentUserPosts ?? this.currentUserPosts,
       currentUserLikedPosts:
           currentUserLikedPosts ?? this.currentUserLikedPosts,
-      error: error ?? this.error,
-      profileTabsItems: profileTabsItems ?? this.profileTabsItems,
+      currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
+      pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
+      pickedBannerImage: pickedBannerImage ?? this.pickedBannerImage,
       followersCount: followersCount ?? this.followersCount,
       followingCount: followingCount ?? this.followingCount,
       profileAvatarScale: profileAvatarScale ?? this.profileAvatarScale,

@@ -7,13 +7,6 @@ class HomePageAfterLoginState extends Equatable {
   final String? error;
   final Map<String, NostrEvent> allUsersMetadata;
 
-  const HomePageAfterLoginState({
-    this.didConnectedToRelaysAndSubscribedToTopics = false,
-    this.isLoading = false,
-    this.error,
-    this.allUsersMetadata = const {},
-  });
-
   @override
   List<Object?> get props => [
         didConnectedToRelaysAndSubscribedToTopics,
@@ -21,6 +14,13 @@ class HomePageAfterLoginState extends Equatable {
         error,
         allUsersMetadata,
       ];
+
+  const HomePageAfterLoginState({
+    this.didConnectedToRelaysAndSubscribedToTopics = false,
+    this.isLoading = false,
+    this.error,
+    this.allUsersMetadata = const {},
+  });
 
   HomePageAfterLoginState copyWith({
     bool? didConnectedToRelaysAndSubscribedToTopics,

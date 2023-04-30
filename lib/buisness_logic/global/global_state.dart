@@ -5,24 +5,24 @@ class GlobalState extends Equatable {
   final NostrEvent? currentUserFollowing;
   final NostrEvent? currentUserFollowers;
 
-  const GlobalState({
-    this.currentUserFollowers,
-    this.currentUserFollowing,
-  });
-
   @override
   List<Object?> get props => [
         currentUserFollowing,
         currentUserFollowers,
       ];
 
+  const GlobalState({
+    this.currentUserFollowers,
+    this.currentUserFollowing,
+  });
+
   GlobalState copyWith({
     NostrEvent? currentUserFollowing,
     NostrEvent? currentUserFollowers,
   }) {
     return GlobalState(
-      currentUserFollowing: currentUserFollowing ?? this.currentUserFollowing,
       currentUserFollowers: currentUserFollowers ?? this.currentUserFollowers,
+      currentUserFollowing: currentUserFollowing ?? this.currentUserFollowing,
     );
   }
 }

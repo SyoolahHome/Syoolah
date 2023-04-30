@@ -27,7 +27,7 @@ class RelaysWidget extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7.5),
           decoration: BoxDecoration(
-            color: AppColors.black.withOpacity(0.05),
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
             borderRadius: BorderRadius.circular(10),
           ),
           child: BlocBuilder<AppCubit, AppState>(
@@ -41,18 +41,10 @@ class RelaysWidget extends StatelessWidget {
                 },
                 child: Row(
                   children: <Widget>[
-                    // Text(
-                    //   activeRelays.length.toString(),
-                    //   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    //         color: AppColors.black.withOpacity(0.75),
-                    //         fontWeight: FontWeight.bold,
-                    //       ),
-                    // ),
-                    // const SizedBox(width: 5),
                     Icon(
                       FlutterRemix.cloud_line,
                       size: 17.5,
-                      color: AppColors.black.withOpacity(0.75),
+                      color: Theme.of(context).colorScheme.onSecondary,
                     )
                   ],
                 ),

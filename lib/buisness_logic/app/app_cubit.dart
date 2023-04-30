@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/configs.dart';
-import '../../model/profile_option.dart';
+import '../../model/bottom_sheet_option.dart';
 import '../../model/relat_configuration.dart';
 import '../../presentation/general/widget/button.dart';
 
@@ -18,6 +18,9 @@ part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   TextEditingController? relayUrlController;
+
+  List<String> get relaysUrls =>
+      state.relaysConfigurations.map((e) => e.url).toList();
 
   AppCubit()
       : super(AppInitial(
@@ -28,34 +31,34 @@ class AppCubit extends Cubit<AppState> {
     relayUrlController = TextEditingController()
       ..addListener(
         () {
+          final controller = relayUrlController;
+
+          if (controller == null) {
+            return;
+          }
+
           emit(
-            state.copyWith(
-              isValidUrl: relayUrlController!.text.isValidWebSocketSchema,
-            ),
+            state.copyWith(isValidUrl: controller.text.isValidWebSocketSchema),
           );
         },
       );
   }
 
-  List<String> get relaysUrls =>
-      state.relaysConfigurations.map((e) => e.url).toList();
-
   Future<void> addRelay() async {
+    final controller = relayUrlController;
+    if (controller == null) {
+      return;
+    }
     try {
-      Uri.parse(relayUrlController!.text);
-      RelayConfiguration relay = RelayConfiguration(
-        url: relayUrlController!.text,
-      );
-
+      RelayConfiguration relay = RelayConfiguration(url: controller.text);
       emit(
         state.copyWith(
           relaysConfigurations: [...state.relaysConfigurations, relay],
         ),
       );
     } catch (e) {
-      throw Exception('Invalid url');
     } finally {
-      relayUrlController!.clear();
+      controller.clear();
     }
   }
 
@@ -102,7 +105,8 @@ class AppCubit extends Cubit<AppState> {
 
   @override
   Future<void> close() {
-    relayUrlController!.dispose();
+    relayUrlController?.dispose();
+
     return super.close();
   }
 
@@ -110,7 +114,7 @@ class AppCubit extends Cubit<AppState> {
     required BuildContext context,
     required RelayConfiguration relayConfig,
   }) {
-    AlertsService.showRemoveRelayDialog(
+    return AlertsService.showRemoveRelayDialog(
       context,
       relayConfig: relayConfig,
       onRemove: () {
@@ -199,11 +203,11 @@ class AppCubit extends Cubit<AppState> {
   void showTranslationsSheet(BuildContext context) {
     MunawarahButton applyButton(String text, Locale locale) {
       return MunawarahButton(
-        isSmall: true,
-        text: text,
         onTap: () {
-          AppUtils.changeLocale(context, Locale('en'));
+          AppUtils.changeLocale(context, locale);
         },
+        text: text,
+        isSmall: true,
       );
     }
 
@@ -213,49 +217,41 @@ class AppCubit extends Cubit<AppState> {
         BottomSheetOption(
           title: 'English',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Apply', Locale('en')),
         ),
         BottomSheetOption(
           title: 'Français',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Appliquer', Locale('fr')),
         ),
         BottomSheetOption(
           title: 'German',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Anwenden', Locale('de')),
         ),
         BottomSheetOption(
           title: 'Italian',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Applicare', Locale('it')),
         ),
         BottomSheetOption(
           title: 'Spanish',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Aplicar', Locale('es')),
         ),
         BottomSheetOption(
           title: 'Portuguese',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Aplicar', Locale('pt')),
         ),
         BottomSheetOption(
           title: 'Russian',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('Применить', Locale('ru')),
         ),
         BottomSheetOption(
           title: 'Chinese',
           icon: FlutterRemix.arrow_right_line,
-          onPressed: () {},
           trailing: applyButton('应用', Locale('zh')),
         ),
       ],

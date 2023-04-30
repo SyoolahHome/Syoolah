@@ -1,4 +1,3 @@
-// ignore_for_List<file>: public_member_api_docs, sort_constructors_first
 part of 'add_new_post_cubit.dart';
 
 class AddNewPostState extends Equatable {
@@ -8,14 +7,6 @@ class AddNewPostState extends Equatable {
   final String? success;
   final String? error;
 
-  const AddNewPostState({
-    this.pickedImages,
-    this.categories = const [],
-    this.isLoading = false,
-    this.error,
-    this.success,
-  });
-
   @override
   List<Object?> get props => [
         pickedImages,
@@ -24,6 +15,14 @@ class AddNewPostState extends Equatable {
         error,
         isLoading,
       ];
+
+  const AddNewPostState({
+    this.pickedImages,
+    this.categories = const [],
+    this.isLoading = false,
+    this.error,
+    this.success,
+  });
 
   AddNewPostState copyWith({
     List<File>? pickedImages,

@@ -54,12 +54,23 @@ class MyApp extends StatelessWidget {
           value: Routing.appCubit,
         ),
       ],
-      child: MaterialApp(
-        routes: Routing.routes,
-        initialRoute: Paths.onBoarding,
-        title: AppStrings.appName,
-        debugShowCheckedModeBanner: false,
-        theme: AppThemes.primary,
+      child: StreamBuilder(
+        stream: LocalDatabase.instance.themeStateListenable(),
+        builder: (context, snapshot) {
+          final themeMode = LocalDatabase.instance.getThemeState()
+              ? ThemeMode.dark
+              : ThemeMode.light;
+
+          return MaterialApp(
+            routes: Routing.routes,
+            initialRoute: Paths.onBoarding,
+            title: AppStrings.appName,
+            debugShowCheckedModeBanner: false,
+            theme: AppThemes.primary,
+            darkTheme: AppThemes.darkTheme,
+            themeMode: themeMode,
+          );
+        },
       ),
     );
   }

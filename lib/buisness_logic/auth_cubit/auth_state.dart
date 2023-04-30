@@ -11,17 +11,6 @@ class AuthState extends Equatable {
   final int currentStepIndex;
   final File? pickedImage;
 
-  const AuthState({
-    this.pickedImage,
-    this.currentStepIndex = 1,
-    required this.signUpScreens,
-    this.error,
-    this.authenticated = false,
-    this.isGeneratingNewPrivateKey = false,
-    this.isSavingExistentKey = false,
-    this.isSignedOut = false,
-  });
-
   @override
   List<Object?> get props => [
         error,
@@ -34,9 +23,19 @@ class AuthState extends Equatable {
         pickedImage,
       ];
 
+  const AuthState({
+    this.pickedImage,
+    this.currentStepIndex = 1,
+    required this.signUpScreens,
+    this.error,
+    this.authenticated = false,
+    this.isGeneratingNewPrivateKey = false,
+    this.isSavingExistentKey = false,
+    this.isSignedOut = false,
+  });
+
   AuthState copyWith({
     bool? isGeneratingNewPrivateKey,
-    bool? shouldRedirectAfterGeneratingPrivateKey,
     String? error,
     bool? isSavingExistentKey,
     bool? authenticated,

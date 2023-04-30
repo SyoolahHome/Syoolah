@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.isMultiline = false,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String label;
   final EdgeInsets? contentPadding;
   final Widget? suffix;
@@ -35,7 +35,6 @@ class CustomTextField extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: <Widget>[
             HashTagTextField(
-              
               minLines: 1,
               maxLines: isMultiline ? 5 : 1,
               decoratedStyle: TextStyle(

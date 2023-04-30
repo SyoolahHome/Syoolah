@@ -27,51 +27,48 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     BottomSheetService.showOnBoardingRelaysSheet(context);
   }
 
-  void _init() {
-    searchNodeFocus = FocusNode();
-
-    searchController = TextEditingController()
-      ..addListener(() {
-        final isNotEmpty = searchController!.text.isNotEmpty;
-        final isEmail = searchController!.text.split("@").length == 2;
-        final is64Hex = searchController!.text.length == 64;
-        emit(
-          state.copyWith(
-              shouldShowSearchButton: isNotEmpty && (isEmail || is64Hex)),
-        );
-      });
-  }
-
   Future<void> executeSearch() async {
-    searchNodeFocus!.unfocus();
+    searchNodeFocus?.unfocus();
     if (userSearchSub != null) {
-      userSearchSub!.cancel();
+      userSearchSub?.cancel();
       userSearchSub = null;
     }
     String pubKey;
-    if (searchController!.text.contains("@")) {
-      if (searchController!.text.split("@").length != 2) {
+    final searchQuery = searchController?.text;
+
+    if (searchQuery == null || searchQuery.isEmpty) {
+      emit(state.copyWith(error: "search query is empty"));
+
+      return;
+    }
+
+    if (searchQuery.contains("@")) {
+      final lengthOfEmailElems = 2;
+
+      if (searchQuery.split("@").length != lengthOfEmailElems) {
         emit(
           state.copyWith(
             error:
                 "the search query is not a valid identifier, it should be like an email",
           ),
         );
+
         return;
       }
-      pubKey = await NostrService.instance
-          .getPubKeyFromEmail(searchController!.text);
+      pubKey = await NostrService.instance.getPubKeyFromEmail(searchQuery);
     } else {
-      if (searchController!.text.length != 64) {
+      final requiredHexLength = 64;
+      if (searchQuery.length != requiredHexLength) {
         emit(
           state.copyWith(
             error:
                 "the search query is not a valid identifier or 64 hex string (pubkey)",
           ),
         );
+
         return;
       }
-      pubKey = searchController!.text;
+      pubKey = searchQuery;
     }
 
     try {
@@ -89,15 +86,34 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   void resetSearch() {
-    searchController!.clear();
+    searchController?.clear();
     emit(state.copyWith(searchedUser: null));
   }
 
   @override
   Future<void> close() {
-    searchNodeFocus!.dispose();
-    searchController!.dispose();
+    resetSearch();
+    searchNodeFocus?.dispose();
+    searchController?.dispose();
     userSearchSub?.cancel();
+
     return super.close();
+  }
+
+  void _init() {
+    searchNodeFocus = FocusNode();
+
+    searchController = TextEditingController()
+      ..addListener(() {
+        final isNotEmpty = searchController?.text.isNotEmpty;
+        final isEmail = searchController?.text.split("@").length == 2;
+        final is64Hex = searchController?.text.length == 64;
+        emit(
+          state.copyWith(
+            shouldShowSearchButton:
+                (isNotEmpty ?? true) && (isEmail || is64Hex),
+          ),
+        );
+      });
   }
 }

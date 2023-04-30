@@ -23,27 +23,15 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     //
   }
 
-  bool _noteImagesExists() {
-    return state.pickedImages != null && state.pickedImages!.isNotEmpty;
-  }
-
-  Future<String> _uploadImagesAndGetNewNoteResult() async {
-    String result = "";
-
-    for (int index = 0; index < state.pickedImages!.length; index++) {
-      final currentUploadedImageLink = await FileUpload()(
-        state.pickedImages![index],
-      );
-      result += "\n$currentUploadedImageLink";
+  Future<void> createNote() async {
+    final controller = textController;
+    if (controller == null) {
+      return;
     }
 
-    return result;
-  }
-
-  void createNote() async {
     try {
       emit(state.copyWith(isLoading: true, pickedImages: state.pickedImages));
-      String resultNote = textController!.text;
+      String resultNote = controller.text;
       if (_noteImagesExists()) {
         resultNote += await _uploadImagesAndGetNewNoteResult();
       }
@@ -90,7 +78,8 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   @override
   Future<void> close() {
-    textController!.dispose();
+    textController?.dispose();
+
     return super.close();
   }
 
@@ -112,15 +101,40 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   }
 
   void removePickedImage(int imageIndex) {
+    final pickedImages = state.pickedImages;
+    if (pickedImages == null) {
+      return;
+    }
+
     final newList = <File>[];
     assert(state.pickedImages != null);
-    for (int index = 0; index < state.pickedImages!.length; index++) {
-      final current = state.pickedImages![index];
+    for (int index = 0; index < pickedImages.length; index++) {
+      final current = pickedImages[index];
       if (imageIndex != index) {
         newList.add(current);
       }
     }
 
     emit(state.copyWith(pickedImages: newList));
+  }
+
+  bool _noteImagesExists() {
+    return state.pickedImages?.isNotEmpty ?? false;
+  }
+
+  Future<String> _uploadImagesAndGetNewNoteResult() async {
+    String result = "";
+    final pickedImages = state.pickedImages;
+    if (pickedImages == null) {
+      return result;
+    }
+
+    for (int index = 0; index < pickedImages.length; index++) {
+      final current = pickedImages[index];
+      final currentUploadedImageLink = await FileUpload()(current);
+      result += "\n$currentUploadedImageLink";
+    }
+
+    return result;
   }
 }

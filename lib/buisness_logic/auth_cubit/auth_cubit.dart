@@ -39,51 +39,35 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await _generatePrivateKeyAndSetInfoToNostr();
       String? imageLink;
-      if (state.pickedImage != null) {
-        imageLink = await FileUpload()(state.pickedImage!);
+      final pickedImage = state.pickedImage;
+
+      if (pickedImage != null) {
+        imageLink = await FileUpload()(pickedImage);
       }
 
       NostrService.instance.setCurrentUserMetaData(
         metadata: UserMetaData(
-          banner: null,
-          name: nameController!.text,
-          username: usernameController!.text,
-          displayName: nameController!.text,
+          name: nameController?.text ?? '',
           picture: imageLink,
-          about: bioController!.text,
+          banner: null,
+          username: usernameController?.text ?? '',
+          about: bioController?.text ?? '',
+          displayName: nameController?.text.split(" ").join("-") ?? '',
         ),
       );
       emit(state.copyWith(authenticated: true));
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
-    } finally {}
-  }
-
-  Future<void> _generatePrivateKeyAndSetInfoToNostr() async {
-    emit(state.copyWith(isGeneratingNewPrivateKey: true));
-    if (nameController!.text.isEmpty) {
-      emit(state.copyWith(
-        isGeneratingNewPrivateKey: false,
-      ));
-      throw AppStrings.pleaseEnterName;
+    } finally {
+      emit(state.copyWith(error: null));
     }
-
-    final newGeneratedPair = NostrKeyPairs.generate();
-    final privateKey = newGeneratedPair.private;
-
-    await LocalDatabase.instance.setAuthInformations(
-      key: privateKey,
-      name: nameController!.text,
-    );
-
-    emit(state.copyWith(isGeneratingNewPrivateKey: false));
   }
 
   @override
   Future<void> close() {
-    nameController!.dispose();
-    nameFocusNode!.dispose();
-    pageController!.dispose();
+    nameController?.dispose();
+    nameFocusNode?.dispose();
+    pageController?.dispose();
     bioController?.dispose();
     usernameController?.dispose();
     existentKeyController?.dispose();
@@ -92,14 +76,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> handleExistentKey() async {
-    if (existentKeyController!.text.isEmpty) {
+    final existentKey = existentKeyController?.text ?? '';
+    if (existentKey.isEmpty) {
       emit(state.copyWith(error: AppStrings.pleaseEnterKey));
 
       return;
     }
 
     try {
-      final keyChain = NostrKeyPairs(private: existentKeyController!.text);
+      final keyChain = NostrKeyPairs(private: existentKey);
       LocalDatabase.instance.setPrivateKey(keyChain.private);
       emit(state.copyWith(authenticated: true));
     } catch (e) {
@@ -127,8 +112,21 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void gotoNext() {
-    if (pageController!.page!.round() + 1 < state.signUpScreens!.length) {
-      pageController!.nextPage(
+    final _internalPageController = pageController;
+    if (_internalPageController == null) {
+      return;
+    }
+    final _internalPageControllerPage = _internalPageController.page;
+    if (_internalPageControllerPage == null) {
+      return;
+    }
+    final signUpScreens = state.signUpScreens;
+    if (signUpScreens == null) {
+      return;
+    }
+
+    if (_internalPageControllerPage.round() + 1 < signUpScreens.length) {
+      _internalPageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -136,20 +134,85 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void previousStep() {
-    if (pageController!.page!.round() - 1 >= 0) {
-      pageController!.previousPage(
+    final _internalPageController = pageController;
+    if (_internalPageController == null) {
+      return;
+    }
+    final _internalPageControllerPage = _internalPageController.page;
+    if (_internalPageControllerPage == null) {
+      return;
+    }
+    final signUpScreens = state.signUpScreens;
+    if (signUpScreens == null) {
+      return;
+    }
+
+    if (_internalPageControllerPage.round() - 1 >= 0) {
+      _internalPageController.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }
   }
 
+  Future<void> pickImage() async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        final image = File(pickedFile.path);
+        emit(
+          state.copyWith(pickedImage: image),
+        );
+      }
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+    } finally {
+      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
+    }
+  }
+
+  Future<void> _generatePrivateKeyAndSetInfoToNostr() async {
+    emit(state.copyWith(isGeneratingNewPrivateKey: true));
+    final name = nameController?.text ?? '';
+    if (name.isEmpty) {
+      emit(state.copyWith(
+        isGeneratingNewPrivateKey: false,
+      ));
+      throw AppStrings.pleaseEnterName;
+    }
+
+    final newGeneratedPair = NostrKeyPairs.generate();
+    final privateKey = newGeneratedPair.private;
+
+    await LocalDatabase.instance.setAuthInformations(
+      key: privateKey,
+      name: name,
+    );
+
+    emit(state.copyWith(isGeneratingNewPrivateKey: false));
+  }
+
   void _init() {
     pageController = PageController()
       ..addListener(() {
+        final _internalPageController = pageController;
+        if (_internalPageController == null) {
+          return;
+        }
+        final _internalPageControllerPage = _internalPageController.page;
+        if (_internalPageControllerPage == null) {
+          return;
+        }
+        final signUpScreens = state.signUpScreens;
+        if (signUpScreens == null) {
+          return;
+        }
+
         emit(
           state.copyWith(
-            currentStepIndex: pageController!.page!.round() + 1,
+            currentStepIndex: _internalPageControllerPage.round() + 1,
           ),
         );
       });
@@ -157,7 +220,7 @@ class AuthCubit extends Cubit<AuthState> {
     bioController = TextEditingController();
     usernameController = TextEditingController();
     if (kDebugMode) {
-      nameController!.text = 'test name';
+      nameController?.text = 'test name';
     }
     existentKeyController = TextEditingController();
     nameFocusNode = FocusNode();
@@ -181,34 +244,35 @@ class AuthCubit extends Cubit<AuthState> {
             title: AppStrings.whatIsYourName,
             subtitle: AppStrings.whatIsYourNameSubtitle,
             widgetBody: CustomTextField(
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 20,
-              ),
+              controller: nameController,
               label: AppStrings.yourName,
-              controller: nameController!,
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             ),
             nextViewAllower: () {
-              usernameController!.text =
-                  "@${nameController!.text.split(' ').join('_')}";
-              return nameController!.text.isNotEmpty &&
-                  nameController!.text.length >= 2;
+              final username = usernameController?.text ?? '';
+
+              usernameController?.text = "@${username.split(' ').join('_')}";
+              final minAcceptableUsernameLength = 2;
+
+              return username.isNotEmpty &&
+                  username.length >= minAcceptableUsernameLength;
             },
           ),
           SignUpStepView(
             title: AppStrings.whatAboutYou,
             subtitle: AppStrings.whatAboutYouSubtitle,
             widgetBody: CustomTextField(
-              isMultiline: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 20,
-              ),
+              controller: bioController,
               label: AppStrings.recommendedOneLines,
-              controller: bioController!,
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              isMultiline: true,
             ),
             nextViewAllower: () {
-              return bioController!.text.isNotEmpty;
+              final bio = bioController?.text ?? '';
+
+              return bio.isNotEmpty;
             },
           ),
           SignUpStepView(
@@ -223,16 +287,16 @@ class AuthCubit extends Cubit<AuthState> {
             title: AppStrings.yourUsername,
             subtitle: AppStrings.yourUsernameSubtitle,
             widgetBody: CustomTextField(
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 20,
-              ),
+              controller: usernameController,
               label: AppStrings.yourUsername,
-              controller: usernameController!,
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               hint: AppStrings.hintUsername,
             ),
             nextViewAllower: () {
-              return usernameController!.text.isNotEmpty;
+              final username = usernameController?.text ?? '';
+
+              return username.isNotEmpty;
             },
             onButtonTap: () {
               authenticate();
@@ -243,20 +307,20 @@ class AuthCubit extends Cubit<AuthState> {
             subtitle: AppStrings.yourPrivateKeySubtitle,
             widgetBody: Builder(
               builder: (context) {
+                final iconColorOpacity = 0.05;
+
                 return Center(
                   child: IconButton(
                     padding: const EdgeInsets.all(15),
+                    onPressed: () {
+                      final val =
+                          BottomSheetService.showPrivateKeyGenSuccess(context);
+                    },
                     style: IconButton.styleFrom(
-                      backgroundColor: AppColors.black.withOpacity(0.05),
+                      backgroundColor:
+                          AppColors.black.withOpacity(iconColorOpacity),
                     ),
                     icon: const Icon(FlutterRemix.eye_2_line),
-                    onPressed: () {
-                      BottomSheetService.showPrivateKeyGenSuccess(context).then(
-                        (_) {
-                          // nameFocusNode!.unfocus();
-                        },
-                      );
-                    },
                   ),
                 );
               },
@@ -290,23 +354,5 @@ class AuthCubit extends Cubit<AuthState> {
         ],
       ),
     );
-  }
-
-  Future<void> pickImage() async {
-    try {
-      final pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.gallery,
-      );
-      if (pickedFile != null) {
-        final image = File(pickedFile.path);
-        emit(
-          state.copyWith(pickedImage: image),
-        );
-      }
-    } catch (e) {
-      emit(state.copyWith(error: e.toString()));
-    } finally {
-      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
-    }
   }
 }

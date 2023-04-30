@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../model/profile_option.dart';
+import '../../model/bottom_sheet_option.dart';
 import '../../model/tab_item.dart';
 import '../../presentation/general/profile_tabs.dart';
 import '../../services/nostr/nostr.dart';
@@ -27,6 +28,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   Stream<NostrEvent> currentUserMetadataStream;
   Stream<NostrEvent> currentUserLikedPosts;
 
+  StreamSubscription<NostrEvent>? _currentUserPostsSubscription;
+  StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
+  StreamSubscription<NostrEvent>? _currentUserLikedPostsSubscription;
+
   ProfileCubit({
     required this.currentUserPostsStream,
     required this.currentUserMetadataStream,
@@ -34,43 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }) : super(const ProfileInitial(
           profileTabsItems: GeneralProfileTabs.profileTabsItems,
         )) {
-    handleStreams();
-  }
-
-  void handleStreams() {
-    _handleCurrentUserPosts();
-    _handleCurrentUserMetadata();
-    _handleCurrentUserLikedPosts();
-  }
-
-  void _handleCurrentUserMetadata() {
-    currentUserMetadataStream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserMetadata: event,
-        ),
-      );
-    });
-  }
-
-  void _handleCurrentUserPosts() {
-    currentUserPostsStream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserPosts: [...state.currentUserPosts, event],
-        ),
-      );
-    });
-  }
-
-  void _handleCurrentUserLikedPosts() {
-    currentUserLikedPosts.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserLikedPosts: [...state.currentUserLikedPosts, event],
-        ),
-      );
-    });
+    _handleStreams();
   }
 
   Future<void> pickAvatarFromGallery() async {
@@ -78,9 +47,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       final imagePicker = ImagePicker();
       final pickedImage =
           await imagePicker.pickImage(source: ImageSource.gallery);
-      emit(
-        state.copyWith(pickedAvatarImage: File(pickedImage!.path)),
-      );
+      if (pickedImage != null) {
+        emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
+      }
     } catch (e) {
       emit(state.copyWith(error: AppStrings.error));
     } finally {
@@ -93,9 +62,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       final imagePicker = ImagePicker();
       final pickedImage =
           await imagePicker.pickImage(source: ImageSource.camera);
-      emit(
-        state.copyWith(pickedAvatarImage: File(pickedImage!.path)),
-      );
+      if (pickedImage != null) {
+        emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
+      }
     } catch (e) {
       emit(state.copyWith(error: AppStrings.error));
     } finally {
@@ -105,7 +74,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> removeAvatar() async {
+  void removeAvatar() {
     emit(state.copyWith(pickedAvatarImage: null));
     try {
       final currentUsermetadata = UserMetaData.fromJson(
@@ -126,12 +95,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<bool> uploadPictureAndSet() async {
+    final pickedAvatarImage = state.pickedAvatarImage;
+    if (pickedAvatarImage == null) {
+      return false;
+    }
     try {
-      if (state.pickedAvatarImage == null) {
-        return false;
-      }
       emit(state.copyWith(isLoading: true));
-      final uploadedAvatarUrl = await FileUpload()(state.pickedAvatarImage!);
+      final uploadedAvatarUrl = await FileUpload()(pickedAvatarImage);
 
       final currentUsermetadata = UserMetaData.fromJson(
         jsonDecode(state.currentUserMetadata?.content ?? "{}")
@@ -139,19 +109,18 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
 
       NostrService.instance.setCurrentUserMetaData(
-          metadata: currentUsermetadata.copyWith(
-        picture: uploadedAvatarUrl,
-      ));
+        metadata: currentUsermetadata.copyWith(
+          picture: uploadedAvatarUrl,
+        ),
+      );
 
       return true;
     } catch (e) {
       emit(state.copyWith(error: AppStrings.error));
+
       return false;
     } finally {
-      emit(state.copyWith(
-        error: null,
-        isLoading: false,
-      ));
+      emit(state.copyWith(error: null, isLoading: false));
     }
   }
 
@@ -160,7 +129,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       final imagePicker = ImagePicker();
       final pickedImage =
           await imagePicker.pickImage(source: ImageSource.gallery);
-      emit(state.copyWith(pickedBannerImage: File(pickedImage!.path)));
+      if (pickedImage != null) {
+        emit(state.copyWith(pickedBannerImage: File(pickedImage.path)));
+      }
     } catch (e) {
       emit(state.copyWith(error: AppStrings.error));
     } finally {
@@ -169,7 +140,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void scaleAvatarDown() {
-    emit(state.copyWith(profileAvatarScale: 0.95));
+    final scaleDownVal = state.profileAvatarScale - 0.05;
+    emit(state.copyWith(profileAvatarScale: scaleDownVal));
   }
 
   void scaleAvatarToNormal() {
@@ -187,7 +159,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       onPickFromGallery: pickAvatarFromGallery,
       onTakePhoto: pickAvatarFromCamera,
       onAvatarPickedOrTaken: uploadPictureAndSet,
-      onRemove: removeAvatar,
+      onRemove: () async => removeAvatar,
       onEnd: onEnd,
       cubit: cubit,
       onFullView: onFullView,
@@ -202,6 +174,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       state.currentUserMetadata?.content ?? "{}",
     ) as Map<String, dynamic>);
 
+    final currentUserMetadata = state.currentUserMetadata;
+
+    final currentUserMetadataPubkey = currentUserMetadata?.pubkey;
+
+    final currentUserMetadataContent = currentUserMetadata?.content;
+
     BottomSheetService.showProfileBottomSheet(
       context,
       options: [
@@ -214,7 +192,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: AppStrings.copyPubKey,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
-            AppUtils.copy(state.currentUserMetadata!.pubkey, onSuccess: () {
+            AppUtils.copy(currentUserMetadataPubkey ?? "", onSuccess: () {
               SnackBars.text(context, AppStrings.copySuccess);
             });
           },
@@ -223,7 +201,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: AppStrings.copyMetaDataEvent,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
-            AppUtils.copy(state.currentUserMetadata!.content, onSuccess: () {
+            AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
               SnackBars.text(context, AppStrings.copySuccess);
             });
           },
@@ -232,17 +210,19 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: AppStrings.copyProfileEvent,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
-            AppUtils.copy(state.currentUserMetadata!.serialized(),
-                onSuccess: () {
-              SnackBars.text(context, AppStrings.copySuccess);
-            });
+            AppUtils.copy(
+              currentUserMetadata?.serialized() ?? "",
+              onSuccess: () {
+                SnackBars.text(context, AppStrings.copySuccess);
+              },
+            );
           },
         ),
         BottomSheetOption(
           title: AppStrings.copyImageUrl,
           icon: FlutterRemix.file_code_line,
           onPressed: () {
-            AppUtils.copy(metadata.picture!, onSuccess: () {
+            AppUtils.copy(metadata.picture ?? "", onSuccess: () {
               SnackBars.text(context, AppStrings.copySuccess);
             });
           },
@@ -258,5 +238,42 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
       ],
     );
+  }
+
+  void _handleStreams() {
+    _handleCurrentUserPosts();
+    _handleCurrentUserMetadata();
+    _handleCurrentUserLikedPosts();
+  }
+
+  void _handleCurrentUserMetadata() {
+    _currentUserMetadataSubscription =
+        currentUserMetadataStream.listen((event) {
+      emit(
+        state.copyWith(
+          currentUserMetadata: event,
+        ),
+      );
+    });
+  }
+
+  void _handleCurrentUserPosts() {
+    _currentUserPostsSubscription = currentUserPostsStream.listen((event) {
+      emit(
+        state.copyWith(
+          currentUserPosts: [...state.currentUserPosts, event],
+        ),
+      );
+    });
+  }
+
+  void _handleCurrentUserLikedPosts() {
+    _currentUserLikedPostsSubscription = currentUserLikedPosts.listen((event) {
+      emit(
+        state.copyWith(
+          currentUserLikedPosts: [...state.currentUserLikedPosts, event],
+        ),
+      );
+    });
   }
 }

@@ -6,7 +6,7 @@ import 'package:ditto/model/relat_configuration.dart';
 import 'package:ditto/services/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/profile_option.dart';
+import '../../model/bottom_sheet_option.dart';
 import '../../presentation/add_relay/add_relay.dart';
 import '../../presentation/feeds/widgets/search.dart';
 import '../../presentation/new_post/add_new_post.dart';
@@ -185,6 +185,7 @@ abstract class BottomSheetService {
       },
     );
   }
+
   static Future<dynamic> showPrivateKeyGenSuccess(BuildContext context) {
     return showModalBottomSheet(
       isScrollControlled: false,

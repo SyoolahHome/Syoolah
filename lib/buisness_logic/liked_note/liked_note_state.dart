@@ -3,14 +3,14 @@ part of 'liked_note_cubit.dart';
 
 class LikedNoteState extends Equatable {
   final Note? likedNote;
-  const LikedNoteState({
-    this.likedNote,
-  });
-
   @override
   List<Object?> get props => [
         likedNote,
       ];
+
+  const LikedNoteState({
+    this.likedNote,
+  });
 
   LikedNoteState copyWith({
     Note? likedNote,

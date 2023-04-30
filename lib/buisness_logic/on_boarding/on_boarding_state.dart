@@ -5,11 +5,6 @@ class OnBoardingState extends Equatable {
   final bool shouldShowSearchButton;
   final NostrEvent? searchedUser;
   final String? error;
-  const OnBoardingState({
-    this.shouldShowSearchButton = false,
-    this.searchedUser,
-    this.error,
-  });
 
   @override
   List<Object?> get props => [
@@ -18,15 +13,21 @@ class OnBoardingState extends Equatable {
         error,
       ];
 
+  const OnBoardingState({
+    this.shouldShowSearchButton = false,
+    this.searchedUser,
+    this.error,
+  });
+
   OnBoardingState copyWith({
     bool? shouldShowSearchButton,
     NostrEvent? searchedUser,
     String? error,
   }) {
     return OnBoardingState(
-      searchedUser: searchedUser,
       shouldShowSearchButton:
           shouldShowSearchButton ?? this.shouldShowSearchButton,
+      searchedUser: searchedUser,
       error: error,
     );
   }

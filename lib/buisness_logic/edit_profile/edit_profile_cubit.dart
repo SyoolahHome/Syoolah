@@ -20,22 +20,23 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   @override
   Future<void> close() {
-    nameController!.dispose();
-    usernameController!.dispose();
-    pictureController!.dispose();
-    bannerController!.dispose();
-    aboutController!.dispose();
+    nameController?.dispose();
+    usernameController?.dispose();
+    pictureController?.dispose();
+    bannerController?.dispose();
+    aboutController?.dispose();
+
     return super.close();
   }
 
   void saveEdits() {
     NostrService.instance.setCurrentUserMetaData(
       metadata: UserMetaData(
-        name: nameController!.text,
-        username: usernameController!.text,
-        picture: pictureController!.text,
-        banner: bannerController!.text,
-        about: aboutController!.text,
+        name: nameController?.text ?? metaData.name,
+        picture: pictureController?.text ?? metaData.picture,
+        banner: bannerController?.text ?? metaData.banner,
+        username: usernameController?.text ?? metaData.username,
+        about: aboutController?.text ?? metaData.about,
       ),
     );
   }

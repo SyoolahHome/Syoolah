@@ -4,14 +4,14 @@ part of 'note_comments_cubit.dart';
 class NoteCommentsState extends Equatable {
   final List<NostrEvent> noteComments;
 
-  const NoteCommentsState({
-    this.noteComments = const [],
-  });
-
   @override
   List<Object> get props => [
         noteComments,
       ];
+
+  const NoteCommentsState({
+    this.noteComments = const [],
+  });
 
   NoteCommentsState copyWith({
     List<NostrEvent>? noteComments,
