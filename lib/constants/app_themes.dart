@@ -13,6 +13,9 @@ abstract class AppThemes {
     colorScheme: ColorScheme.light(
       onSecondary: AppColors.black.withOpacity(0.75),
       onSecondaryContainer: AppColors.black.withOpacity(0.05),
+      background: AppColors.black,
+      onBackground: AppColors.white,
+      surface: AppColors.white.withOpacity(0.4),
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -189,6 +192,9 @@ abstract class AppThemes {
     colorScheme: ColorScheme.light(
       onSecondary: AppColors.white.withOpacity(0.9),
       onSecondaryContainer: AppColors.white.withOpacity(0.25),
+      background: AppColors.white,
+      onBackground: AppColors.black,
+      surface: AppColors.black.withOpacity(0.4),
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

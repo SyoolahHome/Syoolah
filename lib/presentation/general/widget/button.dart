@@ -25,7 +25,7 @@ class MunawarahButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.black,
+            backgroundColor: Theme.of(context).colorScheme.background,
             elevation: isSmall ? 1 : 4,
             shape: RoundedRectangleBorder(
               borderRadius: isSmall
@@ -35,12 +35,12 @@ class MunawarahButton extends StatelessWidget {
             padding: isSmall
                 ? const EdgeInsets.symmetric(horizontal: 15, vertical: 0)
                 : null,
-            foregroundColor: AppColors.white.withOpacity(0.4),
+            foregroundColor: Theme.of(context).colorScheme.surface,
           ),
           child: Text(
             text,
             style: TextStyle(
-              color: AppColors.white,
+              color: Theme.of(context).colorScheme.onBackground,
               fontSize: isSmall ? 11 : 17,
               fontWeight: FontWeight.w400,
             ),

@@ -6,6 +6,7 @@ import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../../constants/app_colors.dart';
 import '../../../services/utils/paths.dart';
 import '../../../services/utils/routing.dart';
+import 'action_button_container.dart';
 
 class TranslateIcon extends StatelessWidget {
   const TranslateIcon({
@@ -25,16 +26,10 @@ class TranslateIcon extends StatelessWidget {
         Routing.appCubit.showTranslationsSheet(context);
       },
       splashFactory: NoSplash.splashFactory,
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7.5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.black.withOpacity(0.05),
-        ),
+      child: ActionButtonContainer(
         child: Icon(
           FlutterRemix.translate,
-          color: color ?? AppColors.black.withOpacity(0.75),
+          color: color ?? Theme.of(context).colorScheme.onSecondary,
           size: 17.5,
         ),
       ),

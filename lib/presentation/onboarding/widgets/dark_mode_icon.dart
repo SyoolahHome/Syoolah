@@ -6,6 +6,7 @@ import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../../constants/app_colors.dart';
 import '../../../services/database/local/local_database.dart';
 import '../../../services/utils/paths.dart';
+import 'action_button_container.dart';
 
 class DarkIcon extends StatelessWidget {
   const DarkIcon({
@@ -25,16 +26,10 @@ class DarkIcon extends StatelessWidget {
         LocalDatabase.instance.toggleThemeState();
       },
       splashFactory: NoSplash.splashFactory,
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7.5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.black.withOpacity(0.05),
-        ),
+      child: ActionButtonContainer(
         child: Icon(
           FlutterRemix.contrast_2_line,
-          color: color ?? AppColors.black.withOpacity(0.75),
+          color: color ?? Theme.of(context).colorScheme.onSecondary,
           size: 17.5,
         ),
       ),

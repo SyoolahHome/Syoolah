@@ -8,6 +8,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../../buisness_logic/app/app_cubit.dart';
 import '../../../../services/utils/paths.dart';
 import '../../../constants/app_strings.dart';
+import 'action_button_container.dart';
 
 class RelaysWidget extends StatelessWidget {
   const RelaysWidget({super.key});
@@ -24,12 +25,7 @@ class RelaysWidget extends StatelessWidget {
           cubit.showRelaysSheet(context);
         },
         splashFactory: NoSplash.splashFactory,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7.5),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSecondaryContainer,
-            borderRadius: BorderRadius.circular(10),
-          ),
+        child: ActionButtonContainer(
           child: BlocBuilder<AppCubit, AppState>(
             builder: (context, state) {
               final activeRelays =

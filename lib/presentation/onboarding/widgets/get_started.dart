@@ -34,11 +34,11 @@ class GetStarted extends StatelessWidget {
           Animate(
             effects: const <Effect>[FadeEffect()],
             delay: const Duration(milliseconds: 1800),
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.only(right: 15),
               child: Icon(
                 FlutterRemix.arrow_right_s_line,
-                color: AppColors.white,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ),
