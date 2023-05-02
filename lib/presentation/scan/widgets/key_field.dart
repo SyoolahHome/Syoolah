@@ -57,7 +57,7 @@ class KeyField extends StatelessWidget {
                 },
                 child: Icon(
                   FlutterRemix.clipboard_line,
-                  color: AppColors.white.withOpacity(0.8),
+                  color: Theme.of(context).iconTheme.color,
                 ),
               ),
             ),

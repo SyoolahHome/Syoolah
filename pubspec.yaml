@@ -63,4 +63,5 @@ flutter:
   assets:
     - assets/
     - assets/logo/black_no_bg.png
+    - assets/logo/white_no_bg.png
     - assets/translations/

@@ -26,10 +26,12 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(label,
-            style: TextStyle(
-              color: Theme.of(context).hintColor,
-            )),
+        Text(
+          label,
+          style: TextStyle(
+            color: Theme.of(context).hintColor,
+          ),
+        ),
         const SizedBox(height: 5),
         Stack(
           alignment: Alignment.centerRight,
@@ -51,8 +53,6 @@ class CustomTextField extends StatelessWidget {
                       horizontal: 10,
                       vertical: 25,
                     ),
-                fillColor: AppColors.lighGrey,
-                filled: true,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(10)),

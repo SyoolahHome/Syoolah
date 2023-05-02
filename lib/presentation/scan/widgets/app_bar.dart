@@ -15,8 +15,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       leading: IconButton(
-        icon: const Icon(FlutterRemix.arrow_left_line),
-        color: AppColors.white,
+        icon: Icon(
+          FlutterRemix.arrow_left_line,
+          color: Theme.of(context).iconTheme.color,
+        ),
         onPressed: () {
           Navigator.pop(context);
         },

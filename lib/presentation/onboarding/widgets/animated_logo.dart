@@ -33,8 +33,12 @@ class MunawarahLogo extends StatelessWidget {
   final bool isHero;
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
     final widget = Image.asset(
-      AppUtils.appLogoSelector(AppLogoStyle.black),
+      AppUtils.appLogoSelector(
+        isDarkTheme ? AppLogoStyle.white : AppLogoStyle.black,
+      ),
       width: width,
     );
     if (isHero) {

@@ -84,7 +84,7 @@ abstract class AppThemes {
         ),
       ),
       iconTheme: MaterialStateProperty.all(
-        const IconThemeData(color: AppColors.white),
+        const IconThemeData(color: AppColors.black),
       ),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
     ),
@@ -99,13 +99,13 @@ abstract class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
-        color: AppColors.white.withOpacity(0.55),
+        color: AppColors.black.withOpacity(0.55),
         fontWeight: FontWeight.normal,
       ),
       contentPadding:
           const EdgeInsets.symmetric(vertical: 12.5, horizontal: 16),
       filled: true,
-      fillColor: AppColors.white.withOpacity(0.3),
+      fillColor: AppColors.black.withOpacity(0.15),
       errorBorder: OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -129,6 +129,7 @@ abstract class AppThemes {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.teal,
+      scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.black),
     ),
@@ -242,6 +243,7 @@ abstract class AppThemes {
         ),
       ),
     ),
+    iconTheme: const IconThemeData(color: AppColors.white),
     indicatorColor: AppColors.teal,
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.teal,
@@ -249,8 +251,6 @@ abstract class AppThemes {
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.black,
       behavior: SnackBarBehavior.floating,
-      showCloseIcon: true,
-      closeIconColor: AppColors.white,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
@@ -286,7 +286,7 @@ abstract class AppThemes {
       contentPadding:
           const EdgeInsets.symmetric(vertical: 12.5, horizontal: 16),
       filled: true,
-      fillColor: AppColors.white.withOpacity(0.3),
+      fillColor: AppColors.white.withOpacity(0.15),
       errorBorder: OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -311,7 +311,7 @@ abstract class AppThemes {
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.teal,
       surfaceTintColor: Colors.transparent,
-      iconTheme: const IconThemeData(size: 20, color: AppColors.black),
+      iconTheme: const IconThemeData(size: 20, color: AppColors.white),
     ),
     chipTheme: ChipThemeData(
       selectedColor: AppColors.teal.withOpacity(0.1),

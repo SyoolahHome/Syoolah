@@ -21,7 +21,7 @@ class PageViewTracker extends StatelessWidget {
           vertical: 10,
         ),
         decoration: BoxDecoration(
-          color: AppColors.black.withOpacity(0.05),
+          color: Theme.of(context).colorScheme.background.withOpacity(0.05),
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: AnimatedSwitcher(
@@ -52,8 +52,11 @@ class PageViewTracker extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 5),
                     decoration: BoxDecoration(
                       color: currentStepIndex - 1 >= index
-                          ? AppColors.black
-                          : AppColors.black.withOpacity(0.2),
+                          ? Theme.of(context).colorScheme.background
+                          : Theme.of(context)
+                              .colorScheme
+                              .background
+                              .withOpacity(0.2),
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                   ),

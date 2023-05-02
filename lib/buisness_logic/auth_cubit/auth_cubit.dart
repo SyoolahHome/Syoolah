@@ -252,7 +252,7 @@ class AuthCubit extends Cubit<AuthState> {
               controller: nameController,
               label: AppStrings.yourName,
               contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             ),
             nextViewAllower: () {
               final username = usernameController?.text ?? '';
@@ -325,7 +325,10 @@ class AuthCubit extends Cubit<AuthState> {
                       backgroundColor:
                           AppColors.black.withOpacity(iconColorOpacity),
                     ),
-                    icon: const Icon(FlutterRemix.eye_2_line),
+                    icon: Icon(
+                      FlutterRemix.eye_2_line,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                 );
               },
