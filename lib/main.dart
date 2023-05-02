@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            initialRoute: Paths.onBoarding,
+            initialRoute: Paths.initialRoute,
             title: AppStrings.appName,
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,

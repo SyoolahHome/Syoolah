@@ -1,4 +1,7 @@
 abstract class AppStrings {
+  static const logout = 'Logout';
+  static const yourFollowings = 'Your Followings';
+  static const yourFollowers = 'Your Followers';
   static const authenticate = 'Authenticate';
   static const String existentKeyAuth = 'Authenticate with existing key';
   static const relayNameError = ' Can\'t load relay name';

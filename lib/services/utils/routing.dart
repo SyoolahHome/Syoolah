@@ -18,6 +18,9 @@ import '../../presentation/feeds/global_feed.dart';
 import '../../presentation/feeds/hadith_feed.dart';
 import '../../presentation/feeds/sharia_feed.dart';
 import '../../presentation/feeds/sirah_feed.dart';
+import '../../presentation/followers/followers.dart';
+import '../../presentation/followings/followings.dart';
+import '../../presentation/nostr_service_loading/nostr_service_loading.dart';
 import '../../presentation/sign_up/sign_up.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
@@ -48,6 +51,9 @@ abstract class Routing {
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentSignUp: (context) => const ExistentSignUp(),
     Paths.onBoardingRelays: (context) => const OnBoardingRelays(),
+    Paths.followings: (context) => Followings(),
+    Paths.followers: (context) => Followers(),
+    Paths.nostrServiceLoading: (context) => const NostrServiceLoading(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

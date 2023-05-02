@@ -146,7 +146,7 @@ class SignUp extends StatelessWidget {
                                 }
                                 if (isLastView) {
                                   Navigator.of(context)
-                                      .pushNamed(Paths.bottomBar);
+                                      .pushNamed(Paths.nostrServiceLoading);
                                 } else {
                                   cubit.gotoNext();
                                 }

@@ -13,6 +13,7 @@ class NostrService {
   static NostrService get instance => _instance;
   NostrService._();
 
+  Completer relaysConnectionCompleter = Completer();
   Future<void> init({
     List<String>? relaysUrls,
   }) async {
@@ -22,6 +23,8 @@ class NostrService {
     await Nostr.instance.relaysService.init(
       relaysUrl: relaysUrls ?? defaultRelaysUrls,
     );
+
+    relaysConnectionCompleter.complete();
   }
 
   void setCurrentUserMetaData({

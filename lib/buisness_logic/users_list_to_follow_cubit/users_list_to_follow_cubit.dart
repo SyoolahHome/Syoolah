@@ -13,18 +13,21 @@ part 'users_list_to_follow_state.dart';
 class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
   Stream<NostrEvent> currentUserFollowing;
   Stream<NostrEvent> currentUserFollowers;
+  Stream<NostrEvent> usersListMetadata;
+
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
   StreamSubscription<NostrEvent>? _usersListMetadataSubscription;
 
   UsersListToFollowCubit({
-    required List<String> pubKeys,
     required this.currentUserFollowers,
     required this.currentUserFollowing,
+    required this.usersListMetadata,
   }) : super(UsersListToFollowInitial()) {
     _handleCurrentUserFollowers();
+
     _handleCurrentUserFollowing();
-    _handleContacts(pubKeys);
+    _handleContacts();
   }
 
   @override
@@ -110,9 +113,8 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     });
   }
 
-  void _handleContacts(List<String> pubKeys) {
-    _usersListMetadataSubscription =
-        NostrService.instance.usersListMetadata(pubKeys).listen(
+  void _handleContacts() {
+    _usersListMetadataSubscription = usersListMetadata.listen(
       (event) {
         final newList = [
           ...state.pubKeysMetadata,

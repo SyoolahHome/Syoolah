@@ -50,7 +50,8 @@ class Profile extends StatelessWidget {
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return <Widget>[
                         SliverToBoxAdapter(
-                            child: CustomAppBar(userMetadata: metadata)),
+                          child: CustomAppBar(userMetadata: metadata),
+                        ),
                         SliverToBoxAdapter(
                           child: Builder(
                             builder: (context) {

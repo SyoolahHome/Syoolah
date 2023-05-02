@@ -42,6 +42,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   arguments: userMetadata,
                 );
               },
+              onLogout: () {
+                cubit.logout(
+                  onSuccess: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(Paths.onBoarding);
+                  },
+                );
+              },
             );
           },
         ),

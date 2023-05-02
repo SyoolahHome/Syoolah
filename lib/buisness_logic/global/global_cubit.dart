@@ -87,6 +87,14 @@ class GlobalCubit extends Cubit<GlobalState> {
     }
   }
 
+  @override
+  Future<void> close() {
+    _currentUserFollowersSubscription?.cancel();
+    _currentUserFollowingSubscription?.cancel();
+
+    return super.close();
+  }
+
   void _handleCurrentUserFollowers() {
     _currentUserFollowersSubscription = currentUserFollowers.listen((event) {
       emit(state.copyWith(currentUserFollowers: event));

@@ -1,8 +1,21 @@
+import '../database/local/local_database.dart';
+
 abstract class Paths {
+  static get initialRoute {
+    final isAlreadyUserExists = LocalDatabase.instance.isAlreadyUserExists();
+
+    if (isAlreadyUserExists) {
+      return Paths.nostrServiceLoading;
+    } else {
+      return Paths.onBoarding;
+    }
+  }
+
   static const String authChoose = '/auth_choose';
   static const String existentSignUp = '/existentSignUp';
   static const String onBoarding = '/onBoarding';
   static const String onBoardingSearch = '/onBoardingSearch';
+  static const String nostrServiceLoading = '/nostrServiceLoading';
   static const String bottomBar = '/bottomBar';
   static const String SignUp = '/SignUp';
   static const String globalFeed = '/globalFeed';
@@ -19,4 +32,6 @@ abstract class Paths {
   static const String aboutMunawarah = '/aboutMunawarah';
   static const String onBoardingRelays = '/onBoardingRelays';
   static const String foreignProfile = '/foreignProfile';
+  static const String followings = '/followings';
+  static const String followers = '/followers';
 }

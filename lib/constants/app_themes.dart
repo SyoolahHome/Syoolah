@@ -65,7 +65,7 @@ abstract class AppThemes {
     ),
     indicatorColor: AppColors.teal,
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColors.teal,
+      color: AppColors.black,
     ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.black,
@@ -248,7 +248,7 @@ abstract class AppThemes {
     iconTheme: const IconThemeData(color: AppColors.white),
     indicatorColor: AppColors.teal,
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColors.teal,
+      color: AppColors.white,
     ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.black,

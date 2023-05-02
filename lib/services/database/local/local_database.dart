@@ -84,4 +84,8 @@ class LocalDatabase implements LocalDatabaseBase {
     final currentThemeState = getThemeState();
     setThemeState(!currentThemeState);
   }
+
+  bool isAlreadyUserExists() {
+    return getPrivateKey() != null;
+  }
 }

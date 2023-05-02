@@ -1,6 +1,7 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/bottom_sheet_option.dart';
 import 'widgets/profile_title.dart';
@@ -31,6 +32,8 @@ class BottomSheetOptionsWidget extends StatelessWidget {
               options.length,
               (index) {
                 final current = options[index];
+                final isLogout = current.icon == FlutterRemix.logout_box_line;
+
                 return Animate(
                   delay: Duration(milliseconds: 200 + (index * 200)),
                   effects: const <Effect>[
@@ -45,7 +48,9 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                     leading: Icon(
                       current.icon,
                       size: 17.5,
-                      color: Theme.of(context).colorScheme.background,
+                      color: isLogout
+                          ? Theme.of(context).colorScheme.error
+                          : Theme.of(context).colorScheme.background,
                     ),
                     title: Builder(builder: (context) {
                       final title = current.title;
@@ -72,7 +77,12 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                       } else {
                         return Text(
                           title,
-                          style: Theme.of(context).textTheme.labelMedium,
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: isLogout
+                                        ? Theme.of(context).colorScheme.error
+                                        : null,
+                                  ),
                         );
                       }
                     }),

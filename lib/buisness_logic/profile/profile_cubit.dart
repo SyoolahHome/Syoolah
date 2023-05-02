@@ -7,6 +7,7 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:ditto/services/utils/app_utils.dart';
@@ -166,9 +167,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
+  void logout({required VoidCallback onSuccess}) {
+    try {
+      LocalDatabase.instance.deletePrivateKey();
+      onSuccess();
+    } catch (e) {}
+  }
+
   void onMorePressed(
     BuildContext context, {
     required void Function() onEditProfile,
+    required void Function() onLogout,
   }) {
     final metadata = UserMetaData.fromJson(jsonDecode(
       state.currentUserMetadata?.content ?? "{}",
@@ -240,6 +249,11 @@ class ProfileCubit extends Cubit<ProfileState> {
                   SnackBars.text(context, AppStrings.copySuccess);
             });
           },
+        ),
+        BottomSheetOption(
+          title: AppStrings.logout,
+          icon: FlutterRemix.logout_box_line,
+          onPressed: onLogout,
         ),
       ],
     );

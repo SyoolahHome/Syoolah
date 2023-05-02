@@ -10,13 +10,13 @@ abstract class AppConfigs {
     'wss://nostr.fmt.wiz.biz',
     'wss://relay.damus.io',
     'wss://nostr-pub.wellorder.net',
-    'wss://relay.nostr.info',
+    // 'wss://relay.nostr.info',
     'wss://offchain.pub',
     'wss://nos.lol',
-    'wss://brb.io',
+    // 'wss://brb.io',
     'wss://relay.snort.social',
     'wss://relay.current.fyi',
-    'wss://nostr.relayer.se',
+    // 'wss://nostr.relayer.se',
   ];
   static final List<FeedCategory> categories = [
     const FeedCategory(
