@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../buisness_logic/global/global_cubit.dart';
 import '../../../constants/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -18,7 +17,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
-    final globalCubit = context.read<GlobalCubit>();
 
     return AppBar(
       elevation: 0,
@@ -31,14 +29,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: AppColors.black,
           ),
           onPressed: () {
-            cubit.onFollowingsMorePressed(
+            cubit.onFollowersMorePressed(
               context,
               followings: followingsList,
-              onUnFollowAll: () {
-                for (var i = 0; i < followingsList.length; i++) {
-                  globalCubit.handleFollowButtonTap(followingsList[i]);
-                }
-              },
             );
           },
         ),

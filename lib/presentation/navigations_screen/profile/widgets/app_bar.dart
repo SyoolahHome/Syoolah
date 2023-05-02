@@ -21,18 +21,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     final cubit = context.read<ProfileCubit>();
 
     return AppBar(
-      title: const HeadTitle(
-        title: AppStrings.myProfile,
-      ),
+      title: const HeadTitle(title: AppStrings.myProfile),
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       elevation: 0.0,
       actions: <Widget>[
         IconButton(
-          icon: const Icon(
-            FlutterRemix.more_2_line,
-            color: AppColors.black,
-          ),
+          icon: const Icon(FlutterRemix.more_2_line, color: AppColors.black),
           onPressed: () {
             cubit.onMorePressed(
               context,

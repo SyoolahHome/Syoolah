@@ -1,8 +1,12 @@
 abstract class AppStrings {
-  static const logout = 'Logout';
-  static const yourFollowings = 'Your Followings';
-  static const yourFollowers = 'Your Followers';
-  static const authenticate = 'Authenticate';
+  static const String unFollowAll = 'Unfollow all';
+  static const String noFollowings =
+      'No followings yet, you will need to follow some users to see them here';
+  static const String copyFollowingsKeys = 'Copy Your Followings Keys';
+  static const String logout = 'Logout';
+  static const String yourFollowings = 'Your Followings';
+  static const String yourFollowers = 'Your Followers';
+  static const String authenticate = 'Authenticate';
   static const String existentKeyAuth = 'Authenticate with existing key';
   static const relayNameError = ' Can\'t load relay name';
   static const relayDescriptionError = ' Can\'t load relay description';

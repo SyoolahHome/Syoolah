@@ -50,8 +50,7 @@ class Profile extends StatelessWidget {
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return <Widget>[
                         SliverToBoxAdapter(
-                          child: CustomAppBar(userMetadata: metadata),
-                        ),
+                            child: CustomAppBar(userMetadata: metadata)),
                         SliverToBoxAdapter(
                           child: Builder(
                             builder: (context) {
@@ -61,7 +60,6 @@ class Profile extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     const SizedBox(height: height * 2),
-                                    // ProfileCover(metadata: metadata),
                                     ProfileHeader(metadata: metadata),
                                     const SizedBox(height: height * 3),
                                     ProfileName(metadata: metadata),

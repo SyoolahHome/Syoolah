@@ -57,8 +57,8 @@ abstract class BottomSheetService {
   static Future<void> showProfileBottomSheet(
     BuildContext context, {
     required List<BottomSheetOption> options,
-  }) {
-    return showModalBottomSheet(
+  }) async {
+    return await showModalBottomSheet(
       context: context,
       builder: (context) {
         return BottomSheetOptionsWidget(options: options);
@@ -188,6 +188,21 @@ abstract class BottomSheetService {
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: false,
+    );
+  }
+
+  static Future<void> showProfileFollowings(
+    BuildContext context, {
+    required List<BottomSheetOption> options,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheetOptionsWidget(options: options);
+      },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
     );
   }
 }

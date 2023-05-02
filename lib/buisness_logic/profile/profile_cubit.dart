@@ -199,17 +199,22 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
         BottomSheetOption(
           title: AppStrings.copyPubKey,
-          icon: FlutterRemix.file_code_line,
+          icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(currentUserMetadataPubkey ?? "", onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, AppStrings.copySuccess);
-            });
+            AppUtils.copy(
+              currentUserMetadataPubkey ?? "",
+              onSuccess: () {
+                final shownSnackbarController = SnackBars.text(
+                  context,
+                  AppStrings.copySuccess,
+                );
+              },
+            );
           },
         ),
         BottomSheetOption(
           title: AppStrings.copyMetaDataEvent,
-          icon: FlutterRemix.file_code_line,
+          icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
               final shownSnackbarController =
@@ -219,7 +224,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
         BottomSheetOption(
           title: AppStrings.copyProfileEvent,
-          icon: FlutterRemix.file_code_line,
+          icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(
               currentUserMetadata?.serialized() ?? "",
@@ -232,7 +237,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
         BottomSheetOption(
           title: AppStrings.copyImageUrl,
-          icon: FlutterRemix.file_code_line,
+          icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(metadata.picture ?? "", onSuccess: () {
               final shownSnackbarController =
@@ -242,7 +247,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
         BottomSheetOption(
           title: AppStrings.copyUsername,
-          icon: FlutterRemix.file_code_line,
+          icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(metadata.username, onSuccess: () {
               final shownSnackbarController =
@@ -266,14 +271,15 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void _handleCurrentUserMetadata() {
-    _currentUserMetadataSubscription =
-        currentUserMetadataStream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserMetadata: event,
-        ),
-      );
-    });
+    _currentUserMetadataSubscription = currentUserMetadataStream.listen(
+      (event) {
+        emit(
+          state.copyWith(
+            currentUserMetadata: event,
+          ),
+        );
+      },
+    );
   }
 
   void _handleCurrentUserPosts() {
@@ -294,5 +300,47 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
       );
     });
+  }
+
+  Future<void> onFollowingsMorePressed(
+    BuildContext context, {
+    required List<String> followings,
+    required VoidCallback onUnFollowAll,
+  }) {
+    return BottomSheetService.showProfileFollowings(
+      context,
+      options: <BottomSheetOption>[
+        BottomSheetOption(
+          icon: FlutterRemix.copyleft_line,
+          title: AppStrings.copyFollowingsKeys,
+          onPressed: () {
+            AppUtils.copy(
+              followings.join("\n"),
+            );
+          },
+        ),
+        BottomSheetOption(
+          icon: FlutterRemix.copyleft_line,
+          title: AppStrings.unFollowAll,
+          onPressed: onUnFollowAll,
+        ),
+      ],
+    );
+  }
+
+  Future<void> onFollowersMorePressed(
+    BuildContext context, {
+    required List<String> followings,
+  }) {
+    return BottomSheetService.showProfileFollowings(
+      context,
+      options: <BottomSheetOption>[
+        BottomSheetOption(
+          icon: FlutterRemix.copyleft_line,
+          title: AppStrings.copyFollowingsKeys,
+          onPressed: () {},
+        ),
+      ],
+    );
   }
 }

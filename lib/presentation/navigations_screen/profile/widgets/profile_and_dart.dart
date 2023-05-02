@@ -1,4 +1,5 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/follow_info.dart';
@@ -26,9 +27,16 @@ class ProfileHeader extends StatelessWidget {
               label: AppStrings.followings,
               count: state.currentUserFollowing?.tags.length ?? 0,
               onTap: () {
+                final profileCubit = context.read<ProfileCubit>();
+                final globalCubit = context.read<GlobalCubit>();
+
                 Navigator.of(context).pushNamed(
                   Paths.followings,
-                  arguments: state.currentUserFollowing?.tags ?? [],
+                  arguments: {
+                    "tags": state.currentUserFollowing?.tags ?? [],
+                    "profileCubit": profileCubit,
+                    "globalCubit": globalCubit,
+                  },
                 );
               },
             );
