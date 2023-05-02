@@ -1,6 +1,8 @@
 import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/app_colors.dart';
+
 abstract class SnackBars {
   static ScaffoldFeatureController text(
     BuildContext context,
@@ -17,7 +19,7 @@ abstract class SnackBars {
           style: Theme.of(context)
               .textTheme
               .bodyMedium
-              ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+              ?.copyWith(color: AppColors.white),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100.0),

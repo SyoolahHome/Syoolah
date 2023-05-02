@@ -16,7 +16,7 @@ class AvatarUpload extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 shape: BoxShape.circle,
               ),
               child: state.pickedImage != null
@@ -32,7 +32,10 @@ class AvatarUpload extends StatelessWidget {
                             width: 45,
                             height: 45,
                             decoration: BoxDecoration(
-                              color: Colors.grey[200]!.withOpacity(0.5),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant
+                                  .withOpacity(0.5),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
@@ -43,9 +46,10 @@ class AvatarUpload extends StatelessWidget {
                         ),
                       ],
                     )
-                  : const Icon(
+                  : Icon(
                       Icons.person,
                       size: 20,
+                      color: Theme.of(context).iconTheme.color,
                     )),
         );
       },

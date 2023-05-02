@@ -19,6 +19,7 @@ class KeySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PrivateKeyGenSuccessCubit cubit;
+
     final widget =
         BlocBuilder<PrivateKeyGenSuccessCubit, PrivateKeyGenSuccessState>(
       builder: (context, state) {

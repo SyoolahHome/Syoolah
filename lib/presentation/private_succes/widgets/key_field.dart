@@ -18,9 +18,6 @@ class KeyField extends StatelessWidget {
       controller: TextEditingController(text: text),
       style: Theme.of(context).textTheme.labelSmall,
       enabled: false,
-      decoration: InputDecoration(
-        fillColor: AppColors.lighGrey,
-      ),
     );
   }
 }

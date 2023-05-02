@@ -322,8 +322,10 @@ class AuthCubit extends Cubit<AuthState> {
                           BottomSheetService.showPrivateKeyGenSuccess(context);
                     },
                     style: IconButton.styleFrom(
-                      backgroundColor:
-                          AppColors.black.withOpacity(iconColorOpacity),
+                      backgroundColor: Theme.of(context)
+                          .colorScheme
+                          .surfaceVariant
+                          .withOpacity(iconColorOpacity),
                     ),
                     icon: Icon(
                       FlutterRemix.eye_2_line,

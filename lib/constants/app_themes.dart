@@ -17,6 +17,7 @@ abstract class AppThemes {
       onBackground: AppColors.white,
       surface: AppColors.white.withOpacity(0.4),
       onSurface: Colors.white,
+      onSurfaceVariant: Colors.grey[200]!,
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
     ),
     scaffoldBackgroundColor: AppColors.white,
@@ -84,7 +85,7 @@ abstract class AppThemes {
         ),
       ),
       iconTheme: MaterialStateProperty.all(
-        const IconThemeData(color: AppColors.black),
+        const IconThemeData(color: AppColors.white),
       ),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
     ),
@@ -192,6 +193,7 @@ abstract class AppThemes {
     primaryColorLight: AppColors.tealLight,
     primaryColorDark: AppColors.tealDark,
     colorScheme: ColorScheme.light(
+      onSurfaceVariant: Colors.grey.withOpacity(.5),
       onSecondary: AppColors.white.withOpacity(0.9),
       onSecondaryContainer: AppColors.white.withOpacity(0.25),
       background: AppColors.white,
