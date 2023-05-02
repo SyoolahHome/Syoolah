@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -51,8 +52,8 @@ abstract class AppUtils {
     }
   }
 
-  static void changeLocale(BuildContext context, Locale locale) {
-    throw UnimplementedError();
+  static Future<void> changeLocale(BuildContext context, Locale locale) {
+    return context.setLocale(locale);
   }
 }
 

@@ -1,4 +1,6 @@
 abstract class AppStrings {
+  static const authenticate = 'Authenticate';
+  static const String existentKeyAuth = 'Authenticate with existing key';
   static const relayNameError = ' Can\'t load relay name';
   static const relayDescriptionError = ' Can\'t load relay description';
 
@@ -175,5 +177,9 @@ We're building a world that's impossible to hack intentions - a world where inte
     }
 
     return "$name's relay";
+  }
+
+  static String laungageApplied(String code) {
+    return "Language applied: $code";
   }
 }

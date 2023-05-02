@@ -45,6 +45,9 @@ class AuthChooseBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
           onTap: onTap,
           child: Align(
             alignment: Alignment.centerLeft,

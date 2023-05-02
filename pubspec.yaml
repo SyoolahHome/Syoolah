@@ -37,7 +37,8 @@ dependencies:
   image_picker:
   cached_network_image:
   http: ^0.13.5
-  timeago: ^3.4.0
+  timeago: 
+  easy_localization: ^3.0.1 
   dart_openai: ^1.9.1
   hashtagable: ^2.1.0
   transitioned_indexed_stack: ^1.0.2
@@ -62,3 +63,4 @@ flutter:
   assets:
     - assets/
     - assets/logo/black_no_bg.png
+    - assets/translations/

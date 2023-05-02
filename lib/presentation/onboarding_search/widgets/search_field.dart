@@ -27,7 +27,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: AppStrings.searchUsersHint,
           filled: true,
-          fillColor: AppColors.lighGrey,
+          fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
           hintStyle: const TextStyle(
             color: AppColors.grey,
             fontSize: 15,

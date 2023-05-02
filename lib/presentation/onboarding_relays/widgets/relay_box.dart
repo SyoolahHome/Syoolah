@@ -81,7 +81,8 @@ class RelayBox extends StatelessWidget {
                 ? snapshot!.data!.description
                 : AppStrings.relayDescriptionError,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: AppColors.black.withOpacity(1),
+                  color:
+                      Theme.of(context).colorScheme.background.withOpacity(.3),
                   fontWeight: FontWeight.w300,
                 ),
             maxLines: 1,

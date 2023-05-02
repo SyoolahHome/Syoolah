@@ -7,6 +7,7 @@ import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -16,6 +17,7 @@ import 'constants/app_strings.dart';
 import 'constants/app_themes.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
 
   Animate.restartOnHotReload = kDebugMode;
@@ -24,8 +26,16 @@ Future<void> main() async {
 
   final box = await LocalDatabase.instance.init();
   NostrService.instance.init();
+  await EasyLocalization.ensureInitialized();
 
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('fr')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: Locale('en'),
+        child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -55,6 +65,9 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             routes: Routing.routes,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             initialRoute: Paths.onBoarding,
             title: AppStrings.appName,
             theme: AppThemes.primary,

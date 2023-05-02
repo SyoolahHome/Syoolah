@@ -82,6 +82,11 @@ class AuthCubit extends Cubit<AuthState> {
 
       return;
     }
+    if (!Nostr.instance.keysService.isValidPrivateKey(existentKey)) {
+      emit(state.copyWith(error: AppStrings.invalidKey));
+
+      return;
+    }
 
     try {
       final keyChain = NostrKeyPairs(private: existentKey);

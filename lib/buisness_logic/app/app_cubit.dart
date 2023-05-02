@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
+import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -204,6 +206,9 @@ class AppCubit extends Cubit<AppState> {
       return MunawarahButton(
         onTap: () {
           AppUtils.changeLocale(context, locale);
+          Navigator.of(context).pop();
+          SnackBars.text(
+              context, AppStrings.laungageApplied(locale.languageCode));
         },
         text: text,
         isSmall: true,

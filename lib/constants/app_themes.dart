@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 abstract class AppThemes {
-  static final primary = ThemeData.light().copyWith(
+  static final primary = ThemeData.light(useMaterial3: true).copyWith(
     primaryColor: AppColors.teal,
     primaryColorLight: AppColors.tealLight,
     primaryColorDark: AppColors.tealDark,
@@ -69,7 +69,6 @@ abstract class AppThemes {
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.black,
       behavior: SnackBarBehavior.floating,
-      showCloseIcon: true,
       closeIconColor: AppColors.white,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -187,7 +186,7 @@ abstract class AppThemes {
     ),
   );
 
-  static final darkTheme = ThemeData.dark().copyWith(
+  static final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
     primaryColor: AppColors.teal,
     primaryColorLight: AppColors.tealLight,
     primaryColorDark: AppColors.tealDark,
