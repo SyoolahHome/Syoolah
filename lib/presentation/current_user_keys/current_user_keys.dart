@@ -4,11 +4,14 @@ import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
+import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../services/bottom_sheet/bottom_sheet_service.dart';
 import 'widgets/app_bar.dart';
+import 'widgets/danger_box.dart';
 import 'widgets/private_key_section.dart';
 
 class CurrentUserKeys extends StatelessWidget {
@@ -25,34 +28,46 @@ class CurrentUserKeys extends StatelessWidget {
       appBar: CustomAppBar(),
       body: MarginedBody(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: height * 3),
-            Text(
-              AppStrings.myKeys,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            SizedBox(height: height * 3),
-            HeadTitle(title: AppStrings.myPublicKey),
-            SizedBox(height: height),
-            KeySection(type: KeySectionType.publicKey),
-            SizedBox(height: height * 2),
-            HeadTitle(title: AppStrings.nPubKey),
-            SizedBox(height: height),
-            KeySection(type: KeySectionType.nPubKey),
-            SizedBox(height: height * 6),
-            HeadTitle(title: AppStrings.myPrivateKey),
-            SizedBox(height: height),
-            HiddenPrivateKeySection(
-              type: HiddenPrivateKeySectionType.privateKey,
-            ),
-            HiddenPrivateKeySection(
-              type: HiddenPrivateKeySectionType.nsecKey,
-            ),
-          ],
-        ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: AnimateList(
+              effects: <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(0, 0.5),
+                ),
+              ],
+              interval: Duration(milliseconds: 100),
+              children: <Widget>[
+                SizedBox(height: height * 3),
+                Text(
+                  AppStrings.myKeys,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                SizedBox(height: height * 6),
+                HeadTitle(title: AppStrings.myPublicKey),
+                SizedBox(height: height),
+                KeySection(type: KeySectionType.publicKey),
+                SizedBox(height: height * 2),
+                HeadTitle(title: AppStrings.nPubKey),
+                SizedBox(height: height),
+                KeySection(type: KeySectionType.nPubKey),
+                SizedBox(height: height * 4),
+                SizedBox(width: double.infinity, child: OrDivider()),
+                SizedBox(height: height * 4),
+                HeadTitle(title: AppStrings.myPrivateKey),
+                DangerBox(),
+                SizedBox(height: height * 3),
+                HiddenPrivateKeySection(
+                  type: HiddenPrivateKeySectionType.privateKey,
+                ),
+                SizedBox(height: height * 2),
+                HiddenPrivateKeySection(
+                  type: HiddenPrivateKeySectionType.nsecKey,
+                ),
+              ],
+            )),
       ),
     );
   }

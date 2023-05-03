@@ -1,4 +1,8 @@
 abstract class AppStrings {
+  static const String danger = 'Danger!';
+
+  static const String dangerDoNotSharePrivateKeys =
+      "Do not share your private & nsec keys since they can give access to your Nostr account.";
   static const String nPubKey = 'Npub Key';
   static const String reveal = 'Reveal';
   static const String myPublicKey = 'My Public Key';

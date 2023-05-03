@@ -45,6 +45,7 @@ class HiddenPrivateKeySection extends StatelessWidget {
           style: Theme.of(context).textTheme.labelMedium,
         ),
         MunawarahButton(
+          isSmall: true,
           text: AppStrings.reveal,
           onTap: () {
             final val = BottomSheetService.showKey(

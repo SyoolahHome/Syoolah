@@ -30,15 +30,14 @@ class Settings extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: height * 2),
+                  SizedBox(height: height),
                   Text(
                     AppStrings.settings,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppColors.black,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
-                  SizedBox(height: height * 2),
+                  SizedBox(height: height * 3),
                   ...List.generate(
                     settingsItems.length,
                     (index) {

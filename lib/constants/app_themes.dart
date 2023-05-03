@@ -20,6 +20,7 @@ abstract class AppThemes {
       onSurfaceVariant: Colors.grey[200]!,
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
       onPrimary: AppColors.lighGrey,
+      errorContainer: Colors.red,
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -150,6 +151,11 @@ abstract class AppThemes {
       overlayColor: MaterialStateProperty.all(AppColors.lighGrey),
       splashFactory: NoSplash.splashFactory,
     ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: AppColors.black,
+      ),
+    ),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -203,6 +209,7 @@ abstract class AppThemes {
       onSurface: Colors.black87,
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
       onPrimary: Colors.grey[800]!,
+      errorContainer: Colors.red,
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -316,6 +323,11 @@ abstract class AppThemes {
       backgroundColor: AppColors.teal,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.white),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: AppColors.white,
+      ),
     ),
     chipTheme: ChipThemeData(
       selectedColor: AppColors.teal.withOpacity(0.1),

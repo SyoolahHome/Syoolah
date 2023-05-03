@@ -1,5 +1,6 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/app_colors.dart';
@@ -52,13 +53,14 @@ class RelayConfigTile extends StatelessWidget {
                   );
                 }
 
-                return GestureDetector(
-                  onTap: () => onRelayBoxTap(context),
-                  child: Icon(
-                    FlutterRemix.information_line,
-                    color: snapshot.hasData
-                        ? null
-                        : Theme.of(context).iconTheme.color!.withOpacity(.25),
+                return Animate(
+                  effects: <Effect>[FadeEffect()],
+                  target: snapshot.hasData ? 1 : 0,
+                  child: GestureDetector(
+                    onTap: () => onRelayBoxTap(context),
+                    child: Icon(
+                      FlutterRemix.information_line,
+                    ),
                   ),
                 );
               },
