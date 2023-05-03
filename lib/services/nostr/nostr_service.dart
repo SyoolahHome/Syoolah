@@ -22,6 +22,9 @@ class NostrService {
 
     await Nostr.instance.relaysService.init(
       relaysUrl: relaysUrls ?? defaultRelaysUrls,
+      retryOnClose: true,
+      shouldReconnectToRelayOnNotice: true,
+      connectionTimeout: Duration(seconds: 4),
     );
 
     relaysConnectionCompleter.complete();

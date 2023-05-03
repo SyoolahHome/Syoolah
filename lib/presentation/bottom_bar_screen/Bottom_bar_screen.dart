@@ -27,26 +27,30 @@ class BottomBar extends StatelessWidget {
         value: cubit,
         child: BlocProvider(
           create: (context) => BottomBarCubit(),
-          child: Builder(builder: (context) {
-            final cubit = context.read<BottomBarCubit>();
-            return BlocBuilder<BottomBarCubit, int>(builder: (context, state) {
-              return Scaffold(
-                bottomNavigationBar: CustomBottomBar(
-                  items: cubit.items,
-                  selectedIndex: state,
-                  onElementTap: cubit.onItemTapped,
-                ),
-                body: FadeIndexedStack(
-                  index: state,
-                  children: cubit.items.map(
-                    (BottomBarItem item) {
-                      return item.screen;
-                    },
-                  ).toList(),
-                ),
+          child: Builder(
+            builder: (context) {
+              final cubit = context.read<BottomBarCubit>();
+              return BlocBuilder<BottomBarCubit, int>(
+                builder: (context, state) {
+                  return Scaffold(
+                    bottomNavigationBar: CustomBottomBar(
+                      items: cubit.items,
+                      selectedIndex: state,
+                      onElementTap: cubit.onItemTapped,
+                    ),
+                    body: FadeIndexedStack(
+                      index: state,
+                      children: cubit.items.map(
+                        (BottomBarItem item) {
+                          return item.screen;
+                        },
+                      ).toList(),
+                    ),
+                  );
+                },
               );
-            });
-          }),
+            },
+          ),
         ),
       ),
     );

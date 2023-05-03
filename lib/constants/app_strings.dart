@@ -1,4 +1,13 @@
 abstract class AppStrings {
+  static const String reveal = 'Reveal';
+  static const String myPublicKey = 'My Public Key';
+  static const String myPrivateKey = 'My Private Key';
+  static const String myKeys = 'My Keys';
+  static const String changeLanguage = 'Change App Language';
+  static const String relaysConfigs = 'Relays Configurations';
+  static const String darkMode = 'Dark mode';
+  static const String switchDarkMode = 'Switch App Theme';
+  static const String settings = 'Settings';
   static const String unFollowAll = 'Unfollow all';
   static const String noFollowings =
       'No followings yet, you will need to follow some users to see them here';
@@ -124,7 +133,7 @@ abstract class AppStrings {
   static const String unfollow = "Unfollow";
   static const String error = "Something went wrong, try again";
   static const String postCreatedSuccessfully = "Post Created Successfully";
-  static const String selectedImage = "Selected Image";
+  static const String selectedImages = "Selected Images";
   static const String chooseCategories = "Choose Categories";
   static const String yourPost = "Your Post";
   static const String createNewPost = "Create New Post";

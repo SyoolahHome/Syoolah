@@ -17,16 +17,26 @@ class PostButton extends StatelessWidget {
     final cubit = context.read<AddNewPostCubit>();
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
           onPressed: () {
             cubit.addImage();
           },
-          icon: const Icon(
+          icon: Icon(
             FlutterRemix.image_add_line,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
+        IconButton(
+          onPressed: () {
+            // cubit.setYoutubeVideo();
+          },
+          icon: Icon(
+            FlutterRemix.youtube_line,
+            color: Theme.of(context).iconTheme.color,
+          ),
+        ),
+        Spacer(),
         BlocConsumer<AddNewPostCubit, AddNewPostState>(
           listener: (_, state) {
             if (state.success != null) {

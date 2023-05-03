@@ -10,6 +10,7 @@ import '../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../presentation/about_munawarah/about_munawarah.dart';
 import '../../presentation/auth_choose/auth_choose.dart';
 import '../../presentation/bottom_bar_screen/bottom_bar_screen.dart';
+import '../../presentation/current_user_keys/current_user_keys.dart';
 import '../../presentation/edit_profile/edit_Profile.dart';
 import '../../presentation/feeds/dua_feed.dart';
 import '../../presentation/feeds/fiqh_feed.dart';
@@ -21,6 +22,7 @@ import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/followers/followers.dart';
 import '../../presentation/followings/followings.dart';
 import '../../presentation/nostr_service_loading/nostr_service_loading.dart';
+import '../../presentation/settings/settings.dart';
 import '../../presentation/sign_up/sign_up.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
@@ -54,6 +56,8 @@ abstract class Routing {
     Paths.followings: (context) => Followings(),
     Paths.followers: (context) => Followers(),
     Paths.nostrServiceLoading: (context) => const NostrServiceLoading(),
+    Paths.settings: (context) => Settings(),
+    Paths.myKeys: (context) => const CurrentUserKeys(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

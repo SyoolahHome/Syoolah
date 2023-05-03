@@ -167,11 +167,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  void logout({required VoidCallback onSuccess}) {
-    try {
-      LocalDatabase.instance.deletePrivateKey();
-      onSuccess();
-    } catch (e) {}
+  Future<void> logout({
+    required VoidCallback onSuccess,
+  }) async {
+    return LocalDatabase.instance.logoutUser(onSuccess: onSuccess);
   }
 
   void onMorePressed(

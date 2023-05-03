@@ -34,4 +34,6 @@ abstract class Paths {
   static const String foreignProfile = '/foreignProfile';
   static const String followings = '/followings';
   static const String followers = '/followers';
+  static const String settings = '/settings';
+  static const String myKeys = '/myKeys';
 }

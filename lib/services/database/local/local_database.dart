@@ -80,12 +80,26 @@ class LocalDatabase implements LocalDatabaseBase {
     return getValue("themeState") ?? false;
   }
 
-  void toggleThemeState() {
+  Future<void> toggleThemeState() {
     final currentThemeState = getThemeState();
-    setThemeState(!currentThemeState);
+    return setThemeState(!currentThemeState);
   }
 
   bool isAlreadyUserExists() {
     return getPrivateKey() != null;
+  }
+
+  Future<void> logoutUser({
+    required void Function() onSuccess,
+    void Function(Object?)? onError,
+  }) async {
+    try {
+      await deletePrivateKey();
+      onSuccess();
+    } catch (e) {
+      if (onError != null) {
+        onError(e);
+      }
+    }
   }
 }

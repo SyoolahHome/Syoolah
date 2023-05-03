@@ -66,24 +66,23 @@ class NoteCard extends StatelessWidget {
                           state.noteOwnerMetadata?.createdAt ??
                               note.event.createdAt,
                     ),
-                    // const OrDivider(onlyDivider: true),
                     NoteContents(
                       heroTag: note.event.uniqueTag(),
                       imageLinks: note.imageLinks,
                       text: note.noteOnly,
                     ),
                     NoteActions(note: note),
-                    ...List.generate(state.noteLikes.length, (index) {
-                      return Text(
-                        state.noteLikes[index].tags.last.last.substring(0, 10) +
-                            " liked this note with id " +
-                            state.noteLikes[index].tags.first.last
-                                .substring(0, 10) +
-                            ", id of event is " +
-                            state.noteLikes[index].id.substring(0, 10) +
-                            "\n",
-                      );
-                    }),
+                    // ...List.generate(state.noteLikes.length, (index) {
+                    //   return Text(
+                    //     state.noteLikes[index].tags.last.last.substring(0, 10) +
+                    //         " liked this note with id " +
+                    //         state.noteLikes[index].tags.first.last
+                    //             .substring(0, 10) +
+                    //         ", id of event is " +
+                    //         state.noteLikes[index].id.substring(0, 10) +
+                    //         "\n",
+                    //   );
+                    // }),
                   ],
                 ),
               );
