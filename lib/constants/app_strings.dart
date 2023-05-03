@@ -1,7 +1,9 @@
 abstract class AppStrings {
+  static const String nPubKey = 'Npub Key';
   static const String reveal = 'Reveal';
   static const String myPublicKey = 'My Public Key';
   static const String myPrivateKey = 'My Private Key';
+  static const String myNsecKey = 'My nsec Key';
   static const String myKeys = 'My Keys';
   static const String changeLanguage = 'Change App Language';
   static const String relaysConfigs = 'Relays Configurations';

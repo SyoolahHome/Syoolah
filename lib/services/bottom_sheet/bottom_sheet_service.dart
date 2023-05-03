@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 
 import '../../model/bottom_sheet_option.dart';
 import '../../presentation/add_relay/add_relay.dart';
+import '../../presentation/current_user_keys/widgets/private_key_section.dart';
 import '../../presentation/feeds/widgets/search.dart';
 import '../../presentation/new_post/add_new_post.dart';
+import '../../presentation/private_succes/private_key.dart';
 import '../../presentation/private_succes/private_key_gen_success.dart';
 import '../../presentation/profile_options/profile_options.dart';
 import '../utils/paths.dart';
@@ -188,6 +190,25 @@ abstract class BottomSheetService {
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: false,
+    );
+  }
+
+  static Future<void> showKey(
+    BuildContext context, {
+    required HiddenPrivateKeySectionType type,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: false,
+      builder: (context) {
+        return PrivateKey(
+          type: type,
+          title: type == HiddenPrivateKeySectionType.privateKey
+              ? AppStrings.myPrivateKey
+              : AppStrings.myNsecKey,
+        );
+      },
     );
   }
 

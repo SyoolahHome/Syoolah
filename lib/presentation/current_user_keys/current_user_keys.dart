@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/bottom_sheet/bottom_sheet_service.dart';
 import 'widgets/app_bar.dart';
+import 'widgets/private_key_section.dart';
 
 class CurrentUserKeys extends StatelessWidget {
   const CurrentUserKeys({super.key});
@@ -19,10 +20,6 @@ class CurrentUserKeys extends StatelessWidget {
     final privateKey = LocalDatabase.instance.getPrivateKey()!;
     final publicKey =
         Nostr.instance.keysService.derivePublicKey(privateKey: privateKey);
-
-    final hiddenPrivateKey = privateKey.substring(0, 6) +
-        '...' +
-        privateKey.substring(privateKey.length - 6, privateKey.length);
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -41,25 +38,19 @@ class CurrentUserKeys extends StatelessWidget {
             HeadTitle(title: AppStrings.myPublicKey),
             SizedBox(height: height),
             KeySection(type: KeySectionType.publicKey),
-            SizedBox(height: height * 4),
+            SizedBox(height: height * 2),
+            HeadTitle(title: AppStrings.nPubKey),
+            SizedBox(height: height),
+            KeySection(type: KeySectionType.nPubKey),
+            SizedBox(height: height * 6),
             HeadTitle(title: AppStrings.myPrivateKey),
             SizedBox(height: height),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  hiddenPrivateKey,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                MunawarahButton(
-                  text: AppStrings.reveal,
-                  onTap: () {
-                    final val =
-                        BottomSheetService.showPrivateKeyGenSuccess(context);
-                  },
-                ),
-              ],
-            )
+            HiddenPrivateKeySection(
+              type: HiddenPrivateKeySectionType.privateKey,
+            ),
+            HiddenPrivateKeySection(
+              type: HiddenPrivateKeySectionType.nsecKey,
+            ),
           ],
         ),
       ),

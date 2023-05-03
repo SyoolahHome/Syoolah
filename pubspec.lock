@@ -37,10 +37,10 @@ packages:
     dependency: transitive
     description:
       name: args
-      sha256: "4cab82a83ffef80b262ddedf47a0a8e56ee6fbf7fe21e6e768b02792034dd440"
+      sha256: c372bb384f273f0c2a8aaaa226dad84dc27c8519a691b888725dec59518ad53a
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.1"
   async:
     dependency: transitive
     description:
@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  bech32:
+    dependency: transitive
+    description:
+      name: bech32
+      sha256: "156cbace936f7720c79a79d16a03efad343b1ef17106716e04b8b8e39f99f7f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   bip340:
     dependency: transitive
     description:
@@ -190,10 +198,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "59e2c05e026e4ddc492da250636794b21b3d4ff8"
+      resolved-ref: "4a09e892361c8107e9ca8cdefe925c572056a7d8"
       url: "https://github.com/anasfik/nostr.git"
     source: git
-    version: "1.4.0"
+    version: "1.5.0"
   dart_openai:
     dependency: "direct main"
     description:
@@ -382,6 +390,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  hex:
+    dependency: transitive
+    description:
+      name: hex
+      sha256: "4e7cd54e4b59ba026432a6be2dd9d96e4c5205725194997193bf871703b82c4a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   hive:
     dependency: transitive
     description:
@@ -402,10 +418,10 @@ packages:
     dependency: transitive
     description:
       name: html
-      sha256: "79d498e6d6761925a34ee5ea8fa6dfef38607781d2fa91e37523474282af55cb"
+      sha256: "58e3491f7bf0b6a4ea5110c0c688877460d1a6366731155c4a4580e7ded773e8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.15.2"
+    version: "0.15.3"
   http:
     dependency: "direct main"
     description:

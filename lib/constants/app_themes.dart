@@ -19,6 +19,7 @@ abstract class AppThemes {
       onSurface: Colors.white,
       onSurfaceVariant: Colors.grey[200]!,
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
+      onPrimary: AppColors.lighGrey,
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -201,6 +202,7 @@ abstract class AppThemes {
       surface: AppColors.black.withOpacity(0.4),
       onSurface: Colors.black87,
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
+      onPrimary: Colors.grey[800]!,
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

@@ -7,7 +7,12 @@ import '../../../buisness_logic/private_key_gen_success_cubit/private_key_gen_su
 import 'field_suffix.dart';
 import 'key_field.dart';
 
-enum KeySectionType { privateKey, publicKey }
+enum KeySectionType {
+  privateKey,
+  publicKey,
+  nPubKey,
+  nsecKey,
+}
 
 class KeySection extends StatelessWidget {
   const KeySection({
@@ -18,11 +23,12 @@ class KeySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PrivateKeyGenSuccessCubit cubit;
-
     final widget =
         BlocBuilder<PrivateKeyGenSuccessCubit, PrivateKeyGenSuccessState>(
       builder: (context, state) {
+        final cubit = context.read<PrivateKeyGenSuccessCubit>();
+        final keyToShow = cubit.decideWhichKeyToShow(type);
+
         return Stack(
           alignment: Alignment.centerRight,
           children: <Widget>[
@@ -33,9 +39,7 @@ class KeySection extends StatelessWidget {
                 SlideEffect(begin: const Offset(0, 0.5)),
               ],
               child: KeyField(
-                text: type == KeySectionType.privateKey
-                    ? state.privateKey!
-                    : state.publicKey!,
+                text: keyToShow,
                 isPasswordVisible: state.isPasswordVisible,
               ),
             ),
