@@ -17,7 +17,7 @@ import 'constants/app_strings.dart';
 import 'constants/app_themes.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final binding = WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
 
   Animate.restartOnHotReload = kDebugMode;
@@ -30,10 +30,11 @@ Future<void> main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en'), Locale('fr')],
-        path: 'assets/translations',
-        fallbackLocale: Locale('en'),
-        child: MyApp()),
+      child: MyApp(),
+      supportedLocales: [Locale('en'), Locale('fr')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+    ),
   );
 }
 
@@ -64,14 +65,14 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             routes: Routing.routes,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
             initialRoute: Paths.initialRoute,
             title: AppStrings.appName,
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,
             themeMode: themeMode,
+            locale: context.locale,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
             debugShowCheckedModeBanner: false,
           );
         },

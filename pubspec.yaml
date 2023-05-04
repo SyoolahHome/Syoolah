@@ -45,6 +45,7 @@ dependencies:
   flutter_islamic_icons: ^1.0.2
   process_run: ^0.12.5+3
   flutter_animate: ^4.1.1+1
+  envied: ^0.3.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,8 @@ dev_dependencies:
   dart_code_metrics: ^5.7.2
 
   flutter_lints:
+  build_runner: ^2.3.3
+  envied_generator: ^0.3.0
 
 flutter:
   # The following line ensures that the Material Icons font is

@@ -12,9 +12,11 @@ class SettingsCubit extends Cubit<SettingsState> {
     return LocalDatabase.instance.toggleThemeState();
   }
 
-  Future<void> logout() {
+  Future<void> logout({
+    required void Function() onSuccess,
+  }) {
     return LocalDatabase.instance.logoutUser(
-      onSuccess: () {},
+      onSuccess: onSuccess,
     );
   }
 }

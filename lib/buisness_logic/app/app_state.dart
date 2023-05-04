@@ -5,6 +5,7 @@ class AppState extends Equatable {
   final List<RelayConfiguration> relaysConfigurations;
   final bool isReconnecting;
   final bool isValidUrl;
+
   @override
   List<Object> get props => [
         isReconnecting,

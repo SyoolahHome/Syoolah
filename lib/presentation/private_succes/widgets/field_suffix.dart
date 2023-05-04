@@ -14,7 +14,7 @@ class FieldSuffixIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[800] ?? Theme.of(context).colorScheme.onPrimary,
+      color: Theme.of(context).colorScheme.onPrimary,
       child: IconButton(
         icon: Icon(
           icon,

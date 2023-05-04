@@ -14,6 +14,7 @@ class BottomBar extends StatelessWidget {
     super.key,
     required this.cubit,
   });
+
   final HomePageAfterLoginCubit cubit;
 
   @override

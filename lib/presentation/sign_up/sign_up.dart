@@ -31,18 +31,77 @@ class SignUp extends StatelessWidget {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
     final cubit = context.read<AuthCubit>();
-    final stepsLength = cubit.state.signUpScreens!.length;
+
+    final signUpScreens = cubit.state.signUpScreens;
+
+    if (signUpScreens == null) {
+      return const SizedBox();
+    }
+
+    final stepsLength = signUpScreens.length;
+
+    widget(index) {
+      final current = signUpScreens[index];
+      final labelLarge = Theme.of(context).textTheme.labelLarge;
+      if (labelLarge == null) {
+        throw Exception("labelLarge is null");
+      }
+      final animationDuration = 200.ms;
+
+      return MarginedBody(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Animate(
+              child: HeadTitle(
+                title: current.title,
+                isForSection: true,
+              ),
+              effects: const <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(-0.25, 0),
+                ),
+              ],
+            ),
+            const SizedBox(height: height * 2),
+            Animate(
+              child: Text(
+                current.subtitle,
+                style: labelLarge.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              effects: const <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(-0.25, 0),
+                ),
+              ],
+              delay: animationDuration,
+            ),
+            const Spacer(),
+            Animate(
+              child: current.widgetBody,
+              effects: const <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(-0.25, 0),
+                ),
+              ],
+              delay: animationDuration,
+            ),
+            const Spacer(),
+          ],
+        ),
+      );
+    }
 
     return AuthenticationStreamHandler(
       child: Scaffold(
         body: SingleChildScrollView(
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: screenHeight,
-              minHeight: screenHeight,
-              maxWidth: screenWidth,
-              minWidth: screenWidth,
-            ),
+            constraints: BoxConstraints.tight(Size(screenWidth, screenHeight)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -51,110 +110,67 @@ class SignUp extends StatelessWidget {
                 Flexible(
                   child: PageView(
                     controller: cubit.pageController,
-                    allowImplicitScrolling: false,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: List<Widget>.generate(
-                      stepsLength,
-                      (index) {
-                        final current = cubit.state.signUpScreens![index];
-
-                        return MarginedBody(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Animate(
-                                effects: const <Effect>[
-                                  FadeEffect(),
-                                  SlideEffect(
-                                    begin: Offset(-0.25, 0),
-                                  ),
-                                ],
-                                child: HeadTitle(
-                                  title: current.title,
-                                  isForSection: true,
-                                ),
-                              ),
-                              const SizedBox(height: height * 2),
-                              Animate(
-                                delay: 200.ms,
-                                effects: const <Effect>[
-                                  FadeEffect(),
-                                  SlideEffect(
-                                    begin: Offset(-0.25, 0),
-                                  ),
-                                ],
-                                child: Text(
-                                  current.subtitle,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge!
-                                      .copyWith(fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const Spacer(),
-                              Animate(
-                                delay: 400.ms,
-                                effects: const <Effect>[
-                                  FadeEffect(),
-                                  SlideEffect(
-                                    begin: Offset(-0.25, 0),
-                                  ),
-                                ],
-                                child: current.widgetBody,
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                    children: List<Widget>.generate(stepsLength, widget),
+                    allowImplicitScrolling: false,
                   ),
                 ),
                 BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     final isLastView = state.currentStepIndex == stepsLength;
-                    final current =
-                        cubit.state.signUpScreens![state.currentStepIndex - 1];
+
+                    final current = signUpScreens[state.currentStepIndex - 1];
+
+                    void onMainButtonPressed() {
+                      final onButtonTap = current.onButtonTap;
+                      if (!current.nextViewAllower()) {
+                        final val = SnackBars.text(
+                          context,
+                          AppStrings.finishThisStepFirst,
+                        );
+                      } else {
+                        if (onButtonTap != null) {
+                          onButtonTap();
+                        }
+                        if (isLastView) {
+                          final val = Navigator.of(context)
+                              .pushNamed(Paths.nostrServiceLoading);
+                        } else {
+                          cubit.gotoNext();
+                        }
+                      }
+                    }
+
+                    String textDecider() {
+                      final textIfAuthenticated =
+                          Routing.authCubit.state.authenticated
+                              ? AppStrings.start
+                              : "loading..";
+
+                      return isLastView
+                          ? textIfAuthenticated
+                          : AppStrings.continueText;
+                    }
+
+                    final animationDuration = 600.ms;
+                    final height = 45.0;
 
                     return Animate(
-                      delay: 600.ms,
-                      effects: const <Effect>[
-                        FadeEffect(),
-                        SlideEffect(
-                          begin: Offset(0, 0.25),
-                        ),
-                      ],
                       child: MarginedBody(
                         child: SizedBox(
                           width: double.infinity,
-                          height: 45,
+                          height: height,
                           child: MunawarahButton(
-                            text: isLastView
-                                ? Routing.authCubit.state.authenticated
-                                    ? AppStrings.start
-                                    : "loading.."
-                                : AppStrings.continueText,
-                            onTap: () {
-                              if (!current.nextViewAllower()) {
-                                SnackBars.text(
-                                  context,
-                                  AppStrings.finishThisStepFirst,
-                                );
-                              } else {
-                                if (current.onButtonTap != null) {
-                                  current.onButtonTap!();
-                                }
-                                if (isLastView) {
-                                  Navigator.of(context)
-                                      .pushNamed(Paths.nostrServiceLoading);
-                                } else {
-                                  cubit.gotoNext();
-                                }
-                              }
-                            },
+                            onTap: onMainButtonPressed,
+                            text: textDecider(),
                           ),
                         ),
                       ),
+                      effects: const <Effect>[
+                        FadeEffect(),
+                        SlideEffect(begin: Offset(0, 0.25)),
+                      ],
+                      delay: animationDuration,
                     );
                   },
                 ),

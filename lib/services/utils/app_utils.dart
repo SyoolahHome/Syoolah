@@ -5,6 +5,19 @@ import 'package:flutter/services.dart';
 import 'routing.dart';
 
 abstract class AppUtils {
+  static int chatUserIdCounter = 0;
+  static int chatSystemIdCounter = 0;
+
+  static String getChatUserId() {
+    chatUserIdCounter--;
+    return chatUserIdCounter.toString();
+  }
+
+  static String getChatSystemId() {
+    chatSystemIdCounter++;
+    return chatSystemIdCounter.toString();
+  }
+
   static ScaffoldFeatureController displaySnackBar(
     BuildContext context,
     String content,

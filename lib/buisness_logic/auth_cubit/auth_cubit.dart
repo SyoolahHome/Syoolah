@@ -324,7 +324,7 @@ class AuthCubit extends Cubit<AuthState> {
                     style: IconButton.styleFrom(
                       backgroundColor: Theme.of(context)
                           .colorScheme
-                          .surfaceVariant
+                          .background
                           .withOpacity(iconColorOpacity),
                     ),
                     icon: Icon(

@@ -22,8 +22,8 @@ class UsersListToFollow extends StatelessWidget {
     return BlocProvider<UsersListToFollowCubit>(
       create: (context) => UsersListToFollowCubit(
         usersListMetadata: pubKeys.isEmpty
-            ? NostrService.instance.usersListMetadata(pubKeys)
-            : Stream.empty(),
+            ? Stream.empty()
+            : NostrService.instance.usersListMetadata(pubKeys),
         currentUserFollowing: NostrService.instance.currentUserFollowings(),
         currentUserFollowers: NostrService.instance.currentUserFollowers(),
       ),

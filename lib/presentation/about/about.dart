@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class AboutPage extends StatefulWidget {
-  const AboutPage({Key? key}) : super(key: key);
+class About extends StatefulWidget {
+  const About({Key? key}) : super(key: key);
 
   @override
-  AboutPageState createState() => AboutPageState();
+  AboutState createState() => AboutState();
 }
 
-class AboutPageState extends State<AboutPage> {
+class AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 60, left: 24),
+          padding: const EdgeInsets.only(left: 24, top: 60),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,7 +31,8 @@ class AboutPageState extends State<AboutPage> {
               ),
               const SizedBox(height: 20),
               const Text(
-                  "Ditto is like the social networking apps we're used to, \n but better:"),
+                "Ditto is like the social networking apps we're used to, \n but better:",
+              ),
               Container(
                 margin: const EdgeInsets.all(40.0),
                 child: Column(
@@ -44,7 +45,7 @@ class AboutPageState extends State<AboutPage> {
                     ),
                     Text(
                       "Always available. It works offline-first and is not dependent on any single centrally managed server. Users can even connect directly to each other.",
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -68,7 +69,8 @@ class AboutPageState extends State<AboutPage> {
                 height: 40,
               ),
               const Text(
-                  "The application is an unaudited proof-of-concept implementation, so don't use it for security critical purposes."),
+                "The application is an unaudited proof-of-concept implementation, so don't use it for security critical purposes.",
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -81,7 +83,8 @@ class AboutPageState extends State<AboutPage> {
                 height: 30,
               ),
               const Text(
-                  "Ditto rejects all content from authors that your social network has not interacted with. You get way less spam, but the downside is that discovery of new users is more difficult, and sometimes you don't see all the messages that appear on other clients."),
+                "Ditto rejects all content from authors that your social network has not interacted with. You get way less spam, but the downside is that discovery of new users is more difficult, and sometimes you don't see all the messages that appear on other clients.",
+              ),
               const SizedBox(
                 height: 30,
               ),
@@ -96,8 +99,8 @@ class AboutPageState extends State<AboutPage> {
               Row(
                 children: [
                   const CircleAvatar(
-                    radius: 18,
                     backgroundImage: AssetImage(".jpg"),
+                    radius: 18,
                   ),
                   const SizedBox(
                     width: 10,
@@ -107,17 +110,19 @@ class AboutPageState extends State<AboutPage> {
                     width: 60,
                   ),
                   Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 12,
+                    ),
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.yellow),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
                     child: InkWell(
                       child: const Text(
                         "Follow",
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
-                      onTap: () {},
                     ),
                   ),
                 ],
@@ -132,8 +137,8 @@ class AboutPageState extends State<AboutPage> {
               Row(
                 children: [
                   const CircleAvatar(
-                    radius: 18,
                     backgroundImage: AssetImage(".jpg"),
+                    radius: 18,
                   ),
                   const SizedBox(
                     width: 20,
@@ -143,24 +148,22 @@ class AboutPageState extends State<AboutPage> {
                     width: 60,
                   ),
                   Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.yellow),
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: const BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
                     child: InkWell(
                       child: const Text(
                         "Follow",
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
-                      onTap: () {},
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 40,
-              )
+              const SizedBox(height: 40),
             ],
           ),
         ),

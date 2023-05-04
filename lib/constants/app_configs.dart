@@ -190,7 +190,11 @@ abstract class AppConfigs {
         icon: FlutterRemix.logout_box_line,
         name: AppStrings.logout,
         onTap: () {
-          cubit.logout();
+          cubit.logout(
+            onSuccess: () {
+              Navigator.of(context).pushReplacementNamed(Paths.onBoarding);
+            },
+          );
         },
       ),
     ];

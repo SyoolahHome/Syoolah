@@ -53,7 +53,7 @@ abstract class GeneralDrawerItems {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AboutPage(),
+                builder: (context) => const About(),
               ),
             );
           },

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/bottom_bar_item.dart';
+import '../../presentation/chat/chat.dart';
 import '../../presentation/navigations_screen/chat_relays/global_chats.dart';
 import '../../presentation/navigations_screen/home/home.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
@@ -17,8 +18,8 @@ class BottomBarCubit extends Cubit<int> {
       selectedIcon: FlutterRemix.home_4_fill,
     ),
     BottomBarItem(
-      screen: Scaffold(),
-      label: 'Messages',
+      screen: Chat(),
+      label: 'Chat',
       icon: FlutterRemix.message_3_line,
       selectedIcon: FlutterRemix.message_3_fill,
     ),
