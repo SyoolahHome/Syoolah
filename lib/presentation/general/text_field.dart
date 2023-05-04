@@ -7,38 +7,44 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
-    required this.label,
+    this.label,
     this.contentPadding,
     this.suffix,
     this.hint,
     this.isMultiline = false,
+    this.focusNode,
   });
 
   final TextEditingController? controller;
-  final String label;
+  final String? label;
   final EdgeInsets? contentPadding;
   final Widget? suffix;
   final String? hint;
   final bool isMultiline;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(
-          label,
-          style: TextStyle(
-            color: Theme.of(context).hintColor,
+        if (label != null) ...[
+          Text(
+            label!,
+            style: TextStyle(
+              color: Theme.of(context).hintColor,
+            ),
           ),
-        ),
-        const SizedBox(height: 5),
+          const SizedBox(height: 5),
+        ],
         Stack(
           alignment: Alignment.centerRight,
           children: <Widget>[
             HashTagTextField(
               minLines: 1,
+              focusNode: focusNode,
               maxLines: isMultiline ? 5 : 1,
+              autofocus: false,
               decoratedStyle: TextStyle(
                 color: AppColors.teal,
               ),

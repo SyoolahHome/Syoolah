@@ -7,20 +7,25 @@ class MunawarahButton extends StatelessWidget {
   const MunawarahButton({
     super.key,
     required this.onTap,
-    required this.text,
+    this.text,
     this.isSmall = false,
+    this.isRounded = true,
+    this.icon,
   });
 
   final VoidCallback onTap;
-  final String text;
+  final String? text;
   final bool isSmall;
+  final bool isRounded;
+  final IconData? icon;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       layoutBuilder: (currentChild, previousChildren) => currentChild!,
       duration: 200.ms,
       child: SizedBox(
-        key: ValueKey<String>(text),
+        key: ValueKey<String>(text.toString()),
         height: isSmall ? 30 : null,
         child: ElevatedButton(
           onPressed: onTap,
@@ -37,13 +42,25 @@ class MunawarahButton extends StatelessWidget {
                 : null,
             foregroundColor: Theme.of(context).colorScheme.surface,
           ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground,
-              fontSize: isSmall ? 11 : 17,
-              fontWeight: FontWeight.w400,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              if (text != null)
+                Text(
+                  text!,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: isSmall ? 11 : 17,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              if (icon != null) ...[
+                SizedBox(width: 7.5),
+                Icon(icon, size: isSmall ? 12.5 : 15),
+              ],
+            ],
           ),
         ),
       ),

@@ -1,8 +1,13 @@
 import 'package:dart_openai/openai.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/cubit/chat_cubit.dart';
+import 'widgets/app_bar.dart';
+import 'widgets/chat_message_widget.dart';
+import 'widgets/chat_section.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});
@@ -15,38 +20,40 @@ class Chat extends StatelessWidget {
         builder: (context) {
           final cubit = context.read<ChatCubit>();
 
-          return BlocBuilder<ChatCubit, ChatState>(
-            builder: (context, state) {
-              return Scaffold(
-                body: Column(
-                  children: [
-                    ListView(
-                      shrinkWrap: true,
-                      children: state.messages.map(
-                        (message) {
-                          return Text(
-                            message.message,
-                            textAlign:
-                                message.role == OpenAIChatMessageRole.user
-                                    ? TextAlign.right
-                                    : TextAlign.left,
-                          );
-                        },
-                      ).toList(),
-                    ),
-                    TextField(
-                      controller: cubit.userMessageController,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        cubit.sendMessageByCurrentUser();
-                      },
-                      child: Text("send"),
-                    ),
-                  ],
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              Scaffold(
+                appBar: CustomAppBar(),
+                body: MarginedBody(
+                  child: BlocBuilder<ChatCubit, ChatState>(
+                    builder: (context, state) {
+                      return SingleChildScrollView(
+                        reverse: true,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 20),
+                            ...state.messages.map(
+                              (message) {
+                                return Animate(
+                                  effects: <Effect>[
+                                    FadeEffect(),
+                                    SlideEffect(begin: Offset(0, 0.25)),
+                                  ],
+                                  child: ChatMessageWidget(message: message),
+                                );
+                              },
+                            ).toList(),
+                            SizedBox(height: 90),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              );
-            },
+              ),
+              Container(child: MessageSection()),
+            ],
           );
         },
       ),

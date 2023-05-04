@@ -199,4 +199,27 @@ abstract class AppConfigs {
       ),
     ];
   }
+
+  static const List<String> chatMessagePlaceholders = <String>[
+    'What is the meaning of the word "Islam"?',
+    'Who is the prophet of Islam?',
+    'What is the holy book of Islam called?',
+    'What is the significance of the Kaaba in Islam?',
+    'What is the difference between Sunni and Shia Muslims?',
+    'What are the Five Pillars of Islam?',
+    'What is the importance of prayer in Islam?',
+    'What is the month of Ramadan and why is it important in Islam?',
+    'What is Zakat and why is it important in Islam?',
+    'What is the Islamic view on women\'s rights?',
+    'What is the concept of Jihad in Islam?',
+    'What is the Islamic view on homosexuality?',
+    'What is the punishment for apostasy in Islam?',
+    'What is the role of the mosque in Islamic worship?',
+    'What is the significance of the Hajj pilgrimage in Islam?',
+    'What is the Islamic perspective on other religions?',
+    'What is the Islamic concept of afterlife?',
+    'What is the Islamic stance on alcohol and drugs?',
+    'What is the significance of the Friday prayer in Islam?',
+    'What is the Islamic view on democracy and secularism?',
+  ];
 }

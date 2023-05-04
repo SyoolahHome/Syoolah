@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/constants/app_strings.dart';
+import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/services/utils/app_utils.dart';
@@ -220,6 +223,26 @@ abstract class BottomSheetService {
       context: context,
       builder: (context) {
         return BottomSheetOptionsWidget(options: options);
+      },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+    );
+  }
+
+  static Future<void> showChatMessageOptionsSheet(
+    BuildContext context, {
+    required ChatMessage message,
+    required List<BottomSheetOption> options,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheetOptionsWidget(
+          options: options,
+          title: message.message.substring(0, min(message.message.length, 20)) +
+              '...',
+        );
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,

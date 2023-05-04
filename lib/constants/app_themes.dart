@@ -135,6 +135,11 @@ abstract class AppThemes {
       scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.black),
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
     ),
     chipTheme: ChipThemeData(
       selectedColor: AppColors.teal.withOpacity(0.1),
@@ -323,6 +328,11 @@ abstract class AppThemes {
       backgroundColor: AppColors.teal,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.white),
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(

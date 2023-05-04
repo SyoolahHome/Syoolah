@@ -1,8 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_openai/openai.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../constants/app_strings.dart';
+import '../../model/bottom_sheet_option.dart';
 import '../../model/chat_message.dart';
 import '../../services/open_ai/openai.dart';
 import '../../services/utils/app_utils.dart';
@@ -11,21 +15,33 @@ part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   TextEditingController? userMessageController;
+  ScrollController? scrollController;
+  FocusNode? focusNode;
   ChatCubit() : super(ChatInitial()) {
     _init();
   }
 
   void sendMessageByCurrentUser() {
+    assert(state.currentHint != null);
+
     final controller = userMessageController;
     if (controller == null) {
       return;
     }
 
+    controller.clear();
+    if (focusNode!.hasFocus) {
+      focusNode!.unfocus();
+    }
+
+    final userMessage =
+        controller.text.isEmpty ? state.currentHint! : controller.text;
+
     final currentMessagesList = state.messages;
     final newMessageId = AppUtils.getChatUserId();
 
     final newMessage = ChatMessage(
-      message: controller.text,
+      message: userMessage,
       role: OpenAIChatMessageRole.user,
       id: newMessageId,
       createdAt: DateTime.now(),
@@ -36,7 +52,7 @@ class ChatCubit extends Cubit<ChatState> {
     emit(state.copyWith(messages: newMessagesList));
   }
 
-  void sendMessageBySystem(String message) {
+  void _sendMessageBySystem(String message) {
     final currentMessagesList = state.messages;
     final newMessageId = AppUtils.getChatSystemId();
 
@@ -83,12 +99,81 @@ class ChatCubit extends Cubit<ChatState> {
 
   void _init() {
     userMessageController = TextEditingController();
-
+    scrollController = ScrollController();
+    focusNode = FocusNode();
     stream.where((event) => event.messages.isNotEmpty).listen((event) {
       final lastMessage = event.messages.last;
       if (lastMessage.role == OpenAIChatMessageRole.user) {
-        sendMessageBySystem(lastMessage.message);
+        _sendMessageBySystem(lastMessage.message);
       }
     });
+  }
+
+  void setCurrentHint(String hint) {
+    emit(state.copyWith(currentHint: hint));
+  }
+
+  void resendUserMessage(ChatMessage message) {
+    final controller = userMessageController;
+    if (controller == null) {
+      return;
+    }
+
+    controller.text = message.message;
+    sendMessageByCurrentUser();
+  }
+
+  Future<void> showChatMessageOptionsSheet(
+    BuildContext context, {
+    required ChatMessage message,
+  }) {
+    final isCurrentUserMessage = message.role == OpenAIChatMessageRole.user;
+
+    return BottomSheetService.showChatMessageOptionsSheet(
+      context,
+      message: message,
+      options: <BottomSheetOption>[
+        BottomSheetOption(
+          icon: FlutterRemix.file_copy_line,
+          title: AppStrings.copyChatMessage,
+          onPressed: () => copyMessage(message),
+        ),
+        if (isCurrentUserMessage)
+          BottomSheetOption(
+            icon: FlutterRemix.refresh_line,
+            title: AppStrings.resendChatMessage,
+            onPressed: () => resendUserMessage(message),
+          ),
+      ],
+    );
+  }
+
+  Future<void> copyMessage(ChatMessage message) {
+    return AppUtils.copy(
+      message.message,
+    );
+  }
+}
+
+extension ScrollControllerExt on ScrollController {
+  bool get isNotAtBottom {
+    if (hasClients) {
+      return false;
+    }
+
+    final maxScroll = position.maxScrollExtent;
+    final currentScroll = position.pixels;
+
+    return maxScroll - currentScroll > 100;
+  }
+
+  Future<void> animateToBottom() async {
+    if (isNotAtBottom && hasClients) {
+      return animateTo(
+        position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 }

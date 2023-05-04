@@ -1,6 +1,9 @@
 abstract class AppStrings {
+  static const String resendChatMessage = 'Resend chat message';
+  static const String copyChatMessage = 'Copy chat message';
+  static const String imamOnDuty = 'Imam on duty';
+  static const String send = 'Send';
   static const String danger = 'Danger!';
-
   static const String dangerDoNotSharePrivateKeys =
       "Do not share your private & nsec keys since they can give access to your Nostr account.";
   static const String nPubKey = 'Npub Key';
