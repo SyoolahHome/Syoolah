@@ -2,7 +2,6 @@ import 'package:dart_nostr/nostr/model/event.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_owner_avatar.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/app_colors.dart';

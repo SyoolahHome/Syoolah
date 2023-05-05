@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../constants/app_colors.dart';
 import 'relays_widget.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {

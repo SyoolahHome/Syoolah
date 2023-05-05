@@ -3,8 +3,7 @@ import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FollowingsFeed extends StatelessWidget {
   FollowingsFeed({super.key});
@@ -16,7 +15,7 @@ class FollowingsFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: AppStrings.followings,
+        feedName: "followings".tr(),
         feedPostsStream: NostrService.instance.followingsFeed(
           followings: globalCubit!.state.currentUserFollowing?.tags.map(
                 (e) {

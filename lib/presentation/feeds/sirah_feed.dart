@@ -3,8 +3,9 @@ import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SirahFeed extends StatelessWidget {
   SirahFeed({super.key});
@@ -17,7 +18,7 @@ class SirahFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: AppStrings.dua,
+        feedName: "dua".tr(),
         feedPostsStream: NostrService.instance.sirahFeedStream(),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ScreenTitle extends StatelessWidget {
   const ScreenTitle({super.key});
@@ -8,7 +7,7 @@ class ScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      AppStrings.homeTitle,
+      "homeTitle".tr(),
       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: Colors.white,
           ),

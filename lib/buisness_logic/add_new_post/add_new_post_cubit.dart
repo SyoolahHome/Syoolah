@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/file_upload.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,9 +43,9 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
             .map((e) => ["t", e.name])
             .toList(),
       );
-      emit(state.copyWith(success: AppStrings.postCreatedSuccessfully));
+      emit(state.copyWith(success: "postCreatedSuccessfully".tr()));
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(
         error: null,
@@ -65,7 +65,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(
         error: null,

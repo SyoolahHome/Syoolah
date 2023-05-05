@@ -4,9 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../constants/app_strings.dart';
 
 class KeyField extends StatelessWidget {
   const KeyField({
@@ -27,7 +26,7 @@ class KeyField extends StatelessWidget {
           ],
           delay: const Duration(milliseconds: 400),
           child: Text(
-            AppStrings.yourPrivateKey,
+            "yourPrivateKey".tr(),
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: AppColors.white,
                   fontWeight: FontWeight.w300,
@@ -44,7 +43,7 @@ class KeyField extends StatelessWidget {
           child: TextField(
             controller: cubit.existentKeyController,
             decoration: InputDecoration(
-              hintText: AppStrings.writeYourKey,
+              hintText: "writeYourKey".tr(),
               suffixIcon: GestureDetector(
                 onTap: () {
                   Clipboard.getData('text/plain').then(

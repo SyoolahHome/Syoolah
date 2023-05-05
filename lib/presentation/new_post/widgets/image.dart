@@ -1,5 +1,5 @@
 import 'package:ditto/constants/app_colors.dart';
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -16,7 +16,7 @@ class PostImage extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(AppStrings.selectedImages),
+        Text("selectedImages".tr()),
         const SizedBox(height: 10),
         BlocBuilder<AddNewPostCubit, AddNewPostState>(
           builder: (context, state) {

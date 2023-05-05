@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_openai/openai.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/app_strings.dart';
 import '../../model/bottom_sheet_option.dart';
 import '../../model/chat_message.dart';
 import '../../services/open_ai/openai.dart';
@@ -141,13 +141,13 @@ class ChatCubit extends Cubit<ChatState> {
       options: <BottomSheetOption>[
         BottomSheetOption(
           icon: FlutterRemix.file_copy_line,
-          title: AppStrings.copyChatMessage,
+          title: "copyChatMessage".tr(),
           onPressed: () => copyMessage(message),
         ),
         if (isCurrentUserMessage)
           BottomSheetOption(
             icon: FlutterRemix.refresh_line,
-            title: AppStrings.resendChatMessage,
+            title: "resendChatMessage".tr(),
             onPressed: () => resendUserMessage(message),
           ),
       ],
@@ -166,18 +166,18 @@ class ChatCubit extends Cubit<ChatState> {
       options: <BottomSheetOption>[
         BottomSheetOption(
           icon: FlutterRemix.file_copy_line,
-          title: AppStrings.copyChatMessages,
+          title: "copyChatMessages".tr(),
           onPressed: () => copyMessages(),
         ),
         BottomSheetOption(
           icon: FlutterRemix.delete_bin_2_line,
-          title: AppStrings.clearChatMessages,
+          title: "clearChatMessages".tr(),
           onPressed: () {
             AlertsService.confirmDialog(
               context: context,
-              title: AppStrings.areYouSureclearChatMessages,
-              confirmText: AppStrings.yes,
-              cancelTextt: AppStrings.no,
+              title: "areYouSureclearChatMessages".tr(),
+              confirmText: "yes".tr(),
+              cancelTextt: "no".tr(),
               onConfirm: () async => clearMessages(),
             );
           },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FeedPageHeading extends StatelessWidget {
   const FeedPageHeading({
@@ -21,7 +20,7 @@ class FeedPageHeading extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(
-            AppStrings.feedOfName(feedName),
+            "feedOfName".tr(args: [feedName]),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: AppColors.black,
                   fontWeight: FontWeight.bold,

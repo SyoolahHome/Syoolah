@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/global/global_cubit.dart';
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DuaFeed extends StatelessWidget {
   DuaFeed({super.key});
@@ -18,7 +18,7 @@ class DuaFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: AppStrings.dua,
+        feedName: "dua".tr(),
         feedPostsStream: NostrService.instance.duaFeedStream(),
       ),
     );

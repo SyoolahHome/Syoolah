@@ -1,9 +1,9 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/app_strings.dart';
 import '../../services/utils/routing.dart';
 import '../general/widget/margined_body.dart';
 import 'widgets/add_button.dart';
@@ -32,8 +32,8 @@ class AddRelayWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     const SizedBox(height: height * 2),
-                    const BottomSheetTitleWithIconButton(
-                      title: AppStrings.addRelay,
+                    BottomSheetTitleWithIconButton(
+                      title: "addRelay".tr(),
                     ),
                     const SizedBox(height: height * 2),
                     const RelayUrlField(),

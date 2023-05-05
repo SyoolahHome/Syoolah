@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/global/global_cubit.dart';
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class GlobalFeed extends StatelessWidget {
   GlobalFeed({super.key});
@@ -17,7 +17,7 @@ class GlobalFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: AppStrings.globalFeed,
+        feedName: "globalFeed".tr(),
         feedPostsStream: NostrService.instance.globalFeed(),
       ),
     );

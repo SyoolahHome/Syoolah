@@ -6,7 +6,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/note.dart';
 
-import '../../services/utils/routing.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/notes_list_view.dart';
 

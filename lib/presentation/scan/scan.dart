@@ -1,13 +1,12 @@
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../constants/app_strings.dart';
 import '../general/widget/title.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/button.dart';
 import 'widgets/key_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ExistentSignUp extends StatelessWidget {
   const ExistentSignUp({
@@ -35,7 +34,7 @@ class ExistentSignUp extends StatelessWidget {
                   ),
                 ],
                 child: HeadTitle(
-                  title: AppStrings.existentKeyAuth,
+                  title: "existentKeyAuth".tr(),
                   isForSection: true,
                 ),
               ),

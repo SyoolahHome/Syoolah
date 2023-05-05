@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
@@ -144,7 +144,7 @@ class NostrService {
       filters: <NostrFilter>[
         NostrFilter(
           kinds: const [1],
-          t: const ["anas", "gwhyyy"],
+          t: ["anas", "gwhyyy"],
           since: DateTime.now().subtract(const Duration(days: 30)),
         )
       ],
@@ -365,7 +365,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.quran],
+          t: ["quran".tr()],
           kinds: const [1],
         )
       ],
@@ -383,7 +383,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.dua],
+          t: ["dua".tr()],
           kinds: const [1],
         )
       ],
@@ -401,7 +401,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.hadith],
+          t: ["hadith".tr()],
           kinds: const [1],
         )
       ],
@@ -419,7 +419,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.sharia],
+          t: ["sharia".tr()],
           kinds: const [1],
         )
       ],
@@ -437,7 +437,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.fiqh],
+          t: ["fiqh".tr()],
           kinds: const [1],
         )
       ],
@@ -455,7 +455,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const [AppStrings.sirah],
+          t: ["sirah".tr()],
           kinds: const [1],
         )
       ],
@@ -473,13 +473,13 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: const <String>[
-            AppStrings.quran,
-            AppStrings.dua,
-            AppStrings.hadith,
-            AppStrings.sharia,
-            AppStrings.fiqh,
-            AppStrings.sirah,
+          t: <String>[
+            "quran".tr(),
+            "dua".tr(),
+            "hadith".tr(),
+            "sharia".tr(),
+            "fiqh".tr(),
+            "sirah".tr(),
           ],
           kinds: const [1],
           limit: 1,

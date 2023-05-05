@@ -2,10 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/app_colors.dart';
 import '../../onboarding/widgets/animated_logo.dart';
-import '../../onboarding/widgets/get_started.dart';
-import '../../onboarding/widgets/title.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});

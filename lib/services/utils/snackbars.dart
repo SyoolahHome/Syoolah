@@ -1,4 +1,4 @@
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
@@ -25,7 +25,7 @@ abstract class SnackBars {
           borderRadius: BorderRadius.circular(100.0),
         ),
         action: SnackBarAction(
-          label: AppStrings.ok.toUpperCase(),
+          label: "ok".tr().toUpperCase(),
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },

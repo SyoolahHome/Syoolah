@@ -4,13 +4,13 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -52,7 +52,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
       }
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(error: null));
     }
@@ -67,7 +67,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
       }
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(
         error: null,
@@ -89,7 +89,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(error: null));
     }
@@ -117,7 +117,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       return true;
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
 
       return false;
     } finally {
@@ -134,7 +134,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(pickedBannerImage: File(pickedImage.path)));
       }
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.error));
+      emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(error: null));
     }
@@ -192,12 +192,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       context,
       options: [
         BottomSheetOption(
-          title: AppStrings.editProfile,
+          title: "editProfile".tr(),
           icon: FlutterRemix.pencil_line,
           onPressed: onEditProfile,
         ),
         BottomSheetOption(
-          title: AppStrings.copyPubKey,
+          title: "copyPubKey".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(
@@ -205,57 +205,57 @@ class ProfileCubit extends Cubit<ProfileState> {
               onSuccess: () {
                 final shownSnackbarController = SnackBars.text(
                   context,
-                  AppStrings.copySuccess,
+                  "copySuccess".tr(),
                 );
               },
             );
           },
         ),
         BottomSheetOption(
-          title: AppStrings.copyMetaDataEvent,
+          title: "copyMetaDataEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
               final shownSnackbarController =
-                  SnackBars.text(context, AppStrings.copySuccess);
+                  SnackBars.text(context, "copySuccess".tr());
             });
           },
         ),
         BottomSheetOption(
-          title: AppStrings.copyProfileEvent,
+          title: "copyProfileEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(
               currentUserMetadata?.serialized() ?? "",
               onSuccess: () {
                 final shownSnackbarController =
-                    SnackBars.text(context, AppStrings.copySuccess);
+                    SnackBars.text(context, "copySuccess".tr());
               },
             );
           },
         ),
         BottomSheetOption(
-          title: AppStrings.copyImageUrl,
+          title: "copyImageUrl".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(metadata.picture ?? "", onSuccess: () {
               final shownSnackbarController =
-                  SnackBars.text(context, AppStrings.copySuccess);
+                  SnackBars.text(context, "copySuccess".tr());
             });
           },
         ),
         BottomSheetOption(
-          title: AppStrings.copyUsername,
+          title: "copyUsername".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(metadata.username, onSuccess: () {
               final shownSnackbarController =
-                  SnackBars.text(context, AppStrings.copySuccess);
+                  SnackBars.text(context, "copySuccess".tr());
             });
           },
         ),
         BottomSheetOption(
-          title: AppStrings.logout,
+          title: "logout".tr(),
           icon: FlutterRemix.logout_box_line,
           onPressed: onLogout,
         ),
@@ -311,7 +311,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       options: <BottomSheetOption>[
         BottomSheetOption(
           icon: FlutterRemix.copyleft_line,
-          title: AppStrings.copyFollowingsKeys,
+          title: "copyFollowingsKeys".tr(),
           onPressed: () {
             AppUtils.copy(
               followings.join("\n"),
@@ -320,7 +320,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
         BottomSheetOption(
           icon: FlutterRemix.copyleft_line,
-          title: AppStrings.unFollowAll,
+          title: "unFollowAll".tr(),
           onPressed: onUnFollowAll,
         ),
       ],
@@ -336,7 +336,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       options: <BottomSheetOption>[
         BottomSheetOption(
           icon: FlutterRemix.copyleft_line,
-          title: AppStrings.copyFollowingsKeys,
+          title: "copyFollowingsKeys".tr(),
           onPressed: () {},
         ),
       ],

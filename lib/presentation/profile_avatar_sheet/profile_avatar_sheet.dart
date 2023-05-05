@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../buisness_logic/profile/profile_cubit.dart';
-import '../../constants/app_strings.dart';
 
 class AvatarSheetWidget extends StatelessWidget {
   const AvatarSheetWidget({
@@ -61,14 +60,14 @@ class AvatarSheetWidget extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         leading: const Icon(FlutterRemix.image_2_line),
-                        title: const Text(AppStrings.fullImageView),
+                        title: Text("fullImageView".tr()),
                         onTap: onFullView,
                       ),
                       ListTile(
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         leading: const Icon(FlutterRemix.camera_2_line),
-                        title: const Text(AppStrings.takeFromCamera),
+                        title: Text("takeFromCamera".tr()),
                         onTap: () {
                           onTakePhoto()
                               .then((_) => onAvatarPickedOrTaken())
@@ -83,7 +82,7 @@ class AvatarSheetWidget extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         leading: const Icon(FlutterRemix.gallery_line),
-                        title: const Text(AppStrings.takeFromGallery),
+                        title: Text("takeFromGallery".tr()),
                         onTap: () {
                           onPickFromGallery()
                               .then((_) => onAvatarPickedOrTaken())
@@ -98,7 +97,7 @@ class AvatarSheetWidget extends StatelessWidget {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
                         leading: const Icon(FlutterRemix.delete_bin_2_line),
-                        title: const Text(AppStrings.removeAvatar),
+                        title: Text("removeAvatar".tr()),
                         onTap: () {
                           onRemove().then((_) => onEnd());
                         },

@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'action_button.dart';
 import 'date_range_picker.dart';
 import 'search_field.dart';
 import 'search_options_builder.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SearchSections extends StatelessWidget {
   const SearchSections({
@@ -28,10 +28,10 @@ class SearchSections extends StatelessWidget {
         child: MarginedBody(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const <Widget>[
+            children: <Widget>[
               SizedBox(height: height * 2),
               BottomSheetTitleWithIconButton(
-                title: AppStrings.customizeSearch,
+                title: "customizeSearch".tr(),
               ),
               SizedBox(height: height),
               SearchField(),

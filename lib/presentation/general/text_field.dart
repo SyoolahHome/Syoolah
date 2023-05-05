@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/widgets/hashtag_text_field.dart';
 import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -50,7 +50,7 @@ class CustomTextField extends StatelessWidget {
               ),
               controller: controller,
               decoration: InputDecoration(
-                hintText: hint ?? AppStrings.typeHere,
+                hintText: hint ?? "typeHere".tr(),
                 hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: AppColors.grey,
                     ),

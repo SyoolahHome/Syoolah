@@ -1,8 +1,7 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../general/widget/margined_body.dart';
 import '../general/widget/title.dart';
 import 'widgets/app_bar.dart';
@@ -22,9 +21,9 @@ class RelaysConfig extends StatelessWidget {
             children: <Widget>[
               MarginedBody(
                 child: Column(
-                  children: const <Widget>[
+                  children: <Widget>[
                     SizedBox(height: height * 2),
-                    HeadTitle(title: AppStrings.manageRelays),
+                    HeadTitle(title: "manageRelays".tr()),
                     SizedBox(height: height * 2),
                   ],
                 ),

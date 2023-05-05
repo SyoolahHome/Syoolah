@@ -1,7 +1,6 @@
-import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
-
 import '../../general/widget/bottom_sheet_title_with_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BottomSheetOptionsTitle extends StatelessWidget {
   const BottomSheetOptionsTitle({
@@ -13,7 +12,7 @@ class BottomSheetOptionsTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetTitleWithIconButton(
-      title: title ?? AppStrings.BottomSheetOptions,
+      title: title ?? "BottomSheetOptions".tr(),
     );
   }
 }

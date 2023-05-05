@@ -1,6 +1,6 @@
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +45,10 @@ class NoteCommentsSection extends StatelessWidget {
                     iconTheme: const IconThemeData(color: AppColors.white),
                     centerTitle: true,
                     title: Text(
-                      AppStrings.commentsN(state.noteComments.length),
+                      "commentsN".tr(args: [
+                        "comments".tr(),
+                        state.noteComments.length.toString()
+                      ]),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: AppColors.white,
                           ),

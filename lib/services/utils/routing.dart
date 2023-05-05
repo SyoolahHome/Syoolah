@@ -1,10 +1,8 @@
-import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/services/utils/paths.dart';
 
 import '../../buisness_logic/app/app_cubit.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../buisness_logic/on_boarding/on_boarding_cubit.dart';
 import '../../presentation/about_munawarah/about_munawarah.dart';
@@ -24,7 +22,6 @@ import '../../presentation/followings/followings.dart';
 import '../../presentation/nostr_service_loading/nostr_service_loading.dart';
 import '../../presentation/settings/settings.dart';
 import '../../presentation/sign_up/sign_up.dart';
-import '../../presentation/navigations_screen/profile/profile.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/onboarding/onboarding.dart';
 import '../../presentation/onboarding_relays/onboarding_relays.dart';

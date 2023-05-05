@@ -1,11 +1,11 @@
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../../constants/app_colors.dart';
-import '../../../../constants/app_strings.dart';
 import '../../../../services/utils/paths.dart';
 import '../../../general/widget/title.dart';
 
@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     final cubit = context.read<ProfileCubit>();
 
     return AppBar(
-      title: const HeadTitle(title: AppStrings.myProfile),
+      title: HeadTitle(title: "myProfile".tr()),
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       elevation: 0.0,

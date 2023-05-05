@@ -1,4 +1,4 @@
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../general/widget/bottom_sheet_title_with_button.dart';
@@ -8,8 +8,8 @@ class AddNewPostTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BottomSheetTitleWithIconButton(
-      title: AppStrings.addNewPost,
+    return BottomSheetTitleWithIconButton(
+      title: "addNewPost".tr(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_colors.dart';
@@ -20,7 +20,7 @@ class SaveButton extends StatelessWidget {
         ),
         onPressed: onTap,
         child: Text(
-          AppStrings.save,
+          "save".tr(),
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: AppColors.white,
               ),

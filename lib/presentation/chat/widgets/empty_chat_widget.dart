@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../constants/app_strings.dart';
 
 class EmptyChatWidget extends StatelessWidget {
   const EmptyChatWidget({super.key});
@@ -18,7 +17,7 @@ class EmptyChatWidget extends StatelessWidget {
         ),
         SizedBox(height: 40),
         Text(
-          AppStrings.startConversation,
+          "startConversation".tr(),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],

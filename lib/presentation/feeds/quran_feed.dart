@@ -2,9 +2,8 @@ import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../buisness_logic/global/global_cubit.dart';
-import '../../constants/app_strings.dart';
 
 class QuranFeed extends StatelessWidget {
   QuranFeed({super.key});
@@ -17,7 +16,7 @@ class QuranFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: AppStrings.quran,
+        feedName: "quran".tr(),
         feedPostsStream: NostrService.instance.quranFeedStream(),
       ),
     );

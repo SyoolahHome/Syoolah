@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
 import '../../../services/utils/paths.dart';
-import '../../scan/scan.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PrivateKeyLabel extends StatelessWidget {
   const PrivateKeyLabel({super.key});
@@ -15,7 +13,7 @@ class PrivateKeyLabel extends StatelessWidget {
         Navigator.of(context).pushNamed(Paths.existentSignUp);
       },
       child: Text(
-        AppStrings.privateKeyAccess,
+        "privateKeyAccess".tr(),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: AppColors.white,
               decoration: TextDecoration.underline,

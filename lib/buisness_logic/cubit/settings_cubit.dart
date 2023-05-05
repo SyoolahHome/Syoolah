@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:equatable/equatable.dart';
 

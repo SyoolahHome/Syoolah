@@ -1,7 +1,6 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/presentation/followings/widgets/empty_list.dart';
-import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
 import 'package:ditto/presentation/sign_up/widgets/users_list_to_follow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,5 @@
 import 'package:ditto/constants/app_colors.dart';
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       title: Text(
-        AppStrings.editProfile,
+        "editProfile".tr(),
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: AppColors.white,
             ),

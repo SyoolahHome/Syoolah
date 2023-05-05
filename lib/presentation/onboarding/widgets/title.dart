@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
 
 class MunawarahTitle extends StatelessWidget {
   const MunawarahTitle({
@@ -23,9 +22,9 @@ class MunawarahTitle extends StatelessWidget {
               displayColor: Colors.black,
             )),
       child: Hero(
-        tag: "${AppStrings.appName}title",
+        tag: "${"appName".tr()}wwtitle",
         child: Text(
-          AppStrings.appName,
+          "appName".tr(),
           style: style ??
               Theme.of(context).textTheme.headlineLarge?.copyWith(
                     // color: AppColors.white,

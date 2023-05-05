@@ -1,7 +1,7 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -24,12 +24,12 @@ class Home extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 20),
-                const HeadTitle(title: AppStrings.globalFeeds),
+                HeadTitle(title: "globalFeeds".tr()),
                 const SizedBox(height: 10),
                 FeedBox(
                   icon: FlutterRemix.global_line,
-                  title: AppStrings.globalFeed,
-                  description: AppStrings.globalFeedDescription,
+                  title: "globalFeed".tr(),
+                  description: "globalFeedDescription".tr(),
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -40,8 +40,8 @@ class Home extends StatelessWidget {
                 ),
                 FeedBox(
                   icon: FlutterRemix.user_add_line,
-                  title: AppStrings.followingsFeed,
-                  description: AppStrings.followingsFeedDescription,
+                  title: "followingsFeed".tr(),
+                  description: "followingsFeedDescription".tr(),
                   onTap: () {
                     Navigator.pushNamed(
                       context,
@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 20),
-                const HeadTitle(title: AppStrings.categorizedFeeds),
+                HeadTitle(title: "categorizedFeeds".tr()),
                 const SizedBox(height: 10),
                 ...List.generate(AppConfigs.categories.length, (index) {
                   final current = AppConfigs.categories[index];

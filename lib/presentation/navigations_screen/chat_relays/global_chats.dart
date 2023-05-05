@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_strings.dart';
 import 'widgets/app_bar.dart';
 
 class GlobalChatRelays extends StatelessWidget {
@@ -11,9 +11,9 @@ class GlobalChatRelays extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       body: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Center(
-            child: Text(AppStrings.loading),
+            child: Text("loading".tr()),
           )
         ],
       ),

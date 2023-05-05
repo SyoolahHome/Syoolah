@@ -1,11 +1,9 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
-import 'package:ditto/presentation/navigations_screen/home/widgets/global_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../services/utils/paths.dart';
 import '../general/widget/bottom_sheet_title_with_button.dart';
 import 'widgets/app_bar.dart';
@@ -24,11 +22,11 @@ class AuthChoose extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           if (isShownInBottomSheet) ...[
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: height * 2),
               child: MarginedBody(
                 child: BottomSheetTitleWithIconButton(
-                  title: AppStrings.chooseAuth,
+                  title: "chooseAuth".tr(),
                 ),
               ),
             ),
@@ -44,10 +42,10 @@ class AuthChoose extends StatelessWidget {
                 ],
                 AuthChooseBox(
                   additionalDelay: 0.ms,
-                  buttonText: AppStrings.create,
+                  buttonText: "create".tr(),
                   icon: FlutterRemix.arrow_right_line,
-                  title: AppStrings.createNewAcc,
-                  description: AppStrings.createNewAccDescription,
+                  title: "createNewAcc".tr(),
+                  description: "createNewAccDescription".tr(),
                   targetRoutePath: Paths.SignUp,
                 ),
                 const SizedBox(height: height * 3),
@@ -59,10 +57,10 @@ class AuthChoose extends StatelessWidget {
                 AuthChooseBox(
                   additionalDelay: 200.ms,
                   targetRoutePath: Paths.existentSignUp,
-                  buttonText: AppStrings.login,
+                  buttonText: "login".tr(),
                   icon: FlutterRemix.arrow_right_line,
-                  title: AppStrings.alreadyHaveAKey,
-                  description: AppStrings.alreadyHaveAKeyDescription,
+                  title: "alreadyHaveAKey".tr(),
+                  description: "alreadyHaveAKeyDescription".tr(),
                 ),
               ],
             ),

@@ -1,13 +1,10 @@
 import 'dart:io';
 
-import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
 import '../../../model/relay_configuration.dart';
 import '../../../services/utils/routing.dart';
 import '../../general/widget/margined_body.dart';
@@ -62,7 +59,7 @@ class RelayBox extends StatelessWidget {
                 TextSpan(
                   text: snapshot?.hasData ?? false
                       ? ' - ${snapshot!.data!.name}'
-                      : AppStrings.relayNameError,
+                      : "relayNameError".tr(),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w300,
                       ),
@@ -79,7 +76,7 @@ class RelayBox extends StatelessWidget {
           child: Text(
             snapshot?.hasData ?? false
                 ? snapshot!.data!.description
-                : AppStrings.relayDescriptionError,
+                : "relayDescriptionError".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color:
                       Theme.of(context).colorScheme.background.withOpacity(.3),

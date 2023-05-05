@@ -1,6 +1,6 @@
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/paths.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
@@ -10,7 +10,6 @@ import '../buisness_logic/cubit/settings_cubit.dart';
 import '../model/feed_category.dart';
 import '../model/search_option.dart';
 import '../model/settings_item.dart';
-import '../presentation/navigations_screen/home/widgets/relays_widget.dart';
 import '../services/utils/routing.dart';
 
 abstract class AppConfigs {
@@ -28,43 +27,43 @@ abstract class AppConfigs {
     // 'wss://nostr.relayer.se',
   ];
   static final List<FeedCategory> categories = [
-    const FeedCategory(
-      name: AppStrings.quran,
+    FeedCategory(
+      name: "quran".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.quran,
       isSelected: false,
       path: Paths.quranFeed,
     ),
-    const FeedCategory(
-      name: AppStrings.dua,
+    FeedCategory(
+      name: "dua".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.prayer,
       isSelected: false,
       path: Paths.duaFeed,
     ),
-    const FeedCategory(
-      name: AppStrings.sharia,
+    FeedCategory(
+      name: "sharia".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.kowtow,
       isSelected: false,
       path: Paths.shariaFeed,
     ),
-    const FeedCategory(
-      name: AppStrings.hadith,
+    FeedCategory(
+      name: "hadith".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.sajadah,
       isSelected: false,
       path: Paths.hadithFeed,
     ),
-    const FeedCategory(
-      name: AppStrings.fiqh,
+    FeedCategory(
+      name: "fiqh".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.family,
       isSelected: false,
       path: Paths.fiqhFeed,
     ),
-    const FeedCategory(
-      name: AppStrings.sirah,
+    FeedCategory(
+      name: "sirah".tr(),
       description: "This feed contains Quran",
       icon: FlutterIslamicIcons.solidMuslim,
       isSelected: false,
@@ -127,7 +126,7 @@ abstract class AppConfigs {
     return <SettingsItem>[
       SettingsItem(
         icon: FlutterRemix.cloud_line,
-        name: AppStrings.relaysConfigs,
+        name: "relaysConfigs".tr(),
         onTap: () {
           Navigator.of(context).pushNamed(Paths.relaysConfig);
         },
@@ -157,7 +156,7 @@ abstract class AppConfigs {
       ),
       SettingsItem(
         icon: FlutterRemix.moon_line,
-        name: AppStrings.switchDarkMode,
+        name: "switchDarkMode".tr(),
         onTap: () {
           cubit.switchDarkMode();
         },
@@ -174,21 +173,21 @@ abstract class AppConfigs {
       ),
       SettingsItem(
         icon: FlutterRemix.key_line,
-        name: AppStrings.myKeys,
+        name: "myKeys".tr(),
         onTap: () {
           Navigator.of(context).pushNamed(Paths.myKeys);
         },
       ),
       SettingsItem(
         icon: FlutterRemix.translate,
-        name: AppStrings.changeLanguage,
+        name: "changeLanguage".tr(),
         onTap: () {
           Routing.appCubit.showTranslationsSheet(context);
         },
       ),
       SettingsItem(
         icon: FlutterRemix.logout_box_line,
-        name: AppStrings.logout,
+        name: "logout".tr(),
         onTap: () {
           cubit.logout(
             onSuccess: () {

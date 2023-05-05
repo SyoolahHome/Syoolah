@@ -2,9 +2,9 @@ import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DateRangePicker extends StatelessWidget {
   const DateRangePicker({super.key});
@@ -16,7 +16,7 @@ class DateRangePicker extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(AppStrings.dateRange),
+            Text("dateRange".tr()),
             const SizedBox(height: 5),
             ListTile(
               title: Column(
@@ -50,8 +50,8 @@ class DateRangePicker extends StatelessWidget {
                 onPressed: () {
                   context.read<GlobalFeedCubit>().pickDateRange(context);
                 },
-                child: const Text(
-                  AppStrings.pick,
+                child: Text(
+                  "pick".tr(),
                   style: TextStyle(
                     color: AppColors.white,
                   ),

@@ -1,7 +1,7 @@
-import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DangerBox extends StatelessWidget {
   DangerBox({super.key});
@@ -52,7 +52,7 @@ class DangerBox extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                AppStrings.danger,
+                                "danger".tr(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelLarge
@@ -67,7 +67,7 @@ class DangerBox extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: height / 2),
-                          Text(AppStrings.dangerDoNotSharePrivateKeys),
+                          Text("dangerDoNotSharePrivateKeys".tr()),
                         ],
                       ),
                     ),

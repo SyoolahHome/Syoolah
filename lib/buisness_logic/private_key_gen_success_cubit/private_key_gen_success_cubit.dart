@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../constants/app_strings.dart';
 import '../../services/database/local/local_database.dart';
 
 part 'private_key_gen_success_state.dart';
@@ -26,7 +26,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
     try {
       await Clipboard.setData(ClipboardData(text: state.privateKey));
 
-      return SnackBars.text(context, AppStrings.privateKeyCopied);
+      return SnackBars.text(context, "privateKeyCopied".tr());
     } catch (e) {
       return SnackBars.text(context, e.toString());
     }
@@ -46,7 +46,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
         ),
       );
 
-      return SnackBars.text(context, AppStrings.publicKeyCopied);
+      return SnackBars.text(context, "publicKeyCopied".tr());
     } catch (e) {
       return SnackBars.text(context, e.toString());
     }

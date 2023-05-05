@@ -1,9 +1,8 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../constants/app_strings.dart';
 
 class CategoriesSelect extends StatelessWidget {
   const CategoriesSelect({super.key});
@@ -18,7 +17,7 @@ class CategoriesSelect extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Text(AppStrings.chooseCategories),
+          Text("chooseCategories".tr()),
           Wrap(
               alignment: WrapAlignment.start,
               crossAxisAlignment: WrapCrossAlignment.start,

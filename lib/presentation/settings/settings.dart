@@ -1,14 +1,11 @@
 import 'package:ditto/constants/app_configs.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/cubit/settings_cubit.dart';
-import '../../buisness_logic/profile/profile_cubit.dart';
-import '../../constants/app_colors.dart';
 import 'widgets/app_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Settings extends StatelessWidget {
   Settings({super.key});
@@ -32,7 +29,7 @@ class Settings extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: height),
                   Text(
-                    AppStrings.settings,
+                    "settings".tr(),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -42,7 +39,7 @@ class Settings extends StatelessWidget {
                     settingsItems.length,
                     (index) {
                       final current = settingsItems[index];
-                      final isLogout = current.name == AppStrings.logout;
+                      final isLogout = current.name == "logout".tr();
 
                       return ListTile(
                         splashColor: Colors.transparent,

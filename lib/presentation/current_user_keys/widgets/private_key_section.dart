@@ -1,7 +1,6 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../services/bottom_sheet/bottom_sheet_service.dart';
 import '../../../services/database/local/local_database.dart';
 import '../../general/widget/button.dart';
@@ -46,7 +45,7 @@ class HiddenPrivateKeySection extends StatelessWidget {
         ),
         MunawarahButton(
           isSmall: true,
-          text: AppStrings.reveal,
+          text: "reveal".tr(),
           onTap: () {
             final val = BottomSheetService.showKey(
               context,

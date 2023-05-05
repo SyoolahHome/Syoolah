@@ -1,9 +1,9 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../constants/app_colors.dart';
-import '../../../../../constants/app_strings.dart';
 import '../../../../../model/note.dart';
 
 class NoteFollowButton extends StatelessWidget {
@@ -39,7 +39,7 @@ class NoteFollowButton extends StatelessWidget {
                   isNoteOwnerFollowed ? Colors.transparent : AppColors.teal,
             ),
             child: Text(
-              isNoteOwnerFollowed ? AppStrings.unfollow : AppStrings.follow,
+              isNoteOwnerFollowed ? "unfollow".tr() : "follow".tr(),
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color:
                         isNoteOwnerFollowed ? AppColors.teal : AppColors.white,

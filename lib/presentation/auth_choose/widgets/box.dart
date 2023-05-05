@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
-import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
-import '../../../services/utils/paths.dart';
 import '../../general/widget/button.dart';
 
 class AuthChooseBox extends StatelessWidget {

@@ -7,8 +7,6 @@ import '../current_user_keys/widgets/private_key_section.dart';
 import '../general/widget/title.dart';
 import 'widgets/button.dart';
 import 'widgets/key_section.dart';
-import 'widgets/success_icon.dart';
-import 'widgets/success_text.dart';
 
 class PrivateKey extends StatelessWidget {
   const PrivateKey({

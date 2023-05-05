@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../services/utils/routing.dart';
 import '../../general/text_field.dart';
 
@@ -14,8 +13,8 @@ class RelayUrlField extends StatelessWidget {
         horizontal: 10,
         vertical: 10,
       ),
-      hint: AppStrings.relayUrlHint,
-      label: AppStrings.addRelayUrlLabel,
+      hint: "relayUrlHint".tr(),
+      label: "addRelayUrlLabel".tr(),
       controller: Routing.appCubit.relayUrlController!,
     );
   }

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/profile_options/widgets/profile_title.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -11,15 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
 import '../../model/user_meta_data.dart';
-import '../../services/utils/paths.dart';
 import '../../services/utils/routing.dart';
 import '../general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import '../sign_up/widgets/or_divider.dart';
-import '../onboarding/widgets/search_icon.dart';
-import 'widgets/app_bar.dart';
 import 'widgets/search_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OnBoardingSearch extends StatelessWidget {
   const OnBoardingSearch({
@@ -72,7 +68,7 @@ class OnBoardingSearch extends StatelessWidget {
                       children: <Widget>[
                         const SizedBox(height: height * 2),
                         BottomSheetTitleWithIconButton(
-                          title: AppStrings.searchUser,
+                          title: "searchUser".tr(),
                           onPop: () {
                             cubit.resetSearch();
                           },
@@ -87,7 +83,7 @@ class OnBoardingSearch extends StatelessWidget {
                             )
                           ],
                           child: Text(
-                            AppStrings.identifierOrPuKey,
+                            "identifierOrPuKey".tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium

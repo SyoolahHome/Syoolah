@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/bottom_sheet_option.dart';
@@ -139,7 +139,7 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
-          title: AppStrings.relayName(relayInformations?.name),
+          title: "relayName".tr(args: [relayInformations!.name]),
         );
       },
       clipBehavior: Clip.hardEdge,
@@ -157,7 +157,7 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
-          title: AppStrings.translations,
+          title: "translations".tr(),
         );
       },
       clipBehavior: Clip.hardEdge,
@@ -208,8 +208,8 @@ abstract class BottomSheetService {
         return PrivateKey(
           type: type,
           title: type == HiddenPrivateKeySectionType.privateKey
-              ? AppStrings.myPrivateKey
-              : AppStrings.myNsecKey,
+              ? "myPrivateKey".tr()
+              : "myNsecKey".tr(),
         );
       },
     );

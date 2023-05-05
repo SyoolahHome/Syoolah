@@ -1,4 +1,4 @@
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/app_colors.dart';
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.teal,
-      title: const Text(AppStrings.globalMessages),
+      title: Text("globalMessages".tr()),
       centerTitle: true,
     );
   }

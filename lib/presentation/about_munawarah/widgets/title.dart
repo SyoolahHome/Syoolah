@@ -1,8 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
 
 class AboutMunawarahTitle extends StatelessWidget {
   const AboutMunawarahTitle({super.key});
@@ -16,7 +14,7 @@ class AboutMunawarahTitle extends StatelessWidget {
         SlideEffect(begin: Offset(0, 0.45)),
       ],
       child: Text(
-        AppStrings.aboutMunawarahWe,
+        "aboutMunawarahWe".tr(),
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.background,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../../services/utils/routing.dart';
 import '../../../services/utils/snackbars.dart';
 
@@ -14,7 +13,7 @@ class ReconnectButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           Routing.appCubit.reconnectToRelays();
-          SnackBars.text(context, AppStrings.reconnecting);
+          SnackBars.text(context, "reconnecting".tr());
         },
         icon: const Icon(
           Icons.refresh,
@@ -22,7 +21,7 @@ class ReconnectButton extends StatelessWidget {
           size: 12.5,
         ),
         label: Text(
-          AppStrings.reconnect,
+          "reconnect".tr(),
           style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: Colors.white,
               ),

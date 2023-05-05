@@ -1,6 +1,6 @@
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      title: HeadTitle(title: AppStrings.yourFollowings),
+      title: HeadTitle(title: "yourFollowings".tr()),
       actions: <Widget>[
         IconButton(
           icon: const Icon(

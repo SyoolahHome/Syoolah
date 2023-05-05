@@ -1,6 +1,4 @@
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
-import 'package:ditto/presentation/sign_up/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 

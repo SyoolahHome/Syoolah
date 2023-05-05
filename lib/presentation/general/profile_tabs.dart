@@ -1,27 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../constants/app_strings.dart';
 import '../../model/tab_item.dart';
 import '../navigations_screen/profile/widgets/current_user_likes.dart';
 import '../navigations_screen/profile/widgets/current_user_posts.dart';
 
 abstract class GeneralProfileTabs {
-  static const List<TabItem> profileTabsItems = [
+  static List<TabItem> profileTabsItems = [
     TabItem(
-      label: AppStrings.posts,
+      label: "posts".tr(),
       widget: CurrentUserPosts(),
       icon: FlutterRemix.line_height,
     ),
     TabItem(
-      label: AppStrings.reposts,
+      label: "reposts".tr(),
       widget: Center(
         child: Text("reposts"),
       ),
       icon: FlutterRemix.repeat_2_line,
     ),
     TabItem(
-      label: AppStrings.likes,
+      label: "likes".tr(),
       widget: Center(
         child: CurrentUserLikes(),
       ),

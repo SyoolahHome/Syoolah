@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../constants/app_strings.dart';
 import '../../../services/utils/paths.dart';
 
 class AboutMinawarah extends StatelessWidget {
@@ -21,7 +21,7 @@ class AboutMinawarah extends StatelessWidget {
         },
         child: Center(
           child: Text(
-            AppStrings.aboutMunawarah,
+            "aboutMunawarah".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   // color: Theme.of(context).primaryColor,
                   decoration: TextDecoration.underline,

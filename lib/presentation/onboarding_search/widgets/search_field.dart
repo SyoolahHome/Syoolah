@@ -2,9 +2,9 @@ import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
-import '../../../constants/app_strings.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
@@ -25,7 +25,7 @@ class SearchField extends StatelessWidget {
         focusNode: cubit.searchNodeFocus,
         controller: cubit.searchController,
         decoration: InputDecoration(
-          hintText: AppStrings.searchUsersHint,
+          hintText: "searchUsersHint".tr(),
           filled: true,
           fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
           hintStyle: const TextStyle(

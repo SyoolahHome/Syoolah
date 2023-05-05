@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/app_strings.dart';
 import '../../../services/utils/snackbars.dart';
 
 class AddButton extends StatelessWidget {
@@ -21,12 +21,12 @@ class AddButton extends StatelessWidget {
               onAdd().then((_) {
                 Navigator.of(context).pop();
               }).catchError((e) {
-                SnackBars.text(context, AppStrings.invalidUrl);
+                SnackBars.text(context, "invalidUrl".tr());
               });
             }
           : null,
       icon: const Icon(FlutterRemix.add_line, color: Colors.white),
-      label: const Text(AppStrings.add, style: TextStyle(color: Colors.white)),
+      label: Text("add".tr(), style: TextStyle(color: Colors.white)),
     );
   }
 }

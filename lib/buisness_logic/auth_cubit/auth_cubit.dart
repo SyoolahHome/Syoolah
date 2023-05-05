@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../model/sign_up_step_view.dart';
@@ -78,12 +77,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> handleExistentKey() async {
     final existentKey = existentKeyController?.text ?? '';
     if (existentKey.isEmpty) {
-      emit(state.copyWith(error: AppStrings.pleaseEnterKey));
+      emit(state.copyWith(error: "pleaseEnterKey".tr()));
 
       return;
     }
     if (!Nostr.instance.keysService.isValidPrivateKey(existentKey)) {
-      emit(state.copyWith(error: AppStrings.invalidKey));
+      emit(state.copyWith(error: "invalidKey".tr()));
 
       return;
     }
@@ -93,7 +92,7 @@ class AuthCubit extends Cubit<AuthState> {
       LocalDatabase.instance.setPrivateKey(keyChain.private);
       emit(state.copyWith(authenticated: true));
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.invalidKey));
+      emit(state.copyWith(error: "invalidKey".tr()));
 
       return;
     } finally {
@@ -112,7 +111,7 @@ class AuthCubit extends Cubit<AuthState> {
         ClipboardData(text: LocalDatabase.instance.getPrivateKey()),
       );
     } catch (e) {
-      emit(state.copyWith(error: AppStrings.couldNotCopyKey));
+      emit(state.copyWith(error: "couldNotCopyKey".tr()));
     }
   }
 
@@ -185,7 +184,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         isGeneratingNewPrivateKey: false,
       ));
-      throw AppStrings.pleaseEnterName;
+      throw "pleaseEnterName".tr();
     }
 
     final newGeneratedPair = NostrKeyPairs.generate();
@@ -233,8 +232,8 @@ class AuthCubit extends Cubit<AuthState> {
       AuthInitial(
         signUpScreens: <SignUpStepView>[
           SignUpStepView(
-            title: AppStrings.welcome,
-            subtitle: AppStrings.welcomeSubtitle,
+            title: "welcome".tr(),
+            subtitle: "welcomeSubtitle".tr(),
             widgetBody: const Center(
               child: MunawarahLogo(
                 width: 100,
@@ -246,11 +245,11 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           SignUpStepView(
-            title: AppStrings.whatIsYourName,
-            subtitle: AppStrings.whatIsYourNameSubtitle,
+            title: "whatIsYourName".tr(),
+            subtitle: "whatIsYourNameSubtitle".tr(),
             widgetBody: CustomTextField(
               controller: nameController,
-              label: AppStrings.yourName,
+              label: "yourName".tr(),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             ),
@@ -265,11 +264,11 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           SignUpStepView(
-            title: AppStrings.whatAboutYou,
-            subtitle: AppStrings.whatAboutYouSubtitle,
+            title: "whatAboutYou".tr(),
+            subtitle: "whatAboutYouSubtitle".tr(),
             widgetBody: CustomTextField(
               controller: bioController,
-              label: AppStrings.recommendedOneLines,
+              label: "recommendedOneLines".tr(),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               isMultiline: true,
@@ -281,22 +280,22 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           SignUpStepView(
-            title: AppStrings.yourProfileImage,
-            subtitle: AppStrings.yourProfileImageSubtitle,
+            title: "yourProfileImage".tr(),
+            subtitle: "yourProfileImageSubtitle".tr(),
             widgetBody: const Center(child: AvatarUpload()),
             nextViewAllower: () {
               return true;
             },
           ),
           SignUpStepView(
-            title: AppStrings.yourUsername,
-            subtitle: AppStrings.yourUsernameSubtitle,
+            title: "yourUsername".tr(),
+            subtitle: "yourUsernameSubtitle".tr(),
             widgetBody: CustomTextField(
               controller: usernameController,
-              label: AppStrings.yourUsername,
+              label: "yourUsername".tr(),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              hint: AppStrings.hintUsername,
+              hint: "hintUsername".tr(),
             ),
             nextViewAllower: () {
               final username = usernameController?.text ?? '';
@@ -308,8 +307,8 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           SignUpStepView(
-            title: AppStrings.yourPrivateKey,
-            subtitle: AppStrings.yourPrivateKeySubtitle,
+            title: "yourPrivateKey".tr(),
+            subtitle: "yourPrivateKeySubtitle".tr(),
             widgetBody: Builder(
               builder: (context) {
                 final iconColorOpacity = 0.05;
@@ -340,16 +339,16 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           SignUpStepView(
-            title: AppStrings.yourPublicKey,
-            subtitle: AppStrings.yourPublicKeySubtitle,
+            title: "yourPublicKey".tr(),
+            subtitle: "yourPublicKeySubtitle".tr(),
             widgetBody: const KeySection(type: KeySectionType.publicKey),
             nextViewAllower: () {
               return true;
             },
           ),
           SignUpStepView(
-            title: AppStrings.recommendToFollow,
-            subtitle: AppStrings.yourPublicKeySubtitle,
+            title: "recommendToFollow".tr(),
+            subtitle: "yourPublicKeySubtitle".tr(),
             widgetBody: const UsersListToFollow(
               pubKeys: <String>[
                 "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",

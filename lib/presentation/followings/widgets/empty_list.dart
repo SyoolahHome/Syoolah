@@ -1,5 +1,5 @@
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EmptyList extends StatelessWidget {
@@ -10,7 +10,7 @@ class EmptyList extends StatelessWidget {
     return MarginedBody(
       child: Center(
         child: Text(
-          AppStrings.noFollowings,
+          "noFollowings".tr(),
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.labelMedium,
         ),

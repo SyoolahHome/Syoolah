@@ -1,5 +1,3 @@
-import 'package:ditto/constants/app_strings.dart';
-import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';

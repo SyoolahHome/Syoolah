@@ -1,15 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
 
 class AboutMunawarahContent extends StatelessWidget {
   const AboutMunawarahContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final contentParagraphs = AppStrings.aboutMunawarahContent.split("\n");
+    final contentParagraphs = "aboutMunawarahContent".tr().split("\n");
 
     final startingDurationMs = 400;
 

@@ -1,10 +1,8 @@
-import 'package:ditto/constants/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/app_colors.dart';
 import '../../../services/utils/paths.dart';
 import '../../general/widget/button.dart';
 
@@ -29,7 +27,7 @@ class GetStarted extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(Paths.authChoose);
               },
-              text: AppStrings.getStarted,
+              text: "getStarted".tr(),
             ),
           ),
           Animate(

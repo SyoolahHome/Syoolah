@@ -1,13 +1,9 @@
-import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
-import 'package:ditto/presentation/sign_up/widgets/logo.dart';
 import 'package:ditto/services/utils/routing.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
 import '../../services/utils/paths.dart';
 import '../../services/utils/snackbars.dart';
 import '../general/auth_app_handler.dart';
@@ -15,11 +11,6 @@ import '../general/widget/button.dart';
 import '../general/widget/margined_body.dart';
 import '../general/widget/title.dart';
 import 'widgets/app_bar.dart';
-import 'widgets/go_button.dart';
-import 'widgets/name_field.dart';
-import 'widgets/or_divider.dart';
-import 'widgets/page_view_tracker.dart';
-import 'widgets/private_key_label.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -126,7 +117,7 @@ class SignUp extends StatelessWidget {
                       if (!current.nextViewAllower()) {
                         final val = SnackBars.text(
                           context,
-                          AppStrings.finishThisStepFirst,
+                          "finishThisStepFirst".tr(),
                         );
                       } else {
                         if (onButtonTap != null) {
@@ -144,12 +135,12 @@ class SignUp extends StatelessWidget {
                     String textDecider() {
                       final textIfAuthenticated =
                           Routing.authCubit.state.authenticated
-                              ? AppStrings.start
+                              ? "start".tr()
                               : "loading..";
 
                       return isLastView
                           ? textIfAuthenticated
-                          : AppStrings.continueText;
+                          : "continueText".tr();
                     }
 
                     final animationDuration = 600.ms;

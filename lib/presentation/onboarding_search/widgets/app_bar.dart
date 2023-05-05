@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/app_colors.dart';
-import '../../../constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(AppStrings.searchUser,
+      title: Text("searchUser".tr(),
           style: Theme.of(context).textTheme.labelLarge),
       backgroundColor: AppColors.lighGrey,
       elevation: 0,

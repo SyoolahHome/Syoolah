@@ -1,4 +1,4 @@
-import 'package:ditto/constants/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -67,7 +67,7 @@ class PostButton extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        AppStrings.createNewPost,
+                        "createNewPost".tr(),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: AppColors.white,
                             ),

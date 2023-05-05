@@ -1,8 +1,8 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
-import 'package:ditto/constants/app_strings.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/follow_info.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../services/utils/paths.dart';
@@ -24,7 +24,7 @@ class ProfileHeader extends StatelessWidget {
         BlocBuilder<GlobalCubit, GlobalState>(
           builder: (context, state) {
             return FollowInfo(
-              label: AppStrings.followings,
+              label: "followings".tr(),
               count: state.currentUserFollowing?.tags.length ?? 0,
               onTap: () {
                 final profileCubit = context.read<ProfileCubit>();
@@ -46,7 +46,7 @@ class ProfileHeader extends StatelessWidget {
         BlocBuilder<GlobalCubit, GlobalState>(
           builder: (context, state) {
             return FollowInfo(
-              label: AppStrings.followers,
+              label: "followers".tr(),
               count: state.currentUserFollowers?.tags.length ?? 0,
               onTap: () {
                 Navigator.of(context).pushNamed(Paths.followers);

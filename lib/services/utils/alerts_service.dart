@@ -1,8 +1,8 @@
 import 'package:ditto/constants/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/app_strings.dart';
 import '../../model/relay_configuration.dart';
 import '../../presentation/general/widget/text_button.dart';
 import '../../presentation/general/widget/title.dart';
@@ -38,7 +38,7 @@ abstract class AlertsService {
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
             CustomTextButton(
-              text: AppStrings.close,
+              text: "close".tr(),
               onTap: () => Navigator.of(context).pop(),
               textColor: AppColors.black.withOpacity(textOpacity),
             ),
@@ -62,18 +62,18 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
-          title: HeadTitle(title: AppStrings.removeRelay(relayConfig.url)),
+          title: HeadTitle(title: "removeRelay".tr(args: [relayConfig.url])),
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
             CustomTextButton(
-              text: AppStrings.cancel,
+              text: "cancel".tr(),
               onTap: () {
                 Navigator.of(context).pop();
               },
               textColor: AppColors.black.withOpacity(textOpacity),
             ),
             CustomTextButton(
-              text: AppStrings.remove,
+              text: "remove".tr(),
               onTap: () {
                 onRemove();
                 Navigator.of(context).pop();
@@ -93,8 +93,8 @@ abstract class AlertsService {
     required BuildContext context,
     String? title,
     String? content,
-    String confirmText = AppStrings.ok,
-    String cancelTextt = AppStrings.cancel,
+    String? confirmText,
+    String? cancelTextt,
     Future<void> Function()? onConfirm,
     void Function()? onCancel,
   }) {
@@ -109,7 +109,7 @@ abstract class AlertsService {
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
             CustomTextButton(
-              text: cancelTextt,
+              text: cancelTextt ?? "cancel".tr(),
               onTap: () {
                 onCancel?.call();
                 Navigator.of(context).pop();
@@ -120,7 +120,7 @@ abstract class AlertsService {
                   .withOpacity(textOpacity),
             ),
             CustomTextButton(
-              text: confirmText,
+              text: confirmText ?? "ok".tr(),
               onTap: () {
                 onConfirm?.call().then((_) {
                   Navigator.of(context).pop();
