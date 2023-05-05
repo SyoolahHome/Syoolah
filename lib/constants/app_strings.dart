@@ -1,4 +1,12 @@
 abstract class AppStrings {
+  static const startConversation = 'Start a conversation by typing a message';
+  static const String yes = 'Yes';
+  static const String no = 'No';
+  static const String areYouSureclearChatMessages =
+      'Are you sure you want to clear chat messages?';
+
+  static const String copyChatMessages = 'Copy chat messages';
+  static const String clearChatMessages = 'Clear chat messages';
   static const String resendChatMessage = 'Resend chat message';
   static const String copyChatMessage = 'Copy chat message';
   static const String imamOnDuty = 'Imam on duty';

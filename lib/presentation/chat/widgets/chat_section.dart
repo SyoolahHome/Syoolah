@@ -15,8 +15,8 @@ class MessageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ChatCubit>();
-
     final hint = AppUtils.randomChatMessagePlaceholder();
+
     return Container(
       margin: const EdgeInsets.only(
             bottom: 10,
@@ -43,7 +43,9 @@ class MessageSection extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () {
+                print(cubit.userMessageController!.text);
                 cubit.setCurrentHint(hint);
+                print(cubit.userMessageController!.text);
                 cubit.sendMessageByCurrentUser();
               },
             ),

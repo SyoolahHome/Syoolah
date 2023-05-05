@@ -249,4 +249,19 @@ abstract class BottomSheetService {
       useRootNavigator: true,
     );
   }
+
+  static Future<void> showChatOptionsSheet(
+    BuildContext context, {
+    required List<BottomSheetOption> options,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return BottomSheetOptionsWidget(options: options);
+      },
+    );
+  }
 }

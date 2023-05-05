@@ -8,6 +8,7 @@ import '../../buisness_logic/cubit/chat_cubit.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/chat_message_widget.dart';
 import 'widgets/chat_section.dart';
+import 'widgets/empty_chat_widget.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});
@@ -28,6 +29,12 @@ class Chat extends StatelessWidget {
                 body: MarginedBody(
                   child: BlocBuilder<ChatCubit, ChatState>(
                     builder: (context, state) {
+                      if (state.messages.isEmpty) {
+                        return Center(
+                          child: EmptyChatWidget(),
+                        );
+                      }
+
                       return SingleChildScrollView(
                         reverse: true,
                         child: Column(
@@ -36,6 +43,7 @@ class Chat extends StatelessWidget {
                             ...state.messages.map(
                               (message) {
                                 return Animate(
+                                  key: ValueKey(message.id),
                                   effects: <Effect>[
                                     FadeEffect(),
                                     SlideEffect(begin: Offset(0, 0.25)),

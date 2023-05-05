@@ -88,4 +88,52 @@ abstract class AlertsService {
       },
     );
   }
+
+  static void confirmDialog({
+    required BuildContext context,
+    String? title,
+    String? content,
+    String confirmText = AppStrings.ok,
+    String cancelTextt = AppStrings.cancel,
+    Future<void> Function()? onConfirm,
+    void Function()? onCancel,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final textOpacity = 0.5;
+
+        return AlertDialog(
+          title: title != null ? HeadTitle(title: title) : null,
+          content: content != null ? Text(content) : null,
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: cancelTextt,
+              onTap: () {
+                onCancel?.call();
+                Navigator.of(context).pop();
+              },
+              textColor: Theme.of(context)
+                  .colorScheme
+                  .background
+                  .withOpacity(textOpacity),
+            ),
+            CustomTextButton(
+              text: confirmText,
+              onTap: () {
+                onConfirm?.call().then((_) {
+                  Navigator.of(context).pop();
+                });
+              },
+              textColor: Theme.of(context).colorScheme.error,
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
+        );
+      },
+    );
+  }
 }

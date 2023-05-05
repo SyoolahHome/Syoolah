@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_openai/openai.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -29,7 +30,6 @@ class ChatCubit extends Cubit<ChatState> {
       return;
     }
 
-    controller.clear();
     if (focusNode!.hasFocus) {
       focusNode!.unfocus();
     }
@@ -50,6 +50,8 @@ class ChatCubit extends Cubit<ChatState> {
     final newMessagesList = [...currentMessagesList, newMessage];
 
     emit(state.copyWith(messages: newMessagesList));
+
+    controller.clear();
   }
 
   void _sendMessageBySystem(String message) {
@@ -65,7 +67,7 @@ class ChatCubit extends Cubit<ChatState> {
             role: OpenAIChatMessageRole.system,
             id: newMessageId,
             createdAt: DateTime.now(),
-          )
+          ),
         ],
       ),
     );
@@ -98,9 +100,13 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void _init() {
-    userMessageController = TextEditingController();
+    userMessageController = TextEditingController()
+      ..addListener(() {
+        print("Text: ${userMessageController!.text}");
+      });
     scrollController = ScrollController();
     focusNode = FocusNode();
+
     stream.where((event) => event.messages.isNotEmpty).listen((event) {
       final lastMessage = event.messages.last;
       if (lastMessage.role == OpenAIChatMessageRole.user) {
@@ -152,6 +158,42 @@ class ChatCubit extends Cubit<ChatState> {
     return AppUtils.copy(
       message.message,
     );
+  }
+
+  Future<void> showChatOptionsSheet(BuildContext context) {
+    return BottomSheetService.showChatOptionsSheet(
+      context,
+      options: <BottomSheetOption>[
+        BottomSheetOption(
+          icon: FlutterRemix.file_copy_line,
+          title: AppStrings.copyChatMessages,
+          onPressed: () => copyMessages(),
+        ),
+        BottomSheetOption(
+          icon: FlutterRemix.delete_bin_2_line,
+          title: AppStrings.clearChatMessages,
+          onPressed: () {
+            AlertsService.confirmDialog(
+              context: context,
+              title: AppStrings.areYouSureclearChatMessages,
+              confirmText: AppStrings.yes,
+              cancelTextt: AppStrings.no,
+              onConfirm: () async => clearMessages(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  void copyMessages() {
+    final messages = state.messages;
+    final messagesText = messages.map((e) => e.message).join("\n");
+    AppUtils.copy(messagesText);
+  }
+
+  void clearMessages() {
+    emit(state.copyWith(messages: <ChatMessage>[]));
   }
 }
 

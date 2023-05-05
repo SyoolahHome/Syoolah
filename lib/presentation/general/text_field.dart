@@ -6,7 +6,7 @@ import '../../constants/app_strings.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    required this.controller,
+    this.controller,
     this.label,
     this.contentPadding,
     this.suffix,
