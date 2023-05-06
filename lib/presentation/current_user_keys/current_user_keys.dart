@@ -6,7 +6,7 @@ import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:easy_localization/easy_localization.dart';w
+import 'package:easy_localization/easy_localization.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/danger_box.dart';
 import 'widgets/private_key_section.dart';

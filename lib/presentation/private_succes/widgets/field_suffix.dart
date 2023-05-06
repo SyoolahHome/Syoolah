@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class FieldSuffixIcon extends StatelessWidget {
   const FieldSuffixIcon({
     super.key,

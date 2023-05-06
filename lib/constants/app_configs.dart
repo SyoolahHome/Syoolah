@@ -8,6 +8,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../buisness_logic/app/app_cubit.dart';
 import '../buisness_logic/cubit/settings_cubit.dart';
 import '../model/feed_category.dart';
+import '../model/loclal_item.dart';
 import '../model/search_option.dart';
 import '../model/settings_item.dart';
 import '../services/utils/routing.dart';
@@ -70,6 +71,53 @@ abstract class AppConfigs {
       path: Paths.sirahFeed,
     ),
   ];
+
+  static final localeItems = <LocaleItem>[
+    LocaleItem(
+      applyText: "Apply",
+      locale: Locale('en'),
+      titleName: "English",
+    ),
+    LocaleItem(
+      applyText: "Appliquer",
+      locale: Locale('fr'),
+      titleName: "Français",
+    ),
+    LocaleItem(
+      applyText: "Anwenden",
+      locale: Locale('de'),
+      titleName: "Deutsch",
+    ),
+    LocaleItem(
+      applyText: "Applicare",
+      locale: Locale('it'),
+      titleName: "Italiano",
+    ),
+    LocaleItem(
+      applyText: "Aplicar",
+      locale: Locale('es'),
+      titleName: "Español",
+    ),
+    LocaleItem(
+      applyText: "Aplicar",
+      locale: Locale('pt'),
+      titleName: "Português",
+    ),
+    LocaleItem(
+      applyText: "Применять",
+      locale: Locale('ru'),
+      titleName: "Русский",
+    ),
+    LocaleItem(
+      applyText: "应用",
+      locale: Locale('zh'),
+      titleName: "中文",
+    ),
+  ];
+
+  static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
+  static String translationsPath = 'assets/translations';
+  static Locale fallbackLocale = Locale('en');
 
   static final feedsSearchOptions = [
     SearchOption(

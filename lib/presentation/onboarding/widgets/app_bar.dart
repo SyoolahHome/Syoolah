@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
 
@@ -15,8 +14,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: const <Widget>[
-        ],
+        actions: const <Widget>[],
       ),
     );
   }

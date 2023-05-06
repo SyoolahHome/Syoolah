@@ -4,7 +4,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../buisness_logic/global_feed/global_feed_cubit.dart';
 import '../../../constants/app_colors.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class SearchButton extends StatelessWidget {
   const SearchButton({super.key});

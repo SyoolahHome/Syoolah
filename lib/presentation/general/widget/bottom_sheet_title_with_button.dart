@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-
 class BottomSheetTitleWithIconButton extends StatelessWidget {
   const BottomSheetTitleWithIconButton({
     super.key,

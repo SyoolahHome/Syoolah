@@ -2,7 +2,6 @@ import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-
 class AnimatedLogo extends StatelessWidget {
   const AnimatedLogo({super.key});
 

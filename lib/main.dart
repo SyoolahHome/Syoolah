@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import 'constants/app_configs.dart';
 import 'constants/app_themes.dart';
 
 Future<void> main() async {
@@ -28,9 +29,9 @@ Future<void> main() async {
   runApp(
     EasyLocalization(
       child: MyApp(),
-      supportedLocales: [Locale('en'), Locale('fr')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('en'),
+      supportedLocales: AppConfigs.locales,
+      path: AppConfigs.translationsPath,
+      fallbackLocale: AppConfigs.fallbackLocale,
     ),
   );
 }

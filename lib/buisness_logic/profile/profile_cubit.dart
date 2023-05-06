@@ -37,7 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.currentUserPostsStream,
     required this.currentUserMetadataStream,
     required this.currentUserLikedPosts,
-  }) : super(const ProfileInitial(
+  }) : super(ProfileInitial(
           profileTabsItems: GeneralProfileTabs.profileTabsItems,
         )) {
     _handleStreams();
