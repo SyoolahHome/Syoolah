@@ -9,12 +9,14 @@ class MunawarahButton extends StatelessWidget {
     this.isSmall = false,
     this.isRounded = true,
     this.icon,
+    this.isOnlyBorder = false,
   });
 
   final VoidCallback onTap;
   final String? text;
   final bool isSmall;
   final bool isRounded;
+  final bool isOnlyBorder;
   final IconData? icon;
 
   @override
@@ -28,13 +30,25 @@ class MunawarahButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.background,
-            elevation: isSmall ? 1 : 4,
+            backgroundColor: isOnlyBorder
+                ? Colors.transparent
+                : Theme.of(context).colorScheme.background,
+            elevation: isOnlyBorder
+                ? 0
+                : isSmall
+                    ? 1
+                    : 4,
             shape: RoundedRectangleBorder(
               borderRadius: isSmall
                   ? BorderRadius.circular(100)
                   : BorderRadius.circular(10),
             ),
+            side: isOnlyBorder
+                ? BorderSide(
+                    color: Theme.of(context).colorScheme.background,
+                    width: 1.5,
+                  )
+                : null,
             padding: isSmall
                 ? const EdgeInsets.symmetric(horizontal: 15, vertical: 0)
                 : null,
@@ -49,14 +63,22 @@ class MunawarahButton extends StatelessWidget {
                 Text(
                   text!,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: isOnlyBorder
+                        ? Theme.of(context).colorScheme.background
+                        : Theme.of(context).colorScheme.onBackground,
                     fontSize: isSmall ? 11 : 17,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+              if (text != null && icon != null) SizedBox(width: 7.5),
               if (icon != null) ...[
-                SizedBox(width: 7.5),
-                Icon(icon, size: isSmall ? 12.5 : 15),
+                Icon(
+                  icon,
+                  size: isSmall ? 12.5 : 15,
+                  color: isOnlyBorder
+                      ? Theme.of(context).colorScheme.background
+                      : null,
+                ),
               ],
             ],
           ),

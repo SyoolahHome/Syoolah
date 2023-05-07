@@ -269,4 +269,6 @@ abstract class AppConfigs {
     'What is the significance of the Friday prayer in Islam?',
     'What is the Islamic view on democracy and secularism?',
   ];
+
+  static final version = '1.0.0';
 }

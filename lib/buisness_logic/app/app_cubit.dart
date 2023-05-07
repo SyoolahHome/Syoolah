@@ -206,8 +206,14 @@ class AppCubit extends Cubit<AppState> {
       required String buttonText,
       required Locale locale,
     }) {
+      final isCurrentApplied = context.locale == locale;
+
       return MunawarahButton(
         onTap: () async {
+          if (isCurrentApplied) {
+            return;
+          }
+
           await AppUtils.changeLocale(context, locale);
           Navigator.of(context).pop();
           SnackBars.text(
@@ -217,7 +223,9 @@ class AppCubit extends Cubit<AppState> {
             ),
           );
         },
-        text: buttonText,
+        isOnlyBorder: isCurrentApplied,
+        text: isCurrentApplied ? null : buttonText,
+        icon: isCurrentApplied ? FlutterRemix.check_line : null,
         isSmall: true,
       );
     }
