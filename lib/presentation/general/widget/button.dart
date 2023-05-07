@@ -10,6 +10,7 @@ class MunawarahButton extends StatelessWidget {
     this.isRounded = true,
     this.icon,
     this.isOnlyBorder = false,
+    this.customWidget,
   });
 
   final VoidCallback onTap;
@@ -18,6 +19,7 @@ class MunawarahButton extends StatelessWidget {
   final bool isRounded;
   final bool isOnlyBorder;
   final IconData? icon;
+  final Widget? customWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class MunawarahButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              if (customWidget != null) customWidget!,
               if (text != null)
                 Text(
                   text!,

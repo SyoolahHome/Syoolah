@@ -7,7 +7,7 @@ abstract class SnackBars {
   static ScaffoldFeatureController text(
     BuildContext context,
     String message, {
-    bool isError = true,
+    bool isError = false,
   }) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

@@ -20,7 +20,11 @@ class UserMetaData extends Equatable {
   /// The about of the user.
   final String? about;
 
+  /// The display name of the user.
   final String? displayName;
+
+  /// The nip05 identifier of the user.
+  final String? nip05Identifier;
 
   @override
   List<Object?> get props => [
@@ -30,6 +34,7 @@ class UserMetaData extends Equatable {
         username,
         about,
         displayName,
+        nip05Identifier,
       ];
 
   /// {@macro user_meta_data}
@@ -40,6 +45,7 @@ class UserMetaData extends Equatable {
     required this.username,
     required this.about,
     this.displayName,
+    this.nip05Identifier,
   });
 
   /// {@macro user_meta_data}
@@ -60,6 +66,7 @@ class UserMetaData extends Equatable {
       username: json['username'] ?? UserMetaData.placeholder().username,
       about: json['about'] ?? UserMetaData.placeholder().about,
       displayName: json['display_name'],
+      nip05Identifier: json['nip05_identifier'],
     );
   }
 
@@ -72,6 +79,8 @@ class UserMetaData extends Equatable {
       banner: "https://picsum.photos/200/300",
       username: "No Username",
       about: "No About",
+      displayName: "No Display Name",
+      nip05Identifier: "No NIP05 Identifier",
     );
   }
 
@@ -84,6 +93,7 @@ class UserMetaData extends Equatable {
       'username': username,
       'about': about,
       'display_name': displayName,
+      "nip05_identifier": nip05Identifier,
     };
   }
 
@@ -105,6 +115,8 @@ class UserMetaData extends Equatable {
     String? picture,
     String? banner,
     String? about,
+    String? displayName,
+    String? nip05Identifier,
   }) {
     return UserMetaData(
       name: name ?? this.name,
@@ -112,6 +124,8 @@ class UserMetaData extends Equatable {
       banner: banner ?? this.banner,
       username: username ?? this.username,
       about: about ?? this.about,
+      nip05Identifier: nip05Identifier ?? this.nip05Identifier,
+      displayName: displayName ?? this.displayName,
     );
   }
 }

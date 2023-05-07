@@ -21,6 +21,7 @@ class AvatarUpload extends StatelessWidget {
               ),
               child: state.pickedImage != null
                   ? Stack(
+                      fit: StackFit.expand,
                       alignment: Alignment.center,
                       children: <Widget>[
                         Image.file(

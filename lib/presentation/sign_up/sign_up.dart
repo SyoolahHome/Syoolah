@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../services/utils/paths.dart';
 import '../../services/utils/snackbars.dart';
@@ -29,7 +30,7 @@ class SignUp extends StatelessWidget {
 
     final stepsLength = signUpScreens.length;
 
-    widget(index) {
+    Widget widget(index) {
       final current = signUpScreens[index];
       final labelLarge = Theme.of(context).textTheme.labelLarge;
       if (labelLarge == null) {
@@ -111,11 +112,17 @@ class SignUp extends StatelessWidget {
                     final current = signUpScreens[state.currentStepIndex - 1];
 
                     void onMainButtonPressed() {
+                      if (!(Routing.authCubit.state.authenticated ||
+                          !isLastView)) {
+                        return;
+                      }
+
                       final onButtonTap = current.onButtonTap;
                       if (!current.nextViewAllower()) {
                         final val = SnackBars.text(
                           context,
                           "finishThisStepFirst".tr(),
+                          isError: true,
                         );
                       } else {
                         if (onButtonTap != null) {
@@ -130,15 +137,30 @@ class SignUp extends StatelessWidget {
                       }
                     }
 
-                    String textDecider() {
+                    String? textDecider() {
                       final textIfAuthenticated =
                           Routing.authCubit.state.authenticated
                               ? "start".tr()
-                              : "loading..";
+                              : null;
 
                       return isLastView
                           ? textIfAuthenticated
                           : "continueText".tr();
+                    }
+
+                    Widget? customWidgetDecider() {
+                      return Routing.authCubit.state.authenticated ||
+                              !isLastView
+                          ? null
+                          : SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1.2,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                            );
                     }
 
                     final animationDuration = 600.ms;
@@ -149,9 +171,33 @@ class SignUp extends StatelessWidget {
                         child: SizedBox(
                           width: double.infinity,
                           height: height,
-                          child: MunawarahButton(
-                            onTap: onMainButtonPressed,
-                            text: textDecider(),
+                          child: Stack(
+                            alignment: Alignment.centerRight,
+                            fit: StackFit.expand,
+                            children: <Widget>[
+                              MunawarahButton(
+                                onTap: onMainButtonPressed,
+                                text: textDecider(),
+                                customWidget: customWidgetDecider(),
+                              ),
+                              if (!isLastView)
+                                Animate(
+                                  effects: <Effect>[FadeEffect()],
+                                  delay: 2000.ms,
+                                  child: Positioned(
+                                    right:
+                                        MarginedBody.defaultMargin.horizontal /
+                                            2,
+                                    child: Icon(
+                                      FlutterRemix.arrow_right_line,
+                                      size: 21,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
+                                  ),
+                                )
+                            ],
                           ),
                         ),
                       ),

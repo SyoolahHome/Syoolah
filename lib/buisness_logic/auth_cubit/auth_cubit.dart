@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +20,7 @@ import '../../presentation/sign_up/widgets/avatar_upload.dart';
 import '../../presentation/sign_up/widgets/users_list_to_follow.dart';
 import '../../services/database/local/local_database.dart';
 import '../../services/nostr/nostr_service.dart';
+import '../../services/utils/app_utils.dart';
 import '../../services/utils/file_upload.dart';
 part 'auth_state.dart';
 
@@ -28,6 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController? existentKeyController;
   TextEditingController? bioController;
   TextEditingController? usernameController;
+  TextEditingController? nip05Controller;
   FocusNode? nameFocusNode;
 
   AuthCubit() : super(const AuthInitial()) {
@@ -70,6 +73,7 @@ class AuthCubit extends Cubit<AuthState> {
     bioController?.dispose();
     usernameController?.dispose();
     existentKeyController?.dispose();
+    nip05Controller?.dispose();
 
     return super.close();
   }
@@ -211,6 +215,8 @@ class AuthCubit extends Cubit<AuthState> {
     nameController = TextEditingController();
     bioController = TextEditingController();
     usernameController = TextEditingController();
+    nip05Controller = TextEditingController();
+
     if (kDebugMode) {
       nameController?.text = 'test name';
     }
@@ -224,7 +230,7 @@ class AuthCubit extends Cubit<AuthState> {
           subtitle: "welcomeSubtitle".tr(),
           widgetBody: const Center(
             child: MunawarahLogo(
-              width: 100,
+              width: 140,
               isHero: false,
             ),
           ),
@@ -242,13 +248,13 @@ class AuthCubit extends Cubit<AuthState> {
                 const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           ),
           nextViewAllower: () {
-            final username = usernameController?.text ?? '';
+            final fullName = nameController?.text ?? '';
 
-            usernameController?.text = "@${username.split(' ').join('_')}";
+            usernameController!.text = "@${fullName.split(' ').join('_')}";
             final minAcceptableUsernameLength = 2;
 
-            return username.isNotEmpty &&
-                username.length >= minAcceptableUsernameLength;
+            return usernameController!.text.isNotEmpty &&
+                usernameController!.text.length >= minAcceptableUsernameLength;
           },
         ),
         SignUpStepView(
@@ -293,6 +299,23 @@ class AuthCubit extends Cubit<AuthState> {
           onButtonTap: () {
             authenticate();
           },
+        ),
+        SignUpStepView(
+          title: "NIP05IdentifierTitle".tr(),
+          subtitle: "NIP05IdentifierSubtitle".tr(),
+          widgetBody: CustomTextField(
+            controller: nip05Controller,
+            label: "yourNIP05".tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            hint: "hintNIP05".tr(),
+          ),
+          nextViewAllower: () {
+            // TODO: implement nip05 validator and check if it's valid.
+            final isValidNIP05 = true;
+            return nip05Controller!.text.isNotEmpty && isValidNIP05;
+          },
+          // onButtonTap: () {},
         ),
         SignUpStepView(
           title: "yourPrivateKey".tr(),
