@@ -124,10 +124,6 @@ class AuthCubit extends Cubit<AuthState> {
     if (_internalPageControllerPage == null) {
       return;
     }
-    final signUpScreens = state.signUpScreens;
-    if (signUpScreens == null) {
-      return;
-    }
 
     if (_internalPageControllerPage.round() + 1 < signUpScreens.length) {
       _internalPageController.nextPage(
@@ -144,10 +140,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
     final _internalPageControllerPage = _internalPageController.page;
     if (_internalPageControllerPage == null) {
-      return;
-    }
-    final signUpScreens = state.signUpScreens;
-    if (signUpScreens == null) {
       return;
     }
 
@@ -209,10 +201,6 @@ class AuthCubit extends Cubit<AuthState> {
         if (_internalPageControllerPage == null) {
           return;
         }
-        final signUpScreens = state.signUpScreens;
-        if (signUpScreens == null) {
-          return;
-        }
 
         emit(
           state.copyWith(
@@ -228,140 +216,137 @@ class AuthCubit extends Cubit<AuthState> {
     }
     existentKeyController = TextEditingController();
     nameFocusNode = FocusNode();
-    emit(
-      AuthInitial(
-        signUpScreens: <SignUpStepView>[
-          SignUpStepView(
-            title: "welcome".tr(),
-            subtitle: "welcomeSubtitle".tr(),
-            widgetBody: const Center(
-              child: MunawarahLogo(
-                width: 100,
-                isHero: false,
-              ),
-            ),
-            nextViewAllower: () {
-              return true;
-            },
-          ),
-          SignUpStepView(
-            title: "whatIsYourName".tr(),
-            subtitle: "whatIsYourNameSubtitle".tr(),
-            widgetBody: CustomTextField(
-              controller: nameController,
-              label: "yourName".tr(),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            ),
-            nextViewAllower: () {
-              final username = usernameController?.text ?? '';
-
-              usernameController?.text = "@${username.split(' ').join('_')}";
-              final minAcceptableUsernameLength = 2;
-
-              return username.isNotEmpty &&
-                  username.length >= minAcceptableUsernameLength;
-            },
-          ),
-          SignUpStepView(
-            title: "whatAboutYou".tr(),
-            subtitle: "whatAboutYouSubtitle".tr(),
-            widgetBody: CustomTextField(
-              controller: bioController,
-              label: "recommendedOneLines".tr(),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              isMultiline: true,
-            ),
-            nextViewAllower: () {
-              final bio = bioController?.text ?? '';
-
-              return bio.isNotEmpty;
-            },
-          ),
-          SignUpStepView(
-            title: "yourProfileImage".tr(),
-            subtitle: "yourProfileImageSubtitle".tr(),
-            widgetBody: const Center(child: AvatarUpload()),
-            nextViewAllower: () {
-              return true;
-            },
-          ),
-          SignUpStepView(
-            title: "yourUsername".tr(),
-            subtitle: "yourUsernameSubtitle".tr(),
-            widgetBody: CustomTextField(
-              controller: usernameController,
-              label: "yourUsername".tr(),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              hint: "hintUsername".tr(),
-            ),
-            nextViewAllower: () {
-              final username = usernameController?.text ?? '';
-
-              return username.isNotEmpty;
-            },
-            onButtonTap: () {
-              authenticate();
-            },
-          ),
-          SignUpStepView(
-            title: "yourPrivateKey".tr(),
-            subtitle: "yourPrivateKeySubtitle".tr(),
-            widgetBody: Builder(
-              builder: (context) {
-                final iconColorOpacity = 0.05;
-
-                return Center(
-                  child: IconButton(
-                    padding: const EdgeInsets.all(15),
-                    onPressed: () {
-                      final val =
-                          BottomSheetService.showPrivateKeyGenSuccess(context);
-                    },
-                    style: IconButton.styleFrom(
-                      backgroundColor: Theme.of(context)
-                          .colorScheme
-                          .background
-                          .withOpacity(iconColorOpacity),
-                    ),
-                    icon: Icon(
-                      FlutterRemix.eye_2_line,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                  ),
-                );
-              },
-            ),
-            nextViewAllower: () {
-              return true;
-            },
-          ),
-          SignUpStepView(
-            title: "yourPublicKey".tr(),
-            subtitle: "yourPublicKeySubtitle".tr(),
-            widgetBody: const KeySection(type: KeySectionType.publicKey),
-            nextViewAllower: () {
-              return true;
-            },
-          ),
-          SignUpStepView(
-            title: "recommendToFollow".tr(),
-            subtitle: "yourPublicKeySubtitle".tr(),
-            widgetBody: const UsersListToFollow(
-              pubKeys: <String>[
-                "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
-                "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
-                "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
-              ],
-            ),
-            nextViewAllower: () {
-              return true;
-            },
-          ),
-        ],
-      ),
-    );
   }
+
+  List<SignUpStepView> get signUpScreens => <SignUpStepView>[
+        SignUpStepView(
+          title: "welcome".tr(),
+          subtitle: "welcomeSubtitle".tr(),
+          widgetBody: const Center(
+            child: MunawarahLogo(
+              width: 100,
+              isHero: false,
+            ),
+          ),
+          nextViewAllower: () {
+            return true;
+          },
+        ),
+        SignUpStepView(
+          title: "whatIsYourName".tr(),
+          subtitle: "whatIsYourNameSubtitle".tr(),
+          widgetBody: CustomTextField(
+            controller: nameController,
+            label: "yourName".tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          ),
+          nextViewAllower: () {
+            final username = usernameController?.text ?? '';
+
+            usernameController?.text = "@${username.split(' ').join('_')}";
+            final minAcceptableUsernameLength = 2;
+
+            return username.isNotEmpty &&
+                username.length >= minAcceptableUsernameLength;
+          },
+        ),
+        SignUpStepView(
+          title: "whatAboutYou".tr(),
+          subtitle: "whatAboutYouSubtitle".tr(),
+          widgetBody: CustomTextField(
+            controller: bioController,
+            label: "recommendedOneLines".tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            isMultiline: true,
+          ),
+          nextViewAllower: () {
+            final bio = bioController?.text ?? '';
+
+            return bio.isNotEmpty;
+          },
+        ),
+        SignUpStepView(
+          title: "yourProfileImage".tr(),
+          subtitle: "yourProfileImageSubtitle".tr(),
+          widgetBody: const Center(child: AvatarUpload()),
+          nextViewAllower: () {
+            return true;
+          },
+        ),
+        SignUpStepView(
+          title: "yourUsername".tr(),
+          subtitle: "yourUsernameSubtitle".tr(),
+          widgetBody: CustomTextField(
+            controller: usernameController,
+            label: "yourUsername".tr(),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            hint: "hintUsername".tr(),
+          ),
+          nextViewAllower: () {
+            final username = usernameController?.text ?? '';
+
+            return username.isNotEmpty;
+          },
+          onButtonTap: () {
+            authenticate();
+          },
+        ),
+        SignUpStepView(
+          title: "yourPrivateKey".tr(),
+          subtitle: "yourPrivateKeySubtitle".tr(),
+          widgetBody: Builder(
+            builder: (context) {
+              final iconColorOpacity = 0.05;
+
+              return Center(
+                child: IconButton(
+                  padding: const EdgeInsets.all(15),
+                  onPressed: () {
+                    final val =
+                        BottomSheetService.showPrivateKeyGenSuccess(context);
+                  },
+                  style: IconButton.styleFrom(
+                    backgroundColor: Theme.of(context)
+                        .colorScheme
+                        .background
+                        .withOpacity(iconColorOpacity),
+                  ),
+                  icon: Icon(
+                    FlutterRemix.eye_2_line,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                ),
+              );
+            },
+          ),
+          nextViewAllower: () {
+            return true;
+          },
+        ),
+        SignUpStepView(
+          title: "yourPublicKey".tr(),
+          subtitle: "yourPublicKeySubtitle".tr(),
+          widgetBody: const KeySection(type: KeySectionType.publicKey),
+          nextViewAllower: () {
+            return true;
+          },
+        ),
+        SignUpStepView(
+          title: "recommendToFollow".tr(),
+          subtitle: "yourPublicKeySubtitle".tr(),
+          widgetBody: const UsersListToFollow(
+            pubKeys: <String>[
+              "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
+              "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+              "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
+            ],
+          ),
+          nextViewAllower: () {
+            return true;
+          },
+        ),
+      ];
 }

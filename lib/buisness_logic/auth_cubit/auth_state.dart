@@ -7,7 +7,6 @@ class AuthState extends Equatable {
   final bool isGeneratingNewPrivateKey;
   final bool isSavingExistentKey;
   final bool isSignedOut;
-  final List<SignUpStepView>? signUpScreens;
   final int currentStepIndex;
   final File? pickedImage;
 
@@ -19,14 +18,12 @@ class AuthState extends Equatable {
         isGeneratingNewPrivateKey,
         isSavingExistentKey,
         isSignedOut,
-        signUpScreens,
         pickedImage,
       ];
 
   const AuthState({
     this.pickedImage,
     this.currentStepIndex = 1,
-    required this.signUpScreens,
     this.error,
     this.authenticated = false,
     this.isGeneratingNewPrivateKey = false,
@@ -40,14 +37,12 @@ class AuthState extends Equatable {
     bool? isSavingExistentKey,
     bool? authenticated,
     bool? isSignedOut,
-    List<SignUpStepView>? signUpScreens,
     int? currentStepIndex,
     File? pickedImage,
   }) {
     return AuthState(
       pickedImage: pickedImage ?? this.pickedImage,
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
-      signUpScreens: signUpScreens ?? this.signUpScreens,
       error: error ?? this.error,
       authenticated: authenticated ?? this.authenticated,
       isGeneratingNewPrivateKey:
@@ -59,7 +54,5 @@ class AuthState extends Equatable {
 }
 
 class AuthInitial extends AuthState {
-  const AuthInitial({
-    super.signUpScreens,
-  });
+  const AuthInitial();
 }

@@ -1,3 +1,4 @@
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,8 @@ class SignUp extends StatelessWidget {
     final screenHeight = screenSize.height;
     final cubit = context.read<AuthCubit>();
 
-    final signUpScreens = cubit.state.signUpScreens;
-
-    if (signUpScreens == null) {
-      return const SizedBox();
-    }
+    // final signUpScreens = cubit.state.signUpScreens;
+    final signUpScreens = cubit.signUpScreens;
 
     final stepsLength = signUpScreens.length;
 

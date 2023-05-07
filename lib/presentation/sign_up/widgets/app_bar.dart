@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AuthCubit>();
-    final stepsLength = cubit.state.signUpScreens!.length;
+    final stepsLength = cubit.signUpScreens.length;
 
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
