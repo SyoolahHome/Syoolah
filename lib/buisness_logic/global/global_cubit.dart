@@ -10,8 +10,8 @@ import '../../services/nostr/nostr_service.dart';
 part 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {
-  Stream<NostrEvent> currentUserFollowing;
-  Stream<NostrEvent> currentUserFollowers;
+  NostrEventsStream currentUserFollowing;
+  NostrEventsStream currentUserFollowers;
 
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
@@ -89,6 +89,8 @@ class GlobalCubit extends Cubit<GlobalState> {
 
   @override
   Future<void> close() {
+    currentUserFollowing.close();
+    currentUserFollowers.close();
     _currentUserFollowersSubscription?.cancel();
     _currentUserFollowingSubscription?.cancel();
 
@@ -96,13 +98,15 @@ class GlobalCubit extends Cubit<GlobalState> {
   }
 
   void _handleCurrentUserFollowers() {
-    _currentUserFollowersSubscription = currentUserFollowers.listen((event) {
+    _currentUserFollowersSubscription =
+        currentUserFollowers.stream.listen((event) {
       emit(state.copyWith(currentUserFollowers: event));
     });
   }
 
   void _handleCurrentUserFollowing() {
-    _currentUserFollowingSubscription = currentUserFollowing.listen((event) {
+    _currentUserFollowingSubscription =
+        currentUserFollowing.stream.listen((event) {
       emit(state.copyWith(currentUserFollowing: event));
     });
   }

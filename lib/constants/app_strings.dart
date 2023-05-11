@@ -34,7 +34,7 @@
 //   static const String yourFollowings = 'Your Followings';
 //   static const String yourFollowers = 'Your Followers';
 //   static const String authenticate = 'Authenticate';
-//   static const String existentKeyAuth = 'Authenticate with existing key';
+//   static const String existentKeyAuthTitle = 'Authenticate with existing key';
 //   static const String relayNameError = ' Can\'t load relay name';
 //   static const String relayDescriptionError = ' Can\'t load relay description';
 

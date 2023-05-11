@@ -32,7 +32,6 @@ class NostrService {
 
   void setCurrentUserMetaData({
     required UserMetaData metadata,
-    DateTime? creationDate,
   }) {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
@@ -41,21 +40,14 @@ class NostrService {
     final event = NostrEvent.fromPartialData(
       kind: 0,
       keyPairs: nostrKeyPairs,
-      content: jsonEncode({
-        "name": metadata.name,
-        "creationDate": (creationDate ?? DateTime.now()).toIso8601String(),
-        "picture": metadata.picture,
-        "banner": metadata.banner,
-        "about": metadata.about,
-        "username": metadata.username,
-      }),
+      content: jsonEncode(metadata.toJson()),
     );
 
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> userMetadata(String pubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userMetadata(String pubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -72,12 +64,12 @@ class NostrService {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  Stream<NostrEvent> currentUserMetaDataStream() {
+  NostrEventsStream currentUserMetaDataStream() {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
 
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -114,8 +106,8 @@ class NostrService {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> currentUserTextNotesStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream currentUserTextNotesStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
@@ -136,8 +128,8 @@ class NostrService {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  Stream<NostrEvent> textNotesFeed() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream textNotesFeed() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -154,12 +146,12 @@ class NostrService {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  Stream getFollowedPeople() {
+  NostrEventsStream getFollowedPeople() {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
 
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -191,8 +183,8 @@ class NostrService {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> allUsersMetadata() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream allUsersMetadata() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -227,10 +219,10 @@ class NostrService {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> noteLikes({
+  NostrEventsStream noteLikes({
     required String postEventId,
   }) {
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -247,8 +239,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> currentUserLikes() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream currentUserLikes() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
@@ -268,8 +260,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> currentUserFollowings() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream currentUserFollowings() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
@@ -289,8 +281,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> currentUserFollowers() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream currentUserFollowers() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
@@ -310,11 +302,11 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> noteComments({
+  NostrEventsStream noteComments({
     required String postEventId,
     required Note note,
   }) {
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -330,7 +322,7 @@ class NostrService {
       request: requestWithFilter,
     );
 
-    stream.listen((event) {
+    stream.stream.listen((event) {
       print("comment: ${event.content}, random: $randomId");
     });
 
@@ -358,8 +350,8 @@ class NostrService {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  Stream<NostrEvent> quranFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream quranFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -376,8 +368,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> duaFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream duaFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -394,8 +386,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> hadithFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream hadithFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -412,8 +404,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> shariaFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream shariaFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -430,8 +422,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> fiqhFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream fiqhFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -448,8 +440,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> sirahFeedStream() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream sirahFeedStream() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -466,8 +458,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> globalFeed() {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream globalFeed() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -491,16 +483,16 @@ class NostrService {
       request: requestWithFilter,
     );
 
-    stream.listen((event) {
+    stream.stream.listen((event) {
       print("global: ${event.content}, random: $randomId");
     });
     return stream;
   }
 
-  Stream<NostrEvent> followingsFeed({
+  NostrEventsStream followingsFeed({
     required List<String> followings,
   }) {
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
@@ -520,10 +512,10 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> noteStreamById({
+  NostrEventsStream noteStreamById({
     required String noteId,
   }) {
-    final randomId = NostrClientUtils.random64HexChars();
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -565,8 +557,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> userTextNotesStream(String userProfilePubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userTextNotesStream(String userProfilePubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -583,8 +575,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> userMetaDataStream(String userProfilePubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userMetaDataStream(String userProfilePubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -601,8 +593,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> userLikes(String userProfilePubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userLikes(String userProfilePubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -619,8 +611,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> userFollowers(String userProfilePubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userFollowers(String userProfilePubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -637,8 +629,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> userFollowing(String userProfilePubKey) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream userFollowing(String userProfilePubKey) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
@@ -655,8 +647,8 @@ class NostrService {
     );
   }
 
-  Stream<NostrEvent> usersListMetadata(List<String> pubKeys) {
-    final randomId = NostrClientUtils.random64HexChars();
+  NostrEventsStream usersListMetadata(List<String> pubKeys) {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,

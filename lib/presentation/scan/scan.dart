@@ -8,6 +8,8 @@ import 'widgets/button.dart';
 import 'widgets/key_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'widgets/title_section.dart';
+
 class ExistentSignUp extends StatelessWidget {
   const ExistentSignUp({
     super.key,
@@ -26,23 +28,10 @@ class ExistentSignUp extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: heightSeparator * 2),
               Spacer(),
-              Animate(
-                effects: const <Effect>[
-                  FadeEffect(),
-                  SlideEffect(
-                    begin: Offset(-0.25, 0),
-                  ),
-                ],
-                child: HeadTitle(
-                  title: "existentKeyAuth".tr(),
-                  isForSection: true,
-                ),
-              ),
-              Spacer(
-                flex: 2,
-              ),
+              TitleSection(),
+              Spacer(flex: 2),
               KeyField(),
-              SizedBox(height: heightSeparator),
+              SizedBox(height: heightSeparator * 2),
               CustomButton(),
               SizedBox(height: heightSeparator * 3),
             ],

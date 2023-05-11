@@ -39,7 +39,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> authenticate() async {
     try {
-      await _generatePrivateKeyAndSetInfoToNostr();
       String? imageLink;
       final pickedImage = state.pickedImage;
 
@@ -55,6 +54,7 @@ class AuthCubit extends Cubit<AuthState> {
           username: usernameController?.text ?? '',
           about: bioController?.text ?? '',
           displayName: nameController?.text.split(" ").join("-") ?? '',
+          nip05Identifier: nip05Controller?.text ?? '',
         ),
       );
       emit(state.copyWith(authenticated: true));
@@ -180,6 +180,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         isGeneratingNewPrivateKey: false,
       ));
+
       throw "pleaseEnterName".tr();
     }
 
@@ -235,7 +236,7 @@ class AuthCubit extends Cubit<AuthState> {
             ),
           ),
           nextViewAllower: () {
-            return true;
+            return Future.value(true);
           },
         ),
         SignUpStepView(
@@ -253,8 +254,8 @@ class AuthCubit extends Cubit<AuthState> {
             usernameController!.text = "@${fullName.split(' ').join('_')}";
             final minAcceptableUsernameLength = 2;
 
-            return usernameController!.text.isNotEmpty &&
-                usernameController!.text.length >= minAcceptableUsernameLength;
+            return Future.value(usernameController!.text.isNotEmpty &&
+                usernameController!.text.length >= minAcceptableUsernameLength);
           },
         ),
         SignUpStepView(
@@ -270,7 +271,7 @@ class AuthCubit extends Cubit<AuthState> {
           nextViewAllower: () {
             final bio = bioController?.text ?? '';
 
-            return bio.isNotEmpty;
+            return Future.value(bio.isNotEmpty);
           },
         ),
         SignUpStepView(
@@ -278,7 +279,7 @@ class AuthCubit extends Cubit<AuthState> {
           subtitle: "yourProfileImageSubtitle".tr(),
           widgetBody: const Center(child: AvatarUpload()),
           nextViewAllower: () {
-            return true;
+            return Future.value(true);
           },
         ),
         SignUpStepView(
@@ -294,28 +295,12 @@ class AuthCubit extends Cubit<AuthState> {
           nextViewAllower: () {
             final username = usernameController?.text ?? '';
 
-            return username.isNotEmpty;
+            return Future.value(username.isNotEmpty);
           },
-          onButtonTap: () {
-            authenticate();
+          onButtonTap: () async {
+            await _generatePrivateKeyAndSetInfoToNostr();
+            // await authenticate();
           },
-        ),
-        SignUpStepView(
-          title: "NIP05IdentifierTitle".tr(),
-          subtitle: "NIP05IdentifierSubtitle".tr(),
-          widgetBody: CustomTextField(
-            controller: nip05Controller,
-            label: "yourNIP05".tr(),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            hint: "hintNIP05".tr(),
-          ),
-          nextViewAllower: () {
-            // TODO: implement nip05 validator and check if it's valid.
-            final isValidNIP05 = true;
-            return nip05Controller!.text.isNotEmpty && isValidNIP05;
-          },
-          // onButtonTap: () {},
         ),
         SignUpStepView(
           title: "yourPrivateKey".tr(),
@@ -346,7 +331,7 @@ class AuthCubit extends Cubit<AuthState> {
             },
           ),
           nextViewAllower: () {
-            return true;
+            return Future.value(true);
           },
         ),
         SignUpStepView(
@@ -354,9 +339,49 @@ class AuthCubit extends Cubit<AuthState> {
           subtitle: "yourPublicKeySubtitle".tr(),
           widgetBody: const KeySection(type: KeySectionType.publicKey),
           nextViewAllower: () {
-            return true;
+            return Future.value(true);
           },
         ),
+        SignUpStepView(
+            title: "NIP05IdentifierTitle".tr(),
+            subtitle: "NIP05IdentifierSubtitle".tr(),
+            widgetBody: CustomTextField(
+              controller: nip05Controller,
+              label: "yourNIP05".tr(),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              hint: "hintNIP05".tr(),
+            ),
+            nextViewAllower: () async {
+              if (nip05Controller!.text.isEmpty) {
+                return Future.value(true);
+              }
+
+              final privateKey = LocalDatabase.instance.getPrivateKey();
+              if (privateKey == null) {
+                return Future.value(false);
+              }
+
+              final pubKey = Nostr.instance.keysService
+                  .derivePublicKey(privateKey: privateKey);
+              final internetIdentifier = nip05Controller?.text ?? '';
+
+              final isValidNIP05 = Nostr.instance.utilsService
+                  .isValidNip05Identifier(nip05Controller?.text ?? '');
+
+              if (nip05Controller!.text.isNotEmpty && isValidNIP05) {
+                return Nostr.instance.relaysService.verifyNip05(
+                  internetIdentifier: internetIdentifier,
+                  pubKey: pubKey,
+                );
+              } else {
+                return Future.value(false);
+              }
+            },
+            errorText: "invalidNIP05".tr(),
+            onButtonTap: () async {
+              await authenticate();
+            }),
         SignUpStepView(
           title: "recommendToFollow".tr(),
           subtitle: "yourPublicKeySubtitle".tr(),
@@ -368,7 +393,7 @@ class AuthCubit extends Cubit<AuthState> {
             ],
           ),
           nextViewAllower: () {
-            return true;
+            return Future.value(true);
           },
         ),
       ];

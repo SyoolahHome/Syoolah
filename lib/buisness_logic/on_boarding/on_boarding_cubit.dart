@@ -12,6 +12,8 @@ part 'on_boarding_state.dart';
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   TextEditingController? searchController;
   FocusNode? searchNodeFocus;
+  NostrEventsStream? userStream;
+
   StreamSubscription? userSearchSub;
   OnBoardingCubit() : super(OnBoardingInitial()) {
     _init();
@@ -70,8 +72,8 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
 
     try {
-      final userStream = NostrService.instance.userMetadata(pubKey);
-      userSearchSub = userStream.listen(
+      userStream = NostrService.instance.userMetadata(pubKey);
+      userSearchSub = userStream!.stream.listen(
         (event) {
           emit(state.copyWith(searchedUser: event));
         },
@@ -91,6 +93,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   @override
   Future<void> close() {
     resetSearch();
+    userStream?.close();
     searchNodeFocus?.dispose();
     searchController?.dispose();
     userSearchSub?.cancel();

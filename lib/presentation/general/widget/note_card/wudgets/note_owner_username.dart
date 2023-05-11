@@ -14,7 +14,7 @@ class NoteOwnerUsername extends StatelessWidget {
     return Text(
       nameToShow,
       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: AppColors.black.withOpacity(0.85),
+            color: DefaultTextStyle.of(context).style.color!.withOpacity(.9),
             fontWeight: FontWeight.bold,
           ),
     );

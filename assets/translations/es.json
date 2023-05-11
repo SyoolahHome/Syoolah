@@ -29,7 +29,7 @@
     "yourFollowings": "Los que sigues",
     "yourFollowers": "Tus seguidores",
     "authenticate": "Autenticar",
-    "existentKeyAuth": "Autenticar con clave existente",
+    "existentKeyAuthTitle": "Autenticar con clave existente",
     "relayNameError": " No se puede cargar el nombre del relé",
     "relayDescriptionError": " No se puede cargar la descripción del relé",
     "recommendToFollow": "Recomendamos seguir a",

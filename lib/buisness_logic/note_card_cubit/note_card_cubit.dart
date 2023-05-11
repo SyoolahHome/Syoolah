@@ -14,8 +14,8 @@ part 'note_card_state.dart';
 
 class NoteCardCubit extends Cubit<NoteCardState> {
   Note note;
-  Stream<NostrEvent> currentUserMetadataStream;
-  Stream<NostrEvent> noteLikesStream;
+  NostrEventsStream currentUserMetadataStream;
+  NostrEventsStream noteLikesStream;
 
   StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
   StreamSubscription<NostrEvent>? _noteLikesSubscription;
@@ -103,6 +103,8 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   @override
   Future<void> close() {
+    currentUserMetadataStream.close();
+    noteLikesStream.close();
     _currentUserMetadataSubscription?.cancel();
     _noteLikesSubscription?.cancel();
 
@@ -111,12 +113,12 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   void _handleStreams() {
     _currentUserMetadataSubscription =
-        currentUserMetadataStream.listen((event) {
+        currentUserMetadataStream.stream.listen((event) {
       if (!isClosed) {
         emitIfOpen(state.copyWith(noteOwnerMetadata: event));
       }
     });
-    _noteLikesSubscription = noteLikesStream.listen((event) {
+    _noteLikesSubscription = noteLikesStream.stream.listen((event) {
       emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
     });
   }

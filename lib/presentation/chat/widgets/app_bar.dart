@@ -6,7 +6,14 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../../buisness_logic/cubit/chat_cubit.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    required this.height,
+    required this.title,
+  });
+
+  final double height;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      title: Text("imamOnDuty".tr()),
+      title: Text(title),
       actions: <Widget>[
         SizedBox(width: 10),
         IconButton(
@@ -30,5 +37,5 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height);
 }

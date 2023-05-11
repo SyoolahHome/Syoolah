@@ -42,7 +42,10 @@ class NoteAvatarAndName extends StatelessWidget {
             Text(
               memeberShipStartedAt.memberForTime(),
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: AppColors.grey,
+                    color: DefaultTextStyle.of(context)
+                        .style
+                        .color!
+                        .withOpacity(.65),
                     letterSpacing: 0.1,
                   ),
             )

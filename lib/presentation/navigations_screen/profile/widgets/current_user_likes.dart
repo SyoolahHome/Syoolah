@@ -43,8 +43,7 @@ class CurrentUserLikes extends StatelessWidget {
                             note: likedNoteState.likedNote!,
                           );
                         } else {
-                          return Text(
-                              "likes note of like with id: ${current.id} is not got yet");
+                          return SizedBox.shrink();
                         }
                       },
                     );

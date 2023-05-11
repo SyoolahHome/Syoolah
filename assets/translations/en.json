@@ -29,7 +29,7 @@
     "yourFollowings": "Your Followings",
     "yourFollowers": "Your Followers",
     "authenticate": "Authenticate",
-    "existentKeyAuth": "Authenticate with existing key",
+    "existentKeyAuthTitle": "Authenticate with existing key",
     "relayNameError": " Can\"t load relay name",
     "relayDescriptionError": " Can\"t load relay description",
     "recommendToFollow": "We recommend to follow",
@@ -166,5 +166,13 @@
     "NIP05IdentifierTitle": "NIP05 Identifier",
     "NIP05IdentifierSubtitle": "This will be used to identify, verify your Nostr profile and it will be shown in your profile. ",
     "yourNIP05": "Your NIP05 Identifier",
-    "hintNIP05": "Enter your NIP05 Identifier here"
+    "hintNIP05": "Enter your NIP05 Identifier here",
+    "imamOnDutySubtitle": "Choose your AI instructor to guide you through your journey, you can switch between them at any time.",
+    "chatInstructorTitle": "keyword's instructor",
+    "chatInstructorSubtitle": "Choose this to chat about anything related to keyword",
+    "AskDirectlyFromTextField": "Ask directly from text field below",
+    "invalidNIP05": "Invalid NIP 05 identifier",
+    "existentKeyAuthSubtitle": "You can use your existing key to authenticate your account, this will allow you to access your account from any device.",
+    "myReposts": "My Reposts",
+    "myPosts": "My Posts"
 }

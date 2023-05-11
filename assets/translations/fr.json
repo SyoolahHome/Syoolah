@@ -29,7 +29,7 @@
     "yourFollowings": "Vos abonnements",
     "yourFollowers": "Vos abonnés",
     "authenticate": "S'authentifier",
-    "existentKeyAuth": "S'authentifier avec une clé existante",
+    "existentKeyAuthTitle": "S'authentifier avec une clé existante",
     "relayNameError": "Impossible de charger le nom du relais",
     "relayDescriptionError": "Impossible de charger la description du relais",
     "recommendToFollow": "Nous recommandons de suivre",

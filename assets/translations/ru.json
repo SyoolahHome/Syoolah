@@ -29,7 +29,7 @@
     "yourFollowings": "Ваши подписки",
     "yourFollowers": "Ваши подписчики",
     "authenticate": "Аутентифицироваться",
-    "existentKeyAuth": "Аутентифицироваться с помощью существующего ключа",
+    "existentKeyAuthTitle": "Аутентифицироваться с помощью существующего ключа",
     "relayNameError": "Не удается загрузить имя реле",
     "relayDescriptionError": "Не удается загрузить описание реле",
     "recommendToFollow": "Мы рекомендуем подписаться на",

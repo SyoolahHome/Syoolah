@@ -17,7 +17,7 @@ class GeneralFeed extends StatelessWidget {
   });
 
   final String feedName;
-  final Stream<NostrEvent> feedPostsStream;
+  final NostrEventsStream feedPostsStream;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<GlobalFeedCubit>(

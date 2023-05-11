@@ -48,8 +48,8 @@ class FeedBox extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   color: state.isHighlighted
-                      ? AppColors.mediumGrey
-                      : AppColors.lighGrey,
+                      ? Theme.of(context).colorScheme.onPrimaryContainer
+                      : Theme.of(context).colorScheme.onTertiaryContainer,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -68,7 +68,10 @@ class FeedBox extends StatelessWidget {
                                 .textTheme
                                 .titleLarge!
                                 .copyWith(
-                                  color: AppColors.black.withOpacity(0.95),
+                                  color: DefaultTextStyle.of(context)
+                                      .style
+                                      .color
+                                      ?.withOpacity(0.95),
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
@@ -79,7 +82,10 @@ class FeedBox extends StatelessWidget {
                                 .textTheme
                                 .labelSmall!
                                 .copyWith(
-                                  color: AppColors.black.withOpacity(0.95),
+                                  color: DefaultTextStyle.of(context)
+                                      .style
+                                      .color
+                                      ?.withOpacity(0.85),
                                 ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,

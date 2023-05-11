@@ -31,7 +31,7 @@ class CustomDrawer extends StatelessWidget {
             Radius.circular(0),
           ),
         ),
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.colorScheme.onBackground,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: heightSeparator / 2),
-            OrDivider(),
+            Center(child: OrDivider()),
             const SizedBox(height: heightSeparator / 2),
             ...List.generate(
               items.length,

@@ -5,9 +5,9 @@ class SignUpStepView extends Equatable {
   final String title;
   final String subtitle;
   final Widget widgetBody;
-  final bool Function() nextViewAllower;
+  final Future<bool> Function() nextViewAllower;
   final void Function()? onButtonTap;
-
+  final String? errorText;
   @override
   List<Object?> get props => [
         title,
@@ -15,6 +15,7 @@ class SignUpStepView extends Equatable {
         subtitle,
         widgetBody,
         nextViewAllower,
+        errorText,
       ];
 
   const SignUpStepView({
@@ -23,5 +24,6 @@ class SignUpStepView extends Equatable {
     required this.widgetBody,
     required this.nextViewAllower,
     this.onButtonTap,
+    this.errorText,
   });
 }

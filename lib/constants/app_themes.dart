@@ -20,6 +20,8 @@ abstract class AppThemes {
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
       onPrimary: AppColors.lighGrey,
       errorContainer: Colors.red,
+      onPrimaryContainer: AppColors.mediumGrey,
+      onTertiaryContainer: AppColors.lighGrey,
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -152,6 +154,7 @@ abstract class AppThemes {
       labelStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
       unselectedLabelStyle:
           const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      unselectedLabelColor: AppColors.grey,
       overlayColor: MaterialStateProperty.all(AppColors.lighGrey),
       splashFactory: NoSplash.splashFactory,
     ),
@@ -214,6 +217,8 @@ abstract class AppThemes {
       onInverseSurface: AppColors.lighGrey.withOpacity(.45),
       onPrimary: Colors.grey[800]!,
       errorContainer: Colors.red,
+      onPrimaryContainer: Colors.grey[800],
+      onTertiaryContainer: Colors.grey[900],
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -264,8 +269,9 @@ abstract class AppThemes {
       color: AppColors.white,
     ),
     snackBarTheme: const SnackBarThemeData(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       behavior: SnackBarBehavior.floating,
+      actionTextColor: AppColors.white,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,

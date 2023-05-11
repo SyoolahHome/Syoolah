@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,16 @@ class UsersListToFollow extends StatelessWidget {
   final List<String> pubKeys;
   @override
   Widget build(BuildContext context) {
+    final emptyNostrStrea = NostrEventsStream(
+      request: NostrRequest(filters: []),
+      stream: Stream.empty(),
+      subscriptionId: "",
+    );
+
     return BlocProvider<UsersListToFollowCubit>(
       create: (context) => UsersListToFollowCubit(
         usersListMetadata: pubKeys.isEmpty
-            ? Stream.empty()
+            ? emptyNostrStrea
             : NostrService.instance.usersListMetadata(pubKeys),
         currentUserFollowing: NostrService.instance.currentUserFollowings(),
         currentUserFollowers: NostrService.instance.currentUserFollowers(),
@@ -32,10 +39,12 @@ class UsersListToFollow extends StatelessWidget {
           return BlocBuilder<UsersListToFollowCubit, UsersListToFollowState>(
             builder: (context, state) {
               return Container(
-                height: 200,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                // height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.lighGrey.withOpacity(0.3),
+                  color:
+                      Theme.of(context).colorScheme.background.withOpacity(.1),
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,

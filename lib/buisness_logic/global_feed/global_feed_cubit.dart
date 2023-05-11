@@ -15,7 +15,7 @@ part 'global_feed_state.dart';
 class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   ScrollController? scrollController;
   TextEditingController? searchController;
-  Stream<NostrEvent> feedPostsStream;
+  NostrEventsStream feedPostsStream;
   StreamSubscription? _streamSubscription;
 
   GlobalFeedCubit({
@@ -26,6 +26,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
 
   @override
   Future<void> close() {
+    feedPostsStream.close();
     searchController?.dispose();
     _streamSubscription?.cancel();
     scrollController?.dispose();
@@ -131,7 +132,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   }
 
   void _handleStreams() {
-    _streamSubscription = feedPostsStream.listen(
+    _streamSubscription = feedPostsStream.stream.listen(
       (event) {
         final sortedList = [...state.feedPosts, event].reversed.toList();
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));

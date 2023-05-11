@@ -11,9 +11,9 @@ import '../../services/database/local/local_database.dart';
 part 'users_list_to_follow_state.dart';
 
 class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
-  Stream<NostrEvent> currentUserFollowing;
-  Stream<NostrEvent> currentUserFollowers;
-  Stream<NostrEvent> usersListMetadata;
+  NostrEventsStream currentUserFollowing;
+  NostrEventsStream currentUserFollowers;
+  NostrEventsStream usersListMetadata;
 
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
@@ -32,6 +32,9 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
 
   @override
   Future<void> close() {
+    currentUserFollowing.close();
+    currentUserFollowers.close();
+    usersListMetadata.close();
     _currentUserFollowersSubscription?.cancel();
     _currentUserFollowingSubscription?.cancel();
     _usersListMetadataSubscription?.cancel();
@@ -102,19 +105,21 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
   }
 
   void _handleCurrentUserFollowers() {
-    _currentUserFollowersSubscription = currentUserFollowers.listen((event) {
+    _currentUserFollowersSubscription =
+        currentUserFollowers.stream.listen((event) {
       emit(state.copyWith(currentUserFollowers: event));
     });
   }
 
   void _handleCurrentUserFollowing() {
-    _currentUserFollowingSubscription = currentUserFollowing.listen((event) {
+    _currentUserFollowingSubscription =
+        currentUserFollowing.stream.listen((event) {
       emit(state.copyWith(currentUserFollowing: event));
     });
   }
 
   void _handleContacts() {
-    _usersListMetadataSubscription = usersListMetadata.listen(
+    _usersListMetadataSubscription = usersListMetadata.stream.listen(
       (event) {
         final newList = [
           ...state.pubKeysMetadata,

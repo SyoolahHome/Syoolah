@@ -1,6 +1,7 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -15,40 +16,51 @@ class MessageSection extends StatelessWidget {
     final cubit = context.read<ChatCubit>();
     final hint = AppUtils.randomChatMessagePlaceholder();
 
-    return Container(
-      margin: const EdgeInsets.only(
-            bottom: 10,
-          ) +
-          MarginedBody.defaultMargin / 2,
-      child: Stack(
-        alignment: Alignment.centerRight,
-        children: <Widget>[
-          CustomTextField(
-            focusNode: cubit.focusNode,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 17.5,
-            ),
-            controller: cubit.userMessageController,
-            hint: hint,
-          ),
-          Container(
-            margin: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              icon: Icon(
-                FlutterRemix.send_plane_2_line,
-                size: 18,
-                color: Theme.of(context).primaryColor,
+    return Animate(
+      delay: 1400.ms,
+      effects: <Effect>[FadeEffect()],
+      child: Material(
+        elevation: 0,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10) +
+              MarginedBody.defaultMargin / 2,
+          child: Stack(
+            alignment: Alignment.centerRight,
+            children: <Widget>[
+              CustomTextField(
+                focusNode: cubit.focusNode,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 17.5,
+                ),
+                bgColor: Theme.of(context).colorScheme.onPrimary,
+                controller: cubit.userMessageController,
+                hint: hint,
               ),
-              onPressed: () {
-                print(cubit.userMessageController!.text);
-                cubit.setCurrentHint(hint);
-                print(cubit.userMessageController!.text);
-                cubit.sendMessageByCurrentUser();
-              },
-            ),
+              Animate(
+                delay: 1800.ms,
+                effects: <Effect>[FadeEffect()],
+                child: Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  child: IconButton(
+                    icon: Icon(
+                      FlutterRemix.send_plane_2_line,
+                      size: 18,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () {
+                      print(cubit.userMessageController!.text);
+                      cubit.setCurrentHint(hint);
+                      print(cubit.userMessageController!.text);
+                      cubit.sendMessageByCurrentUser();
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -29,7 +29,7 @@
     "yourFollowings": "I tuoi seguaci",
     "yourFollowers": "I tuoi follower",
     "authenticate": "Autenticati",
-    "existentKeyAuth": "Autenticati con la chiave esistente",
+    "existentKeyAuthTitle": "Autenticati con la chiave esistente",
     "relayNameError": "Impossibile caricare il nome del relay",
     "relayDescriptionError": "Impossibile caricare la descrizione del relay",
     "recommendToFollow": "Ti consigliamo di seguire",

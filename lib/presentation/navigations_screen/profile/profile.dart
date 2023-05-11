@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../model/user_meta_data.dart';
@@ -62,11 +63,19 @@ class Profile extends StatelessWidget {
                                     const SizedBox(height: height * 2),
                                     ProfileHeader(metadata: metadata),
                                     const SizedBox(height: height * 3),
-                                    ProfileName(metadata: metadata),
+                                    ProfileName(
+                                      metadata: metadata,
+                                      pubKey: event?.pubkey ?? "",
+                                    ),
                                     const SizedBox(height: height),
                                     ProfileAbout(metadata: metadata),
                                     const SizedBox(height: height * 2),
-                                    const OrDivider(color: Colors.black),
+                                    Animate(
+                                      effects: [FadeEffect()],
+                                      delay: 1000.ms,
+                                      child:
+                                          const OrDivider(color: Colors.black),
+                                    ),
                                     const SizedBox(height: height * 2),
                                     const ProfileTabs(),
                                   ],
@@ -80,7 +89,10 @@ class Profile extends StatelessWidget {
                     body: MediaQuery.removePadding(
                       removeTop: true,
                       context: context,
-                      child: const ProfileTabView(),
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: const ProfileTabView(),
+                      ),
                     ),
                   );
                 });

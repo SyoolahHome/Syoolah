@@ -111,17 +111,24 @@ class SignUp extends StatelessWidget {
 
                     final current = signUpScreens[state.currentStepIndex - 1];
 
-                    void onMainButtonPressed() {
+                    void onMainButtonPressed() async {
                       if (!(Routing.authCubit.state.authenticated ||
                           !isLastView)) {
                         return;
                       }
 
                       final onButtonTap = current.onButtonTap;
-                      if (!current.nextViewAllower()) {
+                      bool shouldAllowToForward;
+                      try {
+                        shouldAllowToForward = await current.nextViewAllower();
+                      } catch (e) {
+                        shouldAllowToForward = false;
+                      }
+
+                      if (!shouldAllowToForward) {
                         final val = SnackBars.text(
                           context,
-                          "finishThisStepFirst".tr(),
+                          current.errorText ?? "finishThisStepFirst".tr(),
                           isError: true,
                         );
                       } else {

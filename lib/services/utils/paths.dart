@@ -36,4 +36,5 @@ abstract class Paths {
   static const String followers = '/followers';
   static const String settings = '/settings';
   static const String myKeys = '/myKeys';
+  static const String chat = '/chat';
 }

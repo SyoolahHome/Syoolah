@@ -9,7 +9,7 @@ import '../../model/note.dart';
 part 'liked_note_state.dart';
 
 class LikedNoteCubit extends Cubit<LikedNoteState> {
-  Stream<NostrEvent> likedNoteStream;
+  NostrEventsStream likedNoteStream;
   StreamSubscription<NostrEvent>? _likedNoteSubscription;
 
   LikedNoteCubit({
@@ -20,13 +20,14 @@ class LikedNoteCubit extends Cubit<LikedNoteState> {
 
   @override
   Future<void> close() {
+    likedNoteStream.close();
     _likedNoteSubscription?.cancel();
 
     return super.close();
   }
 
   void _handleStreams() {
-    _likedNoteSubscription = likedNoteStream.listen((event) {
+    _likedNoteSubscription = likedNoteStream.stream.listen((event) {
       emit(
         state.copyWith(
           likedNote: Note.fromEvent(event),

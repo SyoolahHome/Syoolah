@@ -29,7 +29,7 @@
     "yourFollowings": "您的关注者",
     "yourFollowers": "您的粉丝",
     "authenticate": "认证",
-    "existentKeyAuth": "使用现有密钥进行身份验证",
+    "existentKeyAuthTitle": "使用现有密钥进行身份验证",
     "relayNameError": "无法加载中继名称",
     "relayDescriptionError": "无法加载中继描述",
     "recommendToFollow": "我们建议关注",

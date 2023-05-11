@@ -12,15 +12,23 @@ class OpenAIService {
     OpenAI.apiKey = Env.apiKey;
   }
 
-  Stream<String> messageResponseStream(List<ChatMessage> chatMessages) {
-    final messages = chatMessages
-        .map(
-          (message) => message.toOpenAIChatMessage(),
-        )
-        .toList();
+  Stream<String> messageResponseStream({
+    required List<ChatMessage> chatMessages,
+    required String instruction,
+  }) {
+    final messages =
+        chatMessages.map((message) => message.toOpenAIChatMessage()).toList();
+
+    final systemInstructionMessage = OpenAIChatCompletionChoiceMessageModel(
+      content: instruction,
+      role: OpenAIChatMessageRole.system,
+    );
 
     return OpenAI.instance.chat
-        .createStream(model: modelId, messages: messages)
+        .createStream(model: modelId, messages: [
+          systemInstructionMessage,
+          ...messages,
+        ])
         .where(_responseMessageIsValid)
         .map(_extractOnlyResposeMessage);
   }

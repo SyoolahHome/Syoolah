@@ -25,6 +25,7 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onBackground,
           content: AvatarSheetWidget(
             onPickFromGallery: onPickFromGallery,
             onTakePhoto: onTakePhoto,
@@ -40,7 +41,10 @@ abstract class AlertsService {
             CustomTextButton(
               text: "close".tr(),
               onTap: () => Navigator.of(context).pop(),
-              textColor: AppColors.black.withOpacity(textOpacity),
+              textColor: DefaultTextStyle.of(context)
+                  .style
+                  .color
+                  ?.withOpacity(textOpacity),
             ),
           ],
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -62,6 +66,7 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onBackground,
           title: HeadTitle(title: "removeRelay".tr(args: [relayConfig.url])),
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
@@ -78,7 +83,10 @@ abstract class AlertsService {
                 onRemove();
                 Navigator.of(context).pop();
               },
-              textColor: Colors.red,
+              textColor: DefaultTextStyle.of(context)
+                  .style
+                  .color
+                  ?.withOpacity(textOpacity),
             ),
           ],
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -104,6 +112,7 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onBackground,
           title: title != null ? HeadTitle(title: title) : null,
           content: content != null ? Text(content) : null,
           contentPadding: const EdgeInsets.only(top: 16),
@@ -114,10 +123,10 @@ abstract class AlertsService {
                 onCancel?.call();
                 Navigator.of(context).pop();
               },
-              textColor: Theme.of(context)
-                  .colorScheme
-                  .background
-                  .withOpacity(textOpacity),
+              textColor: DefaultTextStyle.of(context)
+                  .style
+                  .color
+                  ?.withOpacity(textOpacity),
             ),
             CustomTextButton(
               text: confirmText ?? "ok".tr(),

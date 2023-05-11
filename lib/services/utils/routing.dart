@@ -1,3 +1,4 @@
+import 'package:ditto/presentation/chat/chat.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/services/utils/paths.dart';
 
@@ -43,7 +44,7 @@ abstract class Routing {
     Paths.sirahFeed: (context) => SirahFeed(),
     Paths.globalFeed: (context) => GlobalFeed(),
     Paths.followingFeed: (context) => FollowingsFeed(),
-    Paths.commentsSection: (context) => NoteCommentsSection(),
+    // Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
     Paths.aboutMunawarah: (context) => const AboutMunawarah(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
@@ -55,6 +56,7 @@ abstract class Routing {
     Paths.nostrServiceLoading: (context) => const NostrServiceLoading(),
     Paths.settings: (context) => Settings(),
     Paths.myKeys: (context) => const CurrentUserKeys(),
+    Paths.chat: (context) => const Chat(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

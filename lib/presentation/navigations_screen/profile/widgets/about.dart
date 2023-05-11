@@ -1,5 +1,7 @@
 import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../model/user_meta_data.dart';
 
@@ -12,15 +14,18 @@ class ProfileAbout extends StatelessWidget {
   final UserMetaData metadata;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      metadata.about!,
-      style: Theme.of(context)
-          .textTheme
-          .bodyMedium!
-          .copyWith(color: AppColors.grey),
-      textAlign: TextAlign.center,
-      maxLines: 3,
-      overflow: TextOverflow.ellipsis,
+    return Animate(
+      effects: [FadeEffect()],
+      delay: 800.ms,
+      child: Text(
+        metadata.about!.capitalized,
+        style: TextStyle(
+          color: DefaultTextStyle.of(context).style.color?.withOpacity(.85),
+        ),
+        textAlign: TextAlign.center,
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }

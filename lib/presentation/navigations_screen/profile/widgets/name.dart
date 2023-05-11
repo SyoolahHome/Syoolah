@@ -1,31 +1,72 @@
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class ProfileName extends StatelessWidget {
-  const ProfileName({super.key, required this.metadata});
+  const ProfileName({
+    super.key,
+    required this.metadata,
+    required this.pubKey,
+  });
 
   final UserMetaData metadata;
+  final String pubKey;
   @override
   Widget build(BuildContext context) {
     final String toShow = metadata.nameToShow();
+    final String internetIdentifier = metadata.nip05Identifier ?? "";
+
+    Future<bool> future() async {
+      if (Nostr.instance.utilsService
+          .isValidNip05Identifier(internetIdentifier)) {
+        return Nostr.instance.relaysService.verifyNip05(
+          internetIdentifier: internetIdentifier,
+          pubKey: pubKey,
+        );
+      } else {
+        return false;
+      }
+    }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(
-          toShow,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+        Animate(
+          effects: [FadeEffect()],
+          delay: 600.ms,
+          child: Text(
+            toShow.capitalized,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
         const SizedBox(width: 5),
-        const Icon(
-          Icons.verified,
-          color: Colors.green,
-          size: 15,
+        FutureBuilder<bool>(
+          future: future(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!) {
+                return Animate(
+                  effects: [FadeEffect()],
+                  child: const Icon(
+                    Icons.verified,
+                    color: Colors.green,
+                    size: 15,
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            } else {
+              return SizedBox.shrink();
+            }
+          },
         ),
       ],
     );

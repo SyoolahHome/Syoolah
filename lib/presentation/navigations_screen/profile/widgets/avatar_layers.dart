@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/profile/profile_cubit.dart';
@@ -31,45 +32,49 @@ class AvatarLayers extends StatelessWidget {
       );
     }
 
-    return GestureDetector(
-      onPanDown: (_) => cubit.scaleAvatarDown(),
-      onPanStart: (_) => cubit.scaleAvatarDown(),
-      onPanCancel: () => cubit.scaleAvatarToNormal(),
-      onPanEnd: (_) => cubit.scaleAvatarToNormal(),
-      onTap: onFullView,
-      onLongPress: () {
-        cubit.showAvatarMenu(
-          context,
-          cubit: cubit,
-          onEnd: () {
-            return Future.delayed(
-              const Duration(milliseconds: 300),
-              () {
-                if (ModalRoute.of(context)?.isCurrent != true) {
-                  Navigator.of(context).pop();
-                }
-              },
-            );
-          },
-          onFullView: onFullView,
-        );
-      },
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          return Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              const ProfileAvatarNeon(),
-              const ProfileAvatarNeonBorder(),
-              const ProfileAvatarBorder(),
-              AnimatedScale(
-                duration: const Duration(milliseconds: 300),
-                scale: state.profileAvatarScale,
-                child: ProfileAvatar(picture: metadata.picture!),
-              ),
-            ],
+    return Animate(
+      effects: [FadeEffect()],
+      delay: 200.ms,
+      child: GestureDetector(
+        onPanDown: (_) => cubit.scaleAvatarDown(),
+        onPanStart: (_) => cubit.scaleAvatarDown(),
+        onPanCancel: () => cubit.scaleAvatarToNormal(),
+        onPanEnd: (_) => cubit.scaleAvatarToNormal(),
+        onTap: onFullView,
+        onLongPress: () {
+          cubit.showAvatarMenu(
+            context,
+            cubit: cubit,
+            onEnd: () {
+              return Future.delayed(
+                const Duration(milliseconds: 300),
+                () {
+                  if (ModalRoute.of(context)?.isCurrent != true) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              );
+            },
+            onFullView: onFullView,
           );
         },
+        child: BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            return Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                const ProfileAvatarNeon(),
+                const ProfileAvatarNeonBorder(),
+                const ProfileAvatarBorder(),
+                AnimatedScale(
+                  duration: const Duration(milliseconds: 300),
+                  scale: state.profileAvatarScale,
+                  child: ProfileAvatar(picture: metadata.picture!),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

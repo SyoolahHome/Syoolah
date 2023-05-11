@@ -29,7 +29,7 @@
     "yourFollowings": "Your Followings",
     "yourFollowers": "Your Followers",
     "authenticate": "Authenticate",
-    "existentKeyAuth": "Authenticate with existing key",
+    "existentKeyAuthTitle": "Authenticate with existing key",
     "relayNameError": " Can\"t load relay name",
     "relayDescriptionError": " Can\"t load relay description",
     "recommendToFollow": "We recommend to follow",

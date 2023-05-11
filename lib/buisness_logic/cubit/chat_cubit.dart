@@ -4,6 +4,7 @@ import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -15,17 +16,20 @@ import '../../services/utils/app_utils.dart';
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
+  final String instruction;
   TextEditingController? userMessageController;
-  ScrollController? scrollController;
   FocusNode? focusNode;
-  ChatCubit() : super(ChatInitial()) {
+
+  ChatCubit({
+    required this.instruction,
+  }) : super(ChatInitial()) {
     _init();
   }
 
   void sendMessageByCurrentUser() {
-    assert(state.currentHint != null);
-
     final controller = userMessageController;
+    assert(state.currentHint != null || controller?.text != null);
+
     if (controller == null) {
       return;
     }
@@ -56,6 +60,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   void _sendMessageBySystem(String message) {
     final currentMessagesList = state.messages;
+
     final newMessageId = AppUtils.getChatSystemId();
 
     emit(
@@ -72,8 +77,10 @@ class ChatCubit extends Cubit<ChatState> {
       ),
     );
 
-    final messageReponseStream =
-        OpenAIService.instance.messageResponseStream(currentMessagesList);
+    final messageReponseStream = OpenAIService.instance.messageResponseStream(
+      chatMessages: currentMessagesList,
+      instruction: instruction,
+    );
 
     messageReponseStream.listen((responseMessage) {
       emitMessageContentForSystemMessageWithId(newMessageId, responseMessage);
@@ -104,15 +111,33 @@ class ChatCubit extends Cubit<ChatState> {
       ..addListener(() {
         print("Text: ${userMessageController!.text}");
       });
-    scrollController = ScrollController();
     focusNode = FocusNode();
 
-    stream.where((event) => event.messages.isNotEmpty).listen((event) {
-      final lastMessage = event.messages.last;
-      if (lastMessage.role == OpenAIChatMessageRole.user) {
-        _sendMessageBySystem(lastMessage.message);
-      }
-    });
+    stream.where((event) => event.messages.isNotEmpty).listen(
+          (event) {
+            final lastMessage = event.messages.last;
+            if (lastMessage.role == OpenAIChatMessageRole.user) {
+              _sendMessageBySystem(lastMessage.message);
+            }
+          },
+          onError: (e) {
+            String errorMessage;
+            if (kDebugMode) {
+              errorMessage = e.toString();
+            } else {
+              errorMessage = "error".tr();
+            }
+            if (!isClosed) {
+              emit(state.copyWith(errorMessage: errorMessage));
+            }
+          },
+          cancelOnError: true,
+          onDone: () {
+            if (!isClosed) {
+              emit(state.copyWith(errorMessage: null));
+            }
+          },
+        );
   }
 
   void setCurrentHint(String hint) {

@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.hint,
     this.isMultiline = false,
     this.focusNode,
+    this.bgColor,
   });
 
   final TextEditingController? controller;
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
   final String? hint;
   final bool isMultiline;
   final FocusNode? focusNode;
+  final Color? bgColor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,6 +61,7 @@ class CustomTextField extends StatelessWidget {
                       horizontal: 10,
                       vertical: 25,
                     ),
+                fillColor: bgColor,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(10)),

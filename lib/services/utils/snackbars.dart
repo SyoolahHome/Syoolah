@@ -11,20 +11,20 @@ abstract class SnackBars {
   }) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: isError
-            ? Theme.of(context).colorScheme.errorContainer
-            : Theme.of(context).colorScheme.background,
+        backgroundColor:
+            isError ? Theme.of(context).colorScheme.errorContainer : null,
         content: Text(
           message,
           style: Theme.of(context)
               .textTheme
               .bodyMedium
-              ?.copyWith(color: AppColors.white),
+              ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100.0),
         ),
         action: SnackBarAction(
+          disabledTextColor: Theme.of(context).snackBarTheme.actionTextColor,
           label: "ok".tr().toUpperCase(),
           onPressed: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();

@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../buisness_logic/profile/profile_cubit.dart';
 import '../../../../model/note.dart';
 
-class CurrentUserPosts extends StatelessWidget {
-  const CurrentUserPosts({super.key});
+class CurrentUserReposts extends StatelessWidget {
+  const CurrentUserReposts({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CurrentUserPosts extends StatelessWidget {
       builder: (context, state) {
         return NotesListView(
           shrinkWrap: true,
-          feedName: "myPosts".tr(),
+          feedName: "myReposts".tr(),
           hideCount: true,
           physics: const NeverScrollableScrollPhysics(),
           notes: state.currentUserPosts.map((e) => Note.fromEvent(e)).toList(),

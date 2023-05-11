@@ -17,23 +17,6 @@ abstract class GeneralDrawerItems {
           onTap: () {},
         ),
         DrawerListTimeItem(
-          icon: FlutterRemix.chat_2_line,
-          label: 'Messages',
-          onTap: () {},
-        ),
-        DrawerListTimeItem(
-          icon: FlutterRemix.camera_lens_line,
-          label: 'Global',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const GlobalChatRelays(),
-              ),
-            );
-          },
-        ),
-        DrawerListTimeItem(
           icon: FlutterRemix.user_line,
           label: 'Profile',
           onTap: () {},

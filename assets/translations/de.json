@@ -29,7 +29,7 @@
     "yourFollowings": "Ihre Abonnements",
     "yourFollowers": "Ihre Follower",
     "authenticate": "Authentifizieren",
-    "existentKeyAuth": "Mit vorhandenem Schlüssel authentifizieren",
+    "existentKeyAuthTitle": "Mit vorhandenem Schlüssel authentifizieren",
     "relayNameError": "Relais-Name kann nicht geladen werden",
     "relayDescriptionError": "Relais-Beschreibung kann nicht geladen werden",
     "recommendToFollow": "Wir empfehlen, zu folgen",

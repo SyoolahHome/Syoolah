@@ -54,7 +54,10 @@ class UserMetaData extends Equatable {
     final json = {...jsonData};
 
     json.forEach((key, value) {
-      if (value == "" || value == null) {
+      if (
+          // value == ""
+          // ||
+          value == null) {
         json[key] = null;
       }
     });
@@ -66,7 +69,7 @@ class UserMetaData extends Equatable {
       username: json['username'] ?? UserMetaData.placeholder().username,
       about: json['about'] ?? UserMetaData.placeholder().about,
       displayName: json['display_name'],
-      nip05Identifier: json['nip05_identifier'],
+      nip05Identifier: json['nip05'],
     );
   }
 
@@ -87,13 +90,13 @@ class UserMetaData extends Equatable {
   /// This will return a json representation of the [UserMetaData] that can be sent to the relays.
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'picture': picture,
-      'banner': banner,
-      'username': username,
-      'about': about,
-      'display_name': displayName,
-      "nip05_identifier": nip05Identifier,
+      "name": name,
+      "creationDate": DateTime.now().toIso8601String(),
+      "picture": picture,
+      "banner": banner,
+      "about": about,
+      "username": username,
+      "nip05": nip05Identifier,
     };
   }
 

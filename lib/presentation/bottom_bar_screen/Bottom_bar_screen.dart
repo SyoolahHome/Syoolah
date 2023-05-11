@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transitioned_indexed_stack/transitioned_indexed_stack.dart';
 
@@ -39,13 +40,9 @@ class BottomBar extends StatelessWidget {
                       selectedIndex: state,
                       onElementTap: cubit.onItemTapped,
                     ),
-                    body: FadeIndexedStack(
-                      index: state,
-                      children: cubit.items.map(
-                        (BottomBarItem item) {
-                          return item.screen;
-                        },
-                      ).toList(),
+                    body: AnimatedSwitcher(
+                      duration: Animate.defaultDuration,
+                      child: cubit.items[state].screen,
                     ),
                   );
                 },

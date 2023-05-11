@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../model/tab_item.dart';
+import '../current_user_reposts/current_user_reposts.dart';
 import '../navigations_screen/profile/widgets/current_user_likes.dart';
 import '../navigations_screen/profile/widgets/current_user_posts.dart';
 
@@ -15,9 +16,7 @@ abstract class GeneralProfileTabs {
     ),
     TabItem(
       label: "reposts".tr(),
-      widget: Center(
-        child: Text("reposts"),
-      ),
+      widget: CurrentUserReposts(),
       icon: FlutterRemix.repeat_2_line,
     ),
     TabItem(
