@@ -189,6 +189,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     BuildContext context, {
     required void Function() onEditProfile,
     required void Function() onLogout,
+    required void Function() onMyKeysPressed,
   }) {
     final metadata = UserMetaData.fromJson(jsonDecode(
       state.currentUserMetadata?.content ?? "{}",
@@ -207,6 +208,11 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "editProfile".tr(),
           icon: FlutterRemix.pencil_line,
           onPressed: onEditProfile,
+        ),
+        BottomSheetOption(
+          title: "myKeys".tr(),
+          icon: FlutterRemix.key_line,
+          onPressed: onMyKeysPressed,
         ),
         BottomSheetOption(
           title: "copyPubKey".tr(),

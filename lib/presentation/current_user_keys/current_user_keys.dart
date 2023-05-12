@@ -1,9 +1,7 @@
-import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
-import 'package:ditto/services/database/local/local_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,9 +15,6 @@ class CurrentUserKeys extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = 10.0;
-    final privateKey = LocalDatabase.instance.getPrivateKey()!;
-    final publicKey =
-        Nostr.instance.keysService.derivePublicKey(privateKey: privateKey);
 
     return Scaffold(
       appBar: CustomAppBar(),

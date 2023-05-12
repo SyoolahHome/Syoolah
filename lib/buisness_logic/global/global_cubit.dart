@@ -91,6 +91,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   Future<void> close() {
     currentUserFollowing.close();
     currentUserFollowers.close();
+
     _currentUserFollowersSubscription?.cancel();
     _currentUserFollowingSubscription?.cancel();
 

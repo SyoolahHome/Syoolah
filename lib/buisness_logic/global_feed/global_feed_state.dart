@@ -3,6 +3,7 @@ part of 'global_feed_cubit.dart';
 
 class GlobalFeedState extends Equatable {
   final List<NostrEvent> feedPosts;
+  final List<NostrEvent> shownFeedPosts;
   final List<Note> searchedFeedNotesPosts;
   final List<SearchOption> searchOptions;
   final DateTimeRange? dateRange;
@@ -15,10 +16,12 @@ class GlobalFeedState extends Equatable {
         dateRange,
         searchedFeedNotesPosts,
         shouldShowScrollToTopButton,
+        shownFeedPosts,
       ];
 
   const GlobalFeedState({
     this.feedPosts = const [],
+    this.shownFeedPosts = const [],
     this.searchedFeedNotesPosts = const [],
     this.searchOptions = const [],
     this.dateRange,
@@ -27,6 +30,7 @@ class GlobalFeedState extends Equatable {
 
   GlobalFeedState copyWith({
     List<NostrEvent>? feedPosts,
+    List<NostrEvent>? shownFeedPosts,
     List<Note>? searchedFeedNotesPosts,
     List<SearchOption>? searchOptions,
     DateTimeRange? dateRange,
@@ -40,6 +44,7 @@ class GlobalFeedState extends Equatable {
       dateRange: dateRange ?? this.dateRange,
       shouldShowScrollToTopButton:
           shouldShowScrollToTopButton ?? this.shouldShowScrollToTopButton,
+      shownFeedPosts: shownFeedPosts ?? this.shownFeedPosts,
     );
   }
 }

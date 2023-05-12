@@ -174,5 +174,10 @@
     "invalidNIP05": "Invalid NIP 05 identifier",
     "existentKeyAuthSubtitle": "You can use your existing key to authenticate your account, this will allow you to access your account from any device.",
     "myReposts": "My Reposts",
-    "myPosts": "My Posts"
+    "myPosts": "My Posts",
+    "noFollowers": "No followers yet, if someone follows you, you will see them here.",
+    "selectedYoutube": "Selected Youtube Video",
+    "youtubeUrlHint": "Enter youtube url here",
+    "youtubeVideo": "Youtube Video",
+    "set": "Set"
 }

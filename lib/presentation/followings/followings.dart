@@ -39,7 +39,9 @@ class Followings extends StatelessWidget {
                 return EmptyList();
               } else {
                 return UsersListToFollow(
-                    pubKeys: tags!.map((e) => e.last).toList());
+                  pubKeys: tags!.map((e) => e.last).toList(),
+                  noBg: true,
+                );
               }
             },
           ),

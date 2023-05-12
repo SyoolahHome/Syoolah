@@ -68,9 +68,11 @@ class NotesListView extends StatelessWidget {
                   notesLength: max(notes.length - 1, 0),
                 );
               }
+              final current = notes[index - 1];
               return NoteCard(
+                key: ValueKey(current.event.id),
                 cardMargin: cardMargin,
-                note: notes[index - 1],
+                note: current,
               );
             },
           );

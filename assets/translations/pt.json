@@ -162,5 +162,22 @@
     "removeRelay": "Remover relay\n{}?",
     "relayName": "Relay de {}",
     "laungageApplied": "Idioma aplicado: {}",
-    "aboutMunawarahContent": "La confianza es esencial en todos los emprendimientos. Es el ingrediente más importante en los negocios, pero detectarla es un fenómeno raro en estos días que está fallando a la humanidad cuando más se necesita.\n\nLo mismo ocurre con la religión, cuando millones de hermanos y hermanas en el Islam se reúnen de todo el mundo para realizar la peregrinación a La Meca y la Umrah, y es muy fácil sentirse perdido en la enormidad de todo esto y no saber en quién confiar cuando las cosas salen mal en un mar de gente suplicando la misericordia de Allah.\n\nEstás en el lugar correcto si esto te resulta familiar, si estás en una encrucijada en tu vida y no estás seguro de cuál es el camino correcto para ti.\n\nNo estás solo. Todo el mundo está en la misma línea detrás de ti, luchando con los mismos problemas que el Corán fue revelado para resolver hace mil cuatrocientos años.\n\nEn Munawarah, estamos mejorando la confianza en el Islam con claves criptográficas que facilitan la seguridad de las intenciones en línea que comienzan halal y permanecen halal para siempre.\n\nEstamos construyendo un mundo en el que es imposible hackear las intenciones, un mundo en el que las intenciones no se determinan por cuánto dinero ganas (o deseas ganar), sino uno en el que los desconocidos pueden confiar mutuamente sin temor a ser estafados por primera vez desde los días del Profeta (PBUH) cuando la Sagrada Kaaba una vez sirvió como bóveda para intercambiar bienes entre caravanas en partidas."
+    "aboutMunawarahContent": "La confianza es esencial en todos los emprendimientos. Es el ingrediente más importante en los negocios, pero detectarla es un fenómeno raro en estos días que está fallando a la humanidad cuando más se necesita.\n\nLo mismo ocurre con la religión, cuando millones de hermanos y hermanas en el Islam se reúnen de todo el mundo para realizar la peregrinación a La Meca y la Umrah, y es muy fácil sentirse perdido en la enormidad de todo esto y no saber en quién confiar cuando las cosas salen mal en un mar de gente suplicando la misericordia de Allah.\n\nEstás en el lugar correcto si esto te resulta familiar, si estás en una encrucijada en tu vida y no estás seguro de cuál es el camino correcto para ti.\n\nNo estás solo. Todo el mundo está en la misma línea detrás de ti, luchando con los mismos problemas que el Corán fue revelado para resolver hace mil cuatrocientos años.\n\nEn Munawarah, estamos mejorando la confianza en el Islam con claves criptográficas que facilitan la seguridad de las intenciones en línea que comienzan halal y permanecen halal para siempre.\n\nEstamos construyendo un mundo en el que es imposible hackear las intenciones, un mundo en el que las intenciones no se determinan por cuánto dinero ganas (o deseas ganar), sino uno en el que los desconocidos pueden confiar mutuamente sin temor a ser estafados por primera vez desde los días del Profeta (PBUH) cuando la Sagrada Kaaba una vez sirvió como bóveda para intercambiar bienes entre caravanas en partidas.",
+    "NIP05IdentifierTitle": "Identificador NIP05",
+    "NIP05IdentifierSubtitle": "Este será utilizado para identificar e verificar o seu perfil Nostr, e será mostrado no seu perfil.",
+    "yourNIP05": "Seu Identificador NIP05",
+    "hintNIP05": "Digite seu Identificador NIP05 aqui",
+    "imamOnDutySubtitle": "Escolha o seu instrutor de IA para guiá-lo em sua jornada. Você pode trocar entre eles a qualquer momento.",
+    "chatInstructorTitle": "Instrutor de palavra-chave",
+    "chatInstructorSubtitle": "Escolha este para conversar sobre qualquer coisa relacionada à palavra-chave.",
+    "AskDirectlyFromTextField": "Pergunte diretamente pelo campo de texto abaixo",
+    "invalidNIP05": "Identificador NIP05 inválido",
+    "existentKeyAuthSubtitle": "Você pode usar sua chave existente para autenticar sua conta. Isso permitirá que você acesse sua conta de qualquer dispositivo.",
+    "myReposts": "Meus reposts",
+    "myPosts": "Meus posts",
+    "noFollowers": "Ainda não há seguidores. Se alguém começar a seguir você, eles aparecerão aqui.",
+    "selectedYoutube": "Vídeo do Youtube selecionado",
+    "youtubeUrlHint": "Digite a URL do Youtube aqui",
+    "youtubeVideo": "Vídeo do Youtube",
+    "set": "Definir"
 }

@@ -25,7 +25,6 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     required this.usersListMetadata,
   }) : super(UsersListToFollowInitial()) {
     _handleCurrentUserFollowers();
-
     _handleCurrentUserFollowing();
     _handleContacts();
   }

@@ -143,4 +143,8 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
       },
     );
   }
+
+  void showNewestPostsToUI() {
+    emit(state.copyWith(shownFeedPosts: state.feedPosts));
+  }
 }

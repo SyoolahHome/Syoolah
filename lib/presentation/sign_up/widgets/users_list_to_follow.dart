@@ -15,9 +15,11 @@ class UsersListToFollow extends StatelessWidget {
   const UsersListToFollow({
     super.key,
     required this.pubKeys,
+    this.noBg = false,
   });
 
   final List<String> pubKeys;
+  final bool noBg;
   @override
   Widget build(BuildContext context) {
     final emptyNostrStrea = NostrEventsStream(
@@ -43,8 +45,12 @@ class UsersListToFollow extends StatelessWidget {
                 // height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color:
-                      Theme.of(context).colorScheme.background.withOpacity(.1),
+                  color: noBg
+                      ? Colors.transparent
+                      : Theme.of(context)
+                          .colorScheme
+                          .background
+                          .withOpacity(.1),
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,

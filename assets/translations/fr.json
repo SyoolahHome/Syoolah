@@ -162,5 +162,22 @@
     "removeRelay": "Supprimer le relais\n{} ?",
     "relayName": "Relais de {}",
     "laungageApplied": "Langue appliquée : {}",
-    "aboutMunawarahContent": "La confiance est essentielle dans toutes les entreprises. C'est l'ingrédient le plus important en affaires, mais le repérer est un phénomène rare de nos jours qui fait défaut à l'humanité quand le monde en a le plus besoin.\n\nIl en va de même pour la religion, car des millions de frères et sœurs en Islam se rassemblent du monde entier pour accomplir le Hajj et la Omra, alors qu'il est très facile de se sentir perdu dans l'énormité de tout cela sans savoir en qui avoir confiance quand les choses tournent mal dans une mer d'humanité implorant la miséricorde d'Allah.\n\nVous êtes au bon endroit si cela vous semble familier - si vous êtes à une étape de votre vie où vous ne savez pas quel chemin prendre.\n\nVous n'êtes pas seul. Le monde entier est aligné juste derrière vous, luttant avec les mêmes problèmes que le Coran a été révélé pour résoudre il y a quatorze siècles.\n\nChez Munawarah, nous améliorons la confiance dans l'Islam avec des clés cryptographiques qui rendent facile la sécurisation des intentions en ligne qui commencent halal et restent halal - pour toujours.\n\nNous construisons un monde impossible à pirater par les intentions - un monde où les intentions ne sont pas déterminées par l'argent que vous gagnez (ou que vous souhaitez gagner), mais où des étrangers peuvent se faire confiance sans crainte de se faire arnaquer pour la première fois depuis les jours du Prophète (PBUH) où la sainte Kaaba servait autrefois de coffre-fort pour échanger des biens entre les caravanes qui partaient."
+    "aboutMunawarahContent": "La confiance est essentielle dans toutes les entreprises. C'est l'ingrédient le plus important en affaires, mais le repérer est un phénomène rare de nos jours qui fait défaut à l'humanité quand le monde en a le plus besoin.\n\nIl en va de même pour la religion, car des millions de frères et sœurs en Islam se rassemblent du monde entier pour accomplir le Hajj et la Omra, alors qu'il est très facile de se sentir perdu dans l'énormité de tout cela sans savoir en qui avoir confiance quand les choses tournent mal dans une mer d'humanité implorant la miséricorde d'Allah.\n\nVous êtes au bon endroit si cela vous semble familier - si vous êtes à une étape de votre vie où vous ne savez pas quel chemin prendre.\n\nVous n'êtes pas seul. Le monde entier est aligné juste derrière vous, luttant avec les mêmes problèmes que le Coran a été révélé pour résoudre il y a quatorze siècles.\n\nChez Munawarah, nous améliorons la confiance dans l'Islam avec des clés cryptographiques qui rendent facile la sécurisation des intentions en ligne qui commencent halal et restent halal - pour toujours.\n\nNous construisons un monde impossible à pirater par les intentions - un monde où les intentions ne sont pas déterminées par l'argent que vous gagnez (ou que vous souhaitez gagner), mais où des étrangers peuvent se faire confiance sans crainte de se faire arnaquer pour la première fois depuis les jours du Prophète (PBUH) où la sainte Kaaba servait autrefois de coffre-fort pour échanger des biens entre les caravanes qui partaient.",
+    "NIP05IdentifierTitle": "Identifiant NIP05",
+    "NIP05IdentifierSubtitle": "Ceci sera utilisé pour identifier et vérifier votre profil Nostr et sera affiché dans votre profil.",
+    "yourNIP05": "Votre identifiant NIP05",
+    "hintNIP05": "Entrez votre identifiant NIP05 ici",
+    "imamOnDutySubtitle": "Choisissez votre instructeur d'IA pour vous guider dans votre parcours. Vous pouvez les changer à tout moment.",
+    "chatInstructorTitle": "Instructeur de mot-clé",
+    "chatInstructorSubtitle": "Choisissez cela pour discuter de tout ce qui concerne le mot-clé.",
+    "AskDirectlyFromTextField": "Posez directement votre question dans le champ ci-dessous",
+    "invalidNIP05": "Identifiant NIP05 invalide",
+    "existentKeyAuthSubtitle": "Vous pouvez utiliser votre clé existante pour vous authentifier sur votre compte. Cela vous permettra d'accéder à votre compte depuis n'importe quel appareil.",
+    "myReposts": "Mes repartages",
+    "myPosts": "Mes publications",
+    "noFollowers": "Aucun abonné pour l'instant. Si quelqu'un commence à vous suivre, vous le verrez ici.",
+    "selectedYoutube": "Vidéo YouTube sélectionnée",
+    "youtubeUrlHint": "Entrez l'URL de la vidéo YouTube ici",
+    "youtubeVideo": "Vidéo YouTube",
+    "set": "Définir"
 }

@@ -162,5 +162,22 @@
     "removeRelay": "Relay entfernen\n{}?",
     "relayName": "{}'s Relay",
     "laungageApplied": "Sprache angewendet: {}",
-    "aboutMunawarahContent": "Vertrauen ist in allen Bemühungen unerlässlich. Es ist die wichtigste Zutat im Geschäft, aber das Erkennen ist heutzutage ein seltenes Phänomen, das die Menschheit in einer Zeit scheitert, in der sie es am meisten braucht.\n\nDas Gleiche gilt für die Religion, wenn Millionen von Brüdern und Schwestern im Islam aus aller Welt zusammenkommen, um Hajj und Umrah zu vollziehen, wenn es viel zu einfach ist, sich in der enormen Menge zu verlieren und nicht zu wissen, wem man vertrauen soll, wenn in einem Meer von Menschen um Allahs Barmherzigkeit gebeten wird und Dinge schiefgehen.\n\nWenn Ihnen dies vertraut vorkommt und Sie an einem Scheideweg in Ihrem Leben stehen und nicht sicher sind, welcher Weg der richtige für Sie ist, sind Sie hier am richtigen Ort.\n\nSie sind nicht allein. Die ganze Welt steht direkt hinter Ihnen und kämpft mit denselben Problemen, die vor viertausend Jahren mit dem Qur'an gelöst wurden.\n\nBei Munawarah verbessern wir das Vertrauen im Islam mit kryptografischen Schlüsseln, die es einfach machen, Online-Absichten sicher zu sichern, die halal beginnen und halal bleiben - für immer.\n\nWir bauen eine Welt auf, in der Absichten unmöglich gehackt werden können - eine Welt, in der Absichten nicht durch das Einkommen (oder das, was Sie sich wünschen könnten) bestimmt werden, sondern in der total Fremde einander ohne Angst vor Betrug vertrauen können, zum ersten Mal seit den Tagen des Propheten (Friede und Segen seien auf ihm), als die heilige Kaaba einmal als Tresor diente, um Waren zwischen abreisenden Karawanen auszutauschen."
+    "aboutMunawarahContent": "Vertrauen ist in allen Bemühungen unerlässlich. Es ist die wichtigste Zutat im Geschäft, aber das Erkennen ist heutzutage ein seltenes Phänomen, das die Menschheit in einer Zeit scheitert, in der sie es am meisten braucht.\n\nDas Gleiche gilt für die Religion, wenn Millionen von Brüdern und Schwestern im Islam aus aller Welt zusammenkommen, um Hajj und Umrah zu vollziehen, wenn es viel zu einfach ist, sich in der enormen Menge zu verlieren und nicht zu wissen, wem man vertrauen soll, wenn in einem Meer von Menschen um Allahs Barmherzigkeit gebeten wird und Dinge schiefgehen.\n\nWenn Ihnen dies vertraut vorkommt und Sie an einem Scheideweg in Ihrem Leben stehen und nicht sicher sind, welcher Weg der richtige für Sie ist, sind Sie hier am richtigen Ort.\n\nSie sind nicht allein. Die ganze Welt steht direkt hinter Ihnen und kämpft mit denselben Problemen, die vor viertausend Jahren mit dem Qur'an gelöst wurden.\n\nBei Munawarah verbessern wir das Vertrauen im Islam mit kryptografischen Schlüsseln, die es einfach machen, Online-Absichten sicher zu sichern, die halal beginnen und halal bleiben - für immer.\n\nWir bauen eine Welt auf, in der Absichten unmöglich gehackt werden können - eine Welt, in der Absichten nicht durch das Einkommen (oder das, was Sie sich wünschen könnten) bestimmt werden, sondern in der total Fremde einander ohne Angst vor Betrug vertrauen können, zum ersten Mal seit den Tagen des Propheten (Friede und Segen seien auf ihm), als die heilige Kaaba einmal als Tresor diente, um Waren zwischen abreisenden Karawanen auszutauschen.",
+    "NIP05IdentifierTitle": "NIP05 Kennung",
+    "NIP05IdentifierSubtitle": "Dies wird verwendet, um Ihr Nostr-Profil zu identifizieren, zu verifizieren und es wird in Ihrem Profil angezeigt.",
+    "yourNIP05": "Ihre NIP05 Kennung",
+    "hintNIP05": "Geben Sie hier Ihre NIP05 Kennung ein",
+    "imamOnDutySubtitle": "Wählen Sie Ihren KI-Instruktor, der Sie auf Ihrer Reise begleiten wird. Sie können jederzeit zwischen ihnen wechseln.",
+    "chatInstructorTitle": "Schlüsselwort-Instruktor",
+    "chatInstructorSubtitle": "Wählen Sie dies, um über alles im Zusammenhang mit Schlüsselwort zu chatten",
+    "AskDirectlyFromTextField": "Stellen Sie direkt eine Frage über das Textfeld unten",
+    "invalidNIP05": "Ungültige NIP05 Kennung",
+    "existentKeyAuthSubtitle": "Sie können Ihren vorhandenen Schlüssel verwenden, um Ihr Konto zu authentifizieren. Dadurch können Sie von jedem Gerät aus auf Ihr Konto zugreifen.",
+    "myReposts": "Meine Reposts",
+    "myPosts": "Meine Beiträge",
+    "noFollowers": "Noch keine Follower, wenn Ihnen jemand folgt, sehen Sie sie hier.",
+    "selectedYoutube": "Ausgewähltes Youtube-Video",
+    "youtubeUrlHint": "Geben Sie hier die Youtube-URL ein",
+    "youtubeVideo": "Youtube-Video",
+    "set": "Setzen"
 }

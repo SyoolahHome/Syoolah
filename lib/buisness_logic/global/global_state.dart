@@ -21,8 +21,8 @@ class GlobalState extends Equatable {
     NostrEvent? currentUserFollowers,
   }) {
     return GlobalState(
-      currentUserFollowers: currentUserFollowers ?? this.currentUserFollowers,
-      currentUserFollowing: currentUserFollowing ?? this.currentUserFollowing,
+      currentUserFollowers: currentUserFollowers,
+      currentUserFollowing: currentUserFollowing,
     );
   }
 }

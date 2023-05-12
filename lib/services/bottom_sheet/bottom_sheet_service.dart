@@ -17,6 +17,7 @@ import '../../presentation/new_post/add_new_post.dart';
 import '../../presentation/private_succes/private_key.dart';
 import '../../presentation/private_succes/private_key_gen_success.dart';
 import '../../presentation/profile_options/profile_options.dart';
+import '../../presentation/youtube_video_widget/youtube_video_widget.dart';
 import '../utils/paths.dart';
 
 abstract class BottomSheetService {
@@ -203,13 +204,15 @@ abstract class BottomSheetService {
     return showModalBottomSheet(
       context: context,
       clipBehavior: Clip.hardEdge,
-      isScrollControlled: false,
+      isScrollControlled: true,
       builder: (context) {
-        return PrivateKey(
-          type: type,
-          title: type == HiddenPrivateKeySectionType.privateKey
-              ? "myPrivateKey".tr()
-              : "myNsecKey".tr(),
+        return SingleChildScrollView(
+          child: PrivateKey(
+            type: type,
+            title: type == HiddenPrivateKeySectionType.privateKey
+                ? "myPrivateKey".tr()
+                : "myNsecKey".tr(),
+          ),
         );
       },
     );
@@ -261,6 +264,25 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       builder: (context) {
         return BottomSheetOptionsWidget(options: options);
+      },
+    );
+  }
+
+  static showYoututbeVideoBottomSheet(
+    BuildContext context, {
+    required String url,
+    required VoidCallback onAccept,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return YoutubeVideoWidget(
+          url: url,
+          onAccept: onAccept,
+        );
       },
     );
   }

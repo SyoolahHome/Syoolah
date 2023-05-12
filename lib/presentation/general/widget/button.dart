@@ -11,6 +11,7 @@ class MunawarahButton extends StatelessWidget {
     this.icon,
     this.isOnlyBorder = false,
     this.customWidget,
+    this.iconSize,
   });
 
   final VoidCallback onTap;
@@ -20,7 +21,7 @@ class MunawarahButton extends StatelessWidget {
   final bool isOnlyBorder;
   final IconData? icon;
   final Widget? customWidget;
-
+  final double? iconSize;
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -77,7 +78,11 @@ class MunawarahButton extends StatelessWidget {
               if (icon != null) ...[
                 Icon(
                   icon,
-                  size: isSmall ? 12.5 : 15,
+                  size: iconSize != null
+                      ? iconSize!
+                      : isSmall
+                          ? 12.5
+                          : 15,
                   color: isOnlyBorder
                       ? Theme.of(context).colorScheme.background
                       : null,

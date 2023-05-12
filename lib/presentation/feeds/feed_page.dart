@@ -1,6 +1,9 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
+import 'package:ditto/presentation/feeds/widgets/new_notes_tip.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -24,44 +27,53 @@ class GeneralFeed extends StatelessWidget {
       create: (context) => GlobalFeedCubit(
         feedPostsStream: feedPostsStream,
       ),
-      child: Scaffold(
-        appBar: CustomAppBar(feedName: feedName),
-        floatingActionButton: BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
-          builder: (context, state) {
-            return AnimatedScale(
-              duration: const Duration(milliseconds: 200),
-              scale: state.shouldShowScrollToTopButton ? 1 : 0,
-              child: FloatingActionButton(
-                onPressed: () {},
-                child: const Icon(FlutterRemix.arrow_up_s_line),
-              ),
-            );
-          },
-        ),
-        body: Builder(
-          builder: (context) {
-            final cubit = context.read<GlobalFeedCubit>();
-
-            return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Scaffold(
+            appBar: CustomAppBar(feedName: feedName),
+            floatingActionButton: BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
               builder: (context, state) {
-                if (state.searchedFeedNotesPosts.isNotEmpty) {
-                  return NotesListView(
-                    scrollController: cubit.scrollController,
-                    feedName: feedName,
-                    notes: state.searchedFeedNotesPosts,
-                  );
-                } else {
-                  return NotesListView(
-                    scrollController: cubit.scrollController,
-                    feedName: feedName,
-                    notes:
-                        state.feedPosts.map((e) => Note.fromEvent(e)).toList(),
-                  );
-                }
+                return AnimatedScale(
+                  duration: const Duration(milliseconds: 200),
+                  scale: state.shouldShowScrollToTopButton ? 1 : 0,
+                  child: FloatingActionButton(
+                    onPressed: () {},
+                    child: const Icon(FlutterRemix.arrow_up_s_line),
+                  ),
+                );
               },
-            );
-          },
-        ),
+            ),
+            body: Builder(
+              builder: (context) {
+                final cubit = context.read<GlobalFeedCubit>();
+
+                return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
+                  builder: (context, state) {
+                    if (state.searchedFeedNotesPosts.isNotEmpty) {
+                      return NotesListView(
+                        scrollController: cubit.scrollController,
+                        feedName: feedName,
+                        notes: state.searchedFeedNotesPosts,
+                      );
+                    } else {
+                      final shownFeedPosts = state.shownFeedPosts;
+
+                      return NotesListView(
+                        scrollController: cubit.scrollController,
+                        feedName: feedName,
+                        notes: shownFeedPosts
+                            .map((e) => Note.fromEvent(e))
+                            .toList(),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+          ),
+          NewNotesTip(),
+        ],
       ),
     );
   }

@@ -6,6 +6,9 @@ class AddNewPostState extends Equatable {
   final bool isLoading;
   final String? success;
   final String? error;
+  final String? youtubeUrl;
+  final String? acceptedYoutubeUrl;
+  final int currentPostAssetsSectionIndex;
 
   @override
   List<Object?> get props => [
@@ -14,6 +17,9 @@ class AddNewPostState extends Equatable {
         success,
         error,
         isLoading,
+        youtubeUrl,
+        currentPostAssetsSectionIndex,
+        acceptedYoutubeUrl,
       ];
 
   const AddNewPostState({
@@ -22,6 +28,9 @@ class AddNewPostState extends Equatable {
     this.isLoading = false,
     this.error,
     this.success,
+    this.youtubeUrl,
+    this.currentPostAssetsSectionIndex = 0,
+    this.acceptedYoutubeUrl,
   });
 
   AddNewPostState copyWith({
@@ -30,6 +39,9 @@ class AddNewPostState extends Equatable {
     bool? isLoading,
     String? error,
     String? success,
+    String? youtubeUrl,
+    String? acceptedYoutubeUrl,
+    int? currentPostAssetsSectionIndex,
   }) {
     return AddNewPostState(
       pickedImages: pickedImages,
@@ -37,6 +49,10 @@ class AddNewPostState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       error: error,
       success: success,
+      youtubeUrl: youtubeUrl ?? this.youtubeUrl,
+      acceptedYoutubeUrl: acceptedYoutubeUrl ?? this.acceptedYoutubeUrl,
+      currentPostAssetsSectionIndex:
+          currentPostAssetsSectionIndex ?? this.currentPostAssetsSectionIndex,
     );
   }
 }

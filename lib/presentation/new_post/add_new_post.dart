@@ -1,5 +1,6 @@
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/new_post/widgets/posr_assets_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +46,7 @@ class AddNewPost extends StatelessWidget {
                         SizedBox(height: height * 2),
                         CategoriesSelect(),
                         SizedBox(height: height * 2),
-                        PostImage(),
+                        PostAssetsSection(),
                         Spacer(),
                         PostButton(),
                         SizedBox(height: height * 2),

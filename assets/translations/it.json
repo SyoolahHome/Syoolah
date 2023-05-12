@@ -162,5 +162,22 @@
     "removeRelay": "Rimuovere il relay\n{}?",
     "relayName": "Relay di {}",
     "laungageApplied": "Lingua applicata: {}",
-    "aboutMunawarahContent": "La fiducia è essenziale in tutti gli sforzi. È l'ingrediente più importante nel mondo degli affari, ma oggi è diventato difficile individuarla e questo sta fallendo l'umanità nel momento in cui ne ha più bisogno.\n\nLo stesso vale per la religione, poiché milioni di fratelli e sorelle musulmani si riuniscono da tutto il mondo per compiere l'Hajj e l'Umrah, quando è troppo facile sentirsi smarriti nella vastità di tutto ciò e non sapere a chi affidarsi quando le cose vanno storte in mezzo alla folla che implora la misericordia di Allah.\n\nSe ti ritrovi in questa descrizione, sei nel posto giusto, se sei in un momento di svolta nella tua vita e non sei sicuro quale sia la giusta direzione da prendere.\n\nNon sei solo. Il mondo intero è al tuo fianco, lottando con gli stessi problemi che il Corano è stato rivelato per risolvere quattordici secoli fa.\n\nA Munawarah, stiamo migliorando la fiducia nell'Islam con chiavi crittografiche che rendono facile proteggere le intenzioni online che iniziano in modo lecito e rimangono lecite - per sempre.\n\nStiamo costruendo un mondo in cui le intenzioni non possono essere violate, un mondo in cui le intenzioni non sono determinate dal denaro che si guadagna (o si vorrebbe guadagnare), ma in cui perfetti sconosciuti possono fidarsi l'uno dell'altro senza il timore di essere truffati, per la prima volta dai giorni del Profeta (PBUH) quando la sacra Kaaba serviva da cassaforte per scambiare beni tra carovane che si separavano."
+    "aboutMunawarahContent": "La fiducia è essenziale in tutti gli sforzi. È l'ingrediente più importante nel mondo degli affari, ma oggi è diventato difficile individuarla e questo sta fallendo l'umanità nel momento in cui ne ha più bisogno.\n\nLo stesso vale per la religione, poiché milioni di fratelli e sorelle musulmani si riuniscono da tutto il mondo per compiere l'Hajj e l'Umrah, quando è troppo facile sentirsi smarriti nella vastità di tutto ciò e non sapere a chi affidarsi quando le cose vanno storte in mezzo alla folla che implora la misericordia di Allah.\n\nSe ti ritrovi in questa descrizione, sei nel posto giusto, se sei in un momento di svolta nella tua vita e non sei sicuro quale sia la giusta direzione da prendere.\n\nNon sei solo. Il mondo intero è al tuo fianco, lottando con gli stessi problemi che il Corano è stato rivelato per risolvere quattordici secoli fa.\n\nA Munawarah, stiamo migliorando la fiducia nell'Islam con chiavi crittografiche che rendono facile proteggere le intenzioni online che iniziano in modo lecito e rimangono lecite - per sempre.\n\nStiamo costruendo un mondo in cui le intenzioni non possono essere violate, un mondo in cui le intenzioni non sono determinate dal denaro che si guadagna (o si vorrebbe guadagnare), ma in cui perfetti sconosciuti possono fidarsi l'uno dell'altro senza il timore di essere truffati, per la prima volta dai giorni del Profeta (PBUH) quando la sacra Kaaba serviva da cassaforte per scambiare beni tra carovane che si separavano.",
+    "NIP05IdentifierTitle": "Identificatore NIP05",
+    "NIP05IdentifierSubtitle": "Questo verrà utilizzato per identificare e verificare il tuo profilo Nostr e verrà mostrato nel tuo profilo.",
+    "yourNIP05": "Il tuo identificatore NIP05",
+    "hintNIP05": "Inserisci qui il tuo identificatore NIP05",
+    "imamOnDutySubtitle": "Scegli il tuo istruttore di intelligenza artificiale per guidarti nel tuo percorso. Puoi cambiarli in qualsiasi momento.",
+    "chatInstructorTitle": "Istruttore di parola chiave",
+    "chatInstructorSubtitle": "Scegli questo per chattare su qualsiasi cosa relativa alla parola chiave.",
+    "AskDirectlyFromTextField": "Chiedi direttamente dal campo di testo sottostante",
+    "invalidNIP05": "Identificatore NIP05 non valido",
+    "existentKeyAuthSubtitle": "Puoi usare la tua chiave esistente per autenticare il tuo account. Ciò ti permetterà di accedere al tuo account da qualsiasi dispositivo.",
+    "myReposts": "I miei repost",
+    "myPosts": "I miei post",
+    "noFollowers": "Ancora nessun follower. Se qualcuno inizia a seguirti, lo vedrai qui.",
+    "selectedYoutube": "Video di YouTube selezionato",
+    "youtubeUrlHint": "Inserisci qui l'URL di YouTube",
+    "youtubeVideo": "Video di YouTube",
+    "set": "Imposta"
 }

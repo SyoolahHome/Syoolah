@@ -18,23 +18,35 @@ class PostButton extends StatelessWidget {
 
     return Row(
       children: [
-        IconButton(
-          onPressed: () {
-            cubit.addImage();
+        ...List.generate(
+          cubit.postAssetsSectionsWidgets.length,
+          (index) {
+            final current = cubit.postAssetsSectionsWidgets[index];
+
+            return BlocBuilder<AddNewPostCubit, AddNewPostState>(
+              builder: (context, state) {
+                final isSelected = index == state.currentPostAssetsSectionIndex;
+
+                return IconButton(
+                  onPressed: () {
+                    cubit.showWidgetAt(index);
+                    if (isSelected) {
+                      current.onPressed();
+                    }
+                  },
+                  icon: Container(
+                    color: isSelected
+                        ? Theme.of(context).colorScheme.onSecondaryContainer
+                        : null,
+                    child: Icon(
+                      current.icon,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                  ),
+                );
+              },
+            );
           },
-          icon: Icon(
-            FlutterRemix.image_add_line,
-            color: Theme.of(context).iconTheme.color,
-          ),
-        ),
-        IconButton(
-          onPressed: () {
-            // cubit.setYoutubeVideo();
-          },
-          icon: Icon(
-            FlutterRemix.youtube_line,
-            color: Theme.of(context).iconTheme.color,
-          ),
         ),
         Spacer(),
         BlocConsumer<AddNewPostCubit, AddNewPostState>(

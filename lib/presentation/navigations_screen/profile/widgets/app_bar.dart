@@ -31,6 +31,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           onPressed: () {
             cubit.onMorePressed(
               context,
+              onMyKeysPressed: () {
+                Navigator.of(context).pushNamed(
+                  Paths.myKeys,
+                );
+              },
               onEditProfile: () {
                 Navigator.of(context).pushNamed(
                   Paths.editProfile,

@@ -6,15 +6,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(),
-      child: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(FlutterRemix.arrow_left_line),
-          onPressed: () => Navigator.pop(context),
-        ),
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      leading: IconButton(
+        icon: const Icon(FlutterRemix.arrow_left_line),
+        onPressed: () => Navigator.pop(context),
       ),
     );
   }
