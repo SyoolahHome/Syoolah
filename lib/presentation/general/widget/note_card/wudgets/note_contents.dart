@@ -5,6 +5,7 @@ import 'package:hashtagable/hashtagable.dart';
 import '../../../../../constants/app_colors.dart';
 import 'image_content.dart';
 import 'image_full_view..dart';
+import 'note_youtube_player.dart';
 
 class NoteContents extends StatelessWidget {
   const NoteContents({
@@ -12,11 +13,13 @@ class NoteContents extends StatelessWidget {
     required this.imageLinks,
     required this.text,
     required this.heroTag,
+    required this.youtubeVideosLinks,
   });
 
   final String text;
   final String heroTag;
   final List<String> imageLinks;
+  final List<String> youtubeVideosLinks;
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +36,31 @@ class NoteContents extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: imageLinks.map(
-                (link) {
-                  return GestureDetector(
-                    child: Container(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: ImageContent(
-                        heroTag: heroTag,
-                        link: link,
-                        size: 75,
-                        fit: BoxFit.cover,
+        if (imageLinks.isNotEmpty)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: imageLinks.map(
+                  (link) {
+                    return GestureDetector(
+                      child: Container(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: ImageContent(
+                          heroTag: heroTag,
+                          link: link,
+                          size: 75,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ).toList()),
-        ),
+                    );
+                  },
+                ).toList()),
+          ),
+        const SizedBox(height: 20),
+        if (youtubeVideosLinks.isNotEmpty)
+          NoteYoutubePlayer(url: youtubeVideosLinks.first),
         const SizedBox(height: 20),
       ],
     );

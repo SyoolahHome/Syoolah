@@ -25,7 +25,10 @@ class NoteActions extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            NoteDateOfCreationAgo(createdAt: note.event.createdAt),
+            NoteDateOfCreationAgo(
+              createdAt: note.event.createdAt,
+              isMedium: true,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -33,12 +36,11 @@ class NoteActions extends StatelessWidget {
                   builder: (context, state) {
                     final noteLikes = state.noteLikes;
                     int likes = noteLikes.length;
-                    if (state.localLiked) {
-                      // likes += 1;
-                    }
+                    // if (state.localLiked) {
+                    //   likes += 1;
+                    // }
 
                     return Action(
-                      key: ValueKey(note.event.uniqueTag()),
                       icon: FlutterRemix.heart_2_fill,
                       onTap: () {
                         if (!cubit.isUserAlreadyLiked()) {
@@ -47,10 +49,10 @@ class NoteActions extends StatelessWidget {
                       },
                       bgColor: state.localLiked || cubit.isUserAlreadyLiked()
                           ? Colors.red.withOpacity(.1)
-                          : AppColors.grey.withOpacity(.2),
+                          : Theme.of(context).colorScheme.onPrimary,
                       color: state.localLiked || cubit.isUserAlreadyLiked()
                           ? Colors.red
-                          : AppColors.black,
+                          : DefaultTextStyle.of(context).style.color!,
                       text: likes.toString(),
                     );
                   },
@@ -67,8 +69,8 @@ class NoteActions extends StatelessWidget {
                           'cubit': cubit,
                         });
                       },
-                      bgColor: AppColors.grey.withOpacity(.2),
-                      color: AppColors.black,
+                      bgColor: Theme.of(context).colorScheme.onPrimary,
+                      color: DefaultTextStyle.of(context).style.color!,
                     );
                   },
                 ),

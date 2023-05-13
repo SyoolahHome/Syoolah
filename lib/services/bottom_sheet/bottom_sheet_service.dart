@@ -279,10 +279,7 @@ abstract class BottomSheetService {
       isScrollControlled: true,
       useRootNavigator: true,
       builder: (context) {
-        return YoutubeVideoWidget(
-          url: url,
-          onAccept: onAccept,
-        );
+        return YoutubeVideoWidget(url: url, onAccept: onAccept);
       },
     );
   }

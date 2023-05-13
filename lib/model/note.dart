@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class Note extends Equatable {
   final NostrEvent event;
-  List<String> links;
+  final List<String> links;
   final List<String> imageLinks;
+  final List<String> youtubeVideoLinks;
   String noteOnly;
 
   @override
@@ -14,6 +16,7 @@ class Note extends Equatable {
         noteOnly,
         links,
         imageLinks,
+        youtubeVideoLinks,
       ];
 
   Note({
@@ -21,6 +24,7 @@ class Note extends Equatable {
     this.links = const [],
     this.noteOnly = "",
     this.imageLinks = const [],
+    this.youtubeVideoLinks = const [],
   });
 
   factory Note.fromEvent(
@@ -29,12 +33,14 @@ class Note extends Equatable {
     final links = extractLinks(event.content);
     final noteOnly = removeLinksFromInitial(event.content);
     final imageLinks = filterImageLinks(links);
+    final youtubeVideoLinks = filteryoutubeVideoLinks(links);
 
     return Note(
       event: event,
       links: links,
       noteOnly: noteOnly,
       imageLinks: imageLinks,
+      youtubeVideoLinks: youtubeVideoLinks,
     );
   }
 
@@ -65,6 +71,12 @@ class Note extends Equatable {
             link.endsWith('.jpg') ||
             link.endsWith('.jpeg') ||
             link.endsWith('.gif'))
+        .toList();
+  }
+
+  static List<String> filteryoutubeVideoLinks(List<String> links) {
+    return links
+        .where((link) => YoutubePlayerController.convertUrlToId(link) != null)
         .toList();
   }
 }

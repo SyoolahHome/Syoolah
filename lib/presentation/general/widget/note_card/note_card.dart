@@ -69,6 +69,7 @@ class NoteCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     NoteContents(
+                      youtubeVideosLinks: note.youtubeVideoLinks,
                       heroTag: note.event.uniqueTag(),
                       imageLinks: note.imageLinks,
                       text: note.noteOnly,
