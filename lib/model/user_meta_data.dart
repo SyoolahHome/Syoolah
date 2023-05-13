@@ -78,7 +78,7 @@ class UserMetaData extends Equatable {
   factory UserMetaData.placeholder() {
     return const UserMetaData(
       name: "No Name",
-      picture: "https://ui-avatars.com/api/?name=Elon+Musk",
+      picture: "assets/logo/black_no_bg.png",
       banner: "https://picsum.photos/200/300",
       username: "No Username",
       about: "No About",
