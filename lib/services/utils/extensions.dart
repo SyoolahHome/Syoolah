@@ -68,7 +68,15 @@ extension DateTimeExt on DateTime {
 }
 
 extension StringExt on String {
-  String get capitalized => '${this[0].toUpperCase()}${substring(1)}';
+  String get capitalized {
+    if (isEmpty) {
+      return this;
+    } else if (length == 1) {
+      return toUpperCase();
+    } else {
+      return '${this[0].toUpperCase()}${substring(1)}';
+    }
+  }
 
   bool get isValidWebSocketSchema {
     if (!startsWith("ws://") && !startsWith("wss://")) {

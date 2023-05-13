@@ -15,7 +15,12 @@ class DateRangePicker extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("dateRange".tr()),
+            Text(
+              "dateRange".tr(),
+              style: DefaultTextStyle.of(context).style.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
             const SizedBox(height: 5),
             ListTile(
               title: Column(
@@ -26,7 +31,10 @@ class DateRangePicker extends StatelessWidget {
                         ? "From: ${state.dateRange!.start.formatted}"
                         : "From: -",
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.black.withOpacity(0.7),
+                          color: DefaultTextStyle.of(context)
+                              .style
+                              .color
+                              ?.withOpacity(0.7),
                         ),
                   ),
                   Text(
@@ -34,7 +42,10 @@ class DateRangePicker extends StatelessWidget {
                         ? "To: ${state.dateRange!.end.formatted}"
                         : "To: -",
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.black.withOpacity(0.7),
+                          color: DefaultTextStyle.of(context)
+                              .style
+                              .color
+                              ?.withOpacity(0.7),
                         ),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:ditto/buisness_logic/edit_profile/edit_profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants/app_colors.dart';
@@ -29,35 +30,24 @@ class EditProfile extends StatelessWidget {
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   EditField(
-                    label: "Name:",
+                    label: "nameLabel".tr(),
                     controller: cubit.nameController!,
                   ),
                   EditField(
-                    label: "Username:",
+                    label: "usernameLabel".tr(),
                     controller: cubit.usernameController!,
                   ),
                   EditField(
                     controller: cubit.pictureController!,
-                    label: "Picture url:",
+                    label: "profileLabel".tr(),
                   ),
                   EditField(
+                    label: "profileLabel".tr(),
                     controller: cubit.aboutController!,
-                    label: "about:",
                   ),
-                  EditField(
-                    controller: cubit.bannerController!,
-                    label: "Banner url:",
-                  ),
-                  // EditField(
-                  //   controller: cubit.aboutController,
-                  //   label: "Bitcoin lightning address:",
-                  // ),
-                  // EditField(
-                  //   controller: cubit.aboutController,
-                  //   label: "Nostr address(nip05):",
-                  // ),
                   const SizedBox(height: 20),
                   SaveButton(
                     onTap: () {

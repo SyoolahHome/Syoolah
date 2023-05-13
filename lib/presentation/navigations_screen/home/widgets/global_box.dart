@@ -1,6 +1,7 @@
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
@@ -104,10 +105,16 @@ class FeedBox extends StatelessWidget {
                     SizedBox(height: 10.0),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: MunawarahButton(
-                        isSmall: true,
-                        onTap: onTap,
-                        text: "browse".tr(),
+                      child: Animate(
+                        delay: 800.ms,
+                        effects: [
+                          FadeEffect(),
+                        ],
+                        child: MunawarahButton(
+                          isSmall: true,
+                          onTap: onTap,
+                          text: "browse".tr(),
+                        ),
                       ),
                     ),
                   ],

@@ -62,12 +62,14 @@ class UserMetaData extends Equatable {
       }
     });
 
+    final placeholderMetadata =
+        UserMetaData.placeholder(name: json['name'] ?? "No Name");
     return UserMetaData(
-      name: json['name'] ?? UserMetaData.placeholder().name,
-      picture: json['picture'] ?? UserMetaData.placeholder().picture,
-      banner: json['banner'] ?? UserMetaData.placeholder().banner,
-      username: json['username'] ?? UserMetaData.placeholder().username,
-      about: json['about'] ?? UserMetaData.placeholder().about,
+      name: json['name'] ?? placeholderMetadata.name,
+      picture: json['picture'] ?? placeholderMetadata.picture,
+      banner: json['banner'] ?? placeholderMetadata.banner,
+      username: json['username'] ?? placeholderMetadata.username,
+      about: json['about'] ?? placeholderMetadata.about,
       displayName: json['display_name'],
       nip05Identifier: json['nip05'],
     );
@@ -75,10 +77,10 @@ class UserMetaData extends Equatable {
 
   /// {@macro user_meta_data}
   /// Instantiate a [UserMetaData] from a placeholder.
-  factory UserMetaData.placeholder() {
-    return const UserMetaData(
+  factory UserMetaData.placeholder({required String name}) {
+    return UserMetaData(
       name: "No Name",
-      picture: "assets/logo/black_no_bg.png",
+      picture: "https://ui-avatars.com/api/?name=$name",
       banner: "https://picsum.photos/200/300",
       username: "No Username",
       about: "No About",

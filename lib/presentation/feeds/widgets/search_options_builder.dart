@@ -16,8 +16,13 @@ class SearchOptionsBuilder extends StatelessWidget {
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("searchOptions".tr()),
+          children: <Widget>[
+            Text(
+              "searchOptions".tr(),
+              style: DefaultTextStyle.of(context).style.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
             const SizedBox(height: 5),
             ...List.generate(
               state.searchOptions.length,
@@ -33,7 +38,7 @@ class SearchOptionsBuilder extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                   trailing: Transform.scale(
-                    scale: 0.75,
+                    scale: 0.7,
                     child: Switch(
                       activeColor: AppColors.teal,
                       activeTrackColor: AppColors.teal.withOpacity(0.15),
@@ -48,7 +53,10 @@ class SearchOptionsBuilder extends StatelessWidget {
                   title: Text(
                     current.name.capitalized,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.black.withOpacity(0.7),
+                          color: DefaultTextStyle.of(context)
+                              .style
+                              .color
+                              ?.withOpacity(0.75),
                         ),
                   ),
                 );

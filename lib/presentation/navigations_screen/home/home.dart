@@ -3,6 +3,7 @@ import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import '../../../services/utils/paths.dart';
@@ -22,6 +23,13 @@ class Home extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+                children: AnimateList(
+              delay: 200.ms,
+              interval: 100.ms,
+              effects: <Effect>[
+                FadeEffect(),
+                SlideEffect(begin: Offset(0, 0.5)),
+              ],
               children: <Widget>[
                 const SizedBox(height: 20),
                 HeadTitle(title: "globalFeeds".tr()),
@@ -69,7 +77,7 @@ class Home extends StatelessWidget {
                   );
                 }),
               ],
-            ),
+            )),
           ),
         ),
       ),

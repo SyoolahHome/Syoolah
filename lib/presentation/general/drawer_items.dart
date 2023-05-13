@@ -12,18 +12,26 @@ import '../navigations_screen/chat_relays/global_chats.dart';
 abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [
         DrawerListTimeItem(
-          icon: FlutterRemix.home_4_line,
-          label: 'Home',
-          onTap: () {},
-        ),
-        DrawerListTimeItem(
-          icon: FlutterRemix.user_line,
-          label: 'Profile',
-          onTap: () {},
+          icon: FlutterRemix.settings_line,
+          label: "myKeys".tr(),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              Paths.settings,
+            );
+          },
         ),
         DrawerListTimeItem(
           icon: FlutterRemix.settings_line,
-          label: 'Settings',
+          label: 'settings'.tr(),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              Paths.settings,
+            );
+          },
+        ),
+        DrawerListTimeItem(
+          icon: FlutterRemix.settings_line,
+          label: 'privacyPolicy'.tr(),
           onTap: () {
             Navigator.of(context).pushNamed(
               Paths.settings,
@@ -32,14 +40,9 @@ abstract class GeneralDrawerItems {
         ),
         DrawerListTimeItem(
           icon: FlutterRemix.information_line,
-          label: 'About',
+          label: 'about'.tr(),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const About(),
-              ),
-            );
+            Navigator.of(context).pushNamed(Paths.aboutApp);
           },
         ),
         DrawerListTimeItem(

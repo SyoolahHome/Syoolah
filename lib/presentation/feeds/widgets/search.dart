@@ -24,7 +24,7 @@ class SearchSections extends StatelessWidget {
     return BlocProvider<GlobalFeedCubit>.value(
       value: cubit,
       child: Container(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: MarginedBody(
           child: Column(
             mainAxisSize: MainAxisSize.min,

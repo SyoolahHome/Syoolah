@@ -6,6 +6,7 @@ import '../../buisness_logic/app/app_cubit.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
 import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import '../../buisness_logic/on_boarding/on_boarding_cubit.dart';
+import '../../presentation/about/about.dart';
 import '../../presentation/about_munawarah/about_munawarah.dart';
 import '../../presentation/auth_choose/auth_choose.dart';
 import '../../presentation/bottom_bar_screen/bottom_bar_screen.dart';
@@ -57,6 +58,7 @@ abstract class Routing {
     Paths.settings: (context) => Settings(),
     Paths.myKeys: (context) => const CurrentUserKeys(),
     Paths.chat: (context) => const Chat(),
+    Paths.aboutApp: (context) => const About(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

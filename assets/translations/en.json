@@ -180,5 +180,11 @@
     "youtubeUrlHint": "Enter youtube url here",
     "youtubeVideo": "Youtube Video",
     "set": "Set",
-    "browse": "Browse"
+    "browse": "Browse",
+    "nameLabel": "Name:",
+    "usernameLabel": "Username:",
+    "profileLabel": "Picture url:",
+    "bioLabel": "Bio:",
+    "about": "About",
+    "privacyPolicy": "Privacy Policy"
 }

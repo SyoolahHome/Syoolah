@@ -84,6 +84,11 @@ abstract class AppConfigs {
       titleName: "Français",
     ),
     LocaleItem(
+      applyText: "Uygula",
+      locale: Locale('tu'),
+      titleName: "Türkçe",
+    ),
+    LocaleItem(
       applyText: "Anwenden",
       locale: Locale('de'),
       titleName: "Deutsch",
@@ -131,7 +136,7 @@ abstract class AppConfigs {
     ),
     SearchOption(
       name: 'Search Posts contents',
-      isSelected: false,
+      isSelected: true,
       searchFunction: (noteList, string) => noteList
           .where((note) =>
               note.event.content.toLowerCase().contains(string.toLowerCase()))
@@ -166,6 +171,15 @@ abstract class AppConfigs {
       searchFunction: (noteList, string) =>
           noteList.where((note) => note.imageLinks.isNotEmpty).toList(),
       useSearchQuery: false,
+    ),
+    SearchOption(
+      name: 'A-Z',
+      isSelected: true,
+      searchFunction: (noteList, string) {
+        noteList.sort((a, b) => a.event.content.compareTo(b.event.content));
+        return noteList;
+      },
+      useSearchQuery: true,
     ),
   ];
 

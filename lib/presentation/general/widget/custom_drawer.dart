@@ -2,8 +2,10 @@ import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/app_colors.dart';
+import '../../../services/bottom_sheet/bottom_sheet_service.dart';
 import '../../onboarding/widgets/animated_logo.dart';
 import '../drawer_items.dart';
 
@@ -38,12 +40,25 @@ class CustomDrawer extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: heightSeparator),
             Container(
-              padding: MarginedBody.defaultMargin,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: MunawarahLogo(width: logoSize),
-              ),
-            ),
+                padding: MarginedBody.defaultMargin,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    MunawarahLogo(width: logoSize),
+                    IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(.5),
+                      ),
+                      onPressed: () {
+                        BottomSheetService.showCreatePostBottomSheet(context);
+                      },
+                      icon: Icon(FlutterRemix.add_line),
+                    )
+                  ],
+                )),
             const SizedBox(height: heightSeparator / 2),
             Center(child: OrDivider()),
             const SizedBox(height: heightSeparator / 2),

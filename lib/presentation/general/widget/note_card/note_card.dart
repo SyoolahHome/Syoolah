@@ -41,7 +41,7 @@ class NoteCard extends StatelessWidget {
               UserMetaData noteOwnerMetadata;
 
               if (state.noteOwnerMetadata == null) {
-                noteOwnerMetadata = UserMetaData.placeholder();
+                noteOwnerMetadata = UserMetaData.placeholder(name: "No Name");
               } else {
                 noteOwnerMetadata = UserMetaData.fromJson(
                   jsonDecode(state.noteOwnerMetadata!.content)

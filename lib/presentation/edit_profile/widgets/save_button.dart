@@ -1,7 +1,6 @@
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_colors.dart';
 
 class SaveButton extends StatelessWidget {
   const SaveButton({
@@ -14,17 +13,9 @@ class SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.teal,
-        ),
-        onPressed: onTap,
-        child: Text(
-          "save".tr(),
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: AppColors.white,
-              ),
-        ),
+      child: MunawarahButton(
+        onTap: onTap,
+        text: "save".tr(),
       ),
     );
   }
