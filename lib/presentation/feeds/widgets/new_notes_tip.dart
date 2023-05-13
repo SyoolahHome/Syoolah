@@ -36,6 +36,7 @@ class NewNotesTip extends StatelessWidget {
                     ),
               ),
               onPressed: () {
+                context.read<GlobalFeedCubit>().goTop();
                 context.read<GlobalFeedCubit>().showNewestPostsToUI();
               },
               label: Animate(

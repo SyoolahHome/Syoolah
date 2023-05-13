@@ -474,7 +474,7 @@ class NostrService {
             "sirah".tr(),
           ],
           kinds: const [1],
-          limit: 1,
+          limit: 10,
         )
       ],
     );

@@ -1,3 +1,5 @@
+import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +28,7 @@ class FeedBox extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<FeedBoxCubit>();
           return GestureDetector(
-            onTap: onTap,
+            // onTap: onTap,
             onPanCancel: cubit.unHighlightBox,
             onPanDown: (details) {
               cubit.highlightBox();
@@ -39,12 +41,13 @@ class FeedBox extends StatelessWidget {
             },
             child: SizedBox(
               width: double.infinity,
-              height: 85,
+              // height: 85,
               child: AnimatedContainer(
                 padding: EdgeInsets.symmetric(
                   horizontal: state.isHighlighted ? 15 : 10,
+                  vertical: 15,
                 ),
-                margin: const EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 15),
                 duration: const Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   color: state.isHighlighted
@@ -52,49 +55,61 @@ class FeedBox extends StatelessWidget {
                       : Theme.of(context).colorScheme.onTertiaryContainer,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                    color: DefaultTextStyle.of(context)
+                                        .style
+                                        .color
+                                        ?.withOpacity(0.95),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              description,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .copyWith(
+                                    color: DefaultTextStyle.of(context)
+                                        .style
+                                        .color
+                                        ?.withOpacity(0.85),
+                                  ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 5),
+                          ],
+                        ),
+                        const Spacer(),
+                        Icon(icon, color: AppColors.teal),
+                      ],
+                    ),
+                    SizedBox(height: 10.0),
                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  color: DefaultTextStyle.of(context)
-                                      .style
-                                      .color
-                                      ?.withOpacity(0.95),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            description,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall!
-                                .copyWith(
-                                  color: DefaultTextStyle.of(context)
-                                      .style
-                                      .color
-                                      ?.withOpacity(0.85),
-                                ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                      alignment: Alignment.centerRight,
+                      child: MunawarahButton(
+                        isSmall: true,
+                        onTap: onTap,
+                        text: "browse".tr(),
                       ),
                     ),
-                    const Spacer(),
-                    Icon(icon, color: AppColors.teal),
                   ],
                 ),
               ),

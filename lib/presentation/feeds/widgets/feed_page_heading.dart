@@ -22,7 +22,6 @@ class FeedPageHeading extends StatelessWidget {
           Text(
             "feedOfName".tr(args: [feedName]),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.black,
                   fontWeight: FontWeight.bold,
                 ),
           ),

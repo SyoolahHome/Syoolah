@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../buisness_logic/users_list_to_follow_cubit/users_list_to_follow_cubit.dart';
 import '../../../constants/app_colors.dart';
+import '../../../services/database/local/local_database.dart';
 import '../../../services/nostr/nostr_service.dart';
 
 class UsersListToFollow extends StatelessWidget {
@@ -26,6 +27,11 @@ class UsersListToFollow extends StatelessWidget {
       request: NostrRequest(filters: []),
       stream: Stream.empty(),
       subscriptionId: "",
+    );
+
+    final String appCurrentUserPublicKey =
+        Nostr.instance.keysService.derivePublicKey(
+      privateKey: LocalDatabase.instance.getPrivateKey()!,
     );
 
     return BlocProvider<UsersListToFollowCubit>(
@@ -70,6 +76,7 @@ class UsersListToFollow extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.all(15),
                         child: NoteAvatarAndName(
+                          appCurrentUserPublicKey: appCurrentUserPublicKey,
                           userPubKey: current.pubkey,
                           showFollowButton: true,
                           avatarUrl: metadata.picture!,

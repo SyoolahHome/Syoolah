@@ -16,10 +16,12 @@ class NoteCard extends StatelessWidget {
     super.key,
     required this.note,
     this.cardMargin,
+    required this.appCurrentUserPublicKey,
   });
 
   final Note note;
   final EdgeInsets? cardMargin;
+  final String appCurrentUserPublicKey;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NoteCardCubit>(
@@ -56,6 +58,7 @@ class NoteCard extends StatelessWidget {
                   children: <Widget>[
                     const SizedBox(height: 10),
                     NoteAvatarAndName(
+                      appCurrentUserPublicKey: appCurrentUserPublicKey,
                       userPubKey: state.noteOwnerMetadata?.pubkey ?? "",
                       note: note,
                       avatarUrl: noteOwnerMetadata.picture!,
@@ -64,23 +67,13 @@ class NoteCard extends StatelessWidget {
                           state.noteOwnerMetadata?.createdAt ??
                               note.event.createdAt,
                     ),
+                    const SizedBox(height: 10),
                     NoteContents(
                       heroTag: note.event.uniqueTag(),
                       imageLinks: note.imageLinks,
                       text: note.noteOnly,
                     ),
                     NoteActions(note: note),
-                    // ...List.generate(state.noteLikes.length, (index) {
-                    //   return Text(
-                    //     state.noteLikes[index].tags.last.last.substring(0, 10) +
-                    //         " liked this note with id " +
-                    //         state.noteLikes[index].tags.first.last
-                    //             .substring(0, 10) +
-                    //         ", id of event is " +
-                    //         state.noteLikes[index].id.substring(0, 10) +
-                    //         "\n",
-                    //   );
-                    // }),
                   ],
                 ),
               );

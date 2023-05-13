@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../../model/note.dart';
+import '../../../services/database/local/local_database.dart';
 import '../../general/widget/margined_body.dart';
 import '../../general/widget/note_card/note_card.dart';
 import 'feed_page_heading.dart';
@@ -30,6 +32,11 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String appCurrentUserPublicKey =
+        Nostr.instance.keysService.derivePublicKey(
+      privateKey: LocalDatabase.instance.getPrivateKey()!,
+    );
+
     final nothingToShow = Text(
       'There is nothing here yet.',
       style: Theme.of(context).textTheme.labelMedium!.copyWith(
@@ -71,6 +78,7 @@ class NotesListView extends StatelessWidget {
               final current = notes[index - 1];
               return NoteCard(
                 key: ValueKey(current.event.id),
+                appCurrentUserPublicKey: appCurrentUserPublicKey,
                 cardMargin: cardMargin,
                 note: current,
               );
@@ -97,6 +105,7 @@ class NotesListView extends StatelessWidget {
             itemCount: notes.length,
             itemBuilder: (context, index) {
               return NoteCard(
+                appCurrentUserPublicKey: appCurrentUserPublicKey,
                 note: notes[index],
               );
             },

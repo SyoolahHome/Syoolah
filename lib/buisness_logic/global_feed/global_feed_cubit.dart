@@ -132,6 +132,8 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   }
 
   void _handleStreams() {
+    bool shouldWaitXSecondsToUpdateFirstUI = true;
+
     _streamSubscription = feedPostsStream.stream.listen(
       (event) {
         final sortedList = [...state.feedPosts, event].reversed.toList();
@@ -140,11 +142,25 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
         if (!isClosed) {
           emit(state.copyWith(feedPosts: sortedList));
         }
+        if (shouldWaitXSecondsToUpdateFirstUI) {
+          Future.delayed(Duration(milliseconds: 1000), () {
+            showNewestPostsToUI();
+            shouldWaitXSecondsToUpdateFirstUI = false;
+          });
+        }
       },
     );
   }
 
   void showNewestPostsToUI() {
     emit(state.copyWith(shownFeedPosts: state.feedPosts));
+  }
+
+  void goTop() {
+    scrollController?.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/app_colors.dart';
 import '../../model/user_meta_data.dart';
+import '../../services/database/local/local_database.dart';
 import '../../services/utils/routing.dart';
 import '../general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import '../sign_up/widgets/or_divider.dart';
@@ -25,6 +27,10 @@ class OnBoardingSearch extends StatelessWidget {
   @override
   Widget build(BuildContext widgetContext) {
     const height = 10.0;
+    final String appCurrentUserPublicKey =
+        Nostr.instance.keysService.derivePublicKey(
+      privateKey: LocalDatabase.instance.getPrivateKey()!,
+    );
 
     return BlocProvider<OnBoardingCubit>.value(
       value: Routing.onBoardingCubit,
@@ -117,6 +123,8 @@ class OnBoardingSearch extends StatelessWidget {
                             return GestureDetector(
                               onTap: () {},
                               child: NoteAvatarAndName(
+                                appCurrentUserPublicKey:
+                                    appCurrentUserPublicKey,
                                 userPubKey: state.searchedUser!.pubkey,
                                 avatarUrl: searchedUserMetadata.picture!,
                                 memeberShipStartedAt:

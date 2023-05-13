@@ -99,16 +99,18 @@ class GlobalCubit extends Cubit<GlobalState> {
   }
 
   void _handleCurrentUserFollowers() {
-    _currentUserFollowersSubscription =
-        currentUserFollowers.stream.listen((event) {
-      emit(state.copyWith(currentUserFollowers: event));
-    });
+    _currentUserFollowersSubscription = currentUserFollowers.stream.listen(
+      (event) {
+        emit(state.copyWith(currentUserFollowers: event));
+      },
+    );
   }
 
   void _handleCurrentUserFollowing() {
-    _currentUserFollowingSubscription =
-        currentUserFollowing.stream.listen((event) {
-      emit(state.copyWith(currentUserFollowing: event));
-    });
+    _currentUserFollowingSubscription = currentUserFollowing.stream.listen(
+      (event) {
+        emit(state.copyWith(currentUserFollowing: event));
+      },
+    );
   }
 }

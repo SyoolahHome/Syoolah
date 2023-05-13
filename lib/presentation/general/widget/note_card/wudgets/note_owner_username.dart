@@ -1,3 +1,4 @@
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/app_colors.dart';
@@ -12,7 +13,7 @@ class NoteOwnerUsername extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      nameToShow,
+      nameToShow.capitalized,
       style: Theme.of(context).textTheme.labelLarge?.copyWith(
             color: DefaultTextStyle.of(context).style.color!.withOpacity(.9),
             fontWeight: FontWeight.bold,

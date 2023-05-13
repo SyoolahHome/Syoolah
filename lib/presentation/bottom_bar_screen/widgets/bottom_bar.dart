@@ -57,20 +57,20 @@ class CustomBottomBar extends StatelessWidget {
                           child: possibleWidget,
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 0.5),
-                        width: 2.5,
-                        height: 2.5,
-                        decoration: const BoxDecoration(
-                          color: AppColors.white,
-                        ),
-                        child: const Text(
-                          "Create",
-                          style: TextStyle(
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   margin: const EdgeInsets.only(bottom: 0.5),
+                      //   width: 2.5,
+                      //   height: 2.5,
+                      //   decoration: const BoxDecoration(
+                      //     color: AppColors.white,
+                      //   ),
+                      //   child: const Text(
+                      //     "Create",
+                      //     style: TextStyle(
+                      //       color: AppColors.white,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   );
                 }

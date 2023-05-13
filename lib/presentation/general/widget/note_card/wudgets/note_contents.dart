@@ -1,3 +1,4 @@
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
 
@@ -24,7 +25,7 @@ class NoteContents extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 5),
         HashTagText(
-          text: text,
+          text: text.capitalized,
           textAlign: TextAlign.left,
           basicStyle: Theme.of(context).textTheme.labelLarge!,
           decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -40,16 +41,6 @@ class NoteContents extends StatelessWidget {
               children: imageLinks.map(
                 (link) {
                   return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ImageFullView(
-                            heroTag: heroTag,
-                            link: link,
-                          ),
-                        ),
-                      );
-                    },
                     child: Container(
                       padding: const EdgeInsets.only(right: 10),
                       child: ImageContent(

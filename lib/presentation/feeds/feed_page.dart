@@ -32,18 +32,6 @@ class GeneralFeed extends StatelessWidget {
         children: [
           Scaffold(
             appBar: CustomAppBar(feedName: feedName),
-            floatingActionButton: BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
-              builder: (context, state) {
-                return AnimatedScale(
-                  duration: const Duration(milliseconds: 200),
-                  scale: state.shouldShowScrollToTopButton ? 1 : 0,
-                  child: FloatingActionButton(
-                    onPressed: () {},
-                    child: const Icon(FlutterRemix.arrow_up_s_line),
-                  ),
-                );
-              },
-            ),
             body: Builder(
               builder: (context) {
                 final cubit = context.read<GlobalFeedCubit>();

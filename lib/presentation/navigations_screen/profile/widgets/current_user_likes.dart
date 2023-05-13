@@ -1,9 +1,11 @@
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/liked_note/liked_note_cubit.dart';
+import '../../../../services/database/local/local_database.dart';
 import '../../../general/widget/margined_body.dart';
 import '../../../general/widget/note_card/note_card.dart';
 
@@ -12,6 +14,11 @@ class CurrentUserLikes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String appCurrentUserPublicKey =
+        Nostr.instance.keysService.derivePublicKey(
+      privateKey: LocalDatabase.instance.getPrivateKey()!,
+    );
+
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, profileCubitState) {
         return MarginedBody(
@@ -40,6 +47,7 @@ class CurrentUserLikes extends StatelessWidget {
                       builder: (context, likedNoteState) {
                         if (likedNoteState.likedNote != null) {
                           return NoteCard(
+                            appCurrentUserPublicKey: appCurrentUserPublicKey,
                             note: likedNoteState.likedNote!,
                           );
                         } else {

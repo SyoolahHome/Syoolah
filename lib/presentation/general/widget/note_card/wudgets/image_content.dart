@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../custom_cached_network_image.dart';
+
 class ImageContent extends StatelessWidget {
   const ImageContent({
     super.key,
@@ -20,13 +22,9 @@ class ImageContent extends StatelessWidget {
       tag: link + heroTag,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: CachedNetworkImage(
-          imageUrl: link,
-          height: size,
-          width: size,
-          fit: fit,
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          placeholder: (context, url) => const CircularProgressIndicator(),
+        child: CustomCachedNetworkImage(
+          url: link,
+          size: size,
         ),
       ),
     );
