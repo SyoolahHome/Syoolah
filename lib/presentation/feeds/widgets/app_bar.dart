@@ -31,7 +31,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () {
             NostrService.instance.sendTextNoteFromCurrentUser(
-              text: DateTime.now().toString(),
+              text: """
+Hello there!!!!
+
+https://www.youtube.com/watch?v=PMpNhbMjDj0
+              """,
               tags: [
                 ["t", AppConfigs.categories.first.name]
               ],

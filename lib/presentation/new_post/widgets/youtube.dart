@@ -50,10 +50,7 @@ class PostYoutube extends StatelessWidget {
                   onPressed: () {
                     cubit.showYoutubeVideoBottomSheet(context);
                   },
-                  icon: const Icon(
-                    FlutterRemix.arrow_right_line,
-                    size: 18,
-                  ),
+                  icon: const Icon(FlutterRemix.arrow_right_line, size: 18),
                 ),
               ),
             );

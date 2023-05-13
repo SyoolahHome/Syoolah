@@ -18,9 +18,12 @@ class NoteYoutubePlayer extends StatelessWidget {
       child: Builder(builder: (context) {
         final cubit = context.read<YoutubeVideoWidgetCubit>();
 
-        return YoutubePlayer(
-          controller: cubit.controller!,
-          aspectRatio: 16 / 9,
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(15.0),
+          child: YoutubePlayer(
+            controller: cubit.controller!,
+            aspectRatio: 16 / 9,
+          ),
         );
       }),
     );
