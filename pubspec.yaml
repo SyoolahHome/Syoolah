@@ -37,8 +37,8 @@ dependencies:
   image_picker:
   cached_network_image:
   http: ^0.13.5
-  timeago: 
-  easy_localization: ^3.0.1 
+  timeago:
+  easy_localization: ^3.0.1
   dart_openai: ^1.9.1
   hashtagable: ^2.1.0
   transitioned_indexed_stack: ^1.0.2
@@ -50,9 +50,11 @@ dependencies:
   device_preview: ^1.1.0
 
 dev_dependencies:
+  # flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   dart_code_metrics: ^5.7.2
+  flutter_app_name:
 
   flutter_lints:
   build_runner: ^2.3.3
@@ -70,3 +72,13 @@ flutter:
     - assets/logo/black_no_bg.png
     - assets/logo/white_no_bg.png
     - assets/translations/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path_android: "assets/logo/playstore_icon.png"
+  image_path_ios: "assets/logo/appstore_icon.png"
+  min_sdk_android: 21
+
+flutter_app_name:
+  name: "Munawarah"
