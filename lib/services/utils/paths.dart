@@ -38,4 +38,6 @@ abstract class Paths {
   static const String myKeys = '/myKeys';
   static const String chat = '/chat';
   static const String aboutApp = '/aboutApp';
+  static const String successAccountMade = '/successAccountMade';
+  static const String privacyPolicy = '/privacyPolicy';
 }

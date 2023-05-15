@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../main.dart';
 import '../../model/sign_up_step_view.dart';
 import '../../model/user_meta_data.dart';
 import '../../presentation/general/text_field.dart';
@@ -155,10 +156,28 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> pickImage() async {
+  Future<void> pickImageFromGallery() async {
     try {
       final pickedFile = await ImagePicker().pickImage(
         source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        final image = File(pickedFile.path);
+        emit(
+          state.copyWith(pickedImage: image),
+        );
+      }
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+    } finally {
+      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
+    }
+  }
+
+  Future<void> pickImageFromCamera() async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.camera,
       );
       if (pickedFile != null) {
         final image = File(pickedFile.path);
@@ -225,176 +244,193 @@ class AuthCubit extends Cubit<AuthState> {
     nameFocusNode = FocusNode();
   }
 
-  List<SignUpStepView> get signUpScreens => <SignUpStepView>[
-        SignUpStepView(
-          title: "welcome".tr(),
-          subtitle: "welcomeSubtitle".tr(),
-          widgetBody: const Center(
-            child: MunawarahLogo(
-              width: 140,
-              isHero: false,
-            ),
+  List<SignUpStepView> get signUpScreens {
+    bool isPrivateKeyCopied = false;
+    return <SignUpStepView>[
+      SignUpStepView(
+        title: "welcome".tr(),
+        subtitle: "welcomeSubtitle".tr(),
+        widgetBody: const Center(
+          child: MunawarahLogo(
+            width: 140,
+            isHero: false,
           ),
-          nextViewAllower: () {
-            return Future.value(true);
-          },
         ),
-        SignUpStepView(
-          title: "whatIsYourName".tr(),
-          subtitle: "whatIsYourNameSubtitle".tr(),
-          widgetBody: CustomTextField(
-            controller: nameController,
-            label: "yourName".tr(),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          ),
-          nextViewAllower: () {
-            final fullName = nameController?.text ?? '';
-
-            usernameController!.text = "@${fullName.split(' ').join('_')}";
-            final minAcceptableUsernameLength = 2;
-
-            return Future.value(usernameController!.text.isNotEmpty &&
-                usernameController!.text.length >= minAcceptableUsernameLength);
-          },
+        nextViewAllower: () {
+          return Future.value(true);
+        },
+      ),
+      SignUpStepView(
+        title: "whatIsYourName".tr(),
+        subtitle: "whatIsYourNameSubtitle".tr(),
+        widgetBody: CustomTextField(
+          controller: nameController,
+          label: "yourName".tr(),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         ),
-        SignUpStepView(
-          title: "whatAboutYou".tr(),
-          subtitle: "whatAboutYouSubtitle".tr(),
-          widgetBody: CustomTextField(
-            controller: bioController,
-            label: "recommendedOneLines".tr(),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            isMultiline: true,
-          ),
-          nextViewAllower: () {
-            final bio = bioController?.text ?? '';
+        nextViewAllower: () {
+          final fullName = nameController?.text ?? '';
 
-            return Future.value(bio.isNotEmpty);
-          },
-        ),
-        SignUpStepView(
-          title: "yourProfileImage".tr(),
-          subtitle: "yourProfileImageSubtitle".tr(),
-          widgetBody: const Center(child: AvatarUpload()),
-          nextViewAllower: () {
-            return Future.value(true);
-          },
-        ),
-        SignUpStepView(
-          title: "yourUsername".tr(),
-          subtitle: "yourUsernameSubtitle".tr(),
-          widgetBody: CustomTextField(
-            controller: usernameController,
-            label: "yourUsername".tr(),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            hint: "hintUsername".tr(),
-          ),
-          nextViewAllower: () {
-            final username = usernameController?.text ?? '';
+          usernameController!.text = "@${fullName.split(' ').join('_')}";
+          final minAcceptableUsernameLength = 2;
 
-            return Future.value(username.isNotEmpty);
-          },
-          onButtonTap: () async {
-            await _generatePrivateKeyAndSetInfoToNostr();
-            // await authenticate();
-          },
+          return Future.value(usernameController!.text.isNotEmpty &&
+              usernameController!.text.length >= minAcceptableUsernameLength);
+        },
+      ),
+      SignUpStepView(
+        title: "whatAboutYou".tr(),
+        subtitle: "whatAboutYouSubtitle".tr(),
+        widgetBody: CustomTextField(
+          controller: bioController,
+          label: "recommendedOneLines".tr(),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          isMultiline: true,
         ),
-        SignUpStepView(
-          title: "yourPrivateKey".tr(),
-          subtitle: "yourPrivateKeySubtitle".tr(),
-          widgetBody: Builder(
-            builder: (context) {
-              final iconColorOpacity = 0.05;
+        nextViewAllower: () {
+          final bio = bioController?.text ?? '';
 
-              return Center(
-                child: IconButton(
-                  padding: const EdgeInsets.all(15),
-                  onPressed: () {
-                    final val =
-                        BottomSheetService.showPrivateKeyGenSuccess(context);
-                  },
-                  style: IconButton.styleFrom(
-                    backgroundColor: Theme.of(context)
-                        .colorScheme
-                        .background
-                        .withOpacity(iconColorOpacity),
-                  ),
-                  icon: Icon(
-                    FlutterRemix.eye_2_line,
-                    color: Theme.of(context).iconTheme.color,
-                  ),
+          return Future.value(bio.isNotEmpty);
+        },
+      ),
+      SignUpStepView(
+        title: "yourProfileImage".tr(),
+        subtitle: "yourProfileImageSubtitle".tr(),
+        widgetBody: const Center(child: AvatarUpload()),
+        nextViewAllower: () {
+          return Future.value(true);
+        },
+      ),
+      SignUpStepView(
+        title: "yourUsername".tr(),
+        subtitle: "yourUsernameSubtitle".tr(),
+        widgetBody: CustomTextField(
+          controller: usernameController,
+          label: "yourUsername".tr(),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          hint: "hintUsername".tr(),
+        ),
+        nextViewAllower: () {
+          final username = usernameController?.text ?? '';
+
+          return Future.value(username.isNotEmpty);
+        },
+        onButtonTap: () async {
+          await _generatePrivateKeyAndSetInfoToNostr();
+          // await authenticate();
+        },
+      ),
+      SignUpStepView(
+        title: "yourPrivateKey".tr(),
+        subtitle: "yourPrivateKeySubtitle".tr(),
+        widgetBody: Builder(
+          builder: (context) {
+            final iconColorOpacity = 0.05;
+
+            return Center(
+              child: IconButton(
+                padding: const EdgeInsets.all(15),
+                onPressed: () {
+                  final val = BottomSheetService.showPrivateKeyGenSuccess(
+                    context,
+                    onCopy: () {
+                      isPrivateKeyCopied = true;
+                      Navigator.of(context).pop();
+                    },
+                    customText: "youNeedToCopyPrivateKey".tr(),
+                  );
+                },
+                style: IconButton.styleFrom(
+                  backgroundColor: Theme.of(context)
+                      .colorScheme
+                      .background
+                      .withOpacity(iconColorOpacity),
                 ),
-              );
-            },
-          ),
-          nextViewAllower: () {
-            return Future.value(true);
+                icon: Icon(
+                  FlutterRemix.eye_2_line,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+              ),
+            );
           },
         ),
-        SignUpStepView(
-          title: "yourPublicKey".tr(),
-          subtitle: "yourPublicKeySubtitle".tr(),
-          widgetBody: const KeySection(type: KeySectionType.publicKey),
-          nextViewAllower: () {
-            return Future.value(true);
-          },
+        nextViewAllower: () {
+          return Future.value(isPrivateKeyCopied);
+        },
+        onButtonTap: () async {
+          await authenticate();
+        },
+      ),
+      SignUpStepView(
+        title: "yourPublicKey".tr(),
+        subtitle: "yourPublicKeySubtitle".tr(),
+        widgetBody: const KeySection(type: KeySectionType.publicKey),
+        nextViewAllower: () {
+          return Future.value(true);
+        },
+      ),
+      // SignUpStepView(
+      //     title: "NIP05IdentifierTitle".tr(),
+      //     subtitle: "NIP05IdentifierSubtitle".tr(),
+      //     widgetBody: CustomTextField(
+      //       controller: nip05Controller,
+      //       label: "yourNIP05".tr(),
+      //       contentPadding:
+      //           const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      //       hint: "hintNIP05".tr(),
+      //     ),
+      //     nextViewAllower: () async {
+      //       if (nip05Controller!.text.isEmpty) {
+      //         return Future.value(true);
+      //       }
+
+      //       final privateKey = LocalDatabase.instance.getPrivateKey();
+      //       if (privateKey == null) {
+      //         return Future.value(false);
+      //       }
+
+      //       final pubKey = Nostr.instance.keysService
+      //           .derivePublicKey(privateKey: privateKey);
+      //       final internetIdentifier = nip05Controller?.text ?? '';
+
+      //       final isValidNIP05 = Nostr.instance.utilsService
+      //           .isValidNip05Identifier(nip05Controller?.text ?? '');
+
+      //       if (nip05Controller!.text.isNotEmpty && isValidNIP05) {
+      //         return Nostr.instance.relaysService.verifyNip05(
+      //           internetIdentifier: internetIdentifier,
+      //           pubKey: pubKey,
+      //         );
+      //       } else {
+      //         return Future.value(false);
+      //       }
+      //     },
+      //     errorText: "invalidNIP05".tr(),
+      //     onButtonTap: () async {
+      //       await authenticate();
+      //     }),
+
+      SignUpStepView(
+        title: "recommendToFollow".tr(),
+        subtitle: "yourPublicKeySubtitle".tr(),
+        widgetBody: const UsersListToFollow(
+          pubKeys: <String>[
+            "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
+            "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+            "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
+          ],
         ),
-        SignUpStepView(
-            title: "NIP05IdentifierTitle".tr(),
-            subtitle: "NIP05IdentifierSubtitle".tr(),
-            widgetBody: CustomTextField(
-              controller: nip05Controller,
-              label: "yourNIP05".tr(),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              hint: "hintNIP05".tr(),
-            ),
-            nextViewAllower: () async {
-              if (nip05Controller!.text.isEmpty) {
-                return Future.value(true);
-              }
+        nextViewAllower: () {
+          return Future.value(true);
+        },
+      ),
+    ];
+  }
 
-              final privateKey = LocalDatabase.instance.getPrivateKey();
-              if (privateKey == null) {
-                return Future.value(false);
-              }
-
-              final pubKey = Nostr.instance.keysService
-                  .derivePublicKey(privateKey: privateKey);
-              final internetIdentifier = nip05Controller?.text ?? '';
-
-              final isValidNIP05 = Nostr.instance.utilsService
-                  .isValidNip05Identifier(nip05Controller?.text ?? '');
-
-              if (nip05Controller!.text.isNotEmpty && isValidNIP05) {
-                return Nostr.instance.relaysService.verifyNip05(
-                  internetIdentifier: internetIdentifier,
-                  pubKey: pubKey,
-                );
-              } else {
-                return Future.value(false);
-              }
-            },
-            errorText: "invalidNIP05".tr(),
-            onButtonTap: () async {
-              await authenticate();
-            }),
-        SignUpStepView(
-          title: "recommendToFollow".tr(),
-          subtitle: "yourPublicKeySubtitle".tr(),
-          widgetBody: const UsersListToFollow(
-            pubKeys: <String>[
-              "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
-              "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
-              "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
-            ],
-          ),
-          nextViewAllower: () {
-            return Future.value(true);
-          },
-        ),
-      ];
+  void removePickedImage() {
+    emit(state.copyWith(pickedImage: null));
+  }
 }

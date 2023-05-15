@@ -25,6 +25,7 @@ class ImageContent extends StatelessWidget {
         child: CustomCachedNetworkImage(
           url: link,
           size: size,
+          fit: fit,
         ),
       ),
     );

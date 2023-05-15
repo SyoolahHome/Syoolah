@@ -179,5 +179,22 @@
     "selectedYoutube": "已选择的YouTube视频",
     "youtubeUrlHint": "在此处输入YouTube网址",
     "youtubeVideo": "YouTube视频",
-    "set": "设置"
+    "set": "设置",
+    "browse": "浏览",
+    "nameLabel": "姓名：",
+    "usernameLabel": "用户名：",
+    "profileLabel": "图片 URL：",
+    "bioLabel": "简介：",
+    "about": "关于",
+    "privacyPolicy": "隐私政策",
+    "seeReactors": "查看反应器",
+    "copyYoutubeUrl": "复制 YouTube 链接",
+    "copyImagesLinks": "复制图片链接",
+    "encryptYourDuaa": "加密您的 Du'aa",
+    "youNeedToCopyPrivateKey": "您需要复制您的私钥才能进入下一步。",
+    "nameError": "您输入的名称无效。",
+    "usernameError": "您输入的用户名无效。",
+    "eventSavedSuccessfully": "关注事件已成功保存",
+    "repostSuccess": "转发事件已成功执行",
+    "getIn": "进入"
 }

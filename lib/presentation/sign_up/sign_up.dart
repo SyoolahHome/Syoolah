@@ -1,4 +1,5 @@
 import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -136,8 +137,10 @@ class SignUp extends StatelessWidget {
                           onButtonTap();
                         }
                         if (isLastView) {
-                          final val = Navigator.of(context)
-                              .pushNamed(Paths.nostrServiceLoading);
+                          BottomSheetService.showRouteAsBottomSheet(
+                              Paths.successAccountMade, context);
+                          // final val = Navigator.of(context)
+                          //     .pushNamed(Paths.successAccountMade);
                         } else {
                           cubit.gotoNext();
                         }

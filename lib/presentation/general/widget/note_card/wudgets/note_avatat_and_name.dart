@@ -2,6 +2,8 @@ import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/utils/extensions.dart';
+import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

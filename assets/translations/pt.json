@@ -179,5 +179,22 @@
     "selectedYoutube": "Vídeo do Youtube selecionado",
     "youtubeUrlHint": "Digite a URL do Youtube aqui",
     "youtubeVideo": "Vídeo do Youtube",
-    "set": "Definir"
+    "set": "Definir",
+    "browse": "Navegar",
+    "nameLabel": "Nome:",
+    "usernameLabel": "Nome de Usuário:",
+    "profileLabel": "URL da Foto:",
+    "bioLabel": "Bio:",
+    "about": "Sobre",
+    "privacyPolicy": "Política de Privacidade",
+    "seeReactors": "Ver reatores",
+    "copyYoutubeUrl": "Copiar URL do Youtube",
+    "copyImagesLinks": "Copiar links de imagens",
+    "encryptYourDuaa": "Criptografar sua Du'aa",
+    "youNeedToCopyPrivateKey": "Você precisa copiar sua chave privada para avançar para a próxima etapa.",
+    "nameError": "O nome que você digitou é inválido.",
+    "usernameError": "O nome de usuário que você digitou é inválido.",
+    "eventSavedSuccessfully": "evento seguido salvo com sucesso",
+    "repostSuccess": "Evento de repostagem executado com sucesso",
+    "getIn": "Entrar"
 }

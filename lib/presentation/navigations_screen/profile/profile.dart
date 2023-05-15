@@ -24,11 +24,8 @@ class Profile extends StatelessWidget {
 
     return BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit(
-        currentUserPostsStream:
-            NostrService.instance.currentUserTextNotesStream(),
         currentUserMetadataStream:
             NostrService.instance.currentUserMetaDataStream(),
-        currentUserLikedPosts: NostrService.instance.currentUserLikes(),
       ),
       child: Builder(
         builder: (context) {
@@ -73,8 +70,7 @@ class Profile extends StatelessWidget {
                                     Animate(
                                       effects: [FadeEffect()],
                                       delay: 1000.ms,
-                                      child:
-                                          const OrDivider(color: Colors.black),
+                                      child: const OrDivider(),
                                     ),
                                     const SizedBox(height: height * 2),
                                     const ProfileTabs(),

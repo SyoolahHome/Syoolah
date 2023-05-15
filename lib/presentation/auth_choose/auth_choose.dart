@@ -37,10 +37,11 @@ class AuthChoose extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                if (!isShownInBottomSheet) ...[
-                  const SizedBox(height: kToolbarHeight),
-                ],
+                // if (!isShownInBottomSheet) ...[
+                const SizedBox(height: kToolbarHeight),
+                // ],
                 AuthChooseBox(
+                  isShownInBottomSheet: isShownInBottomSheet,
                   additionalDelay: 0.ms,
                   buttonText: "create".tr(),
                   icon: FlutterRemix.arrow_right_line,
@@ -55,6 +56,7 @@ class AuthChoose extends StatelessWidget {
                 ),
                 const SizedBox(height: height * 3),
                 AuthChooseBox(
+                  isShownInBottomSheet: isShownInBottomSheet,
                   additionalDelay: 200.ms,
                   targetRoutePath: Paths.existentSignUp,
                   buttonText: "login".tr(),

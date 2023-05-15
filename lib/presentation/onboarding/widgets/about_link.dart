@@ -21,7 +21,7 @@ class AboutMinawarah extends StatelessWidget {
         },
         child: Center(
           child: Text(
-            "aboutMunawarah".tr(),
+            "encryptYourDuaa".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   // color: Theme.of(context).primaryColor,
                   decoration: TextDecoration.underline,

@@ -1,6 +1,8 @@
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:ditto/services/utils/app_utils.dart';
@@ -31,23 +33,62 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
     required VoidCallback onCommentsSectionTapped,
   }) {
     final cubit = context.read<GlobalCubit>();
+    final publicKey = Nostr.instance.keysService
+        .derivePublicKey(privateKey: LocalDatabase.instance.getPrivateKey()!);
 
     final isFollowed = cubit.isNoteOwnerFollowed(note.event.pubkey);
     BottomSheetService.showNoteCardSheet(context, options: [
-      BottomSheetOption(
-        title: isFollowed ? "unfollow".tr() : "follow".tr(),
-        icon: isFollowed
-            ? FlutterRemix.user_unfollow_line
-            : FlutterRemix.user_follow_line,
-        onPressed: () {
-          cubit.handleFollowButtonTap(note.event.pubkey);
-        },
-      ),
+      if (note.event.pubkey != publicKey)
+        BottomSheetOption(
+          title: isFollowed ? "unfollow".tr() : "follow".tr(),
+          icon: isFollowed
+              ? FlutterRemix.user_unfollow_line
+              : FlutterRemix.user_follow_line,
+          onPressed: () {
+            cubit.handleFollowButtonTap(note.event.pubkey);
+          },
+        ),
       BottomSheetOption(
         title: "openCommentsSections".tr(),
         icon: FlutterRemix.chat_1_line,
         onPressed: onCommentsSectionTapped,
       ),
+      if (note.imageLinks.isNotEmpty)
+        BottomSheetOption(
+          title: "copyImagesLinks".tr(),
+          icon: FlutterRemix.file_copy_line,
+          onPressed: () {
+            AppUtils.copy(
+              note.imageLinks.join("\n"),
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+              onError: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copyError".tr());
+              },
+            );
+          },
+        ),
+      if (note.youtubeVideoLinks.isNotEmpty)
+        BottomSheetOption(
+          title: "copyYoutubeUrl".tr(),
+          icon: FlutterRemix.file_copy_line,
+          onPressed: () {
+            AppUtils.copy(
+              note.youtubeVideoLinks.first,
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+              onError: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copyError".tr());
+              },
+            );
+          },
+        ),
       BottomSheetOption(
         title: "copyNoteEventId".tr(),
         icon: FlutterRemix.file_copy_line,

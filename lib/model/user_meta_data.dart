@@ -97,7 +97,7 @@ class UserMetaData extends Equatable {
       "picture": picture,
       "banner": banner,
       "about": about,
-      "username": username,
+      "username": username.replaceAll("@", ""),
       "nip05": nip05Identifier,
     };
   }

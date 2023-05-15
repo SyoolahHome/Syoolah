@@ -1,6 +1,8 @@
+import 'package:bloc/src/bloc_observer.dart';
 import 'package:ditto/presentation/chat/chat.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/services/utils/paths.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/app/app_cubit.dart';
 import '../../buisness_logic/auth_cubit/auth_cubit.dart';
@@ -22,6 +24,7 @@ import '../../presentation/feeds/sirah_feed.dart';
 import '../../presentation/followers/followers.dart';
 import '../../presentation/followings/followings.dart';
 import '../../presentation/nostr_service_loading/nostr_service_loading.dart';
+import '../../presentation/privacy/privacy.dart';
 import '../../presentation/settings/settings.dart';
 import '../../presentation/sign_up/sign_up.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
@@ -30,6 +33,7 @@ import '../../presentation/onboarding_relays/onboarding_relays.dart';
 import '../../presentation/onboarding_search/onboarding_search.dart';
 import '../../presentation/relays_config/relays_config.dart';
 import '../../presentation/scan/scan.dart';
+import '../../presentation/succes_acc_made/succes_acc_made.dart';
 
 abstract class Routing {
   static final routes = {
@@ -59,10 +63,22 @@ abstract class Routing {
     Paths.myKeys: (context) => const CurrentUserKeys(),
     Paths.chat: (context) => const Chat(),
     Paths.aboutApp: (context) => const About(),
+    Paths.successAccountMade: (context) => const SuccessAccountMade(),
+    Paths.privacyPolicy: (context) => const PrivacyPolicy(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();
   static final authCubit = AuthCubit();
   static final appCubit = AppCubit();
   static final onBoardingCubit = OnBoardingCubit();
+
+  static BlocObserver blocObserver = MyBlocObserver();
+}
+
+class MyBlocObserver extends BlocObserver {
+  @override
+  void onClose(BlocBase bloc) {
+    print("Bloc closed: ${bloc.runtimeType}");
+    return super.onClose(bloc);
+  }
 }

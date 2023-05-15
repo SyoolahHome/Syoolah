@@ -13,10 +13,11 @@ class NostrService {
   static NostrService get instance => _instance;
   NostrService._();
 
-  Completer relaysConnectionCompleter = Completer();
+  Completer? relaysConnectionCompleter;
   Future<void> init({
     List<String>? relaysUrls,
   }) async {
+    relaysConnectionCompleter = Completer();
     final defaultRelaysUrls =
         Routing.appCubit.state.relaysConfigurations.map((e) => e.url).toList();
 
@@ -27,7 +28,7 @@ class NostrService {
       connectionTimeout: Duration(seconds: 4),
     );
 
-    relaysConnectionCompleter.complete();
+    relaysConnectionCompleter!.complete();
   }
 
   void setCurrentUserMetaData({
@@ -656,6 +657,44 @@ class NostrService {
         NostrFilter(
           authors: pubKeys,
           kinds: const [0],
+        ),
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  void sendRepostEventFromCurrentUser(Note note) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+        kind: 6,
+        keyPairs: nostrKeyPairs,
+        content: jsonEncode(note.toJson()),
+        tags: [
+          ["e", note.event.id],
+          ["p", note.event.pubkey],
+        ]);
+
+    Nostr.instance.relaysService.sendEventToRelays(event);
+  }
+
+  NostrEventsStream currentUserReposts() {
+    final randomId = Nostr.instance.utilsService.random64HexChars();
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: <NostrFilter>[
+        NostrFilter(
+          authors: [nostrKeyPairs.public],
+          kinds: const [6],
         ),
       ],
     );

@@ -48,6 +48,7 @@ class UsersListToFollow extends StatelessWidget {
             builder: (context, state) {
               return Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
+
                 // height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

@@ -21,27 +21,30 @@ class PrivateKey extends StatelessWidget {
   Widget build(BuildContext context) {
     const heightSeparator = 10.0;
 
-    return BlocProvider<PrivateKeyGenSuccessCubit>(
-      create: (context) => PrivateKeyGenSuccessCubit(),
-      child: Center(
-        child: MarginedBody(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // SizedBox(height: heightSeparator * 2),
-              // HeadTitle(title: title),
-              // SizedBox(height: heightSeparator * 2),
-              // KeySection(
-              //   type: type == HiddenPrivateKeySectionType.privateKey
-              //       ? KeySectionType.privateKey
-              //       : KeySectionType.nsecKey,
-              // ),
-              // SizedBox(height: heightSeparator * 2),
-              // StartButton(),
-              // SizedBox(height: heightSeparator * 2),
-            ],
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: BlocProvider<PrivateKeyGenSuccessCubit>(
+        create: (context) => PrivateKeyGenSuccessCubit(),
+        child: Center(
+          child: MarginedBody(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(height: heightSeparator * 2),
+                HeadTitle(title: title),
+                SizedBox(height: heightSeparator * 2),
+                KeySection(
+                  type: type == HiddenPrivateKeySectionType.privateKey
+                      ? KeySectionType.privateKey
+                      : KeySectionType.nsecKey,
+                ),
+                SizedBox(height: heightSeparator * 2),
+                StartButton(),
+                SizedBox(height: heightSeparator * 2),
+              ],
+            ),
           ),
         ),
       ),

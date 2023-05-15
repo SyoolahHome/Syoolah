@@ -76,13 +76,13 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  void reconnectToRelays() {
+  Future<void> reconnectToRelays() async {
     emit(state.copyWith(isReconnecting: true));
     final activeSelectedRelaysUrls = state.relaysConfigurations
         .where((relay) => relay.isActive)
         .map((relay) => relay.url)
         .toList();
-    NostrService.instance.init(relaysUrls: activeSelectedRelaysUrls);
+    await NostrService.instance.init(relaysUrls: activeSelectedRelaysUrls);
     emit(state.copyWith(isReconnecting: false));
   }
 

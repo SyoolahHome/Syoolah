@@ -5,14 +5,16 @@ class HeadTitle extends StatelessWidget {
     super.key,
     required this.title,
     this.isForSection = false,
+    this.alignment,
   });
 
   final String title;
   final bool isForSection;
+  final Alignment? alignment;
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: alignment ?? Alignment.centerLeft,
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(

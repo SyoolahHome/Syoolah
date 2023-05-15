@@ -179,5 +179,22 @@
     "selectedYoutube": "Ausgewähltes Youtube-Video",
     "youtubeUrlHint": "Geben Sie hier die Youtube-URL ein",
     "youtubeVideo": "Youtube-Video",
-    "set": "Setzen"
+    "set": "Setzen",
+    "browse": "Browse",
+    "nameLabel": "Name:",
+    "usernameLabel": "Username:",
+    "profileLabel": "Picture url:",
+    "bioLabel": "Bio:",
+    "about": "About",
+    "privacyPolicy": "Privacy Policy",
+    "seeReactors": "See reactors",
+    "copyYoutubeUrl": "Copy youtube url",
+    "copyImagesLinks": "Copy images links",
+    "encryptYourDuaa": "Encrypt Your Du'aa",
+    "youNeedToCopyPrivateKey": "You need to copy your private key in order to go to the next step.",
+    "nameError": "The name you entered is invalid.",
+    "usernameError": "The username you entered is invalid.",
+    "eventSavedSuccessfully": "follow event saved successfully",
+    "repostSuccess": "Repost event executed successfully",
+    "getIn": "Get In"
 }

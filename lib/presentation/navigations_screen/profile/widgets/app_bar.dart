@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0.0,
       actions: <Widget>[
         IconButton(
-          icon: const Icon(FlutterRemix.more_2_line, color: AppColors.black),
+          icon: const Icon(FlutterRemix.more_2_line),
           onPressed: () {
             cubit.onMorePressed(
               context,

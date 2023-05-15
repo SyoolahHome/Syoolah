@@ -179,5 +179,22 @@
     "selectedYoutube": "Vidéo YouTube sélectionnée",
     "youtubeUrlHint": "Entrez l'URL de la vidéo YouTube ici",
     "youtubeVideo": "Vidéo YouTube",
-    "set": "Définir"
+    "set": "Définir",
+    "browse": "Parcourir",
+    "nameLabel": "Nom :",
+    "usernameLabel": "Nom d'utilisateur :",
+    "profileLabel": "URL de la photo :",
+    "bioLabel": "Bio :",
+    "about": "À propos",
+    "privacyPolicy": "Politique de confidentialité",
+    "seeReactors": "Voir les réacteurs",
+    "copyYoutubeUrl": "Copier l'URL de Youtube",
+    "copyImagesLinks": "Copier les liens d'images",
+    "encryptYourDuaa": "Crypter votre Du'aa",
+    "youNeedToCopyPrivateKey": "Vous devez copier votre clé privée pour passer à l'étape suivante.",
+    "nameError": "Le nom que vous avez saisi n'est pas valide.",
+    "usernameError": "Le nom d'utilisateur que vous avez saisi n'est pas valide.",
+    "eventSavedSuccessfully": "événement suivi enregistré avec succès",
+    "repostSuccess": "L'événement de repostage a été exécuté avec succès",
+    "getIn": "Entrer"
 }

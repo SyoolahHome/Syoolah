@@ -13,6 +13,7 @@ class AuthChooseBox extends StatelessWidget {
     required this.buttonText,
     required this.targetRoutePath,
     required this.additionalDelay,
+    this.isShownInBottomSheet,
   });
 
   final String title;
@@ -21,6 +22,7 @@ class AuthChooseBox extends StatelessWidget {
   final String buttonText;
   final String targetRoutePath;
   final Duration additionalDelay;
+  final bool? isShownInBottomSheet;
   @override
   Widget build(BuildContext context) {
     void onTap() {
@@ -61,19 +63,21 @@ class AuthChooseBox extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  description,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w300,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .background
-                            .withOpacity(0.95),
-                      ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                if (isShownInBottomSheet == false) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w300,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .background
+                              .withOpacity(0.95),
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

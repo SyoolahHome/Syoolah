@@ -41,7 +41,7 @@ class AuthState extends Equatable {
     File? pickedImage,
   }) {
     return AuthState(
-      pickedImage: pickedImage ?? this.pickedImage,
+      pickedImage: pickedImage,
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
       error: error ?? this.error,
       authenticated: authenticated ?? this.authenticated,

@@ -2,8 +2,6 @@
 part of 'profile_cubit.dart';
 
 class ProfileState extends Equatable {
-  final List<NostrEvent> currentUserPosts;
-  final List<NostrEvent> currentUserLikedPosts;
   final NostrEvent? currentUserMetadata;
   final List<TabItem> profileTabsItems;
   final File? pickedAvatarImage;
@@ -17,9 +15,7 @@ class ProfileState extends Equatable {
 
   @override
   List<Object?> get props => [
-        currentUserPosts,
         currentUserMetadata,
-        currentUserLikedPosts,
         pickedAvatarImage,
         pickedBannerImage,
         error,
@@ -33,8 +29,6 @@ class ProfileState extends Equatable {
   const ProfileState({
     this.profileTabsItems = const [],
     this.error,
-    this.currentUserPosts = const [],
-    this.currentUserLikedPosts = const [],
     this.currentUserMetadata,
     this.pickedAvatarImage,
     this.pickedBannerImage,
@@ -45,8 +39,6 @@ class ProfileState extends Equatable {
   });
 
   ProfileState copyWith({
-    List<NostrEvent>? currentUserPosts,
-    List<NostrEvent>? currentUserLikedPosts,
     NostrEvent? currentUserMetadata,
     File? pickedAvatarImage,
     File? pickedBannerImage,
@@ -60,9 +52,6 @@ class ProfileState extends Equatable {
     return ProfileState(
       profileTabsItems: profileTabsItems ?? this.profileTabsItems,
       error: error ?? this.error,
-      currentUserPosts: currentUserPosts ?? this.currentUserPosts,
-      currentUserLikedPosts:
-          currentUserLikedPosts ?? this.currentUserLikedPosts,
       currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
       pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
       pickedBannerImage: pickedBannerImage ?? this.pickedBannerImage,

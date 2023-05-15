@@ -1,9 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
-class EditProfileCubit extends Cubit<Null> {
+part "./edit_profile_state.dart";
+
+class EditProfileCubit extends Cubit<EditProfileState> {
   TextEditingController? nameController;
   TextEditingController? usernameController;
   TextEditingController? pictureController;
@@ -11,7 +15,7 @@ class EditProfileCubit extends Cubit<Null> {
   TextEditingController? aboutController;
 
   UserMetaData metaData;
-  EditProfileCubit(this.metaData) : super(null) {
+  EditProfileCubit(this.metaData) : super(EditProfileState()) {
     _init();
   }
 
@@ -27,15 +31,28 @@ class EditProfileCubit extends Cubit<Null> {
   }
 
   void saveEdits() {
-    NostrService.instance.setCurrentUserMetaData(
-      metadata: UserMetaData(
-        name: nameController?.text ?? metaData.name,
-        picture: pictureController?.text ?? metaData.picture,
-        banner: bannerController?.text ?? metaData.banner,
-        username: usernameController?.text ?? metaData.username,
-        about: aboutController?.text ?? metaData.about,
-      ),
-    );
+    try {
+      if (nameController?.text == null || nameController?.text.trim() == "") {
+        emit(state.copyWith(error: "nameError".tr()));
+      } else if (usernameController?.text == null ||
+          usernameController?.text.trim() == "") {
+        emit(state.copyWith(error: "usernameError".tr()));
+      } else {
+        NostrService.instance.setCurrentUserMetaData(
+          metadata: UserMetaData(
+            name: nameController?.text ?? metaData.name,
+            picture: pictureController?.text ?? metaData.picture,
+            banner: bannerController?.text ?? metaData.banner,
+            username: usernameController?.text ?? metaData.username,
+            about: aboutController?.text ?? metaData.about,
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      emit(state.copyWith(error: null));
+    }
   }
 
   void _init() {

@@ -12,7 +12,7 @@ class NostrServiceLoadingCubit extends Cubit<bool?> {
 
   Future<void> _load() async {
     try {
-      await NostrService.instance.relaysConnectionCompleter.future;
+      await NostrService.instance.relaysConnectionCompleter!.future;
       emit(true);
     } catch (e) {
       print(e);

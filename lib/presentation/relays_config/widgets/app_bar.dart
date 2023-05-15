@@ -12,10 +12,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       title: const ReconnectButton(),
-      centerTitle: true,
+      centerTitle: false,
       actions: const <Widget>[
         AddRelayIcon(),
-        SizedBox(width: 17.5),
+        SizedBox(width: 2.5),
         RelaysWidget(),
         SizedBox(width: 10),
       ],

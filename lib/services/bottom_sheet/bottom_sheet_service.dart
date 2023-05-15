@@ -24,6 +24,7 @@ abstract class BottomSheetService {
   static showCreatePostBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return const AddNewPost();
       },
@@ -39,6 +40,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return Container();
       },
@@ -51,6 +53,7 @@ abstract class BottomSheetService {
   static showSearch(BuildContext context, GlobalFeedCubit cubit) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return SearchSections(cubit: cubit);
       },
@@ -81,6 +84,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return BottomSheetOptionsWidget(options: options);
       },
@@ -96,6 +100,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return AddRelayWidget(onAdd: onAdd);
       },
@@ -108,6 +113,7 @@ abstract class BottomSheetService {
   static Future<void> showOnBoardingSearchSheet(BuildContext context) async {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return AppUtils.widgetFromRoutePath(Paths.onBoardingSearch, context);
       },
@@ -120,6 +126,7 @@ abstract class BottomSheetService {
   static Future<void> showOnBoardingRelaysSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return AppUtils.widgetFromRoutePath(Paths.onBoardingRelays, context);
       },
@@ -137,6 +144,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
@@ -155,6 +163,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
@@ -174,6 +183,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return SizedBox(
           height: height,
@@ -186,11 +196,19 @@ abstract class BottomSheetService {
     );
   }
 
-  static Future showPrivateKeyGenSuccess(BuildContext context) {
+  static Future showPrivateKeyGenSuccess(
+    BuildContext context, {
+    required VoidCallback onCopy,
+    String? customText,
+  }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
-        return const PrivateKeyGenSuccess();
+        return PrivateKeyGenSuccess(
+          onCopy: onCopy,
+          customText: customText,
+        );
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: false,
@@ -203,6 +221,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
       builder: (context) {
@@ -224,6 +243,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return BottomSheetOptionsWidget(options: options);
       },
@@ -240,6 +260,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
@@ -259,6 +280,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
       useRootNavigator: true,
@@ -275,6 +297,7 @@ abstract class BottomSheetService {
   }) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
       useRootNavigator: true,

@@ -8,10 +8,12 @@ class CustomCachedNetworkImage extends StatelessWidget {
     super.key,
     required this.url,
     this.size,
+    this.fit,
   });
 
   final String url;
   final double? size;
+  final BoxFit? fit;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +31,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
         width: size,
         height: size,
         errorWidget: (context, url, error) => const Icon(Icons.error),
-        fit: BoxFit.cover,
+        fit: fit ?? BoxFit.cover,
         progressIndicatorBuilder: (context, url, downloadProgress) => Center(
           child: SizedBox(
             width: 10,

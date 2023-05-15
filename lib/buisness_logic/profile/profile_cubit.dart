@@ -25,32 +25,23 @@ import '../../services/utils/alerts_service.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  NostrEventsStream currentUserPostsStream;
   NostrEventsStream currentUserMetadataStream;
-  NostrEventsStream currentUserLikedPosts;
 
-  StreamSubscription<NostrEvent>? _currentUserPostsSubscription;
   StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
-  StreamSubscription<NostrEvent>? _currentUserLikedPostsSubscription;
 
   ProfileCubit({
-    required this.currentUserPostsStream,
     required this.currentUserMetadataStream,
-    required this.currentUserLikedPosts,
   }) : super(ProfileInitial(
-            profileTabsItems: GeneralProfileTabs.profileTabsItems)) {
+          profileTabsItems: GeneralProfileTabs.profileTabsItems,
+        )) {
     _handleStreams();
   }
 
   @override
   Future<void> close() {
-    currentUserPostsStream.close();
     currentUserMetadataStream.close();
-    currentUserLikedPosts.close();
 
-    _currentUserPostsSubscription?.cancel();
     _currentUserMetadataSubscription?.cancel();
-    _currentUserLikedPostsSubscription?.cancel();
 
     return super.close();
   }
@@ -282,9 +273,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void _handleStreams() {
-    _handleCurrentUserPosts();
     _handleCurrentUserMetadata();
-    _handleCurrentUserLikedPosts();
   }
 
   void _handleCurrentUserMetadata() {
@@ -297,28 +286,6 @@ class ProfileCubit extends Cubit<ProfileState> {
         );
       },
     );
-  }
-
-  void _handleCurrentUserPosts() {
-    _currentUserPostsSubscription =
-        currentUserPostsStream.stream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserPosts: [...state.currentUserPosts, event],
-        ),
-      );
-    });
-  }
-
-  void _handleCurrentUserLikedPosts() {
-    _currentUserLikedPostsSubscription =
-        currentUserLikedPosts.stream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserLikedPosts: [...state.currentUserLikedPosts, event],
-        ),
-      );
-    });
   }
 
   Future<void> onFollowingsMorePressed(

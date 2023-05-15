@@ -18,17 +18,19 @@ class TranslateIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<OnBoardingCubit>();
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () {
-        Routing.appCubit.showTranslationsSheet(context);
-      },
-      splashFactory: NoSplash.splashFactory,
-      child: ActionButtonContainer(
-        child: Icon(
-          FlutterRemix.translate,
-          color: color ?? Theme.of(context).colorScheme.onSecondary,
-          size: 17.5,
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: () {
+          Routing.appCubit.showTranslationsSheet(context);
+        },
+        splashFactory: NoSplash.splashFactory,
+        child: ActionButtonContainer(
+          child: Icon(
+            FlutterRemix.translate,
+            color: color ?? Theme.of(context).colorScheme.onSecondary,
+            size: 17.5,
+          ),
         ),
       ),
     );

@@ -67,7 +67,7 @@ class NoteCard extends StatelessWidget {
                           state.noteOwnerMetadata?.createdAt ??
                               note.event.createdAt,
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     NoteContents(
                       youtubeVideosLinks: note.youtubeVideoLinks,
                       heroTag: note.event.uniqueTag(),

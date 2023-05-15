@@ -27,10 +27,14 @@ class OnBoardingSearch extends StatelessWidget {
   @override
   Widget build(BuildContext widgetContext) {
     const height = 10.0;
-    final String appCurrentUserPublicKey =
-        Nostr.instance.keysService.derivePublicKey(
-      privateKey: LocalDatabase.instance.getPrivateKey()!,
-    );
+    String? appCurrentUserPublicKey;
+    final privateKey = LocalDatabase.instance.getPrivateKey();
+
+    if (privateKey != null) {
+      Nostr.instance.keysService.derivePublicKey(
+        privateKey: privateKey,
+      );
+    }
 
     return BlocProvider<OnBoardingCubit>.value(
       value: Routing.onBoardingCubit,
@@ -124,7 +128,7 @@ class OnBoardingSearch extends StatelessWidget {
                               onTap: () {},
                               child: NoteAvatarAndName(
                                 appCurrentUserPublicKey:
-                                    appCurrentUserPublicKey,
+                                    appCurrentUserPublicKey ?? "",
                                 userPubKey: state.searchedUser!.pubkey,
                                 avatarUrl: searchedUserMetadata.picture!,
                                 memeberShipStartedAt:

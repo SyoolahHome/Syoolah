@@ -1,3 +1,4 @@
+import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -61,6 +62,19 @@ class NoteActions extends StatelessWidget {
                 BlocBuilder<NoteCardCubit, NoteCardState>(
                   builder: (context, state) {
                     return Action(
+                      icon: FlutterRemix.repeat_2_line,
+                      onTap: () {
+                        cubit.repostNote();
+                      },
+                      bgColor: Theme.of(context).colorScheme.onPrimary,
+                      color: DefaultTextStyle.of(context).style.color!,
+                    );
+                  },
+                ),
+                const SizedBox(width: 10),
+                BlocBuilder<NoteCardCubit, NoteCardState>(
+                  builder: (context, state) {
+                    return Action(
                       icon: FlutterRemix.chat_1_line,
                       onTap: () {
                         Navigator.of(context)
@@ -68,6 +82,23 @@ class NoteActions extends StatelessWidget {
                           'note': note,
                           'cubit': cubit,
                         });
+                      },
+                      bgColor: Theme.of(context).colorScheme.onPrimary,
+                      color: DefaultTextStyle.of(context).style.color!,
+                    );
+                  },
+                ),
+                const SizedBox(width: 10),
+                BlocBuilder<NoteCardCubit, NoteCardState>(
+                  builder: (context, state) {
+                    return Action(
+                      icon: FlutterRemix.more_line,
+                      onTap: () {
+                        context.read<FeedBoxCubit>().showOptions(
+                              context,
+                              note: note,
+                              onCommentsSectionTapped: () {},
+                            );
                       },
                       bgColor: Theme.of(context).colorScheme.onPrimary,
                       color: DefaultTextStyle.of(context).style.color!,

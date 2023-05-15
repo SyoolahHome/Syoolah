@@ -13,23 +13,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'constants/app_configs.dart';
 import 'constants/app_themes.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   Animate.restartOnHotReload = kDebugMode;
   Animate.defaultCurve = Curves.easeInOut;
-
   final box = await LocalDatabase.instance.init();
   NostrService.instance.init();
   await EasyLocalization.ensureInitialized();
+  Bloc.observer = Routing.blocObserver;
 
   runApp(
-    EasyLocalization(
-      child: MyApp(),
-      supportedLocales: AppConfigs.locales,
-      path: AppConfigs.translationsPath,
-      fallbackLocale: AppConfigs.fallbackLocale,
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => EasyLocalization(
+        child: MyApp(),
+        supportedLocales: AppConfigs.locales,
+        path: AppConfigs.translationsPath,
+        fallbackLocale: AppConfigs.fallbackLocale,
+      ), // Wrap your app
     ),
   );
 }
@@ -60,13 +64,16 @@ class MyApp extends StatelessWidget {
               : ThemeMode.light;
 
           return MaterialApp(
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            // locale: context.locale,
+            builder: DevicePreview.appBuilder,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
             title: "appName".tr(),
+            themeMode: themeMode,
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,
-            themeMode: themeMode,
-            locale: context.locale,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             debugShowCheckedModeBanner: false,

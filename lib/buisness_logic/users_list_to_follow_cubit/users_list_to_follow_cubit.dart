@@ -101,6 +101,8 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     } else {
       followUser(pubkey);
     }
+
+    emit(state.copyWith(followedSuccessfully: true));
   }
 
   void _handleCurrentUserFollowers() {

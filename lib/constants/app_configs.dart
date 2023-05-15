@@ -85,7 +85,7 @@ abstract class AppConfigs {
     ),
     LocaleItem(
       applyText: "Uygula",
-      locale: Locale('tu'),
+      locale: Locale('tr'),
       titleName: "Türkçe",
     ),
     LocaleItem(

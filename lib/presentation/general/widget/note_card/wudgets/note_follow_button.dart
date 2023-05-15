@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../constants/app_colors.dart';
 import '../../../../../model/note.dart';
+import '../../../../../services/utils/snackbars.dart';
 
 class NoteFollowButton extends StatelessWidget {
   const NoteFollowButton({

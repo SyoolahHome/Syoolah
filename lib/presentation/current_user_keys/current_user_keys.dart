@@ -18,8 +18,9 @@ class CurrentUserKeys extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(),
-      body: MarginedBody(
-        child: Column(
+      body: SingleChildScrollView(
+        child: MarginedBody(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: AnimateList(
               effects: <Effect>[
@@ -58,8 +59,11 @@ class CurrentUserKeys extends StatelessWidget {
                 HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.nsecKey,
                 ),
+                SizedBox(height: height * 2),
               ],
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

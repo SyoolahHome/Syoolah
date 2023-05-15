@@ -28,7 +28,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         IconButton(
           icon: const Icon(
             FlutterRemix.more_2_line,
-            color: AppColors.black,
           ),
           onPressed: () {
             cubit.onFollowingsMorePressed(

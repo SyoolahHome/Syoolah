@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../constants/app_colors.dart';
 
@@ -19,11 +20,21 @@ class FollowInfo extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: <Widget>[
-          Text(
-            count.toString(),
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+          Animate(
+            effects: [
+              FadeEffect(
+                duration: Duration(
+                    milliseconds: Animate.defaultDuration.inMilliseconds ~/ 2),
+              )
+            ],
+            key: ValueKey<int>(count),
+            child: Text(
+              count.toString(),
+              key: ValueKey<int>(count),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ),
           Text(
             label,

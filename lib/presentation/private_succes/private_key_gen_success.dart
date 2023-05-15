@@ -9,8 +9,10 @@ import 'widgets/success_icon.dart';
 import 'widgets/success_text.dart';
 
 class PrivateKeyGenSuccess extends StatelessWidget {
-  const PrivateKeyGenSuccess({super.key});
+  const PrivateKeyGenSuccess({super.key, this.onCopy, this.customText});
 
+  final VoidCallback? onCopy;
+  final String? customText;
   @override
   Widget build(BuildContext context) {
     const heightSeparator = 10.0;
@@ -22,13 +24,13 @@ class PrivateKeyGenSuccess extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const <Widget>[
+            children: <Widget>[
               Spacer(),
               SuccessIcon(),
               SizedBox(height: heightSeparator),
-              SuccessText(),
+              SuccessText(customText: customText),
               Spacer(),
-              KeySection(),
+              KeySection(onCopy: onCopy),
               Spacer(),
               StartButton(),
               SizedBox(height: heightSeparator),

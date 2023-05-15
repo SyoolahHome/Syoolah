@@ -180,5 +180,22 @@
     "selectedYoutube": "Выбранный видеоролик на YouTube",
     "youtubeUrlHint": "Введите URL-адрес YouTube здесь",
     "youtubeVideo": "Видеоролик на YouTube",
-    "set": "Установить"
+    "set": "Установить",
+    "browse": "Просмотреть",
+    "nameLabel": "Имя:",
+    "usernameLabel": "Имя пользователя:",
+    "profileLabel": "URL изображения:",
+    "bioLabel": "Биография:",
+    "about": "О нас",
+    "privacyPolicy": "Политика конфиденциальности",
+    "seeReactors": "Посмотреть реакторы",
+    "copyYoutubeUrl": "Копировать ссылку на YouTube",
+    "copyImagesLinks": "Копировать ссылки на изображения",
+    "encryptYourDuaa": "Зашифровать вашу Ду'аа",
+    "youNeedToCopyPrivateKey": "Вам нужно скопировать свой закрытый ключ, чтобы перейти к следующему шагу.",
+    "nameError": "Введенное имя недействительно.",
+    "usernameError": "Введенное имя пользователя недействительно.",
+    "eventSavedSuccessfully": "Событие отслеживания успешно сохранено",
+    "repostSuccess": "Событие повторной публикации успешно выполнено",
+    "getIn": "Войти"
 }

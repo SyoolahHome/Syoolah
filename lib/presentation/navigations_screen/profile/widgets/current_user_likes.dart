@@ -4,6 +4,7 @@ import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../buisness_logic/cubit/cubit/current_user_likes_cubit.dart';
 import '../../../../buisness_logic/liked_note/liked_note_cubit.dart';
 import '../../../../services/database/local/local_database.dart';
 import '../../../general/widget/margined_body.dart';
@@ -19,49 +20,60 @@ class CurrentUserLikes extends StatelessWidget {
       privateKey: LocalDatabase.instance.getPrivateKey()!,
     );
 
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (context, profileCubitState) {
-        return MarginedBody(
-          margin: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ) +
-              const EdgeInsets.only(top: 25),
-          child: ListView.builder(
-            itemCount: profileCubitState.currentUserLikedPosts.length,
-            itemBuilder: (context, index) {
-              final current = profileCubitState.currentUserLikedPosts[index];
+    return BlocProvider<CurrentUserLikesCubit>(
+      create: (context) => CurrentUserLikesCubit(
+        currentUserLikedPosts: NostrService.instance.currentUserLikes(),
+      ),
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<CurrentUserLikesCubit, CurrentUserLikesState>(
+            builder: (context, profileCubitState) {
+              return MarginedBody(
+                margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ) +
+                    const EdgeInsets.only(top: 25),
+                child: ListView.builder(
+                  itemCount: profileCubitState.currentUserLikedPosts.length,
+                  itemBuilder: (context, index) {
+                    final current =
+                        profileCubitState.currentUserLikedPosts[index];
 
-              return BlocProvider<LikedNoteCubit>.value(
-                value: LikedNoteCubit(
-                  likedNoteStream: NostrService.instance.noteStreamById(
-                    noteId: current.tags.firstWhere(
-                      (element) {
-                        return element.first.toLowerCase() == "e";
-                      },
-                    )[1],
-                  ),
-                ),
-                child: Builder(
-                  builder: (context) {
-                    return BlocBuilder<LikedNoteCubit, LikedNoteState>(
-                      builder: (context, likedNoteState) {
-                        if (likedNoteState.likedNote != null) {
-                          return NoteCard(
-                            appCurrentUserPublicKey: appCurrentUserPublicKey,
-                            note: likedNoteState.likedNote!,
+                    return BlocProvider<LikedNoteCubit>.value(
+                      value: LikedNoteCubit(
+                        likedNoteStream: NostrService.instance.noteStreamById(
+                          noteId: current.tags.firstWhere(
+                            (element) {
+                              return element.first.toLowerCase() == "e";
+                            },
+                          )[1],
+                        ),
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          return BlocBuilder<LikedNoteCubit, LikedNoteState>(
+                            builder: (context, likedNoteState) {
+                              if (likedNoteState.likedNote != null) {
+                                return NoteCard(
+                                  appCurrentUserPublicKey:
+                                      appCurrentUserPublicKey,
+                                  note: likedNoteState.likedNote!,
+                                );
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            },
                           );
-                        } else {
-                          return SizedBox.shrink();
-                        }
-                      },
+                        },
+                      ),
                     );
                   },
                 ),
               );
             },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

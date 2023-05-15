@@ -7,11 +7,14 @@ class AddRelayIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return IconButton(
+      style: IconButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+      ),
+      onPressed: () {
         Routing.appCubit.showAddRelaySheet(context);
       },
-      child: const Icon(
+      icon: const Icon(
         FlutterRemix.add_line,
         size: 20,
       ),

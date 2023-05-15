@@ -47,6 +47,7 @@ dependencies:
   flutter_animate: ^4.1.1+1
   envied: ^0.3.0
   youtube_player_iframe: ^4.0.4
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:

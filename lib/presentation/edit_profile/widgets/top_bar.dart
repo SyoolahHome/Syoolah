@@ -1,4 +1,5 @@
 import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -11,20 +12,30 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: true,
-      title: Text(
-        "editProfile".tr(),
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: AppColors.white,
-            ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(FlutterRemix.arrow_left_line),
       ),
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(FlutterRemix.key_2_line),
-          onPressed: () {
+        MunawarahButton(
+          onTap: () {
             Navigator.of(context).pushNamed(Paths.myKeys);
           },
+          isSmall: true,
+          text: "myKeys".tr(),
+          icon: FlutterRemix.key_2_line,
+          iconSize: 15,
+          isOnlyBorder: true,
         ),
+        SizedBox(width: 10),
+        // IconButton(
+        //   icon: const Icon(FlutterRemix.key_2_line),
+        //   onPressed:
+        // ),
       ],
     );
   }

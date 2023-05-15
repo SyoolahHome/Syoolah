@@ -186,5 +186,15 @@
     "profileLabel": "Picture url:",
     "bioLabel": "Bio:",
     "about": "About",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "seeReactors": "See reactors",
+    "copyYoutubeUrl": "Copy youtube url",
+    "copyImagesLinks": "Copy images links",
+    "encryptYourDuaa": "Encrypt Your Du'aa",
+    "youNeedToCopyPrivateKey": "You need to copy your private key in order to go to the next step.",
+    "nameError": "The name you entered is invalid.",
+    "usernameError": "The username you entered is invalid.",
+    "eventSavedSuccessfully": "follow event saved successfully",
+    "repostSuccess": "Repost event executed successfully",
+    "getIn": "Get In"
 }

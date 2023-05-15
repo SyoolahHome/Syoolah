@@ -1,5 +1,6 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../general/widget/margined_body.dart';
@@ -15,34 +16,44 @@ class RelaysConfig extends StatelessWidget {
     const height = 10.0;
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-        return SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              MarginedBody(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: height * 2),
-                    HeadTitle(title: "manageRelays".tr()),
-                    SizedBox(height: height * 2),
-                  ],
+      body: BlocBuilder<AppCubit, AppState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Column(
+                children: AnimateList(
+              interval: 100.ms,
+              effects: [
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(0, 0.5),
                 ),
-              ),
-              ...List.generate(
-                state.relaysConfigurations.length,
-                (index) {
-                  final current = state.relaysConfigurations[index];
+              ],
+              children: <Widget>[
+                MarginedBody(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: height * 2),
+                      HeadTitle(title: "manageRelays".tr()),
+                      SizedBox(height: height * 2),
+                    ],
+                  ),
+                ),
+                ...List.generate(
+                  state.relaysConfigurations.length,
+                  (index) {
+                    final current = state.relaysConfigurations[index];
 
-                  return RelayConfigTile(
-                    index: index,
-                    relayConfig: current,
-                  );
-                },
-              ),
-            ],
-          ),
-        );
-      }),
+                    return RelayConfigTile(
+                      index: index,
+                      relayConfig: current,
+                    );
+                  },
+                ),
+              ],
+            )),
+          );
+        },
+      ),
     );
   }
 }

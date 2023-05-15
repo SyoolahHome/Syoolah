@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../constants/app_colors.dart';
-
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({
     super.key,
@@ -26,7 +24,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         IconButton(
           icon: const Icon(
             FlutterRemix.more_2_line,
-            color: AppColors.black,
           ),
           onPressed: () {
             cubit.onFollowersMorePressed(

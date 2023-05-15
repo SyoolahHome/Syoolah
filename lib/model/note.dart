@@ -79,4 +79,26 @@ class Note extends Equatable {
         .where((link) => YoutubePlayerController.convertUrlToId(link) != null)
         .toList();
   }
+
+  // generate toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'event': event.serialized(),
+      'links': links,
+      'noteOnly': noteOnly,
+      'imageLinks': imageLinks,
+      'youtubeVideoLinks': youtubeVideoLinks,
+    };
+  }
+
+  // generate fromJson method
+  factory Note.fromJson(Map<String, dynamic> json) {
+    return Note(
+      event: NostrEvent.deserialized(json['event']),
+      links: List<String>.from(json['links']),
+      noteOnly: json['noteOnly'],
+      imageLinks: List<String>.from(json['imageLinks']),
+      youtubeVideoLinks: List<String>.from(json['youtubeVideoLinks']),
+    );
+  }
 }

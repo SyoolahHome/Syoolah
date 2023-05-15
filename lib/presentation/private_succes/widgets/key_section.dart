@@ -18,8 +18,10 @@ class KeySection extends StatelessWidget {
   const KeySection({
     super.key,
     this.type = KeySectionType.privateKey,
+    this.onCopy,
   });
   final KeySectionType type;
+  final VoidCallback? onCopy;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,8 @@ class KeySection extends StatelessWidget {
                             .read<PrivateKeyGenSuccessCubit>()
                             .copyPublicKey(context);
                       }
+
+                      onCopy?.call();
                     },
                   ),
                 ),
