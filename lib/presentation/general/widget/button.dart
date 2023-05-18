@@ -12,6 +12,7 @@ class MunawarahButton extends StatelessWidget {
     this.isOnlyBorder = false,
     this.customWidget,
     this.iconSize,
+    this.mainColor,
   });
 
   final VoidCallback onTap;
@@ -22,6 +23,8 @@ class MunawarahButton extends StatelessWidget {
   final IconData? icon;
   final Widget? customWidget;
   final double? iconSize;
+  final Color? mainColor;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -35,7 +38,7 @@ class MunawarahButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: isOnlyBorder
                 ? Colors.transparent
-                : Theme.of(context).colorScheme.background,
+                : mainColor ?? Theme.of(context).colorScheme.background,
             elevation: isOnlyBorder
                 ? 0
                 : isSmall
@@ -48,12 +51,12 @@ class MunawarahButton extends StatelessWidget {
             ),
             side: isOnlyBorder
                 ? BorderSide(
-                    color: Theme.of(context).colorScheme.background,
+                    color:
+                        mainColor ?? Theme.of(context).colorScheme.background,
                   )
                 : null,
-            padding: isSmall
-                ? const EdgeInsets.symmetric(horizontal: 15)
-                : null,
+            padding:
+                isSmall ? const EdgeInsets.symmetric(horizontal: 15) : null,
             foregroundColor: Theme.of(context).colorScheme.surface,
           ),
           child: Row(
@@ -66,7 +69,7 @@ class MunawarahButton extends StatelessWidget {
                   text!,
                   style: TextStyle(
                     color: isOnlyBorder
-                        ? Theme.of(context).colorScheme.background
+                        ? mainColor ?? Theme.of(context).colorScheme.background
                         : Theme.of(context).colorScheme.onBackground,
                     fontSize: isSmall ? 11 : 17,
                     fontWeight: FontWeight.w400,
@@ -82,7 +85,7 @@ class MunawarahButton extends StatelessWidget {
                           ? 12.5
                           : 15,
                   color: isOnlyBorder
-                      ? Theme.of(context).colorScheme.background
+                      ? mainColor ?? Theme.of(context).colorScheme.background
                       : null,
                 ),
               ],
