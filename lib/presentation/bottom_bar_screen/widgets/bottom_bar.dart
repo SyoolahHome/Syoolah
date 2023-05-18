@@ -39,23 +39,23 @@ class CustomBottomBar extends StatelessWidget {
                 selectedIcon: Icon(item.selectedIcon),
                 label: item.label,
               );
-              if (item.icon == FlutterRemix.add_line) {
-                possibleWidget = Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.bottomCenter,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        BottomSheetService.showCreatePostBottomSheet(context);
-                      },
-                      child: AbsorbPointer(
-                        child: possibleWidget,
-                      ),
-                    ),
-                  ],
-                );
-              }
 
+//               if (item.icon == FlutterRemix.wallet_line) {
+//                 possibleWidget = Stack(
+//                   clipBehavior: Clip.none,
+//                   alignment: Alignment.bottomCenter,
+//                   children: <Widget>[
+//                     GestureDetector(
+//                       onTap: () {
+//                       },
+//                       child: AbsorbPointer(
+//                         child: possibleWidget,
+//                       ),
+//                     ),
+//                   ],
+//                 );
+//               }
+//
               return Animate(
                 delay: delayFromCenterToSidesBasedOnIndex(index),
                 effects: const <Effect>[FadeEffect()],

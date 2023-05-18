@@ -22,12 +22,12 @@ class BottomBarCubit extends Cubit<int> {
       icon: FlutterRemix.message_3_line,
       selectedIcon: FlutterRemix.message_3_fill,
     ),
-    BottomBarItem(
-      screen: const SizedBox(),
-      label: 'new'.tr(),
-      icon: FlutterRemix.add_line,
-      selectedIcon: FlutterRemix.add_fill,
-    ),
+    // BottomBarItem(
+    //   screen: const SizedBox(),
+    //   label: 'new'.tr(),
+    //   icon: FlutterRemix.wallet_line,
+    //   selectedIcon: FlutterRemix.wallet_fill,
+    // ),
     BottomBarItem(
       screen: const GlobalChatRelays(),
       label: 'global'.tr(),

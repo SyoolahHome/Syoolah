@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'widgets/fab.dart';
+
 class BottomBar extends StatelessWidget {
   const BottomBar({
     super.key,
@@ -37,6 +39,7 @@ class BottomBar extends StatelessWidget {
                       selectedIndex: state,
                       onElementTap: cubit.onItemTapped,
                     ),
+                    floatingActionButton: const CustomCreatePostFAB(),
                     body: AnimatedSwitcher(
                       duration: Animate.defaultDuration,
                       child: cubit.items[state].screen,
