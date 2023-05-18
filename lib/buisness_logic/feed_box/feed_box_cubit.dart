@@ -36,29 +36,66 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
         .derivePublicKey(privateKey: LocalDatabase.instance.getPrivateKey()!);
 
     final isFollowed = cubit.isNoteOwnerFollowed(note.event.pubkey);
-    BottomSheetService.showNoteCardSheet(context, options: [
-      if (note.event.pubkey != publicKey)
+    BottomSheetService.showNoteCardSheet(
+      context,
+      options: [
+        if (note.event.pubkey != publicKey)
+          BottomSheetOption(
+            title: isFollowed ? "unfollow".tr() : "follow".tr(),
+            icon: isFollowed
+                ? FlutterRemix.user_unfollow_line
+                : FlutterRemix.user_follow_line,
+            onPressed: () {
+              cubit.handleFollowButtonTap(note.event.pubkey);
+            },
+          ),
         BottomSheetOption(
-          title: isFollowed ? "unfollow".tr() : "follow".tr(),
-          icon: isFollowed
-              ? FlutterRemix.user_unfollow_line
-              : FlutterRemix.user_follow_line,
-          onPressed: () {
-            cubit.handleFollowButtonTap(note.event.pubkey);
-          },
+          title: "openCommentsSections".tr(),
+          icon: FlutterRemix.chat_1_line,
+          onPressed: onCommentsSectionTapped,
         ),
-      BottomSheetOption(
-        title: "openCommentsSections".tr(),
-        icon: FlutterRemix.chat_1_line,
-        onPressed: onCommentsSectionTapped,
-      ),
-      if (note.imageLinks.isNotEmpty)
+        if (note.imageLinks.isNotEmpty)
+          BottomSheetOption(
+            title: "copyImagesLinks".tr(),
+            icon: FlutterRemix.file_copy_line,
+            onPressed: () {
+              AppUtils.copy(
+                note.imageLinks.join("\n"),
+                onSuccess: () {
+                  final shownSnackbarController =
+                      SnackBars.text(context, "copySuccess".tr());
+                },
+                onError: () {
+                  final shownSnackbarController =
+                      SnackBars.text(context, "copyError".tr());
+                },
+              );
+            },
+          ),
+        if (note.youtubeVideoLinks.isNotEmpty)
+          BottomSheetOption(
+            title: "copyYoutubeUrl".tr(),
+            icon: FlutterRemix.file_copy_line,
+            onPressed: () {
+              AppUtils.copy(
+                note.youtubeVideoLinks.first,
+                onSuccess: () {
+                  final shownSnackbarController =
+                      SnackBars.text(context, "copySuccess".tr());
+                },
+                onError: () {
+                  final shownSnackbarController =
+                      SnackBars.text(context, "copyError".tr());
+                },
+              );
+            },
+          ),
         BottomSheetOption(
-          title: "copyImagesLinks".tr(),
+          title: "copyEventId".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(
-              note.imageLinks.join("\n"),
+              note.event.id,
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -70,13 +107,12 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             );
           },
         ),
-      if (note.youtubeVideoLinks.isNotEmpty)
         BottomSheetOption(
-          title: "copyYoutubeUrl".tr(),
+          title: "copyEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.copy(
-              note.youtubeVideoLinks.first,
+              note.event.serialized(),
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -88,64 +124,31 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             );
           },
         ),
-      BottomSheetOption(
-        title: "copyNoteEventId".tr(),
-        icon: FlutterRemix.file_copy_line,
-        onPressed: () {
-          AppUtils.copy(
-            note.event.id,
-            onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },
-            onError: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copyError".tr());
-            },
-          );
-        },
-      ),
-      BottomSheetOption(
-        title: "copyNoteEvent".tr(),
-        icon: FlutterRemix.file_copy_line,
-        onPressed: () {
-          AppUtils.copy(
-            note.event.serialized(),
-            onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },
-            onError: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copyError".tr());
-            },
-          );
-        },
-      ),
-      BottomSheetOption(
-        title: "copyNoteContent".tr(),
-        icon: FlutterRemix.file_copy_line,
-        onPressed: () {
-          AppUtils.copy(
-            note.noteOnly,
-            onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },
-            onError: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copyError".tr());
-            },
-          );
-        },
-      ),
-      BottomSheetOption(
-        title: "resendToRelays".tr(),
-        icon: FlutterRemix.send_plane_2_line,
-        onPressed: () {
-          NostrService.instance.reSendNote(note.event);
-        },
-      ),
-    ],);
+        BottomSheetOption(
+          title: "copyContent".tr(),
+          icon: FlutterRemix.file_copy_line,
+          onPressed: () {
+            AppUtils.copy(
+              note.noteOnly,
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+              onError: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copyError".tr());
+              },
+            );
+          },
+        ),
+        BottomSheetOption(
+          title: "resendToRelays".tr(),
+          icon: FlutterRemix.send_plane_2_line,
+          onPressed: () {
+            NostrService.instance.reSendNote(note.event);
+          },
+        ),
+      ],
+    );
   }
 }

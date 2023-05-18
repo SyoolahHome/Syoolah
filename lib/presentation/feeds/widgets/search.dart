@@ -29,7 +29,7 @@ class SearchSections extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               const SizedBox(height: height * 2),
-              BottomSheetTitleWithIconButton(title: "customizeSearch".tr()),
+              BottomSheetTitleWithIconButton(title: "CustomizedSearch".tr()),
               const SizedBox(height: height),
               const SearchField(),
               const SizedBox(height: height * 2),

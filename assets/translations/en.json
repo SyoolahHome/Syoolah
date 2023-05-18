@@ -211,5 +211,10 @@
     "login": "Login",
     "following": "Following",
     "delete": "Delete",
-    "topicsFeeds": "Topics Feeds"
+    "topicsFeeds": "Topics Feeds",
+    "searchByUsername": "Search by username",
+    "CustomizedSearch": "Customized Search",
+    "copyEventId": "Copy note event id",
+    "copyEvent": "Copy note event",
+    "copyContent": "Copy note content",
 }
