@@ -167,7 +167,7 @@
     "NIP05IdentifierSubtitle": "This will be used to identify, verify your Nostr profile and it will be shown in your profile. ",
     "yourNIP05": "Your NIP05 Identifier",
     "hintNIP05": "Enter your NIP05 Identifier here",
-    "imamOnDutySubtitle": "Choose your AI instructor to guide you through your journey, you can switch between them at any time.",
+    "imamOnDutySubtitle": "Choose the convenable imam on duty to chat with based on your level of knowledge in Islam.",
     "chatInstructorTitle": "keyword's instructor",
     "chatInstructorSubtitle": "Choose this to chat about anything related to keyword",
     "AskDirectlyFromTextField": "Ask directly from text field below",
@@ -196,5 +196,12 @@
     "usernameError": "The username you entered is invalid.",
     "eventSavedSuccessfully": "follow event saved successfully",
     "repostSuccess": "Repost event executed successfully",
-    "getIn": "Get In"
+    "getIn": "Get In",
+    "nSecKey": "Nsec Key",
+    "home": "Home",
+    "chat": "Chat",
+    "new": "New",
+    "global": "Global",
+    "profile": "Profile",
+    "askQuestionHere": "Ask up question here.."
 }

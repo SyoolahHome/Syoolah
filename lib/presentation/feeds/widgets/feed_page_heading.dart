@@ -30,7 +30,7 @@ class FeedPageHeading extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(7.5),
               decoration: BoxDecoration(
-                color: AppColors.teal.withOpacity(0.1),
+                color: Theme.of(context).primaryColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: AnimatedSwitcher(
@@ -43,7 +43,7 @@ class FeedPageHeading extends StatelessWidget {
                   "$notesLength",
                   key: ValueKey(notesLength),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: AppColors.teal,
+                        color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                 ),

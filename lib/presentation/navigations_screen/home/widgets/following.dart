@@ -12,9 +12,9 @@ class FollowingBox extends StatelessWidget {
       height: 75,
       child: Card(
         elevation: 0.0,
-        color: AppColors.teal.withOpacity(1),
+        color: Theme.of(context).primaryColor.withOpacity(1),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: AppColors.teal, width: 1),
+          side: BorderSide(color: Theme.of(context).primaryColor, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Align(

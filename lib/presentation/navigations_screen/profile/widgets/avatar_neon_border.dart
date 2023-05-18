@@ -12,7 +12,7 @@ class ProfileAvatarNeonBorder extends StatelessWidget {
       height: 85,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.teal,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

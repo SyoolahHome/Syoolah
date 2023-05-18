@@ -56,9 +56,7 @@ class NotesListView extends StatelessWidget {
                   notesLength: max(notes.length - 1, 0),
                 ),
                 const SizedBox(height: 20),
-                Center(
-                  child: nothingToShow,
-                ),
+                Center(child: nothingToShow),
               ],
             );
           }
@@ -104,9 +102,12 @@ class NotesListView extends StatelessWidget {
             shrinkWrap: shrinkWrap,
             itemCount: notes.length,
             itemBuilder: (context, index) {
+              final current = notes[index];
+
               return NoteCard(
+                key: ValueKey(current.event.id),
                 appCurrentUserPublicKey: appCurrentUserPublicKey,
-                note: notes[index],
+                note: current,
               );
             },
           );

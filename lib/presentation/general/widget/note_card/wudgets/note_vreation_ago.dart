@@ -21,7 +21,7 @@ class NoteDateOfCreationAgo extends StatelessWidget {
     return Container(
       padding: paddingDecider(),
       decoration: BoxDecoration(
-        color: AppColors.teal.withOpacity(.1),
+        color: Theme.of(context).colorScheme.background.withOpacity(.1),
         borderRadius: BorderRadius.circular(100),
       ),
       child: Row(
@@ -29,14 +29,14 @@ class NoteDateOfCreationAgo extends StatelessWidget {
           Icon(
             FlutterRemix.time_line,
             size: iconSizeDecider(),
-            color: AppColors.teal,
+            color: Theme.of(context).colorScheme.background,
           ),
           SizedBox(width: isSmall ? 2.5 : 5),
           Text(
             createdAt.toReadableString(),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: fontSizeDecider(),
-                  color: AppColors.teal,
+                  color: Theme.of(context).colorScheme.background,
                 ),
           ),
         ],

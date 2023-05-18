@@ -24,46 +24,50 @@ class Settings extends StatelessWidget {
           return Scaffold(
             appBar: CustomAppBar(),
             body: MarginedBody(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: height),
-                  Text(
-                    "settings".tr(),
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  SizedBox(height: height * 3),
-                  ...List.generate(
-                    settingsItems.length,
-                    (index) {
-                      final current = settingsItems[index];
-                      final isLogout = current.name == "logout".tr();
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: height),
+                    Text(
+                      "settings".tr(),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    SizedBox(height: height * 3),
+                    ...List.generate(
+                      settingsItems.length,
+                      (index) {
+                        final current = settingsItems[index];
+                        final isLogout = current.name == "logout".tr();
 
-                      return ListTile(
-                        splashColor: Colors.transparent,
-                        leading: Icon(
-                          current.icon,
-                          color: isLogout
-                              ? Theme.of(context).colorScheme.error
-                              : Theme.of(context).iconTheme.color,
-                        ),
-                        title: Text(
-                          current.name,
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    color: isLogout
-                                        ? Theme.of(context).colorScheme.error
-                                        : Theme.of(context).iconTheme.color,
-                                  ),
-                        ),
-                        trailing: current.trailing,
-                        onTap: () => current.onTap(),
-                      );
-                    },
-                  )
-                ],
+                        return ListTile(
+                          splashColor: Colors.transparent,
+                          leading: Icon(
+                            current.icon,
+                            color: isLogout
+                                ? Theme.of(context).colorScheme.error
+                                : Theme.of(context).iconTheme.color,
+                          ),
+                          title: Text(
+                            current.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  color: isLogout
+                                      ? Theme.of(context).colorScheme.error
+                                      : Theme.of(context).iconTheme.color,
+                                ),
+                          ),
+                          trailing: current.trailing,
+                          onTap: () => current.onTap(),
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           );

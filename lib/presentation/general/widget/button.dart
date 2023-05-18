@@ -49,7 +49,7 @@ class MunawarahButton extends StatelessWidget {
             side: isOnlyBorder
                 ? BorderSide(
                     color: Theme.of(context).colorScheme.background,
-                    width: 1.5,
+                    width: 1,
                   )
                 : null,
             padding: isSmall

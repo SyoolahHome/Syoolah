@@ -1,5 +1,6 @@
 import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -61,13 +62,23 @@ class NoteActions extends StatelessWidget {
                 const SizedBox(width: 10),
                 BlocBuilder<NoteCardCubit, NoteCardState>(
                   builder: (context, state) {
-                    return Action(
-                      icon: FlutterRemix.repeat_2_line,
-                      onTap: () {
-                        cubit.repostNote();
-                      },
-                      bgColor: Theme.of(context).colorScheme.onPrimary,
-                      color: DefaultTextStyle.of(context).style.color!,
+                    return AnimatedSwitcher(
+                      duration: Animate.defaultDuration,
+                      child: Action(
+                        key: ValueKey(state.markAsReposted),
+                        icon: state.markAsReposted
+                            ? FlutterRemix.check_line
+                            : FlutterRemix.repeat_2_line,
+                        onTap: () {
+                          cubit.repostNote();
+                        },
+                        bgColor: state.markAsReposted
+                            ? Colors.green.withOpacity(.1)
+                            : Theme.of(context).colorScheme.onPrimary,
+                        color: state.markAsReposted
+                            ? Colors.green
+                            : DefaultTextStyle.of(context).style.color!,
+                      ),
                     );
                   },
                 ),

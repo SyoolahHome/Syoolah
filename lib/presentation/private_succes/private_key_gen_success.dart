@@ -1,3 +1,4 @@
+import 'package:ditto/presentation/current_user_keys/widgets/danger_box.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,8 @@ class PrivateKeyGenSuccess extends StatelessWidget {
               SuccessIcon(),
               SizedBox(height: heightSeparator),
               SuccessText(customText: customText),
+              Spacer(),
+              DangerBox(),
               Spacer(),
               KeySection(onCopy: onCopy),
               Spacer(),

@@ -19,19 +19,19 @@ class ChatModules extends StatelessWidget {
       create: (context) => ChatModulesCubit(),
       child: Scaffold(
         body: MarginedBody(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: kToolbarHeight),
-                SizedBox(height: height),
-                HeadTitle(title: "imamOnDuty".tr(), isForSection: true),
-                SizedBox(height: height),
-                ChatModulesSubtitle(text: "imamOnDutySubtitle".tr()),
-                SizedBox(height: height * 2),
-                ChatModulesGridView(),
-                SizedBox(height: height * 2),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: kToolbarHeight),
+              SizedBox(height: height),
+              HeadTitle(title: "encryptYourDuaa".tr(), isForSection: true),
+              SizedBox(height: height / 2),
+              ChatModulesSubtitle(text: "imamOnDutySubtitle".tr()),
+              Spacer(),
+              ChatModulesGridView(),
+              Spacer(),
+              SizedBox(height: kToolbarHeight),
+              SizedBox(height: height),
+            ],
           ),
         ),
       ),

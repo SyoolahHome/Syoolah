@@ -21,7 +21,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   Theme.of(context).colorScheme.onTertiaryContainer,
             ),
             onPressed: () => Scaffold.of(context).openDrawer(),
-            icon: const Icon(FlutterRemix.menu_line),
+            icon: const Icon(
+              FlutterRemix.menu_line,
+            ),
           ),
         ),
       ),

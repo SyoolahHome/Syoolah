@@ -99,7 +99,7 @@ class FeedBox extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        Icon(icon, color: AppColors.teal),
+                        Icon(icon, color: Theme.of(context).iconTheme.color),
                       ],
                     ),
                     SizedBox(height: 10.0),

@@ -36,25 +36,25 @@ class GeneralFeed extends StatelessWidget {
               builder: (context) {
                 final cubit = context.read<GlobalFeedCubit>();
 
-                return BlocBuilder<GlobalFeedCubit, GlobalFeedState>(
-                  builder: (context, state) {
-                    if (state.searchedFeedNotesPosts.isNotEmpty) {
-                      return NotesListView(
-                        scrollController: cubit.scrollController,
-                        feedName: feedName,
-                        notes: state.searchedFeedNotesPosts,
-                      );
-                    } else {
-                      final shownFeedPosts = state.shownFeedPosts;
-
-                      return NotesListView(
-                        scrollController: cubit.scrollController,
-                        feedName: feedName,
-                        notes: shownFeedPosts
-                            .map((e) => Note.fromEvent(e))
-                            .toList(),
-                      );
-                    }
+                return BlocSelector<GlobalFeedCubit, GlobalFeedState,
+                    List<Note>>(
+                  selector: (state) => state.searchedFeedNotesPosts,
+                  builder: (context, notes) {
+                    return BlocSelector<GlobalFeedCubit, GlobalFeedState,
+                        List<NostrEvent>>(
+                      selector: (state) => state.shownFeedPosts,
+                      builder: (context, shownFeedPosts) {
+                        return NotesListView(
+                          scrollController: cubit.scrollController,
+                          feedName: feedName,
+                          notes: notes.isNotEmpty
+                              ? notes
+                              : shownFeedPosts
+                                  .map((e) => Note.fromEvent(e))
+                                  .toList(),
+                        );
+                      },
+                    );
                   },
                 );
               },

@@ -19,7 +19,7 @@ class SingleFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: AppColors.teal,
+      backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Theme.of(context).primaryColor, width: 3),
         borderRadius: BorderRadius.circular(100),

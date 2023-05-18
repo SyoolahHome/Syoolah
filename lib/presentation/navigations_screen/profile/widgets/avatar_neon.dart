@@ -14,7 +14,7 @@ class ProfileAvatarNeon extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: AppColors.teal,
+            color: Theme.of(context).primaryColor,
             blurRadius: 12.5,
             spreadRadius: 7,
           ),

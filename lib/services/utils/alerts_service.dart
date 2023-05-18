@@ -25,7 +25,7 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.onBackground,
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           content: AvatarSheetWidget(
             onPickFromGallery: onPickFromGallery,
             onTakePhoto: onTakePhoto,
@@ -41,10 +41,8 @@ abstract class AlertsService {
             CustomTextButton(
               text: "close".tr(),
               onTap: () => Navigator.of(context).pop(),
-              textColor: DefaultTextStyle.of(context)
-                  .style
-                  .color
-                  ?.withOpacity(textOpacity),
+              textColor:
+                  Theme.of(context).colorScheme.error.withOpacity(textOpacity),
             ),
           ],
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -66,7 +64,7 @@ abstract class AlertsService {
         final textOpacity = 0.5;
 
         return AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.onBackground,
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           title: HeadTitle(title: "removeRelay".tr(args: [relayConfig.url])),
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
@@ -109,10 +107,10 @@ abstract class AlertsService {
     showDialog(
       context: context,
       builder: (context) {
-        final textOpacity = 0.5;
+        final textOpacity = 0.6;
 
         return AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.onBackground,
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           title: title != null ? HeadTitle(title: title) : null,
           content: content != null ? Text(content) : null,
           contentPadding: const EdgeInsets.only(top: 16),
@@ -135,7 +133,7 @@ abstract class AlertsService {
                   Navigator.of(context).pop();
                 });
               },
-              textColor: Theme.of(context).colorScheme.error,
+              textColor: DefaultTextStyle.of(context).style.color,
             ),
           ],
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),

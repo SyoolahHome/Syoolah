@@ -125,7 +125,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   void repostNote() {
     NostrService.instance.sendRepostEventFromCurrentUser(note);
-    emit(state.copyWith(success: "repostSuccess".tr()));
+    emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
     emit(state.copyWith(success: null));
   }
 }

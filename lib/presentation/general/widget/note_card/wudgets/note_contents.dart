@@ -26,13 +26,13 @@ class NoteContents extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 5),
+        // const SizedBox(height: 5),
         HashTagText(
           text: text.capitalized,
           textAlign: TextAlign.left,
           basicStyle: Theme.of(context).textTheme.labelLarge!,
           decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: AppColors.teal,
+                color: Theme.of(context).primaryColor,
               ),
         ),
         const SizedBox(height: 10),
@@ -58,7 +58,7 @@ class NoteContents extends StatelessWidget {
                   },
                 ).toList()),
           ),
-        const SizedBox(height: 20),
+        // const SizedBox(height: 20),
         if (youtubeVideosLinks.isNotEmpty)
           NoteYoutubePlayer(url: youtubeVideosLinks.first),
         const SizedBox(height: 20),

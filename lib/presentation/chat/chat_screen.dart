@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Chatbot Playground'),
         elevation: 0,
-        backgroundColor: AppColors.teal,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Column(
         children: <Widget>[

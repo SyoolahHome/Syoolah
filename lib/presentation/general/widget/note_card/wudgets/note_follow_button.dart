@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants/app_colors.dart';
 import '../../../../../model/note.dart';
 import '../../../../../services/utils/snackbars.dart';
+import '../../button.dart';
 
 class NoteFollowButton extends StatelessWidget {
   const NoteFollowButton({
@@ -24,29 +25,13 @@ class NoteFollowButton extends StatelessWidget {
 
         return SizedBox(
           height: 27.5,
-          child: ElevatedButton(
-            onPressed: () {
+          child: MunawarahButton(
+            onTap: () {
               cubit.handleFollowButtonTap(note.event.pubkey);
             },
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              side: BorderSide(
-                color:
-                    isNoteOwnerFollowed ? AppColors.teal : Colors.transparent,
-                width: 1,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              backgroundColor:
-                  isNoteOwnerFollowed ? Colors.transparent : AppColors.teal,
-            ),
-            child: Text(
-              isNoteOwnerFollowed ? "unfollow".tr() : "follow".tr(),
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color:
-                        isNoteOwnerFollowed ? AppColors.teal : AppColors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+            isOnlyBorder: isNoteOwnerFollowed,
+            isSmall: true,
+            text: isNoteOwnerFollowed ? "unfollow".tr() : "follow".tr(),
           ),
         );
       },

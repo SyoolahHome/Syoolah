@@ -12,10 +12,13 @@ class ChatModulesSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final labelLarge = Theme.of(context).textTheme.labelLarge!;
 
-    return Text(
-      text,
-      style: labelLarge.copyWith(
-        fontWeight: FontWeight.w300,
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: Text(
+        text,
+        style: labelLarge.copyWith(
+          fontWeight: FontWeight.w300,
+        ),
       ),
     );
   }

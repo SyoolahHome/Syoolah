@@ -32,31 +32,31 @@ class Chat extends StatelessWidget {
             ),
             body: SizedBox(
               height: MediaQuery.of(context).size.height - kToolbarHeight,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  MarginedBody(
-                    child: BlocConsumer<ChatCubit, ChatState>(
-                      listener: (context, state) {
-                        if (state.errorMessage != null &&
-                            state.errorMessage!.isNotEmpty) {
-                          SnackBars.text(context, state.errorMessage!);
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state.messages.isEmpty) {
-                          return Center(
-                            child: EmptyChatWidget(
-                              recommendedQuestions:
-                                  chatModduleItem.recommendedQuestions,
-                            ),
-                          );
-                        }
+              child: BlocConsumer<ChatCubit, ChatState>(
+                listener: (context, state) {
+                  if (state.errorMessage != null &&
+                      state.errorMessage!.isNotEmpty) {
+                    SnackBars.text(context, state.errorMessage!);
+                  }
+                },
+                builder: (context, state) {
+                  if (state.messages.isEmpty) {
+                    return Center(
+                      child: EmptyChatWidget(
+                        recommendedQuestions:
+                            chatModduleItem.recommendedQuestions,
+                      ),
+                    );
+                  }
 
-                        return SingleChildScrollView(
+                  return Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: <Widget>[
+                      MarginedBody(
+                        child: SingleChildScrollView(
                           reverse: true,
                           child: Column(
-                            children: [
+                            children: <Widget>[
                               Column(
                                 children: <Widget>[
                                   SizedBox(height: 20),
@@ -73,17 +73,18 @@ class Chat extends StatelessWidget {
                                       );
                                     },
                                   ).toList(),
-                                  SizedBox(height: 90),
+                                  // SizedBox(height: 90),
                                 ],
                               ),
+                              SizedBox(height: 90),
                             ],
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                  Container(child: MessageSection()),
-                ],
+                        ),
+                      ),
+                      MessageSection(),
+                    ],
+                  );
+                },
               ),
             ),
           );

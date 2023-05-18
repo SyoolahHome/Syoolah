@@ -18,7 +18,7 @@ class HeadTitle extends StatelessWidget {
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               fontSize: isForSection ? 32 : null,
             ),
       ),

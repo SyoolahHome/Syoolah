@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/cubit/chat_cubit.dart';
+import 'chat_section.dart';
 
 class EmptyChatWidget extends StatelessWidget {
   const EmptyChatWidget({
@@ -42,63 +43,70 @@ class EmptyChatWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            "startConversation".tr() + ":",
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          SizedBox(height: height * 1),
-          Column(
-            children: AnimateList(
-              interval: 200.ms,
-              effects: [
-                const SlideEffect(begin: Offset(0, 0.5)),
-                FadeEffect(),
-              ],
-              children: randomChoosenThree.map(
-                (qst) {
-                  final current = qst;
-                  return Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 16.0),
-                    child: Material(
-                      color: Theme.of(context).colorScheme.onTertiaryContainer,
-                      borderRadius: BorderRadius.circular(8.0),
-                      clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: () {
-                          final cubit = context.read<ChatCubit>();
-                          cubit.userMessageController!.text = current;
-                          cubit.sendMessageByCurrentUser();
-                        },
-                        highlightColor: Theme.of(context)
-                            .colorScheme
-                            .background
-                            .withOpacity(0.1),
-                        splashColor: Colors.transparent,
-                        child: Container(
-                          padding: MarginedBody.defaultMargin +
-                              EdgeInsets.symmetric(
-                                vertical: 15.0,
-                              ),
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                current,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                              const Spacer(),
-                              Icon(
-                                FlutterRemix.bubble_chart_line,
-                                size: 20,
-                              ),
-                            ],
+          Spacer(),
+          MessageSection(),
+          Spacer(),
+
+          Center(child: OrDivider(onlyDivider: true)),
+          // SizedBox(height: height * 4),
+          // Text(
+          //   "startConversation".tr() + ":",
+          //   style: Theme.of(context).textTheme.bodyMedium,
+          // ),
+          SizedBox(height: height),
+          MarginedBody(
+            child: Column(
+              children: AnimateList(
+                interval: 200.ms,
+                effects: const [
+                  SlideEffect(begin: Offset(0, 0.5)),
+                  FadeEffect()
+                ],
+                children: randomChoosenThree.map(
+                  (qst) {
+                    final current = qst;
+                    return Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Material(
+                        color:
+                            Theme.of(context).colorScheme.onTertiaryContainer,
+                        borderRadius: BorderRadius.circular(8.0),
+                        clipBehavior: Clip.hardEdge,
+                        child: InkWell(
+                          onTap: () {
+                            final cubit = context.read<ChatCubit>();
+                            cubit.userMessageController!.text = current;
+                            cubit.sendMessageByCurrentUser();
+                          },
+                          highlightColor: Theme.of(context)
+                              .colorScheme
+                              .background
+                              .withOpacity(0.1),
+                          splashColor: Colors.transparent,
+                          child: Container(
+                            padding: MarginedBody.defaultMargin +
+                                EdgeInsets.symmetric(vertical: 15.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  current,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                const Spacer(),
+                                Icon(
+                                  FlutterRemix.bubble_chart_line,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ).toList(),
+                    );
+                  },
+                ).toList(),
+              ),
             ),
           ),
           // ...List.generate(
@@ -148,8 +156,6 @@ class EmptyChatWidget extends StatelessWidget {
           //     );
           //   },
           // ),
-          SizedBox(height: height * 4),
-          Center(child: OrDivider(onlyDivider: true)),
           // SizedBox(height: height * 4),
           // Text(
           //   "AskDirectlyFromTextField".tr() + ":",

@@ -12,7 +12,7 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
   ChatModulesCubit() : super(ChatModulesInitial());
   List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
         ChatModuleItem(
-            title: "General Islam's instructor" ?? "chatInstructorTitle".tr(),
+            title: "Beginner" ?? "chatInstructorTitle".tr(),
             subtitle: "This will guide you with all information about islam" ??
                 "chatInstructorSubtitle".tr(),
             icon: FlutterIslamicIcons.kowtow,
@@ -27,7 +27,7 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
               "How many prophets are there in islam?",
             ]),
         ChatModuleItem(
-          title: 'Sirah\s instructor' ?? "chatInstructorTitle".tr(),
+          title: 'Intermediate' ?? "chatInstructorTitle".tr(),
           subtitle:
               "This will guide you with all information about Sirah of Prophet Muhammad (PBUH)" ??
                   "chatInstructorSubtitle".tr(),
@@ -43,63 +43,9 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           ],
         ),
         ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
+          title: "Advanced" ?? "chatInstructorTitle".tr(),
           subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
-          instruction:
-              "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
-        ),
-        ChatModuleItem(
-          title: "chatInstructorTitle".tr(),
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterRemix.a_b,
+          icon: FlutterIslamicIcons.solidTasbihHand,
           instruction:
               "You are an islamic imam who will guide with all information about islam",
           recommendedQuestions:

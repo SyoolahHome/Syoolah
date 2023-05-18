@@ -21,7 +21,7 @@ class ExistentSignUp extends StatelessWidget {
 
     return Scaffold(
       appBar: const CustomAppBar(),
-      // backgroundColor: AppColors.teal,
+      // backgroundColor: Theme.of(context).primaryColor,
       body: MarginedBody(
         child: Center(
           child: Column(

@@ -41,28 +41,42 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   }
 
   void selectedSearchOption(int index, bool value) {
-    final searchOptions = <SearchOption>[];
-
-    for (int i = 0; i < state.searchOptions.length; i++) {
-      final current = state.searchOptions[i];
-      final isSelectedItem = i == index;
-
-      if (isSelectedItem) {
-        searchOptions.add(current.copyWith(isSelected: value));
-      } else {
-        searchOptions.add(current);
-      }
-    }
-
+    final searchOptions = [...state.searchOptions];
+    searchOptions[index] = searchOptions[index].copyWith(isSelected: value);
     emit(state.copyWith(searchOptions: searchOptions));
+
+    // final searchOptions = <SearchOption>[];
+
+    // for (int i = 0; i < state.searchOptions.length; i++) {
+    //   final current = state.searchOptions[i];
+    //   final isSelectedItem = i == index;
+
+    //   if (isSelectedItem) {
+    //     searchOptions.add(current.copyWith(isSelected: value));
+    //   } else {
+    //     searchOptions.add(current);
+    //   }
+    // }
+
+    // emit(state.copyWith(searchOptions: searchOptions));
   }
 
   void pickDateRange(BuildContext context) async {
     final rangeDate = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime.now(),
-    );
+        context: context,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime.now(),
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        builder: (context, widget) {
+          return Theme(
+            data: ThemeData.from(
+              colorScheme: Theme.of(context).brightness == Brightness.light
+                  ? ColorScheme.light(primary: Colors.black)
+                  : ColorScheme.dark(primary: Colors.white),
+            ),
+            child: widget!,
+          );
+        });
 
     if (rangeDate != null) {
       emit(state.copyWith(dateRange: rangeDate));
@@ -121,13 +135,6 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   void _init() {
     searchController = TextEditingController();
     scrollController = ScrollController();
-    scrollController?.addListener(() {
-      if (scrollController?.position.pixels != 0) {
-        emit(state.copyWith(shouldShowScrollToTopButton: true));
-      } else {
-        emit(state.copyWith(shouldShowScrollToTopButton: false));
-      }
-    });
     _handleStreams();
   }
 
@@ -136,12 +143,13 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
 
     _streamSubscription = feedPostsStream.stream.listen(
       (event) {
-        final sortedList = [...state.feedPosts, event].reversed.toList();
+        final sortedList = [event, ...state.feedPosts];
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
         if (!isClosed) {
-          emit(state.copyWith(feedPosts: sortedList));
+          emit(state.copyWith(feedPosts: sortedList.toList()));
         }
+
         if (shouldWaitXSecondsToUpdateFirstUI) {
           Future.delayed(Duration(milliseconds: 1000), () {
             showNewestPostsToUI();

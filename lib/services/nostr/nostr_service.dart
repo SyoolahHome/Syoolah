@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../../constants/app_configs.dart';
 import '../../model/note.dart';
 import '../../model/user_meta_data.dart';
 import '../database/local/local_database.dart';
@@ -360,7 +361,8 @@ class NostrService {
         NostrFilter(
           t: ["quran".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -378,7 +380,8 @@ class NostrService {
         NostrFilter(
           t: ["dua".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -396,7 +399,8 @@ class NostrService {
         NostrFilter(
           t: ["hadith".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -414,7 +418,8 @@ class NostrService {
         NostrFilter(
           t: ["sharia".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -432,7 +437,8 @@ class NostrService {
         NostrFilter(
           t: ["fiqh".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -450,7 +456,8 @@ class NostrService {
         NostrFilter(
           t: ["sirah".tr()],
           kinds: const [1],
-        )
+          limit: 10,
+        ),
       ],
     );
 
@@ -466,14 +473,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: <String>[
-            "quran".tr(),
-            "dua".tr(),
-            "hadith".tr(),
-            "sharia".tr(),
-            "fiqh".tr(),
-            "sirah".tr(),
-          ],
+          t: AppConfigs.categories.map((category) => category.name).toList(),
           kinds: const [1],
           limit: 10,
         )
@@ -484,9 +484,6 @@ class NostrService {
       request: requestWithFilter,
     );
 
-    stream.stream.listen((event) {
-      print("global: ${event.content}, random: $randomId");
-    });
     return stream;
   }
 
@@ -494,16 +491,14 @@ class NostrService {
     required List<String> followings,
   }) {
     final randomId = Nostr.instance.utilsService.random64HexChars();
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: followings,
+          authors: [".", ...followings],
           kinds: const [1],
+          limit: 10,
         )
       ],
     );

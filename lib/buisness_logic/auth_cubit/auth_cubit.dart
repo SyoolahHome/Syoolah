@@ -58,11 +58,20 @@ class AuthCubit extends Cubit<AuthState> {
           nip05Identifier: nip05Controller?.text ?? '',
         ),
       );
-      emit(state.copyWith(authenticated: true));
+      emit(state.copyWith(
+        authenticated: true,
+        pickedImage: state.pickedImage,
+      ));
     } catch (e) {
-      emit(state.copyWith(error: e.toString()));
+      emit(state.copyWith(
+        error: e.toString(),
+        pickedImage: state.pickedImage,
+      ));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith(
+        error: null,
+        pickedImage: state.pickedImage,
+      ));
     }
   }
 
@@ -82,32 +91,45 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> handleExistentKey() async {
     final existentKey = existentKeyController?.text ?? '';
     if (existentKey.isEmpty) {
-      emit(state.copyWith(error: "pleaseEnterKey".tr()));
+      emit(state.copyWith(
+        error: "pleaseEnterKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
 
       return;
     }
     if (!Nostr.instance.keysService.isValidPrivateKey(existentKey)) {
-      emit(state.copyWith(error: "invalidKey".tr()));
+      emit(state.copyWith(
+        error: "invalidKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
 
       return;
     }
 
     try {
       final keyChain = NostrKeyPairs(private: existentKey);
-      LocalDatabase.instance.setPrivateKey(keyChain.private);
-      emit(state.copyWith(authenticated: true));
+      await LocalDatabase.instance.setPrivateKey(keyChain.private);
+      emit(state.copyWith(
+        authenticated: true,
+        pickedImage: state.pickedImage,
+      ));
     } catch (e) {
-      emit(state.copyWith(error: "invalidKey".tr()));
-
-      return;
+      emit(state.copyWith(
+        error: "invalidKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
     }
   }
 
   void signOut() {
     LocalDatabase.instance.setPrivateKey(null);
-    emit(state.copyWith(isSignedOut: true));
+    emit(state.copyWith(
+      isSignedOut: true,
+      pickedImage: state.pickedImage,
+    ));
   }
 
   void copyPrivateKey() {
@@ -116,7 +138,10 @@ class AuthCubit extends Cubit<AuthState> {
         ClipboardData(text: LocalDatabase.instance.getPrivateKey()),
       );
     } catch (e) {
-      emit(state.copyWith(error: "couldNotCopyKey".tr()));
+      emit(state.copyWith(
+        error: "couldNotCopyKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
     }
   }
 
@@ -211,7 +236,10 @@ class AuthCubit extends Cubit<AuthState> {
       name: name,
     );
 
-    emit(state.copyWith(isGeneratingNewPrivateKey: false));
+    emit(state.copyWith(
+      isGeneratingNewPrivateKey: false,
+      pickedImage: state.pickedImage,
+    ));
   }
 
   void _init() {
@@ -229,6 +257,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(
           state.copyWith(
             currentStepIndex: _internalPageControllerPage.round() + 1,
+            pickedImage: state.pickedImage,
           ),
         );
       });
@@ -239,6 +268,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (kDebugMode) {
       nameController?.text = 'test name';
+      bioController?.text = 'test bio';
     }
     existentKeyController = TextEditingController();
     nameFocusNode = FocusNode();

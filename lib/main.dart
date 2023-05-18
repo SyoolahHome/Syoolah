@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/services/database/local/local_database.dart';
@@ -25,16 +26,24 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   Bloc.observer = Routing.blocObserver;
 
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => EasyLocalization(
+  //       child: MyApp(),
+  //       supportedLocales: AppConfigs.locales,
+  //       path: AppConfigs.translationsPath,
+  //       fallbackLocale: AppConfigs.fallbackLocale,
+  //     ), // Wrap your app
+  //   ),
+  // );
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => EasyLocalization(
-        child: MyApp(),
-        supportedLocales: AppConfigs.locales,
-        path: AppConfigs.translationsPath,
-        fallbackLocale: AppConfigs.fallbackLocale,
-      ), // Wrap your app
-    ),
+    EasyLocalization(
+      child: MyApp(),
+      supportedLocales: AppConfigs.locales,
+      path: AppConfigs.translationsPath,
+      fallbackLocale: AppConfigs.fallbackLocale,
+    ), // Wrap your app
   );
 }
 
@@ -65,9 +74,9 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             useInheritedMediaQuery: true,
-            locale: DevicePreview.locale(context),
-            // locale: context.locale,
-            builder: DevicePreview.appBuilder,
+            // locale: DevicePreview.locale(context),
+            locale: context.locale,
+            // builder: DevicePreview.appBuilder,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
             title: "appName".tr(),

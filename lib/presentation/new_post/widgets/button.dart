@@ -6,6 +6,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../buisness_logic/add_new_post/add_new_post_cubit.dart';
 import '../../../constants/app_colors.dart';
 import '../../../services/utils/snackbars.dart';
+import '../../general/widget/button.dart';
 
 class PostButton extends StatelessWidget {
   const PostButton({
@@ -61,15 +62,13 @@ class PostButton extends StatelessWidget {
           },
           builder: (_, state) {
             return SizedBox(
-              width: 150,
-              child: ElevatedButton(
-                onPressed: () {
+              height: 40,
+              child: MunawarahButton(
+                isSmall: true,
+                onTap: () {
                   cubit.createNote();
                 },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.teal),
-                ),
-                child: state.isLoading
+                customWidget: state.isLoading
                     ? const SizedBox(
                         height: 20,
                         width: 20,
@@ -81,7 +80,7 @@ class PostButton extends StatelessWidget {
                     : Text(
                         "createNewPost".tr(),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: AppColors.white,
+                              color: Theme.of(context).colorScheme.onBackground,
                             ),
                       ),
               ),

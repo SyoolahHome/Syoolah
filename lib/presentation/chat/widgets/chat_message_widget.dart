@@ -61,12 +61,10 @@ class ChatMessageWidget extends StatelessWidget {
                 padding: EdgeInsets.all(12.5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: isCurrentUserMessage
-                      ? Theme.of(context).primaryColorDark.withOpacity(.15)
-                      : Theme.of(context)
-                          .colorScheme
-                          .background
-                          .withOpacity(.05),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onPrimary
+                      .withOpacity(isCurrentUserMessage ? .5 : .25),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

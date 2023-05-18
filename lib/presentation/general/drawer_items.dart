@@ -9,7 +9,7 @@ import '../../model/drawer_list_time_item.dart';
 abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [
         DrawerListTimeItem(
-          icon: FlutterRemix.settings_line,
+          icon: FlutterRemix.key_line,
           label: "myKeys".tr(),
           onTap: () {
             Navigator.of(context).pushNamed(
@@ -27,7 +27,7 @@ abstract class GeneralDrawerItems {
           },
         ),
         DrawerListTimeItem(
-          icon: FlutterRemix.settings_line,
+          icon: FlutterRemix.shield_user_line,
           label: 'privacyPolicy'.tr(),
           onTap: () {
             Navigator.of(context).pushNamed(Paths.privacyPolicy);

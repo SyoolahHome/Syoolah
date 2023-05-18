@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text("globalMessages".tr()),
-      backgroundColor: AppColors.teal,
+      backgroundColor: Theme.of(context).primaryColor,
       centerTitle: true,
       leading: InkWell(
         child: const Icon(FlutterRemix.arrow_left_line),

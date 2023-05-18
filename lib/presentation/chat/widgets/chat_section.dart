@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ class MessageSection extends StatelessWidget {
       effects: <Effect>[FadeEffect()],
       child: Material(
         elevation: 0,
+        color: Colors.transparent,
         child: Container(
           margin: const EdgeInsets.only(bottom: 10) +
               MarginedBody.defaultMargin / 2,
@@ -29,13 +31,12 @@ class MessageSection extends StatelessWidget {
             children: <Widget>[
               CustomTextField(
                 focusNode: cubit.focusNode,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 17.5,
-                ),
-                bgColor: Theme.of(context).colorScheme.onPrimary,
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                bgColor: Color(Theme.of(context).colorScheme.onPrimary.value),
                 controller: cubit.userMessageController,
-                hint: hint,
+                hint: "askQuestionHere".tr() ?? hint,
+                fontWight: FontWeight.w300,
               ),
               Animate(
                 delay: 1800.ms,
@@ -45,9 +46,8 @@ class MessageSection extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimary,
                   child: IconButton(
                     icon: Icon(
-                      FlutterRemix.send_plane_2_line,
+                      FlutterRemix.chat_1_line,
                       size: 18,
-                      color: Theme.of(context).primaryColor,
                     ),
                     onPressed: () {
                       print(cubit.userMessageController!.text);

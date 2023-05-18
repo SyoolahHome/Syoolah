@@ -79,12 +79,13 @@ class CustomDrawer extends StatelessWidget {
                     final isLogout = currentItem.isLogout;
 
                     return ListTile(
-                      contentPadding: MarginedBody.defaultMargin,
+                      contentPadding: MarginedBody.defaultMargin +
+                          const EdgeInsets.symmetric(vertical: 2.5),
                       leading: Icon(
                         currentItem.icon,
                         color: isLogout
                             ? theme.colorScheme.error
-                            : theme.primaryColor,
+                            : theme.iconTheme.color,
                         size: iconSize,
                       ),
                       title: Text(

@@ -36,7 +36,6 @@ class NoteCard extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return BlocBuilder<NoteCardCubit, NoteCardState>(
-            key: ValueKey(note.event.uniqueTag()),
             builder: (context, state) {
               UserMetaData noteOwnerMetadata;
 

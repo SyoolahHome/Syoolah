@@ -40,12 +40,12 @@ class GoButton extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.white.withOpacity(0.95),
-                  foregroundColor: AppColors.tealLight,
+                  foregroundColor: Theme.of(context).primaryColorLight,
                 ),
                 child: Text(
                   "continueText".tr(),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.teal,
+                        color: Theme.of(context).primaryColor,
                       ),
                 ),
               ),

@@ -8,6 +8,7 @@ class NoteCardState extends Equatable {
   final bool localLiked;
   final String? error;
   final String? success;
+  final bool markAsReposted;
 
   @override
   List<Object?> get props => [
@@ -17,6 +18,7 @@ class NoteCardState extends Equatable {
         noteComments,
         error,
         success,
+        markAsReposted,
       ];
 
   const NoteCardState({
@@ -26,6 +28,7 @@ class NoteCardState extends Equatable {
     this.localLiked = false,
     this.error,
     this.success,
+    this.markAsReposted = false,
   });
 
   NoteCardState copyWith({
@@ -35,6 +38,7 @@ class NoteCardState extends Equatable {
     List<NostrEvent>? noteComments,
     String? error,
     String? success,
+    bool? markAsReposted,
   }) {
     return NoteCardState(
       noteOwnerMetadata: noteOwnerMetadata ?? this.noteOwnerMetadata,
@@ -43,6 +47,7 @@ class NoteCardState extends Equatable {
       localLiked: localLiked ?? this.localLiked,
       error: error,
       success: success,
+      markAsReposted: markAsReposted ?? this.markAsReposted,
     );
   }
 }

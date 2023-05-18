@@ -33,7 +33,6 @@ class EditProfile extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               appBar: const CustomAppBar(),
-              backgroundColor: AppColors.white,
               body: MarginedBody(
                 child: Builder(builder: (context) {
                   final cubit = context.read<EditProfileCubit>();

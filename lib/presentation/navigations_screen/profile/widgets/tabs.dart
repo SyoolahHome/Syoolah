@@ -16,6 +16,8 @@ class ProfileTabs extends StatelessWidget {
       effects: [FadeEffect()],
       delay: 1000.ms,
       child: TabBar(
+        labelColor: Theme.of(context).colorScheme.background,
+        indicatorColor: Theme.of(context).colorScheme.background,
         indicatorWeight: 1,
         tabs: cubit.state.profileTabsItems.map((e) {
           return Tab(

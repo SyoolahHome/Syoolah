@@ -35,7 +35,6 @@ class RelaysWidget extends StatelessWidget {
                   Text(
                     "${state.relaysConfigurations.map((e) => e.isActive).length}",
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -43,7 +42,7 @@ class RelaysWidget extends StatelessWidget {
                   Icon(
                     FlutterRemix.cloud_line,
                     size: 20,
-                    color: Theme.of(context).primaryColor,
+                    // color: Theme.of(context).primaryColor,
                   )
                 ],
               ),

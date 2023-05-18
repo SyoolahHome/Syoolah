@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -55,54 +56,86 @@ class AvatarSheetWidget extends StatelessWidget {
                   ),
                   firstChild: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        leading: const Icon(FlutterRemix.image_2_line),
-                        title: Text("fullImageView".tr()),
-                        onTap: onFullView,
-                      ),
-                      ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        leading: const Icon(FlutterRemix.camera_2_line),
-                        title: Text("takeFromCamera".tr()),
-                        onTap: () {
-                          onTakePhoto()
-                              .then((_) => onAvatarPickedOrTaken())
-                              .then((isUploaded) {
-                            if (isUploaded) {
-                              onEnd();
-                            }
-                          });
-                        },
-                      ),
-                      ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        leading: const Icon(FlutterRemix.gallery_line),
-                        title: Text("takeFromGallery".tr()),
-                        onTap: () {
-                          onPickFromGallery()
-                              .then((_) => onAvatarPickedOrTaken())
-                              .then((isUploaded) {
-                            if (isUploaded) {
-                              onEnd();
-                            }
-                          });
-                        },
-                      ),
-                      ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20),
-                        leading: const Icon(FlutterRemix.delete_bin_2_line),
-                        title: Text("removeAvatar".tr()),
-                        onTap: () {
-                          onRemove().then((_) => onEnd());
-                        },
-                      ),
-                    ],
+                    children: AnimateList(
+                      effects: <Effect>[FadeEffect()],
+                      interval: 100.ms,
+                      children: <Widget>[
+                        ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          leading: Icon(
+                            FlutterRemix.image_2_line,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 19,
+                          ),
+                          title: Text(
+                            "fullImageView".tr(),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          onTap: onFullView,
+                        ),
+                        ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          leading: Icon(
+                            FlutterRemix.camera_2_line,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 19,
+                          ),
+                          title: Text(
+                            "takeFromCamera".tr(),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          onTap: () {
+                            onTakePhoto()
+                                .then((_) => onAvatarPickedOrTaken())
+                                .then((isUploaded) {
+                              if (isUploaded) {
+                                onEnd();
+                              }
+                            });
+                          },
+                        ),
+                        ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          leading: Icon(
+                            FlutterRemix.gallery_line,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 19,
+                          ),
+                          title: Text(
+                            "takeFromGallery".tr(),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          onTap: () {
+                            onPickFromGallery()
+                                .then((_) => onAvatarPickedOrTaken())
+                                .then((isUploaded) {
+                              if (isUploaded) {
+                                onEnd();
+                              }
+                            });
+                          },
+                        ),
+                        ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 20),
+                          leading: Icon(
+                            FlutterRemix.delete_bin_2_line,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 19,
+                          ),
+                          title: Text(
+                            "removeAvatar".tr(),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          onTap: () {
+                            onRemove().then((_) => onEnd());
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

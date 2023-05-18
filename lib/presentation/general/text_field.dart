@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.isMultiline = false,
     this.focusNode,
     this.bgColor,
+    this.fontWight,
   });
 
   final TextEditingController? controller;
@@ -24,6 +25,8 @@ class CustomTextField extends StatelessWidget {
   final bool isMultiline;
   final FocusNode? focusNode;
   final Color? bgColor;
+  final FontWeight? fontWight;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,13 +51,15 @@ class CustomTextField extends StatelessWidget {
               maxLines: isMultiline ? 5 : 1,
               autofocus: false,
               decoratedStyle: TextStyle(
-                color: AppColors.teal,
+                color: Theme.of(context).primaryColor,
+                fontWeight: fontWight,
               ),
               controller: controller,
               decoration: InputDecoration(
                 hintText: hint ?? "typeHere".tr(),
                 hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: AppColors.grey,
+                      fontWeight: fontWight,
                     ),
                 contentPadding: contentPadding ??
                     const EdgeInsets.symmetric(

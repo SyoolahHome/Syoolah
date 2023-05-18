@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.teal,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text("globalMessages".tr()),
       centerTitle: true,
     );

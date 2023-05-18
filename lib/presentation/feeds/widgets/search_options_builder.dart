@@ -29,6 +29,7 @@ class SearchOptionsBuilder extends StatelessWidget {
               (index) {
                 final current = state.searchOptions[index];
                 return ListTile(
+                  key: ValueKey(current.name),
                   dense: true,
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 10,
@@ -40,10 +41,10 @@ class SearchOptionsBuilder extends StatelessWidget {
                   trailing: Transform.scale(
                     scale: 0.7,
                     child: Switch(
-                      activeColor: AppColors.teal,
-                      activeTrackColor: AppColors.teal.withOpacity(0.15),
-                      inactiveTrackColor: AppColors.lighGrey,
-                      inactiveThumbColor: AppColors.white,
+                      activeColor: Colors.green,
+                      activeTrackColor: Colors.green.withOpacity(0.15),
+                      inactiveTrackColor: Colors.red.withOpacity(0.15),
+                      inactiveThumbColor: Colors.red,
                       value: current.isSelected,
                       onChanged: (value) {
                         cubit.selectedSearchOption(index, value);

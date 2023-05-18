@@ -25,9 +25,7 @@ class CurrentUserKeys extends StatelessWidget {
             children: AnimateList(
               effects: <Effect>[
                 FadeEffect(),
-                SlideEffect(
-                  begin: Offset(0, 0.5),
-                ),
+                SlideEffect(begin: Offset(0, 0.5)),
               ],
               interval: Duration(milliseconds: 100),
               children: <Widget>[
@@ -48,14 +46,16 @@ class CurrentUserKeys extends StatelessWidget {
                 KeySection(type: KeySectionType.nPubKey),
                 SizedBox(height: height * 4),
                 SizedBox(width: double.infinity, child: OrDivider()),
-                SizedBox(height: height * 4),
-                HeadTitle(title: "myPrivateKey".tr()),
                 DangerBox(),
                 SizedBox(height: height * 3),
+                HeadTitle(title: "myPrivateKey".tr()),
+                SizedBox(height: height),
                 HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.privateKey,
                 ),
                 SizedBox(height: height * 2),
+                HeadTitle(title: "nSecKey".tr()),
+                SizedBox(height: height),
                 HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.nsecKey,
                 ),

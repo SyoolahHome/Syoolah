@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -10,34 +11,34 @@ import '../../presentation/navigations_screen/home/home.dart';
 import '../../presentation/navigations_screen/profile/profile.dart';
 
 class BottomBarCubit extends Cubit<int> {
-  final List<BottomBarItem> items = const <BottomBarItem>[
+  final List<BottomBarItem> items = <BottomBarItem>[
     BottomBarItem(
       screen: Home(),
-      label: 'Home',
+      label: 'home'.tr(),
       icon: FlutterRemix.home_4_line,
       selectedIcon: FlutterRemix.home_4_fill,
     ),
     BottomBarItem(
       screen: ChatModules(),
-      label: 'Chat',
+      label: 'chat'.tr(),
       icon: FlutterRemix.message_3_line,
       selectedIcon: FlutterRemix.message_3_fill,
     ),
     BottomBarItem(
       screen: SizedBox(),
-      label: 'New',
+      label: 'new'.tr(),
       icon: FlutterRemix.add_line,
       selectedIcon: FlutterRemix.add_fill,
     ),
     BottomBarItem(
       screen: GlobalChatRelays(),
-      label: 'Global',
+      label: 'global'.tr(),
       icon: FlutterRemix.list_check_2,
       selectedIcon: FlutterRemix.list_check,
     ),
     BottomBarItem(
       screen: Profile(),
-      label: 'Profile',
+      label: 'profile'.tr(),
       icon: FlutterRemix.user_line,
       selectedIcon: FlutterRemix.user_fill,
     ),

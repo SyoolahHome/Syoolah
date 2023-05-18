@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -57,7 +58,11 @@ class CustomBottomBar extends StatelessWidget {
                 );
               }
 
-              return possibleWidget;
+              return Animate(
+                delay: delayFromCenterToSidesBasedOnIndex(index),
+                effects: <Effect>[FadeEffect()],
+                child: possibleWidget,
+              );
             }).toList(),
           );
         } else if (state.isLoading) {
@@ -73,6 +78,12 @@ class CustomBottomBar extends StatelessWidget {
         }
       },
     );
+  }
+
+  Duration delayFromCenterToSidesBasedOnIndex(int index) {
+    final centerIndex = items.length ~/ 2;
+    final distanceFromCenter = (index - centerIndex).abs();
+    return Duration(milliseconds: 100 * distanceFromCenter);
   }
 }
 

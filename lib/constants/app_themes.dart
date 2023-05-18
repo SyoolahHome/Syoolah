@@ -6,9 +6,9 @@ import 'app_colors.dart';
 
 abstract class AppThemes {
   static final primary = ThemeData.light(useMaterial3: true).copyWith(
-    primaryColor: AppColors.teal,
-    primaryColorLight: AppColors.tealLight,
-    primaryColorDark: AppColors.tealDark,
+    primaryColor: AppColors.black,
+    primaryColorLight: Colors.black54,
+    primaryColorDark: Colors.black87,
     colorScheme: ColorScheme.light(
       onSecondary: AppColors.black.withOpacity(0.75),
       onSecondaryContainer: AppColors.black.withOpacity(0.05),
@@ -25,7 +25,7 @@ abstract class AppThemes {
     ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       elevation: 0,
       selectedIconTheme: const IconThemeData(size: 19, color: AppColors.white),
       unselectedIconTheme:
@@ -41,20 +41,24 @@ abstract class AppThemes {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         animationDuration: const Duration(milliseconds: 200),
-        foregroundColor: AppColors.tealLight,
+        foregroundColor: Colors.black54,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: AppColors.teal,
+        backgroundColor: AppColors.black,
         textStyle: const TextStyle(
           color: AppColors.white,
         ),
       ),
     ),
     dialogBackgroundColor: AppColors.lighGrey,
-    disabledColor: AppColors.tealLight,
+    dialogTheme: DialogTheme(
+      backgroundColor: AppColors.lighGrey,
+      elevation: 0,
+    ),
+    disabledColor: Colors.black54,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       foregroundColor: AppColors.white,
-      backgroundColor: AppColors.teal,
-      splashColor: AppColors.tealLight,
+      backgroundColor: AppColors.black,
+      splashColor: Colors.black54,
     ),
     dividerColor: AppColors.black,
     bottomSheetTheme: BottomSheetThemeData(
@@ -66,7 +70,7 @@ abstract class AppThemes {
         ),
       ),
     ),
-    indicatorColor: AppColors.teal,
+    indicatorColor: AppColors.black,
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.black,
     ),
@@ -78,7 +82,7 @@ abstract class AppThemes {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       indicatorColor: AppColors.white.withOpacity(0.3),
       labelTextStyle: MaterialStateProperty.all(
         TextStyle(
@@ -132,7 +136,7 @@ abstract class AppThemes {
       ),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.black),
@@ -143,14 +147,14 @@ abstract class AppThemes {
       ),
     ),
     chipTheme: ChipThemeData(
-      selectedColor: AppColors.teal.withOpacity(0.1),
-      checkmarkColor: AppColors.teal,
+      selectedColor: AppColors.lighGrey,
+      checkmarkColor: AppColors.black,
       iconTheme: const IconThemeData(size: 20, grade: 5),
     ),
     tabBarTheme: TabBarTheme(
-      indicatorColor: AppColors.teal,
+      indicatorColor: AppColors.black,
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColors.teal,
+      labelColor: AppColors.black,
       labelStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
       unselectedLabelStyle:
           const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
@@ -203,9 +207,9 @@ abstract class AppThemes {
   );
 
   static final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
-    primaryColor: AppColors.teal,
-    primaryColorLight: AppColors.tealLight,
-    primaryColorDark: AppColors.tealDark,
+    primaryColor: AppColors.black,
+    primaryColorLight: Colors.black54,
+    primaryColorDark: Colors.black87,
     colorScheme: ColorScheme.light(
       onSurfaceVariant: Colors.grey.withOpacity(.5),
       onSecondary: AppColors.white.withOpacity(0.9),
@@ -222,7 +226,7 @@ abstract class AppThemes {
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       elevation: 0,
       selectedIconTheme: const IconThemeData(size: 19, color: AppColors.white),
       unselectedIconTheme:
@@ -238,20 +242,24 @@ abstract class AppThemes {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         animationDuration: const Duration(milliseconds: 200),
-        foregroundColor: AppColors.tealLight,
+        foregroundColor: Colors.black54,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: AppColors.teal,
+        backgroundColor: AppColors.black,
         textStyle: const TextStyle(
           color: AppColors.white,
         ),
       ),
     ),
-    dialogBackgroundColor: AppColors.lighGrey,
-    disabledColor: AppColors.tealLight,
+    dialogBackgroundColor: Colors.black87,
+    dialogTheme: DialogTheme(
+      backgroundColor: Colors.black87,
+      elevation: 0,
+    ),
+    disabledColor: Colors.black54,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       foregroundColor: AppColors.white,
-      backgroundColor: AppColors.teal,
-      splashColor: AppColors.tealLight,
+      backgroundColor: AppColors.black,
+      splashColor: Colors.black54,
     ),
     dividerColor: AppColors.white,
     bottomSheetTheme: BottomSheetThemeData(
@@ -264,7 +272,7 @@ abstract class AppThemes {
       ),
     ),
     iconTheme: const IconThemeData(color: AppColors.white),
-    indicatorColor: AppColors.teal,
+    indicatorColor: AppColors.black,
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.white,
     ),
@@ -276,7 +284,7 @@ abstract class AppThemes {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     useMaterial3: true,
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       indicatorColor: AppColors.white.withOpacity(0.3),
       labelTextStyle: MaterialStateProperty.all(
         TextStyle(
@@ -330,7 +338,7 @@ abstract class AppThemes {
       ),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.teal,
+      backgroundColor: AppColors.black,
       surfaceTintColor: Colors.transparent,
       iconTheme: const IconThemeData(size: 20, color: AppColors.white),
       titleTextStyle: TextStyle(
@@ -345,14 +353,14 @@ abstract class AppThemes {
       ),
     ),
     chipTheme: ChipThemeData(
-      selectedColor: AppColors.teal.withOpacity(0.1),
-      checkmarkColor: AppColors.teal,
+      selectedColor: AppColors.white.withOpacity(0.15),
+      checkmarkColor: AppColors.white,
       iconTheme: const IconThemeData(size: 20, grade: 5),
     ),
     tabBarTheme: TabBarTheme(
-      indicatorColor: AppColors.teal,
+      indicatorColor: AppColors.black,
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColors.teal,
+      labelColor: AppColors.black,
       labelStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
       unselectedLabelStyle:
           const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),

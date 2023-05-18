@@ -28,30 +28,34 @@ class CategoriesSelect extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.only(right: 5),
                   child: FilterChip(
-                    backgroundColor: isSelected ? null : AppColors.lighGrey,
+                    backgroundColor: isSelected
+                        ? null
+                        : Theme.of(context).colorScheme.onPrimary,
                     onSelected: (value) {
                       cubit.onSelected(index, value);
                     },
-                    disabledColor: AppColors.lighGrey,
+                    disabledColor: Theme.of(context).colorScheme.onPrimary,
                     selected: isSelected,
                     labelPadding: const EdgeInsets.symmetric(horizontal: 5),
 
                     label: Text(
                       current.name,
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: isSelected
-                                ? AppColors.teal
-                                : Colors.black.withOpacity(.75),
+                            // color: isSelected
+                            //     ? Theme.of(context).primaryColor
+                            //     : Colors.black.withOpacity(.75),
                             fontWeight: FontWeight.bold,
                           ),
                     ),
                     side: BorderSide(
-                      color: isSelected ? AppColors.teal : Colors.transparent,
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.background
+                          : Colors.transparent,
                       width: 0.75,
                     ),
                     labelStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
-                              color: AppColors.teal,
+                              color: Theme.of(context).colorScheme.background,
                               fontWeight: FontWeight.bold,
                             ),
 

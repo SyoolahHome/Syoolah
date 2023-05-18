@@ -7,7 +7,6 @@ class GlobalFeedState extends Equatable {
   final List<Note> searchedFeedNotesPosts;
   final List<SearchOption> searchOptions;
   final DateTimeRange? dateRange;
-  final bool shouldShowScrollToTopButton;
 
   @override
   List<Object?> get props => [
@@ -15,7 +14,6 @@ class GlobalFeedState extends Equatable {
         searchOptions,
         dateRange,
         searchedFeedNotesPosts,
-        shouldShowScrollToTopButton,
         shownFeedPosts,
       ];
 
@@ -25,7 +23,6 @@ class GlobalFeedState extends Equatable {
     this.searchedFeedNotesPosts = const [],
     this.searchOptions = const [],
     this.dateRange,
-    this.shouldShowScrollToTopButton = false,
   });
 
   GlobalFeedState copyWith({
@@ -34,7 +31,6 @@ class GlobalFeedState extends Equatable {
     List<Note>? searchedFeedNotesPosts,
     List<SearchOption>? searchOptions,
     DateTimeRange? dateRange,
-    bool? shouldShowScrollToTopButton,
   }) {
     return GlobalFeedState(
       feedPosts: feedPosts ?? this.feedPosts,
@@ -42,8 +38,6 @@ class GlobalFeedState extends Equatable {
           searchedFeedNotesPosts ?? this.searchedFeedNotesPosts,
       searchOptions: searchOptions ?? this.searchOptions,
       dateRange: dateRange ?? this.dateRange,
-      shouldShowScrollToTopButton:
-          shouldShowScrollToTopButton ?? this.shouldShowScrollToTopButton,
       shownFeedPosts: shownFeedPosts ?? this.shownFeedPosts,
     );
   }
