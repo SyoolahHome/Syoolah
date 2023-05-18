@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
                   onTap: () {
                     cubit.handleExistentKey();
                   },
-                  text: "authenticate".tr(),
+                  text: "login".tr(),
                 ),
               ),
               if (state.isSavingExistentKey)

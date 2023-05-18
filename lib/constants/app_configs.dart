@@ -250,7 +250,7 @@ abstract class AppConfigs {
       ),
       SettingsItem(
         icon: FlutterRemix.translate,
-        name: "changeLanguage".tr(),
+        name: "switchLaungage".tr(),
         onTap: () {
           Routing.appCubit.showTranslationsSheet(context);
         },
