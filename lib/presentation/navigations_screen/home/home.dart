@@ -23,61 +23,62 @@ class Home extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-                children: AnimateList(
-              delay: 200.ms,
-              interval: 100.ms,
-              effects: <Effect>[
-                const FadeEffect(),
-                const SlideEffect(begin: Offset(0, 0.5)),
-              ],
-              children: <Widget>[
-                const SizedBox(height: 20),
-                HeadTitle(title: "globalFeeds".tr()),
-                const SizedBox(height: 10),
-                FeedBox(
-                  icon: FlutterRemix.global_line,
-                  title: "globalFeed".tr(),
-                  description: "globalFeedDescription".tr(),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      Paths.globalFeed,
-                      arguments: context.read<GlobalCubit>(),
-                    );
-                  },
-                ),
-                FeedBox(
-                  icon: FlutterRemix.user_add_line,
-                  title: "followingsFeed".tr(),
-                  description: "followingsFeedDescription".tr(),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      Paths.followingFeed,
-                      arguments: context.read<GlobalCubit>(),
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                HeadTitle(title: "categorizedFeeds".tr()),
-                const SizedBox(height: 10),
-                ...List.generate(AppConfigs.categories.length, (index) {
-                  final current = AppConfigs.categories[index];
-                  return FeedBox(
-                    icon: current.icon,
-                    description: current.description,
-                    title: current.name,
+              children: AnimateList(
+                delay: 200.ms,
+                interval: 100.ms,
+                effects: <Effect>[
+                  const FadeEffect(),
+                  const SlideEffect(begin: Offset(0, 0.5)),
+                ],
+                children: <Widget>[
+                  const SizedBox(height: 20),
+                  HeadTitle(title: "globalFeeds".tr()),
+                  const SizedBox(height: 10),
+                  FeedBox(
+                    icon: FlutterRemix.global_line,
+                    title: "globalFeed".tr(),
+                    description: "globalFeedDescription".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        current.path,
+                        Paths.globalFeed,
                         arguments: context.read<GlobalCubit>(),
                       );
                     },
-                  );
-                }),
-              ],
-            ),),
+                  ),
+                  FeedBox(
+                    icon: FlutterRemix.user_add_line,
+                    title: "followingsFeed".tr(),
+                    description: "followingsFeedDescription".tr(),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        Paths.followingFeed,
+                        arguments: context.read<GlobalCubit>(),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  HeadTitle(title: "topicsFeeds".tr()),
+                  const SizedBox(height: 10),
+                  ...List.generate(AppConfigs.categories.length, (index) {
+                    final current = AppConfigs.categories[index];
+                    return FeedBox(
+                      icon: current.icon,
+                      description: current.description,
+                      title: current.name,
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          current.path,
+                          arguments: context.read<GlobalCubit>(),
+                        );
+                      },
+                    );
+                  }),
+                ],
+              ),
+            ),
           ),
         ),
       ),
