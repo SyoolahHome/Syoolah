@@ -217,4 +217,15 @@
     "copyEventId": "Copy note event id",
     "copyEvent": "Copy note event",
     "copyContent": "Copy note content",
+    "dropYourUQuestionHere": "drop your question here",
+    "notePostedSuccessfully": "note posted successfully",
+    "imamOnDutySubtitle2": "Follow the built in AI imam to bring you closer to islam.",
+    "notes": "Notes",
+    "yourNote": "Your Note",
+    "createNewNote": "Create New Note",
+    "addNewNote": "Add New Note",
+    "suggestionToGetStarted": "Suggestions to Get Started",
+    "photos": "Photos",
+    "validate": "Validate",
+    "accept": "Accept"
 }

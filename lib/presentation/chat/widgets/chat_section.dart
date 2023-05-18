@@ -33,7 +33,7 @@ class MessageSection extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 bgColor: Color(Theme.of(context).colorScheme.onPrimary.value),
                 controller: cubit.userMessageController,
-                hint: "askQuestionHere".tr() ?? hint,
+                hint: "dropYourUQuestionHere".tr() ?? hint,
                 fontWight: FontWeight.w300,
               ),
               Animate(

@@ -65,13 +65,15 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
             .map((e) => ["t", e.name])
             .toList(),
       );
-      emit(state.copyWith(success: "postCreatedSuccessfully".tr()));
+      emit(state.copyWith(success: "notePostedSuccessfully".tr()));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(state.copyWith(
-        isLoading: false,
-      ),);
+      emit(
+        state.copyWith(
+          isLoading: false,
+        ),
+      );
     }
   }
 
@@ -116,10 +118,12 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         newList.add(selectedItem.copyWith(isSelected: value));
       }
     }
-    emit(state.copyWith(
-      categories: newList,
-      pickedImages: state.pickedImages,
-    ),);
+    emit(
+      state.copyWith(
+        categories: newList,
+        pickedImages: state.pickedImages,
+      ),
+    );
   }
 
   void removePickedImage(int imageIndex) {

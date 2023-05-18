@@ -8,7 +8,7 @@ class AddNewPostTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetTitleWithIconButton(
-      title: "addNewPost".tr(),
+      title: "addNewNote".tr(),
     );
   }
 }

@@ -76,7 +76,7 @@ class PostButton extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        "createNewPost".tr(),
+                        "createNewNote".tr(),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Theme.of(context).colorScheme.onBackground,
                             ),

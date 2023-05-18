@@ -1,5 +1,6 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'package:ditto/presentation/general/text_field.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class PostYoutube extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("selectedYoutube".tr()),
+        Text("youtubeVideo".tr()),
         const SizedBox(height: 15),
         BlocConsumer<AddNewPostCubit, AddNewPostState>(
           listener: (context, state) {
@@ -43,14 +44,14 @@ class PostYoutube extends StatelessWidget {
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               controller: cubit.youtubeUrlController,
-              suffix: Container(
-                color: Theme.of(context).colorScheme.onPrimary,
-                child: IconButton(
-                  onPressed: () {
-                    cubit.showYoutubeVideoBottomSheet(context);
-                  },
-                  icon: const Icon(FlutterRemix.arrow_right_line, size: 18),
-                ),
+              suffix: MunawarahButton(
+                isSmall: true,
+                onTap: () {
+                  cubit.showYoutubeVideoBottomSheet(context);
+                },
+                text: "validate".tr(),
+                icon: FlutterRemix.check_line,
+                iconSize: 19,
               ),
             );
           },

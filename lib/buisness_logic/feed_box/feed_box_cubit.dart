@@ -141,13 +141,13 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             );
           },
         ),
-        BottomSheetOption(
-          title: "resendToRelays".tr(),
-          icon: FlutterRemix.send_plane_2_line,
-          onPressed: () {
-            NostrService.instance.reSendNote(note.event);
-          },
-        ),
+        // BottomSheetOption(
+        //   title: "resendToRelays".tr(),
+        //   icon: FlutterRemix.send_plane_2_line,
+        //   onPressed: () {
+        //     NostrService.instance.reSendNote(note.event);
+        //   },
+        // ),
       ],
     );
   }

@@ -263,7 +263,8 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
-          title: '${message.message.substring(0, min(message.message.length, 20))}...',
+          title:
+              '${message.message.substring(0, min(message.message.length, 20))}...',
         );
       },
       clipBehavior: Clip.hardEdge,

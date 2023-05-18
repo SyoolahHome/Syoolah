@@ -9,7 +9,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 abstract class GeneralProfileTabs {
   static List<TabItem> profileTabsItems = [
     TabItem(
-      label: "posts".tr(),
+      label: "notes".tr(),
       widget: const CurrentUserPosts(),
       icon: FlutterRemix.line_height,
     ),

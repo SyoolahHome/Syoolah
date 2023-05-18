@@ -4,6 +4,7 @@ import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/presentation/chat/widgets/chat_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,16 +54,27 @@ class EmptyChatWidget extends StatelessWidget {
           // ),
           const SizedBox(height: height),
           MarginedBody(
+            child: Text(
+              "suggestionToGetStarted".tr(),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .background
+                        .withOpacity(.6),
+                  ),
+            ),
+          ),
+          // const SizedBox(height: height / 2),
+          MarginedBody(
             child: Column(
               children: AnimateList(
                 interval: 200.ms,
-                effects: const [
+                effects: const <Effect>[
                   SlideEffect(begin: Offset(0, 0.5)),
                   FadeEffect()
                 ],
                 children: randomChoosenThree.map(
-                  (qst) {
-                    final current = qst;
+                  (current) {
                     return Container(
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(vertical: 16.0),

@@ -17,7 +17,7 @@ class PostImage extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("selectedImages".tr()),
+        Text("photos".tr()),
         const SizedBox(height: 15),
         BlocBuilder<AddNewPostCubit, AddNewPostState>(
           builder: (context, state) {
@@ -68,7 +68,8 @@ class PostImage extends StatelessWidget {
                                     children: <Widget>[
                                       ClipRRect(
                                         borderRadius: const BorderRadius.all(
-                                            Radius.circular(10),),
+                                          Radius.circular(10),
+                                        ),
                                         child: Image.file(
                                           current,
                                           height: 75,
@@ -81,8 +82,9 @@ class PostImage extends StatelessWidget {
                                         // padding: EdgeInsets.zero,
 
                                         style: IconButton.styleFrom(
-                                            backgroundColor: AppColors.black
-                                                .withOpacity(0.05),),
+                                          backgroundColor:
+                                              AppColors.black.withOpacity(0.05),
+                                        ),
                                         color: Colors.red,
                                         onPressed: () {
                                           cubit.removePickedImage(index);

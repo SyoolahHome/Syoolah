@@ -51,9 +51,7 @@ class YoutubeVideoWidget extends StatelessWidget {
                         Navigator.of(context).pop();
                       },
                       isSmall: true,
-                      isOnlyBorder: true,
-                      icon: FlutterRemix.checkbox_circle_fill,
-                      iconSize: 17.0,
+                      text: 'accept'.tr(),
                     ),
                   ),
                   const SizedBox(height: 20.0),

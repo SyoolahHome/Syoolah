@@ -8,6 +8,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../../../constants/app_colors.dart';
+
 class NoteActions extends StatelessWidget {
   const NoteActions({
     super.key,
@@ -48,10 +50,10 @@ class NoteActions extends StatelessWidget {
                         }
                       },
                       bgColor: state.localLiked || cubit.isUserAlreadyLiked()
-                          ? Colors.red.withOpacity(.1)
+                          ? AppColors.red.withOpacity(.1)
                           : Theme.of(context).colorScheme.onPrimary,
                       color: state.localLiked || cubit.isUserAlreadyLiked()
-                          ? Colors.red
+                          ? AppColors.red
                           : DefaultTextStyle.of(context).style.color!,
                       text: likes.toString(),
                     );
@@ -86,11 +88,13 @@ class NoteActions extends StatelessWidget {
                     return Action(
                       icon: FlutterRemix.chat_1_line,
                       onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(Paths.commentsSection, arguments: {
-                          'note': note,
-                          'cubit': cubit,
-                        },);
+                        Navigator.of(context).pushNamed(
+                          Paths.commentsSection,
+                          arguments: {
+                            'note': note,
+                            'cubit': cubit,
+                          },
+                        );
                       },
                       bgColor: Theme.of(context).colorScheme.onPrimary,
                       color: DefaultTextStyle.of(context).style.color!,

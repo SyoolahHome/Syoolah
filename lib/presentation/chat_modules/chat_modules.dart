@@ -22,9 +22,9 @@ class ChatModules extends StatelessWidget {
             children: <Widget>[
               const SizedBox(height: kToolbarHeight),
               const SizedBox(height: height),
-              HeadTitle(title: "encryptYourDuaa".tr(), isForSection: true),
+              HeadTitle(title: "imamOnDuty".tr(), isForSection: true),
               const SizedBox(height: height / 2),
-              ChatModulesSubtitle(text: "imamOnDutySubtitle".tr()),
+              ChatModulesSubtitle(text: "imamOnDutySubtitle2".tr()),
               const Spacer(),
               const ChatModulesGridView(),
               const Spacer(),
