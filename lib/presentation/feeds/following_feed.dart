@@ -15,7 +15,7 @@ class FollowingsFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: "followings".tr(),
+        feedName: "following".tr(),
         feedPostsStream: NostrService.instance.followingsFeed(
           followings: globalCubit!.state.currentUserFollowing?.tags
                   .map((e) => e[1])

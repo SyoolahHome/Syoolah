@@ -208,5 +208,7 @@
     "show": "Show",
     "keys": "Keys",
     "switchLaungage": "Switch Laungage",
-    "login": "Login"
+    "login": "Login",
+    "following": "Following",
+    "delete": "Delete",
 }
