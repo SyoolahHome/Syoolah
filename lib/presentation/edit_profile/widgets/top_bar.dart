@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Navigator.of(context).pushNamed(Paths.myKeys);
           },
           isSmall: true,
-          text: "myKeys".tr(),
+          text: "keys".tr(),
           icon: FlutterRemix.key_2_line,
           iconSize: 15,
           isOnlyBorder: true,

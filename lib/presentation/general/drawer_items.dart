@@ -9,7 +9,7 @@ abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [
         DrawerListTimeItem(
           icon: FlutterRemix.key_line,
-          label: "myKeys".tr(),
+          label: "keys".tr(),
           onTap: () {
             Navigator.of(context).pushNamed(
               Paths.myKeys,

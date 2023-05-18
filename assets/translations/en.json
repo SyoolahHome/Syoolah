@@ -204,5 +204,7 @@
     "global": "Global",
     "profile": "Profile",
     "askQuestionHere": "Ask up question here..",
-    "warning": "Warning"
+    "warning": "Warning",
+    "show": "Show",
+    "keys": "Keys"
 }

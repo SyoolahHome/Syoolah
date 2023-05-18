@@ -30,9 +30,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit({
     required this.currentUserMetadataStream,
-  }) : super(ProfileInitial(
-          profileTabsItems: GeneralProfileTabs.profileTabsItems,
-        ),) {
+  }) : super(
+          ProfileInitial(
+            profileTabsItems: GeneralProfileTabs.profileTabsItems,
+          ),
+        ) {
     _handleStreams();
   }
 
@@ -71,9 +73,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(state.copyWith(
-        
-      ),);
+      emit(
+        state.copyWith(),
+      );
     }
   }
 
@@ -181,9 +183,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     required void Function() onLogout,
     required void Function() onMyKeysPressed,
   }) {
-    final metadata = UserMetaData.fromJson(jsonDecode(
-      state.currentUserMetadata?.content ?? "{}",
-    ) as Map<String, dynamic>,);
+    final metadata = UserMetaData.fromJson(
+      jsonDecode(
+        state.currentUserMetadata?.content ?? "{}",
+      ) as Map<String, dynamic>,
+    );
 
     final currentUserMetadata = state.currentUserMetadata;
 
@@ -200,7 +204,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           onPressed: onEditProfile,
         ),
         BottomSheetOption(
-          title: "myKeys".tr(),
+          title: "keys".tr(),
           icon: FlutterRemix.key_line,
           onPressed: onMyKeysPressed,
         ),
@@ -223,10 +227,13 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyMetaDataEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },);
+            AppUtils.copy(
+              currentUserMetadataContent ?? "",
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+            );
           },
         ),
         BottomSheetOption(
@@ -246,20 +253,26 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyImageUrl".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(metadata.picture ?? "", onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },);
+            AppUtils.copy(
+              metadata.picture ?? "",
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+            );
           },
         ),
         BottomSheetOption(
           title: "copyUsername".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(metadata.username, onSuccess: () {
-              final shownSnackbarController =
-                  SnackBars.text(context, "copySuccess".tr());
-            },);
+            AppUtils.copy(
+              metadata.username,
+              onSuccess: () {
+                final shownSnackbarController =
+                    SnackBars.text(context, "copySuccess".tr());
+              },
+            );
           },
         ),
         BottomSheetOption(

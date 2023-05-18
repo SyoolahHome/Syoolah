@@ -31,7 +31,7 @@ class CurrentUserKeys extends StatelessWidget {
               children: <Widget>[
                 const SizedBox(height: height * 3),
                 Text(
-                  "myKeys".tr(),
+                  "keys".tr(),
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

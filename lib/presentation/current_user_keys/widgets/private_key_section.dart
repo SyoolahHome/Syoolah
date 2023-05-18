@@ -21,12 +21,14 @@ class HiddenPrivateKeySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final privateKey = LocalDatabase.instance.getPrivateKey()!;
 
-    final hiddenPrivateKey = '${privateKey.substring(0, 7)}...${privateKey.substring(privateKey.length - 7, privateKey.length)}';
+    final hiddenPrivateKey =
+        '${privateKey.substring(0, 7)}...${privateKey.substring(privateKey.length - 7, privateKey.length)}';
 
     final nsecKey =
         Nostr.instance.keysService.encodePrivateKeyToNsec(privateKey);
 
-    final hiddenNsecKey = '${nsecKey.substring(0, 5)}...${nsecKey.substring(nsecKey.length - 5, nsecKey.length)}';
+    final hiddenNsecKey =
+        '${nsecKey.substring(0, 5)}...${nsecKey.substring(nsecKey.length - 5, nsecKey.length)}';
 
     final hiddenKey = type == HiddenPrivateKeySectionType.privateKey
         ? hiddenPrivateKey
@@ -41,7 +43,7 @@ class HiddenPrivateKeySection extends StatelessWidget {
         ),
         MunawarahButton(
           isSmall: true,
-          text: "reveal".tr(),
+          text: "show".tr(),
           onTap: () {
             final val = BottomSheetService.showKey(
               context,

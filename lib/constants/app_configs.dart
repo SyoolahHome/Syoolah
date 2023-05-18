@@ -129,8 +129,10 @@ abstract class AppConfigs {
       name: "Search usernames",
       isSelected: false,
       searchFunction: (noteList, string) => noteList
-          .where((note) =>
-              note.event.pubkey.toLowerCase().contains(string.toLowerCase()),)
+          .where(
+            (note) =>
+                note.event.pubkey.toLowerCase().contains(string.toLowerCase()),
+          )
           .toList(),
       useSearchQuery: true,
     ),
@@ -138,8 +140,10 @@ abstract class AppConfigs {
       name: 'Search Posts contents',
       isSelected: true,
       searchFunction: (noteList, string) => noteList
-          .where((note) =>
-              note.event.content.toLowerCase().contains(string.toLowerCase()),)
+          .where(
+            (note) =>
+                note.event.content.toLowerCase().contains(string.toLowerCase()),
+          )
           .toList(),
       useSearchQuery: true,
     ),
@@ -147,11 +151,13 @@ abstract class AppConfigs {
       name: 'Search Posts dates',
       isSelected: false,
       searchFunction: (noteList, string) => noteList
-          .where((note) =>
-              note.event.createdAt.toString().contains(string) ||
-              note.event.createdAt.millisecondsSinceEpoch
-                  .toString()
-                  .contains(string),)
+          .where(
+            (note) =>
+                note.event.createdAt.toString().contains(string) ||
+                note.event.createdAt.millisecondsSinceEpoch
+                    .toString()
+                    .contains(string),
+          )
           .toList(),
       useSearchQuery: true,
     ),
@@ -159,9 +165,11 @@ abstract class AppConfigs {
       name: 'Search hashtags',
       isSelected: false,
       searchFunction: (noteList, string) => noteList
-          .where((note) => note.event.content
-              .toLowerCase()
-              .contains('#$string'.toLowerCase()),)
+          .where(
+            (note) => note.event.content
+                .toLowerCase()
+                .contains('#$string'.toLowerCase()),
+          )
           .toList(),
       useSearchQuery: true,
     ),
@@ -235,7 +243,7 @@ abstract class AppConfigs {
       ),
       SettingsItem(
         icon: FlutterRemix.key_line,
-        name: "myKeys".tr(),
+        name: "keys".tr(),
         onTap: () {
           Navigator.of(context).pushNamed(Paths.myKeys);
         },

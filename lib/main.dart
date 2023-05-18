@@ -60,9 +60,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomePageAfterLoginCubit>.value(
           value: Routing.homePageAfterLoginCubit,
         ),
-        BlocProvider<AppCubit>.value(
-          value: Routing.appCubit,
-        ),
+        BlocProvider<AppCubit>.value(value: Routing.appCubit),
       ],
       child: StreamBuilder(
         stream: LocalDatabase.instance.themeStateListenable(),
