@@ -1,20 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
+import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
+import 'package:ditto/model/relay_configuration.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
-import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../constants/app_configs.dart';
-import '../../model/bottom_sheet_option.dart';
-import '../../model/relay_configuration.dart';
-import '../../presentation/general/widget/button.dart';
 
 part 'app_state.dart';
 
@@ -25,11 +24,13 @@ class AppCubit extends Cubit<AppState> {
       state.relaysConfigurations.map((e) => e.url).toList();
 
   AppCubit()
-      : super(AppInitial(
-          relaysConfigurations: AppConfigs.relaysUrls
-              .map((url) => RelayConfiguration(url: url))
-              .toList(),
-        )) {
+      : super(
+          AppInitial(
+            relaysConfigurations: AppConfigs.relaysUrls
+                .map((url) => RelayConfiguration(url: url))
+                .toList(),
+          ),
+        ) {
     relayUrlController = TextEditingController()
       ..addListener(
         () {
@@ -58,7 +59,6 @@ class AppCubit extends Cubit<AppState> {
           relaysConfigurations: [...state.relaysConfigurations, relay],
         ),
       );
-    } catch (e) {
     } finally {
       controller.clear();
     }
@@ -111,7 +111,7 @@ class AppCubit extends Cubit<AppState> {
     return super.close();
   }
 
-  void showRemoveRelayDialog({
+  Future showRemoveRelayDialog({
     required BuildContext context,
     required RelayConfiguration relayConfig,
   }) {

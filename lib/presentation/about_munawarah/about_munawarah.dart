@@ -1,11 +1,10 @@
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/presentation/about_munawarah/widgets/about_munawarah_content.dart';
+import 'package:ditto/presentation/about_munawarah/widgets/custom_app_bar.dart';
+import 'package:ditto/presentation/about_munawarah/widgets/title.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/app_colors.dart';
-import 'widgets/about_munawarah_content.dart';
-import 'widgets/custom_app_bar.dart';
-import 'widgets/title.dart';
 
 class AboutMunawarah extends StatelessWidget {
   const AboutMunawarah({super.key});
@@ -17,6 +16,8 @@ class AboutMunawarah extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       body: MarginedBody(
+        margin: MarginedBody.defaultMargin +
+            const EdgeInsets.symmetric(horizontal: 5),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -26,7 +27,7 @@ class AboutMunawarah extends StatelessWidget {
               AboutMunawarahTitle(),
               SizedBox(height: height * 3),
               Center(
-                child: OrDivider(onlyDivider: false, color: AppColors.black),
+                child: OrDivider(color: AppColors.black),
               ),
               SizedBox(height: height * 3),
               AboutMunawarahContent(),
@@ -34,8 +35,6 @@ class AboutMunawarah extends StatelessWidget {
             ],
           ),
         ),
-        margin: MarginedBody.defaultMargin +
-            const EdgeInsets.symmetric(horizontal: 5),
       ),
     );
   }

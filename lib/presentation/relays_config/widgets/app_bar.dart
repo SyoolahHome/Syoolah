@@ -1,8 +1,7 @@
+import 'package:ditto/presentation/navigations_screen/home/widgets/relays_widget.dart';
+import 'package:ditto/presentation/relays_config/widgets/add_relay_icon.dart';
+import 'package:ditto/presentation/relays_config/widgets/reconnect_button.dart';
 import 'package:flutter/material.dart';
-
-import '../../navigations_screen/home/widgets/relays_widget.dart';
-import 'add_relay_icon.dart';
-import 'reconnect_button.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});

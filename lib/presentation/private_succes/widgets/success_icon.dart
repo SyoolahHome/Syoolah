@@ -13,7 +13,7 @@ class SuccessIcon extends StatelessWidget {
         FadeEffect(),
         SlideEffect(begin: Offset(0, 0.5)),
       ],
-      child: Icon(
+      child: const Icon(
         FlutterRemix.checkbox_circle_line,
         size: 75,
       ),

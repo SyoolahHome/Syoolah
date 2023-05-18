@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:ditto/model/feed_category.dart';
+import 'package:ditto/model/post_asset_section_item.dart';
+import 'package:ditto/presentation/new_post/widgets/image.dart';
+import 'package:ditto/presentation/new_post/widgets/youtube.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/file_upload.dart';
@@ -9,11 +13,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../model/feed_category.dart';
-import '../../model/post_asset_section_item.dart';
-import '../../presentation/new_post/widgets/image.dart';
-import '../../presentation/new_post/widgets/youtube.dart';
 
 part 'add_new_post_state.dart';
 
@@ -26,7 +25,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   List<PostAssetSectionItem> get postAssetsSectionsWidgets => [
         PostAssetSectionItem(
-          widget: PostImage(),
+          widget: const PostImage(),
           icon: FlutterRemix.account_box_fill,
           onPressed: () {
             addImage();
@@ -35,7 +34,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         PostAssetSectionItem(
           onPressed: () {},
           icon: FlutterRemix.youtube_line,
-          widget: PostYoutube(),
+          widget: const PostYoutube(),
         ),
       ];
 
@@ -71,10 +70,8 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
       emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(
-        error: null,
-        success: null,
         isLoading: false,
-      ));
+      ),);
     }
   }
 
@@ -92,8 +89,6 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     } finally {
       emit(
         state.copyWith(
-          error: null,
-          success: null,
           isLoading: false,
           pickedImages: state.pickedImages,
           currentPostAssetsSectionIndex: state.currentPostAssetsSectionIndex,
@@ -124,7 +119,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     emit(state.copyWith(
       categories: newList,
       pickedImages: state.pickedImages,
-    ));
+    ),);
   }
 
   void removePickedImage(int imageIndex) {
@@ -193,7 +188,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     } catch (e) {
       emit(state.copyWith(error: "invalidUrl".tr()));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 

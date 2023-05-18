@@ -1,19 +1,18 @@
-import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
+import 'package:ditto/presentation/general/auth_app_handler.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:ditto/presentation/sign_up/widgets/app_bar.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import '../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../services/utils/paths.dart';
-import '../../services/utils/snackbars.dart';
-import '../general/auth_app_handler.dart';
-import '../general/widget/button.dart';
-import '../general/widget/margined_body.dart';
-import '../general/widget/title.dart';
-import 'widgets/app_bar.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -31,7 +30,7 @@ class SignUp extends StatelessWidget {
 
     final stepsLength = signUpScreens.length;
 
-    Widget widget(index) {
+    Widget widget(int index) {
       final current = signUpScreens[index];
       final labelLarge = Theme.of(context).textTheme.labelLarge;
       if (labelLarge == null) {
@@ -44,36 +43,35 @@ class SignUp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Animate(
-              child: HeadTitle(
-                title: current.title,
-                isForSection: true,
-              ),
               effects: const <Effect>[
                 FadeEffect(),
                 SlideEffect(
                   begin: Offset(-0.25, 0),
                 ),
               ],
+              child: HeadTitle(
+                title: current.title,
+                isForSection: true,
+              ),
             ),
             const SizedBox(height: height * 2),
             Animate(
+              effects: const <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(-0.25, 0),
+                ),
+              ],
+              delay: animationDuration,
               child: Text(
                 current.subtitle,
                 style: labelLarge.copyWith(
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              effects: const <Effect>[
-                FadeEffect(),
-                SlideEffect(
-                  begin: Offset(-0.25, 0),
-                ),
-              ],
-              delay: animationDuration,
             ),
             const Spacer(),
             Animate(
-              child: current.widgetBody,
               effects: const <Effect>[
                 FadeEffect(),
                 SlideEffect(
@@ -81,6 +79,7 @@ class SignUp extends StatelessWidget {
                 ),
               ],
               delay: animationDuration,
+              child: current.widgetBody,
             ),
             const Spacer(),
           ],
@@ -103,7 +102,6 @@ class SignUp extends StatelessWidget {
                     controller: cubit.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: List<Widget>.generate(stepsLength, widget),
-                    allowImplicitScrolling: false,
                   ),
                 ),
                 BlocBuilder<AuthCubit, AuthState>(
@@ -112,7 +110,7 @@ class SignUp extends StatelessWidget {
 
                     final current = signUpScreens[state.currentStepIndex - 1];
 
-                    void onMainButtonPressed() async {
+                    Future<void> onMainButtonPressed() async {
                       if (!(Routing.authCubit.state.authenticated ||
                           !isLastView)) {
                         return;
@@ -138,7 +136,9 @@ class SignUp extends StatelessWidget {
                         }
                         if (isLastView) {
                           BottomSheetService.showRouteAsBottomSheet(
-                              Paths.successAccountMade, context);
+                            Paths.successAccountMade,
+                            context,
+                          );
                           // final val = Navigator.of(context)
                           //     .pushNamed(Paths.successAccountMade);
                         } else {
@@ -174,9 +174,14 @@ class SignUp extends StatelessWidget {
                     }
 
                     final animationDuration = 600.ms;
-                    final height = 45.0;
+                    const height = 45.0;
 
                     return Animate(
+                      effects: const <Effect>[
+                        FadeEffect(),
+                        SlideEffect(begin: Offset(0, 0.25)),
+                      ],
+                      delay: animationDuration,
                       child: MarginedBody(
                         child: SizedBox(
                           width: double.infinity,
@@ -192,7 +197,7 @@ class SignUp extends StatelessWidget {
                               ),
                               if (!isLastView)
                                 Animate(
-                                  effects: <Effect>[FadeEffect()],
+                                  effects: const <Effect>[FadeEffect()],
                                   delay: 2000.ms,
                                   child: Positioned(
                                     right:
@@ -211,11 +216,6 @@ class SignUp extends StatelessWidget {
                           ),
                         ),
                       ),
-                      effects: const <Effect>[
-                        FadeEffect(),
-                        SlideEffect(begin: Offset(0, 0.25)),
-                      ],
-                      delay: animationDuration,
                     );
                   },
                 ),

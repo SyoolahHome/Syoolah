@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
-  const About({Key? key}) : super(key: key);
+  const About({super.key});
 
   @override
   AboutState createState() => AboutState();
@@ -118,8 +118,8 @@ class AboutState extends State<About> {
                       color: Colors.yellow,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    child: InkWell(
-                      child: const Text(
+                    child: const InkWell(
+                      child: Text(
                         "Follow",
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
@@ -154,8 +154,8 @@ class AboutState extends State<About> {
                       color: Colors.yellow,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    child: InkWell(
-                      child: const Text(
+                    child: const InkWell(
+                      child: Text(
                         "Follow",
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),

@@ -1,11 +1,10 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:ditto/presentation/followings/widgets/app_bar.dart';
 import 'package:ditto/presentation/followings/widgets/empty_list.dart';
 import 'package:ditto/presentation/sign_up/widgets/users_list_to_follow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'widgets/app_bar.dart';
 
 class Followings extends StatelessWidget {
   Followings({super.key});
@@ -36,7 +35,7 @@ class Followings extends StatelessWidget {
               final isEmptyFollowings = (tags ?? []).isEmpty;
 
               if (isEmptyFollowings) {
-                return EmptyList();
+                return const EmptyList();
               } else {
                 return UsersListToFollow(
                   pubKeys: tags!.map((e) => e.last).toList(),

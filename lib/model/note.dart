@@ -48,7 +48,7 @@ class Note extends Equatable {
     RegExp linkRegex = RegExp(r'https?:\/\/[^\s]+');
     Iterable<Match> matches = linkRegex.allMatches(inputString);
     List<String> links = [];
-    for (Match match in matches) {
+    for (final Match match in matches) {
       final group = match.group(0);
       if (group != null) {
         links.add(group);
@@ -66,11 +66,13 @@ class Note extends Equatable {
 
   static List<String> filterImageLinks(List<String> links) {
     return links
-        .where((link) =>
-            link.endsWith('.png') ||
-            link.endsWith('.jpg') ||
-            link.endsWith('.jpeg') ||
-            link.endsWith('.gif'))
+        .where(
+          (link) =>
+              link.endsWith('.png') ||
+              link.endsWith('.jpg') ||
+              link.endsWith('.jpeg') ||
+              link.endsWith('.gif'),
+        )
         .toList();
   }
 
@@ -94,11 +96,14 @@ class Note extends Equatable {
   // generate fromJson method
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
-      event: NostrEvent.deserialized(json['event']),
-      links: List<String>.from(json['links']),
-      noteOnly: json['noteOnly'],
-      imageLinks: List<String>.from(json['imageLinks']),
-      youtubeVideoLinks: List<String>.from(json['youtubeVideoLinks']),
+      event: NostrEvent.deserialized(json['event'] as String) as NostrEvent,
+      links: List<String>.from(json['links'] as List) ?? [],
+      noteOnly: json['noteOnly'] as String,
+      imageLinks:
+          List<String>.from(json['imageLinks'] as List) as List<String> ?? [],
+      youtubeVideoLinks: List<String>.from(json['youtubeVideoLinks'] as List)
+              as List<String> ??
+          [],
     );
   }
 }

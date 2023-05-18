@@ -16,10 +16,9 @@ class SuccessText extends StatelessWidget {
       delay: 200.ms,
       effects: const <Effect>[
         FadeEffect(),
-        SlideEffect(begin: const Offset(0, 0.5)),
+        SlideEffect(begin: Offset(0, 0.5)),
       ],
       child: Align(
-        alignment: Alignment.center,
         child: Text(
           customText ?? "keyGeneratedSuccessfullyText".tr(),
           style: Theme.of(context).textTheme.titleMedium?.copyWith(

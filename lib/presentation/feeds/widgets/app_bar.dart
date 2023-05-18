@@ -1,11 +1,9 @@
+import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/global_feed/global_feed_cubit.dart';
-import '../../../constants/app_colors.dart';
-import '../../../services/nostr/nostr_service.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -41,7 +39,7 @@ https://www.youtube.com/watch?v=PMpNhbMjDj0
               ],
             );
           },
-          icon: Icon(FlutterRemix.add_line),
+          icon: const Icon(FlutterRemix.add_line),
         ),
         IconButton(
           icon: const Icon(

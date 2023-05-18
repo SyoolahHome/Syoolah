@@ -1,11 +1,10 @@
+import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
+import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
+import 'package:ditto/presentation/sign_up/widgets/page_view_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../onboarding/widgets/animated_logo.dart';
-import 'page_view_tracker.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -28,7 +27,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               currentStepIndex: state.currentStepIndex,
               stepsLength: stepsLength,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
           ],
           leading: IconButton(
             onPressed: () {

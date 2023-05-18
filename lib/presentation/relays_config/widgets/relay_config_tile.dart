@@ -1,12 +1,11 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/model/relay_configuration.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../constants/app_colors.dart';
-import '../../../model/relay_configuration.dart';
-import '../../../services/utils/routing.dart';
-import '../../general/widget/margined_body.dart';
 
 class RelayConfigTile extends StatelessWidget {
   const RelayConfigTile({
@@ -32,11 +31,10 @@ class RelayConfigTile extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         padding: MarginedBody.defaultMargin,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(relayConfig.url),
-            Spacer(),
+            const Spacer(),
             FutureBuilder(
               future: Nostr.instance.relaysService
                   .relayInformationsDocumentNip11(relayUrl: relayConfig.url),
@@ -54,11 +52,11 @@ class RelayConfigTile extends StatelessWidget {
                 }
 
                 return Animate(
-                  effects: <Effect>[FadeEffect()],
+                  effects: const <Effect>[FadeEffect()],
                   target: snapshot.hasData ? 1 : 0,
                   child: GestureDetector(
                     onTap: () => onRelayBoxTap(context),
-                    child: Icon(
+                    child: const Icon(
                       FlutterRemix.information_line,
                     ),
                   ),

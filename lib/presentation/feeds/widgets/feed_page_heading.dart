@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import '../../../constants/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 
 class FeedPageHeading extends StatelessWidget {
   const FeedPageHeading({

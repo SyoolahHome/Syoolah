@@ -1,9 +1,8 @@
+import 'package:ditto/buisness_logic/app/app_cubit.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../../buisness_logic/app/app_cubit.dart';
-import '../../../../services/utils/paths.dart';
 
 class RelaysWidget extends StatelessWidget {
   const RelaysWidget({super.key});
@@ -13,7 +12,7 @@ class RelaysWidget extends StatelessWidget {
     return IconButton(
       style: IconButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20.0,
           vertical: 10.0,
         ),
@@ -39,7 +38,7 @@ class RelaysWidget extends StatelessWidget {
                         ),
                   ),
                   const SizedBox(width: 5),
-                  Icon(
+                  const Icon(
                     FlutterRemix.cloud_line,
                     size: 20,
                     // color: Theme.of(context).primaryColor,

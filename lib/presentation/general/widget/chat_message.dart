@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatMessage extends StatelessWidget {
-  const ChatMessage({Key? key, required this.text, required this.sender})
-      : super(key: key);
+  const ChatMessage({super.key, required this.text, required this.sender});
 
   final String text;
   final String sender;
@@ -10,7 +9,6 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 13),
@@ -25,7 +23,7 @@ class ChatMessage extends StatelessWidget {
               child: Text(
                 sender,
                 style: TextStyle(
-                    color: Colors.black, fontSize: sender == 'user' ? 14 : 30),
+                    color: Colors.black, fontSize: sender == 'user' ? 14 : 30,),
               ),
             ),
           ),

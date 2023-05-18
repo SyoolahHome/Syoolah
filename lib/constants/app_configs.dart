@@ -1,17 +1,17 @@
+import 'package:ditto/buisness_logic/app/app_cubit.dart';
+import 'package:ditto/buisness_logic/cubit/settings_cubit.dart';
+import 'package:ditto/model/feed_category.dart';
+import 'package:ditto/model/loclal_item.dart';
+import 'package:ditto/model/search_option.dart';
+import 'package:ditto/model/settings_item.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/paths.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import '../buisness_logic/app/app_cubit.dart';
-import '../buisness_logic/cubit/settings_cubit.dart';
-import '../model/feed_category.dart';
-import '../model/loclal_item.dart';
-import '../model/search_option.dart';
-import '../model/settings_item.dart';
-import '../services/utils/routing.dart';
 
 abstract class AppConfigs {
   static const relaysUrls = [
@@ -73,47 +73,47 @@ abstract class AppConfigs {
   ];
 
   static final localeItems = <LocaleItem>[
-    LocaleItem(
+    const LocaleItem(
       applyText: "Apply",
       locale: Locale('en'),
       titleName: "English",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Appliquer",
       locale: Locale('fr'),
       titleName: "Français",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Uygula",
       locale: Locale('tr'),
       titleName: "Türkçe",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Anwenden",
       locale: Locale('de'),
       titleName: "Deutsch",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Applicare",
       locale: Locale('it'),
       titleName: "Italiano",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Aplicar",
       locale: Locale('es'),
       titleName: "Español",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Aplicar",
       locale: Locale('pt'),
       titleName: "Português",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "Применять",
       locale: Locale('ru'),
       titleName: "Русский",
     ),
-    LocaleItem(
+    const LocaleItem(
       applyText: "应用",
       locale: Locale('zh'),
       titleName: "中文",
@@ -122,7 +122,7 @@ abstract class AppConfigs {
 
   static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
   static String translationsPath = 'assets/translations';
-  static Locale fallbackLocale = Locale('en');
+  static Locale fallbackLocale = const Locale('en');
 
   static final feedsSearchOptions = [
     SearchOption(
@@ -130,7 +130,7 @@ abstract class AppConfigs {
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where((note) =>
-              note.event.pubkey.toLowerCase().contains(string.toLowerCase()))
+              note.event.pubkey.toLowerCase().contains(string.toLowerCase()),)
           .toList(),
       useSearchQuery: true,
     ),
@@ -139,7 +139,7 @@ abstract class AppConfigs {
       isSelected: true,
       searchFunction: (noteList, string) => noteList
           .where((note) =>
-              note.event.content.toLowerCase().contains(string.toLowerCase()))
+              note.event.content.toLowerCase().contains(string.toLowerCase()),)
           .toList(),
       useSearchQuery: true,
     ),
@@ -151,7 +151,7 @@ abstract class AppConfigs {
               note.event.createdAt.toString().contains(string) ||
               note.event.createdAt.millisecondsSinceEpoch
                   .toString()
-                  .contains(string))
+                  .contains(string),)
           .toList(),
       useSearchQuery: true,
     ),
@@ -161,7 +161,7 @@ abstract class AppConfigs {
       searchFunction: (noteList, string) => noteList
           .where((note) => note.event.content
               .toLowerCase()
-              .contains('#$string'.toLowerCase()))
+              .contains('#$string'.toLowerCase()),)
           .toList(),
       useSearchQuery: true,
     ),
@@ -271,7 +271,7 @@ abstract class AppConfigs {
     'What is the importance of prayer in Islam?',
     'What is the month of Ramadan and why is it important in Islam?',
     'What is Zakat and why is it important in Islam?',
-    'What is the Islamic view on women\'s rights?',
+    "What is the Islamic view on women's rights?",
     'What is the concept of Jihad in Islam?',
     'What is the Islamic view on homosexuality?',
     'What is the punishment for apostasy in Islam?',
@@ -284,5 +284,5 @@ abstract class AppConfigs {
     'What is the Islamic view on democracy and secularism?',
   ];
 
-  static final version = '1.0.0';
+  static const version = '1.0.0';
 }

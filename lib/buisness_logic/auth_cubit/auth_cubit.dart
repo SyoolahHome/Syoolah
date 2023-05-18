@@ -2,9 +2,17 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/model/sign_up_step_view.dart';
+import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/text_field.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
+import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
+import 'package:ditto/presentation/sign_up/widgets/avatar_upload.dart';
+import 'package:ditto/presentation/sign_up/widgets/users_list_to_follow.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
-import 'package:ditto/services/utils/extensions.dart';
+import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/file_upload.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -12,17 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../main.dart';
-import '../../model/sign_up_step_view.dart';
-import '../../model/user_meta_data.dart';
-import '../../presentation/general/text_field.dart';
-import '../../presentation/private_succes/widgets/key_section.dart';
-import '../../presentation/sign_up/widgets/avatar_upload.dart';
-import '../../presentation/sign_up/widgets/users_list_to_follow.dart';
-import '../../services/database/local/local_database.dart';
-import '../../services/nostr/nostr_service.dart';
-import '../../services/utils/app_utils.dart';
-import '../../services/utils/file_upload.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -61,17 +59,16 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         authenticated: true,
         pickedImage: state.pickedImage,
-      ));
+      ),);
     } catch (e) {
       emit(state.copyWith(
         error: e.toString(),
         pickedImage: state.pickedImage,
-      ));
+      ),);
     } finally {
       emit(state.copyWith(
-        error: null,
         pickedImage: state.pickedImage,
-      ));
+      ),);
     }
   }
 
@@ -94,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         error: "pleaseEnterKey".tr(),
         pickedImage: state.pickedImage,
-      ));
+      ),);
 
       return;
     }
@@ -102,7 +99,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         error: "invalidKey".tr(),
         pickedImage: state.pickedImage,
-      ));
+      ),);
 
       return;
     }
@@ -113,14 +110,14 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         authenticated: true,
         pickedImage: state.pickedImage,
-      ));
+      ),);
     } catch (e) {
       emit(state.copyWith(
         error: "invalidKey".tr(),
         pickedImage: state.pickedImage,
-      ));
+      ),);
     } finally {
-      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
+      emit(state.copyWith(pickedImage: state.pickedImage));
     }
   }
 
@@ -129,7 +126,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(
       isSignedOut: true,
       pickedImage: state.pickedImage,
-    ));
+    ),);
   }
 
   void copyPrivateKey() {
@@ -141,22 +138,22 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(
         error: "couldNotCopyKey".tr(),
         pickedImage: state.pickedImage,
-      ));
+      ),);
     }
   }
 
   void gotoNext() {
-    final _internalPageController = pageController;
-    if (_internalPageController == null) {
+    final internalPageController = pageController;
+    if (internalPageController == null) {
       return;
     }
-    final _internalPageControllerPage = _internalPageController.page;
-    if (_internalPageControllerPage == null) {
+    final internalPageControllerPage = internalPageController.page;
+    if (internalPageControllerPage == null) {
       return;
     }
 
-    if (_internalPageControllerPage.round() + 1 < signUpScreens.length) {
-      _internalPageController.nextPage(
+    if (internalPageControllerPage.round() + 1 < signUpScreens.length) {
+      internalPageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -164,17 +161,17 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void previousStep() {
-    final _internalPageController = pageController;
-    if (_internalPageController == null) {
+    final internalPageController = pageController;
+    if (internalPageController == null) {
       return;
     }
-    final _internalPageControllerPage = _internalPageController.page;
-    if (_internalPageControllerPage == null) {
+    final internalPageControllerPage = internalPageController.page;
+    if (internalPageControllerPage == null) {
       return;
     }
 
-    if (_internalPageControllerPage.round() - 1 >= 0) {
-      _internalPageController.previousPage(
+    if (internalPageControllerPage.round() - 1 >= 0) {
+      internalPageController.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -195,7 +192,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
-      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
+      emit(state.copyWith(pickedImage: state.pickedImage));
     }
   }
 
@@ -213,7 +210,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
-      emit(state.copyWith(error: null, pickedImage: state.pickedImage));
+      emit(state.copyWith(pickedImage: state.pickedImage));
     }
   }
 
@@ -223,7 +220,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (name.isEmpty) {
       emit(state.copyWith(
         isGeneratingNewPrivateKey: false,
-      ));
+      ),);
 
       throw "pleaseEnterName".tr();
     }
@@ -239,24 +236,24 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(
       isGeneratingNewPrivateKey: false,
       pickedImage: state.pickedImage,
-    ));
+    ),);
   }
 
   void _init() {
     pageController = PageController()
       ..addListener(() {
-        final _internalPageController = pageController;
-        if (_internalPageController == null) {
+        final internalPageController = pageController;
+        if (internalPageController == null) {
           return;
         }
-        final _internalPageControllerPage = _internalPageController.page;
-        if (_internalPageControllerPage == null) {
+        final internalPageControllerPage = internalPageController.page;
+        if (internalPageControllerPage == null) {
           return;
         }
 
         emit(
           state.copyWith(
-            currentStepIndex: _internalPageControllerPage.round() + 1,
+            currentStepIndex: internalPageControllerPage.round() + 1,
             pickedImage: state.pickedImage,
           ),
         );
@@ -303,10 +300,10 @@ class AuthCubit extends Cubit<AuthState> {
           final fullName = nameController?.text ?? '';
 
           usernameController!.text = "@${fullName.split(' ').join('_')}";
-          final minAcceptableUsernameLength = 2;
+          const minAcceptableUsernameLength = 2;
 
           return Future.value(usernameController!.text.isNotEmpty &&
-              usernameController!.text.length >= minAcceptableUsernameLength);
+              usernameController!.text.length >= minAcceptableUsernameLength,);
         },
       ),
       SignUpStepView(
@@ -358,7 +355,7 @@ class AuthCubit extends Cubit<AuthState> {
         subtitle: "yourPrivateKeySubtitle".tr(),
         widgetBody: Builder(
           builder: (context) {
-            final iconColorOpacity = 0.05;
+            const iconColorOpacity = 0.05;
 
             return Center(
               child: IconButton(
@@ -461,6 +458,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void removePickedImage() {
-    emit(state.copyWith(pickedImage: null));
+    emit(state.copyWith());
   }
 }

@@ -2,8 +2,6 @@ import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../../constants/app_colors.dart';
-
 class NoteDateOfCreationAgo extends StatelessWidget {
   const NoteDateOfCreationAgo({
     super.key,
@@ -46,17 +44,17 @@ class NoteDateOfCreationAgo extends StatelessWidget {
 
   EdgeInsets paddingDecider() {
     if (isSmall) {
-      return EdgeInsets.symmetric(
+      return const EdgeInsets.symmetric(
         horizontal: 5,
         vertical: 2.5,
       );
     } else if (isMedium) {
-      return EdgeInsets.symmetric(
+      return const EdgeInsets.symmetric(
         horizontal: 7.5,
         vertical: 5,
       );
     } else {
-      return EdgeInsets.symmetric(
+      return const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 7.5,
       );

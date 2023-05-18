@@ -1,12 +1,12 @@
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/paths.dart';
+import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../services/utils/paths.dart';
-import '../../../services/utils/snackbars.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key});
@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
     final cubit = context.read<AuthCubit>();
 
     return Animate(
-      effects: [
+      effects: const [
         FadeEffect(),
         SlideEffect(begin: Offset(0, 0.5)),
       ],

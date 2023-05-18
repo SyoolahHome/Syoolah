@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditto/presentation/general/custom_cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../general/custom_cached_network_image.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({

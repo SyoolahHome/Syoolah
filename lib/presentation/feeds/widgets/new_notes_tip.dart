@@ -1,9 +1,8 @@
+import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/global_feed/global_feed_cubit.dart';
 
 class NewNotesTip extends StatelessWidget {
   const NewNotesTip({super.key});
@@ -20,7 +19,7 @@ class NewNotesTip extends StatelessWidget {
 
         return Animate(
           target: isThereNewPosts ? 1 : 0,
-          effects: [
+          effects: const [
             FadeEffect(begin: 0, end: 1),
             ScaleEffect(begin: Offset(0.5, 0.5), end: Offset(1, 1)),
           ],
@@ -30,7 +29,7 @@ class NewNotesTip extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.background,
                 foregroundColor: Theme.of(context).colorScheme.onBackground,
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w400,
                     ),
@@ -44,7 +43,7 @@ class NewNotesTip extends StatelessWidget {
                 effects: [FadeEffect(duration: 50.ms)],
                 child: Text("New $newTweets Notes"),
               ),
-              icon: Icon(
+              icon: const Icon(
                 FlutterRemix.arrow_up_line,
                 size: 19,
               ),

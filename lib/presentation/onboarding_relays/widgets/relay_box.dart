@@ -1,13 +1,14 @@
 import 'dart:io';
 
+import 'package:dart_nostr/nostr/model/relay_informations.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/model/relay_configuration.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/routing.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../constants/app_colors.dart';
-import '../../../model/relay_configuration.dart';
-import '../../../services/utils/routing.dart';
-import '../../general/widget/margined_body.dart';
 
 class RelayBox extends StatelessWidget {
   const RelayBox({
@@ -31,7 +32,7 @@ class RelayBox extends StatelessWidget {
     return Routing.appCubit.showRelayOptionsSheet(
       context,
       relay: relay,
-      relayInformations: snapshot!.data,
+      relayInformations: snapshot!.data as RelayInformations,
     );
   }
 
@@ -75,7 +76,7 @@ class RelayBox extends StatelessWidget {
           margin: const EdgeInsets.only(top: 7.5),
           child: Text(
             snapshot?.hasData ?? false
-                ? snapshot!.data!.description
+                ? snapshot!.data!.description as String
                 : "relayDescriptionError".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color:

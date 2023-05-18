@@ -1,3 +1,5 @@
+import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
+import 'package:ditto/presentation/general/text_field.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -5,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/cubit/chat_cubit.dart';
-import '../../general/text_field.dart';
 
 class MessageSection extends StatelessWidget {
   const MessageSection({super.key});
@@ -19,9 +18,8 @@ class MessageSection extends StatelessWidget {
 
     return Animate(
       delay: 1400.ms,
-      effects: <Effect>[FadeEffect()],
+      effects: const <Effect>[FadeEffect()],
       child: Material(
-        elevation: 0,
         color: Colors.transparent,
         child: Container(
           margin: const EdgeInsets.only(bottom: 10) +
@@ -32,7 +30,7 @@ class MessageSection extends StatelessWidget {
               CustomTextField(
                 focusNode: cubit.focusNode,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 bgColor: Color(Theme.of(context).colorScheme.onPrimary.value),
                 controller: cubit.userMessageController,
                 hint: "askQuestionHere".tr() ?? hint,
@@ -40,12 +38,12 @@ class MessageSection extends StatelessWidget {
               ),
               Animate(
                 delay: 1800.ms,
-                effects: <Effect>[FadeEffect()],
+                effects: const <Effect>[FadeEffect()],
                 child: Container(
                   margin: const EdgeInsets.only(right: 10),
                   color: Theme.of(context).colorScheme.onPrimary,
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       FlutterRemix.chat_1_line,
                       size: 18,
                     ),

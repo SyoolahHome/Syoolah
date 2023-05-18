@@ -1,9 +1,8 @@
+import 'package:ditto/buisness_logic/cubit/nostr_service_loading_cubit.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/cubit/nostr_service_loading_cubit.dart';
-import '../../services/utils/paths.dart';
 
 class NostrServiceLoading extends StatelessWidget {
   const NostrServiceLoading({super.key});
@@ -35,10 +34,9 @@ class NostrServiceLoading extends StatelessWidget {
                     width: double.infinity,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
+                      children: const <Widget>[
                         MunawarahLogo(width: 150),
-                        const SizedBox(height: 40),
+                        SizedBox(height: 40),
                         LinearProgressIndicator(),
                       ],
                     ),

@@ -1,8 +1,7 @@
+import 'package:ditto/presentation/navigations_screen/home/widgets/relays_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import 'relays_widget.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -14,7 +13,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       leading: Center(
         child: Animate(
-          effects: [FadeEffect()],
+          effects: const [FadeEffect()],
           child: IconButton(
             style: IconButton.styleFrom(
               backgroundColor:
@@ -28,7 +27,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       actions: AnimateList(
-        effects: [FadeEffect()],
+        effects: [const FadeEffect()],
         children: const <Widget>[
           RelaysWidget(),
           SizedBox(width: 20),

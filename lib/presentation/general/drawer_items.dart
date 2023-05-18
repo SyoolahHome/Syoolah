@@ -1,10 +1,9 @@
+import 'package:ditto/model/drawer_list_time_item.dart';
+import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../services/database/local/local_database.dart';
-import '../../services/utils/paths.dart';
-import '../../model/drawer_list_time_item.dart';
 
 abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [

@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../services/database/local/local_database.dart';
 
 part 'users_list_to_follow_state.dart';
 
@@ -51,7 +50,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
   void followUser(String pubKey) {
     NostrEvent newEvent;
 
-    final contactListNostrEventKind = 3;
+    const contactListNostrEventKind = 3;
     final curerntUserPrivateKey = LocalDatabase.instance.getPrivateKey();
     if (curerntUserPrivateKey == null) {
       return;
@@ -90,7 +89,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
 
     NostrEvent newEvent = currentUserFollowing.copyWith(tags: [
       ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
-    ]);
+    ],);
 
     NostrService.instance.setFollowingsEvent(newEvent);
   }

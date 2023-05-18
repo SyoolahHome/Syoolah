@@ -52,7 +52,7 @@ class AvatarUpload extends StatelessWidget {
                                     color: Theme.of(context)
                                         .colorScheme
                                         .background,
-                                    shape: BoxShape.circle),
+                                    shape: BoxShape.circle,),
                                 child: Icon(
                                   FlutterRemix.close_line,
                                   size: 20,

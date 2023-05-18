@@ -1,11 +1,8 @@
+import 'package:ditto/presentation/general/widget/note_card/wudgets/image_content.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
-
-import '../../../../../constants/app_colors.dart';
-import 'image_content.dart';
-import 'image_full_view..dart';
-import 'note_youtube_player.dart';
 
 class NoteContents extends StatelessWidget {
   const NoteContents({
@@ -40,7 +37,6 @@ class NoteContents extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: imageLinks.map(
                   (link) {
@@ -56,7 +52,7 @@ class NoteContents extends StatelessWidget {
                       ),
                     );
                   },
-                ).toList()),
+                ).toList(),),
           ),
         // const SizedBox(height: 20),
         if (youtubeVideosLinks.isNotEmpty)

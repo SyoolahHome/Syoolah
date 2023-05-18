@@ -2,26 +2,25 @@ import 'dart:math';
 
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/model/relay_configuration.dart';
+import 'package:ditto/presentation/add_relay/add_relay.dart';
+import 'package:ditto/presentation/current_user_keys/widgets/private_key_section.dart';
+import 'package:ditto/presentation/feeds/widgets/search.dart';
+import 'package:ditto/presentation/new_post/add_new_post.dart';
+import 'package:ditto/presentation/private_succes/private_key.dart';
+import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
+import 'package:ditto/presentation/profile_options/profile_options.dart';
+import 'package:ditto/presentation/youtube_video_widget/youtube_video_widget.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/bottom_sheet_option.dart';
-import '../../presentation/add_relay/add_relay.dart';
-import '../../presentation/current_user_keys/widgets/private_key_section.dart';
-import '../../presentation/feeds/widgets/search.dart';
-import '../../presentation/new_post/add_new_post.dart';
-import '../../presentation/private_succes/private_key.dart';
-import '../../presentation/private_succes/private_key_gen_success.dart';
-import '../../presentation/profile_options/profile_options.dart';
-import '../../presentation/youtube_video_widget/youtube_video_widget.dart';
-import '../utils/paths.dart';
-
 abstract class BottomSheetService {
-  static showCreatePostBottomSheet(BuildContext context) {
+  static Future showCreatePostBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
@@ -34,7 +33,7 @@ abstract class BottomSheetService {
     );
   }
 
-  static noteComments(
+  static Future noteComments(
     BuildContext context, {
     required Note note,
   }) {
@@ -50,7 +49,7 @@ abstract class BottomSheetService {
     );
   }
 
-  static showSearch(BuildContext context, GlobalFeedCubit cubit) {
+  static Future showSearch(BuildContext context, GlobalFeedCubit cubit) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
@@ -264,8 +263,7 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
-          title: message.message.substring(0, min(message.message.length, 20)) +
-              '...',
+          title: '${message.message.substring(0, min(message.message.length, 20))}...',
         );
       },
       clipBehavior: Clip.hardEdge,
@@ -290,7 +288,7 @@ abstract class BottomSheetService {
     );
   }
 
-  static showYoututbeVideoBottomSheet(
+  static Future showYoututbeVideoBottomSheet(
     BuildContext context, {
     required String url,
     required VoidCallback onAccept,

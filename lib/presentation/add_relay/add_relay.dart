@@ -1,13 +1,12 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
+import 'package:ditto/presentation/add_relay/widgets/add_button.dart';
+import 'package:ditto/presentation/add_relay/widgets/field.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../services/utils/routing.dart';
-import '../general/widget/margined_body.dart';
-import 'widgets/add_button.dart';
-import 'widgets/field.dart';
 
 class AddRelayWidget extends StatelessWidget {
   const AddRelayWidget({

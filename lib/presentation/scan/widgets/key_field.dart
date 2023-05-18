@@ -1,11 +1,11 @@
+import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../buisness_logic/auth_cubit/auth_cubit.dart';
 
 class KeyField extends StatelessWidget {
   const KeyField({
@@ -20,7 +20,7 @@ class KeyField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Animate(
-          effects: [
+          effects: const [
             FadeEffect(),
             SlideEffect(begin: Offset(-0.25, 0)),
           ],
@@ -35,7 +35,7 @@ class KeyField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         Animate(
-          effects: [
+          effects: const [
             FadeEffect(),
             SlideEffect(begin: Offset(-0.25, 0)),
           ],

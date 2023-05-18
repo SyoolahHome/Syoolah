@@ -1,15 +1,15 @@
 import 'dart:convert';
+
+import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
+import 'package:ditto/model/note.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_actions.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_bg.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_contents.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
-import '../../../../model/note.dart';
-import '../../../../services/nostr/nostr_service.dart';
-import 'wudgets/note_actions.dart';
-import 'wudgets/note_avatat_and_name.dart';
-import 'wudgets/note_bg.dart';
-import 'wudgets/note_contents.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({

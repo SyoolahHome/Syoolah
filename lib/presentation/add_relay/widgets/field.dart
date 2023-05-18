@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:ditto/presentation/general/text_field.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../services/utils/routing.dart';
-import '../../general/text_field.dart';
+import 'package:flutter/material.dart';
 
 class RelayUrlField extends StatelessWidget {
   const RelayUrlField({super.key});

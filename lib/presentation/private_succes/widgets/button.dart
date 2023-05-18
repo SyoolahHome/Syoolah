@@ -1,8 +1,7 @@
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../general/widget/button.dart';
 
 class StartButton extends StatelessWidget {
   const StartButton({super.key});

@@ -1,8 +1,6 @@
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../constants/app_colors.dart';
-
 class NoteOwnerUsername extends StatelessWidget {
   const NoteOwnerUsername({
     super.key,

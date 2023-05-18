@@ -1,9 +1,9 @@
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:flutter/material.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../services/bottom_sheet/bottom_sheet_service.dart';
-import '../../../services/database/local/local_database.dart';
-import '../../general/widget/button.dart';
+import 'package:flutter/material.dart';
 
 enum HiddenPrivateKeySectionType {
   privateKey,
@@ -21,16 +21,12 @@ class HiddenPrivateKeySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final privateKey = LocalDatabase.instance.getPrivateKey()!;
 
-    final hiddenPrivateKey = privateKey.substring(0, 7) +
-        '...' +
-        privateKey.substring(privateKey.length - 7, privateKey.length);
+    final hiddenPrivateKey = '${privateKey.substring(0, 7)}...${privateKey.substring(privateKey.length - 7, privateKey.length)}';
 
     final nsecKey =
         Nostr.instance.keysService.encodePrivateKeyToNsec(privateKey);
 
-    final hiddenNsecKey = nsecKey.substring(0, 5) +
-        '...' +
-        nsecKey.substring(nsecKey.length - 5, nsecKey.length);
+    final hiddenNsecKey = '${nsecKey.substring(0, 5)}...${nsecKey.substring(nsecKey.length - 5, nsecKey.length)}';
 
     final hiddenKey = type == HiddenPrivateKeySectionType.privateKey
         ? hiddenPrivateKey

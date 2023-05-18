@@ -1,15 +1,13 @@
 import 'dart:math';
 
+import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
+import 'package:ditto/presentation/chat/widgets/chat_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/cubit/chat_cubit.dart';
-import 'chat_section.dart';
 
 class EmptyChatWidget extends StatelessWidget {
   const EmptyChatWidget({
@@ -43,17 +41,17 @@ class EmptyChatWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Spacer(),
-          MessageSection(),
-          Spacer(),
+          const Spacer(),
+          const MessageSection(),
+          const Spacer(),
 
-          Center(child: OrDivider(onlyDivider: true)),
+          const Center(child: OrDivider(onlyDivider: true)),
           // SizedBox(height: height * 4),
           // Text(
           //   "startConversation".tr() + ":",
           //   style: Theme.of(context).textTheme.bodyMedium,
           // ),
-          SizedBox(height: height),
+          const SizedBox(height: height),
           MarginedBody(
             child: Column(
               children: AnimateList(
@@ -67,7 +65,7 @@ class EmptyChatWidget extends StatelessWidget {
                     final current = qst;
                     return Container(
                       width: double.infinity,
-                      margin: EdgeInsets.symmetric(vertical: 16.0),
+                      margin: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Material(
                         color:
                             Theme.of(context).colorScheme.onTertiaryContainer,
@@ -86,7 +84,7 @@ class EmptyChatWidget extends StatelessWidget {
                           splashColor: Colors.transparent,
                           child: Container(
                             padding: MarginedBody.defaultMargin +
-                                EdgeInsets.symmetric(vertical: 15.0),
+                                const EdgeInsets.symmetric(vertical: 15.0),
                             child: Row(
                               children: <Widget>[
                                 Text(
@@ -94,7 +92,7 @@ class EmptyChatWidget extends StatelessWidget {
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 const Spacer(),
-                                Icon(
+                                const Icon(
                                   FlutterRemix.bubble_chart_line,
                                   size: 20,
                                 ),

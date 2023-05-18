@@ -1,6 +1,5 @@
+import 'package:ditto/services/database/local/base/local_database_base.dart';
 import 'package:hive_flutter/adapters.dart';
-
-import 'base/local_database_base.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
   final String dbName = "local_database";
@@ -15,7 +14,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   @override
-  getValue(String key) {
+  dynamic getValue(String key) {
     return Hive.box(dbName).get(key);
   }
 
@@ -50,7 +49,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   String? getPrivateKey() {
-    return getValue("privateKey");
+    return getValue("privateKey") as String?;
   }
 
   @override
@@ -59,7 +58,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   Stream<String?> getPrivateKeyStream() {
-    return getStream("privateKey").map((event) => event);
+    return getStream("privateKey").map((event) => event as String?);
   }
 
   @override
@@ -77,7 +76,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }
 
   bool getThemeState() {
-    return getValue("themeState") ?? false;
+    return getValue("themeState") as bool? ?? false;
   }
 
   Future<void> toggleThemeState() {

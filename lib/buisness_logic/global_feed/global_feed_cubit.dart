@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/model/note.dart';
+import 'package:ditto/model/search_option.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/app_configs.dart';
-import '../../model/note.dart';
-import '../../model/search_option.dart';
-import '../../services/bottom_sheet/bottom_sheet_service.dart';
 
 part 'global_feed_state.dart';
 
@@ -36,7 +35,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     return super.close();
   }
 
-  void showSearch(BuildContext context) {
+  Future<void> showSearch(BuildContext context) {
     return BottomSheetService.showSearch(context, this);
   }
 
@@ -61,22 +60,23 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     // emit(state.copyWith(searchOptions: searchOptions));
   }
 
-  void pickDateRange(BuildContext context) async {
+  Future<void> pickDateRange(BuildContext context) async {
     final rangeDate = await showDateRangePicker(
-        context: context,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime.now(),
-        initialEntryMode: DatePickerEntryMode.calendarOnly,
-        builder: (context, widget) {
-          return Theme(
-            data: ThemeData.from(
-              colorScheme: Theme.of(context).brightness == Brightness.light
-                  ? ColorScheme.light(primary: Colors.black)
-                  : ColorScheme.dark(primary: Colors.white),
-            ),
-            child: widget!,
-          );
-        });
+      context: context,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime.now(),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (context, widget) {
+        return Theme(
+          data: ThemeData.from(
+            colorScheme: Theme.of(context).brightness == Brightness.light
+                ? const ColorScheme.light(primary: Colors.black)
+                : const ColorScheme.dark(primary: Colors.white),
+          ),
+          child: widget!,
+        );
+      },
+    );
 
     if (rangeDate != null) {
       emit(state.copyWith(dateRange: rangeDate));
@@ -123,7 +123,6 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     emit(
       state.copyWith(
         searchedFeedNotesPosts: [],
-        dateRange: null,
         searchOptions: state.searchOptions
             .map((e) => e.copyWith(isSelected: false))
             .toList(),
@@ -151,7 +150,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
         }
 
         if (shouldWaitXSecondsToUpdateFirstUI) {
-          Future.delayed(Duration(milliseconds: 1000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             showNewestPostsToUI();
             shouldWaitXSecondsToUpdateFirstUI = false;
           });
@@ -167,7 +166,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   void goTop() {
     scrollController?.animateTo(
       0,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }

@@ -1,19 +1,19 @@
 import 'dart:convert';
+
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/about.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/app_bar.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/name.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/profile_and_dart.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/tab_view.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/tabs.dart';
+import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../buisness_logic/profile/profile_cubit.dart';
-import '../../../model/user_meta_data.dart';
-import '../../../services/nostr/nostr_service.dart';
-import '../../sign_up/widgets/or_divider.dart';
-import 'widgets/about.dart';
-
-import 'widgets/app_bar.dart';
-import 'widgets/name.dart';
-import 'widgets/profile_and_dart.dart';
-import 'widgets/tab_view.dart';
-import 'widgets/tabs.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -48,14 +48,13 @@ class Profile extends StatelessWidget {
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return <Widget>[
                         SliverToBoxAdapter(
-                            child: CustomAppBar(userMetadata: metadata)),
+                            child: CustomAppBar(userMetadata: metadata),),
                         SliverToBoxAdapter(
                           child: Builder(
                             builder: (context) {
                               return MarginedBody(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     const SizedBox(height: height * 2),
                                     ProfileHeader(metadata: metadata),
@@ -68,7 +67,7 @@ class Profile extends StatelessWidget {
                                     ProfileAbout(metadata: metadata),
                                     const SizedBox(height: height * 2),
                                     Animate(
-                                      effects: [FadeEffect()],
+                                      effects: const [FadeEffect()],
                                       delay: 1000.ms,
                                       child: const OrDivider(),
                                     ),
@@ -86,12 +85,12 @@ class Profile extends StatelessWidget {
                       removeTop: true,
                       context: context,
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
                         child: const ProfileTabView(),
                       ),
                     ),
                   );
-                });
+                },);
               },
             ),
           );

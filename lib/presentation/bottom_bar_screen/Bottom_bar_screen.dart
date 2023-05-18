@@ -1,14 +1,11 @@
+import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
+import 'package:ditto/buisness_logic/global/global_cubit.dart';
+import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:transitioned_indexed_stack/transitioned_indexed_stack.dart';
-
-import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
-import '../../buisness_logic/global/global_cubit.dart';
-import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
-import '../../model/bottom_bar_item.dart';
-import '../../services/nostr/nostr_service.dart';
-import 'widgets/bottom_bar.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({

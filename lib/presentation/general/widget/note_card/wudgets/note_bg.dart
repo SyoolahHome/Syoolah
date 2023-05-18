@@ -1,10 +1,8 @@
 import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:ditto/model/note.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../constants/app_colors.dart';
-import '../../margined_body.dart';
 
 class NoteContainer extends StatelessWidget {
   const NoteContainer({
@@ -40,7 +38,7 @@ class NoteContainer extends StatelessWidget {
               },
               onLongPress: () {
                 feedBoxCubit.showOptions(context,
-                    note: note, onCommentsSectionTapped: () {});
+                    note: note, onCommentsSectionTapped: () {},);
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
@@ -69,7 +67,7 @@ class NoteContainer extends StatelessWidget {
             );
           },
         );
-      }),
+      },),
     );
   }
 }

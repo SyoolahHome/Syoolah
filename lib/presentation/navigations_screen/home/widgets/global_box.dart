@@ -1,11 +1,9 @@
+import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/feed_box/feed_box_cubit.dart';
-import '../../../../constants/app_colors.dart';
 
 class FeedBox extends StatelessWidget {
   const FeedBox({
@@ -102,12 +100,12 @@ class FeedBox extends StatelessWidget {
                         Icon(icon, color: Theme.of(context).iconTheme.color),
                       ],
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Animate(
                         delay: 800.ms,
-                        effects: [
+                        effects: const [
                           FadeEffect(),
                         ],
                         child: MunawarahButton(

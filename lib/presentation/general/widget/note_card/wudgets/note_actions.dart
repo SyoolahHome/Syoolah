@@ -1,14 +1,12 @@
 import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
+import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
+import 'package:ditto/model/note.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../../../buisness_logic/note_card_cubit/note_card_cubit.dart';
-import '../../../../../constants/app_colors.dart';
-import '../../../../../model/note.dart';
-import '../../../../../services/utils/paths.dart';
-import 'note_vreation_ago.dart';
 
 class NoteActions extends StatelessWidget {
   const NoteActions({
@@ -92,7 +90,7 @@ class NoteActions extends StatelessWidget {
                             .pushNamed(Paths.commentsSection, arguments: {
                           'note': note,
                           'cubit': cubit,
-                        });
+                        },);
                       },
                       bgColor: Theme.of(context).colorScheme.onPrimary,
                       color: DefaultTextStyle.of(context).style.color!,

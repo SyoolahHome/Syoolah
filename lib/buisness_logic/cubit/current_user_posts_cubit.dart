@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:dart_nostr/nostr/model/nostr_eve,ts_stream.dart';
 import 'package:equatable/equatable.dart';
 
 part 'current_user_posts_state.dart';

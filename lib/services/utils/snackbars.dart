@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/app_colors.dart';
-
 abstract class SnackBars {
   static ScaffoldFeatureController text(
     BuildContext context,

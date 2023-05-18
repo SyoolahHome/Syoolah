@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:ditto/presentation/general/widget/note_card/wudgets/image_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import 'image_content.dart';
 
 class ImageFullView extends StatelessWidget {
   const ImageFullView({
@@ -45,7 +44,7 @@ class ImageFullView extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-              )),
+              ),),
         ],
       ),
     );

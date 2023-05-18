@@ -1,13 +1,13 @@
+import 'package:ditto/presentation/auth_choose/widgets/app_bar.dart';
+import 'package:ditto/presentation/auth_choose/widgets/box.dart';
+import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/utils/paths.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../services/utils/paths.dart';
-import '../general/widget/bottom_sheet_title_with_button.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/box.dart';
 
 class AuthChoose extends StatelessWidget {
   const AuthChoose({super.key});
@@ -23,7 +23,7 @@ class AuthChoose extends StatelessWidget {
         children: <Widget>[
           if (isShownInBottomSheet) ...[
             Padding(
-              padding: EdgeInsets.symmetric(vertical: height * 2),
+              padding: const EdgeInsets.symmetric(vertical: height * 2),
               child: MarginedBody(
                 child: BottomSheetTitleWithIconButton(
                   title: "chooseAuth".tr(),
@@ -50,7 +50,7 @@ class AuthChoose extends StatelessWidget {
                   targetRoutePath: Paths.SignUp,
                 ),
                 const SizedBox(height: height * 3),
-                OrDivider(
+                const OrDivider(
                   onlyDivider: true,
                   // color: Theme.of(context).primaryColorDark,
                 ),

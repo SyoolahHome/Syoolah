@@ -1,7 +1,7 @@
 import 'package:dart_openai/openai.dart';
 import 'package:ditto/env/env.dart';
 
-import '../../model/chat_message.dart';
+import 'package:ditto/model/chat_message.dart';
 
 class OpenAIService {
   static final OpenAIService _instance = OpenAIService._();
@@ -28,7 +28,7 @@ class OpenAIService {
         .createStream(model: modelId, messages: [
           systemInstructionMessage,
           ...messages,
-        ])
+        ],)
         .where(_responseMessageIsValid)
         .map(_extractOnlyResposeMessage);
   }

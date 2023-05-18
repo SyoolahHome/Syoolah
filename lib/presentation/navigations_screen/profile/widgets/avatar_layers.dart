@@ -1,14 +1,13 @@
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/image_full_view..dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/avatar.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/avatar_border.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/avatar_neon.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/avatar_neon_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/profile/profile_cubit.dart';
-import '../../../../model/user_meta_data.dart';
-import '../../../general/widget/note_card/wudgets/image_full_view..dart';
-import 'avatar.dart';
-import 'avatar_border.dart';
-import 'avatar_neon.dart';
-import 'avatar_neon_border.dart';
 
 class AvatarLayers extends StatelessWidget {
   const AvatarLayers({
@@ -21,7 +20,7 @@ class AvatarLayers extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
 
-    void onFullView() async {
+    Future<void> onFullView() async {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ImageFullView(
@@ -33,7 +32,7 @@ class AvatarLayers extends StatelessWidget {
     }
 
     return Animate(
-      effects: [FadeEffect()],
+      effects: const [FadeEffect()],
       delay: 200.ms,
       child: GestureDetector(
         onPanDown: (_) => cubit.scaleAvatarDown(),

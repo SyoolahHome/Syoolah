@@ -1,8 +1,7 @@
+import 'package:ditto/constants/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../../constants/app_colors.dart';
 
 class MunawarahShortDescription extends StatelessWidget {
   const MunawarahShortDescription({super.key});

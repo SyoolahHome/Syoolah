@@ -1,12 +1,11 @@
+import 'package:ditto/buisness_logic/private_key_gen_success_cubit/private_key_gen_success_cubit.dart';
+import 'package:ditto/presentation/current_user_keys/widgets/private_key_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:ditto/presentation/private_succes/widgets/button.dart';
+import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/private_key_gen_success_cubit/private_key_gen_success_cubit.dart';
-import '../current_user_keys/widgets/private_key_section.dart';
-import '../general/widget/title.dart';
-import 'widgets/button.dart';
-import 'widgets/key_section.dart';
 
 class PrivateKey extends StatelessWidget {
   const PrivateKey({
@@ -32,17 +31,17 @@ class PrivateKey extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                SizedBox(height: heightSeparator * 2),
+                const SizedBox(height: heightSeparator * 2),
                 HeadTitle(title: title),
-                SizedBox(height: heightSeparator * 2),
+                const SizedBox(height: heightSeparator * 2),
                 KeySection(
                   type: type == HiddenPrivateKeySectionType.privateKey
                       ? KeySectionType.privateKey
                       : KeySectionType.nsecKey,
                 ),
-                SizedBox(height: heightSeparator * 2),
-                StartButton(),
-                SizedBox(height: heightSeparator * 2),
+                const SizedBox(height: heightSeparator * 2),
+                const StartButton(),
+                const SizedBox(height: heightSeparator * 2),
               ],
             ),
           ),

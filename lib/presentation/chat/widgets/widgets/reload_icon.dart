@@ -1,9 +1,8 @@
+import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
+import 'package:ditto/model/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../../buisness_logic/cubit/chat_cubit.dart';
-import '../../../../model/chat_message.dart';
 
 class ReloadIcon extends StatelessWidget {
   const ReloadIcon({

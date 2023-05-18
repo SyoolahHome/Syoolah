@@ -1,28 +1,30 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../services/database/local/local_database.dart';
-
 part 'private_key_gen_success_state.dart';
 
 class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
-  PrivateKeyGenSuccessCubit() : super(PrivateKeyGenSuccessInitial()) {
+  PrivateKeyGenSuccessCubit() : super(const PrivateKeyGenSuccessInitial()) {
     _initKeys();
   }
 
   void togglePrivateKeyFieldVisibility() {
-    emit(state.copyWith(
-      isPasswordVisible: !state.isPasswordVisible,
-    ));
+    emit(
+      state.copyWith(
+        isPasswordVisible: !state.isPasswordVisible,
+      ),
+    );
   }
 
-  copyPrivateKey(BuildContext context) async {
+  Future<ScaffoldFeatureController<Widget, dynamic>> copyPrivateKey(
+      BuildContext context) async {
     try {
       await Clipboard.setData(ClipboardData(text: state.privateKey));
 
@@ -32,12 +34,13 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
     }
   }
 
-  copyPublicKey(context) async {
+  copyPublicKey(BuildContext context) async {
     try {
       final privateKey = LocalDatabase.instance.getPrivateKey();
       if (privateKey == null) {
         return;
       }
+
       await Clipboard.setData(
         ClipboardData(
           text: state.publicKey ??

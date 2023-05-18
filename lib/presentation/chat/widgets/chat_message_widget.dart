@@ -1,14 +1,13 @@
 import 'package:dart_openai/openai.dart';
+import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/model/chat_message.dart';
+import 'package:ditto/presentation/chat/widgets/widgets/copy_icon.dart';
+import 'package:ditto/presentation/chat/widgets/widgets/reload_icon.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/cubit/chat_cubit.dart';
-import '../../general/widget/note_card/wudgets/note_vreation_ago.dart';
-import 'widgets/copy_icon.dart';
-import 'widgets/reload_icon.dart';
 
 class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget({
@@ -24,7 +23,7 @@ class ChatMessageWidget extends StatelessWidget {
     final cubit = context.read<ChatCubit>();
 
     if (message.message.isEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     return GestureDetector(
@@ -32,22 +31,21 @@ class ChatMessageWidget extends StatelessWidget {
         cubit.showChatMessageOptionsSheet(context, message: message);
       },
       child: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           bottom: 15.0,
           // left: isCurrentUserMessage ? 30 : 0,
           // right: isCurrentUserMessage ? 0 : 30,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             if (isCurrentUserMessage)
               Animate(
-                effects: <Effect>[
+                effects: const <Effect>[
                   FadeEffect(),
                   SlideEffect(begin: Offset(0.25, 0)),
                 ],
                 child: Animate(
-                  effects: <Effect>[
+                  effects: const <Effect>[
                     FadeEffect(),
                     SlideEffect(begin: Offset(0, 0.25)),
                   ],
@@ -58,7 +56,7 @@ class ChatMessageWidget extends StatelessWidget {
               ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(12.5),
+                padding: const EdgeInsets.all(12.5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: Theme.of(context)
@@ -76,9 +74,9 @@ class ChatMessageWidget extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                    SizedBox(height: 12.5),
+                    const SizedBox(height: 12.5),
                     Animate(
-                      effects: <Effect>[
+                      effects: const <Effect>[
                         FadeEffect(),
                       ],
                       child: Row(
@@ -132,8 +130,8 @@ class ChatMessageWidgetDots extends StatelessWidget {
         cubit.showChatMessageOptionsSheet(context, message: message);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.5),
-        child: Icon(
+        margin: const EdgeInsets.symmetric(horizontal: 12.5),
+        child: const Icon(
           FlutterRemix.more_line,
           size: 20,
         ),

@@ -1,15 +1,14 @@
+import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
+import 'package:ditto/model/chat_modules.dart';
+import 'package:ditto/presentation/chat/widgets/app_bar.dart';
+import 'package:ditto/presentation/chat/widgets/chat_message_widget.dart';
+import 'package:ditto/presentation/chat/widgets/chat_section.dart';
+import 'package:ditto/presentation/chat/widgets/empty_chat_widget.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/cubit/chat_cubit.dart';
-import '../../model/chat_modules.dart';
-import '../../services/utils/snackbars.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/chat_message_widget.dart';
-import 'widgets/chat_section.dart';
-import 'widgets/empty_chat_widget.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});
@@ -59,12 +58,12 @@ class Chat extends StatelessWidget {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   ...state.messages.map(
                                     (message) {
                                       return Animate(
                                         key: ValueKey(message.id),
-                                        effects: <Effect>[
+                                        effects: const <Effect>[
                                           FadeEffect(),
                                           SlideEffect(begin: Offset(0, 0.25)),
                                         ],
@@ -76,12 +75,12 @@ class Chat extends StatelessWidget {
                                   // SizedBox(height: 90),
                                 ],
                               ),
-                              SizedBox(height: 90),
+                              const SizedBox(height: 90),
                             ],
                           ),
                         ),
                       ),
-                      MessageSection(),
+                      const MessageSection(),
                     ],
                   );
                 },

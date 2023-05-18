@@ -1,7 +1,6 @@
+import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../onboarding/widgets/animated_logo.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});

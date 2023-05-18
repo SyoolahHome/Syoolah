@@ -59,6 +59,7 @@ dev_dependencies:
   flutter_lints:
   build_runner: ^2.3.3
   envied_generator: ^0.3.0
+  flutter_native_splash: ^2.2.0+1
 
 flutter:
   # The following line ensures that the Material Icons font is
@@ -82,3 +83,37 @@ flutter_launcher_icons:
 
 flutter_app_name:
   name: "Munawarah"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/logo/icon_rounded.png"
+
+  # The branding property allows you to specify an image used as branding in the splash screen.
+  # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
+  # see the Android 12 section below.
+  #branding: assets/dart.png
+
+  # To position the branding image at the bottom of the screen you can use bottom, bottomRight,
+  # and bottomLeft. The default values is bottom if not specified or specified something else.
+  #branding_mode: bottom
+
+  # The color_dark, background_image_dark, image_dark, branding_dark are parameters that set the background
+  # and image when the device is in dark mode. If they are not specified, the app will use the
+  # parameters from above. If the image_dark parameter is specified, color_dark or
+  # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
+  # set.
+  color_dark: "#000000"
+
+  # Android 12 handles the splash screen differently than previous versions.  Please visit
+  # https://developer.android.com/guide/topics/ui/splash-screen
+  # Following are Android 12 specific parameter.
+  android_12:
+    color: "#ffffff"
+    color_dark: "#000000"
+
+    # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+    # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+    # do not remove any spaces:
+    #info_plist_files:
+    #  - 'ios/Runner/Info-Debug.plist'
+    #  - 'ios/Runner/Info-Release.plist'

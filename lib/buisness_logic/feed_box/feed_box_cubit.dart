@@ -1,18 +1,17 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
-import 'package:ditto/services/utils/snackbars.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../model/bottom_sheet_option.dart';
 
 part 'feed_box_state.dart';
 
@@ -24,7 +23,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
   }
 
   void unHighlightBox() {
-    emit(const FeedBoxState(isHighlighted: false));
+    emit(const FeedBoxState());
   }
 
   void showOptions(
@@ -147,6 +146,6 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           NostrService.instance.reSendNote(note.event);
         },
       ),
-    ]);
+    ],);
   }
 }

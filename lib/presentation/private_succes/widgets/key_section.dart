@@ -1,11 +1,10 @@
+import 'package:ditto/buisness_logic/private_key_gen_success_cubit/private_key_gen_success_cubit.dart';
+import 'package:ditto/presentation/private_succes/widgets/field_suffix.dart';
+import 'package:ditto/presentation/private_succes/widgets/key_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/private_key_gen_success_cubit/private_key_gen_success_cubit.dart';
-import 'field_suffix.dart';
-import 'key_field.dart';
 
 enum KeySectionType {
   privateKey,
@@ -38,7 +37,7 @@ class KeySection extends StatelessWidget {
               delay: 400.ms,
               effects: const <Effect>[
                 FadeEffect(),
-                SlideEffect(begin: const Offset(0, 0.5)),
+                SlideEffect(begin: Offset(0, 0.5)),
               ],
               child: KeyField(
                 text: keyToShow,
@@ -100,7 +99,7 @@ class KeySection extends StatelessWidget {
         create: (context) => PrivateKeyGenSuccessCubit(),
         child: Builder(builder: (context) {
           return widget;
-        }),
+        },),
       );
     }
   }

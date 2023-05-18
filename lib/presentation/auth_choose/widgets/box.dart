@@ -1,8 +1,7 @@
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../general/widget/button.dart';
 
 class AuthChooseBox extends StatelessWidget {
   const AuthChooseBox({
@@ -82,14 +81,14 @@ class AuthChooseBox extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
+                    const Icon(
                       FlutterRemix.arrow_right_line,
                       size: 15,
                     ),
                     Animate(
                       delay:
                           const Duration(milliseconds: 1500) + additionalDelay,
-                      effects: <Effect>[
+                      effects: const <Effect>[
                         FadeEffect(),
                       ],
                       child: MunawarahButton(

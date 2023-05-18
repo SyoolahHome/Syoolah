@@ -1,11 +1,10 @@
+import 'package:ditto/presentation/onboarding/widgets/dark_mode_icon.dart';
+import 'package:ditto/presentation/onboarding/widgets/profile_icon.dart';
+import 'package:ditto/presentation/onboarding/widgets/relays_widget.dart';
+import 'package:ditto/presentation/onboarding/widgets/search_icon.dart';
+import 'package:ditto/presentation/onboarding/widgets/translate_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import 'dark_mode_icon.dart';
-import 'profile_icon.dart';
-import 'relays_widget.dart';
-import 'search_icon.dart';
-import 'translate_icon.dart';
 
 class OnboardingActions extends StatelessWidget {
   const OnboardingActions({super.key});

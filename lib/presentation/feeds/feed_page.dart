@@ -1,16 +1,11 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
+import 'package:ditto/model/note.dart';
+import 'package:ditto/presentation/feeds/widgets/app_bar.dart';
 import 'package:ditto/presentation/feeds/widgets/new_notes_tip.dart';
-import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/presentation/feeds/widgets/notes_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../model/note.dart';
-
-import 'widgets/app_bar.dart';
-import 'widgets/notes_list_view.dart';
 
 class GeneralFeed extends StatelessWidget {
   const GeneralFeed({
@@ -60,7 +55,7 @@ class GeneralFeed extends StatelessWidget {
               },
             ),
           ),
-          NewNotesTip(),
+          const NewNotesTip(),
         ],
       ),
     );

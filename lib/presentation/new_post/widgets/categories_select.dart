@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
-import 'package:ditto/constants/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +18,6 @@ class CategoriesSelect extends StatelessWidget {
         children: <Widget>[
           Text("chooseCategories".tr()),
           Wrap(
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              runAlignment: WrapAlignment.start,
               children: List.generate(state.categories.length, (index) {
                 final current = state.categories[index];
                 final isSelected = current.isSelected;
@@ -62,9 +58,9 @@ class CategoriesSelect extends StatelessWidget {
                     // iconTheme: ,
                   ),
                 );
-              })),
+              }),),
         ],
       );
-    });
+    },);
   }
 }

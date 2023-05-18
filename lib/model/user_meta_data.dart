@@ -63,15 +63,15 @@ class UserMetaData extends Equatable {
     });
 
     final placeholderMetadata =
-        UserMetaData.placeholder(name: json['name'] ?? "No Name");
+        UserMetaData.placeholder(name: json['name'] as String? ?? "No Name");
     return UserMetaData(
-      name: json['name'] ?? placeholderMetadata.name,
-      picture: json['picture'] ?? placeholderMetadata.picture,
-      banner: json['banner'] ?? placeholderMetadata.banner,
-      username: json['username'] ?? placeholderMetadata.username,
-      about: json['about'] ?? placeholderMetadata.about,
-      displayName: json['display_name'],
-      nip05Identifier: json['nip05'],
+      name: json['name'] as String? ?? placeholderMetadata.name,
+      picture: json['picture'] as String? ?? placeholderMetadata.picture,
+      banner: json['banner'] as String? ?? placeholderMetadata.banner,
+      username: json['username'] as String? ?? placeholderMetadata.username,
+      about: json['about'] as String? ?? placeholderMetadata.about,
+      displayName: json['display_name'] as String?,
+      nip05Identifier: json['nip05'] as String?,
     );
   }
 

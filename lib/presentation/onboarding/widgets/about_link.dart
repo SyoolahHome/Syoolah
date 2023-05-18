@@ -1,8 +1,7 @@
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../../services/utils/paths.dart';
 
 class AboutMinawarah extends StatelessWidget {
   const AboutMinawarah({super.key});

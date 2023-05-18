@@ -1,14 +1,12 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
-import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:ditto/buisness_logic/cubit/cubit/current_user_likes_cubit.dart';
+import 'package:ditto/buisness_logic/liked_note/liked_note_cubit.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/note_card/note_card.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/cubit/cubit/current_user_likes_cubit.dart';
-import '../../../../buisness_logic/liked_note/liked_note_cubit.dart';
-import '../../../../services/database/local/local_database.dart';
-import '../../../general/widget/margined_body.dart';
-import '../../../general/widget/note_card/note_card.dart';
 
 class CurrentUserLikes extends StatelessWidget {
   const CurrentUserLikes({super.key});
@@ -60,7 +58,7 @@ class CurrentUserLikes extends StatelessWidget {
                                   note: likedNoteState.likedNote!,
                                 );
                               } else {
-                                return SizedBox.shrink();
+                                return const SizedBox.shrink();
                               }
                             },
                           );

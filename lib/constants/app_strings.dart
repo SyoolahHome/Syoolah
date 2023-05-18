@@ -186,7 +186,7 @@
 // Trust is essential in all endeavors. It's the single most important ingredient in business but spotting it is a rare phenomenon these days that's failing humanity when the world needs it most.
 
 // The same is true for religion as millions of brothers and sisters in Islam gather from all over the world to perform Hajj and Umrah when it's all too easy to feel lost in the enormity of it all not knowing who to trust when things go wrong in a sea of humanity pleading for Allah's mercy.
- 
+
 // You're in the right place if this sounds familiar to you - if you're at a parting stone in your life and you're not sure which path is the right path for you.
 
 // You're not alone. The whole world is lined up right behind you struggling with the same issues that the Quran was revealed to solve fourteen hundred years ago.

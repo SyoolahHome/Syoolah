@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:dart_nostr/dart_nostr.dart';
-import 'package:easy_localization/easy_localization.dart';
 
-import '../../constants/app_configs.dart';
-import '../../model/note.dart';
-import '../../model/user_meta_data.dart';
-import '../database/local/local_database.dart';
-import '../utils/routing.dart';
+import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/model/note.dart';
+import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/utils/routing.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NostrService {
   static final NostrService _instance = NostrService._();
@@ -26,7 +26,7 @@ class NostrService {
       relaysUrl: relaysUrls ?? defaultRelaysUrls,
       retryOnClose: true,
       shouldReconnectToRelayOnNotice: true,
-      connectionTimeout: Duration(seconds: 4),
+      connectionTimeout: const Duration(seconds: 4),
     );
 
     relaysConnectionCompleter!.complete();
@@ -138,7 +138,7 @@ class NostrService {
       filters: <NostrFilter>[
         NostrFilter(
           kinds: const [1],
-          t: ["anas", "gwhyyy"],
+          t: const ["anas", "gwhyyy"],
           since: DateTime.now().subtract(const Duration(days: 30)),
         )
       ],
@@ -673,7 +673,7 @@ class NostrService {
         tags: [
           ["e", note.event.id],
           ["p", note.event.pubkey],
-        ]);
+        ],);
 
     Nostr.instance.relaysService.sendEventToRelays(event);
   }

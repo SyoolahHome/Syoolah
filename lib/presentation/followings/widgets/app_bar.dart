@@ -1,12 +1,10 @@
+import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/global/global_cubit.dart';
-import '../../../constants/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({
@@ -46,5 +44,5 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

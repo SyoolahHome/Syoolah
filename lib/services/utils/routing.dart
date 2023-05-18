@@ -1,39 +1,36 @@
-import 'package:bloc/src/bloc_observer.dart';
+import 'package:ditto/buisness_logic/app/app_cubit.dart';
+import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
+import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
+import 'package:ditto/presentation/about/about.dart';
+import 'package:ditto/presentation/about_munawarah/about_munawarah.dart';
+import 'package:ditto/presentation/auth_choose/auth_choose.dart';
+import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
+import 'package:ditto/presentation/current_user_keys/current_user_keys.dart';
+import 'package:ditto/presentation/edit_profile/edit_Profile.dart';
+import 'package:ditto/presentation/feeds/dua_feed.dart';
+import 'package:ditto/presentation/feeds/fiqh_feed.dart';
+import 'package:ditto/presentation/feeds/following_feed.dart';
+import 'package:ditto/presentation/feeds/global_feed.dart';
+import 'package:ditto/presentation/feeds/hadith_feed.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
+import 'package:ditto/presentation/feeds/sharia_feed.dart';
+import 'package:ditto/presentation/feeds/sirah_feed.dart';
+import 'package:ditto/presentation/followers/followers.dart';
+import 'package:ditto/presentation/followings/followings.dart';
+import 'package:ditto/presentation/nostr_service_loading/nostr_service_loading.dart';
+import 'package:ditto/presentation/onboarding/onboarding.dart';
+import 'package:ditto/presentation/onboarding_relays/onboarding_relays.dart';
+import 'package:ditto/presentation/onboarding_search/onboarding_search.dart';
+import 'package:ditto/presentation/privacy/privacy.dart';
+import 'package:ditto/presentation/relays_config/relays_config.dart';
+import 'package:ditto/presentation/scan/scan.dart';
+import 'package:ditto/presentation/settings/settings.dart';
+import 'package:ditto/presentation/sign_up/sign_up.dart';
+import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/app/app_cubit.dart';
-import '../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
-import '../../buisness_logic/on_boarding/on_boarding_cubit.dart';
-import '../../presentation/about/about.dart';
-import '../../presentation/about_munawarah/about_munawarah.dart';
-import '../../presentation/auth_choose/auth_choose.dart';
-import '../../presentation/bottom_bar_screen/bottom_bar_screen.dart';
-import '../../presentation/current_user_keys/current_user_keys.dart';
-import '../../presentation/edit_profile/edit_Profile.dart';
-import '../../presentation/feeds/dua_feed.dart';
-import '../../presentation/feeds/fiqh_feed.dart';
-import '../../presentation/feeds/following_feed.dart';
-import '../../presentation/feeds/global_feed.dart';
-import '../../presentation/feeds/hadith_feed.dart';
-import '../../presentation/feeds/sharia_feed.dart';
-import '../../presentation/feeds/sirah_feed.dart';
-import '../../presentation/followers/followers.dart';
-import '../../presentation/followings/followings.dart';
-import '../../presentation/nostr_service_loading/nostr_service_loading.dart';
-import '../../presentation/privacy/privacy.dart';
-import '../../presentation/settings/settings.dart';
-import '../../presentation/sign_up/sign_up.dart';
-import '../../presentation/note_comments_section/note_comments_section.dart';
-import '../../presentation/onboarding/onboarding.dart';
-import '../../presentation/onboarding_relays/onboarding_relays.dart';
-import '../../presentation/onboarding_search/onboarding_search.dart';
-import '../../presentation/relays_config/relays_config.dart';
-import '../../presentation/scan/scan.dart';
-import '../../presentation/succes_acc_made/succes_acc_made.dart';
 
 abstract class Routing {
   static final routes = {
@@ -59,7 +56,7 @@ abstract class Routing {
     Paths.followings: (context) => Followings(),
     Paths.followers: (context) => Followers(),
     Paths.nostrServiceLoading: (context) => const NostrServiceLoading(),
-    Paths.settings: (context) => Settings(),
+    Paths.settings: (context) => const Settings(),
     Paths.myKeys: (context) => const CurrentUserKeys(),
     Paths.chat: (context) => const Chat(),
     Paths.aboutApp: (context) => const About(),

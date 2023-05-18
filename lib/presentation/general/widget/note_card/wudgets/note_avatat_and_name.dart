@@ -1,18 +1,12 @@
-import 'package:dart_nostr/nostr/dart_nostr.dart';
-import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/buisness_logic/users_list_to_follow_cubit/users_list_to_follow_cubit.dart';
+import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_follow_button.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_owner_avatar.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_owner_username.dart';
 import 'package:ditto/services/utils/extensions.dart';
-import 'package:ditto/services/utils/snackbars.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../buisness_logic/users_list_to_follow_cubit/users_list_to_follow_cubit.dart';
-import '../../../../../model/note.dart';
-import '../../../../../services/database/local/local_database.dart';
-import 'note_follow_button.dart';
-import 'note_owner_avatar.dart';
-import 'note_owner_username.dart';
 
 class NoteAvatarAndName extends StatelessWidget {
   const NoteAvatarAndName({
@@ -37,8 +31,6 @@ class NoteAvatarAndName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           NoteOwnerAvatar(avatarUrl: avatarUrl),
           const SizedBox(width: 10),
@@ -78,6 +70,6 @@ class NoteAvatarAndName extends StatelessWidget {
               },
             ),
           ],
-        ]);
+        ],);
   }
 }

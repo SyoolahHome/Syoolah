@@ -17,6 +17,7 @@ class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
     _handleCurrentUserLikedPosts();
   }
 
+  @override
   Future<void> close() {
     currentUserLikedPosts.close();
     _currentUserLikedPostsSubscription?.cancel();

@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:dart_nostr/nostr/dart_nostr.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/model/note.dart';
+import 'package:ditto/presentation/feeds/widgets/feed_page_heading.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/note_card/note_card.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/app_colors.dart';
-import '../../../model/note.dart';
-import '../../../services/database/local/local_database.dart';
-import '../../general/widget/margined_body.dart';
-import '../../general/widget/note_card/note_card.dart';
-import 'feed_page_heading.dart';
 
 class NotesListView extends StatelessWidget {
   const NotesListView({
@@ -82,7 +81,7 @@ class NotesListView extends StatelessWidget {
               );
             },
           );
-        }),
+        },),
       );
     } else {
       return MarginedBody(
@@ -111,7 +110,7 @@ class NotesListView extends StatelessWidget {
               );
             },
           );
-        }),
+        },),
       );
     }
   }

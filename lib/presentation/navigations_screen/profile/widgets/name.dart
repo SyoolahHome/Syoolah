@@ -33,10 +33,9 @@ class ProfileName extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Animate(
-          effects: [FadeEffect()],
+          effects: const [FadeEffect()],
           delay: 600.ms,
           child: Text(
             toShow.capitalized,
@@ -53,7 +52,7 @@ class ProfileName extends StatelessWidget {
             if (snapshot.hasData) {
               if (snapshot.data!) {
                 return Animate(
-                  effects: [FadeEffect()],
+                  effects: const [FadeEffect()],
                   child: const Icon(
                     Icons.verified,
                     color: Colors.green,
@@ -61,10 +60,10 @@ class ProfileName extends StatelessWidget {
                   ),
                 );
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         ),

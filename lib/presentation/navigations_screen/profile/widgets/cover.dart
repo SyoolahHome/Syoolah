@@ -1,8 +1,7 @@
+import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/auth_cubit/auth_cubit.dart';
-import '../../../../model/user_meta_data.dart';
 
 class ProfileCover extends StatelessWidget {
   const ProfileCover({

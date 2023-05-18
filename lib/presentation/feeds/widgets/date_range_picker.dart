@@ -1,10 +1,9 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/utils/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../../constants/app_colors.dart';
 
 class DateRangePicker extends StatelessWidget {
   const DateRangePicker({super.key});
@@ -13,7 +12,7 @@ class DateRangePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        timePickerTheme: TimePickerThemeData(
+        timePickerTheme: const TimePickerThemeData(
           dialTextColor: Colors.red,
           backgroundColor: Colors.red,
         ),

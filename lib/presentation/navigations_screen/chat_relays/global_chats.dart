@@ -1,10 +1,9 @@
+import 'package:ditto/presentation/navigations_screen/chat_relays/widgets/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/app_bar.dart';
-
 class GlobalChatRelays extends StatelessWidget {
-  const GlobalChatRelays({Key? key}) : super(key: key);
+  const GlobalChatRelays({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../constants/app_colors.dart';
 
 class FollowingBox extends StatelessWidget {
   const FollowingBox({super.key});
@@ -14,7 +13,7 @@ class FollowingBox extends StatelessWidget {
         elevation: 0.0,
         color: Theme.of(context).primaryColor.withOpacity(1),
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Theme.of(context).primaryColor, width: 1),
+          side: BorderSide(color: Theme.of(context).primaryColor),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Align(

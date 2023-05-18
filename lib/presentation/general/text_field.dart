@@ -1,7 +1,7 @@
+import 'package:ditto/constants/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/widgets/hashtag_text_field.dart';
-import '../../constants/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -49,7 +49,6 @@ class CustomTextField extends StatelessWidget {
               minLines: 1,
               focusNode: focusNode,
               maxLines: isMultiline ? 5 : 1,
-              autofocus: false,
               decoratedStyle: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: fontWight,

@@ -1,7 +1,6 @@
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../services/utils/app_utils.dart';
 
 class TweetWidget extends StatelessWidget {
   final String avatar;
@@ -18,17 +17,17 @@ class TweetWidget extends StatelessWidget {
   });
 
   String formatDate(int secondsUnixTimestamp) {
-    var date = DateTime.fromMillisecondsSinceEpoch(secondsUnixTimestamp * 1000,
-            isUtc: true)
+    final date = DateTime.fromMillisecondsSinceEpoch(secondsUnixTimestamp * 1000,
+            isUtc: true,)
         .toLocal()
         .toString();
     return date.substring(0, date.length - 4);
   }
 
   int setColor() {
-    var pubKeyChars = pubkey.substring(0, 6);
-    var color = '0xff';
-    var result = '$color$pubKeyChars';
+    final pubKeyChars = pubkey.substring(0, 6);
+    const color = '0xff';
+    final result = '$color$pubKeyChars';
     return int.parse(result);
   }
 
@@ -80,9 +79,9 @@ class TweetWidget extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   Clipboard.setData(
-                                      ClipboardData(text: pubkey));
+                                      ClipboardData(text: pubkey),);
                                   AppUtils.displaySnackBar(
-                                      context, 'Copied to clipboard: $pubkey');
+                                      context, 'Copied to clipboard: $pubkey',);
                                 },
                               ),
                             ),

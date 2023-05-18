@@ -1,7 +1,7 @@
-import '../database/local/local_database.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 
 abstract class Paths {
-  static get initialRoute {
+  static String get initialRoute {
     final isAlreadyUserExists = LocalDatabase.instance.isAlreadyUserExists();
 
     if (isAlreadyUserExists) {

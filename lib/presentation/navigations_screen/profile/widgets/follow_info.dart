@@ -1,7 +1,6 @@
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../../../constants/app_colors.dart';
 
 class FollowInfo extends StatelessWidget {
   const FollowInfo({
@@ -24,7 +23,7 @@ class FollowInfo extends StatelessWidget {
             effects: [
               FadeEffect(
                 duration: Duration(
-                    milliseconds: Animate.defaultDuration.inMilliseconds ~/ 2),
+                    milliseconds: Animate.defaultDuration.inMilliseconds ~/ 2,),
               )
             ],
             key: ValueKey<int>(count),

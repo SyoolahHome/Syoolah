@@ -1,7 +1,6 @@
+import 'package:ditto/presentation/feeds/widgets/reset_button.dart';
 import 'package:ditto/presentation/feeds/widgets/search_button.dart';
 import 'package:flutter/material.dart';
-
-import 'reset_button.dart';
 
 class ActionButtons extends StatelessWidget {
   const ActionButtons({super.key});

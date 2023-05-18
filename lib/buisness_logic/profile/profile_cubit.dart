@@ -4,23 +4,22 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
+import 'package:ditto/model/tab_item.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/profile_tabs.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/alerts_service.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:ditto/services/utils/snackbars.dart';
-import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../model/bottom_sheet_option.dart';
-import '../../model/tab_item.dart';
-import '../../presentation/general/profile_tabs.dart';
-import '../../services/nostr/nostr_service.dart';
-import '../../services/utils/alerts_service.dart';
 
 part 'profile_state.dart';
 
@@ -33,7 +32,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.currentUserMetadataStream,
   }) : super(ProfileInitial(
           profileTabsItems: GeneralProfileTabs.profileTabsItems,
-        )) {
+        ),) {
     _handleStreams();
   }
 
@@ -57,7 +56,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 
@@ -73,13 +72,13 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(state.copyWith(error: "error".tr()));
     } finally {
       emit(state.copyWith(
-        error: null,
-      ));
+        
+      ),);
     }
   }
 
   void removeAvatar() {
-    emit(state.copyWith(pickedAvatarImage: null));
+    emit(state.copyWith());
     try {
       final currentUsermetadata = UserMetaData.fromJson(
         jsonDecode(state.currentUserMetadata?.content ?? "{}")
@@ -94,7 +93,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 
@@ -124,7 +123,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       return false;
     } finally {
-      emit(state.copyWith(error: null, isLoading: false));
+      emit(state.copyWith(isLoading: false));
     }
   }
 
@@ -139,7 +138,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 
@@ -184,7 +183,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }) {
     final metadata = UserMetaData.fromJson(jsonDecode(
       state.currentUserMetadata?.content ?? "{}",
-    ) as Map<String, dynamic>);
+    ) as Map<String, dynamic>,);
 
     final currentUserMetadata = state.currentUserMetadata;
 
@@ -227,7 +226,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             AppUtils.copy(currentUserMetadataContent ?? "", onSuccess: () {
               final shownSnackbarController =
                   SnackBars.text(context, "copySuccess".tr());
-            });
+            },);
           },
         ),
         BottomSheetOption(
@@ -250,7 +249,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             AppUtils.copy(metadata.picture ?? "", onSuccess: () {
               final shownSnackbarController =
                   SnackBars.text(context, "copySuccess".tr());
-            });
+            },);
           },
         ),
         BottomSheetOption(
@@ -260,7 +259,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             AppUtils.copy(metadata.username, onSuccess: () {
               final shownSnackbarController =
                   SnackBars.text(context, "copySuccess".tr());
-            });
+            },);
           },
         ),
         BottomSheetOption(

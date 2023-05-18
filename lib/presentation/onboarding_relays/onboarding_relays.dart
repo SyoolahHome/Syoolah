@@ -1,11 +1,11 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/onboarding_relays/widgets/relay_box.dart';
 import 'package:ditto/services/utils/routing.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'widgets/relay_box.dart';
 
 class OnBoardingRelays extends StatelessWidget {
   const OnBoardingRelays({super.key});

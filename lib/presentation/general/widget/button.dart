@@ -49,18 +49,16 @@ class MunawarahButton extends StatelessWidget {
             side: isOnlyBorder
                 ? BorderSide(
                     color: Theme.of(context).colorScheme.background,
-                    width: 1,
                   )
                 : null,
             padding: isSmall
-                ? const EdgeInsets.symmetric(horizontal: 15, vertical: 0)
+                ? const EdgeInsets.symmetric(horizontal: 15)
                 : null,
             foregroundColor: Theme.of(context).colorScheme.surface,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               if (customWidget != null) customWidget!,
               if (text != null)
@@ -74,7 +72,7 @@ class MunawarahButton extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-              if (text != null && icon != null) SizedBox(width: 7.5),
+              if (text != null && icon != null) const SizedBox(width: 7.5),
               if (icon != null) ...[
                 Icon(
                   icon,

@@ -1,10 +1,10 @@
+import 'package:ditto/buisness_logic/note_comments/note_comments_cubit.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import '../../../buisness_logic/note_comments/note_comments_cubit.dart';
-import '../../../constants/app_colors.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class CommentField extends StatelessWidget {
   const CommentField({

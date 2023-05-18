@@ -7,7 +7,7 @@ class MunawaraOnboardingBoxesScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Row(
-        children: <Widget>[],
+        
       ),
     );
   }

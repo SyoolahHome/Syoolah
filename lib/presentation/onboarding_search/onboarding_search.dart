@@ -2,22 +2,21 @@ import 'dart:convert';
 
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
+import 'package:ditto/presentation/onboarding_search/widgets/search_field.dart';
+import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../constants/app_colors.dart';
-import '../../model/user_meta_data.dart';
-import '../../services/database/local/local_database.dart';
-import '../../services/utils/routing.dart';
-import '../general/widget/note_card/wudgets/note_avatat_and_name.dart';
-import '../sign_up/widgets/or_divider.dart';
-import 'widgets/search_field.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class OnBoardingSearch extends StatelessWidget {
   const OnBoardingSearch({
@@ -65,7 +64,7 @@ class OnBoardingSearch extends StatelessWidget {
                       child: AnimatedScale(
                         duration: const Duration(milliseconds: 200),
                         scale: state.shouldShowSearchButton ? 1.0 : 0.95,
-                        child: Icon(
+                        child: const Icon(
                           FlutterRemix.search_line,
                         ),
                       ),
@@ -113,30 +112,34 @@ class OnBoardingSearch extends StatelessWidget {
                           ],
                           child: const Center(
                             child: OrDivider(
-                              onlyDivider: false,
                               color: AppColors.black,
                             ),
                           ),
                         ),
                         const SizedBox(height: height * 2),
                         if (state.searchedUser != null)
-                          Builder(builder: (context) {
-                            final searchedUserMetadata = UserMetaData.fromJson(
-                                jsonDecode(state.searchedUser!.content));
+                          Builder(
+                            builder: (context) {
+                              final searchedUserMetadata =
+                                  UserMetaData.fromJson(
+                                jsonDecode(state.searchedUser!.content)
+                                    as Map<String, dynamic>,
+                              );
 
-                            return GestureDetector(
-                              onTap: () {},
-                              child: NoteAvatarAndName(
-                                appCurrentUserPublicKey:
-                                    appCurrentUserPublicKey ?? "",
-                                userPubKey: state.searchedUser!.pubkey,
-                                avatarUrl: searchedUserMetadata.picture!,
-                                memeberShipStartedAt:
-                                    state.searchedUser!.createdAt,
-                                nameToShow: searchedUserMetadata.nameToShow(),
-                              ),
-                            );
-                          }),
+                              return GestureDetector(
+                                onTap: () {},
+                                child: NoteAvatarAndName(
+                                  appCurrentUserPublicKey:
+                                      appCurrentUserPublicKey ?? "",
+                                  userPubKey: state.searchedUser!.pubkey,
+                                  avatarUrl: searchedUserMetadata.picture!,
+                                  memeberShipStartedAt:
+                                      state.searchedUser!.createdAt,
+                                  nameToShow: searchedUserMetadata.nameToShow(),
+                                ),
+                              );
+                            },
+                          ),
                       ],
                     ),
                   ),

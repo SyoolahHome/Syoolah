@@ -1,13 +1,13 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/navigations_screen/profile/widgets/avatar_layers.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/follow_info.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../services/utils/paths.dart';
-import 'avatar_layers.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -26,7 +26,7 @@ class ProfileHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Animate(
-          effects: [FadeEffect()],
+          effects: const [FadeEffect()],
           delay: 600.ms,
           child: BlocBuilder<GlobalCubit, GlobalState>(
             builder: (context, state) {
@@ -49,7 +49,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         AvatarLayers(metadata: metadata),
         Animate(
-          effects: [FadeEffect()],
+          effects: const [FadeEffect()],
           delay: 600.ms,
           child: BlocBuilder<GlobalCubit, GlobalState>(
             builder: (context, state) {

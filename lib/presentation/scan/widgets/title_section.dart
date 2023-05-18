@@ -1,8 +1,7 @@
+import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import '../../general/widget/title.dart';
 
 class TitleSection extends StatelessWidget {
   const TitleSection({super.key});
@@ -26,7 +25,7 @@ class TitleSection extends StatelessWidget {
             isForSection: true,
           ),
         ),
-        SizedBox(height: height * 2),
+        const SizedBox(height: height * 2),
         Animate(
           delay: 200.ms,
           effects: const <Effect>[

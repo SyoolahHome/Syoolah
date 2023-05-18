@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ditto/model/note.dart';
 import 'package:equatable/equatable.dart';
-
-import 'note.dart';
 
 class SearchOption extends Equatable {
   final String name;

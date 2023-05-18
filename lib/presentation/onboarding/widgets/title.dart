@@ -20,7 +20,7 @@ class MunawarahTitle extends StatelessWidget {
             ..apply(
               bodyColor: Colors.black,
               displayColor: Colors.black,
-            )),
+            ),),
       child: Hero(
         tag: "${"appName".tr()}wwtitle",
         child: Text(

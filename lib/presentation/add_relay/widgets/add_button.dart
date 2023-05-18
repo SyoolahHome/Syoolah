@@ -1,8 +1,7 @@
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../services/utils/snackbars.dart';
 
 class AddButton extends StatelessWidget {
   const AddButton({
@@ -26,7 +25,7 @@ class AddButton extends StatelessWidget {
             }
           : null,
       icon: const Icon(FlutterRemix.add_line, color: Colors.white),
-      label: Text("add".tr(), style: TextStyle(color: Colors.white)),
+      label: Text("add".tr(), style: const TextStyle(color: Colors.white)),
     );
   }
 }

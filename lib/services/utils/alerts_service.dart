@@ -1,12 +1,11 @@
 import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/model/relay_configuration.dart';
+import 'package:ditto/presentation/general/widget/text_button.dart';
+import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:ditto/presentation/profile_avatar_sheet/profile_avatar_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../model/relay_configuration.dart';
-import '../../presentation/general/widget/text_button.dart';
-import '../../presentation/general/widget/title.dart';
-import '../../presentation/profile_avatar_sheet/profile_avatar_sheet.dart';
 
 abstract class AlertsService {
   static Future<void> showAvatarMenu(
@@ -22,7 +21,7 @@ abstract class AlertsService {
     return showDialog(
       context: context,
       builder: (context) {
-        final textOpacity = 0.5;
+        const textOpacity = 0.5;
 
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -53,7 +52,7 @@ abstract class AlertsService {
     );
   }
 
-  static showRemoveRelayDialog(
+  static Future showRemoveRelayDialog(
     BuildContext context, {
     required void Function() onRemove,
     required RelayConfiguration relayConfig,
@@ -61,7 +60,7 @@ abstract class AlertsService {
     return showDialog(
       context: context,
       builder: (context) {
-        final textOpacity = 0.5;
+        const textOpacity = 0.5;
 
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -107,7 +106,7 @@ abstract class AlertsService {
     showDialog(
       context: context,
       builder: (context) {
-        final textOpacity = 0.6;
+        const textOpacity = 0.6;
 
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,

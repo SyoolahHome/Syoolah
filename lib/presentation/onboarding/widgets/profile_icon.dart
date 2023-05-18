@@ -1,11 +1,10 @@
+import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
+import 'package:ditto/presentation/onboarding/widgets/action_button_container.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/on_boarding/on_boarding_cubit.dart';
-import '../../../services/utils/paths.dart';
-import 'action_button_container.dart';
 
 class ProfileIcon extends StatelessWidget {
   const ProfileIcon({

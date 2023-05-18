@@ -1,9 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/services/utils/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../buisness_logic/global_feed/global_feed_cubit.dart';
-import '../../../constants/app_colors.dart';
 
 class SearchOptionsBuilder extends StatelessWidget {
   const SearchOptionsBuilder({super.key});

@@ -1,14 +1,12 @@
 import 'dart:async';
 
+import 'package:ditto/presentation/chat/widgets/text_field.dart';
 import 'package:ditto/presentation/general/widget/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../../constants/app_colors.dart';
-import 'widgets/text_field.dart';
-
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();

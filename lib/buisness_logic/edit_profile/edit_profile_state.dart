@@ -3,7 +3,7 @@ part of "./edit_profile_cubit.dart";
 class EditProfileState extends Equatable {
   final String? error;
 
-  EditProfileState({
+  const EditProfileState({
     this.error,
   });
 

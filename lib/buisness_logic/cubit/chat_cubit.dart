@@ -1,17 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_openai/openai.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
+import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/open_ai/openai.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../model/bottom_sheet_option.dart';
-import '../../model/chat_message.dart';
-import '../../services/open_ai/openai.dart';
-import '../../services/utils/app_utils.dart';
 
 part 'chat_state.dart';
 
@@ -134,7 +133,7 @@ class ChatCubit extends Cubit<ChatState> {
           cancelOnError: true,
           onDone: () {
             if (!isClosed) {
-              emit(state.copyWith(errorMessage: null));
+              emit(state.copyWith());
             }
           },
         );
@@ -238,7 +237,7 @@ extension ScrollControllerExt on ScrollController {
     if (isNotAtBottom && hasClients) {
       return animateTo(
         position.maxScrollExtent,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
     }

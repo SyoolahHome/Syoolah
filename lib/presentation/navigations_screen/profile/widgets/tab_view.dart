@@ -1,8 +1,7 @@
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../buisness_logic/profile/profile_cubit.dart';
 
 class ProfileTabView extends StatelessWidget {
   const ProfileTabView({super.key});
@@ -12,7 +11,7 @@ class ProfileTabView extends StatelessWidget {
     final cubit = context.read<ProfileCubit>();
 
     return Animate(
-      effects: [FadeEffect()],
+      effects: const [FadeEffect()],
       delay: 1200.ms,
       child: TabBarView(
         children: cubit.state.profileTabsItems.map((e) {

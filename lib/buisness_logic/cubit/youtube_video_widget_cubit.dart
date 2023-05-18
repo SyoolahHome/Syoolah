@@ -11,8 +11,7 @@ class YoutubeVideoWidgetCubit extends Cubit<YoutubeVideoWidgetState> {
   YoutubeVideoWidgetCubit(this.url) : super(YoutubeVideoWidgetInitial()) {
     controller = YoutubePlayerController.fromVideoId(
       videoId: YoutubePlayerController.convertUrlToId(url) ?? '',
-      params: YoutubePlayerParams(
-        showControls: true,
+      params: const YoutubePlayerParams(
         showFullscreenButton: true,
       ),
     );

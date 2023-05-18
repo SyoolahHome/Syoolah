@@ -1,7 +1,10 @@
 import 'dart:io';
-import 'package:dart_nostr/dart_nostr.dart';
+
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
+import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
+import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/constants/app_themes.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/paths.dart';
@@ -11,10 +14,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
-import 'constants/app_configs.dart';
-import 'constants/app_themes.dart';
-import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
@@ -39,10 +38,10 @@ Future<void> main() async {
   // );
   runApp(
     EasyLocalization(
-      child: MyApp(),
       supportedLocales: AppConfigs.locales,
       path: AppConfigs.translationsPath,
       fallbackLocale: AppConfigs.fallbackLocale,
+      child: const MyApp(),
     ), // Wrap your app
   );
 }

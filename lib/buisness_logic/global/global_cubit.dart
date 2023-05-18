@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../services/nostr/nostr_service.dart';
 
 part 'global_state.dart';
 
@@ -41,7 +40,7 @@ class GlobalCubit extends Cubit<GlobalState> {
     }
 
     if (state.currentUserFollowing == null) {
-      final nostrEventContactListKind = 3;
+      const nostrEventContactListKind = 3;
 
       newEvent = NostrEvent.fromPartialData(
         kind: nostrEventContactListKind,
@@ -60,7 +59,7 @@ class GlobalCubit extends Cubit<GlobalState> {
       newEvent = currentUserFollowing.copyWith(tags: [
         ...currentUserFollowing.tags,
         ["p", pubKey],
-      ]);
+      ],);
     }
 
     NostrService.instance.setFollowingsEvent(newEvent);
@@ -74,7 +73,7 @@ class GlobalCubit extends Cubit<GlobalState> {
 
     NostrEvent newEvent = currentUserFollowing.copyWith(tags: [
       ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
-    ]);
+    ],);
 
     NostrService.instance.setFollowingsEvent(newEvent);
   }

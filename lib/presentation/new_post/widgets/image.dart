@@ -1,11 +1,10 @@
+import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/presentation/general/widget/note_card/wudgets/image_full_view..dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../buisness_logic/add_new_post/add_new_post_cubit.dart';
-import '../../general/widget/note_card/wudgets/image_full_view..dart';
 
 class PostImage extends StatelessWidget {
   const PostImage({super.key});
@@ -39,7 +38,6 @@ class PostImage extends StatelessWidget {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: List.generate(
                               state.pickedImages?.length ?? 0, (index) {
                             final current = state.pickedImages![index];
@@ -70,7 +68,7 @@ class PostImage extends StatelessWidget {
                                     children: <Widget>[
                                       ClipRRect(
                                         borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
+                                            Radius.circular(10),),
                                         child: Image.file(
                                           current,
                                           height: 75,
@@ -84,7 +82,7 @@ class PostImage extends StatelessWidget {
 
                                         style: IconButton.styleFrom(
                                             backgroundColor: AppColors.black
-                                                .withOpacity(0.05)),
+                                                .withOpacity(0.05),),
                                         color: Colors.red,
                                         onPressed: () {
                                           cubit.removePickedImage(index);

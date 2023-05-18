@@ -1,10 +1,8 @@
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../../services/utils/paths.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -18,7 +16,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(FlutterRemix.arrow_left_line),
+        icon: const Icon(FlutterRemix.arrow_left_line),
       ),
       actions: <Widget>[
         MunawarahButton(
@@ -31,7 +29,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           iconSize: 15,
           isOnlyBorder: true,
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         // IconButton(
         //   icon: const Icon(FlutterRemix.key_2_line),
         //   onPressed:

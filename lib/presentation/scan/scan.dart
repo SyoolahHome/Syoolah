@@ -1,14 +1,9 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/scan/widgets/app_bar.dart';
+import 'package:ditto/presentation/scan/widgets/button.dart';
+import 'package:ditto/presentation/scan/widgets/key_field.dart';
+import 'package:ditto/presentation/scan/widgets/title_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-
-import '../general/widget/title.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/button.dart';
-import 'widgets/key_field.dart';
-import 'package:easy_localization/easy_localization.dart';
-
-import 'widgets/title_section.dart';
 
 class ExistentSignUp extends StatelessWidget {
   const ExistentSignUp({
@@ -25,7 +20,7 @@ class ExistentSignUp extends StatelessWidget {
       body: MarginedBody(
         child: Center(
           child: Column(
-            children: <Widget>[
+            children: const <Widget>[
               SizedBox(height: heightSeparator * 2),
               Spacer(),
               TitleSection(),

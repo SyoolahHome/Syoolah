@@ -43,7 +43,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
 
     if (searchQuery.contains("@")) {
-      final lengthOfEmailElems = 2;
+      const lengthOfEmailElems = 2;
 
       if (searchQuery.split("@").length != lengthOfEmailElems) {
         emit(
@@ -57,7 +57,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       }
       pubKey = await NostrService.instance.getPubKeyFromEmail(searchQuery);
     } else {
-      final requiredHexLength = 64;
+      const requiredHexLength = 64;
       if (searchQuery.length != requiredHexLength) {
         emit(
           state.copyWith(
@@ -81,13 +81,13 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 
   void resetSearch() {
     searchController?.clear();
-    emit(state.copyWith(searchedUser: null));
+    emit(state.copyWith());
   }
 
   @override

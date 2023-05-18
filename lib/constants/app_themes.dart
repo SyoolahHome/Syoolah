@@ -1,8 +1,7 @@
 // ignore_for_file: no-equal-arguments
 
+import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
 
 abstract class AppThemes {
   static final primary = ThemeData.light(useMaterial3: true).copyWith(
@@ -55,7 +54,7 @@ abstract class AppThemes {
       elevation: 0,
     ),
     disabledColor: Colors.black54,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       foregroundColor: AppColors.white,
       backgroundColor: AppColors.black,
       splashColor: Colors.black54,
@@ -71,7 +70,7 @@ abstract class AppThemes {
       ),
     ),
     indicatorColor: AppColors.black,
-    progressIndicatorTheme: ProgressIndicatorThemeData(
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColors.black,
     ),
     snackBarTheme: const SnackBarThemeData(
@@ -114,32 +113,32 @@ abstract class AppThemes {
           const EdgeInsets.symmetric(vertical: 12.5, horizontal: 16),
       filled: true,
       fillColor: AppColors.lighGrey,
-      errorBorder: OutlineInputBorder(
+      errorBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      focusedErrorBorder: OutlineInputBorder(
+      focusedErrorBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.black,
       scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
-      iconTheme: const IconThemeData(size: 20, color: AppColors.black),
+      iconTheme: IconThemeData(size: 20, color: AppColors.black),
       titleTextStyle: TextStyle(
         color: Colors.black,
         fontSize: 20,
@@ -214,7 +213,6 @@ abstract class AppThemes {
       onSurfaceVariant: Colors.grey.withOpacity(.5),
       onSecondary: AppColors.white.withOpacity(0.9),
       onSecondaryContainer: AppColors.white.withOpacity(0.25),
-      background: AppColors.white,
       onBackground: AppColors.black,
       surface: AppColors.black.withOpacity(0.4),
       onSurface: Colors.black87,
@@ -251,21 +249,21 @@ abstract class AppThemes {
       ),
     ),
     dialogBackgroundColor: Colors.black87,
-    dialogTheme: DialogTheme(
+    dialogTheme: const DialogTheme(
       backgroundColor: Colors.black87,
       elevation: 0,
     ),
     disabledColor: Colors.black54,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       foregroundColor: AppColors.white,
       backgroundColor: AppColors.black,
       splashColor: Colors.black54,
     ),
     dividerColor: AppColors.white,
-    bottomSheetTheme: BottomSheetThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.black87,
       elevation: 0,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ),
@@ -273,7 +271,7 @@ abstract class AppThemes {
     ),
     iconTheme: const IconThemeData(color: AppColors.white),
     indicatorColor: AppColors.black,
-    progressIndicatorTheme: ProgressIndicatorThemeData(
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColors.white,
     ),
     snackBarTheme: const SnackBarThemeData(
@@ -316,31 +314,31 @@ abstract class AppThemes {
           const EdgeInsets.symmetric(vertical: 12.5, horizontal: 16),
       filled: true,
       fillColor: AppColors.white.withOpacity(0.15),
-      errorBorder: OutlineInputBorder(
+      errorBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      focusedErrorBorder: OutlineInputBorder(
+      focusedErrorBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderSide: BorderSide.none,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.black,
       surfaceTintColor: Colors.transparent,
-      iconTheme: const IconThemeData(size: 20, color: AppColors.white),
+      iconTheme: IconThemeData(size: 20, color: AppColors.white),
       titleTextStyle: TextStyle(
         color: Colors.white,
         fontSize: 20,

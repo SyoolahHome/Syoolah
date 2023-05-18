@@ -1,9 +1,9 @@
+import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../../buisness_logic/profile/profile_cubit.dart';
 
 class AvatarSheetWidget extends StatelessWidget {
   const AvatarSheetWidget({
@@ -57,7 +57,7 @@ class AvatarSheetWidget extends StatelessWidget {
                   firstChild: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: AnimateList(
-                      effects: <Effect>[FadeEffect()],
+                      effects: <Effect>[const FadeEffect()],
                       interval: 100.ms,
                       children: <Widget>[
                         ListTile(
@@ -142,7 +142,7 @@ class AvatarSheetWidget extends StatelessWidget {
             );
           },
         );
-      }),
+      },),
     );
   }
 }

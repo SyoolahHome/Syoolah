@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part "./edit_profile_state.dart";
 
@@ -15,7 +15,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   TextEditingController? aboutController;
 
   UserMetaData metaData;
-  EditProfileCubit(this.metaData) : super(EditProfileState()) {
+  EditProfileCubit(this.metaData) : super(const EditProfileState()) {
     _init();
   }
 
@@ -51,7 +51,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     } catch (e) {
       print(e);
     } finally {
-      emit(state.copyWith(error: null));
+      emit(state.copyWith());
     }
   }
 

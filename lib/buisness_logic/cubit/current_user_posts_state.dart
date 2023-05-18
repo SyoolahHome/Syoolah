@@ -4,7 +4,7 @@ part of 'current_user_posts_cubit.dart';
 class CurrentUserPostsState extends Equatable {
   final List<NostrEvent> currentUserPosts;
 
-  CurrentUserPostsState({
+  const CurrentUserPostsState({
     this.currentUserPosts = const [],
   });
 

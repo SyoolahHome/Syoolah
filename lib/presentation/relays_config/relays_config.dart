@@ -1,12 +1,12 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:ditto/presentation/relays_config/widgets/app_bar.dart';
+import 'package:ditto/presentation/relays_config/widgets/relay_config_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../general/widget/margined_body.dart';
-import '../general/widget/title.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/relay_config_tile.dart';
 
 class RelaysConfig extends StatelessWidget {
   const RelaysConfig({super.key});
@@ -23,8 +23,8 @@ class RelaysConfig extends StatelessWidget {
                 children: AnimateList(
               interval: 100.ms,
               effects: [
-                FadeEffect(),
-                SlideEffect(
+                const FadeEffect(),
+                const SlideEffect(
                   begin: Offset(0, 0.5),
                 ),
               ],
@@ -32,9 +32,9 @@ class RelaysConfig extends StatelessWidget {
                 MarginedBody(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: height * 2),
+                      const SizedBox(height: height * 2),
                       HeadTitle(title: "manageRelays".tr()),
-                      SizedBox(height: height * 2),
+                      const SizedBox(height: height * 2),
                     ],
                   ),
                 ),
@@ -50,7 +50,7 @@ class RelaysConfig extends StatelessWidget {
                   },
                 ),
               ],
-            )),
+            ),),
           );
         },
       ),

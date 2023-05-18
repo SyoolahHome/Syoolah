@@ -1,10 +1,9 @@
+import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/profile_options/widgets/profile_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-
-import '../../model/bottom_sheet_option.dart';
-import 'widgets/profile_title.dart';
 
 class BottomSheetOptionsWidget extends StatelessWidget {
   const BottomSheetOptionsWidget({
@@ -85,7 +84,7 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                                   ),
                         );
                       }
-                    }),
+                    },),
                     onTap: () {
                       Navigator.of(context).pop();
                       final onPressed = current.onPressed;

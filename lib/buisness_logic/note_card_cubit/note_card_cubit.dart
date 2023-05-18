@@ -5,10 +5,9 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../services/utils/app_utils.dart';
 
 part 'note_card_state.dart';
 
@@ -44,54 +43,54 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     return likers.contains(pubKey);
   }
 
-  void copyNoteId() async {
+  Future<void> copyNoteId() async {
     await AppUtils.copy(
       note.event.id,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
-      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
+      onEnd: () => emitIfOpen(state.copyWith()),
     );
   }
 
-  void copyImagesLinks() async {
+  Future<void> copyImagesLinks() async {
     if (note.imageLinks.isNotEmpty) {
       await AppUtils.copy(
         note.imageLinks.join('\n'),
         onSuccess: () =>
             emitIfOpen(state.copyWith(success: "copySuccess".tr())),
         onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
-        onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
+        onEnd: () => emitIfOpen(state.copyWith()),
       );
     } else {
       emitIfOpen(state.copyWith(error: "noImagesToCopy".tr()));
-      emitIfOpen(state.copyWith(error: null));
+      emitIfOpen(state.copyWith());
     }
   }
 
-  void copyNoteEvent() async {
+  Future<void> copyNoteEvent() async {
     await AppUtils.copy(
       note.event.serialized(),
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
-      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
+      onEnd: () => emitIfOpen(state.copyWith()),
     );
   }
 
-  void copyNoteOwnerPubKey() async {
+  Future<void> copyNoteOwnerPubKey() async {
     await AppUtils.copy(
       note.event.pubkey,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
-      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
+      onEnd: () => emitIfOpen(state.copyWith()),
     );
   }
 
-  void copyNoteContent() async {
+  Future<void> copyNoteContent() async {
     await AppUtils.copy(
       note.noteOnly,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
-      onEnd: () => emitIfOpen(state.copyWith(success: null, error: null)),
+      onEnd: () => emitIfOpen(state.copyWith()),
     );
   }
 
@@ -126,6 +125,6 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   void repostNote() {
     NostrService.instance.sendRepostEventFromCurrentUser(note);
     emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
-    emit(state.copyWith(success: null));
+    emit(state.copyWith());
   }
 }

@@ -9,7 +9,7 @@ class AboutMunawarahContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final contentParagraphs = "aboutMunawarahContent".tr().split("\n");
 
-    final startingDurationMs = 400;
+    const startingDurationMs = 400;
 
     Widget widget(int index) {
       final current = contentParagraphs[index];
@@ -19,10 +19,6 @@ class AboutMunawarahContent extends StatelessWidget {
       }
 
       return Animate(
-        child: Text(
-          current,
-          style: labelLarge.copyWith(fontWeight: FontWeight.w300),
-        ),
         effects: const <Effect>[
           FadeEffect(),
           SlideEffect(begin: Offset(0, 0.45)),
@@ -31,10 +27,13 @@ class AboutMunawarahContent extends StatelessWidget {
           milliseconds: startingDurationMs +
               (index * Animate.defaultDuration.inMilliseconds),
         ),
+        child: Text(
+          current,
+          style: labelLarge.copyWith(fontWeight: FontWeight.w300),
+        ),
       );
     }
 
-    ;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

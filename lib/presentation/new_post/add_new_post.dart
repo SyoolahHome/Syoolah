@@ -1,19 +1,17 @@
+import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
+import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/new_post/widgets/button.dart';
+import 'package:ditto/presentation/new_post/widgets/categories_select.dart';
 import 'package:ditto/presentation/new_post/widgets/posr_assets_section.dart';
+import 'package:ditto/presentation/new_post/widgets/post_field.dart';
+import 'package:ditto/presentation/new_post/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../buisness_logic/add_new_post/add_new_post_cubit.dart';
-import '../../constants/app_colors.dart';
-import 'widgets/button.dart';
-import 'widgets/categories_select.dart';
-import 'widgets/image.dart';
-import 'widgets/post_field.dart';
-import 'widgets/title.dart';
-
 class AddNewPost extends StatelessWidget {
-  const AddNewPost({Key? key}) : super(key: key);
+  const AddNewPost({super.key});
 
   @override
   Widget build(BuildContext context) {

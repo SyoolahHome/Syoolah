@@ -1,65 +1,65 @@
+import 'package:ditto/presentation/current_user_keys/widgets/app_bar.dart';
+import 'package:ditto/presentation/current_user_keys/widgets/danger_box.dart';
+import 'package:ditto/presentation/current_user_keys/widgets/private_key_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/danger_box.dart';
-import 'widgets/private_key_section.dart';
 
 class CurrentUserKeys extends StatelessWidget {
   const CurrentUserKeys({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final height = 10.0;
+    const height = 10.0;
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: MarginedBody(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: AnimateList(
               effects: <Effect>[
-                FadeEffect(),
-                SlideEffect(begin: Offset(0, 0.5)),
+                const FadeEffect(),
+                const SlideEffect(begin: Offset(0, 0.5)),
               ],
-              interval: Duration(milliseconds: 100),
+              interval: const Duration(milliseconds: 100),
               children: <Widget>[
-                SizedBox(height: height * 3),
+                const SizedBox(height: height * 3),
                 Text(
                   "myKeys".tr(),
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
-                SizedBox(height: height * 6),
+                const SizedBox(height: height * 6),
                 HeadTitle(title: "myPublicKey".tr()),
-                SizedBox(height: height),
-                KeySection(type: KeySectionType.publicKey),
-                SizedBox(height: height * 2),
+                const SizedBox(height: height),
+                const KeySection(type: KeySectionType.publicKey),
+                const SizedBox(height: height * 2),
                 HeadTitle(title: "nPubKey".tr()),
-                SizedBox(height: height),
-                KeySection(type: KeySectionType.nPubKey),
-                SizedBox(height: height * 4),
-                SizedBox(width: double.infinity, child: OrDivider()),
+                const SizedBox(height: height),
+                const KeySection(type: KeySectionType.nPubKey),
+                const SizedBox(height: height * 4),
+                const SizedBox(width: double.infinity, child: OrDivider()),
                 DangerBox(),
-                SizedBox(height: height * 3),
+                const SizedBox(height: height * 3),
                 HeadTitle(title: "myPrivateKey".tr()),
-                SizedBox(height: height),
-                HiddenPrivateKeySection(
+                const SizedBox(height: height),
+                const HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.privateKey,
                 ),
-                SizedBox(height: height * 2),
+                const SizedBox(height: height * 2),
                 HeadTitle(title: "nSecKey".tr()),
-                SizedBox(height: height),
-                HiddenPrivateKeySection(
+                const SizedBox(height: height),
+                const HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.nsecKey,
                 ),
-                SizedBox(height: height * 2),
+                const SizedBox(height: height * 2),
               ],
             ),
           ),
