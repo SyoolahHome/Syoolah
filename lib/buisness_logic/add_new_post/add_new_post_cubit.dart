@@ -58,6 +58,10 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         resultNote += await _uploadImagesAndGetNewNoteResult();
       }
 
+      if (_noteYoutubeVideExists()) {
+        resultNote += state.acceptedYoutubeUrl!;
+      }
+
       NostrService.instance.sendTextNoteFromCurrentUser(
         text: resultNote,
         tags: state.categories
@@ -146,6 +150,10 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   bool _noteImagesExists() {
     return state.pickedImages?.isNotEmpty ?? false;
+  }
+
+  bool _noteYoutubeVideExists() {
+    return state.acceptedYoutubeUrl != null;
   }
 
   Future<String> _uploadImagesAndGetNewNoteResult() async {

@@ -126,7 +126,7 @@ abstract class AppConfigs {
 
   static final feedsSearchOptions = [
     SearchOption(
-      name: "Search usernames",
+      name: "SearchByUsername".tr(),
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -137,7 +137,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'Search Posts contents',
+      name: 'SearchPostsContents'.tr(),
       isSelected: true,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -148,7 +148,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'Search Posts dates',
+      name: 'SearchPostsDates'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -162,7 +162,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'Search hashtags',
+      name: 'SearchHashtags'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -174,14 +174,14 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'Only posts with images',
+      name: 'OnlyPostsWithImages'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) =>
           noteList.where((note) => note.imageLinks.isNotEmpty).toList(),
       useSearchQuery: false,
     ),
     SearchOption(
-      name: 'A-Z',
+      name: 'az'.tr(),
       isSelected: true,
       searchFunction: (noteList, string) {
         noteList.sort((a, b) => a.event.content.compareTo(b.event.content));
