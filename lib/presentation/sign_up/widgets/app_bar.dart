@@ -49,7 +49,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 begin: Offset(-0.25, 0.0),
               ),
             ],
-            target: isFirstView ? 0.0 : 1.0,
+            target:
+                // isFirstView ? 0.0 :
+                1.0,
             child: const MunawarahLogo(
               width: 50,
               isHero: false,

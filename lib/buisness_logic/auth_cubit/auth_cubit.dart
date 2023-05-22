@@ -56,19 +56,25 @@ class AuthCubit extends Cubit<AuthState> {
           nip05Identifier: nip05Controller?.text ?? '',
         ),
       );
-      emit(state.copyWith(
-        authenticated: true,
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          authenticated: true,
+          pickedImage: state.pickedImage,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        error: e.toString(),
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          error: e.toString(),
+          pickedImage: state.pickedImage,
+        ),
+      );
     } finally {
-      emit(state.copyWith(
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          pickedImage: state.pickedImage,
+        ),
+      );
     }
   }
 
@@ -88,18 +94,22 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> handleExistentKey() async {
     final existentKey = existentKeyController?.text ?? '';
     if (existentKey.isEmpty) {
-      emit(state.copyWith(
-        error: "pleaseEnterKey".tr(),
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          error: "pleaseEnterKey".tr(),
+          pickedImage: state.pickedImage,
+        ),
+      );
 
       return;
     }
     if (!Nostr.instance.keysService.isValidPrivateKey(existentKey)) {
-      emit(state.copyWith(
-        error: "invalidKey".tr(),
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          error: "invalidKey".tr(),
+          pickedImage: state.pickedImage,
+        ),
+      );
 
       return;
     }
@@ -107,15 +117,19 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final keyChain = NostrKeyPairs(private: existentKey);
       await LocalDatabase.instance.setPrivateKey(keyChain.private);
-      emit(state.copyWith(
-        authenticated: true,
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          authenticated: true,
+          pickedImage: state.pickedImage,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        error: "invalidKey".tr(),
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          error: "invalidKey".tr(),
+          pickedImage: state.pickedImage,
+        ),
+      );
     } finally {
       emit(state.copyWith(pickedImage: state.pickedImage));
     }
@@ -123,10 +137,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   void signOut() {
     LocalDatabase.instance.setPrivateKey(null);
-    emit(state.copyWith(
-      isSignedOut: true,
-      pickedImage: state.pickedImage,
-    ),);
+    emit(
+      state.copyWith(
+        isSignedOut: true,
+        pickedImage: state.pickedImage,
+      ),
+    );
   }
 
   void copyPrivateKey() {
@@ -135,10 +151,12 @@ class AuthCubit extends Cubit<AuthState> {
         ClipboardData(text: LocalDatabase.instance.getPrivateKey()),
       );
     } catch (e) {
-      emit(state.copyWith(
-        error: "couldNotCopyKey".tr(),
-        pickedImage: state.pickedImage,
-      ),);
+      emit(
+        state.copyWith(
+          error: "couldNotCopyKey".tr(),
+          pickedImage: state.pickedImage,
+        ),
+      );
     }
   }
 
@@ -218,9 +236,11 @@ class AuthCubit extends Cubit<AuthState> {
     emit(state.copyWith(isGeneratingNewPrivateKey: true));
     final name = nameController?.text ?? '';
     if (name.isEmpty) {
-      emit(state.copyWith(
-        isGeneratingNewPrivateKey: false,
-      ),);
+      emit(
+        state.copyWith(
+          isGeneratingNewPrivateKey: false,
+        ),
+      );
 
       throw "pleaseEnterName".tr();
     }
@@ -233,10 +253,12 @@ class AuthCubit extends Cubit<AuthState> {
       name: name,
     );
 
-    emit(state.copyWith(
-      isGeneratingNewPrivateKey: false,
-      pickedImage: state.pickedImage,
-    ),);
+    emit(
+      state.copyWith(
+        isGeneratingNewPrivateKey: false,
+        pickedImage: state.pickedImage,
+      ),
+    );
   }
 
   void _init() {
@@ -274,25 +296,27 @@ class AuthCubit extends Cubit<AuthState> {
   List<SignUpStepView> get signUpScreens {
     bool isPrivateKeyCopied = false;
     return <SignUpStepView>[
+      // SignUpStepView(
+      //   title: "welcome".tr(),
+      //   subtitle: "welcomeSubtitle".tr(),
+      //   widgetBody: const Center(
+      //     child: MunawarahLogo(
+      //       width: 140,
+      //       isHero: false,
+      //     ),
+      //   ),
+      //   nextViewAllower: () {
+      //     return Future.value(true);
+      //   },
+      // ),
+      //
       SignUpStepView(
-        title: "welcome".tr(),
-        subtitle: "welcomeSubtitle".tr(),
-        widgetBody: const Center(
-          child: MunawarahLogo(
-            width: 140,
-            isHero: false,
-          ),
-        ),
-        nextViewAllower: () {
-          return Future.value(true);
-        },
-      ),
-      SignUpStepView(
-        title: "whatIsYourName".tr(),
-        subtitle: "whatIsYourNameSubtitle".tr(),
+        title: "whatsYourName".tr(),
+        subtitle: "whateverYouPutHereWillBeUsedInYourProfile".tr(),
         widgetBody: CustomTextField(
           controller: nameController,
-          label: "yourName".tr(),
+          // label: "yourName".tr(),
+          hint: "typeYourName".tr(),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         ),
@@ -302,16 +326,19 @@ class AuthCubit extends Cubit<AuthState> {
           usernameController!.text = "@${fullName.split(' ').join('_')}";
           const minAcceptableUsernameLength = 2;
 
-          return Future.value(usernameController!.text.isNotEmpty &&
-              usernameController!.text.length >= minAcceptableUsernameLength,);
+          return Future.value(
+            usernameController!.text.isNotEmpty &&
+                usernameController!.text.length >= minAcceptableUsernameLength,
+          );
         },
       ),
       SignUpStepView(
-        title: "whatAboutYou".tr(),
-        subtitle: "whatAboutYouSubtitle".tr(),
+        title: "bio".tr(),
+        subtitle: "addSomethingAboutYouForYourProfileCoupleLines".tr(),
         widgetBody: CustomTextField(
           controller: bioController,
-          label: "recommendedOneLines".tr(),
+          // label: "recommendedOneLines".tr(),
+          hint: "typeYourBio".tr(),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           isMultiline: true,
@@ -323,22 +350,21 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ),
       SignUpStepView(
-        title: "yourProfileImage".tr(),
-        subtitle: "yourProfileImageSubtitle".tr(),
+        title: "yourPhoto".tr(),
+        subtitle: "yourPhotoSubtitle".tr(),
         widgetBody: const Center(child: AvatarUpload()),
         nextViewAllower: () {
           return Future.value(true);
         },
       ),
       SignUpStepView(
-        title: "yourUsername".tr(),
-        subtitle: "yourUsernameSubtitle".tr(),
+        title: "addUsername".tr(),
+        subtitle: "pickAUsername".tr(),
         widgetBody: CustomTextField(
           controller: usernameController,
-          label: "yourUsername".tr(),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          hint: "hintUsername".tr(),
+          hint: "typeYourUsername".tr(),
         ),
         nextViewAllower: () {
           final username = usernameController?.text ?? '';
@@ -351,8 +377,8 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ),
       SignUpStepView(
-        title: "yourPrivateKey".tr(),
-        subtitle: "yourPrivateKeySubtitle".tr(),
+        title: "privateKey".tr(),
+        subtitle: "privateKeySubtitle".tr(),
         widgetBody: Builder(
           builder: (context) {
             const iconColorOpacity = 0.05;
@@ -392,8 +418,8 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ),
       SignUpStepView(
-        title: "yourPublicKey".tr(),
-        subtitle: "yourPublicKeySubtitle".tr(),
+        title: "publicKey".tr(),
+        subtitle: "publicKeySubtitle".tr(),
         widgetBody: const KeySection(type: KeySectionType.publicKey),
         nextViewAllower: () {
           return Future.value(true);
