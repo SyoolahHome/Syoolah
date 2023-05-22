@@ -4,9 +4,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 class DangerBox extends StatelessWidget {
-  DangerBox({super.key});
+  DangerBox({
+    super.key,
+    this.customText,
+  });
 
   bool _isHidden = false;
+  final String? customText;
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
@@ -68,7 +72,9 @@ class DangerBox extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: height / 2),
-                            Text("dangerDoNotSharePrivateKeys".tr()),
+                            Text(
+                              customText ?? "dangerDoNotSharePrivateKeys".tr(),
+                            ),
                           ],
                         ),
                       ),

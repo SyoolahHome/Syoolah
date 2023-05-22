@@ -466,20 +466,20 @@ class AuthCubit extends Cubit<AuthState> {
       //       await authenticate();
       //     }),
 
-      SignUpStepView(
-        title: "recommendToFollow".tr(),
-        subtitle: "yourPublicKeySubtitle".tr(),
-        widgetBody: const UsersListToFollow(
-          pubKeys: <String>[
-            "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
-            "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
-            "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
-          ],
-        ),
-        nextViewAllower: () {
-          return Future.value(true);
-        },
-      ),
+      // SignUpStepView(
+      //   title: "recommendToFollow".tr(),
+      //   subtitle: "yourPublicKeySubtitle".tr(),
+      //   widgetBody: const UsersListToFollow(
+      //     pubKeys: <String>[
+      //       "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
+      //       "3bf0c63fcb93463407af97a5e5ee64fa883d107ef9e558472c4eb9aaaefa459d",
+      //       "1577e4599dd10c863498fe3c20bd82aafaf829a595ce83c5cf8ac3463531b09b",
+      //     ],
+      //   ),
+      //   nextViewAllower: () {
+      //     return Future.value(true);
+      //   },
+      // ),
     ];
   }
 

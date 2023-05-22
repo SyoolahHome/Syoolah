@@ -29,11 +29,11 @@ class SuccessAccountMade extends StatelessWidget {
               title: "Account Created Successfully",
               alignment: Alignment.center,
             ),
-            const SizedBox(height: 10),
-            const Text(
-              "You can now access all the features of the app and enjoy using Munawarah app.",
-              textAlign: TextAlign.center,
-            ),
+            // const SizedBox(height: 10),
+            // const Text(
+            //   "You can now access all the features of the app and enjoy using Munawarah app.",
+            //   textAlign: TextAlign.center,
+            // ),
             const SizedBox(height: 50),
             SizedBox(
               width: double.infinity,
@@ -43,7 +43,7 @@ class SuccessAccountMade extends StatelessWidget {
                   final val = Navigator.of(context)
                       .pushNamed(Paths.nostrServiceLoading);
                 },
-                text: 'getIn'.tr(),
+                text: 'letsGo'.tr(),
               ),
             ),
             const SizedBox(height: 10),
