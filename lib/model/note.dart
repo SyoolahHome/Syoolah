@@ -1,7 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Note extends Equatable {
   final NostrEvent event;
@@ -78,7 +77,7 @@ class Note extends Equatable {
 
   static List<String> filteryoutubeVideoLinks(List<String> links) {
     return links
-        .where((link) => YoutubePlayerController.convertUrlToId(link) != null)
+        .where((link) => YoutubePlayer.convertUrlToId(link) != null)
         .toList();
   }
 

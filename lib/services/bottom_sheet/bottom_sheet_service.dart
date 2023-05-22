@@ -13,11 +13,12 @@ import 'package:ditto/presentation/new_post/add_new_post.dart';
 import 'package:ditto/presentation/private_succes/private_key.dart';
 import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
 import 'package:ditto/presentation/profile_options/profile_options.dart';
-import 'package:ditto/presentation/youtube_video_widget/youtube_video_widget.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 
 abstract class BottomSheetService {
   static Future showCreatePostBottomSheet(BuildContext context) {
@@ -298,10 +299,14 @@ abstract class BottomSheetService {
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       clipBehavior: Clip.hardEdge,
-      isScrollControlled: true,
+
+      // isScrollControlled: true,
       useRootNavigator: true,
       builder: (context) {
-        return YoutubeVideoWidget(url: url, onAccept: onAccept);
+        return NoteYoutubePlayer(
+          url: url,
+          // onAccept: onAccept,
+        );
       },
     );
   }

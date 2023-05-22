@@ -234,5 +234,9 @@
     "SearchPostsDates": "Поиск по датам постов",
     "SearchHashtags": "Поиск по хэштегам",
     "OnlyPostsWithImages": "Только посты с изображениями",
-    "az": "A-Z"
+    "az": "A-Z",
+    "openComments": "Открытые комментарии",
+    "peopleYouFollow": "Люди, которых вы следите",
+    "explore": "Исследовать",
+    "umah": "Umah"
 }

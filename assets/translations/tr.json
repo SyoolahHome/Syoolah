@@ -216,5 +216,9 @@
     "SearchPostsDates": "Gönderi tarihlerine göre ara",
     "SearchHashtags": "Hashtaglere göre ara",
     "OnlyPostsWithImages": "Yalnızca resimli gönderiler",
-    "az": "A-Z"
+    "az": "A-Z",
+    "openComments": "Açık yorumlar",
+    "peopleYouFollow": "Takip ettiğiniz kişiler",
+    "explore": "Keşfet",
+    "umah": "Umah"
 }

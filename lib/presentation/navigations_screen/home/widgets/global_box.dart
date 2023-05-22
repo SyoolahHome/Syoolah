@@ -111,7 +111,7 @@ class FeedBox extends StatelessWidget {
                         child: MunawarahButton(
                           isSmall: true,
                           onTap: onTap,
-                          text: "browse".tr(),
+                          text: "explore".tr(),
                         ),
                       ),
                     ),

@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
                   const SizedBox(height: 10),
                   FeedBox(
                     icon: FlutterRemix.global_line,
-                    title: "globalFeed".tr(),
+                    title: "umah".tr(),
                     description: "globalFeedDescription".tr(),
                     onTap: () {
                       Navigator.pushNamed(
@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                   ),
                   FeedBox(
                     icon: FlutterRemix.user_add_line,
-                    title: "followingsFeed".tr(),
+                    title: "peopleYouFollow".tr(),
                     description: "followingsFeedDescription".tr(),
                     onTap: () {
                       Navigator.pushNamed(

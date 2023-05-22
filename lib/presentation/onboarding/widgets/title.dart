@@ -16,13 +16,14 @@ class MunawarahTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final hero = Theme(
       data: Theme.of(context).copyWith(
-          textTheme: Theme.of(context).textTheme
-            ..apply(
-              bodyColor: Colors.black,
-              displayColor: Colors.black,
-            ),),
+        textTheme: Theme.of(context).textTheme
+          ..apply(
+            bodyColor: Colors.black,
+            displayColor: Colors.black,
+          ),
+      ),
       child: Hero(
-        tag: "${"appName".tr()}wwtitle",
+        tag: "${"appName".tr()} title",
         child: Text(
           "appName".tr(),
           style: style ??

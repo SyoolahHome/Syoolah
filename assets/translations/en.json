@@ -233,5 +233,9 @@
   "SearchPostsDates": "Search posts dates",
   "SearchHashtags": "Search hashtags",
   "OnlyPostsWithImages": "Only posts with images",
-  "az": "A-Z"
+  "az": "A-Z",
+  "openComments": "Open comments",
+  "peopleYouFollow": "People you Follow",
+  "explore": "Explore",
+  "umah": "Umah"
 }

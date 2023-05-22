@@ -233,5 +233,9 @@
     "SearchPostsDates": "搜索帖子日期",
     "SearchHashtags": "搜索标签",
     "OnlyPostsWithImages": "仅显示带有图片的帖子",
-    "az": "A-Z"
+    "az": "A-Z",
+    "openComments": "公开评论",
+    "peopleYouFollow": "您关注的人",
+    "explore": "探索",
+    "umah": "Umah"
 }

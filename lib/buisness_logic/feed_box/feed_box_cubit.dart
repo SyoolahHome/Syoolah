@@ -50,7 +50,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             },
           ),
         BottomSheetOption(
-          title: "openCommentsSections".tr(),
+          title: "openComments".tr(),
           icon: FlutterRemix.chat_1_line,
           onPressed: onCommentsSectionTapped,
         ),

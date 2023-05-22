@@ -16,7 +16,7 @@ class GlobalFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: "globalFeed".tr(),
+        feedName: "umah".tr(),
         feedPostsStream: NostrService.instance.globalFeed(),
       ),
     );
