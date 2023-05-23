@@ -21,6 +21,7 @@ class Umah extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "umah".tr(),
+        endFeedTitleWithAdditionalText: false,
         feedPostsStream: NostrService.instance.globalFeed(),
       ),
     );

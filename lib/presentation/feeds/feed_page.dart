@@ -13,10 +13,13 @@ class GeneralFeed extends StatelessWidget {
     super.key,
     required this.feedName,
     required this.feedPostsStream,
+    this.endFeedTitleWithAdditionalText = true,
   });
 
   final String feedName;
   final NostrEventsStream feedPostsStream;
+  final bool endFeedTitleWithAdditionalText;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<GlobalFeedCubit>(
@@ -43,6 +46,8 @@ class GeneralFeed extends StatelessWidget {
                       builder: (context, shownFeedPosts) {
                         return NotesListView(
                           scrollController: cubit.scrollController,
+                          endTitleWithAdditionalText:
+                              endFeedTitleWithAdditionalText,
                           feedName: feedName,
                           notes: notes.isNotEmpty
                               ? notes

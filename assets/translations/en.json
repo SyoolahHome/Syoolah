@@ -252,8 +252,8 @@
   "addUsername": "Add Username",
   "pickAUsername": "Pick a username - it will be public and visible to everyone.",
   "typeYourUsername": "Type your username here..",
-  "privateKey": "Private Key",
   "privateKeySubtitle": "This is your private key. Don't lose it or you won't be able to get back in.",
+  "privateKey": "Private Key",
   "publicKey": "Public Key",
   "publicKeySubtitle": "This is your public key. Share it with anyone to find you.",
   "copyItNowDanger": "Copy it now and keep it in a safe place. You'll need it to restore your account if you ever lose your phone or get a new one.",
@@ -261,5 +261,5 @@
   "takes": "Takes",
   "followings": "Followings",
   "following": "Following",
-  "followers": "Followers",
+  "followers": "Followers"
 }

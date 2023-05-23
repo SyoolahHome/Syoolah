@@ -37,7 +37,7 @@ class CurrentUserKeys extends StatelessWidget {
                       ),
                 ),
                 const SizedBox(height: height * 6),
-                HeadTitle(title: "myPublicKey".tr()),
+                HeadTitle(title: "publicKey".tr()),
                 const SizedBox(height: height),
                 const KeySection(type: KeySectionType.publicKey),
                 const SizedBox(height: height * 2),
@@ -48,7 +48,7 @@ class CurrentUserKeys extends StatelessWidget {
                 const SizedBox(width: double.infinity, child: OrDivider()),
                 DangerBox(),
                 const SizedBox(height: height * 3),
-                HeadTitle(title: "myPrivateKey".tr()),
+                HeadTitle(title: "privateKey".tr()),
                 const SizedBox(height: height),
                 const HiddenPrivateKeySection(
                   type: HiddenPrivateKeySectionType.privateKey,

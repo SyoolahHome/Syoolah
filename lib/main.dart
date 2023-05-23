@@ -72,8 +72,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             useInheritedMediaQuery: true,
             // locale: DevicePreview.locale(context),
-            locale: context.locale,
             // builder: DevicePreview.appBuilder,
+            locale: context.locale,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
             title: "appName".tr(),
