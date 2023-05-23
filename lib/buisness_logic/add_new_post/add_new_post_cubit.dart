@@ -69,15 +69,11 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
             .map((e) => ["t", e.name])
             .toList(),
       );
-      emit(state.copyWith(success: "notePostedSuccessfully".tr()));
+      emit(state.copyWith(success: "yourNoteWasSent".tr()));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
-      emit(
-        state.copyWith(
-          isLoading: false,
-        ),
-      );
+      emit(state.copyWith(isLoading: false));
     }
   }
 

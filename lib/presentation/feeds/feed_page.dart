@@ -31,7 +31,7 @@ class GeneralFeed extends StatelessWidget {
         children: [
           Scaffold(
             appBar: CustomAppBar(feedName: feedName),
-            drawer: CustomDrawer(),
+            // drawer: CustomDrawer(),
             body: Builder(
               builder: (context) {
                 final cubit = context.read<GlobalFeedCubit>();

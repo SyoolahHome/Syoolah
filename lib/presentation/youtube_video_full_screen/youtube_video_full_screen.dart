@@ -41,28 +41,18 @@ class _YoutubeVideoFullScreenState extends State<YoutubeVideoFullScreen> {
       body: Hero(
         tag: widget.controller.hashCode,
         child: YoutubePlayer(
-          bottomActions: [
+          bottomActions: <Widget>[
             const SizedBox(width: 14.0),
             CurrentPosition(),
             const SizedBox(width: 8.0),
-            ProgressBar(
-              controller: controller,
-              isExpanded: true,
-            ),
-            RemainingDuration(
-              controller: controller,
-            ),
-            PlaybackSpeedButton(
-              controller: controller,
-            ),
+            ProgressBar(controller: controller, isExpanded: true),
+            RemainingDuration(controller: controller),
+            PlaybackSpeedButton(controller: controller),
             IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: const Icon(
-                Icons.fullscreen_exit,
-                color: Colors.white,
-              ),
+              icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
             ),
           ],
           controller: controller!,

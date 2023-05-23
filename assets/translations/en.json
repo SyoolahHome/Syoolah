@@ -219,6 +219,7 @@
   "copyContent": "Copy note content",
   "dropYourUQuestionHere": "drop your question here",
   "notePostedSuccessfully": "note posted successfully",
+  "yourNoteWasSent": "Your Note Was Sent",
   "imamOnDutySubtitle2": "Follow the built in AI imam to bring you closer to islam.",
   "notes": "Notes",
   "yourNote": "Your Note",
@@ -262,5 +263,8 @@
   "followings": "Followings",
   "following": "Following",
   "followers": "Followers",
-  "pasteExistentKey": "Paste existent key.."
+  "pasteExistentKey": "Paste existent key..",
+  "newEndryptYourDuaa": "At Munawarah, we're upgrading trust in Islam with cryptographic keys to help purify intentions online - not for a day or for tomorrow but for forever.\nYup - that's the thing with the kind of pubkey cryptography Bitcoin uses - it's math that can't be hacked - intentions start halal and stay halal forever.\nWe're building a world that's impossible to corrupt with great power games - a world where intentions aren't determined by how much money you make (or wish you could) but one where total strangers can trust each other without fear of getting scammed for the 1st time since the days of the Prophet (PBUH) when the holy Kabbah once served as a vault to exchange goods between parting caravans.",
+  "imam": "Imam",
+  "wallet": "Wallet"
 }

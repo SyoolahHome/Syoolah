@@ -7,7 +7,7 @@ class AboutMunawarahContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contentParagraphs = "aboutMunawarahContent".tr().split("\n");
+    final contentParagraphs = "newEndryptYourDuaa".tr().split("\n");
 
     const startingDurationMs = 400;
 
@@ -33,7 +33,6 @@ class AboutMunawarahContent extends StatelessWidget {
         ),
       );
     }
-
 
     return Column(
       mainAxisSize: MainAxisSize.min,

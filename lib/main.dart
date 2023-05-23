@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
-            title: "appName".tr(),
+            title: "Muna Warah",
             themeMode: themeMode,
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,
