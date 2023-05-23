@@ -5,13 +5,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GlobalFeed extends StatelessWidget {
-  GlobalFeed({super.key});
+class Umah extends StatelessWidget {
+  Umah({super.key});
 
   GlobalCubit? globalCubit;
   @override
   Widget build(BuildContext context) {
-    globalCubit = ModalRoute.of(context)?.settings.arguments as GlobalCubit;
+    globalCubit = ModalRoute.of(context)?.settings.arguments is GlobalCubit
+        ? ModalRoute.of(context)?.settings.arguments as GlobalCubit
+        : null;
+
+    globalCubit ??= context.read<GlobalCubit>();
 
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,

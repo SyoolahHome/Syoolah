@@ -17,6 +17,7 @@ class Followers extends StatelessWidget {
 
     tags =
         (args["tags"] as List).map((e) => (e as List).cast<String>()).toList();
+
     profileCubit = args["profileCubit"] as ProfileCubit;
 
     return BlocProvider<ProfileCubit>.value(

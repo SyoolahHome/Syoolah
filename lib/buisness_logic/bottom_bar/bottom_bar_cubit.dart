@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
 import 'package:ditto/presentation/chat_modules/chat_modules.dart';
+import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/navigations_screen/chat_relays/global_chats.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
@@ -11,8 +12,9 @@ import 'package:flutter_remix/flutter_remix.dart';
 class BottomBarCubit extends Cubit<int> {
   final List<BottomBarItem> items = <BottomBarItem>[
     BottomBarItem(
-      screen: const Home(),
-      label: 'home'.tr(),
+      screen: Umah(),
+      // const Home(),
+      label: 'umah'.tr(),
       icon: FlutterRemix.home_4_line,
       selectedIcon: FlutterRemix.home_4_fill,
     ),

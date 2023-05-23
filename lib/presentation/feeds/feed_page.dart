@@ -4,6 +4,7 @@ import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/feeds/widgets/app_bar.dart';
 import 'package:ditto/presentation/feeds/widgets/new_notes_tip.dart';
 import 'package:ditto/presentation/feeds/widgets/notes_list_view.dart';
+import 'package:ditto/presentation/general/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +28,7 @@ class GeneralFeed extends StatelessWidget {
         children: [
           Scaffold(
             appBar: CustomAppBar(feedName: feedName),
+            drawer: CustomDrawer(),
             body: Builder(
               builder: (context) {
                 final cubit = context.read<GlobalFeedCubit>();

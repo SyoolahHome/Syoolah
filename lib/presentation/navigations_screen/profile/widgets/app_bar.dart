@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     final cubit = context.read<ProfileCubit>();
 
     return AppBar(
-      title: HeadTitle(title: "myProfile".tr()),
+      title: HeadTitle(title: "profile".tr()),
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       elevation: 0.0,

@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      title: HeadTitle(title: "yourFollowers".tr()),
+      title: HeadTitle(title: "followers".tr()),
       actions: <Widget>[
         IconButton(
           icon: const Icon(

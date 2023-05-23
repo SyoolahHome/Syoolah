@@ -23,7 +23,8 @@ class CurrentUserReposts extends StatelessWidget {
             builder: (context, state) {
               return NotesListView(
                 shrinkWrap: true,
-                feedName: "reposts".tr(),
+                feedName: "takes".tr(),
+                endTitleWithAdditionalText: false,
                 hideCount: true,
                 physics: const NeverScrollableScrollPhysics(),
                 notes: state.currentUserReposts

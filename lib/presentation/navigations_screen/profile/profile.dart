@@ -36,61 +36,64 @@ class Profile extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 return BlocBuilder<ProfileCubit, ProfileState>(
-                    builder: (context, state) {
-                  final event = state.currentUserMetadata;
-                  UserMetaData metadata;
+                  builder: (context, state) {
+                    final event = state.currentUserMetadata;
+                    UserMetaData metadata;
 
-                  metadata = UserMetaData.fromJson(
-                    jsonDecode(event?.content ?? "{}") as Map<String, dynamic>,
-                  );
+                    metadata = UserMetaData.fromJson(
+                      jsonDecode(event?.content ?? "{}")
+                          as Map<String, dynamic>,
+                    );
 
-                  return NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) {
-                      return <Widget>[
-                        SliverToBoxAdapter(
-                            child: CustomAppBar(userMetadata: metadata),),
-                        SliverToBoxAdapter(
-                          child: Builder(
-                            builder: (context) {
-                              return MarginedBody(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    const SizedBox(height: height * 2),
-                                    ProfileHeader(metadata: metadata),
-                                    const SizedBox(height: height * 3),
-                                    ProfileName(
-                                      metadata: metadata,
-                                      pubKey: event?.pubkey ?? "",
-                                    ),
-                                    const SizedBox(height: height),
-                                    ProfileAbout(metadata: metadata),
-                                    const SizedBox(height: height * 2),
-                                    Animate(
-                                      effects: const [FadeEffect()],
-                                      delay: 1000.ms,
-                                      child: const OrDivider(),
-                                    ),
-                                    const SizedBox(height: height * 2),
-                                    const ProfileTabs(),
-                                  ],
-                                ),
-                              );
-                            },
+                    return NestedScrollView(
+                      headerSliverBuilder: (context, innerBoxIsScrolled) {
+                        return <Widget>[
+                          SliverToBoxAdapter(
+                            child: CustomAppBar(userMetadata: metadata),
                           ),
+                          SliverToBoxAdapter(
+                            child: Builder(
+                              builder: (context) {
+                                return MarginedBody(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      const SizedBox(height: height * 2),
+                                      ProfileHeader(metadata: metadata),
+                                      const SizedBox(height: height * 3),
+                                      ProfileName(
+                                        metadata: metadata,
+                                        pubKey: event?.pubkey ?? "",
+                                      ),
+                                      const SizedBox(height: height),
+                                      ProfileAbout(metadata: metadata),
+                                      const SizedBox(height: height * 2),
+                                      Animate(
+                                        effects: const [FadeEffect()],
+                                        delay: 1000.ms,
+                                        child: const OrDivider(),
+                                      ),
+                                      const SizedBox(height: height * 2),
+                                      const ProfileTabs(),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ];
+                      },
+                      body: MediaQuery.removePadding(
+                        removeTop: true,
+                        context: context,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: const ProfileTabView(),
                         ),
-                      ];
-                    },
-                    body: MediaQuery.removePadding(
-                      removeTop: true,
-                      context: context,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: const ProfileTabView(),
                       ),
-                    ),
-                  );
-                },);
+                    );
+                  },
+                );
               },
             ),
           );

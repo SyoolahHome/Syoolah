@@ -14,7 +14,7 @@ abstract class GeneralProfileTabs {
       icon: FlutterRemix.line_height,
     ),
     TabItem(
-      label: "reposts".tr(),
+      label: "takes".tr(),
       widget: const CurrentUserReposts(),
       icon: FlutterRemix.repeat_2_line,
     ),

@@ -19,6 +19,7 @@ class NotesListView extends StatelessWidget {
     this.shrinkWrap = false,
     this.hideCount = false,
     this.cardMargin,
+    this.endTitleWithAdditionalText = true,
   });
 
   final List<Note> notes;
@@ -28,7 +29,7 @@ class NotesListView extends StatelessWidget {
   final bool hideCount;
   final EdgeInsets? cardMargin;
   final ScrollController? scrollController;
-
+  final bool endTitleWithAdditionalText;
   @override
   Widget build(BuildContext context) {
     final String appCurrentUserPublicKey =
@@ -45,72 +46,78 @@ class NotesListView extends StatelessWidget {
 
     if (feedName != null) {
       return MarginedBody(
-        child: Builder(builder: (context) {
-          if (notes.isEmpty) {
-            return Column(
-              children: <Widget>[
-                FeedPageHeading(
-                  hideCount: hideCount,
-                  feedName: feedName!,
-                  notesLength: max(notes.length - 1, 0),
-                ),
-                const SizedBox(height: 20),
-                Center(child: nothingToShow),
-              ],
-            );
-          }
-          return ListView.builder(
-            physics: physics,
-            shrinkWrap: shrinkWrap,
-            controller: scrollController,
-            itemCount: notes.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return FeedPageHeading(
-                  hideCount: hideCount,
-                  feedName: feedName!,
-                  notesLength: max(notes.length - 1, 0),
-                );
-              }
-              final current = notes[index - 1];
-              return NoteCard(
-                key: ValueKey(current.event.id),
-                appCurrentUserPublicKey: appCurrentUserPublicKey,
-                cardMargin: cardMargin,
-                note: current,
+        child: Builder(
+          builder: (context) {
+            if (notes.isEmpty) {
+              return Column(
+                children: <Widget>[
+                  FeedPageHeading(
+                    endTitleWithAdditionalText: endTitleWithAdditionalText,
+                    hideCount: hideCount,
+                    feedName: feedName!,
+                    notesLength: max(notes.length - 1, 0),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(child: nothingToShow),
+                ],
               );
-            },
-          );
-        },),
+            }
+            return ListView.builder(
+              physics: physics,
+              shrinkWrap: shrinkWrap,
+              controller: scrollController,
+              itemCount: notes.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return FeedPageHeading(
+                    endTitleWithAdditionalText: endTitleWithAdditionalText,
+                    hideCount: hideCount,
+                    feedName: feedName!,
+                    notesLength: max(notes.length - 1, 0),
+                  );
+                }
+                final current = notes[index - 1];
+                return NoteCard(
+                  key: ValueKey(current.event.id),
+                  appCurrentUserPublicKey: appCurrentUserPublicKey,
+                  cardMargin: cardMargin,
+                  note: current,
+                );
+              },
+            );
+          },
+        ),
       );
     } else {
       return MarginedBody(
-        child: Builder(builder: (context) {
-          if (notes.isEmpty) {
-            return Column(
-              children: [
-                const SizedBox(height: 20),
-                Center(
-                  child: nothingToShow,
-                ),
-              ],
-            );
-          }
-          return ListView.builder(
-            physics: physics,
-            shrinkWrap: shrinkWrap,
-            itemCount: notes.length,
-            itemBuilder: (context, index) {
-              final current = notes[index];
-
-              return NoteCard(
-                key: ValueKey(current.event.id),
-                appCurrentUserPublicKey: appCurrentUserPublicKey,
-                note: current,
+        child: Builder(
+          builder: (context) {
+            if (notes.isEmpty) {
+              return Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Center(
+                    child: nothingToShow,
+                  ),
+                ],
               );
-            },
-          );
-        },),
+            }
+            return ListView.builder(
+              physics: physics,
+              shrinkWrap: shrinkWrap,
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                final current = notes[index];
+
+                return NoteCard(
+                  key: ValueKey(current.event.id),
+                  appCurrentUserPublicKey: appCurrentUserPublicKey,
+                  note: current,
+                );
+              },
+            );
+          },
+        ),
       );
     }
   }

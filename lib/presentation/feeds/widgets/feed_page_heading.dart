@@ -7,11 +7,13 @@ class FeedPageHeading extends StatelessWidget {
     required this.notesLength,
     required this.feedName,
     this.hideCount = false,
+    this.endTitleWithAdditionalText = true,
   });
 
   final int notesLength;
   final String feedName;
   final bool hideCount;
+  final bool endTitleWithAdditionalText;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,9 @@ class FeedPageHeading extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(
-            "feedOfName".tr(args: [feedName]),
+            endTitleWithAdditionalText
+                ? "feedOfName".tr(args: [feedName])
+                : feedName,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

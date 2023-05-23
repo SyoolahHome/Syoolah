@@ -17,13 +17,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: IconButton(
-        icon: const Icon(
-          FlutterRemix.arrow_left_fill,
-          size: 20,
-        ),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      // leading: IconButton(
+      //   icon: const Icon(
+      //     FlutterRemix.arrow_left_fill,
+      //     size: 20,
+      //   ),
+      //   onPressed: () => Navigator.of(context).pop(),
+      // ),
       centerTitle: true,
       actions: [
         IconButton(

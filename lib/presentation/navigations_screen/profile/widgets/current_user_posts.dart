@@ -16,20 +16,24 @@ class CurrentUserPosts extends StatelessWidget {
         currentUserPostsStream:
             NostrService.instance.currentUserTextNotesStream(),
       ),
-      child: Builder(builder: (context) {
-        return BlocBuilder<CurrentUserPostsCubit, CurrentUserPostsState>(
-          builder: (context, state) {
-            return NotesListView(
-              shrinkWrap: true,
-              feedName: "myPosts".tr(),
-              hideCount: true,
-              physics: const NeverScrollableScrollPhysics(),
-              notes:
-                  state.currentUserPosts.map((e) => Note.fromEvent(e)).toList(),
-            );
-          },
-        );
-      },),
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<CurrentUserPostsCubit, CurrentUserPostsState>(
+            builder: (context, state) {
+              return NotesListView(
+                shrinkWrap: true,
+                feedName: "posts".tr(),
+                endTitleWithAdditionalText: false,
+                hideCount: true,
+                physics: const NeverScrollableScrollPhysics(),
+                notes: state.currentUserPosts
+                    .map((e) => Note.fromEvent(e))
+                    .toList(),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -18,12 +18,14 @@ class ProfileTabs extends StatelessWidget {
         labelColor: Theme.of(context).colorScheme.background,
         indicatorColor: Theme.of(context).colorScheme.background,
         indicatorWeight: 1,
-        tabs: cubit.state.profileTabsItems.map((e) {
-          return Tab(
-            icon: Icon(e.icon, size: 18),
-            text: e.label.capitalized,
-          );
-        }).toList(),
+        tabs: cubit.state.profileTabsItems.map(
+          (e) {
+            return Tab(
+              icon: Icon(e.icon, size: 18),
+              text: e.label.capitalized,
+            );
+          },
+        ).toList(),
       ),
     );
   }

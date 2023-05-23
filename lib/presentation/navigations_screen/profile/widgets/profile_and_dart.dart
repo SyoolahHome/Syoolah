@@ -31,7 +31,7 @@ class ProfileHeader extends StatelessWidget {
           child: BlocBuilder<GlobalCubit, GlobalState>(
             builder: (context, state) {
               return FollowInfo(
-                label: "followings".tr(),
+                label: "following".tr(),
                 count: state.currentUserFollowing?.tags.length ?? 0,
                 onTap: () {
                   Navigator.of(context).pushNamed(

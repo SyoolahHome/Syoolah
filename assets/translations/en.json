@@ -257,5 +257,9 @@
   "publicKey": "Public Key",
   "publicKeySubtitle": "This is your public key. Share it with anyone to find you.",
   "copyItNowDanger": "Copy it now and keep it in a safe place. You'll need it to restore your account if you ever lose your phone or get a new one.",
-  "letsGo": "Let's Go"
+  "letsGo": "Let's Go",
+  "takes": "Takes",
+  "followings": "Followings",
+  "following": "Following",
+  "followers": "Followers",
 }

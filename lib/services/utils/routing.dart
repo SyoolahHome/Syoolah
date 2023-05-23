@@ -44,7 +44,7 @@ abstract class Routing {
     Paths.hadithFeed: (context) => HadithFeed(),
     Paths.fiqhFeed: (context) => FiqhFeed(),
     Paths.sirahFeed: (context) => SirahFeed(),
-    Paths.globalFeed: (context) => GlobalFeed(),
+    Paths.globalFeed: (context) => Umah(),
     Paths.followingFeed: (context) => FollowingsFeed(),
     // Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
