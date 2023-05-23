@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class NoteYoutubePlayer extends StatelessWidget {
-  const NoteYoutubePlayer({super.key, required this.url});
+  const NoteYoutubePlayer({
+    required this.url,
+    super.key,
+  });
 
   final String url;
   @override
@@ -17,15 +20,23 @@ class NoteYoutubePlayer extends StatelessWidget {
           builder: (context) {
             final cubit = context.read<YoutubeVideoWidgetCubit>();
             final youtubeController = cubit.controller;
-            return YoutubePlayerBuilder(
-              player: YoutubePlayer(
+
+            return Hero(
+              tag: youtubeController.hashCode,
+              child: YoutubePlayer(
                 controller: youtubeController!,
+                bottomActions: <Widget>[
+                  IconButton(
+                    onPressed: () {
+                      cubit.fullScreen(context);
+                    },
+                    icon: const Icon(
+                      Icons.fullscreen,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
-              builder: (context, player) {
-                return Column(
-                  children: <Widget>[player],
-                );
-              },
             );
           },
         ),

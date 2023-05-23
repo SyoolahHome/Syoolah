@@ -261,5 +261,6 @@
   "takes": "Takes",
   "followings": "Followings",
   "following": "Following",
-  "followers": "Followers"
+  "followers": "Followers",
+  "pasteExistentKey": "Paste existent key.."
 }

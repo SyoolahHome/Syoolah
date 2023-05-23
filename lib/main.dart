@@ -12,6 +12,7 @@ import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,13 @@ Future<void> main() async {
   final box = await LocalDatabase.instance.init();
   NostrService.instance.init();
   await EasyLocalization.ensureInitialized();
+
   Bloc.observer = Routing.blocObserver;
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // runApp(
   //   DevicePreview(

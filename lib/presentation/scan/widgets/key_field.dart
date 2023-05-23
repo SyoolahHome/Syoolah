@@ -20,10 +20,7 @@ class KeyField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Animate(
-          effects: const [
-            FadeEffect(),
-            SlideEffect(begin: Offset(-0.25, 0)),
-          ],
+          effects: const [FadeEffect(), SlideEffect(begin: Offset(-0.25, 0))],
           delay: const Duration(milliseconds: 400),
           child: Text(
             "yourPrivateKey".tr(),
@@ -43,7 +40,7 @@ class KeyField extends StatelessWidget {
           child: TextField(
             controller: cubit.existentKeyController,
             decoration: InputDecoration(
-              hintText: "writeYourKey".tr(),
+              hintText: "pasteExistentKey".tr(),
               suffixIcon: GestureDetector(
                 onTap: () {
                   Clipboard.getData('text/plain').then(
