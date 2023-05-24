@@ -60,43 +60,45 @@ class FeedBox extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                    color: DefaultTextStyle.of(context)
-                                        .style
-                                        .color
-                                        ?.withOpacity(0.95),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              description,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall!
-                                  .copyWith(
-                                    color: DefaultTextStyle.of(context)
-                                        .style
-                                        .color
-                                        ?.withOpacity(0.85),
-                                  ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 5),
-                          ],
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(
+                                title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(
+                                      color: DefaultTextStyle.of(context)
+                                          .style
+                                          .color
+                                          ?.withOpacity(0.95),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                description,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall!
+                                    .copyWith(
+                                      color: DefaultTextStyle.of(context)
+                                          .style
+                                          .color
+                                          ?.withOpacity(0.85),
+                                    ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 5),
+                            ],
+                          ),
                         ),
-                        const Spacer(),
+                        const SizedBox(width: 15),
                         Icon(icon, color: Theme.of(context).iconTheme.color),
                       ],
                     ),
