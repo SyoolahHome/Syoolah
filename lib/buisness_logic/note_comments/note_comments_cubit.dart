@@ -10,7 +10,7 @@ part 'note_comments_state.dart';
 
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   TextEditingController? commentTextController;
-  Stream<NostrEvent> noteCommentsStream;
+  NostrEventsStream noteCommentsStream;
   StreamSubscription? _noteCommentsStreamSubscription;
 
   NoteCommentsCubit({
@@ -51,7 +51,7 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   }
 
   void _handleStreams() {
-    _noteCommentsStreamSubscription = noteCommentsStream.listen((event) {
+    _noteCommentsStreamSubscription = noteCommentsStream.stream.listen((event) {
       emit(state.copyWith(noteComments: [...state.noteComments, event]));
     });
   }

@@ -17,34 +17,30 @@ class RelaysWidget extends StatelessWidget {
           vertical: 10.0,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        if (ModalRoute.of(context)?.settings.name != Paths.relaysConfig) {
+          Navigator.of(context).pushNamed(Paths.relaysConfig);
+        }
+      },
       icon: Hero(
         tag: "relaysConfigWidget",
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
-            return GestureDetector(
-              onTap: () {
-                if (ModalRoute.of(context)?.settings.name !=
-                    Paths.relaysConfig) {
-                  Navigator.of(context).pushNamed(Paths.relaysConfig);
-                }
-              },
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "${state.relaysConfigurations.map((e) => e.isActive).length}",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(
-                    FlutterRemix.cloud_line,
-                    size: 20,
-                    // color: Theme.of(context).primaryColor,
-                  )
-                ],
-              ),
+            return Row(
+              children: <Widget>[
+                Text(
+                  "${state.relaysConfigurations.map((e) => e.isActive).length}",
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(width: 5),
+                const Icon(
+                  FlutterRemix.cloud_line,
+                  size: 20,
+                  // color: Theme.of(context).primaryColor,
+                )
+              ],
             );
           },
         ),

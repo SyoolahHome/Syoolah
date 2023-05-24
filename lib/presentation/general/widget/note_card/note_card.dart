@@ -24,62 +24,65 @@ class NoteCard extends StatelessWidget {
   final String appCurrentUserPublicKey;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NoteCardCubit>(
-      create: (context) => NoteCardCubit(
-        note: note,
-        currentUserMetadataStream:
-            NostrService.instance.userMetadata(note.event.pubkey),
-        noteLikesStream: NostrService.instance.noteLikes(
-          postEventId: note.event.id,
+    return Hero(
+      tag: note.event.uniqueTag(),
+      child: BlocProvider<NoteCardCubit>(
+        create: (context) => NoteCardCubit(
+          note: note,
+          currentUserMetadataStream:
+              NostrService.instance.userMetadata(note.event.pubkey),
+          noteLikesStream: NostrService.instance.noteLikes(
+            postEventId: note.event.id,
+          ),
         ),
-      ),
-      child: Builder(
-        builder: (context) {
-          return BlocBuilder<NoteCardCubit, NoteCardState>(
-            builder: (context, state) {
-              UserMetaData noteOwnerMetadata;
+        child: Builder(
+          builder: (context) {
+            return BlocBuilder<NoteCardCubit, NoteCardState>(
+              builder: (context, state) {
+                UserMetaData noteOwnerMetadata;
 
-              if (state.noteOwnerMetadata == null) {
-                noteOwnerMetadata = UserMetaData.placeholder(name: "No Name");
-              } else {
-                noteOwnerMetadata = UserMetaData.fromJson(
-                  jsonDecode(state.noteOwnerMetadata!.content)
-                      as Map<String, dynamic>,
+                if (state.noteOwnerMetadata == null) {
+                  noteOwnerMetadata = UserMetaData.placeholder(name: "No Name");
+                } else {
+                  noteOwnerMetadata = UserMetaData.fromJson(
+                    jsonDecode(state.noteOwnerMetadata!.content)
+                        as Map<String, dynamic>,
+                  );
+                }
+
+                return NoteContainer(
+                  key: ValueKey(note.event.uniqueTag()),
+                  note: note,
+                  margin: cardMargin,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const SizedBox(height: 10),
+                      NoteAvatarAndName(
+                        appCurrentUserPublicKey: appCurrentUserPublicKey,
+                        userPubKey: state.noteOwnerMetadata?.pubkey ?? "",
+                        note: note,
+                        avatarUrl: noteOwnerMetadata.picture!,
+                        nameToShow: noteOwnerMetadata.nameToShow(),
+                        memeberShipStartedAt:
+                            state.noteOwnerMetadata?.createdAt ??
+                                note.event.createdAt,
+                      ),
+                      const SizedBox(height: 15),
+                      NoteContents(
+                        youtubeVideosLinks: note.youtubeVideoLinks,
+                        heroTag: note.event.uniqueTag(),
+                        imageLinks: note.imageLinks,
+                        text: note.noteOnly,
+                      ),
+                      NoteActions(note: note),
+                    ],
+                  ),
                 );
-              }
-
-              return NoteContainer(
-                key: ValueKey(note.event.uniqueTag()),
-                note: note,
-                margin: cardMargin,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 10),
-                    NoteAvatarAndName(
-                      appCurrentUserPublicKey: appCurrentUserPublicKey,
-                      userPubKey: state.noteOwnerMetadata?.pubkey ?? "",
-                      note: note,
-                      avatarUrl: noteOwnerMetadata.picture!,
-                      nameToShow: noteOwnerMetadata.nameToShow(),
-                      memeberShipStartedAt:
-                          state.noteOwnerMetadata?.createdAt ??
-                              note.event.createdAt,
-                    ),
-                    const SizedBox(height: 15),
-                    NoteContents(
-                      youtubeVideosLinks: note.youtubeVideoLinks,
-                      heroTag: note.event.uniqueTag(),
-                      imageLinks: note.imageLinks,
-                      text: note.noteOnly,
-                    ),
-                    NoteActions(note: note),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+              },
+            );
+          },
+        ),
       ),
     );
   }

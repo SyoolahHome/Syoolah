@@ -33,7 +33,7 @@ class NoteActions extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 BlocBuilder<NoteCardCubit, NoteCardState>(
                   builder: (context, state) {
                     final noteLikes = state.noteLikes;

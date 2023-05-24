@@ -667,13 +667,14 @@ class NostrService {
     );
 
     final event = NostrEvent.fromPartialData(
-        kind: 6,
-        keyPairs: nostrKeyPairs,
-        content: jsonEncode(note.toJson()),
-        tags: [
-          ["e", note.event.id],
-          ["p", note.event.pubkey],
-        ],);
+      kind: 6,
+      keyPairs: nostrKeyPairs,
+      content: jsonEncode(note.toJson()),
+      tags: [
+        ["e", note.event.id],
+        ["p", note.event.pubkey],
+      ],
+    );
 
     Nostr.instance.relaysService.sendEventToRelays(event);
   }

@@ -21,22 +21,19 @@ class NoteYoutubePlayer extends StatelessWidget {
             final cubit = context.read<YoutubeVideoWidgetCubit>();
             final youtubeController = cubit.controller;
 
-            return Hero(
-              tag: youtubeController.hashCode,
-              child: YoutubePlayer(
-                controller: youtubeController!,
-                bottomActions: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      cubit.fullScreen(context);
-                    },
-                    icon: const Icon(
-                      Icons.fullscreen,
-                      color: Colors.white,
-                    ),
+            return YoutubePlayer(
+              controller: youtubeController!,
+              bottomActions: <Widget>[
+                IconButton(
+                  onPressed: () {
+                    cubit.fullScreen(context);
+                  },
+                  icon: const Icon(
+                    Icons.fullscreen,
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),

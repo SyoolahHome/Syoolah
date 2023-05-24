@@ -23,9 +23,7 @@ class GeneralFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<GlobalFeedCubit>(
-      create: (context) => GlobalFeedCubit(
-        feedPostsStream: feedPostsStream,
-      ),
+      create: (context) => GlobalFeedCubit(feedPostsStream: feedPostsStream),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [

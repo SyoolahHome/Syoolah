@@ -32,6 +32,8 @@ import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/note_comments_section/note_comments_section.dart';
+
 abstract class Routing {
   static final routes = {
     Paths.bottomBar: (context) => BottomBar(cubit: homePageAfterLoginCubit),
@@ -46,7 +48,7 @@ abstract class Routing {
     Paths.sirahFeed: (context) => SirahFeed(),
     Paths.globalFeed: (context) => Umah(),
     Paths.followingFeed: (context) => FollowingsFeed(),
-    // Paths.commentsSection: (context) => NoteCommentsSection(),
+    Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
     Paths.aboutMunawarah: (context) => const AboutMunawarah(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
