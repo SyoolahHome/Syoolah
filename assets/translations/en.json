@@ -266,5 +266,12 @@
   "pasteExistentKey": "Paste existent key..",
   "newEndryptYourDuaa": "At Munawarah, we're upgrading trust in Islam with cryptographic keys to help purify intentions online - not for a day or for tomorrow but for forever.\nYup - that's the thing with the kind of pubkey cryptography Bitcoin uses - it's math that can't be hacked - intentions start halal and stay halal forever.\nWe're building a world that's impossible to corrupt with great power games - a world where intentions aren't determined by how much money you make (or wish you could) but one where total strangers can trust each other without fear of getting scammed for the 1st time since the days of the Prophet (PBUH) when the holy Kabbah once served as a vault to exchange goods between parting caravans.",
   "imam": "Imam",
-  "wallet": "Wallet"
+  "wallet": "Wallet",
+  "du/'a": "Du'a",
+  "du/'aDescription": "Du'a is a way to connect with Allah, discover Du'a people share.",
+  "QuranDescription": "Recitations of the Quran from around the world",
+  "hadithDescription": "Hadith is what the Prophet (PBUH) said or did, discover Hadith shared by people.",
+  "sirahDescription": "Get to know the prophet better The life of prophet",
+  "fiqhDescription": "Fiqh is the study of Islamic law, aknowledge yourself with the Islamic law",
+  "shariaDescription": "Sharia is the religious law forming part of the Islamic tradition, discover what people share about it"
 }

@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="Muna Zarah"
+        android:label="Muna Warah"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
