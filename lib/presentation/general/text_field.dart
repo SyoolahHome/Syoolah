@@ -8,7 +8,10 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.controller,
     this.label,
-    this.contentPadding,
+    this.contentPadding = const EdgeInsets.symmetric(
+      horizontal: 10,
+      vertical: 25,
+    ),
     this.suffix,
     this.hint,
     this.isMultiline = false,
@@ -19,7 +22,7 @@ class CustomTextField extends StatelessWidget {
 
   final TextEditingController? controller;
   final String? label;
-  final EdgeInsets? contentPadding;
+  final EdgeInsets contentPadding;
   final Widget? suffix;
   final String? hint;
   final bool isMultiline;
@@ -60,11 +63,7 @@ class CustomTextField extends StatelessWidget {
                       color: AppColors.grey,
                       fontWeight: fontWight,
                     ),
-                contentPadding: contentPadding ??
-                    const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 25,
-                    ),
+                contentPadding: contentPadding,
                 fillColor: bgColor,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide.none,

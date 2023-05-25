@@ -16,9 +16,7 @@ class NoteCommentsState extends Equatable {
   NoteCommentsState copyWith({
     List<NostrEvent>? noteComments,
   }) {
-    return NoteCommentsState(
-      noteComments: noteComments ?? this.noteComments,
-    );
+    return NoteCommentsState(noteComments: noteComments ?? this.noteComments);
   }
 }
 

@@ -26,7 +26,7 @@ class NoteActions extends StatelessWidget {
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             NoteDateOfCreationAgo(
               createdAt: note.event.createdAt,
               isMedium: true,
@@ -38,9 +38,9 @@ class NoteActions extends StatelessWidget {
                   builder: (context, state) {
                     final noteLikes = state.noteLikes;
                     int likes = noteLikes.length;
-                    // if (state.localLiked) {
-                    //   likes += 1;
-                    // }
+                    // // if (state.localLiked) {
+                    // //   likes += 1;
+                    // // }
 
                     return Action(
                       icon: FlutterRemix.heart_2_fill,
@@ -90,7 +90,7 @@ class NoteActions extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pushNamed(
                           Paths.commentsSection,
-                          arguments: {
+                          arguments: <String, dynamic>{
                             'note': note,
                             'cubit': cubit,
                           },

@@ -28,7 +28,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             )
           : null,
       title: Text(
-        '${noteContents.substring(0, math.min(noteContents.length, 10))}...',
+        '${noteContents.substring(0, math.min(noteContents.length, 15))}...',
       ),
       actions: <Widget>[
         AnimatedSwitcher(

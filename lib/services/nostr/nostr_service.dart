@@ -562,7 +562,7 @@ class NostrService {
         NostrFilter(
           authors: [userProfilePubKey],
           kinds: const [1],
-        )
+        ),
       ],
     );
 

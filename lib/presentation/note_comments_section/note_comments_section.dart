@@ -1,6 +1,7 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,11 @@ import '../../buisness_logic/note_comments/note_comments_cubit.dart';
 import '../../model/note.dart';
 import '../../services/nostr/nostr_service.dart';
 import '../general/widget/note_card/note_card.dart';
+import '../general/widget/title.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/comment_field.dart';
 import 'widgets/comment_widget.dart';
+import 'widgets/placeholder_card.dart';
 
 class NoteCommentsSection extends StatelessWidget {
   NoteCommentsSection({
@@ -21,12 +24,15 @@ class NoteCommentsSection extends StatelessWidget {
 
   Note? note;
   NoteCardCubit? cubit;
-
+  Widget? avatarSectionWidget;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
+
     note = args['note'] as Note;
     cubit = args['cubit'] as NoteCardCubit;
+    avatarSectionWidget = args['avatarSectionWidget'] as Widget?;
+
     final id = note!.event.id;
 
     return BlocProvider<NoteCardCubit>.value(
@@ -46,26 +52,35 @@ class NoteCommentsSection extends StatelessWidget {
               child: BlocBuilder<NoteCommentsCubit, NoteCommentsState>(
                 builder: (context, state) {
                   return Scaffold(
-                    appBar: CustomAppBar(
-                      noteContents: note!.noteOnly,
-                    ),
-                    body: Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.noteComments.length,
-                            itemBuilder: (context, index) {
-                              final current = state.noteComments[index];
-                              return CommentWidget(
-                                commentEvent: current,
-                                index: index,
-                              );
-                            },
+                    appBar: CustomAppBar(noteContents: note!.noteOnly),
+                    body: MarginedBody(
+                      child: Column(
+                        children: <Widget>[
+                          const SizedBox(height: 10.0),
+                          HeadTitle(
+                            title: "Thread".tr(),
+                            isForSection: true,
+                            minimizeFontSizeBy: 10.0,
                           ),
-                        ),
-                        CommentField(noteId: note!.event.id),
-                      ],
+                          const SizedBox(height: 10.0),
+                          Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.noteComments.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final current = state.noteComments[index];
+
+                                return CommentWidget(
+                                  commentEvent: current,
+                                  index: index,
+                                );
+                              },
+                            ),
+                          ),
+                          CommentField(noteId: note!.event.id),
+                          SizedBox(height: MarginedBody.defaultMargin.left),
+                        ],
+                      ),
                     ),
                   );
                 },

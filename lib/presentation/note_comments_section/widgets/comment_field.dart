@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../general/text_field.dart';
+
 class CommentField extends StatelessWidget {
   const CommentField({
     super.key,
@@ -21,35 +23,21 @@ class CommentField extends StatelessWidget {
     return Stack(
       alignment: Alignment.centerRight,
       children: <Widget>[
-        TextField(
+        CustomTextField(
           controller: cubit.commentTextController,
-          decoration: InputDecoration(
-            hintText: "typeHere".tr(),
-            hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: AppColors.black.withOpacity(0.75),
-                ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(10),
-              ),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: AppColors.lighGrey,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
+          hint: "yourCommentHere".tr(),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 15,
           ),
         ),
         Container(
           margin: MarginedBody.defaultMargin,
           child: GestureDetector(
-            onTap: () {
-              cubit.postComment(noteId);
-            },
+            onTap: () => cubit.postComment(noteId),
             child: Icon(
-              FlutterRemix.message_2_line,
-              color: AppColors.black.withOpacity(0.75),
+              FlutterRemix.send_plane_2_line,
+              color: Theme.of(context).colorScheme.background.withOpacity(.6),
               size: 19,
             ),
           ),

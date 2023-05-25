@@ -16,15 +16,12 @@ class ImageContent extends StatelessWidget {
   final BoxFit fit;
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: link + heroTag,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        child: CustomCachedNetworkImage(
-          url: link,
-          size: size,
-          fit: fit,
-        ),
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      child: CustomCachedNetworkImage(
+        url: link,
+        size: size,
+        fit: fit,
       ),
     );
   }
