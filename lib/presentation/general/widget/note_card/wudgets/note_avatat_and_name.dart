@@ -13,7 +13,7 @@ class NoteAvatarAndName extends StatelessWidget {
     super.key,
     required this.avatarUrl,
     required this.nameToShow,
-    required this.memeberShipStartedAt,
+    this.memeberShipStartedAt,
     this.note,
     required this.userPubKey,
     this.showFollowButton = false,
@@ -22,7 +22,7 @@ class NoteAvatarAndName extends StatelessWidget {
 
   final String avatarUrl;
   final String nameToShow;
-  final DateTime memeberShipStartedAt;
+  final DateTime? memeberShipStartedAt;
   final Note? note;
   final String userPubKey;
   final bool showFollowButton;
@@ -31,15 +31,16 @@ class NoteAvatarAndName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: <Widget>[
-          NoteOwnerAvatar(avatarUrl: avatarUrl),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              NoteOwnerUsername(nameToShow: nameToShow),
+      children: <Widget>[
+        NoteOwnerAvatar(avatarUrl: avatarUrl),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            NoteOwnerUsername(nameToShow: nameToShow),
+            if (memeberShipStartedAt != null)
               Text(
-                memeberShipStartedAt.memberForTime().capitalized,
+                memeberShipStartedAt!.memberForTime().capitalized,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: DefaultTextStyle.of(context)
                           .style
@@ -48,28 +49,29 @@ class NoteAvatarAndName extends StatelessWidget {
                       letterSpacing: 0.1,
                     ),
               ),
-            ],
-          ),
-          const Spacer(),
-          if (note != null) ...[
-            if (note!.event.pubkey != appCurrentUserPublicKey)
-              NoteFollowButton(note: note!),
           ],
-          if (showFollowButton) ...[
-            MunawarahButton(
-              isSmall: true,
-              text: context
-                      .read<UsersListToFollowCubit>()
-                      .isNoteOwnerFollowed(userPubKey)
-                  ? "Following"
-                  : "Follow",
-              onTap: () {
-                context
+        ),
+        const Spacer(),
+        if (note != null) ...<Widget>[
+          if (note!.event.pubkey != appCurrentUserPublicKey)
+            NoteFollowButton(note: note!),
+        ],
+        if (showFollowButton) ...<Widget>[
+          MunawarahButton(
+            isSmall: true,
+            text: context
                     .read<UsersListToFollowCubit>()
-                    .handleFollowButtonTap(userPubKey);
-              },
-            ),
-          ],
-        ],);
+                    .isNoteOwnerFollowed(userPubKey)
+                ? "Following"
+                : "Follow",
+            onTap: () {
+              context
+                  .read<UsersListToFollowCubit>()
+                  .handleFollowButtonTap(userPubKey);
+            },
+          ),
+        ],
+      ],
+    );
   }
 }

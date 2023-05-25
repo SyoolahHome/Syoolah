@@ -10,20 +10,33 @@ class NotePlaceholderCard extends StatelessWidget {
   const NotePlaceholderCard({
     super.key,
     required this.note,
+    required this.nameToShow,
+    required this.noteOwnerUserPubKey,
+    required this.avatarUrl,
+    required this.appCurrentUserPublicKey,
   });
 
   final Note note;
+  final String nameToShow;
+  final String avatarUrl;
+  final String appCurrentUserPublicKey;
+  final String noteOwnerUserPubKey;
   @override
   Widget build(BuildContext context) {
     return NoteContainer(
       key: ValueKey(note.event.uniqueTag()),
       note: note,
-      margin: MarginedBody.defaultMargin,
+      margin: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 10),
-
+          const SizedBox(height: 15),
+          NoteAvatarAndName(
+            avatarUrl: avatarUrl,
+            nameToShow: nameToShow,
+            userPubKey: noteOwnerUserPubKey,
+            appCurrentUserPublicKey: appCurrentUserPublicKey,
+          ),
           const SizedBox(height: 15),
           NoteContents(
             youtubeVideosLinks: note.youtubeVideoLinks,

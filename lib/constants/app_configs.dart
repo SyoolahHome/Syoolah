@@ -64,7 +64,7 @@ abstract class AppConfigs {
       path: Paths.fiqhFeed,
     ),
     FeedCategory(
-      name: "sharia".tr(),
+      name: "shari/'a".tr(),
       description: "shariaDescription".tr(),
       icon: FlutterIslamicIcons.kowtow,
       isSelected: false,

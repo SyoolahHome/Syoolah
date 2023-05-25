@@ -24,14 +24,22 @@ class NoteCommentsSection extends StatelessWidget {
 
   Note? note;
   NoteCardCubit? cubit;
-  Widget? avatarSectionWidget;
+  String? avatarUrl;
+  String? nameToShow;
+  String? appCurrentUserPublicKey;
+  String? noteOwnerUserPubKey;
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
 
     note = args['note'] as Note;
     cubit = args['cubit'] as NoteCardCubit;
-    avatarSectionWidget = args['avatarSectionWidget'] as Widget?;
+
+    avatarUrl = args['avatarUrl'] as String;
+    nameToShow = args['nameToShow'] as String;
+    appCurrentUserPublicKey = args['appCurrentUserPublicKey'] as String;
+    noteOwnerUserPubKey = args['noteOwnerUserPubKey'] as String;
 
     final id = note!.event.id;
 
@@ -57,8 +65,16 @@ class NoteCommentsSection extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           const SizedBox(height: 10.0),
+                          NotePlaceholderCard(
+                            note: note!,
+                            avatarUrl: avatarUrl!,
+                            nameToShow: nameToShow!,
+                            appCurrentUserPublicKey: appCurrentUserPublicKey!,
+                            noteOwnerUserPubKey: noteOwnerUserPubKey!,
+                          ),
+                          const SizedBox(height: 15),
                           HeadTitle(
-                            title: "Thread".tr(),
+                            title: "thread".tr(),
                             isForSection: true,
                             minimizeFontSizeBy: 10.0,
                           ),

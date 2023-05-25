@@ -14,9 +14,19 @@ class NoteActions extends StatelessWidget {
   const NoteActions({
     super.key,
     required this.note,
+    required this.avatarUrl,
+    required this.nameToShow,
+    required this.appCurrentUserPublicKey,
+    required this.noteOwnerUserPubKey,
   });
 
   final Note note;
+
+  final String? avatarUrl;
+  final String? nameToShow;
+  final String? appCurrentUserPublicKey;
+  final String? noteOwnerUserPubKey;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<NoteCardCubit>();
@@ -38,7 +48,7 @@ class NoteActions extends StatelessWidget {
                   builder: (context, state) {
                     final noteLikes = state.noteLikes;
                     int likes = noteLikes.length;
-                    // // if (state.localLiked) {
+                    // // if (state.localLiked)l,  {
                     // //   likes += 1;
                     // // }
 
@@ -93,6 +103,10 @@ class NoteActions extends StatelessWidget {
                           arguments: <String, dynamic>{
                             'note': note,
                             'cubit': cubit,
+                            'avatarUrl': avatarUrl,
+                            'nameToShow': nameToShow,
+                            'appCurrentUserPublicKey': appCurrentUserPublicKey,
+                            'noteOwnerUserPubKey': noteOwnerUserPubKey,
                           },
                         );
                       },

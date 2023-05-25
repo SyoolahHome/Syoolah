@@ -59,9 +59,9 @@ class NoteCard extends StatelessWidget {
                     children: <Widget>[
                       const SizedBox(height: 10),
                       NoteAvatarAndName(
-                        appCurrentUserPublicKey: appCurrentUserPublicKey,
                         userPubKey: state.noteOwnerMetadata?.pubkey ?? "",
                         note: note,
+                        appCurrentUserPublicKey: appCurrentUserPublicKey,
                         avatarUrl: noteOwnerMetadata.picture!,
                         nameToShow: noteOwnerMetadata.nameToShow(),
                         memeberShipStartedAt:
@@ -75,7 +75,13 @@ class NoteCard extends StatelessWidget {
                         imageLinks: note.imageLinks,
                         text: note.noteOnly,
                       ),
-                      NoteActions(note: note),
+                      NoteActions(
+                        note: note,
+                        appCurrentUserPublicKey: appCurrentUserPublicKey,
+                        avatarUrl: noteOwnerMetadata.picture,
+                        nameToShow: noteOwnerMetadata.nameToShow(),
+                        noteOwnerUserPubKey: state.noteOwnerMetadata?.pubkey,
+                      ),
                     ],
                   ),
                 );
