@@ -48,6 +48,7 @@ Future<void> main() async {
   //     ), // Wrap your app
   //   ),
   // );
+
   runApp(
     EasyLocalization(
       supportedLocales: AppConfigs.locales,

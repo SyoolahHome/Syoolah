@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import 'profile_icon.dart';
+
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({super.key});
 
@@ -13,7 +15,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       leading: Center(
         child: Animate(
-          effects: const [FadeEffect()],
+          effects: const <Effect>[
+            FadeEffect(),
+          ],
           child: IconButton(
             style: IconButton.styleFrom(
               backgroundColor:
@@ -27,12 +31,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       actions: AnimateList(
-        effects: [const FadeEffect()],
+        interval: 100.ms,
+        effects: <Effect>[
+          const FadeEffect(),
+        ],
         children: const <Widget>[
           RelaysWidget(),
-          SizedBox(width: 20),
-          // Icon(FlutterRemix.heart_2_line, size: 22),
-          // SizedBox(width: 10),
+          SizedBox(width: 2.5),
+          ProfileIcon(),
+          SizedBox(width: 2.5),
         ],
       ),
     );

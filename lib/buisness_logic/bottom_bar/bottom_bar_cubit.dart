@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
+import '../../presentation/dms/dms.dart';
+
 class BottomBarCubit extends Cubit<int> {
   List<BottomBarItem> get items => <BottomBarItem>[
         BottomBarItem(
@@ -31,21 +33,22 @@ class BottomBarCubit extends Cubit<int> {
           icon: FlutterIslamicIcons.community,
           selectedIcon: FlutterIslamicIcons.solidCommunity,
         ),
-
-        // BottomBarItem(
-        //   screen: const Profile(),
-        //   label: 'profile'.tr(),
-        //   icon: FlutterRemix.user_line,
-        //   selectedIcon: FlutterRemix.user_fill,
-        // ),
-
         BottomBarItem(
-          screen: const Scaffold(backgroundColor: Colors.grey),
-          label: 'wallet'.tr(),
-          icon: FlutterRemix.wallet_line,
-          selectedIcon: FlutterRemix.wallet_fill,
+          screen: const DMS(),
+          label: 'dms'.tr(),
+          icon: FlutterRemix.discuss_line,
+          selectedIcon: FlutterRemix.discuss_fill,
+        ),
+        BottomBarItem(
+          screen: const Profile(),
+          label: 'profile'.tr(),
+          icon: FlutterRemix.user_line,
+          selectedIcon: FlutterRemix.user_fill,
         ),
       ];
+
+  List<BottomBarItem> get itemsToShowInBottomBarScreen =>
+      items.take(items.length - 1).toList();
 
   BottomBarCubit() : super(2);
 

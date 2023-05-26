@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
@@ -35,8 +36,11 @@ class BottomBar extends StatelessWidget {
                 builder: (context, state) {
                   return Scaffold(
                     bottomNavigationBar: CustomBottomBar(
-                      items: cubit.items,
-                      selectedIndex: state,
+                      items: cubit.itemsToShowInBottomBarScreen,
+                      selectedIndex:
+                          state > cubit.itemsToShowInBottomBarScreen.length - 1
+                              ? 0
+                              : state,
                       onElementTap: cubit.onItemTapped,
                     ),
                     floatingActionButton: const CustomCreatePostFAB(),
