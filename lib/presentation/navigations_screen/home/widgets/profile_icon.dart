@@ -17,8 +17,9 @@ class ProfileIcon extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
       ),
       onPressed: () {
-        final profileItemIndex =
-            cubit.items.indexWhere((item) => item.screen is Profile);
+        final profileItemIndex = cubit.items.indexWhere(
+          (item) => item.screen is Profile,
+        );
 
         cubit.onItemTapped(profileItemIndex, shouldShowLeadingOnProfile: true);
       },

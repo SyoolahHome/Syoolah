@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                   ),
                   FeedBox(
                     icon: FlutterRemix.user_add_line,
-                    title: "peopleYouFollow".tr(),
+                    title: "following".tr(),
                     description: "followingsFeedSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(

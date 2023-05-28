@@ -24,15 +24,21 @@ class BottomBarCubit extends Cubit<int> {
           selectedIcon: FlutterRemix.home_4_fill,
         ),
         BottomBarItem(
+          screen: const Profile(),
+          label: 'profile'.tr(),
+          icon: FlutterRemix.user_line,
+          selectedIcon: FlutterRemix.user_fill,
+        ),
+        BottomBarItem(
           screen: const ChatModules(),
           label: 'imam'.tr(),
-          icon: FlutterRemix.message_3_line,
-          selectedIcon: FlutterRemix.message_3_fill,
+          icon: FlutterIslamicIcons.quran,
+          selectedIcon: FlutterIslamicIcons.solidQuran,
         ),
         BottomBarItem(
           screen: Umah(),
           // const Home(),
-          label: 'umah'.tr(),
+          label: 'umaxh'.tr(),
           icon: FlutterIslamicIcons.community,
           selectedIcon: FlutterIslamicIcons.solidCommunity,
         ),
@@ -42,18 +48,17 @@ class BottomBarCubit extends Cubit<int> {
           icon: FlutterRemix.discuss_line,
           selectedIcon: FlutterRemix.discuss_fill,
         ),
-        BottomBarItem(
-          screen: const Profile(),
-          label: 'profile'.tr(),
-          icon: FlutterRemix.user_line,
-          selectedIcon: FlutterRemix.user_fill,
-        ),
       ];
 
   List<BottomBarItem> get itemsToShowInBottomBarScreen =>
       items.take(items.length - 1).toList();
 
-  BottomBarCubit() : super(2);
+  BottomBarCubit() : super(0) {
+    final indexOfProfile = items.indexWhere(
+      (element) => element.screen is Umah,
+    );
+    emit(indexOfProfile);
+  }
 
   void onItemTapped(
     int index, {
