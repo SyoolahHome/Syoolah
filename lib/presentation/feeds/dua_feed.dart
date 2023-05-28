@@ -17,7 +17,7 @@ class DuaFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: "dua".tr(),
+        feedName: "newDuaa".tr(),
         feedPostsStream: NostrService.instance.duaFeedStream(),
       ),
     );

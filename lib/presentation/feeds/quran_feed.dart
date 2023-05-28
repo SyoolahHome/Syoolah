@@ -16,7 +16,7 @@ class QuranFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: "quran".tr(),
+        feedName: "newQuran".tr(),
         feedPostsStream: NostrService.instance.quranFeedStream(),
       ),
     );
