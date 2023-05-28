@@ -13,6 +13,9 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import '../../presentation/dms/dms.dart';
 
 class BottomBarCubit extends Cubit<int> {
+  bool _shouldShowLeadingOnProfile = false;
+  bool get shouldShowLeadingOnProfile => _shouldShowLeadingOnProfile;
+
   List<BottomBarItem> get items => <BottomBarItem>[
         BottomBarItem(
           screen: const Home(),
@@ -52,7 +55,11 @@ class BottomBarCubit extends Cubit<int> {
 
   BottomBarCubit() : super(2);
 
-  void onItemTapped(int index) {
+  void onItemTapped(
+    int index, {
+    bool shouldShowLeadingOnProfile = false,
+  }) {
+    _shouldShowLeadingOnProfile = shouldShowLeadingOnProfile;
     emit(index);
   }
 }

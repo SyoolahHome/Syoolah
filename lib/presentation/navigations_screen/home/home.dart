@@ -63,6 +63,7 @@ class Home extends StatelessWidget {
                   const SizedBox(height: 10),
                   ...List.generate(AppConfigs.categories.length, (index) {
                     final current = AppConfigs.categories[index];
+
                     return FeedBox(
                       icon: current.icon,
                       description: current.description,

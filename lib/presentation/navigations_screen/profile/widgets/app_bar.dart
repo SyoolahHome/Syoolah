@@ -21,21 +21,26 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
     final bottomBarCubit = context.read<BottomBarCubit>();
+
+    final shouldShowLeading = bottomBarCubit.shouldShowLeadingOnProfile;
+
     return AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      leading: IconButton(
-        onPressed: () {
-          final indexOfHomeScreen =
-              bottomBarCubit.itemsToShowInBottomBarScreen.indexWhere(
-            (element) => element.screen is Home,
-          );
+      leading: shouldShowLeading
+          ? IconButton(
+              onPressed: () {
+                final indexOfHomeScreen =
+                    bottomBarCubit.itemsToShowInBottomBarScreen.indexWhere(
+                  (element) => element.screen is Home,
+                );
 
-          bottomBarCubit.onItemTapped(indexOfHomeScreen);
-        },
-        icon: const Icon(FlutterRemix.arrow_left_fill),
-      ),
+                bottomBarCubit.onItemTapped(indexOfHomeScreen);
+              },
+              icon: const Icon(FlutterRemix.arrow_left_fill),
+            )
+          : null,
       actions: <Widget>[
         IconButton(
           icon: const Icon(FlutterRemix.more_2_line),

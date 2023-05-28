@@ -20,7 +20,7 @@ class ProfileIcon extends StatelessWidget {
         final profileItemIndex =
             cubit.items.indexWhere((item) => item.screen is Profile);
 
-        cubit.onItemTapped(profileItemIndex);
+        cubit.onItemTapped(profileItemIndex, shouldShowLeadingOnProfile: true);
       },
       icon: const Icon(FlutterRemix.user_line),
     );

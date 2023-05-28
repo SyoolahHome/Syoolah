@@ -36,9 +36,9 @@ class BottomBar extends StatelessWidget {
                 builder: (context, state) {
                   return Scaffold(
                     bottomNavigationBar: CustomBottomBar(
-                      items: cubit.itemsToShowInBottomBarScreen,
+                      items: cubit.items,
                       selectedIndex:
-                          state > cubit.itemsToShowInBottomBarScreen.length - 1
+                          state > cubit.itemsToShowInBottomBarScreen.length
                               ? 0
                               : state,
                       onElementTap: cubit.onItemTapped,

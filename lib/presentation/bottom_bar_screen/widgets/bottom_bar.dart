@@ -31,14 +31,13 @@ class CustomBottomBar extends StatelessWidget {
             height: height,
             selectedIndex: selectedIndex,
             onDestinationSelected: onElementTap,
-            destinations: items.indexedMap((index, item) {
-              Widget possibleWidget = NavigationDestination(
-                icon: Icon(
-                  item.icon,
-                ),
-                selectedIcon: Icon(item.selectedIcon),
-                label: item.label,
-              );
+            destinations: items.indexedMap(
+              (index, item) {
+                Widget possibleWidget = NavigationDestination(
+                  icon: Icon(item.icon),
+                  selectedIcon: Icon(item.selectedIcon),
+                  label: item.label,
+                );
 
 //               if (item.icon == FlutterRemix.wallet_line) {
 //                 possibleWidget = Stack(
@@ -56,12 +55,13 @@ class CustomBottomBar extends StatelessWidget {
 //                 );
 //               }
 //
-              return Animate(
-                delay: delayFromCenterToSidesBasedOnIndex(index),
-                effects: const <Effect>[FadeEffect()],
-                child: possibleWidget,
-              );
-            }).toList(),
+                return Animate(
+                  delay: delayFromCenterToSidesBasedOnIndex(index),
+                  effects: const <Effect>[FadeEffect()],
+                  child: possibleWidget,
+                );
+              },
+            ).toList(),
           );
         } else if (state.isLoading) {
           return Container(
