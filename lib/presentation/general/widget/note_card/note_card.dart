@@ -11,6 +11,8 @@ import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../services/utils/paths.dart';
+
 class NoteCard extends StatelessWidget {
   const NoteCard({
     super.key,
@@ -22,6 +24,7 @@ class NoteCard extends StatelessWidget {
   final Note note;
   final EdgeInsets? cardMargin;
   final String appCurrentUserPublicKey;
+
   @override
   Widget build(BuildContext context) {
     return Hero(
@@ -50,10 +53,25 @@ class NoteCard extends StatelessWidget {
                   );
                 }
 
+                void onCommentsIconClicked() {
+                  Navigator.of(context).pushNamed(
+                    Paths.commentsSection,
+                    arguments: <String, dynamic>{
+                      'note': note,
+                      'cubit': context.read<NoteCardCubit>(),
+                      'avatarUrl': noteOwnerMetadata.picture,
+                      'nameToShow': noteOwnerMetadata.nameToShow(),
+                      'appCurrentUserPublicKey': appCurrentUserPublicKey,
+                      'noteOwnerUserPubKey': state.noteOwnerMetadata?.pubkey,
+                    },
+                  );
+                }
+
                 return NoteContainer(
                   key: ValueKey(note.event.uniqueTag()),
                   note: note,
                   margin: cardMargin,
+                  onTap: onCommentsIconClicked,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -77,10 +95,7 @@ class NoteCard extends StatelessWidget {
                       ),
                       NoteActions(
                         note: note,
-                        appCurrentUserPublicKey: appCurrentUserPublicKey,
-                        avatarUrl: noteOwnerMetadata.picture,
-                        nameToShow: noteOwnerMetadata.nameToShow(),
-                        noteOwnerUserPubKey: state.noteOwnerMetadata?.pubkey,
+                        onCommentsIconClicked: onCommentsIconClicked,
                       ),
                     ],
                   ),

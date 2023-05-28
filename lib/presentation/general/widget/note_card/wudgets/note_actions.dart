@@ -14,18 +14,20 @@ class NoteActions extends StatelessWidget {
   const NoteActions({
     super.key,
     required this.note,
-    required this.avatarUrl,
-    required this.nameToShow,
-    required this.appCurrentUserPublicKey,
-    required this.noteOwnerUserPubKey,
+    // required this.avatarUrl,
+    // required this.nameToShow,
+    // required this.appCurrentUserPublicKey,
+    // required this.noteOwnerUserPubKey,
+    required this.onCommentsIconClicked,
   });
 
   final Note note;
-
-  final String? avatarUrl;
-  final String? nameToShow;
-  final String? appCurrentUserPublicKey;
-  final String? noteOwnerUserPubKey;
+//
+//   final String? avatarUrl;
+//   final String? nameToShow;
+//   final String? appCurrentUserPublicKey;
+//   final String? noteOwnerUserPubKey;
+  final VoidCallback onCommentsIconClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -97,19 +99,7 @@ class NoteActions extends StatelessWidget {
                   builder: (context, state) {
                     return Action(
                       icon: FlutterRemix.chat_1_line,
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                          Paths.commentsSection,
-                          arguments: <String, dynamic>{
-                            'note': note,
-                            'cubit': cubit,
-                            'avatarUrl': avatarUrl,
-                            'nameToShow': nameToShow,
-                            'appCurrentUserPublicKey': appCurrentUserPublicKey,
-                            'noteOwnerUserPubKey': noteOwnerUserPubKey,
-                          },
-                        );
-                      },
+                      onTap: onCommentsIconClicked,
                       bgColor: Theme.of(context).colorScheme.onPrimary,
                       color: DefaultTextStyle.of(context).style.color!,
                     );
