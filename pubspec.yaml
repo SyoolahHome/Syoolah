@@ -55,6 +55,7 @@ dev_dependencies:
     sdk: flutter
   dart_code_metrics: ^5.7.2
   # flutter_app_name:
+  change_app_package_name: ^1.1.0
 
   flutter_lints:
   build_runner: ^2.3.3
