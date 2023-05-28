@@ -11,6 +11,12 @@ class AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Center(
+        child: Text("Nothing yet"),
+      ),
+    );
+
+    return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 24, top: 60),

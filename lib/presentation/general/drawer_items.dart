@@ -8,14 +8,21 @@ import 'package:flutter_remix/flutter_remix.dart';
 abstract class GeneralDrawerItems {
   static List<DrawerListTimeItem> drawerListTileItems(BuildContext context) => [
         DrawerListTimeItem(
-          icon: FlutterRemix.key_line,
-          label: "keys".tr(),
+          icon: FlutterRemix.information_line,
+          label: 'about'.tr(),
           onTap: () {
-            Navigator.of(context).pushNamed(
-              Paths.myKeys,
-            );
+            Navigator.of(context).pushNamed(Paths.aboutApp);
           },
         ),
+        // DrawerListTimeItem(
+        //   icon: FlutterRemix.key_line,
+        //   label: "keys".tr(),
+        //   onTap: () {
+        //     Navigator.of(context).pushNamed(
+        //       Paths.myKeys,
+        //     );
+        //   },
+        // ),
         DrawerListTimeItem(
           icon: FlutterRemix.settings_line,
           label: 'settings'.tr(),
@@ -25,20 +32,13 @@ abstract class GeneralDrawerItems {
             );
           },
         ),
-        DrawerListTimeItem(
-          icon: FlutterRemix.shield_user_line,
-          label: 'privacyPolicy'.tr(),
-          onTap: () {
-            Navigator.of(context).pushNamed(Paths.privacyPolicy);
-          },
-        ),
-        DrawerListTimeItem(
-          icon: FlutterRemix.information_line,
-          label: 'about'.tr(),
-          onTap: () {
-            Navigator.of(context).pushNamed(Paths.aboutApp);
-          },
-        ),
+        // DrawerListTimeItem(
+        //   icon: FlutterRemix.shield_user_line,
+        //   label: 'privacyPolicy'.tr(),
+        //   onTap: () {
+        //     Navigator.of(context).pushNamed(Paths.privacyPolicy);
+        //   },
+        // ),
         DrawerListTimeItem(
           icon: FlutterRemix.logout_box_line,
           label: "logout".tr(),

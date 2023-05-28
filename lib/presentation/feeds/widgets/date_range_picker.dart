@@ -65,7 +65,7 @@ class DateRangePicker extends StatelessWidget {
                     context.read<GlobalFeedCubit>().pickDateRange(context);
                   },
                   isSmall: true,
-                  text: "pick".tr(),
+                  text: "selectDate".tr(),
                 ),
               ),
             ],

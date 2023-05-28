@@ -12,7 +12,6 @@ class PostField extends StatelessWidget {
     final cubit = context.read<AddNewPostCubit>();
 
     return CustomTextField(
-      label: "yourNote".tr(),
       controller: cubit.textController!,
     );
   }

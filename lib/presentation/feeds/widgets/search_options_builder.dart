@@ -17,7 +17,7 @@ class SearchOptionsBuilder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "searchOptions".tr(),
+              "options".tr(),
               style: DefaultTextStyle.of(context).style.copyWith(
                     fontWeight: FontWeight.w500,
                   ),

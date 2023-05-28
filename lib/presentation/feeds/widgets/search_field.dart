@@ -14,7 +14,6 @@ class SearchField extends StatelessWidget {
     final cubit = context.read<GlobalFeedCubit>();
 
     return CustomTextField(
-      label: "search".tr(),
       controller: cubit.searchController!,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 10,

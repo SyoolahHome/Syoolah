@@ -11,13 +11,13 @@ class CategoriesSelect extends StatelessWidget {
     final cubit = context.read<AddNewPostCubit>();
 
     return BlocBuilder<AddNewPostCubit, AddNewPostState>(
-        builder: (context, state) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text("chooseCategories".tr()),
-          Wrap(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("chooseTopics".tr()),
+            Wrap(
               children: List.generate(state.categories.length, (index) {
                 final current = state.categories[index];
                 final isSelected = current.isSelected;
@@ -58,9 +58,11 @@ class CategoriesSelect extends StatelessWidget {
                     // iconTheme: ,
                   ),
                 );
-              }),),
-        ],
-      );
-    },);
+              }),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

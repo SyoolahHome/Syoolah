@@ -35,6 +35,7 @@ class MessageSection extends StatelessWidget {
                 controller: cubit.userMessageController,
                 hint: "dropYourUQuestionHere".tr() ?? hint,
                 fontWight: FontWeight.w300,
+                isMultiline: true,
               ),
               Animate(
                 delay: 1800.ms,

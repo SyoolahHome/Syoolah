@@ -29,47 +29,47 @@ abstract class AppConfigs {
   ];
   static final List<FeedCategory> categories = [
     FeedCategory(
-      name: "du/'a".tr(),
-      description: "du/'aDescription".tr(),
+      name: "newDuaa".tr(),
+      description: "newDuaaDescription".tr(),
       icon: FlutterIslamicIcons.prayer,
       isSelected: false,
       path: Paths.duaFeed,
     ),
     FeedCategory(
-      name: "quran".tr(),
-      description: "QuranDescription".tr(),
+      name: "newQuran".tr(),
+      description: "newQuranDescription".tr(),
       icon: FlutterIslamicIcons.quran,
       isSelected: false,
       path: Paths.quranFeed,
     ),
     FeedCategory(
       name: "hadith".tr(),
-      description: "hadithDescription".tr(),
+      description: "newHadithDescription".tr(),
       icon: FlutterIslamicIcons.sajadah,
       isSelected: false,
       path: Paths.hadithFeed,
     ),
     FeedCategory(
       name: "sirah".tr(),
-      description: "sirahDescription".tr(),
+      description: "newSirahDescription".tr(),
       icon: FlutterIslamicIcons.solidMuslim,
       isSelected: false,
       path: Paths.sirahFeed,
     ),
     FeedCategory(
       name: "fiqh".tr(),
-      description: "fiqhDescription".tr(),
+      description: "newFiqhDescription".tr(),
       icon: FlutterIslamicIcons.family,
       isSelected: false,
       path: Paths.fiqhFeed,
     ),
-    FeedCategory(
-      name: "shari/'a".tr(),
-      description: "shariaDescription".tr(),
-      icon: FlutterIslamicIcons.kowtow,
-      isSelected: false,
-      path: Paths.shariaFeed,
-    ),
+    // FeedCategory(
+    //   name: "shari/'a".tr(),
+    //   description: "shariaDescription".tr(),
+    //   icon: FlutterIslamicIcons.kowtow,
+    //   isSelected: false,
+    //   path: Paths.shariaFeed,
+    // ),
   ];
 
   static final localeItems = <LocaleItem>[
@@ -124,7 +124,7 @@ abstract class AppConfigs {
   static String translationsPath = 'assets/translations';
   static Locale fallbackLocale = const Locale('en');
 
-  static final feedsSearchOptions = [
+  static final feedsSearchOptions = <SearchOption>[
     SearchOption(
       name: "SearchByUsername".tr(),
       isSelected: false,
@@ -137,7 +137,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'SearchPostsContents'.tr(),
+      name: 'newSearchbyKeyword'.tr(),
       isSelected: true,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -148,7 +148,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'SearchPostsDates'.tr(),
+      name: 'newSearchByDate'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -162,7 +162,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'SearchHashtags'.tr(),
+      name: 'newSearchByHashtag'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) => noteList
           .where(
@@ -174,7 +174,7 @@ abstract class AppConfigs {
       useSearchQuery: true,
     ),
     SearchOption(
-      name: 'OnlyPostsWithImages'.tr(),
+      name: 'newImageOnly'.tr(),
       isSelected: false,
       searchFunction: (noteList, string) =>
           noteList.where((note) => note.imageLinks.isNotEmpty).toList(),
@@ -196,7 +196,7 @@ abstract class AppConfigs {
     return <SettingsItem>[
       SettingsItem(
         icon: FlutterRemix.cloud_line,
-        name: "relaysConfigs".tr(),
+        name: "relays".tr(),
         onTap: () {
           Navigator.of(context).pushNamed(Paths.relaysConfig);
         },
@@ -225,8 +225,22 @@ abstract class AppConfigs {
         ),
       ),
       SettingsItem(
+        icon: FlutterRemix.key_line,
+        name: "keys".tr(),
+        onTap: () {
+          Navigator.of(context).pushNamed(Paths.myKeys);
+        },
+      ),
+      SettingsItem(
+        icon: FlutterRemix.translate,
+        name: "languages".tr(),
+        onTap: () {
+          Routing.appCubit.showTranslationsSheet(context);
+        },
+      ),
+      SettingsItem(
         icon: FlutterRemix.moon_line,
-        name: "switchDarkMode".tr(),
+        name: "themes".tr(),
         onTap: () {
           cubit.switchDarkMode();
         },
@@ -240,20 +254,6 @@ abstract class AppConfigs {
             },
           ),
         ),
-      ),
-      SettingsItem(
-        icon: FlutterRemix.key_line,
-        name: "keys".tr(),
-        onTap: () {
-          Navigator.of(context).pushNamed(Paths.myKeys);
-        },
-      ),
-      SettingsItem(
-        icon: FlutterRemix.translate,
-        name: "switchLaungage".tr(),
-        onTap: () {
-          Routing.appCubit.showTranslationsSheet(context);
-        },
       ),
       SettingsItem(
         icon: FlutterRemix.logout_box_line,

@@ -27,7 +27,7 @@ class CustomBottomBar extends StatelessWidget {
       builder: (context, state) {
         if (state.didConnectedToRelaysAndSubscribedToTopics) {
           return NavigationBar(
-            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
             height: height,
             selectedIndex: selectedIndex,
             onDestinationSelected: onElementTap,

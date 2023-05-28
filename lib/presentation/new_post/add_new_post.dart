@@ -1,6 +1,7 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/model/feed_category.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/new_post/widgets/button.dart';
 import 'package:ditto/presentation/new_post/widgets/categories_select.dart';
@@ -22,7 +23,9 @@ class AddNewPost extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: BlocProvider<AddNewPostCubit>(
         create: (context) => AddNewPostCubit(
-          categories: [...AppConfigs.categories],
+          categories: <FeedCategory>[
+            ...AppConfigs.categories,
+          ],
         ),
         child: Builder(
           builder: (_) {

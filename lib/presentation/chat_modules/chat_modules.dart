@@ -19,12 +19,13 @@ class ChatModules extends StatelessWidget {
       child: Scaffold(
         body: MarginedBody(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const SizedBox(height: kToolbarHeight),
               const SizedBox(height: height),
               HeadTitle(title: "imamOnDuty".tr(), isForSection: true),
               const SizedBox(height: height / 2),
-              ChatModulesSubtitle(text: "imamOnDutySubtitle2".tr()),
+              ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
               const Spacer(),
               const ChatModulesGridView(),
               const Spacer(),

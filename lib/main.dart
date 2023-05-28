@@ -84,12 +84,12 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             useInheritedMediaQuery: true,
-            // locale: DevicePreview.locale(context),
-            // builder: DevicePreview.appBuilder,
+            // // locale: DevicePreview.locale(context),
+            // // builder: DevicePreview.appBuilder,
             locale: context.locale,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
-            title: "Muna Warah",
+            title: "Munawarah",
             themeMode: themeMode,
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,
