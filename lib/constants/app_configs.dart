@@ -120,6 +120,8 @@ abstract class AppConfigs {
     ),
   ];
 
+  static const durationBetweenAIChatMessages = Duration(milliseconds: 25);
+
   static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
   static String translationsPath = 'assets/translations';
   static Locale fallbackLocale = const Locale('en');

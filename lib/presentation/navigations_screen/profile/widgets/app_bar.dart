@@ -1,19 +1,19 @@
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/services/utils/paths.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends PreferredSize {
   const CustomAppBar({
     super.key,
     required this.userMetadata,
+    super.preferredSize = const Size.fromHeight(kToolbarHeight),
+    super.child = const SizedBox.shrink(),
   });
 
   final UserMetaData userMetadata;

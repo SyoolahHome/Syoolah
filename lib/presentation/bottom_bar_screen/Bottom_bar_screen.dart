@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';

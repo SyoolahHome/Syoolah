@@ -1,4 +1,5 @@
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 extension Extensions on List<NostrEvent> {
@@ -100,5 +101,37 @@ extension StringExt on String {
     }
 
     return true;
+  }
+}
+
+extension ScrollControllerExt on ScrollController {
+  bool get isNotAtBottom {
+    if (hasClients) {
+      return false;
+    }
+
+    final maxScroll = position.maxScrollExtent;
+    final currentScroll = position.pixels;
+
+    return maxScroll - currentScroll > 100;
+  }
+
+  Future<void> animateToBottom() async {
+    if (isNotAtBottom && hasClients) {
+      return animateTo(
+        position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+}
+
+extension StreamExtensions<T> on Stream<T> {
+  Stream<T> intervalDuration(Duration delay) async* {
+    await for (final val in this) {
+      yield val;
+      await Future.delayed(delay);
+    }
   }
 }

@@ -1,11 +1,9 @@
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
-import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({

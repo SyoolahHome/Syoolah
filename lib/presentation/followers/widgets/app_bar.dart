@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends PreferredSize {
   const CustomAppBar({
     super.key,
     required this.followingsList,
+    super.preferredSize = const Size.fromHeight(kToolbarHeight),
+    super.child = const SizedBox.shrink(),
   });
 
   final List<String> followingsList;

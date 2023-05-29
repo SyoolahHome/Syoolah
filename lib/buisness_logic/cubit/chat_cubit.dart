@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_openai/openai.dart';
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/open_ai/openai.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -76,12 +79,14 @@ class ChatCubit extends Cubit<ChatState> {
       ),
     );
 
-    final messageReponseStream = OpenAIService.instance.messageResponseStream(
+    Stream<String> messageReponseStream =
+        OpenAIService.instance.messageResponseStream(
       chatMessages: currentMessagesList,
       instruction: instruction,
     );
-
-    messageReponseStream.listen((responseMessage) {
+    messageReponseStream
+        .intervalDuration(AppConfigs.durationBetweenAIChatMessages)
+        .listen((responseMessage) {
       emitMessageContentForSystemMessageWithId(newMessageId, responseMessage);
     });
   }
@@ -219,27 +224,14 @@ class ChatCubit extends Cubit<ChatState> {
   void clearMessages() {
     emit(state.copyWith(messages: <ChatMessage>[]));
   }
-}
 
-extension ScrollControllerExt on ScrollController {
-  bool get isNotAtBottom {
-    if (hasClients) {
-      return false;
-    }
-
-    final maxScroll = position.maxScrollExtent;
-    final currentScroll = position.pixels;
-
-    return maxScroll - currentScroll > 100;
-  }
-
-  Future<void> animateToBottom() async {
-    if (isNotAtBottom && hasClients) {
-      return animateTo(
-        position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    }
+  void postMessageAsNoteOfCurrentUser(
+    BuildContext context,
+    ChatMessage message,
+  ) {
+    BottomSheetService.showCreatePostBottomSheet(
+      context,
+      initialNoteContent: message.message,
+    );
   }
 }

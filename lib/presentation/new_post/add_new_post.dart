@@ -12,8 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddNewPost extends StatelessWidget {
-  const AddNewPost({super.key});
+  const AddNewPost({
+    super.key,
+    required this.initialNoteContent,
+  });
 
+  final String? initialNoteContent;
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
@@ -23,9 +27,8 @@ class AddNewPost extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: BlocProvider<AddNewPostCubit>(
         create: (context) => AddNewPostCubit(
-          categories: <FeedCategory>[
-            ...AppConfigs.categories,
-          ],
+          categories: <FeedCategory>[...AppConfigs.categories],
+          initialNoteContent: initialNoteContent,
         ),
         child: Builder(
           builder: (_) {

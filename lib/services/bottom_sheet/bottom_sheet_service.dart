@@ -21,12 +21,15 @@ import 'package:flutter/material.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 
 abstract class BottomSheetService {
-  static Future showCreatePostBottomSheet(BuildContext context) {
+  static Future showCreatePostBottomSheet(
+    BuildContext context, {
+    String? initialNoteContent,
+  }) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
-        return const AddNewPost();
+        return AddNewPost(initialNoteContent: initialNoteContent);
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,

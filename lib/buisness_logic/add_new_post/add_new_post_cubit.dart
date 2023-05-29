@@ -40,8 +40,9 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   AddNewPostCubit({
     required this.categories,
+    String? initialNoteContent,
   }) : super(AddNewPostInitial(categories: categories)) {
-    textController = TextEditingController();
+    textController = TextEditingController()..text = initialNoteContent ?? "";
     youtubeUrlController = TextEditingController();
   }
 

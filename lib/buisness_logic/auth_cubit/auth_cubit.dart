@@ -5,10 +5,8 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/sign_up_step_view.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/text_field.dart';
-import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/presentation/sign_up/widgets/avatar_upload.dart';
-import 'package:ditto/presentation/sign_up/widgets/users_list_to_follow.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
@@ -148,7 +146,7 @@ class AuthCubit extends Cubit<AuthState> {
   void copyPrivateKey() {
     try {
       Clipboard.setData(
-        ClipboardData(text: LocalDatabase.instance.getPrivateKey()),
+        ClipboardData(text: LocalDatabase.instance.getPrivateKey() ?? ""),
       );
     } catch (e) {
       emit(

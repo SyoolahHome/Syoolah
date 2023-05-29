@@ -1,8 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class CustomAppBar extends PreferredSize {
+  const CustomAppBar({
+    super.key,
+    super.preferredSize = const Size.fromHeight(kToolbarHeight),
+    super.child = const SizedBox.shrink(),
+  });
 
   @override
   Widget build(BuildContext context) {

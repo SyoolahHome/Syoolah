@@ -9,6 +9,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import 'widgets/post_as_note.dart';
+
 class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget({
     super.key,
@@ -80,13 +82,15 @@ class ChatMessageWidget extends StatelessWidget {
                         FadeEffect(),
                       ],
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          if (isCurrentUserMessage) ...[
+                          if (isCurrentUserMessage) ...<Widget>[
                             ReloadIcon(message: message),
-                          ] else ...[
+                          ] else ...<Widget>[
                             CopyIcon(message: message),
+                            SizedBox(width: 10.0),
+                            PostDirectlyAsNote(message: message),
                           ],
+                          Spacer(),
                           Align(
                             alignment: isCurrentUserMessage
                                 ? Alignment.centerRight

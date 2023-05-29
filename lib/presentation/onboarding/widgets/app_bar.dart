@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class CustomAppBar extends PreferredSize {
+  const CustomAppBar({
+    super.key,
+    super.preferredSize = const Size.fromHeight(kToolbarHeight),
+    super.child = const SizedBox.shrink(),
+  });
 
   @override
   Widget build(BuildContext context) {

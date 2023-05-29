@@ -2,7 +2,6 @@ import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
-import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

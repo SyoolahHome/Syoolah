@@ -26,7 +26,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
   Future<ScaffoldFeatureController<Widget, dynamic>> copyPrivateKey(
       BuildContext context) async {
     try {
-      await Clipboard.setData(ClipboardData(text: state.privateKey));
+      await Clipboard.setData(ClipboardData(text: state.privateKey ?? ""));
 
       return SnackBars.text(context, "privateKeyCopied".tr());
     } catch (e) {

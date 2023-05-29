@@ -1,7 +1,6 @@
 import 'package:ditto/model/note.dart';
 import 'package:flutter/material.dart';
 
-import '../../general/widget/margined_body.dart';
 import '../../general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import '../../general/widget/note_card/wudgets/note_bg.dart';
 import '../../general/widget/note_card/wudgets/note_contents.dart';

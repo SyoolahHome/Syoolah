@@ -4,7 +4,6 @@ import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
-import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
