@@ -17,6 +17,7 @@ class ProfileAvatar extends StatelessWidget {
         child: CustomCachedNetworkImage(
           url: picture,
           size: 75,
+          shouldOpenFullViewOnTap: true,
         ),
       ),
     );

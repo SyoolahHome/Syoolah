@@ -8,20 +8,26 @@ class ImageContent extends StatelessWidget {
     required this.heroTag,
     this.size,
     this.fit = BoxFit.none,
+    this.shouldOpenFullViewOnTap = true,
+    this.borderRadiusValue = 10,
   });
 
   final String link;
   final String heroTag;
   final double? size;
   final BoxFit fit;
+  final bool shouldOpenFullViewOnTap;
+  final double borderRadiusValue;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      clipBehavior: Clip.hardEdge,
+      borderRadius: BorderRadius.all(Radius.circular(borderRadiusValue)),
       child: CustomCachedNetworkImage(
         url: link,
         size: size,
         fit: fit,
+        shouldOpenFullViewOnTap: shouldOpenFullViewOnTap,
       ),
     );
   }

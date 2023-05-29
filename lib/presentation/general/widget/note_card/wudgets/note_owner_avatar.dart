@@ -15,9 +15,13 @@ class NoteOwnerAvatar extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: Theme.of(context).colorScheme.onPrimary,),
-        child: CustomCachedNetworkImage(url: avatarUrl),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        child: CustomCachedNetworkImage(
+          url: avatarUrl,
+          shouldOpenFullViewOnTap: true,
+        ),
       ),
     );
   }

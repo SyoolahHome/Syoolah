@@ -9,23 +9,27 @@ class CustomCachedNetworkImage extends StatelessWidget {
     required this.url,
     this.size,
     this.fit,
+    required this.shouldOpenFullViewOnTap,
   });
 
   final String url;
   final double? size;
   final BoxFit? fit;
+  final bool shouldOpenFullViewOnTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return ImageFullView(heroTag: url, link: url);
-            },
-          ),
-        );
-      },
+      onTap: shouldOpenFullViewOnTap
+          ? () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ImageFullView(heroTag: url, link: url);
+                  },
+                ),
+              );
+            }
+          : null,
       child: CachedNetworkImage(
         imageUrl: url,
         width: size,

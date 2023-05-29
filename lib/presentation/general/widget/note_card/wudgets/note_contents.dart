@@ -1,8 +1,11 @@
+import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/image_content.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
+
+import '../../../../multi_images_full_screens/multi_images_full_screens.dart';
 
 class NoteContents extends StatelessWidget {
   const NoteContents({
@@ -38,9 +41,19 @@ class NoteContents extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: imageLinks.map(
-                (link) {
+              children: imageLinks.indexedMap(
+                (index, link) {
                   return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ImagesFullView(
+                            imageLinks: imageLinks,
+                            initialIndex: index,
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(right: 10),
                       child: ImageContent(
@@ -48,6 +61,7 @@ class NoteContents extends StatelessWidget {
                         link: link,
                         size: 75,
                         fit: BoxFit.cover,
+                        shouldOpenFullViewOnTap: false,
                       ),
                     ),
                   );

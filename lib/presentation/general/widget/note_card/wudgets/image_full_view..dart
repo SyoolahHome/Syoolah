@@ -23,28 +23,34 @@ class ImageFullView extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          if (link != null) ...[
-            ImageContent(
-              heroTag: heroTag,
-              link: link!,
-              fit: BoxFit.fitWidth,
+          InteractiveViewer(
+            child: Builder(
+              builder: (context) {
+                if (link != null) {
+                  return ImageContent(
+                      heroTag: heroTag, link: link!, fit: BoxFit.fitWidth);
+                } else if (imageFile != null) {
+                  return Image.file(
+                    imageFile!,
+                    fit: BoxFit.fitWidth,
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
             ),
-          ] else if (imageFile != null) ...[
-            Image.file(
-              imageFile!,
-              fit: BoxFit.fitWidth,
-            ),
-          ],
+          ),
           AppBar(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              iconTheme: const IconThemeData(color: Colors.white),
-              leading: IconButton(
-                icon: const Icon(FlutterRemix.close_line),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            iconTheme: const IconThemeData(color: Colors.white),
+            leading: IconButton(
+              icon: const Icon(FlutterRemix.close_line),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
         ],
       ),
     );
