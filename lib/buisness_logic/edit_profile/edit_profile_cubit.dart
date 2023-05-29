@@ -12,7 +12,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   TextEditingController? usernameController;
   TextEditingController? pictureController;
   TextEditingController? bannerController;
-  TextEditingController? aboutController;
+  TextEditingController? bioController;
 
   UserMetaData metaData;
   EditProfileCubit(this.metaData) : super(const EditProfileState()) {
@@ -25,7 +25,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     usernameController?.dispose();
     pictureController?.dispose();
     bannerController?.dispose();
-    aboutController?.dispose();
+    bioController?.dispose();
 
     return super.close();
   }
@@ -44,7 +44,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
             picture: pictureController?.text ?? metaData.picture,
             banner: bannerController?.text ?? metaData.banner,
             username: usernameController?.text ?? metaData.username,
-            about: aboutController?.text ?? metaData.about,
+            about: bioController?.text ?? metaData.about,
           ),
         );
       }
@@ -60,6 +60,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     usernameController = TextEditingController(text: metaData.username);
     pictureController = TextEditingController(text: metaData.picture);
     bannerController = TextEditingController(text: metaData.banner);
-    aboutController = TextEditingController(text: metaData.about);
+    bioController = TextEditingController(text: metaData.about);
   }
 }

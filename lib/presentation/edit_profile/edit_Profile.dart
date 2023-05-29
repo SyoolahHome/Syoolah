@@ -21,57 +21,69 @@ class EditProfile extends StatelessWidget {
     return BlocProvider<EditProfileCubit>(
       create: (context) => EditProfileCubit(userMetaData!),
       lazy: false,
-      child: Builder(builder: (context) {
-        return BlocConsumer<EditProfileCubit, EditProfileState>(
-          listener: (context, state) {
-            if (state.error != null) {
-              SnackBars.text(context, state.error!);
-            }
-          },
-          builder: (context, state) {
-            return Scaffold(
-              appBar: const CustomAppBar(),
-              body: MarginedBody(
-                child: Builder(builder: (context) {
-                  final cubit = context.read<EditProfileCubit>();
+      child: Builder(
+        builder: (context) {
+          return BlocConsumer<EditProfileCubit, EditProfileState>(
+            listener: (context, state) {
+              if (state.error != null) {
+                SnackBars.text(context, state.error!);
+              }
+            },
+            builder: (context, state) {
+              return Scaffold(
+                appBar: const CustomAppBar(),
+                body: MarginedBody(
+                  child: Builder(
+                    builder: (context) {
+                      final cubit = context.read<EditProfileCubit>();
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const SizedBox(height: height * 3),
-                      Text(
-                        "editProfile".tr(),
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      const SizedBox(height: height * 3),
-                      EditField(
-                        label: "nameLabel".tr(),
-                        controller: cubit.nameController!,
-                      ),
-                      const SizedBox(height: height),
-                      EditField(
-                        label: "usernameLabel".tr(),
-                        controller: cubit.usernameController!,
-                      ),
-                      const Spacer(),
-                      SaveButton(
-                        onTap: () {
-                          cubit.saveEdits();
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const SizedBox(height: height),
-                    ],
-                  );
-                },),
-              ),
-            );
-          },
-        );
-      },),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const SizedBox(height: height * 3),
+                          Text(
+                            "editProfile".tr(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          const SizedBox(height: height * 3),
+                          EditField(
+                            label: "nameLabel".tr(),
+                            controller: cubit.nameController!,
+                          ),
+                          const SizedBox(height: height),
+                          EditField(
+                            label: "usernameLabel".tr(),
+                            controller: cubit.usernameController!,
+                          ),
+                          const SizedBox(height: height),
+                          EditField(
+                            label: "bioLabel".tr(),
+                            controller: cubit.bioController!,
+                          ),
+                          const Spacer(),
+                          SaveButton(
+                            onTap: () {
+                              cubit.saveEdits();
+                              Navigator.pop(context);
+                            },
+                          ),
+                          const SizedBox(height: height),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
