@@ -42,6 +42,7 @@ class ImagesFullView extends StatelessWidget {
                   link: imageLink,
                   fit: BoxFit.fitWidth,
                   heroTag: imageLink,
+                  shouldOpenFullViewOnTap: false,
                 ),
               );
             }).toList()),

@@ -21,19 +21,28 @@ class ImagesSlider extends StatelessWidget {
       isScrollable: true,
       indicatorColor: Colors.transparent,
       indicator: null,
+      padding: EdgeInsets.zero,
+      labelPadding: EdgeInsets.only(right: 20),
       dividerColor: Colors.transparent,
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       tabs: imageLinks.indexedMap(
         (index, imageLink) {
-          final bool isFirst = index == 0;
+          final isFirst = index == 0;
 
           return Container(
             margin: EdgeInsets.only(left: isFirst ? marginOfFirstMargin : 0),
-            child: CustomCachedNetworkImage(
-              url: imageLink,
-              shouldOpenFullViewOnTap: false,
-              size: sizeOfSliderImageCard,
-              fit: BoxFit.fill,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white, width: 0.4),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CustomCachedNetworkImage(
+                url: imageLink,
+                shouldOpenFullViewOnTap: false,
+                size: sizeOfSliderImageCard,
+                fit: BoxFit.cover,
+              ),
             ),
           );
         },
