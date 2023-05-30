@@ -62,7 +62,7 @@ class AuthChoose extends StatelessWidget {
                   targetRoutePath: Paths.existentSignUp,
                   buttonText: "continueText".tr(),
                   icon: FlutterRemix.arrow_right_line,
-                  title: "bringYourOwn".tr(),
+                  title: "bringYourOwn".tr().titleCapitalized,
                   description: "useYourOwnKeysTogetInDirectly".tr(),
                 ),
               ],
