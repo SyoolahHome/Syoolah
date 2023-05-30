@@ -3,6 +3,7 @@ import 'package:ditto/presentation/chat_modules/widgets/modules_grid_view.dart';
 import 'package:ditto/presentation/chat_modules/widgets/sub_title.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,10 @@ class ChatModules extends StatelessWidget {
             children: <Widget>[
               const SizedBox(height: kToolbarHeight),
               const SizedBox(height: height),
-              HeadTitle(title: "imamOnDuty".tr(), isForSection: true),
+              HeadTitle(
+                title: "imamOnDuty".tr().titleCapitalized,
+                isForSection: true,
+              ),
               const SizedBox(height: height / 2),
               ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
               const Spacer(),
