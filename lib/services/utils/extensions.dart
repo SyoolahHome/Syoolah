@@ -69,6 +69,18 @@ extension DateTimeExt on DateTime {
 }
 
 extension StringExt on String {
+  String get titleCapitalized {
+    // capitalize all words in title.
+    final List<String> words = split(" ");
+    final List<String> capitalizedWords = [];
+
+    for (final word in words) {
+      capitalizedWords.add(word.capitalized);
+    }
+
+    return capitalizedWords.join(" ");
+  }
+
   String get capitalized {
     if (isEmpty) {
       return this;

@@ -3,6 +3,7 @@ import 'package:ditto/presentation/auth_choose/widgets/box.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class AuthChoose extends StatelessWidget {
                   additionalDelay: 0.ms,
                   buttonText: "create".tr(),
                   icon: FlutterRemix.arrow_right_line,
-                  title: "createNewAcc".tr(),
+                  title: "newCreateNewAcc".tr().titleCapitalized,
                   description: "aPrivatePublicKeyPairToAccessMunawarah".tr(),
                   targetRoutePath: Paths.SignUp,
                 ),

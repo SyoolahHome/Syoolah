@@ -299,5 +299,6 @@
   "newSearchByDate": "Search by Date",
   "newSearchByHashtag": "Search by Hashtag",
   "newImageOnly": "Image Only",
-  "selectDate": "Select Date"
+  "selectDate": "Select Date",
+  "newCreateNewAcc": "Create a new key pair"
 }
