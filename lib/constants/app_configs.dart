@@ -34,6 +34,7 @@ abstract class AppConfigs {
       icon: FlutterIslamicIcons.prayer,
       isSelected: false,
       path: Paths.duaFeed,
+      enumValue: MunawarahTopics.dua,
     ),
     FeedCategory(
       name: "newQuran".tr(),
@@ -41,6 +42,7 @@ abstract class AppConfigs {
       icon: FlutterIslamicIcons.quran,
       isSelected: false,
       path: Paths.quranFeed,
+      enumValue: MunawarahTopics.quran,
     ),
     FeedCategory(
       name: "hadith".tr(),
@@ -48,6 +50,7 @@ abstract class AppConfigs {
       icon: FlutterIslamicIcons.sajadah,
       isSelected: false,
       path: Paths.hadithFeed,
+      enumValue: MunawarahTopics.hadith,
     ),
     FeedCategory(
       name: "sirah".tr(),
@@ -55,6 +58,7 @@ abstract class AppConfigs {
       icon: FlutterIslamicIcons.solidMuslim,
       isSelected: false,
       path: Paths.sirahFeed,
+      enumValue: MunawarahTopics.sirah,
     ),
     FeedCategory(
       name: "fiqh".tr(),
@@ -62,6 +66,7 @@ abstract class AppConfigs {
       icon: FlutterIslamicIcons.family,
       isSelected: false,
       path: Paths.fiqhFeed,
+      enumValue: MunawarahTopics.fiqh,
     ),
     // FeedCategory(
     //   name: "shari/'a".tr(),
@@ -295,4 +300,13 @@ abstract class AppConfigs {
   ];
 
   static const version = '1.0.0';
+}
+
+enum MunawarahTopics {
+  dua,
+  quran,
+  hadith,
+  sirah,
+  fiqh,
+  sharia,
 }

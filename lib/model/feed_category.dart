@@ -2,13 +2,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/app_configs.dart';
+
 class FeedCategory extends Equatable {
   final String name;
   final String path;
   final String description;
   final bool isSelected;
   final IconData icon;
-
+  final MunawarahTopics enumValue;
   @override
   List<Object?> get props => [
         name,
@@ -16,6 +18,7 @@ class FeedCategory extends Equatable {
         description,
         icon,
         path,
+        enumValue,
       ];
 
   const FeedCategory({
@@ -24,6 +27,7 @@ class FeedCategory extends Equatable {
     required this.icon,
     required this.isSelected,
     required this.path,
+    required this.enumValue,
   });
 
   FeedCategory copyWith({
@@ -32,6 +36,7 @@ class FeedCategory extends Equatable {
     bool? isSelected,
     IconData? icon,
     String? path,
+    MunawarahTopics? enumValue,
   }) {
     return FeedCategory(
       name: name ?? this.name,
@@ -39,6 +44,7 @@ class FeedCategory extends Equatable {
       icon: icon ?? this.icon,
       isSelected: isSelected ?? this.isSelected,
       path: path ?? this.path,
+      enumValue: enumValue ?? this.enumValue,
     );
   }
 }

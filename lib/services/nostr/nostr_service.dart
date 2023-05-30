@@ -359,7 +359,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["quran".tr()],
+          t: [MunawarahTopics.quran.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -378,7 +378,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["dua".tr()],
+          t: [MunawarahTopics.dua.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -397,7 +397,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["hadith".tr()],
+          t: [MunawarahTopics.hadith.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -416,7 +416,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["sharia".tr()],
+          t: [MunawarahTopics.sharia.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -435,7 +435,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["fiqh".tr()],
+          t: [MunawarahTopics.fiqh.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -454,7 +454,7 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: ["sirah".tr()],
+          t: [MunawarahTopics.dua.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -473,7 +473,9 @@ class NostrService {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: AppConfigs.categories.map((category) => category.name).toList(),
+          t: AppConfigs.categories
+              .map((category) => category.enumValue.name)
+              .toList(),
           kinds: const [1],
           limit: 10,
         )

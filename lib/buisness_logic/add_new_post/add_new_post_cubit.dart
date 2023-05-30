@@ -67,7 +67,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         text: resultNote,
         tags: state.categories
             .where((e) => e.isSelected)
-            .map((e) => ["t", e.name])
+            .map((e) => ["t", e.enumValue.name])
             .toList(),
       );
       emit(state.copyWith(success: "yourNoteWasSent".tr()));
