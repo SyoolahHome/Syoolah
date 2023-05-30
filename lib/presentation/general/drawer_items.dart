@@ -32,6 +32,13 @@ abstract class GeneralDrawerItems {
             bottomBarCubit.onItemTapped(indexOfProfile);
           },
         ),
+        DrawerListTimeItem(
+          icon: Icons.verified,
+          label: "nip05Verification".tr(),
+          onTap: () {
+            Navigator.of(context).pushNamed(Paths.nip05Verification);
+          },
+        ),
         // DrawerListTimeItem(
         //   icon: FlutterRemix.key_line,
         //   label: "keys".tr(),

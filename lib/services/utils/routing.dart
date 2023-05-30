@@ -32,6 +32,7 @@ import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 
 abstract class Routing {
@@ -64,6 +65,7 @@ abstract class Routing {
     Paths.aboutApp: (context) => const About(),
     Paths.successAccountMade: (context) => const SuccessAccountMade(),
     Paths.privacyPolicy: (context) => const PrivacyPolicy(),
+    Paths.nip05Verification: (context) => const Nip05Verification(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

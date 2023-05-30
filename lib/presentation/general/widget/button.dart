@@ -13,6 +13,7 @@ class MunawarahButton extends StatelessWidget {
     this.customWidget,
     this.iconSize,
     this.mainColor,
+    this.additonalFontSize = 0,
   });
 
   final VoidCallback onTap;
@@ -24,7 +25,7 @@ class MunawarahButton extends StatelessWidget {
   final Widget? customWidget;
   final double? iconSize;
   final Color? mainColor;
-
+  final double additonalFontSize;
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -71,7 +72,7 @@ class MunawarahButton extends StatelessWidget {
                     color: isOnlyBorder
                         ? mainColor ?? Theme.of(context).colorScheme.background
                         : Theme.of(context).colorScheme.onBackground,
-                    fontSize: isSmall ? 11 : 17,
+                    fontSize: (isSmall ? 11 : 17) + additonalFontSize,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

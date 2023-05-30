@@ -27,7 +27,6 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController? existentKeyController;
   TextEditingController? bioController;
   TextEditingController? usernameController;
-  TextEditingController? nip05Controller;
   FocusNode? nameFocusNode;
 
   AuthCubit() : super(const AuthInitial()) {
@@ -51,7 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
           username: usernameController?.text ?? '',
           about: bioController?.text ?? '',
           displayName: nameController?.text.split(" ").join("-") ?? '',
-          nip05Identifier: nip05Controller?.text ?? '',
+          nip05Identifier: '',
         ),
       );
       emit(
@@ -84,7 +83,6 @@ class AuthCubit extends Cubit<AuthState> {
     bioController?.dispose();
     usernameController?.dispose();
     existentKeyController?.dispose();
-    nip05Controller?.dispose();
 
     return super.close();
   }
@@ -281,7 +279,6 @@ class AuthCubit extends Cubit<AuthState> {
     nameController = TextEditingController();
     bioController = TextEditingController();
     usernameController = TextEditingController();
-    nip05Controller = TextEditingController();
 
     if (kDebugMode) {
       nameController?.text = 'test name';
@@ -423,46 +420,6 @@ class AuthCubit extends Cubit<AuthState> {
           return Future.value(true);
         },
       ),
-      // SignUpStepView(
-      //     title: "NIP05IdentifierTitle".tr(),
-      //     subtitle: "NIP05IdentifierSubtitle".tr(),
-      //     widgetBody: CustomTextField(
-      //       controller: nip05Controller,
-      //       label: "yourNIP05".tr(),
-      //       contentPadding:
-      //           const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-      //       hint: "hintNIP05".tr(),
-      //     ),
-      //     nextViewAllower: () async {
-      //       if (nip05Controller!.text.isEmpty) {
-      //         return Future.value(true);
-      //       }
-
-      //       final privateKey = LocalDatabase.instance.getPrivateKey();
-      //       if (privateKey == null) {
-      //         return Future.value(false);
-      //       }
-
-      //       final pubKey = Nostr.instance.keysService
-      //           .derivePublicKey(privateKey: privateKey);
-      //       final internetIdentifier = nip05Controller?.text ?? '';
-
-      //       final isValidNIP05 = Nostr.instance.utilsService
-      //           .isValidNip05Identifier(nip05Controller?.text ?? '');
-
-      //       if (nip05Controller!.text.isNotEmpty && isValidNIP05) {
-      //         return Nostr.instance.relaysService.verifyNip05(
-      //           internetIdentifier: internetIdentifier,
-      //           pubKey: pubKey,
-      //         );
-      //       } else {
-      //         return Future.value(false);
-      //       }
-      //     },
-      //     errorText: "invalidNIP05".tr(),
-      //     onButtonTap: () async {
-      //       await authenticate();
-      //     }),
 
       // SignUpStepView(
       //   title: "recommendToFollow".tr(),

@@ -300,5 +300,8 @@
   "newSearchByHashtag": "Search by Hashtag",
   "newImageOnly": "Image Only",
   "selectDate": "Select Date",
-  "newCreateNewAcc": "Create a new key pair"
+  "newCreateNewAcc": "Create a new key pair",
+  "nip05Verification": "NIP05 Verification",
+  "verify": "Verify",
+  "NIP05IdentifierSuccess": "NIP05 Identifier verified successfully"
 }
