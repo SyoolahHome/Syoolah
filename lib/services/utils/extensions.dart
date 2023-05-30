@@ -23,6 +23,18 @@ extension Extensions on List<NostrEvent> {
 
     return result;
   }
+
+  List<NostrEvent> excludeCommentEvents() {
+    return where((noteEvent) {
+      final noteEventTags = noteEvent.tags;
+
+      return noteEventTags.any((tagList) {
+        final isNotComment = tagList.first != "e";
+
+        return isNotComment;
+      });
+    }).toList();
+  }
 }
 
 extension DateTimeExt on DateTime {

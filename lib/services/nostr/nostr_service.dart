@@ -602,8 +602,9 @@ class NostrService {
       ],
     );
 
-    return Nostr.instance.relaysService
-        .startEventsSubscription(request: requestWithFilter, );
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
   }
 
   NostrEventsStream userFollowers(String userProfilePubKey) {

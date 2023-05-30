@@ -47,6 +47,7 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
       postEventId: postEventId,
       text: comment,
     );
+
     commentTextController?.clear();
   }
 
