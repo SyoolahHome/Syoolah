@@ -33,7 +33,7 @@ abstract class GeneralDrawerItems {
           },
         ),
         DrawerListTimeItem(
-          icon: Icons.verified,
+          icon: Icons.verified_outlined,
           label: "nip05Verification".tr(),
           onTap: () {
             Navigator.of(context).pushNamed(Paths.nip05Verification);

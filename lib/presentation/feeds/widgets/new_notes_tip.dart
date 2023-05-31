@@ -35,8 +35,9 @@ class NewNotesTip extends StatelessWidget {
                     ),
               ),
               onPressed: () {
-                context.read<GlobalFeedCubit>().goTop();
-                context.read<GlobalFeedCubit>().showNewestPostsToUI();
+                final cubit = context.read<GlobalFeedCubit>();
+                cubit.goTop();
+                cubit.showNewestPostsToUI();
               },
               label: Animate(
                 key: ValueKey<int>(newTweets),
@@ -44,7 +45,7 @@ class NewNotesTip extends StatelessWidget {
                 child: Text("New $newTweets Notes"),
               ),
               icon: const Icon(
-                FlutterRemix.arrow_up_line,
+                FlutterRemix.arrow_up_s_line,
                 size: 19,
               ),
             ),

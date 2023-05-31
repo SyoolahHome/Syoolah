@@ -1,12 +1,17 @@
 import 'package:ditto/buisness_logic/cubit/chat_modules_cubit.dart';
-import 'package:ditto/presentation/chat_modules/widgets/modules_grid_view.dart';
+import 'package:ditto/constants/app_colors.dart';
+import 'package:ditto/presentation/chat_modules/widgets/modules_page_view.dart';
 import 'package:ditto/presentation/chat_modules/widgets/sub_title.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../services/utils/paths.dart';
+import '../general/widget/button.dart';
 
 class ChatModules extends StatelessWidget {
   const ChatModules({super.key});
@@ -18,25 +23,131 @@ class ChatModules extends StatelessWidget {
     return BlocProvider<ChatModulesCubit>(
       create: (context) => ChatModulesCubit(),
       child: Scaffold(
-        body: MarginedBody(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const SizedBox(height: kToolbarHeight),
-              const SizedBox(height: height),
-              HeadTitle(
-                title: "imamOnDuty".tr().titleCapitalized,
-                isForSection: true,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: kToolbarHeight),
+            const SizedBox(height: height),
+            MarginedBody(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  HeadTitle(
+                    title: "imamOnDuty".tr().titleCapitalized,
+                    isForSection: true,
+                  ),
+                  const SizedBox(height: height / 2),
+                  ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
+                ],
               ),
-              const SizedBox(height: height / 2),
-              ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
-              const Spacer(),
-              const ChatModulesGridView(),
-              const Spacer(),
-              const SizedBox(height: kToolbarHeight),
-              const SizedBox(height: height),
-            ],
-          ),
+            ),
+            const SizedBox(height: height * 2),
+            BlocSelector<ChatModulesCubit, ChatModulesState, double>(
+              selector: (state) => state.sliderValue,
+              builder: (context, sliderValue) {
+                final cubit = context.read<ChatModulesCubit>();
+                final currentViewedLevel =
+                    cubit.modulesItems[sliderValue.toInt()];
+                void _triggerChatNavigation() {
+                  Navigator.of(context).pushNamed(
+                    Paths.chat,
+                    arguments: {
+                      "chatModduleItem": currentViewedLevel,
+                    },
+                  );
+                }
+
+                return Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Flexible(
+                        child: ChatModulesPageView(
+                          showAtIndex: sliderValue.toInt(),
+                          onTap: _triggerChatNavigation,
+                        ),
+                      ),
+                      MarginedBody(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: height * 2,
+                              child: AnimatedSwitcher(
+                                duration: Animate.defaultDuration,
+                                child: Text(
+                                  currentViewedLevel.subtitle,
+                                  key: ValueKey(currentViewedLevel.subtitle),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background
+                                            .withOpacity(.6),
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: height * 4),
+                            Theme(
+                              data: Theme.of(context).copyWith(
+                                sliderTheme: SliderThemeData(
+                                  thumbColor: AppColors.black,
+                                  valueIndicatorColor: AppColors.black,
+                                  activeTrackColor: AppColors.black,
+                                  valueIndicatorShape:
+                                      PaddleSliderValueIndicatorShape(),
+                                  inactiveTrackColor:
+                                      AppColors.black.withOpacity(.1),
+                                  activeTickMarkColor: AppColors.black,
+                                  inactiveTickMarkColor:
+                                      AppColors.black.withOpacity(.1),
+                                  trackHeight: 2.5,
+                                  thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 8.0,
+                                  ),
+                                  overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 10.0,
+                                  ),
+                                ),
+                              ),
+                              child: Slider(
+                                value: sliderValue,
+                                onChanged: (value) {
+                                  cubit.changeSliderValue(value);
+                                },
+                                min: 0.0,
+                                max: cubit.modulesItems.length.toDouble() - 1,
+                                divisions: cubit.modulesItems.length - 1,
+                                label: currentViewedLevel.title,
+                              ),
+                            ),
+                            SizedBox(height: height),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: MunawarahButton(
+                                text: "start".tr(),
+                                onTap: _triggerChatNavigation,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: kToolbarHeight),
+            const SizedBox(height: height),
+          ],
         ),
       ),
     );
