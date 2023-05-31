@@ -7,6 +7,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../general/pattern_widget.dart';
+
 class OnBoardingRelays extends StatelessWidget {
   const OnBoardingRelays({super.key});
 
@@ -16,8 +18,7 @@ class OnBoardingRelays extends StatelessWidget {
 
     return SizedBox(
       height: 575,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
+      child: PatternScaffold(
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

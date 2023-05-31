@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../general/pattern_widget.dart';
+
 class BottomSheetOptionsWidget extends StatelessWidget {
   const BottomSheetOptionsWidget({
     super.key,
@@ -18,9 +20,8 @@ class BottomSheetOptionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
-    return Container(
-      color: Theme.of(context).bottomSheetTheme.backgroundColor,
-      child: SingleChildScrollView(
+    return PatternScaffold(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -51,40 +52,45 @@ class BottomSheetOptionsWidget extends StatelessWidget {
                           ? Theme.of(context).colorScheme.error
                           : Theme.of(context).colorScheme.background,
                     ),
-                    title: Builder(builder: (context) {
-                      final title = current.title;
-                      if (title.split(':').length >= 2) {
-                        return Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "${title.split(':')[0]} : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                              TextSpan(
-                                text: title.split(':')[1],
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        return Text(
-                          title,
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: isLogout
-                                        ? Theme.of(context).colorScheme.error
-                                        : null,
-                                  ),
-                        );
-                      }
-                    },),
+                    title: Builder(
+                      builder: (context) {
+                        final title = current.title;
+                        if (title.split(':').length >= 2) {
+                          return Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "${title.split(':')[0]} : ",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: title.split(':')[1],
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(
+                                  color: isLogout
+                                      ? Theme.of(context).colorScheme.error
+                                      : null,
+                                ),
+                          );
+                        }
+                      },
+                    ),
                     onTap: () {
                       Navigator.of(context).pop();
                       final onPressed = current.onPressed;

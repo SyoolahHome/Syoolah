@@ -11,6 +11,8 @@ import 'package:ditto/presentation/new_post/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../general/pattern_widget.dart';
+
 class AddNewPost extends StatelessWidget {
   const AddNewPost({
     super.key,
@@ -32,7 +34,7 @@ class AddNewPost extends StatelessWidget {
         ),
         child: Builder(
           builder: (_) {
-            return Scaffold(
+            return PatternScaffold(
               body: MarginedBody(
                 child: SingleChildScrollView(
                   child: SizedBox(

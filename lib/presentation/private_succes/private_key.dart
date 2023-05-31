@@ -7,6 +7,8 @@ import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../general/pattern_widget.dart';
+
 class PrivateKey extends StatelessWidget {
   const PrivateKey({
     super.key,
@@ -20,9 +22,8 @@ class PrivateKey extends StatelessWidget {
   Widget build(BuildContext context) {
     const heightSeparator = 10.0;
 
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: BlocProvider<PrivateKeyGenSuccessCubit>(
+    return PatternScaffold(
+      body: BlocProvider<PrivateKeyGenSuccessCubit>(
         create: (context) => PrivateKeyGenSuccessCubit(),
         child: Center(
           child: MarginedBody(

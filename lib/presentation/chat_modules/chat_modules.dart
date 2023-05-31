@@ -95,38 +95,15 @@ class ChatModules extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: height * 4),
-                            Theme(
-                              data: Theme.of(context).copyWith(
-                                sliderTheme: SliderThemeData(
-                                  thumbColor: AppColors.black,
-                                  valueIndicatorColor: AppColors.black,
-                                  activeTrackColor: AppColors.black,
-                                  valueIndicatorShape:
-                                      PaddleSliderValueIndicatorShape(),
-                                  inactiveTrackColor:
-                                      AppColors.black.withOpacity(.1),
-                                  activeTickMarkColor: AppColors.black,
-                                  inactiveTickMarkColor:
-                                      AppColors.black.withOpacity(.1),
-                                  trackHeight: 2.5,
-                                  thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 8.0,
-                                  ),
-                                  overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 10.0,
-                                  ),
-                                ),
-                              ),
-                              child: Slider(
-                                value: sliderValue,
-                                onChanged: (value) {
-                                  cubit.changeSliderValue(value);
-                                },
-                                min: 0.0,
-                                max: cubit.modulesItems.length.toDouble() - 1,
-                                divisions: cubit.modulesItems.length - 1,
-                                label: currentViewedLevel.title,
-                              ),
+                            Slider(
+                              value: sliderValue,
+                              onChanged: (value) {
+                                cubit.changeSliderValue(value);
+                              },
+                              min: 0.0,
+                              max: cubit.modulesItems.length.toDouble() - 1,
+                              divisions: cubit.modulesItems.length - 1,
+                              label: currentViewedLevel.title,
                             ),
                             SizedBox(height: height),
                             SizedBox(

@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../general/pattern_widget.dart';
+
 class AuthChoose extends StatelessWidget {
   const AuthChoose({super.key});
 
@@ -19,7 +21,7 @@ class AuthChoose extends StatelessWidget {
     final isShownInBottomSheet =
         ModalRoute.of(context)?.settings.name != Paths.authChoose;
 
-    return Scaffold(
+    return PatternScaffold(
       body: Stack(
         children: <Widget>[
           if (isShownInBottomSheet) ...[

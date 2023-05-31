@@ -4,6 +4,7 @@ import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
@@ -70,77 +71,81 @@ class OnBoardingSearch extends StatelessWidget {
                       ),
                     ),
                   ),
-                  body: MarginedBody(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const SizedBox(height: height * 2),
-                        BottomSheetTitleWithIconButton(
-                          title: "searchUser".tr(),
-                          onPop: () {
-                            cubit.resetSearch();
-                          },
-                        ),
-                        const SizedBox(height: height * 2),
-                        Animate(
-                          delay: const Duration(milliseconds: 200),
-                          effects: const <Effect>[
-                            FadeEffect(),
-                            SlideEffect(
-                              begin: Offset(0, 0.5),
-                            )
-                          ],
-                          child: Text(
-                            "identifierOrPuKey".tr(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(color: Theme.of(context).hintColor),
-                          ),
-                        ),
-                        const SizedBox(height: height),
-                        const SearchField(),
-                        const SizedBox(height: height * 2),
-                        Animate(
-                          delay: const Duration(milliseconds: 600),
-                          effects: const <Effect>[
-                            FadeEffect(),
-                            SlideEffect(
-                              begin: Offset(0, 0.5),
-                            )
-                          ],
-                          child: const Center(
-                            child: OrDivider(
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: height * 2),
-                        if (state.searchedUser != null)
-                          Builder(
-                            builder: (context) {
-                              final searchedUserMetadata =
-                                  UserMetaData.fromJson(
-                                jsonDecode(state.searchedUser!.content)
-                                    as Map<String, dynamic>,
-                              );
-
-                              return GestureDetector(
-                                onTap: () {},
-                                child: NoteAvatarAndName(
-                                  appCurrentUserPublicKey:
-                                      appCurrentUserPublicKey ?? "",
-                                  userPubKey: state.searchedUser!.pubkey,
-                                  avatarUrl: searchedUserMetadata.picture!,
-                                  memeberShipStartedAt:
-                                      state.searchedUser!.createdAt,
-                                  nameToShow: searchedUserMetadata.nameToShow(),
-                                ),
-                              );
+                  body: PatternWidget(
+                    child: MarginedBody(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const SizedBox(height: height * 2),
+                          BottomSheetTitleWithIconButton(
+                            title: "searchUser".tr(),
+                            onPop: () {
+                              cubit.resetSearch();
                             },
                           ),
-                      ],
+                          const SizedBox(height: height * 2),
+                          Animate(
+                            delay: const Duration(milliseconds: 200),
+                            effects: const <Effect>[
+                              FadeEffect(),
+                              SlideEffect(
+                                begin: Offset(0, 0.5),
+                              )
+                            ],
+                            child: Text(
+                              "identifierOrPuKey".tr(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                      color: Theme.of(context).hintColor),
+                            ),
+                          ),
+                          const SizedBox(height: height),
+                          const SearchField(),
+                          const SizedBox(height: height * 2),
+                          Animate(
+                            delay: const Duration(milliseconds: 600),
+                            effects: const <Effect>[
+                              FadeEffect(),
+                              SlideEffect(
+                                begin: Offset(0, 0.5),
+                              )
+                            ],
+                            child: const Center(
+                              child: OrDivider(
+                                color: AppColors.black,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: height * 2),
+                          if (state.searchedUser != null)
+                            Builder(
+                              builder: (context) {
+                                final searchedUserMetadata =
+                                    UserMetaData.fromJson(
+                                  jsonDecode(state.searchedUser!.content)
+                                      as Map<String, dynamic>,
+                                );
+
+                                return GestureDetector(
+                                  onTap: () {},
+                                  child: NoteAvatarAndName(
+                                    appCurrentUserPublicKey:
+                                        appCurrentUserPublicKey ?? "",
+                                    userPubKey: state.searchedUser!.pubkey,
+                                    avatarUrl: searchedUserMetadata.picture!,
+                                    memeberShipStartedAt:
+                                        state.searchedUser!.createdAt,
+                                    nameToShow:
+                                        searchedUserMetadata.nameToShow(),
+                                  ),
+                                );
+                              },
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

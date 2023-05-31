@@ -6,14 +6,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../general/pattern_widget.dart';
+
 class SuccessAccountMade extends StatelessWidget {
   const SuccessAccountMade({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: MarginedBody(
+    return PatternScaffold(
+      body: MarginedBody(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

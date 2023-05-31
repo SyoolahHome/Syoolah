@@ -9,6 +9,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../general/pattern_widget.dart';
+
 class PrivateKeyGenSuccess extends StatelessWidget {
   const PrivateKeyGenSuccess({super.key, this.onCopy, this.customText});
 
@@ -20,7 +22,7 @@ class PrivateKeyGenSuccess extends StatelessWidget {
 
     return BlocProvider<PrivateKeyGenSuccessCubit>(
       create: (context) => PrivateKeyGenSuccessCubit(),
-      child: Scaffold(
+      child: PatternScaffold(
         body: MarginedBody(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,

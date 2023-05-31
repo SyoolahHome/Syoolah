@@ -9,6 +9,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../general/pattern_widget.dart';
+
 class SearchSections extends StatelessWidget {
   const SearchSections({
     super.key,
@@ -22,9 +24,8 @@ class SearchSections extends StatelessWidget {
 
     return BlocProvider<GlobalFeedCubit>.value(
       value: cubit,
-      child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: MarginedBody(
+      child: PatternScaffold(
+        body: MarginedBody(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

@@ -22,6 +22,22 @@ abstract class AppThemes {
       onPrimaryContainer: AppColors.mediumGrey,
       onTertiaryContainer: AppColors.lighGrey,
     ),
+    sliderTheme: SliderThemeData(
+      thumbColor: AppColors.black,
+      valueIndicatorColor: AppColors.black,
+      activeTrackColor: AppColors.black,
+      valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+      inactiveTrackColor: AppColors.black.withOpacity(.1),
+      activeTickMarkColor: AppColors.black,
+      inactiveTickMarkColor: AppColors.black.withOpacity(.1),
+      trackHeight: 2.5,
+      thumbShape: RoundSliderThumbShape(
+        enabledThumbRadius: 8.0,
+      ),
+      overlayShape: RoundSliderOverlayShape(
+        overlayRadius: 10.0,
+      ),
+    ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.black,
@@ -221,6 +237,22 @@ abstract class AppThemes {
       errorContainer: Colors.red,
       onPrimaryContainer: Colors.grey[800],
       onTertiaryContainer: Colors.grey[900],
+    ),
+    sliderTheme: SliderThemeData(
+      thumbColor: AppColors.white,
+      valueIndicatorColor: AppColors.white,
+      activeTrackColor: AppColors.white,
+      valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+      inactiveTrackColor: AppColors.white.withOpacity(.1),
+      activeTickMarkColor: AppColors.white,
+      inactiveTickMarkColor: AppColors.white.withOpacity(.1),
+      trackHeight: 2.5,
+      thumbShape: RoundSliderThumbShape(
+        enabledThumbRadius: 8.0,
+      ),
+      overlayShape: RoundSliderOverlayShape(
+        overlayRadius: 10.0,
+      ),
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
