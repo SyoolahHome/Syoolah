@@ -45,7 +45,7 @@ class AuthState extends Equatable {
     String? privateKey,
   }) {
     return AuthState(
-      pickedImage: pickedImage,
+      pickedImage: pickedImage ?? this.pickedImage,
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
       error: error ?? this.error,
       authenticated: authenticated ?? this.authenticated,
@@ -54,6 +54,19 @@ class AuthState extends Equatable {
       isSavingExistentKey: isSavingExistentKey ?? this.isSavingExistentKey,
       isSignedOut: isSignedOut ?? this.isSignedOut,
       privateKey: privateKey ?? this.privateKey,
+    );
+  }
+
+  AuthState copyWithNullPickedImage() {
+    return AuthState(
+      pickedImage: null,
+      currentStepIndex: currentStepIndex,
+      error: error,
+      authenticated: authenticated,
+      isGeneratingNewPrivateKey: isGeneratingNewPrivateKey,
+      isSavingExistentKey: isSavingExistentKey,
+      isSignedOut: isSignedOut,
+      privateKey: privateKey,
     );
   }
 }

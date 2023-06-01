@@ -12,7 +12,7 @@ class PrivacyPolicyCubit extends Cubit<bool> {
 
   @override
   Future<void> close() {
-    privacyScrollController!.dispose();
+    privacyScrollController?.dispose();
 
     return super.close();
   }

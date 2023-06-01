@@ -467,6 +467,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void removePickedImage() {
-    emit(state.copyWith());
+    emit(state.copyWithNullPickedImage());
   }
 }
