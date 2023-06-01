@@ -308,5 +308,13 @@
     "privacyAndPolicy": "隐私和政策",
     "privacyAndPolicyDescription": "请阅读 Munawarah 的隐私和政策，并接受以继续创建您的账户",
     "acceptPrivacyPolicy": "我已阅读并接受 Munawarah 的隐私和政策",
-    "privacyPolicyContent": "默认情况下，该应用程序连接到 Nostr 网络中的多个中继点来发送和接收消息。这些中继点可能不是 Munawarah 开发人员运营的。您可以自由更改默认中继点..<br><br>在 Nostr 上，私密消息是加密的，但任何人都可以看到您正在与谁聊天以及何时聊天..<br><br>该应用程序封装了位于 <a class='anchorLink' href='https://web.munawarah.app'>https://web.munawarah.app</a> 的网络应用程序。托管提供商记录用户的 IP 地址和页面浏览计数，用于按国家跟踪独立用户数量和使用情况..<br><br>Munawarah 用户可以注册一个可选的用户名，方便地重定向到他们的 Nostr 公开个人资料 <a class='anchorLink' href='https://web.munawarah.app/username'>https://web.munawarah.app/username</a>。在此过程中，用户的 IP 地址和国家代码会被保存..<br><br>否则，Munawarah 开发人员不会收集关于您或您对应用程序的使用的任何信息..<br><br>我们保留随时修改本隐私政策而无需事先通知的权利。在任何修改的隐私政策发布后，您继续使用该应用程序表示您接受修改后的隐私政策的条款。<br><br>如果您对本隐私政策有任何疑问，请通过<a class='anchorLink' href='mailto:privacy@munawarah.engineering'>privacy@munawarah.engineering</a>联系我们。"
+    "privacyPolicyContent": "默认情况下，该应用程序连接到 Nostr 网络中的多个中继点来发送和接收消息。这些中继点可能不是 Munawarah 开发人员运营的。您可以自由更改默认中继点..<br><br>在 Nostr 上，私密消息是加密的，但任何人都可以看到您正在与谁聊天以及何时聊天..<br><br>该应用程序封装了位于 <a class='anchorLink' href='https://web.munawarah.app'>https://web.munawarah.app</a> 的网络应用程序。托管提供商记录用户的 IP 地址和页面浏览计数，用于按国家跟踪独立用户数量和使用情况..<br><br>Munawarah 用户可以注册一个可选的用户名，方便地重定向到他们的 Nostr 公开个人资料 <a class='anchorLink' href='https://web.munawarah.app/username'>https://web.munawarah.app/username</a>。在此过程中，用户的 IP 地址和国家代码会被保存..<br><br>否则，Munawarah 开发人员不会收集关于您或您对应用程序的使用的任何信息..<br><br>我们保留随时修改本隐私政策而无需事先通知的权利。在任何修改的隐私政策发布后，您继续使用该应用程序表示您接受修改后的隐私政策的条款。<br><br>如果您对本隐私政策有任何疑问，请通过<a class='anchorLink' href='mailto:privacy@munawarah.engineering'>privacy@munawarah.engineering</a>联系我们。",
+    "nYears": "{} 年",
+    "nMonths": "{} 月",
+    "nDays": "{} 天",
+    "nHours": "{} 小时",
+    "nMinutes": "{} 分钟",
+    "nSeconds": "{} 秒",
+    "nSecondsAgo": "{} 秒前",
+    "aMomentAgo": "刚刚"
 }
