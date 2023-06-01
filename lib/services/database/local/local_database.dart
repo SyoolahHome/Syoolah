@@ -1,5 +1,6 @@
 import 'package:ditto/services/database/local/base/local_database_base.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:http/http.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
   final String dbName = "local_database";
@@ -30,8 +31,10 @@ class LocalDatabase implements LocalDatabaseBase {
     return await Hive.openBox(dbName);
   }
 
-  Future<void> setPrivateKey(String? value) {
-    return setValue("privateKey", value);
+  Future<String> setPrivateKey(String? value) async {
+    await setValue("privateKey", value);
+
+    return getPrivateKey()!;
   }
 
   Future<void> setName(String name) {
@@ -64,7 +67,12 @@ class LocalDatabase implements LocalDatabaseBase {
   @override
   Future<void> deletePrivateKey() async {
     await deleteValue("privateKey");
-    print(getPrivateKey());
+
+    final maybePrivateKey = getPrivateKey();
+
+    if (maybePrivateKey != null) {
+      throw Exception("privateKey is not deleted !");
+    }
   }
 
   Stream<bool> themeStateListenable() {
@@ -94,6 +102,7 @@ class LocalDatabase implements LocalDatabaseBase {
   }) async {
     try {
       await deletePrivateKey();
+
       onSuccess();
     } catch (e) {
       if (onError != null) {

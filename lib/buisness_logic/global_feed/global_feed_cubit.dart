@@ -89,7 +89,8 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
       Set<Note> notesResults = {};
 
       final searchQuery = searchController?.text ?? "";
-      for (final option in state.searchOptions.where((e) => e.isSelected)) {
+      for (final option in state.searchOptions
+          .where((e) => e.isSelected && !e.manipulatesExistingResultsList)) {
         if (option.useSearchQuery) {
           if (searchQuery.isNotEmpty) {
             notesResults.addAll(option.searchFunction(notes, searchQuery));
@@ -97,6 +98,12 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
         } else {
           notesResults.addAll(option.searchFunction(notes, ""));
         }
+      }
+
+      for (final option in state.searchOptions
+          .where((e) => e.isSelected && e.manipulatesExistingResultsList)) {
+        notesResults =
+            option.searchFunction(notesResults.toList(), searchQuery).toSet();
       }
 
       if (state.dateRange != null) {

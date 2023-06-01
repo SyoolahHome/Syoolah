@@ -39,6 +39,7 @@ class CustomButton extends StatelessWidget {
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
+                height: 50,
                 child: MunawarahButton(
                   onTap: () {
                     cubit.handleExistentKey();

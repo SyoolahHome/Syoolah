@@ -114,9 +114,11 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       final keyChain = NostrKeyPairs(private: existentKey);
-      await LocalDatabase.instance.setPrivateKey(keyChain.private);
+      final privateKey =
+          await LocalDatabase.instance.setPrivateKey(keyChain.private);
       emit(
         state.copyWith(
+          privateKey: privateKey,
           authenticated: true,
           pickedImage: state.pickedImage,
         ),
@@ -129,7 +131,12 @@ class AuthCubit extends Cubit<AuthState> {
         ),
       );
     } finally {
-      emit(state.copyWith(pickedImage: state.pickedImage));
+      emit(state.copyWith(
+        pickedImage: state.pickedImage,
+        error: null,
+        authenticated: true,
+        privateKey: "",
+      ));
     }
   }
 

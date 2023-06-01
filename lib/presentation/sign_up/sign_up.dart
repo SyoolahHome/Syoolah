@@ -79,15 +79,17 @@ class SignUp extends StatelessWidget {
             ),
             // const Spacer(),
             Expanded(
-              child: Animate(
-                effects: const <Effect>[
-                  FadeEffect(),
-                  SlideEffect(
-                    begin: Offset(-0.25, 0),
-                  ),
-                ],
-                delay: animationDuration,
-                child: current.widgetBody,
+              child: Center(
+                child: Animate(
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    SlideEffect(
+                      begin: Offset(-0.25, 0),
+                    ),
+                  ],
+                  delay: animationDuration,
+                  child: current.widgetBody,
+                ),
               ),
             ),
             // const Spacer(),

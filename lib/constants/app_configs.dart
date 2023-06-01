@@ -195,6 +195,7 @@ abstract class AppConfigs {
         return noteList;
       },
       useSearchQuery: true,
+      manipulatesExistingResultsList: true,
     ),
   ];
 

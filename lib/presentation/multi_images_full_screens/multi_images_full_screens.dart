@@ -18,6 +18,7 @@ class ImagesFullView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: imageLinks.length,
+      initialIndex: initialIndex,
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,

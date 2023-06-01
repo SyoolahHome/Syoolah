@@ -32,9 +32,9 @@ class CommentField extends StatelessWidget {
         ),
         Container(
           margin: MarginedBody.defaultMargin,
-          child: GestureDetector(
-            onTap: () => cubit.postComment(noteId),
-            child: Icon(
+          child: IconButton(
+            onPressed: () => cubit.postComment(noteId),
+            icon: Icon(
               FlutterRemix.send_plane_2_line,
               color: Theme.of(context).colorScheme.background.withOpacity(.6),
               size: 19,

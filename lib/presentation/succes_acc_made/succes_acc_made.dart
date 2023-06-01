@@ -38,6 +38,7 @@ class SuccessAccountMade extends StatelessWidget {
             const SizedBox(height: 50),
             SizedBox(
               width: double.infinity,
+              height: 50,
               child: MunawarahButton(
                 // isSmall: true,
                 onTap: () {

@@ -9,6 +9,7 @@ class AuthState extends Equatable {
   final bool isSignedOut;
   final int currentStepIndex;
   final File? pickedImage;
+  final String privateKey;
 
   @override
   List<Object?> get props => [
@@ -19,6 +20,7 @@ class AuthState extends Equatable {
         isSavingExistentKey,
         isSignedOut,
         pickedImage,
+        privateKey,
       ];
 
   const AuthState({
@@ -29,6 +31,7 @@ class AuthState extends Equatable {
     this.isGeneratingNewPrivateKey = false,
     this.isSavingExistentKey = false,
     this.isSignedOut = false,
+    this.privateKey = "",
   });
 
   AuthState copyWith({
@@ -39,6 +42,7 @@ class AuthState extends Equatable {
     bool? isSignedOut,
     int? currentStepIndex,
     File? pickedImage,
+    String? privateKey,
   }) {
     return AuthState(
       pickedImage: pickedImage,
@@ -49,6 +53,7 @@ class AuthState extends Equatable {
           isGeneratingNewPrivateKey ?? this.isGeneratingNewPrivateKey,
       isSavingExistentKey: isSavingExistentKey ?? this.isSavingExistentKey,
       isSignedOut: isSignedOut ?? this.isSignedOut,
+      privateKey: privateKey ?? this.privateKey,
     );
   }
 }
