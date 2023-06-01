@@ -25,7 +25,7 @@ class GeneralFeed extends StatelessWidget {
       create: (context) => GlobalFeedCubit(feedPostsStream: feedPostsStream),
       child: Stack(
         alignment: Alignment.topCenter,
-        children: [
+        children: <Widget>[
           Scaffold(
             appBar: CustomAppBar(feedName: feedName),
             // drawer: CustomDrawer(),

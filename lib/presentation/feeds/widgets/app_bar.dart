@@ -1,6 +1,7 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -27,22 +28,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       centerTitle: true,
-      actions: [
-        IconButton(
-          onPressed: () {
-            NostrService.instance.sendTextNoteFromCurrentUser(
-              text: """
+      actions: <Widget>[
+        if (kDebugMode)
+          IconButton(
+            onPressed: () {
+              NostrService.instance.sendTextNoteFromCurrentUser(
+                text: """
 Hello there!!!!
 
 https://www.youtube.com/watch?v=PMpNhbMjDj0
               """,
-              tags: [
-                ["t", AppConfigs.categories.first.enumValue.name]
-              ],
-            );
-          },
-          icon: const Icon(FlutterRemix.add_line),
-        ),
+                tags: [
+                  ["t", AppConfigs.categories.first.enumValue.name]
+                ],
+              );
+            },
+            icon: const Icon(FlutterRemix.add_line),
+          ),
         IconButton(
           icon: const Icon(
             FlutterRemix.search_2_line,

@@ -1,4 +1,5 @@
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -59,20 +60,20 @@ extension DateTimeExt on DateTime {
     String memebership = '';
 
     if (years > 0) {
-      memebership = '$years years';
+      memebership = "nYears".tr(args: ["$years"]);
     } else if (months > 0) {
-      memebership = '$months months';
+      memebership = "nMonths".tr(args: ["$months"]);
     } else if (days > 0) {
-      memebership = '$days days';
+      memebership = "nDays".tr(args: ["$days"]);
     } else if (hours > 0) {
-      memebership = '$hours hours';
+      memebership = "nHours".tr(args: ["$hours"]);
     } else if (minutes > 0) {
-      memebership = '$minutes minutes';
+      memebership = "nMinutes".tr(args: ["$minutes"]);
     } else if (seconds > 0) {
-      memebership = '$seconds seconds';
+      memebership = "nSeconds".tr(args: ["$seconds"]);
     }
 
-    return 'Member for $memebership';
+    return 'Last updated $memebership ago';
   }
 
   String get formatted {
