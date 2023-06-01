@@ -48,7 +48,7 @@ class PrivacyPolicy extends StatelessWidget {
                             "privacyPolicyContent".tr(),
                             customStylesBuilder: (element) {
                               if (element.classes.contains("anchorLink")) {
-                                return {
+                                return <String, String>{
                                   'color': Colors.blue.shade700.toHex(),
                                 };
                               }
