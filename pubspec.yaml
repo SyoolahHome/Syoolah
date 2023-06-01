@@ -48,6 +48,8 @@ dependencies:
   envied: ^0.3.0
   youtube_player_flutter:
   device_preview: ^1.1.0
+  flutter_html: ^3.0.0-beta.2
+  flutter_widget_from_html: ^0.10.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

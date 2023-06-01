@@ -36,29 +36,52 @@ class MunawarahButton extends StatelessWidget {
         height: isSmall ? 30 : null,
         child: ElevatedButton(
           onPressed: onTap,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isOnlyBorder
-                ? Colors.transparent
-                : mainColor ?? Theme.of(context).colorScheme.background,
-            elevation: isOnlyBorder
-                ? 0
-                : isSmall
-                    ? 1
-                    : 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: isSmall
-                  ? BorderRadius.circular(100)
-                  : BorderRadius.circular(10),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              isOnlyBorder
+                  ? Colors.transparent
+                  : mainColor ?? Theme.of(context).colorScheme.background,
             ),
-            side: isOnlyBorder
-                ? BorderSide(
-                    color:
-                        mainColor ?? Theme.of(context).colorScheme.background,
-                  )
-                : null,
-            padding:
-                isSmall ? const EdgeInsets.symmetric(horizontal: 15) : null,
-            foregroundColor: Theme.of(context).colorScheme.surface,
+            overlayColor:
+                Theme.of(context).elevatedButtonTheme.style!.overlayColor!,
+            elevation: MaterialStateProperty.resolveWith<double>((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Theme.of(context)
+                    .elevatedButtonTheme
+                    .style!
+                    .elevation!
+                    .resolve(states)!;
+              } else {
+                return isOnlyBorder
+                    ? 0
+                    : isSmall
+                        ? 1
+                        : 4;
+              }
+            }
+                // isOnlyBorder ? 0 : 1,
+                ),
+            side: MaterialStateProperty.all<BorderSide>(
+              isOnlyBorder
+                  ? BorderSide(
+                      color:
+                          mainColor ?? Theme.of(context).colorScheme.background,
+                    )
+                  : BorderSide.none,
+            ),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: isSmall
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(10),
+              ),
+            ),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              EdgeInsets.symmetric(horizontal: isSmall ? 15 : 0),
+            ),
+            foregroundColor: MaterialStateProperty.all(
+              Theme.of(context).colorScheme.surface,
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

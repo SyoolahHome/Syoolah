@@ -64,7 +64,10 @@ abstract class Routing {
     Paths.chat: (context) => const Chat(),
     Paths.aboutApp: (context) => const About(),
     Paths.successAccountMade: (context) => const SuccessAccountMade(),
-    Paths.privacyPolicy: (context) => const PrivacyPolicy(),
+    Paths.privacyPolicy: (context) => PrivacyPolicy(
+          shouldShowAcceptSwitchTile: false,
+          onAccept: (v) {},
+        ),
     Paths.nip05Verification: (context) => const Nip05Verification(),
   };
 

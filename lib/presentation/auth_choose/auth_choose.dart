@@ -21,56 +21,59 @@ class AuthChoose extends StatelessWidget {
     final isShownInBottomSheet =
         ModalRoute.of(context)?.settings.name != Paths.authChoose;
 
-    return PatternScaffold(
-      body: Stack(
-        children: <Widget>[
-          if (isShownInBottomSheet) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: height * 2),
-              child: MarginedBody(
-                child: BottomSheetTitleWithIconButton(
-                  title: "chooseAuth".tr(),
+    return Scaffold(
+      body: PatternWidget(
+        showPattern: isShownInBottomSheet,
+        child: Stack(
+          children: <Widget>[
+            if (isShownInBottomSheet) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: height * 2),
+                child: MarginedBody(
+                  child: BottomSheetTitleWithIconButton(
+                    title: "chooseAuth".tr(),
+                  ),
                 ),
               ),
+            ] else ...[
+              const CustomAppBar(),
+            ],
+            MarginedBody(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // if (!isShownInBottomSheet) ...[
+                  const SizedBox(height: kToolbarHeight),
+                  // ],
+                  AuthChooseBox(
+                    isShownInBottomSheet: isShownInBottomSheet,
+                    additionalDelay: 0.ms,
+                    buttonText: "create".tr(),
+                    icon: FlutterRemix.arrow_right_line,
+                    title: "newCreateNewAcc".tr().titleCapitalized,
+                    description: "aPrivatePublicKeyPairToAccessMunawarah".tr(),
+                    targetRoutePath: Paths.SignUp,
+                  ),
+                  const SizedBox(height: height * 3),
+                  const OrDivider(
+                    onlyDivider: true,
+                    // color: Theme.of(context).primaryColorDark,
+                  ),
+                  const SizedBox(height: height * 3),
+                  AuthChooseBox(
+                    isShownInBottomSheet: isShownInBottomSheet,
+                    additionalDelay: 200.ms,
+                    targetRoutePath: Paths.existentSignUp,
+                    buttonText: "continueText".tr(),
+                    icon: FlutterRemix.arrow_right_line,
+                    title: "bringYourOwn".tr().titleCapitalized,
+                    description: "useYourOwnKeysTogetInDirectly".tr(),
+                  ),
+                ],
+              ),
             ),
-          ] else ...[
-            const CustomAppBar(),
           ],
-          MarginedBody(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // if (!isShownInBottomSheet) ...[
-                const SizedBox(height: kToolbarHeight),
-                // ],
-                AuthChooseBox(
-                  isShownInBottomSheet: isShownInBottomSheet,
-                  additionalDelay: 0.ms,
-                  buttonText: "create".tr(),
-                  icon: FlutterRemix.arrow_right_line,
-                  title: "newCreateNewAcc".tr().titleCapitalized,
-                  description: "aPrivatePublicKeyPairToAccessMunawarah".tr(),
-                  targetRoutePath: Paths.SignUp,
-                ),
-                const SizedBox(height: height * 3),
-                const OrDivider(
-                  onlyDivider: true,
-                  // color: Theme.of(context).primaryColorDark,
-                ),
-                const SizedBox(height: height * 3),
-                AuthChooseBox(
-                  isShownInBottomSheet: isShownInBottomSheet,
-                  additionalDelay: 200.ms,
-                  targetRoutePath: Paths.existentSignUp,
-                  buttonText: "continueText".tr(),
-                  icon: FlutterRemix.arrow_right_line,
-                  title: "bringYourOwn".tr().titleCapitalized,
-                  description: "useYourOwnKeysTogetInDirectly".tr(),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -19,6 +19,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../presentation/privacy/privacy.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -290,6 +292,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   List<SignUpStepView> get signUpScreens {
     bool isPrivateKeyCopied = false;
+    bool isPrivacyPolicyAccepted = false;
+
     return <SignUpStepView>[
       // SignUpStepView(
       //   title: "welcome".tr(),
@@ -305,6 +309,23 @@ class AuthCubit extends Cubit<AuthState> {
       //   },
       // ),
       //
+      SignUpStepView(
+        title: "privacyAndPolicy".tr(),
+        subtitle: "privacyAndPolicyDescription".tr(),
+        widgetBody: Center(
+            child: PrivacyPolicy(
+          shouldShowAcceptSwitchTile: true,
+          onAccept: (value) {
+            if (value != null) {
+              isPrivacyPolicyAccepted = value;
+            }
+          },
+        )),
+        nextViewAllower: () {
+          return Future.value(isPrivacyPolicyAccepted);
+        },
+      ),
+
       SignUpStepView(
         title: "whatsYourName".tr(),
         subtitle: "whateverYouPutHereWillBeUsedInYourProfile".tr(),

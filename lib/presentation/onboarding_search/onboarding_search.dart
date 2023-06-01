@@ -74,7 +74,7 @@ class OnBoardingSearch extends StatelessWidget {
                   body: PatternWidget(
                     child: MarginedBody(
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const SizedBox(height: height * 2),

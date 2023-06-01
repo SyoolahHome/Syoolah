@@ -4,18 +4,22 @@ class PatternWidget extends StatelessWidget {
   const PatternWidget({
     super.key,
     required this.child,
+    this.showPattern = true,
   });
 
   final Widget child;
+  final bool showPattern;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/pattern.jpg'),
-          opacity: 0.1,
-          repeat: ImageRepeat.repeat,
-        ),
+        image: showPattern
+            ? DecorationImage(
+                image: AssetImage('assets/images/pattern.jpg'),
+                opacity: 0.1,
+                repeat: ImageRepeat.repeat,
+              )
+            : null,
       ),
       child: child,
     );
@@ -31,8 +35,9 @@ class PatternScaffold extends StatelessWidget {
   final Widget body;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PatternWidget(
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: PatternWidget(
         child: body,
       ),
     );

@@ -41,47 +41,56 @@ class SignUp extends StatelessWidget {
       return MarginedBody(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Animate(
-              effects: const <Effect>[
-                FadeEffect(),
-                SlideEffect(
-                  begin: Offset(-0.25, 0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Animate(
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    SlideEffect(
+                      begin: Offset(-0.25, 0),
+                    ),
+                  ],
+                  child: HeadTitle(
+                    title: current.title,
+                    isForSection: true,
+                  ),
+                ),
+                const SizedBox(height: height * 2),
+                Animate(
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    SlideEffect(
+                      begin: Offset(-0.25, 0),
+                    ),
+                  ],
+                  delay: animationDuration,
+                  child: Text(
+                    current.subtitle,
+                    style: labelLarge.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
                 ),
               ],
-              child: HeadTitle(
-                title: current.title,
-                isForSection: true,
+            ),
+            // const Spacer(),
+            Expanded(
+              child: Animate(
+                effects: const <Effect>[
+                  FadeEffect(),
+                  SlideEffect(
+                    begin: Offset(-0.25, 0),
+                  ),
+                ],
+                delay: animationDuration,
+                child: current.widgetBody,
               ),
             ),
-            const SizedBox(height: height * 2),
-            Animate(
-              effects: const <Effect>[
-                FadeEffect(),
-                SlideEffect(
-                  begin: Offset(-0.25, 0),
-                ),
-              ],
-              delay: animationDuration,
-              child: Text(
-                current.subtitle,
-                style: labelLarge.copyWith(
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            ),
-            const Spacer(),
-            Animate(
-              effects: const <Effect>[
-                FadeEffect(),
-                SlideEffect(
-                  begin: Offset(-0.25, 0),
-                ),
-              ],
-              delay: animationDuration,
-              child: current.widgetBody,
-            ),
-            const Spacer(),
+            // const Spacer(),
           ],
         ),
       );
