@@ -27,11 +27,17 @@ class PrivacyPolicy extends StatelessWidget {
         create: (context) => PrivacyPolicyCubit(),
         child: Builder(
           builder: (context) {
+            final cubit = context.read<PrivacyPolicyCubit>();
+
             return Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: <Widget>[
                 Scrollbar(
+                  controller: cubit.privacyScrollController,
+                  thumbVisibility: true,
+                  interactive: true,
                   child: SingleChildScrollView(
+                    controller: cubit.privacyScrollController,
                     child: Container(
                       padding: EdgeInsets.all(15),
                       margin: EdgeInsets.symmetric(vertical: 0),
