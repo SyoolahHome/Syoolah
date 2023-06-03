@@ -45,12 +45,15 @@ class PostYoutube extends StatelessWidget {
                 ),
                 trailing: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    YoutubePlayer.getThumbnail(
-                      videoId:
-                          YoutubePlayer.convertUrlToId(acceptedYoutubeUrl)!,
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.network(
+                      YoutubePlayer.getThumbnail(
+                        videoId:
+                            YoutubePlayer.convertUrlToId(acceptedYoutubeUrl)!,
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
                   ),
                 ),
               );

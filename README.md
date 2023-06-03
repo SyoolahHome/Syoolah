@@ -1,5 +1,7 @@
 # Munawarah
 
+![Munawarah Cover Image](assets/images/cover.png)
+
 Munawarah is an Islamic social app where you can share & discover Islamic content, connect with friends and get instant answers to your questions.
 
 Nostr is an open protocol that enables a truly censorship-resistant and global social network, Munawarah upgrades trust in Islam with cryptographic keys to help purify intentions online, it make use of Nostr in order to provide a decentralized social network where you own everything you share, and no one can manipulate you or your data.
