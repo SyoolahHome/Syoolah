@@ -38,62 +38,71 @@ class SignUp extends StatelessWidget {
       }
       final animationDuration = 200.ms;
 
-      return MarginedBody(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Animate(
-                  effects: const <Effect>[
-                    FadeEffect(),
-                    SlideEffect(
-                      begin: Offset(-0.25, 0),
-                    ),
-                  ],
-                  child: HeadTitle(
-                    title: current.title,
-                    isForSection: true,
-                  ),
-                ),
-                const SizedBox(height: height * 2),
-                Animate(
-                  effects: const <Effect>[
-                    FadeEffect(),
-                    SlideEffect(
-                      begin: Offset(-0.25, 0),
-                    ),
-                  ],
-                  delay: animationDuration,
-                  child: Text(
-                    current.subtitle,
-                    style: labelLarge.copyWith(
-                      fontWeight: FontWeight.w300,
+      return WillPopScope(
+        onWillPop: () async {
+          if (index == 0) {
+            return true;
+          }
+          cubit.previousStep();
+          return false;
+        },
+        child: MarginedBody(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Animate(
+                    effects: const <Effect>[
+                      FadeEffect(),
+                      SlideEffect(
+                        begin: Offset(-0.25, 0),
+                      ),
+                    ],
+                    child: HeadTitle(
+                      title: current.title,
+                      isForSection: true,
                     ),
                   ),
-                ),
-              ],
-            ),
-            // const Spacer(),
-            Expanded(
-              child: Center(
-                child: Animate(
-                  effects: const <Effect>[
-                    FadeEffect(),
-                    SlideEffect(
-                      begin: Offset(-0.25, 0),
+                  const SizedBox(height: height * 2),
+                  Animate(
+                    effects: const <Effect>[
+                      FadeEffect(),
+                      SlideEffect(
+                        begin: Offset(-0.25, 0),
+                      ),
+                    ],
+                    delay: animationDuration,
+                    child: Text(
+                      current.subtitle,
+                      style: labelLarge.copyWith(
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
-                  ],
-                  delay: animationDuration,
-                  child: current.widgetBody,
+                  ),
+                ],
+              ),
+              // const Spacer(),
+              Expanded(
+                child: Center(
+                  child: Animate(
+                    effects: const <Effect>[
+                      FadeEffect(),
+                      SlideEffect(
+                        begin: Offset(-0.25, 0),
+                      ),
+                    ],
+                    delay: animationDuration,
+                    child: current.widgetBody,
+                  ),
                 ),
               ),
-            ),
-            // const Spacer(),
-          ],
+              // const Spacer(),
+            ],
+          ),
         ),
       );
     }
