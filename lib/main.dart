@@ -85,8 +85,8 @@ class MyApp extends StatelessWidget {
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
             title: "Munawarah",
-            themeMode: ThemeMode.light,
-            // .decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime(),
+            themeMode: ThemeMode.light
+                .decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime(),
             theme: AppThemes.primary,
             darkTheme: AppThemes.darkTheme,
             localizationsDelegates: context.localizationDelegates,
