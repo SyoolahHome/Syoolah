@@ -1,5 +1,14 @@
-# Launch Screen Assets
+# Munawarah!
 
-You can customize the launch screen with your own desired assets by replacing the image files in this directory.
+Munawarah is an Islamic social app where you can share & discover Islamic content, connect with friends and get instant answers to your questions.
 
-You can also do it by opening your Flutter project's Xcode project with `open ios/Runner.xcworkspace`, selecting `Runner/Assets.xcassets` in the Project Navigator and dropping in the desired images.
+Nostr is an open protocol that enables a truly censorship-resistant and global social network, Munawarah make use of it in order to provide a decentralized social network where you own everything you do, and so, no one can censor you.
+
+With Munawarah, say goodbye to Centralized Feeds, Distractions, Ads and algorithms that make use of your data to manipulate you, and welcome to a secure, encrypted, decentralized and private social network.
+
+# Why Munawarah?
+ 
+ - No need to an email, phone number or any personal information to sign up.
+ - 
+# Social Network
+ - Discover Feeds of 
