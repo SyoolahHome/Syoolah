@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../database/local/local_database.dart';
+
 extension Extensions on List<NostrEvent> {
   List<NostrEvent> removeDuplicatedEvents() {
     final List<NostrEvent> result = [];
@@ -164,5 +166,17 @@ extension StreamExtensions<T> on Stream<T> {
 extension ColorExtension on Color {
   String toHex() {
     return '#${value.toRadixString(16).substring(2, 8)}';
+  }
+}
+
+extension ThemeModeExtension on ThemeMode {
+  ThemeMode decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime() {
+    final themeStateFromLocal = LocalDatabase.instance.getThemeState();
+
+    if (themeStateFromLocal != null) {
+      return themeStateFromLocal ? ThemeMode.dark : ThemeMode.light;
+    } else {
+      return ThemeMode.system;
+    }
   }
 }

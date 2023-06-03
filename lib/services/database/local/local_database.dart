@@ -83,12 +83,12 @@ class LocalDatabase implements LocalDatabaseBase {
     return setValue("themeState", value);
   }
 
-  bool getThemeState() {
-    return getValue("themeState") as bool? ?? false;
+  bool? getThemeState() {
+    return getValue("themeState");
   }
 
   Future<void> toggleThemeState() {
-    final currentThemeState = getThemeState();
+    final currentThemeState = getThemeState() ?? false;
     return setThemeState(!currentThemeState);
   }
 

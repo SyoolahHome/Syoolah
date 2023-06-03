@@ -1,3 +1,4 @@
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
@@ -29,6 +30,7 @@ class CustomBottomBar extends StatelessWidget {
             height: height,
             selectedIndex: selectedIndex,
             onDestinationSelected: onElementTap,
+            animationDuration: Animate.defaultDuration,
             destinations: items.indexedMap(
               (index, item) {
                 Widget possibleWidget = NavigationDestination(
@@ -55,7 +57,9 @@ class CustomBottomBar extends StatelessWidget {
 //
                 return Animate(
                   delay: delayFromCenterToSidesBasedOnIndex(index),
-                  effects: const <Effect>[FadeEffect()],
+                  effects: const <Effect>[
+                    FadeEffect(),
+                  ],
                   child: possibleWidget,
                 );
               },

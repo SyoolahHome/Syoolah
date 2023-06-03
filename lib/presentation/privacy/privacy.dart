@@ -74,7 +74,7 @@ class PrivacyPolicy extends StatelessWidget {
                       return Container(
                         margin: EdgeInsets.only(bottom: 0),
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.onBackground,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: CheckboxListTile(

@@ -7,6 +7,7 @@ import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/constants/app_themes.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -76,9 +77,8 @@ class MyApp extends StatelessWidget {
       child: StreamBuilder(
         stream: LocalDatabase.instance.themeStateListenable(),
         builder: (context, snapshot) {
-          final themeMode = LocalDatabase.instance.getThemeState()
-              ? ThemeMode.dark
-              : ThemeMode.light;
+          final themeMode = ThemeMode.system
+              .decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime();
 
           return MaterialApp(
             useInheritedMediaQuery: true,

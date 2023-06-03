@@ -256,7 +256,7 @@ abstract class AppConfigs {
           alignment: Alignment.centerRight,
           scale: .75,
           child: Switch(
-            value: LocalDatabase.instance.getThemeState(),
+            value: LocalDatabase.instance.getThemeState() ?? false,
             onChanged: (value) {
               cubit.switchDarkMode();
             },
