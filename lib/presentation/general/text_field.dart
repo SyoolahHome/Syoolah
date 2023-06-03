@@ -1,6 +1,7 @@
 import 'package:ditto/constants/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hashtagable/widgets/hashtag_text_field.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     this.focusNode,
     this.bgColor,
     this.fontWight,
+    this.showClearButton = false,
   });
 
   final TextEditingController? controller;
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final Color? bgColor;
   final FontWeight? fontWight;
+  final bool showClearButton;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        if (label != null) ...[
+        if (label != null) ...<Widget>[
           Text(
             label!,
             style: TextStyle(
@@ -58,6 +61,27 @@ class CustomTextField extends StatelessWidget {
               ),
               controller: controller,
               decoration: InputDecoration(
+                suffixIcon: showClearButton
+                    ? Container(
+                        margin: EdgeInsets.only(right: 5),
+                        child: IconButton(
+                          onPressed: () {
+                            final textFieldController = controller;
+
+                            if (textFieldController != null) {
+                              textFieldController.clear();
+                            }
+                          },
+                          icon: Icon(
+                            FlutterRemix.close_line,
+                            color: Theme.of(context)
+                                .iconTheme
+                                .color
+                                ?.withOpacity(.8),
+                          ),
+                        ),
+                      )
+                    : null,
                 hintText: hint ?? "typeHere".tr(),
                 hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: AppColors.grey,

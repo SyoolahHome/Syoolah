@@ -11,7 +11,7 @@ abstract class AppThemes {
     colorScheme: ColorScheme.light(
       onSecondary: AppColors.black.withOpacity(0.75),
       onSecondaryContainer: AppColors.black.withOpacity(0.05),
-      background: AppColors.black,
+      // background: AppColors.black,
       onBackground: AppColors.white,
       surface: AppColors.white.withOpacity(0.4),
       onSurface: Colors.white,

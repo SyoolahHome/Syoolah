@@ -332,11 +332,11 @@ class AuthCubit extends Cubit<AuthState> {
           return Future.value(isPrivacyPolicyAccepted);
         },
       ),
-
       SignUpStepView(
         title: "whatsYourName".tr(),
         subtitle: "whateverYouPutHereWillBeUsedInYourProfile".tr(),
         widgetBody: CustomTextField(
+          showClearButton: true,
           controller: nameController,
           // label: "yourName".tr(),
           hint: "typeYourName".tr(),
@@ -359,6 +359,7 @@ class AuthCubit extends Cubit<AuthState> {
         title: "bio".tr(),
         subtitle: "addSomethingAboutYouForYourProfileCoupleLines".tr(),
         widgetBody: CustomTextField(
+          showClearButton: true,
           controller: bioController,
           // label: "recommendedOneLines".tr(),
           hint: "typeYourBio".tr(),
@@ -384,6 +385,7 @@ class AuthCubit extends Cubit<AuthState> {
         title: "addUsername".tr(),
         subtitle: "pickAUsername".tr(),
         widgetBody: CustomTextField(
+          showClearButton: true,
           controller: usernameController,
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
