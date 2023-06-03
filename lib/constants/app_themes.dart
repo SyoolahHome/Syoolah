@@ -38,6 +38,11 @@ abstract class AppThemes {
         overlayRadius: 10.0,
       ),
     ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.all(AppColors.black),
+      checkColor: MaterialStateProperty.all(AppColors.white),
+      visualDensity: VisualDensity.standard,
+    ),
     scaffoldBackgroundColor: AppColors.white,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.black,
@@ -253,6 +258,11 @@ abstract class AppThemes {
       overlayShape: RoundSliderOverlayShape(
         overlayRadius: 10.0,
       ),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.all(AppColors.white),
+      checkColor: MaterialStateProperty.all(AppColors.black),
+      visualDensity: VisualDensity.standard,
     ),
     scaffoldBackgroundColor: AppColors.black,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

@@ -98,7 +98,6 @@ class PrivacyPolicy extends StatelessWidget {
                             );
                           },
                           controlAffinity: ListTileControlAffinity.leading,
-                          visualDensity: VisualDensity.standard,
                           contentPadding: EdgeInsets.zero,
                           dense: false,
                         ),
