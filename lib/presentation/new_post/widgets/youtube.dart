@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PostYoutube extends StatelessWidget {
   const PostYoutube({super.key});
@@ -33,9 +34,25 @@ class PostYoutube extends StatelessWidget {
           builder: (context, state) {
             final acceptedYoutubeUrl = state.acceptedYoutubeUrl;
 
-            if (acceptedYoutubeUrl != null) {
+            if (acceptedYoutubeUrl != null && acceptedYoutubeUrl.isNotEmpty) {
               return ListTile(
-                title: Text(acceptedYoutubeUrl),
+                onTap: () {
+                  cubit.showYoutubeVideoBottomSheet(context);
+                },
+                title: Text('selectedYoutube'.tr()),
+                subtitle: Text(
+                  acceptedYoutubeUrl,
+                ),
+                trailing: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    YoutubePlayer.getThumbnail(
+                      videoId:
+                          YoutubePlayer.convertUrlToId(acceptedYoutubeUrl)!,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               );
             }
             return CustomTextField(

@@ -127,7 +127,7 @@ class MunawarahButton extends StatelessWidget {
                           : 15,
                   color: isOnlyBorder
                       ? mainColor ?? Theme.of(context).colorScheme.background
-                      : null,
+                      : Theme.of(context).colorScheme.onBackground,
                 ),
               ],
             ],

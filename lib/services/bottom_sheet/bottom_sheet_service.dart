@@ -9,6 +9,8 @@ import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/presentation/add_relay/add_relay.dart';
 import 'package:ditto/presentation/current_user_keys/widgets/private_key_section.dart';
 import 'package:ditto/presentation/feeds/widgets/search.dart';
+import 'package:ditto/presentation/general/pattern_widget.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/new_post/add_new_post.dart';
 import 'package:ditto/presentation/private_succes/private_key.dart';
 import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
@@ -17,7 +19,11 @@ import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../constants/app_colors.dart';
+import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
+import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 
 abstract class BottomSheetService {
@@ -297,6 +303,7 @@ abstract class BottomSheetService {
     BuildContext context, {
     required String url,
     required VoidCallback onAccept,
+    required VoidCallback onRemove,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -306,9 +313,51 @@ abstract class BottomSheetService {
       // isScrollControlled: true,
       useRootNavigator: true,
       builder: (context) {
-        return NoteYoutubePlayer(
-          url: url,
-          // onAccept: onAccept,
+        return PatternScaffold(
+          body: Container(
+            padding: EdgeInsets.all(MarginedBody.defaultMargin.left),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                BottomSheetTitleWithIconButton(title: "youtubeVideo".tr()),
+                SizedBox(height: 15),
+                NoteYoutubePlayer(url: url),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 35,
+                      child: MunawarahButton(
+                        onTap: () {
+                          onRemove();
+                          Navigator.of(context).pop();
+                        },
+                        text: "remove".tr(),
+                        isSmall: true,
+                        isOnlyBorder: true,
+                        mainColor: Colors.red,
+                        icon: FlutterRemix.close_fill,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                      child: MunawarahButton(
+                        onTap: () {
+                          onAccept();
+                          Navigator.of(context).pop();
+                        },
+                        text: "accept".tr(),
+                        isSmall: true,
+                        mainColor: Colors.green,
+                        icon: FlutterRemix.check_line,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

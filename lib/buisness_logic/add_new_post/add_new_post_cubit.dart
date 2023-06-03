@@ -192,6 +192,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
           context,
           url: text,
           onAccept: onAcceptYoutubeVideo,
+          onRemove: onRemoveYoutubeVideo,
         );
       }
     } catch (e) {
@@ -203,5 +204,9 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   void onAcceptYoutubeVideo() {
     emit(state.copyWith(acceptedYoutubeUrl: state.youtubeUrl));
+  }
+
+  void onRemoveYoutubeVideo() {
+    emit(state.copyWith(acceptedYoutubeUrl: ""));
   }
 }
