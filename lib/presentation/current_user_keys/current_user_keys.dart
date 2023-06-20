@@ -46,7 +46,14 @@ class CurrentUserKeys extends StatelessWidget {
                 const KeySection(type: KeySectionType.nPubKey),
                 const SizedBox(height: height * 4),
                 const SizedBox(width: double.infinity, child: OrDivider()),
-                DangerBox(),
+                DangerBox(
+                  bgColor: Theme.of(context)
+                      .colorScheme
+                      .errorContainer
+                      .withOpacity(.45),
+                  messageText: "dangerDoNotSharePrivateKeys".tr(),
+                  titleText: "warning".tr(),
+                ),
                 const SizedBox(height: height * 3),
                 HeadTitle(title: "privateKey".tr()),
                 const SizedBox(height: height),

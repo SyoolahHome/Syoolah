@@ -315,5 +315,7 @@
   "nMinutes": "{} minutes",
   "nSeconds": "{} seconds",
   "nSecondsAgo": "{} seconds ago",
-  "aMomentAgo": "a moment ago"
+  "aMomentAgo": "a moment ago",
+  "accountCreatedSuccessfully": "Account Created Successfully",
+  "success": "Success"
 }

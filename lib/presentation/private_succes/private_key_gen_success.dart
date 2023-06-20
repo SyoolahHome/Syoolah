@@ -33,7 +33,12 @@ class PrivateKeyGenSuccess extends StatelessWidget {
               SuccessText(customText: customText),
               const Spacer(),
               DangerBox(
-                customText: "copyItNowDanger".tr(),
+                bgColor: Theme.of(context)
+                    .colorScheme
+                    .errorContainer
+                    .withOpacity(.45),
+                messageText: "copyItNowDanger".tr(),
+                titleText: "warning".tr(),
               ),
               const Spacer(),
               KeySection(onCopy: onCopy),
