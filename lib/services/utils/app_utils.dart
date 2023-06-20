@@ -59,8 +59,10 @@ abstract class AppUtils {
     switch (style) {
       case AppLogoStyle.white:
         return 'assets/logo/white_no_bg.png';
+
       case AppLogoStyle.black:
         return 'assets/logo/black_no_bg.png';
+
       default:
         throw Exception('Invalid AppLogoStyle');
     }

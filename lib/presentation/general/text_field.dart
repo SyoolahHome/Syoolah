@@ -77,7 +77,7 @@ class CustomTextField extends StatelessWidget {
                             color: Theme.of(context)
                                 .iconTheme
                                 .color
-                                ?.withOpacity(.8),
+                                ?.withOpacity(.5),
                           ),
                         ),
                       )

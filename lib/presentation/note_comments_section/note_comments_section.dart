@@ -19,7 +19,9 @@ class NoteCommentsSection extends StatelessWidget {
   });
 
   Note? note;
+
   NoteCardCubit? cubit;
+
   String? avatarUrl;
   String? nameToShow;
   String? appCurrentUserPublicKey;

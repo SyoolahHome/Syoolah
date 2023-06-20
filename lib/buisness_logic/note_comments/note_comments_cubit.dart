@@ -10,6 +10,7 @@ part 'note_comments_state.dart';
 
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
   TextEditingController? commentTextController;
+
   NostrEventsStream noteCommentsStream;
   StreamSubscription? _noteCommentsStreamSubscription;
 

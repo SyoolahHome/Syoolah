@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
+
   HttpOverrides.global = MyHttpOverrides();
   Animate.restartOnHotReload = kDebugMode;
   Animate.defaultCurve = Curves.easeInOut;
@@ -39,27 +40,15 @@ Future<void> main() async {
 
   Widget appMainWidget = MyApp();
 
-  // runApp(
-  //   DevicePreview(
-  //     enabled: true,
-  //     builder: (context) => EasyLocalization(
-  //       child: MyApp(),
-  //       supportedLocales: AppConfigs.locales,
-  //       path: AppConfigs.translationsPath,
-  //       fallbackLocale: AppConfigs.fallbackLocale,
-  //     ), // Wrap your app
-  //   ),
-  // );
   if (AppConfigs.showPreviewMode) {
     appMainWidget = DevicePreview(
-      enabled: true,
-      builder: (context) => EasyLocalization(
-        supportedLocales: AppConfigs.locales,
-        path: AppConfigs.translationsPath,
-        fallbackLocale: AppConfigs.fallbackLocale,
-        child: appMainWidget,
-      ), // Wrap your app
-    );
+        enabled: true,
+        builder: (context) => EasyLocalization(
+              supportedLocales: AppConfigs.locales,
+              path: AppConfigs.translationsPath,
+              fallbackLocale: AppConfigs.fallbackLocale,
+              child: appMainWidget,
+            ));
   } else {
     appMainWidget = EasyLocalization(
       supportedLocales: AppConfigs.locales,

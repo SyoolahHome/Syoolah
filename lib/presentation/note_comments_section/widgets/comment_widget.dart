@@ -4,6 +4,7 @@ import 'package:ditto/presentation/general/widget/note_card/wudgets/note_owner_a
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 class CommentWidget extends StatelessWidget {
@@ -31,15 +32,24 @@ class CommentWidget extends StatelessWidget {
           commentEvent.content.capitalized,
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        leading: const NoteOwnerAvatar(
-          size: 25,
-          avatarUrl: "https://placeholder.com/100x100?color=blue",
+        leading: ClipOval(
+          child: Container(
+            width: 25,
+            height: 25,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background.withOpacity(.2),
+            ),
+          ),
         ),
+        // const NoteOwnerAvatar(
+        //   size: 25,
+        //   avatarUrl: "https://placeholder.com/100x100?color=blue",
+        // ),
         trailing: GestureDetector(
           onTap: () {},
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               NoteDateOfCreationAgo(
                 createdAt: commentEvent.createdAt,
                 isSmall: true,

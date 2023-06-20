@@ -332,6 +332,7 @@ class AuthCubit extends Cubit<AuthState> {
           return Future.value(isPrivacyPolicyAccepted);
         },
       ),
+
       SignUpStepView(
         title: "whatsYourName".tr(),
         subtitle: "whateverYouPutHereWillBeUsedInYourProfile".tr(),

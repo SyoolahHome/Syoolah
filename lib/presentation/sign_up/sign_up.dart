@@ -15,7 +15,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+  const SignUp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
