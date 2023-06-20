@@ -300,6 +300,7 @@ abstract class AppConfigs {
     'What is the Islamic view on democracy and secularism?',
   ];
 
+  static const showPreviewMode = false;
   static const version = '1.0.0';
 }
 

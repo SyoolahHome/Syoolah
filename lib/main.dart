@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
@@ -36,9 +37,11 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  Widget appMainWidget = MyApp();
+
   // runApp(
   //   DevicePreview(
-  //     enabled: !kReleaseMode,
+  //     enabled: true,
   //     builder: (context) => EasyLocalization(
   //       child: MyApp(),
   //       supportedLocales: AppConfigs.locales,
@@ -47,15 +50,26 @@ Future<void> main() async {
   //     ), // Wrap your app
   //   ),
   // );
-
-  runApp(
-    EasyLocalization(
+  if (AppConfigs.showPreviewMode) {
+    appMainWidget = DevicePreview(
+      enabled: true,
+      builder: (context) => EasyLocalization(
+        supportedLocales: AppConfigs.locales,
+        path: AppConfigs.translationsPath,
+        fallbackLocale: AppConfigs.fallbackLocale,
+        child: appMainWidget,
+      ), // Wrap your app
+    );
+  } else {
+    appMainWidget = EasyLocalization(
       supportedLocales: AppConfigs.locales,
       path: AppConfigs.translationsPath,
       fallbackLocale: AppConfigs.fallbackLocale,
-      child: const MyApp(),
-    ), // Wrap your app
-  );
+      child: appMainWidget,
+    ); // Wrap your app
+  }
+
+  runApp(appMainWidget);
 }
 
 class MyApp extends StatelessWidget {
@@ -66,9 +80,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
-          create: (context) => Routing.authCubit,
-          lazy: false,
-        ),
+            create: (context) => Routing.authCubit, lazy: false),
         BlocProvider<HomePageAfterLoginCubit>.value(
           value: Routing.homePageAfterLoginCubit,
         ),
@@ -79,9 +91,11 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           return MaterialApp(
             useInheritedMediaQuery: true,
-            // // locale: DevicePreview.locale(context),
-            // // builder: DevicePreview.appBuilder,
-            locale: context.locale,
+            locale: AppConfigs.showPreviewMode
+                ? DevicePreview.locale(context)
+                : context.locale,
+            builder:
+                AppConfigs.showPreviewMode ? DevicePreview.appBuilder : null,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
             title: "Munawarah",

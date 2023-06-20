@@ -261,3 +261,123 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 - Building the instructors screen that will show a modules with separated AI instructions for each one, so it have it's own chat experience.
 - Implemented the mechanism behind the pre-set questions for each instructed AI chat that will shows up to the user when he first open the chat in a randomized way.
 - Fixed some minor bugs that relates to app state.
+## 61  - 62 - 63
+
+- Applied new translations to other languages that was missing.
+- Implementation of the youtube video option in the note creation bottom sheet, so the user can show either to upload images or to select and render a youtube video in his note, the implementation includes UI, logic, state management..
+
+## 64
+
+- Implementation of the new notes tooltip that will be shown whenever a new note(s) is added by the user or others in a specific feed, it is clickable and will shows those notes when it is clicked
+- added the keys option to the profile bottom sheet, so the user can navigate through the "keys" screen to retrieve and manage his keys.
+
+## 65 - 66
+
+- Implementation of the "keys" page which will show all kind of keys for the user such as:
+- public key
+- private key
+- npub key
+- nsec key
+
+## 67
+
+- Changed full image screen to support working with uploaded files from the devices storage and also from links since both use cases exists in the app (when uploading an avatar file, when showing notes images, other users avatars..)
+
+## 68 - 69
+
+- Add of youtube video url ,thumbnail filterers that will detect any youtube video that is included in any note events in order to render it as well in feeds notes and not only in the note creation bottom sheet.
+- Made the full image screen to support many images and not only one, so a user can slide between them while he is in full screen mode.
+- Applied translations for the new strings to all the supported languages.
+
+## 70
+
+- Added support New Language (turkey).
+
+## 71
+
+- Added option for sorting (A-Z or Z-A) for the advanced notes search for feeds.
+- Added new post icon button in the menu as well to show the add new post bottom sheet.
+- Added browse button for topics feeds in the home screen, so the user can navigate to the topics feeds screen.
+- Refactored, fixed issues, applied new breaking changes for used nostr package in all state management (blocs/cubits) code of the app
+
+## 72 - 73 - 74
+
+- Implementation of the user posts, takes (reposts) sections in profile.
+- Added follow/unfollow, copy images links, copy youtube video link in the note card options bottom sheet.
+- Implemented the feature to repost a specific note to the user's feed/profile.
+
+## 75
+
+- Fix/Implementation of the user's "edit profile" screen, where he can edit his profile metadata
+
+## 76
+
+- Implementation of the camera feature for users when uploading their avatar image, besides that they can of course take it from gallery.
+
+## 77 - 78
+
+- Applied the required changes in the onboarding flow, such as:
+- Requiring the user to copy the private key before going further.
+- Removing some steps, and changing order of them.
+- Added a bottom sheet that inform users about their account creation success and that they can go to the home screen now and use the app.
+- Minor changes for theme, logo.
+
+## 79
+
+- Implementation of relays connection loader screen when an authenticated user closes and come back to the app, so we ensure that all relays are connected before moving to any other screen that may send/receive data from/to relays.
+
+## 80
+
+- Customization for the app launcher icons, logo, name
+- Added translations for new strings to all supported languages.
+- Application to dynamic themes in parts that miss it.
+
+## 81 - 82 - 83
+
+- Creation of a level based screen for choosing a specific level in the Imam On Duty, that will navigate user to the convenient chat screen for that level.
+- Applied more strings and their translations to the app.
+
+## 84
+
+- Moving the note creation action to a custom floating action button that show app differently.
+- remove of unnecessary steps in the onboarding flow such as NIP 05 verification and the profiles recommendations by the app.
+- Implementation of youtube video urls verification while creating a new note event.
+
+## 85 - 86
+
+- made the required changes to the home page bottom bar sub-pages, such as:
+  - Removing the global chat screen.
+  - Adding the Ummah screen for showing notes from all categories in it.
+  - Changing their order as required.
+  - Adding another profile option in the home page menu bar and in the menu.
+- modification of the youtube video widget, in addition of supporting the full screen of it.
+
+## 87
+
+- Implementation of the comments feature for each note, including the UI, and login to add and to filter comments note events of it.
+
+## 88
+
+- Applied new strings translations to all other supported languages.
+- Applied some of the required changes in feeds page such as:
+  - made the tap of a card to move/navigate automatically to the note comments screen.
+  - show always initially the Ummah (global feed) screen when the app is opened
+  - removing the Shariaa screen/tag from the app at all.
+
+## 89 - 90 - 91
+
+- Implementation of the feature to share a generated AI response from the Imam On Duty directly as a user note event, so users can share it with others in the app, and will be the same as creating a new note, which means they will still be able to upload images, choose tags, or specify a youtube video.
+- Added an interactive view (zoom in/out) feature for the images full screen so users can zoom in/out in the images while they are in full screen mode.
+- Implementation of a slider indicator for images in full screen mode, so users can know how many images are there and which one they are currently viewing.
+- Added the missing bio field in the "edit profile" screen.
+- Applied more changes to the ap strings and translations
+
+## 92
+
+- Fixed the issue related to the shown comments in the profile or feeds as user notes, now comments will only be shown in the relevant notes comments section.
+- Added the previously removed nip 05 verification screen from onboarding, to a whole separated section in the menu of the app.
+- applied the pattern asset as a faded background for all bottom sheets used in the app.
+
+## 93 - 94
+
+- Added privacy & policy as a step of the onboarding flow of the app, including the accept checkbox  and logic so the user will not go further until he accepts it..
