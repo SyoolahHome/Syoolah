@@ -1,16 +1,15 @@
 include: package:lint/analysis_options.yaml
 
 analyzer:
-
   plugins:
     - dart_code_metrics:
-        exclude:   
-          - 'constants/**'
-          - 'nostr/**'
-          - 'presentation/**'
-          - 'presentation/*'
-          - 'presentation'
-          - 'nostr/'
+        exclude:
+          - "constants/**"
+          - "nostr/**"
+          - "presentation/**"
+          - "presentation/*"
+          - "presentation"
+          - "nostr/"
 
 dart_code_metrics:
   rules:
@@ -123,4 +122,3 @@ dart_code_metrics:
     maximum-nesting-level: 5
     number-of-parameters: 4
     source-lines-of-code: 50
-

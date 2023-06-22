@@ -13,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../model/report_option.dart';
+
 abstract class AppConfigs {
   static const relaysUrls = [
     'wss://eden.nostr.land',
@@ -299,6 +301,9 @@ abstract class AppConfigs {
     'What is the significance of the Friday prayer in Islam?',
     'What is the Islamic view on democracy and secularism?',
   ];
+
+  static List<ReportOption> reportOptions =
+      ReportType.values.map((type) => ReportOption(reportType: type)).toList();
 
   static const showPreviewMode = false;
   static const version = '1.0.0';

@@ -25,6 +25,7 @@ import '../../constants/app_colors.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
+import '../../presentation/report/report.dart';
 
 abstract class BottomSheetService {
   static Future showCreatePostBottomSheet(
@@ -358,6 +359,22 @@ abstract class BottomSheetService {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  static void showReportSheet(BuildContext context, Note note) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return ReportSheetWidget(
+          note: note,
+          noteCardContext: context,
         );
       },
     );

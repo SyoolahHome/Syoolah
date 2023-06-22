@@ -16,7 +16,7 @@ class MunawarahButton extends StatelessWidget {
     this.additonalFontSize = 0,
   });
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String? text;
   final bool isSmall;
   final bool isRounded;
@@ -40,16 +40,14 @@ class MunawarahButton extends StatelessWidget {
             backgroundColor: isOnlyBorder
                 ? Colors.transparent
                 : mainColor ?? Theme.of(context).colorScheme.background,
-            elevation: isOnlyBorder
-                ? 0
-                : isSmall
-                    ? 1
-                    : 4,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: isSmall
                   ? BorderRadius.circular(100)
                   : BorderRadius.circular(10),
             ),
+            disabledBackgroundColor:
+                Theme.of(context).colorScheme.background.withOpacity(.7),
           ),
           // ElevatedButton.styleFrom(
           //   backgroundColor: false

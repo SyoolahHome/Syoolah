@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/note.dart';
+import 'package:ditto/model/report_option.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/routing.dart';
@@ -700,5 +701,29 @@ class NostrService {
     return Nostr.instance.relaysService.startEventsSubscription(
       request: requestWithFilter,
     );
+  }
+
+  void sendReportEvent({
+    required Note note,
+    required String selectedReportType,
+  }) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final event = NostrEvent.fromPartialData(
+      kind: 1984,
+      keyPairs: nostrKeyPairs,
+      content: jsonEncode(note.toJson()),
+      tags: [
+        ["e", note.event.id, selectedReportType],
+        ["p", note.event.pubkey, selectedReportType],
+        ...AppConfigs.categories.map(
+          (e) => ["t", e.enumValue.name],
+        )
+      ],
+    );
+
+    Nostr.instance.relaysService.sendEventToRelays(event);
   }
 }

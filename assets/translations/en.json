@@ -317,5 +317,8 @@
   "nSecondsAgo": "{} seconds ago",
   "aMomentAgo": "a moment ago",
   "accountCreatedSuccessfully": "Account Created Successfully",
-  "success": "Success"
+  "success": "Success",
+  "report": "Report",
+  "submit": "Submit",
+  "reportedText": "Thank you your report!"
 }
