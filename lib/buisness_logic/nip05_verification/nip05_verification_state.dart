@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'nip05_verification_cubit.dart';
 
 class Nip05VerificationState extends Equatable {

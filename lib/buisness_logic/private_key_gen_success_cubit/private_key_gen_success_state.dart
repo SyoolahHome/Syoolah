@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'private_key_gen_success_cubit.dart';
 
 class PrivateKeyGenSuccessState extends Equatable {
