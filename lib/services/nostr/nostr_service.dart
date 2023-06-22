@@ -726,4 +726,33 @@ class NostrService {
 
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
+
+  void muteUserWithPubKeyPublicly({
+    NostrEvent? currentMuteEvent,
+    required String pubKey,
+  }) {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final initialMuteTagsList = currentMuteEvent?.tags ?? [];
+
+    final event = NostrEvent.fromPartialData(
+        kind: 10000,
+        keyPairs: nostrKeyPairs,
+        content: currentMuteEvent?.content ?? "",
+        tags: <List<String>>[
+          ...initialMuteTagsList,
+          ["p", pubKey],
+        ]);
+
+    Nostr.instance.relaysService.sendEventToRelays(event);
+  }
+
+  void muteUserWithPubKeyPrivately({
+    NostrEvent? currentMuteEvent,
+    required String pubKey,
+  }) {
+    throw UnimplementedError();
+  }
 }
