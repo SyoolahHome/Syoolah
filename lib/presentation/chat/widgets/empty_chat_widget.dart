@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/presentation/chat/widgets/chat_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
@@ -9,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../buisness_logic/chat/chat_cubit.dart';
 
 class EmptyChatWidget extends StatelessWidget {
   const EmptyChatWidget({

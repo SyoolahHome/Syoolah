@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
-import '../../buisness_logic/cubit/privacy_policy_cubit.dart';
+import '../../buisness_logic/privacy_policy/privacy_policy_cubit.dart';
 import '../../constants/app_colors.dart';
 
 class PrivacyPolicy extends StatelessWidget {

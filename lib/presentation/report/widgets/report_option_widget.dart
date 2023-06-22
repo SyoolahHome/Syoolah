@@ -20,7 +20,7 @@ class ReportOptionWidget extends StatelessWidget {
       duration: Animate.defaultDuration,
       height: 50,
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: EdgeInsets.symmetric(vertical: 7.5),
       width: double.infinity,
       decoration: BoxDecoration(
           color: (reportOption.isSelected

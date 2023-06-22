@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
-import 'package:ditto/buisness_logic/cubit/settings_cubit.dart';
 import 'package:ditto/model/feed_category.dart';
 import 'package:ditto/model/loclal_item.dart';
 import 'package:ditto/model/search_option.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../buisness_logic/settings/settings_cubit.dart';
 import '../model/report_option.dart';
 
 abstract class AppConfigs {
@@ -29,6 +29,7 @@ abstract class AppConfigs {
     'wss://relay.current.fyi',
     // 'wss://nostr.relayer.se',
   ];
+
   static final List<FeedCategory> categories = [
     FeedCategory(
       name: "newDuaa".tr(),
@@ -203,6 +204,7 @@ abstract class AppConfigs {
 
   static List<SettingsItem> settings(BuildContext context) {
     final cubit = context.read<SettingsCubit>();
+
     return <SettingsItem>[
       SettingsItem(
         icon: FlutterRemix.cloud_line,

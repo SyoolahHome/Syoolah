@@ -1,5 +1,4 @@
 import 'package:dart_openai/openai.dart';
-import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/copy_icon.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/reload_icon.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../buisness_logic/chat/chat_cubit.dart';
 import 'widgets/post_as_note.dart';
 
 class ChatMessageWidget extends StatelessWidget {

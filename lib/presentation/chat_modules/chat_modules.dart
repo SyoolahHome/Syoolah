@@ -1,4 +1,3 @@
-import 'package:ditto/buisness_logic/cubit/chat_modules_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/chat_modules/widgets/modules_page_view.dart';
 import 'package:ditto/presentation/chat_modules/widgets/sub_title.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../buisness_logic/chat_modules/chat_modules_cubit.dart';
 import '../../services/utils/paths.dart';
 import '../general/widget/button.dart';
 

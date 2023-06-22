@@ -1,8 +1,9 @@
-import 'package:ditto/buisness_logic/cubit/chat_modules_cubit.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../buisness_logic/chat_modules/chat_modules_cubit.dart';
 
 class ChatModulesPageView extends StatelessWidget {
   const ChatModulesPageView({

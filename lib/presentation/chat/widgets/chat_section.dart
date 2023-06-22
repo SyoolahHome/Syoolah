@@ -1,4 +1,3 @@
-import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/presentation/general/text_field.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
@@ -7,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../buisness_logic/chat/chat_cubit.dart';
 
 class MessageSection extends StatelessWidget {
   const MessageSection({super.key});

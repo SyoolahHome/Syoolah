@@ -1,8 +1,8 @@
-import 'package:ditto/buisness_logic/cubit/nostr_service_loading_cubit.dart';
 import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../buisness_logic/nostr_service_loading/nostr_service_loading_cubit.dart';
 
 class NostrServiceLoading extends StatelessWidget {
   const NostrServiceLoading({super.key});

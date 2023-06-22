@@ -42,13 +42,14 @@ Future<void> main() async {
 
   if (AppConfigs.showPreviewMode) {
     appMainWidget = DevicePreview(
-        enabled: true,
-        builder: (context) => EasyLocalization(
-              supportedLocales: AppConfigs.locales,
-              path: AppConfigs.translationsPath,
-              fallbackLocale: AppConfigs.fallbackLocale,
-              child: appMainWidget,
-            ));
+      enabled: true,
+      builder: (context) => EasyLocalization(
+        supportedLocales: AppConfigs.locales,
+        path: AppConfigs.translationsPath,
+        fallbackLocale: AppConfigs.fallbackLocale,
+        child: appMainWidget,
+      ),
+    );
   } else {
     appMainWidget = EasyLocalization(
       supportedLocales: AppConfigs.locales,

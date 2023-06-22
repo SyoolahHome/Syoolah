@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/cubit/cubit/nip05_verification_cubit.dart';
+import '../../buisness_logic/nip05_verification/nip05_verification_cubit.dart';
 import '../../services/nostr/nostr_service.dart';
 import '../../services/utils/snackbars.dart';
 import '../general/text_field.dart';

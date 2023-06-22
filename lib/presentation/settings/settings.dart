@@ -1,10 +1,11 @@
-import 'package:ditto/buisness_logic/cubit/settings_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/settings/widgets/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../buisness_logic/settings/settings_cubit.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});

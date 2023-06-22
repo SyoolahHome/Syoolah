@@ -1,4 +1,3 @@
-import 'package:ditto/buisness_logic/cubit/chat_cubit.dart';
 import 'package:ditto/model/chat_modules.dart';
 import 'package:ditto/presentation/chat/widgets/app_bar.dart';
 import 'package:ditto/presentation/chat/widgets/chat_message_widget.dart';
@@ -9,6 +8,8 @@ import 'package:ditto/services/utils/snackbars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../buisness_logic/chat/chat_cubit.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});

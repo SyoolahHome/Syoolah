@@ -6,8 +6,7 @@ import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../buisness_logic/cubit/report_cubit.dart';
+import '../../buisness_logic/report/report_cubit.dart';
 import '../general/pattern_widget.dart';
 import '../general/widget/bottom_sheet_title_with_button.dart';
 import '../general/widget/margined_body.dart';
