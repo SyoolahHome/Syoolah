@@ -1,3 +1,5 @@
+import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +13,27 @@ class About extends StatefulWidget {
 class AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
+    const height = 10.0;
+
     return Scaffold(
-      body: Container(
-        alignment: Alignment.centerLeft,
-        child: Text("aboutContent".tr()),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      body: MarginedBody(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: height * 3),
+            HeadTitle(
+              title: "about".tr(),
+              isForSection: true,
+            ),
+            SizedBox(height: height * 3),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text("aboutContent".tr()),
+            ),
+          ],
+        ),
       ),
     );
 

@@ -35,29 +35,43 @@ class AddNewPost extends StatelessWidget {
         child: Builder(
           builder: (_) {
             return PatternScaffold(
-              body: MarginedBody(
-                child: SingleChildScrollView(
-                  child: SizedBox(
-                    height: 575,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const <Widget>[
-                        SizedBox(height: height * 2),
-                        AddNewPostTitle(),
-                        Divider(color: AppColors.grey, thickness: 0.2),
-                        SizedBox(height: height),
-                        PostField(),
-                        SizedBox(height: height * 2),
-                        CategoriesSelect(),
-                        SizedBox(height: height * 2),
-                        PostAssetsSection(),
-                        Spacer(),
-                        PostButton(),
-                        SizedBox(height: height * 2),
-                      ],
-                    ),
+              body: SingleChildScrollView(
+                child: SizedBox(
+                  height: 575,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      MarginedBody(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: height * 2),
+                            AddNewPostTitle(),
+                            Divider(color: AppColors.grey, thickness: 0.2),
+                            SizedBox(height: height),
+                            PostField(),
+                            SizedBox(height: height * 2),
+                            CategoriesSelect(),
+                            SizedBox(height: height * 2),
+                          ],
+                        ),
+                      ),
+                      PostAssetsSection(),
+                      Spacer(),
+                      MarginedBody(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            PostButton(),
+                            SizedBox(height: height * 2),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

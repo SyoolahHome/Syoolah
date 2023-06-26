@@ -26,7 +26,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   List<PostAssetSectionItem> get postAssetsSectionsWidgets => [
         PostAssetSectionItem(
           widget: const PostImage(),
-          icon: FlutterRemix.account_box_fill,
+          icon: FlutterRemix.image_add_line,
           onPressed: () {
             addImage();
           },

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../general/widget/margined_body.dart';
+
 class PostImage extends StatelessWidget {
   const PostImage({super.key});
 
@@ -13,102 +15,144 @@ class PostImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddNewPostCubit>();
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("photos".tr()),
-        const SizedBox(height: 15),
-        BlocBuilder<AddNewPostCubit, AddNewPostState>(
-          builder: (context, state) {
-            return state.pickedImages == null ||
-                    (state.pickedImages?.isEmpty ?? false)
-                ? Container(
-                    height: 75,
-                    width: 75,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context)
-                          .colorScheme
-                          .background
-                          .withOpacity(.3),
-                    ),
-                  )
-                : Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(
-                              state.pickedImages?.length ?? 0, (index) {
-                            final current = state.pickedImages![index];
+    return Container(
+      // padding: EdgeInsets.only(left: MarginedBody.defaultMargin.left),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          MarginedBody(
+            child: Text("photos".tr()),
+          ),
+          const SizedBox(height: 15),
+          BlocBuilder<AddNewPostCubit, AddNewPostState>(
+            builder: (context, state) {
+              final placeholderNum = 5;
 
-                            return GestureDetector(
-                              onLongPress: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ImageFullView(
-                                      imageFile: current,
-                                      heroTag: current.path,
+              return state.pickedImages == null ||
+                      (state.pickedImages?.isEmpty ?? false)
+                  ? Container(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          padding: MarginedBody.defaultMargin,
+                          child: Row(
+                            children: List.generate(
+                              5,
+                              (index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    cubit.addImage();
+                                  },
+                                  child: Container(
+                                    height: 75,
+                                    width: 75,
+                                    margin: EdgeInsets.only(right: 15.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background
+                                          .withOpacity((.1 * placeholderNum) -
+                                              (index * .1)),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        FlutterRemix.image_add_line,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background
+                                            .withOpacity(.8),
+                                      ),
                                     ),
                                   ),
                                 );
                               },
-                              child: AnimatedSwitcher(
-                                transitionBuilder: (child, animation) =>
-                                    ScaleTransition(
-                                  scale: animation,
-                                  child: child,
-                                ),
-                                duration: const Duration(milliseconds: 300),
-                                child: Container(
-                                  key: ValueKey(current.path),
-                                  margin: const EdgeInsets.only(right: 5),
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: <Widget>[
-                                      ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        child: Image.file(
-                                          current,
-                                          height: 75,
-                                          width: 75,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        iconSize: 15,
-                                        // padding: EdgeInsets.zero,
-
-                                        style: IconButton.styleFrom(
-                                          backgroundColor:
-                                              AppColors.black.withOpacity(0.05),
-                                        ),
-                                        color: Colors.red,
-                                        onPressed: () {
-                                          cubit.removePickedImage(index);
-                                        },
-                                        icon: const Icon(
-                                          FlutterRemix.delete_bin_2_line,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  );
-          },
-        ),
-      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            padding: MarginedBody.defaultMargin,
+                            child: Row(
+                              children: List.generate(
+                                  state.pickedImages?.length ?? 0, (index) {
+                                final current = state.pickedImages![index];
+
+                                return GestureDetector(
+                                  onLongPress: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => ImageFullView(
+                                          imageFile: current,
+                                          heroTag: current.path,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: AnimatedSwitcher(
+                                    transitionBuilder: (child, animation) =>
+                                        ScaleTransition(
+                                      scale: animation,
+                                      child: child,
+                                    ),
+                                    duration: const Duration(milliseconds: 300),
+                                    child: Container(
+                                      key: ValueKey(current.path),
+                                      margin: const EdgeInsets.only(right: 5),
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: <Widget>[
+                                          ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                            child: Image.file(
+                                              current,
+                                              height: 75,
+                                              width: 75,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            iconSize: 15,
+                                            // padding: EdgeInsets.zero,
+
+                                            style: IconButton.styleFrom(
+                                              backgroundColor: AppColors.black
+                                                  .withOpacity(0.05),
+                                            ),
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              cubit.removePickedImage(index);
+                                            },
+                                            icon: const Icon(
+                                              FlutterRemix.delete_bin_2_line,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
