@@ -139,23 +139,23 @@ class NostrService {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  NostrEventsStream textNotesFeed() {
-    final randomId = Nostr.instance.utilsService.random64HexChars();
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          kinds: const [1],
-          t: const ["anas", "gwhyyy"],
-          since: DateTime.now().subtract(const Duration(days: 30)),
-        )
-      ],
-    );
-
-    return Nostr.instance.relaysService
-        .startEventsSubscription(request: requestWithFilter);
-  }
+//   NostrEventsStream textNotesFeed() {
+//     final randomId = Nostr.instance.utilsService.random64HexChars();
+//
+//     final requestWithFilter = NostrRequest(
+//       subscriptionId: randomId,
+//       filters: <NostrFilter>[
+//         NostrFilter(
+//           kinds: const [1],
+//           t: const ["anas", "gwhyyy"],
+//           since: DateTime.now().subtract(const Duration(days: 30)),
+//         )
+//       ],
+//     );
+//
+//     return Nostr.instance.relaysService
+//         .startEventsSubscription(request: requestWithFilter);
+//   }
 
   NostrEventsStream getFollowedPeople() {
     final nostrKeyPairs = NostrKeyPairs(
@@ -478,13 +478,18 @@ class NostrService {
   NostrEventsStream globalFeed() {
     final randomId = Nostr.instance.utilsService.random64HexChars();
 
+    final eventTags = [
+      "global",
+      ...AppConfigs.categories
+          .map((category) => category.enumValue.name)
+          .toList()
+    ];
+
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: AppConfigs.categories
-              .map((category) => category.enumValue.name)
-              .toList(),
+          t: eventTags,
           kinds: const [1],
           limit: 10,
         )
@@ -530,7 +535,7 @@ class NostrService {
         NostrFilter(
           ids: [noteId],
           kinds: const [1],
-        )
+        ),
       ],
     );
 
@@ -573,6 +578,7 @@ class NostrService {
         NostrFilter(
           authors: [userProfilePubKey],
           kinds: const [1],
+          t: ["global"],
         ),
       ],
     );
