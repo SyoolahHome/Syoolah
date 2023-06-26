@@ -11,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/chat_modules/chat_modules_cubit.dart';
 import '../../services/utils/paths.dart';
+import '../general/pattern_widget.dart';
+import '../general/widget/bottom_sheet_title_with_button.dart';
 import '../general/widget/button.dart';
 
 class ChatModules extends StatelessWidget {
@@ -22,22 +24,30 @@ class ChatModules extends StatelessWidget {
 
     return BlocProvider<ChatModulesCubit>(
       create: (context) => ChatModulesCubit(),
-      child: Scaffold(
+      child: PatternScaffold(
         body: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: kToolbarHeight),
+            SizedBox(
+              height: height,
+            ),
+            MarginedBody(
+              child: BottomSheetTitleWithIconButton(
+                title: "imamOnDuty".tr().titleCapitalized,
+              ),
+            ),
             const SizedBox(height: height),
             MarginedBody(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  HeadTitle(
-                    title: "imamOnDuty".tr().titleCapitalized,
-                    isForSection: true,
-                  ),
-                  const SizedBox(height: height / 2),
+                  // HeadTitle(
+                  //   title: ,
+                  //   isForSection: true,
+                  // ),
+                  // const SizedBox(height: height / 2),
                   ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
                 ],
               ),
@@ -50,6 +60,8 @@ class ChatModules extends StatelessWidget {
                 final currentViewedLevel =
                     cubit.modulesItems[sliderValue.toInt()];
                 void _triggerChatNavigation() {
+                  Navigator.of(context).pop();
+
                   Navigator.of(context).pushNamed(
                     Paths.chat,
                     arguments: {
@@ -122,7 +134,6 @@ class ChatModules extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: kToolbarHeight),
             const SizedBox(height: height),
           ],
         ),

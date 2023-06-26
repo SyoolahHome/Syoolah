@@ -379,4 +379,20 @@ abstract class BottomSheetService {
       },
     );
   }
+
+  static void showWidgetAsBottomSheet(
+    Widget screen,
+    BuildContext context,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return screen;
+      },
+    );
+  }
 }
