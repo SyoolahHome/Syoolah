@@ -16,7 +16,7 @@ class PostButton extends StatelessWidget {
     final cubit = context.read<AddNewPostCubit>();
 
     return Row(
-      children: [
+      children: <Widget>[
         ...List.generate(
           cubit.postAssetsSectionsWidgets.length,
           (index) {
@@ -67,11 +67,11 @@ class PostButton extends StatelessWidget {
                   cubit.createNote();
                 },
                 customWidget: state.isLoading
-                    ? const SizedBox(
+                    ? SizedBox(
                         height: 20,
                         width: 20,
                         child: CircularProgressIndicator(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.onBackground,
                           strokeWidth: 1.2,
                         ),
                       )

@@ -88,7 +88,7 @@ class SuccessAccountMade extends StatelessWidget {
                   isSmall: true,
                   onTap: () {
                     final val = Navigator.of(context)
-                        .pushNamed(Paths.nostrServiceLoading);
+                        .pushReplacementNamed(Paths.nostrServiceLoading);
                   },
                   text: 'letsGo'.tr(),
                 ),

@@ -36,6 +36,7 @@ class Nip05Verification extends StatelessWidget {
             appBar: CustomAppBar(),
             body: MarginedBody(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: height * 3),
                   Animate(
@@ -46,7 +47,7 @@ class Nip05Verification extends StatelessWidget {
                       ),
                     ],
                     child: HeadTitle(
-                      title: "NIP05IdentifierTitle".tr(),
+                      title: "lightningAddressesTitle".tr(),
                       isForSection: true,
                     ),
                   ),
@@ -60,7 +61,7 @@ class Nip05Verification extends StatelessWidget {
                     ],
                     delay: animationDuration,
                     child: Text(
-                      "NIP05IdentifierSubtitle".tr(),
+                      "lightningAddressesSubtitle".tr(),
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             fontWeight: FontWeight.w300,
                           ),
@@ -72,10 +73,10 @@ class Nip05Verification extends StatelessWidget {
                     children: <Widget>[
                       CustomTextField(
                         controller: cubit.nip05Controller,
-                        // label: "yourNIP05".tr(),
+                        // label: "yourLightAdress".tr(),
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 10),
-                        hint: "hintNIP05".tr(),
+                        hint: "hintLightAdress".tr(),
                       ),
                       Container(
                         margin: EdgeInsets.only(
@@ -88,7 +89,7 @@ class Nip05Verification extends StatelessWidget {
                               onSuccess: () {
                                 SnackBars.text(
                                   context,
-                                  "NIP05IdentifierSuccess".tr(),
+                                  "LightAdresSuccess".tr(),
                                 );
 
                                 Navigator.of(context).pop();

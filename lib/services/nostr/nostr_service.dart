@@ -98,11 +98,19 @@ class NostrService {
       private: LocalDatabase.instance.getPrivateKey()!,
     );
 
+    final eventTags = [
+      ["t", "global"]
+    ];
+
+    if (tags != null) {
+      eventTags.addAll(tags);
+    }
+
     final event = NostrEvent.fromPartialData(
       kind: 1,
       keyPairs: nostrKeyPairs,
       content: text,
-      tags: tags,
+      tags: eventTags,
       createdAt: creationDate,
     );
 

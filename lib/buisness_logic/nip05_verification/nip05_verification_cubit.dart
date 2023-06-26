@@ -40,7 +40,7 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
         currentUserMetadata != null) {
       _updateCurrentUserProfileWithNip05(state.currentUserMetadata!);
     } else {
-      emit(state.copyWith(error: "invalidNIP05".tr()));
+      emit(state.copyWith(error: "invalidLightAdress".tr()));
       emit(state.copyWith(error: null));
     }
   }

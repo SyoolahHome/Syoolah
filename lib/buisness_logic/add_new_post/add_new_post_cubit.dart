@@ -55,6 +55,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     try {
       emit(state.copyWith(isLoading: true, pickedImages: state.pickedImages));
       String resultNote = controller.text;
+
       if (_noteImagesExists()) {
         resultNote += await _uploadImagesAndGetNewNoteResult();
       }
@@ -70,6 +71,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
             .map((e) => ["t", e.enumValue.name])
             .toList(),
       );
+
       emit(state.copyWith(success: "yourNoteWasSent".tr()));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
