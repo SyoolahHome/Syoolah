@@ -31,6 +31,7 @@ class BottomBar extends StatelessWidget {
           child: Builder(
             builder: (context) {
               final cubit = context.read<BottomBarCubit>();
+
               return BlocBuilder<BottomBarCubit, int>(
                 builder: (context, state) {
                   return Scaffold(

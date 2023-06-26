@@ -30,8 +30,8 @@ class BottomBarCubit extends Cubit<int> {
         BottomBarItem(
           screen: const ChatModules(),
           label: 'imam'.tr(),
-          icon: FlutterIslamicIcons.quran,
-          selectedIcon: FlutterIslamicIcons.solidQuran,
+          icon: FlutterRemix.message_3_line,
+          selectedIcon: FlutterRemix.message_3_fill,
         ),
         BottomBarItem(
           screen: Umah(),
