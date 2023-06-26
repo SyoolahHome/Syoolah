@@ -46,10 +46,13 @@ class InfoBox extends StatelessWidget {
               Builder(
                 builder: (context) {
                   Widget widget = Column(
-                    children: [
+                    children: <Widget>[
                       const SizedBox(height: height * 2),
                       Container(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 16.0,
+                        ),
                         decoration: BoxDecoration(
                           color: bgColor,
                           borderRadius: BorderRadius.circular(7.5),
@@ -71,14 +74,16 @@ class InfoBox extends StatelessWidget {
                                       ),
                                 ),
                                 if (showPopIcon)
-                                  GestureDetector(
-                                    onTap: hideBox,
-                                    child: const Icon(FlutterRemix.close_line),
-                                  )
+                                  IconButton(
+                                    onPressed: hideBox,
+                                    icon: const Icon(FlutterRemix.close_line),
+                                  ),
                               ],
                             ),
-                            const SizedBox(height: height / 2),
-                            if (messageText != null) Text(messageText!),
+                            if (messageText != null) ...[
+                              // const SizedBox(height: height / 2),
+                              Text(messageText!)
+                            ],
                           ],
                         ),
                       ),
