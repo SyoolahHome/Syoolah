@@ -28,7 +28,10 @@ class PostImage extends StatelessWidget {
                     width: 75,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColors.lighGrey,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .background
+                          .withOpacity(.3),
                     ),
                   )
                 : Column(

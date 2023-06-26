@@ -8,7 +8,7 @@ class DangerBox extends InfoBox {
   DangerBox({
     super.key,
     required super.bgColor,
-    required super.messageText,
+    super.messageText,
     required super.titleText,
     super.showPopIcon = true,
   });

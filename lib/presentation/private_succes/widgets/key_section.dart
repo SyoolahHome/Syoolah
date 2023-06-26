@@ -17,11 +17,13 @@ class KeySection extends StatelessWidget {
   const KeySection({
     super.key,
     this.type = KeySectionType.privateKey,
+    this.showEyeIconButton = true,
     this.onCopy,
   });
+
   final KeySectionType type;
   final VoidCallback? onCopy;
-
+  final bool showEyeIconButton;
   @override
   Widget build(BuildContext context) {
     final widget =
@@ -47,22 +49,23 @@ class KeySection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Animate(
-                  delay: 800.ms,
-                  effects: const <Effect>[
-                    FadeEffect(),
-                  ],
-                  child: FieldSuffixIcon(
-                    icon: state.isPasswordVisible
-                        ? FlutterRemix.eye_close_line
-                        : FlutterRemix.eye_line,
-                    onPressed: () {
-                      context
-                          .read<PrivateKeyGenSuccessCubit>()
-                          .togglePrivateKeyFieldVisibility();
-                    },
+                if (showEyeIconButton)
+                  Animate(
+                    delay: 800.ms,
+                    effects: const <Effect>[
+                      FadeEffect(),
+                    ],
+                    child: FieldSuffixIcon(
+                      icon: state.isPasswordVisible
+                          ? FlutterRemix.eye_close_line
+                          : FlutterRemix.eye_line,
+                      onPressed: () {
+                        context
+                            .read<PrivateKeyGenSuccessCubit>()
+                            .togglePrivateKeyFieldVisibility();
+                      },
+                    ),
                   ),
-                ),
                 Animate(
                   delay: 1000.ms,
                   effects: const <Effect>[
@@ -97,9 +100,11 @@ class KeySection extends StatelessWidget {
     } else {
       return BlocProvider<PrivateKeyGenSuccessCubit>(
         create: (context) => PrivateKeyGenSuccessCubit(),
-        child: Builder(builder: (context) {
-          return widget;
-        },),
+        child: Builder(
+          builder: (context) {
+            return widget;
+          },
+        ),
       );
     }
   }

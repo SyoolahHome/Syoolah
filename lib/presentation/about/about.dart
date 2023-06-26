@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
@@ -11,8 +12,9 @@ class AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Nothing yet"),
+      body: Container(
+        alignment: Alignment.centerLeft,
+        child: Text("aboutContent".tr()),
       ),
     );
 

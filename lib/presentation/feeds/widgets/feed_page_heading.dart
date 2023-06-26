@@ -22,7 +22,7 @@ class FeedPageHeading extends StatelessWidget {
         children: <Widget>[
           Text(
             endTitleWithAdditionalText
-                ? "feedOfName".tr(args: [feedName])
+                ? "newNewFeedOfName".tr(args: [feedName])
                 : feedName,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,

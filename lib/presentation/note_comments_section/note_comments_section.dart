@@ -72,7 +72,7 @@ class NoteCommentsSection extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           HeadTitle(
-                            title: "thread".tr(),
+                            title: "comments".tr(),
                             isForSection: true,
                             minimizeFontSizeBy: 10.0,
                           ),

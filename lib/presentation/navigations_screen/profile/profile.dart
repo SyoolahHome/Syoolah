@@ -17,6 +17,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../general/widget/title.dart';
+import '../../private_succes/widgets/key_section.dart';
+import 'widgets/pub_key_section.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -53,11 +55,11 @@ class Profile extends StatelessWidget {
                       body: NestedScrollView(
                         headerSliverBuilder: (context, innerBoxIsScrolled) {
                           return <Widget>[
-                            SliverToBoxAdapter(
-                              child: MarginedBody(
-                                child: HeadTitle(title: "profile".tr()),
-                              ),
-                            ),
+                            // SliverToBoxAdapter(
+                            //   child: MarginedBody(
+                            //     child: HeadTitle(title: "profile".tr()),
+                            //   ),
+                            // ),
                             SliverToBoxAdapter(
                               child: Builder(
                                 builder: (context) {
@@ -68,13 +70,19 @@ class Profile extends StatelessWidget {
                                       children: <Widget>[
                                         const SizedBox(height: height * 2),
                                         ProfileHeader(metadata: metadata),
-                                        const SizedBox(height: height * 3),
+                                        const SizedBox(height: height * 2),
                                         ProfileName(
                                           metadata: metadata,
                                           pubKey: event?.pubkey ?? "",
                                         ),
                                         const SizedBox(height: height),
                                         ProfileAbout(metadata: metadata),
+                                        const SizedBox(height: height * 2),
+                                        KeySection(
+                                          type: KeySectionType.publicKey,
+                                          showEyeIconButton: false,
+                                        ),
+                                        // PublicKeySection(),
                                         const SizedBox(height: height * 2),
                                         Animate(
                                           effects: const <Effect>[

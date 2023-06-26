@@ -6,13 +6,13 @@ import 'package:flutter_remix/flutter_remix.dart';
 class InfoBox extends StatelessWidget {
   InfoBox({
     super.key,
-    required this.messageText,
     required this.titleText,
     required this.bgColor,
     required this.showPopIcon,
+    this.messageText,
   });
 
-  final String messageText;
+  final String? messageText;
   final String titleText;
   final Color bgColor;
   final bool showPopIcon;
@@ -78,7 +78,7 @@ class InfoBox extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: height / 2),
-                            Text(messageText),
+                            if (messageText != null) Text(messageText!),
                           ],
                         ),
                       ),

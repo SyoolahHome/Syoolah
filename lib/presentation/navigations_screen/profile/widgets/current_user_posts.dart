@@ -28,7 +28,7 @@ class CurrentUserPosts extends StatelessWidget {
 
               return NotesListView(
                 shrinkWrap: true,
-                feedName: "posts".tr(),
+                // feedName: "posts".tr(),
                 endTitleWithAdditionalText: false,
                 hideCount: true,
                 physics: const NeverScrollableScrollPhysics(),

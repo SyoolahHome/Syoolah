@@ -11,7 +11,9 @@ class ProfileTabView extends StatelessWidget {
     final cubit = context.read<ProfileCubit>();
 
     return Animate(
-      effects: const [FadeEffect()],
+      effects: const <Effect>[
+        FadeEffect(),
+      ],
       delay: 1200.ms,
       child: TabBarView(
         children: cubit.state.profileTabsItems.map((e) {

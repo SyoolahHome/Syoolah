@@ -33,8 +33,8 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         ),
         PostAssetSectionItem(
           onPressed: () {},
-          icon: FlutterRemix.youtube_line,
           widget: const PostYoutube(),
+          icon: FlutterRemix.youtube_line,
         ),
       ];
 
