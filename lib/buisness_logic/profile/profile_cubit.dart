@@ -85,7 +85,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             as Map<String, dynamic>,
       );
 
-      NostrService.instance.setCurrentUserMetaData(
+      NostrService.instance.send.setCurrentUserMetaData(
         metadata: currentUsermetadata.copyWith(
           picture: "",
         ),
@@ -111,7 +111,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             as Map<String, dynamic>,
       );
 
-      NostrService.instance.setCurrentUserMetaData(
+      NostrService.instance.send.setCurrentUserMetaData(
         metadata: currentUsermetadata.copyWith(
           picture: uploadedAvatarUrl,
         ),

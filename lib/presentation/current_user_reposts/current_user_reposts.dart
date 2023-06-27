@@ -15,7 +15,7 @@ class CurrentUserReposts extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<CurrentUserRepostsCubit>(
       create: (context) => CurrentUserRepostsCubit(
-        currentUserReposts: NostrService.instance.currentUserReposts(),
+        currentUserReposts: NostrService.instance.subs.currentUserReposts(),
       ),
       child: Builder(
         builder: (context) {

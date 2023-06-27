@@ -229,9 +229,23 @@ class ChatCubit extends Cubit<ChatState> {
     BuildContext context,
     ChatMessage message,
   ) {
+    final indexOfMessage =
+        state.messages.indexWhere((chatMessage) => chatMessage == message);
+
+    final currentMessage = state.messages[indexOfMessage];
+    assert(message.role != OpenAIChatMessageRole.user);
+
+    final indexOfPreviousMessage = indexOfMessage - 1;
+    final previousMessage = state.messages[indexOfPreviousMessage];
+    assert(previousMessage.role == OpenAIChatMessageRole.user);
+
+    String messageToSend = previousMessage.message;
+    messageToSend += "\n\n";
+    messageToSend += currentMessage.message;
+
     BottomSheetService.showCreatePostBottomSheet(
       context,
-      initialNoteContent: message.message,
+      initialNoteContent: messageToSend,
     );
   }
 }

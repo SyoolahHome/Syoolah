@@ -78,7 +78,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
       );
     }
 
-    NostrService.instance.setFollowingsEvent(newEvent);
+    NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
   void unfollowUser(String pubKey) {
@@ -87,11 +87,13 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
       return;
     }
 
-    NostrEvent newEvent = currentUserFollowing.copyWith(tags: [
-      ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
-    ],);
+    NostrEvent newEvent = currentUserFollowing.copyWith(
+      tags: [
+        ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
+      ],
+    );
 
-    NostrService.instance.setFollowingsEvent(newEvent);
+    NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
   void handleFollowButtonTap(String pubkey) {

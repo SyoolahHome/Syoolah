@@ -21,8 +21,9 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<GlobalCubit>(
       create: (context) => GlobalCubit(
-        currentUserFollowing: NostrService.instance.currentUserFollowings(),
-        currentUserFollowers: NostrService.instance.currentUserFollowers(),
+        currentUserFollowing:
+            NostrService.instance.subs.currentUserFollowings(),
+        currentUserFollowers: NostrService.instance.subs.currentUserFollowers(),
       ),
       child: BlocProvider.value(
         value: cubit,

@@ -33,8 +33,8 @@ class NoteCard extends StatelessWidget {
         create: (context) => NoteCardCubit(
           note: note,
           currentUserMetadataStream:
-              NostrService.instance.userMetadata(note.event.pubkey),
-          noteLikesStream: NostrService.instance.noteLikes(
+              NostrService.instance.subs.userMetadata(note.event.pubkey),
+          noteLikesStream: NostrService.instance.subs.noteLikes(
             postEventId: note.event.id,
           ),
         ),

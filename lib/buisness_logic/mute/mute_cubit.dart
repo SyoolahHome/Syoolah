@@ -24,7 +24,7 @@ class MuteCubit extends Cubit<MuteState> {
     required void Function() onSuccess,
     required String pubKey,
   }) {
-    NostrService.instance.muteUserWithPubKeyPublicly(
+    NostrService.instance.send.muteUserWithPubKeyPublicly(
       currentMuteEvent: state.muteEvent,
       pubKey: pubKey,
     );
@@ -36,7 +36,7 @@ class MuteCubit extends Cubit<MuteState> {
     required void Function() onSuccess,
     required String pubKey,
   }) {
-    NostrService.instance.muteUserWithPubKeyPrivately(
+    NostrService.instance.send.muteUserWithPubKeyPrivately(
       currentMuteEvent: state.muteEvent,
       pubKey: pubKey,
     );

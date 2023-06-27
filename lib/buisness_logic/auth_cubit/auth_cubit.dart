@@ -44,7 +44,7 @@ class AuthCubit extends Cubit<AuthState> {
         imageLink = await FileUpload()(pickedImage);
       }
 
-      NostrService.instance.setCurrentUserMetaData(
+      NostrService.instance.send.setCurrentUserMetaData(
         metadata: UserMetaData(
           name: nameController?.text ?? '',
           picture: imageLink,

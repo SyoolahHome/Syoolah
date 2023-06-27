@@ -17,7 +17,7 @@ class QuranFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "newQuran".tr(),
-        feedPostsStream: NostrService.instance.quranFeedStream(),
+        feedPostsStream: NostrService.instance.subs.quranFeedStream(),
       ),
     );
   }

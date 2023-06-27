@@ -22,7 +22,7 @@ class Umah extends StatelessWidget {
       child: GeneralFeed(
         feedName: "umah".tr(),
         endFeedTitleWithAdditionalText: false,
-        feedPostsStream: NostrService.instance.globalFeed(),
+        feedPostsStream: NostrService.instance.subs.globalFeed(),
       ),
     );
   }

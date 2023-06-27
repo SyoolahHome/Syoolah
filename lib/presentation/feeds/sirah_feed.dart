@@ -17,7 +17,7 @@ class SirahFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "dua".tr(),
-        feedPostsStream: NostrService.instance.sirahFeedStream(),
+        feedPostsStream: NostrService.instance.subs.sirahFeedStream(),
       ),
     );
   }

@@ -17,7 +17,7 @@ class HadithFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "hadith".tr(),
-        feedPostsStream: NostrService.instance.hadithFeedStream(),
+        feedPostsStream: NostrService.instance.subs.hadithFeedStream(),
       ),
     );
   }

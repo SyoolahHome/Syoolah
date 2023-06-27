@@ -47,7 +47,7 @@ class AddNewPost extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
+                          children: const <Widget>[
                             SizedBox(height: height * 2),
                             AddNewPostTitle(),
                             Divider(color: AppColors.grey, thickness: 0.2),

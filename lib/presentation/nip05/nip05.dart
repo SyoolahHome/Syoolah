@@ -21,7 +21,8 @@ class Nip05Verification extends StatelessWidget {
 
     return BlocProvider<Nip05VerificationCubit>(
       create: (context) => Nip05VerificationCubit(
-        currentUserMetadata: NostrService.instance.currentUserMetaDataStream(),
+        currentUserMetadata:
+            NostrService.instance.subs.currentUserMetaDataStream(),
       ),
       child: Builder(builder: (context) {
         final cubit = context.read<Nip05VerificationCubit>();

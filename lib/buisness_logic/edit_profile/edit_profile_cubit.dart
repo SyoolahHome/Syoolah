@@ -38,7 +38,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
           usernameController?.text.trim() == "") {
         emit(state.copyWith(error: "usernameError".tr()));
       } else {
-        NostrService.instance.setCurrentUserMetaData(
+        NostrService.instance.send.setCurrentUserMetaData(
           metadata: UserMetaData(
             name: nameController?.text ?? metaData.name,
             picture: pictureController?.text ?? metaData.picture,

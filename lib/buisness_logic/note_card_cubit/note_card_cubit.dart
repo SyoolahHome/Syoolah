@@ -28,7 +28,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   }
 
   void likeNote() {
-    NostrService.instance.likePost(note.event.id);
+    NostrService.instance.send.likePost(note.event.id);
     emitIfOpen(state.copyWith(localLiked: true));
   }
 
@@ -123,7 +123,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   }
 
   void repostNote() {
-    NostrService.instance.sendRepostEventFromCurrentUser(note);
+    NostrService.instance.send.sendRepostEventFromCurrentUser(note);
     emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
     emit(state.copyWith());
   }

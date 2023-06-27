@@ -32,7 +32,7 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
     required String postEventId,
     required String text,
   }) {
-    NostrService.instance.addCommentToPost(
+    NostrService.instance.send.addCommentToPost(
       postEventId: postEventId,
       text: text,
     );
@@ -44,7 +44,7 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
       return;
     }
 
-    NostrService.instance.addCommentToPost(
+    NostrService.instance.send.addCommentToPost(
       postEventId: postEventId,
       text: comment,
     );

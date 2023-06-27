@@ -55,7 +55,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
         return;
       }
-      pubKey = await NostrService.instance.getPubKeyFromEmail(searchQuery);
+      pubKey = await NostrService.instance.send.getPubKeyFromEmail(searchQuery);
     } else {
       const requiredHexLength = 64;
       if (searchQuery.length != requiredHexLength) {
@@ -72,7 +72,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
 
     try {
-      userStream = NostrService.instance.userMetadata(pubKey);
+      userStream = NostrService.instance.subs.userMetadata(pubKey);
       userSearchSub = userStream!.stream.listen(
         (event) {
           emit(state.copyWith(searchedUser: event));

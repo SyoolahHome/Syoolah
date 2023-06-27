@@ -64,7 +64,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
         resultNote += state.acceptedYoutubeUrl!;
       }
 
-      NostrService.instance.sendTextNoteFromCurrentUser(
+      NostrService.instance.send.sendTextNoteFromCurrentUser(
         text: resultNote,
         tags: state.categories
             .where((e) => e.isSelected)

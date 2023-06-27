@@ -69,7 +69,7 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
   }
 
   void _updateCurrentUserProfileWithNip05(UserMetaData previousUserMetaData) {
-    NostrService.instance.setCurrentUserMetaData(
+    NostrService.instance.send.setCurrentUserMetaData(
       metadata: UserMetaData(
         name: previousUserMetaData.name,
         picture: previousUserMetaData.picture,

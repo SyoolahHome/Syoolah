@@ -21,7 +21,7 @@ class CurrentUserLikes extends StatelessWidget {
 
     return BlocProvider<CurrentUserLikesCubit>(
       create: (context) => CurrentUserLikesCubit(
-        currentUserLikedPosts: NostrService.instance.currentUserLikes(),
+        currentUserLikedPosts: NostrService.instance.subs.currentUserLikes(),
       ),
       child: Builder(
         builder: (context) {
@@ -40,7 +40,8 @@ class CurrentUserLikes extends StatelessWidget {
 
                     return BlocProvider<LikedNoteCubit>.value(
                       value: LikedNoteCubit(
-                        likedNoteStream: NostrService.instance.noteStreamById(
+                        likedNoteStream:
+                            NostrService.instance.subs.noteStreamById(
                           noteId: current.tags.firstWhere(
                             (element) {
                               return element.first.toLowerCase() == "e";

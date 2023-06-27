@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (kDebugMode)
           IconButton(
             onPressed: () {
-              NostrService.instance.sendTextNoteFromCurrentUser(
+              NostrService.instance.send.sendTextNoteFromCurrentUser(
                 text: """
 Hello there!!!!
 

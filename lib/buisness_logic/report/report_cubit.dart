@@ -35,7 +35,7 @@ class ReportCubit extends Cubit<ReportState> {
     final selectedReportOption =
         state.reportOptions.firstWhere((option) => option.isSelected);
 
-    NostrService.instance.sendReportEvent(
+    NostrService.instance.send.sendReportEvent(
       note: note,
       selectedReportType: selectedReportOption.reportType.name,
     );

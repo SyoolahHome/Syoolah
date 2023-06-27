@@ -16,7 +16,7 @@ class FollowingsFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "following".tr(),
-        feedPostsStream: NostrService.instance.followingsFeed(
+        feedPostsStream: NostrService.instance.subs.followingsFeed(
           followings: globalCubit!.state.currentUserFollowing?.tags
                   .map((e) => e[1])
                   .toList() ??

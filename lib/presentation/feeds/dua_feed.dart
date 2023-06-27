@@ -18,7 +18,7 @@ class DuaFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "newDuaa".tr(),
-        feedPostsStream: NostrService.instance.duaFeedStream(),
+        feedPostsStream: NostrService.instance.subs.duaFeedStream(),
       ),
     );
   }

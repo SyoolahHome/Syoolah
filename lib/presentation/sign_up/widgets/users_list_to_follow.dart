@@ -36,9 +36,10 @@ class UsersListToFollow extends StatelessWidget {
       create: (context) => UsersListToFollowCubit(
         usersListMetadata: pubKeys.isEmpty
             ? emptyNostrStrea
-            : NostrService.instance.usersListMetadata(pubKeys),
-        currentUserFollowing: NostrService.instance.currentUserFollowings(),
-        currentUserFollowers: NostrService.instance.currentUserFollowers(),
+            : NostrService.instance.subs.usersListMetadata(pubKeys),
+        currentUserFollowing:
+            NostrService.instance.subs.currentUserFollowings(),
+        currentUserFollowers: NostrService.instance.subs.currentUserFollowers(),
       ),
       child: Builder(
         builder: (context) {

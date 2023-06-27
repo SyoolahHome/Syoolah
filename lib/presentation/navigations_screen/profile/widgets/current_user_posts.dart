@@ -17,7 +17,7 @@ class CurrentUserPosts extends StatelessWidget {
     return BlocProvider<CurrentUserPostsCubit>(
       create: (context) => CurrentUserPostsCubit(
         currentUserPostsStream:
-            NostrService.instance.currentUserTextNotesStream(),
+            NostrService.instance.subs.currentUserTextNotesStream(),
       ),
       child: Builder(
         builder: (context) {

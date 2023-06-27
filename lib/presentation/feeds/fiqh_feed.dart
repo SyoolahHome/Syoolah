@@ -17,7 +17,7 @@ class FiqhFeed extends StatelessWidget {
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "fiqh".tr(),
-        feedPostsStream: NostrService.instance.fiqhFeedStream(),
+        feedPostsStream: NostrService.instance.subs.fiqhFeedStream(),
       ),
     );
   }

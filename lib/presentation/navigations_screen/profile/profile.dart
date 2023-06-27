@@ -30,7 +30,7 @@ class Profile extends StatelessWidget {
     return BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit(
         currentUserMetadataStream:
-            NostrService.instance.currentUserMetaDataStream(),
+            NostrService.instance.subs.currentUserMetaDataStream(),
       ),
       child: Builder(
         builder: (context) {

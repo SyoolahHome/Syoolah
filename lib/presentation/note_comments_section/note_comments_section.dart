@@ -45,7 +45,7 @@ class NoteCommentsSection extends StatelessWidget {
       value: cubit!,
       child: BlocProvider<NoteCommentsCubit>(
         create: (context) => NoteCommentsCubit(
-          noteCommentsStream: NostrService.instance.noteComments(
+          noteCommentsStream: NostrService.instance.subs.noteComments(
             note: note!,
             postEventId: id,
           ),
