@@ -22,6 +22,7 @@ Future<void> main() async {
   final binding = WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = MyHttpOverrides();
+
   Animate.restartOnHotReload = kDebugMode;
   Animate.defaultCurve = Curves.easeInOut;
 

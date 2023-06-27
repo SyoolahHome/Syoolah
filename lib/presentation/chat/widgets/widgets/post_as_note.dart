@@ -18,7 +18,7 @@ class PostDirectlyAsNote extends StatelessWidget {
     return GestureDetector(
       onTap: () => cubit.postMessageAsNoteOfCurrentUser(context, message),
       child: Icon(
-        FlutterRemix.account_box_line,
+        FlutterRemix.add_circle_line,
         size: 14.0,
         color: Theme.of(context).colorScheme.onSecondary,
       ),

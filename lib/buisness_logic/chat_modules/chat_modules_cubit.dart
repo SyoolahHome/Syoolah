@@ -25,9 +25,11 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
 
   List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
         ChatModuleItem(
-          title: "Beginner" ?? "chatInstructorTitle".tr(),
-          subtitle: "This will guide you with all information about islam" ??
-              "chatInstructorSubtitle".tr(),
+          title: "Beginner" /* ?? "chatInstructorTitle".tr() */,
+          subtitle:
+              "This will guide you with all information about islam" /* ??
+              "chatInstructorSubtitle".tr() */
+          ,
           icon: FlutterIslamicIcons.solidKowtow,
           instruction:
               "You are an islamic imam who will guide with all information about islam",
@@ -41,10 +43,11 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           ],
         ),
         ChatModuleItem(
-          title: 'Intermediate' ?? "chatInstructorTitle".tr(),
+          title: 'Intermediate' /* ?? "chatInstructorTitle".tr() */,
           subtitle:
-              "This will guide you with all information about Sirah of Prophet Muhammad (PBUH)" ??
-                  "chatInstructorSubtitle".tr(),
+              "This will guide you with all information about Sirah of Prophet Muhammad (PBUH)" /* ??
+                  "chatInstructorSubtitle".tr() */
+          ,
           icon: FlutterIslamicIcons.solidMosque,
           instruction:
               "You are an islamic imam who will guide with all information about Sirah of Prophet Muhammad (PBUH)",
@@ -57,7 +60,7 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           ],
         ),
         ChatModuleItem(
-          title: "Advanced" ?? "chatInstructorTitle".tr(),
+          title: "Advanced" /* ?? "chatInstructorTitle".tr() */,
           subtitle: "chatInstructorSubtitle".tr(),
           icon: FlutterIslamicIcons.solidQuran2,
           instruction:
@@ -69,6 +72,7 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
 
   void changeSliderValue(double value) {
     emit(state.copyWith(sliderValue: value));
+
     pageController!.animateToPage(
       value.toInt(),
       duration: Animate.defaultDuration,

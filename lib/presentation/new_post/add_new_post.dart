@@ -17,9 +17,12 @@ class AddNewPost extends StatelessWidget {
   const AddNewPost({
     super.key,
     required this.initialNoteContent,
+    this.expectMultiLine = false,
   });
 
   final String? initialNoteContent;
+  final bool expectMultiLine;
+
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
@@ -47,12 +50,12 @@ class AddNewPost extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const <Widget>[
+                          children: <Widget>[
                             SizedBox(height: height * 2),
                             AddNewPostTitle(),
                             Divider(color: AppColors.grey, thickness: 0.2),
                             SizedBox(height: height),
-                            PostField(),
+                            PostField(expectMultiLine: expectMultiLine),
                             SizedBox(height: height * 2),
                             CategoriesSelect(),
                             SizedBox(height: height * 2),

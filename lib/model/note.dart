@@ -98,10 +98,11 @@ class Note extends Equatable {
       event: NostrEvent.deserialized(json['event'] as String),
       links: List<String>.from(json['links'] as List) ?? [],
       noteOnly: json['noteOnly'] as String,
-      imageLinks:
-          List<String>.from(json['imageLinks'] as List) ?? [],
-      youtubeVideoLinks: List<String>.from(json['youtubeVideoLinks'] as List) ??
-          [],
+      imageLinks: List<String>.from(json['imageLinks'] as List) ?? [],
+      youtubeVideoLinks: List<String>.from(
+          json['youtubeVideoLinks'] as List) /* ??
+          [] */
+      ,
     );
   }
 }

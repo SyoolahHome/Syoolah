@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ChatMessage extends StatelessWidget {
-  const ChatMessage({super.key, required this.text, required this.sender});
+  const ChatMessage({
+    super.key,
+    required this.text,
+    required this.sender,
+  });
 
   final String text;
   final String sender;
@@ -9,7 +13,7 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 13),
           child: Container(
@@ -23,7 +27,9 @@ class ChatMessage extends StatelessWidget {
               child: Text(
                 sender,
                 style: TextStyle(
-                    color: Colors.black, fontSize: sender == 'user' ? 14 : 30,),
+                  color: Colors.black,
+                  fontSize: sender == 'user' ? 14 : 30,
+                ),
               ),
             ),
           ),

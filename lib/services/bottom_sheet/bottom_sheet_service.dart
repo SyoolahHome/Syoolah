@@ -36,7 +36,10 @@ abstract class BottomSheetService {
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
-        return AddNewPost(initialNoteContent: initialNoteContent);
+        return AddNewPost(
+          initialNoteContent: initialNoteContent,
+          expectMultiLine: true,
+        );
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
