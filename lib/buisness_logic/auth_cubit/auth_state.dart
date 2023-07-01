@@ -57,6 +57,9 @@ class AuthState extends Equatable {
     );
   }
 
+  factory AuthState.initial() {
+    return AuthInitial();
+  }
   AuthState copyWithNullPickedImage() {
     return AuthState(
       pickedImage: null,

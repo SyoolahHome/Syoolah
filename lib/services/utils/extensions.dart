@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
+import 'package:ditto/model/relay_configuration.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../model/feed_category.dart';
+import '../../model/loclal_item.dart';
 import '../database/local/local_database.dart';
 
 extension Extensions on List<NostrEvent> {
@@ -178,5 +185,47 @@ extension ThemeModeExtension on ThemeMode {
     } else {
       return ThemeMode.system;
     }
+  }
+}
+
+extension FeedCategoryListExtension on Iterable<FeedCategory> {
+  Iterable<FeedCategory> get whereSelected => where((e) => e.isSelected);
+  List<List<String>> toNostrTagsList() =>
+      map((e) => ["t", e.enumValue.name]).toList();
+}
+
+extension XFileListExtension on List<XFile> {
+  List<File> toListOfFiles() => map((xf) => File(xf.path)).toList();
+}
+
+extension RelayConfigurationListExtension on List<RelayConfiguration> {
+  List<String> toListOfUrls() => map((e) => e.url).toList();
+
+  List<RelayConfiguration> without(RelayConfiguration relay) =>
+      where((element) {
+        final isTheTargetRelayToRemove = element.url == relay.url;
+
+        return !isTheTargetRelayToRemove;
+      }).toList();
+
+  List<String> activeUrls() {
+    return where((relay) => relay.isActive).map((relay) => relay.url).toList();
+  }
+}
+
+extension LocalItemListExtension on List<LocaleItem> {
+  List<BottomSheetOption> toBottomSheetTranslationOptions(
+    BuildContext context, {
+    required void Function(LocaleItem localItem) onEachTap,
+  }) {
+    return map(
+      (localeItem) {
+        return BottomSheetOption.translationOption(
+          localeItem: localeItem,
+          onTap: () => onEachTap(localeItem),
+          isCurrentApplied: context.locale == localeItem.locale,
+        );
+      },
+    ).toList();
   }
 }

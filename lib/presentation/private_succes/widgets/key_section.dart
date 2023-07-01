@@ -6,13 +6,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-enum KeySectionType {
-  privateKey,
-  publicKey,
-  nPubKey,
-  nsecKey,
-}
-
 class KeySection extends StatelessWidget {
   const KeySection({
     super.key,

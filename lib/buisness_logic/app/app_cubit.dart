@@ -15,93 +15,24 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../constants/app_enums.dart';
+
 part 'app_state.dart';
 
+/// {@template app_cubit}
+///  A general cubit for the app that is responsible for some global and general configuration and members that can be used on many places after the user is authenticated.
+/// {@endtemplate}
+
 class AppCubit extends Cubit<AppState> {
+  /// The responsible controller about holding the input if a new relay url.
   TextEditingController? relayUrlController;
 
-  List<String> get relaysUrls =>
-      state.relaysConfigurations.map((e) => e.url).toList();
+  /// A list of the relays urls that is used in Nostr operations.
+  List<String> get relaysUrls => state.relaysConfigurations.toListOfUrls();
 
-  AppCubit()
-      : super(
-          AppInitial(
-            relaysConfigurations: AppConfigs.relaysUrls
-                .map((url) => RelayConfiguration(url: url))
-                .toList(),
-          ),
-        ) {
-    relayUrlController = TextEditingController()
-      ..addListener(
-        () {
-          final controller = relayUrlController;
-
-          if (controller == null) {
-            return;
-          }
-
-          emit(
-            state.copyWith(isValidUrl: controller.text.isValidWebSocketSchema),
-          );
-        },
-      );
-  }
-
-  Future<void> addRelay() async {
-    final controller = relayUrlController;
-    if (controller == null) {
-      return;
-    }
-    try {
-      RelayConfiguration relay = RelayConfiguration(url: controller.text);
-      emit(
-        state.copyWith(
-          relaysConfigurations: [...state.relaysConfigurations, relay],
-        ),
-      );
-    } finally {
-      controller.clear();
-    }
-  }
-
-  void removeRelay(
-    RelayConfiguration relay,
-  ) {
-    emit(
-      state.copyWith(
-        relaysConfigurations: state.relaysConfigurations
-            .where((element) => element.url != relay.url)
-            .toList(),
-      ),
-    );
-  }
-
-  Future<void> reconnectToRelays() async {
-    emit(state.copyWith(isReconnecting: true));
-    final activeSelectedRelaysUrls = state.relaysConfigurations
-        .where((relay) => relay.isActive)
-        .map((relay) => relay.url)
-        .toList();
-    await NostrService.instance.init(relaysUrls: activeSelectedRelaysUrls);
-    emit(state.copyWith(isReconnecting: false));
-  }
-
-  void changeRelayState({
-    required int index,
-    required bool isActive,
-  }) {
-    final newRelaysConfigurations = [...state.relaysConfigurations];
-    newRelaysConfigurations[index] =
-        newRelaysConfigurations[index].copyWith(isActive: isActive);
-
-    emit(state.copyWith(relaysConfigurations: newRelaysConfigurations));
-  }
-
-  void showAddRelaySheet(BuildContext context) {
-    BottomSheetService.showAddRelaySheet(
-      context: context,
-      onAdd: addRelay,
-    );
+  /// {@macro app_cubit}
+  AppCubit() : super(AppState.initial()) {
+    _init();
   }
 
   @override
@@ -111,16 +42,94 @@ class AppCubit extends Cubit<AppState> {
     return super.close();
   }
 
-  Future showRemoveRelayDialog({
-    required BuildContext context,
-    required RelayConfiguration relayConfig,
+  /// Adds a new relay to the existent collection of relays at the given [position], using the text field associated with the [relayUrlController].
+  /// if the [relayUrlController] is not initialized already, it will ignore.
+  /// if [clearControllerAtEnd] is [false], then the [relayUrlController] will not be cleared after this method is called.
+  /// if a manual [relay] is given, it will have priority.
+  Future<void> addRelay({
+    RelayConfiguration? relay,
+    AppCubitNewRelayPosition addPosition = AppCubitNewRelayPosition.top,
+    bool clearControllerAtEnd = true,
+  }) async {
+    TextEditingController? controller;
+
+    try {
+      if (relay != null) {
+        _emitNewRelayBasedOnPosition(
+          relay: relay,
+          position: addPosition,
+        );
+      } else {
+        controller = relayUrlController;
+        if (controller == null) {
+          return;
+        }
+
+        var newRelayFromUserInput = RelayConfiguration(url: controller.text);
+
+        _emitNewRelayBasedOnPosition(
+          relay: newRelayFromUserInput,
+          position: addPosition,
+        );
+      }
+    } finally {
+      if (clearControllerAtEnd) controller?.clear();
+    }
+
+    reconnectToRelays();
+  }
+
+  /// Removes the given [relay] from the current state.
+  void removeRelay(RelayConfiguration relay) {
+    final newRelaysConfigurations = state.relaysConfigurations.without(relay);
+
+    emit(state.copyWith(relaysConfigurations: newRelaysConfigurations));
+  }
+
+  /// Reconnects/connects to all relays found from the current state
+  Future<void> reconnectToRelays() async {
+    try {
+      emit(state.copyWith(isReconnecting: true));
+
+      await NostrService.instance.init(
+        relaysUrls: state.relaysConfigurations.activeUrls(),
+      );
+    } catch (e) {
+    } finally {
+      emit(state.copyWith(isReconnecting: false));
+    }
+  }
+
+  /// Selects the relay at the given [index] and sets it's [isActive] value.
+  void selectRelay({
+    required int index,
+    required bool isActive,
+  }) {
+    final newRelaysConfigurations = List.of(state.relaysConfigurations);
+
+    newRelaysConfigurations[index] =
+        newRelaysConfigurations[index].copyWith(isActive: isActive);
+
+    emit(state.copyWith(relaysConfigurations: newRelaysConfigurations));
+  }
+
+  /// A wrapper for showing the responsible bottom sheet about adding a new relay.
+  void showAddRelaySheet(
+    BuildContext context, {
+    required Future<void> Function() onAdd,
+  }) {
+    BottomSheetService.showAddRelaySheet(context: context, onAdd: onAdd);
+  }
+
+  /// Shows an alert requesting to remove the given [relay] from the current state.
+  Future showRemoveRelayDialog(
+    BuildContext context, {
+    required RelayConfiguration relay,
   }) {
     return AlertsService.showRemoveRelayDialog(
       context,
-      relayConfig: relayConfig,
-      onRemove: () {
-        removeRelay(relayConfig);
-      },
+      relay: relay,
+      onRemoveTap: removeRelay,
     );
   }
 
@@ -133,6 +142,7 @@ class AppCubit extends Cubit<AppState> {
       context: context,
       relay: relay,
       relayInformations: relayInformations,
+      // TODO: move this to a separated class, file.
       options: <BottomSheetOption>[
         BottomSheetOption(
           title: "Name: ${relayInformations?.name}",
@@ -201,49 +211,59 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
+  /// A wrapper to show the translations sheet
+  /// The current context is got via [context.locale].
   void showTranslationsSheet(BuildContext context) {
-    MunawarahButton applyButton({
-      required String buttonText,
-      required Locale locale,
-    }) {
-      final isCurrentApplied = context.locale == locale;
-
-      return MunawarahButton(
-        onTap: () async {
-          if (isCurrentApplied) {
-            return;
-          }
-
-          await AppUtils.changeLocale(context, locale);
+    BottomSheetService.showOnBoardingTranslationsSheet(
+      context,
+      options: AppConfigs.localeItems.toBottomSheetTranslationOptions(
+        context,
+        onEachTap: (localeItem) async {
+          await AppUtils.changeLocale(context, localeItem.locale);
           Navigator.of(context).pop();
           SnackBars.text(
             context,
             "laungageApplied".tr(
-              args: [locale.languageCode],
+              args: [localeItem.locale.languageCode],
             ),
           );
         },
-        isOnlyBorder: isCurrentApplied,
-        text: isCurrentApplied ? null : buttonText,
-        icon: isCurrentApplied ? FlutterRemix.check_line : null,
-        isSmall: true,
+      ),
+    );
+  }
+
+  void _init() {
+    relayUrlController = TextEditingController()
+      ..addListener(
+        () {
+          final controller = relayUrlController;
+
+          if (controller != null) {
+            final isValidWebSocketSchema =
+                controller.text.isValidWebSocketSchema;
+
+            emit(state.copyWith(isValidUrl: isValidWebSocketSchema));
+          }
+        },
       );
+  }
+
+  /// inserts the given [relay] based on its [position] to the current state
+  void _emitNewRelayBasedOnPosition({
+    required AppCubitNewRelayPosition position,
+    required RelayConfiguration relay,
+  }) {
+    var currentStateList = List.of(state.relaysConfigurations);
+
+    switch (position) {
+      case AppCubitNewRelayPosition.top:
+        currentStateList.insert(0, relay);
+        break;
+      case AppCubitNewRelayPosition.bottom:
+        currentStateList.add(relay);
+        break;
     }
 
-    BottomSheetService.showOnBoardingTranslationsSheet(
-      context,
-      options: AppConfigs.localeItems.map(
-        (localeItem) {
-          return BottomSheetOption(
-            title: localeItem.titleName,
-            icon: FlutterRemix.arrow_right_line,
-            trailing: applyButton(
-              buttonText: localeItem.applyText,
-              locale: localeItem.locale,
-            ),
-          );
-        },
-      ).toList(),
-    );
+    emit(state.copyWith(relaysConfigurations: currentStateList));
   }
 }

@@ -7,6 +7,7 @@ import 'package:ditto/presentation/new_post/widgets/image.dart';
 import 'package:ditto/presentation/new_post/widgets/youtube.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/file_upload.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
@@ -16,36 +17,53 @@ import 'package:image_picker/image_picker.dart';
 
 part 'add_new_post_state.dart';
 
+/// {@template add_new_post}
+/// The cubit responsible on adding/sending new note/post from the current user
+/// {@end_template}
 class AddNewPostCubit extends Cubit<AddNewPostState> {
+  /// Hsandles the note text controller
   TextEditingController? textController;
 
+  /// Handles the youtube video URL text controller.
   TextEditingController? youtubeUrlController;
 
+  /// A List of available categories to be selected from the user
   List<FeedCategory> categories;
 
+  /// The options to select assets from in the note, such images, video urls..
   List<PostAssetSectionItem> get postAssetsSectionsWidgets => [
         PostAssetSectionItem(
           widget: const PostImage(),
           icon: FlutterRemix.image_add_line,
-          onPressed: () {
-            addImage();
-          },
+          onPressed: addImage,
         ),
-        PostAssetSectionItem(
-          onPressed: () {},
+        PostAssetSectionItem.withoutTapHandler(
           widget: const PostYoutube(),
           icon: FlutterRemix.youtube_line,
         ),
       ];
 
+  /// {@macro add_new_post}
   AddNewPostCubit({
     required this.categories,
     String? initialNoteContent,
   }) : super(AddNewPostInitial(categories: categories)) {
-    textController = TextEditingController()..text = initialNoteContent ?? "";
-    youtubeUrlController = TextEditingController();
+    _init(initialNoteContent);
   }
 
+  @override
+  Future<void> close() {
+    textController?.dispose();
+    youtubeUrlController?.dispose();
+
+    return super.close();
+  }
+
+  /// Creates a new note with the available/selected resources.
+  /// if the [controller] is [null], nothing will happen.
+  /// if a youtube video is set, it will be added to the note.
+  /// if any assets are selected, they will be added as well
+  /// if any assets are selected, they need to be uploaded in order to get URLs first, then use it.
   Future<void> createNote() async {
     final controller = textController;
     if (controller == null) {
@@ -66,10 +84,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
       NostrService.instance.send.sendTextNoteFromCurrentUser(
         text: resultNote,
-        tags: state.categories
-            .where((e) => e.isSelected)
-            .map((e) => ["t", e.enumValue.name])
-            .toList(),
+        tags: state.categories.whereSelected.toNostrTagsList(),
       );
 
       emit(state.copyWith(success: "yourNoteWasSent".tr()));
@@ -80,15 +95,13 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     }
   }
 
+  /// Opens the native image picker from the device to be selected, then represent them in the UI.
+  /// if something gets wrong during this operation, it will be handled
   Future<void> addImage() async {
     try {
       final imagePicker = ImagePicker();
       final images = await imagePicker.pickMultiImage();
-      emit(
-        state.copyWith(
-          pickedImages: images.map((xf) => File(xf.path)).toList(),
-        ),
-      );
+      emit(state.copyWith(pickedImages: images.toListOfFiles()));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
@@ -102,32 +115,26 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     }
   }
 
-  @override
-  Future<void> close() {
-    textController?.dispose();
-    youtubeUrlController?.dispose();
-
-    return super.close();
-  }
-
+  /// Selects the target [FeedCategory] at the [selectedIndex], then toggles its [FeedCategory.isSelected] to the given [value]
   void onSelected(int selectedIndex, bool value) {
     final newList = <FeedCategory>[];
 
     for (int index = 0; index < state.categories.length; index++) {
-      if (selectedIndex != index) {
-        newList.add(state.categories[index]);
+      final isTheTargetItem = selectedIndex == index;
+      final currentItem = state.categories[index];
+
+      if (isTheTargetItem) {
+        newList.add(currentItem.toggleSelected(value));
       } else {
-        final selectedItem = state.categories[index];
-        newList.add(selectedItem.copyWith(isSelected: value));
+        newList.add(currentItem);
       }
     }
-    emit(
-      state.copyWith(
-        categories: newList,
-        pickedImages: state.pickedImages,
-      ),
-    );
+
+    final pickedImages = state.pickedImages;
+    emit(state.copyWith(categories: newList, pickedImages: pickedImages));
   }
+
+  /// Removes the selected image (from the current state) at the given [imageIndex] by the [addImage] method, and reflects changes in the UI.
 
   void removePickedImage(int imageIndex) {
     final pickedImages = state.pickedImages;
@@ -136,10 +143,11 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     }
 
     final newList = <File>[];
-    assert(state.pickedImages != null);
     for (int index = 0; index < pickedImages.length; index++) {
+      final isTargetItem = imageIndex == index;
       final current = pickedImages[index];
-      if (imageIndex != index) {
+
+      if (!isTargetItem) {
         newList.add(current);
       }
     }
@@ -147,38 +155,50 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     emit(state.copyWith(pickedImages: newList));
   }
 
+  /// Weither some images are picked from the user.
   bool _noteImagesExists() {
     return state.pickedImages?.isNotEmpty ?? false;
   }
 
+  /// Weither a selected youtube video is valid & accepted.
   bool _noteYoutubeVideExists() {
     return state.acceptedYoutubeUrl != null;
   }
 
+  /// Uploads the picked images from the user using the [FileUpload] service, combining each one's url to one string that is returned.
+  /// if no images are selected, an empty string is returned.
+  ///
   Future<String> _uploadImagesAndGetNewNoteResult() async {
+    final fileUploadService = FileUpload();
     String result = "";
+
     final pickedImages = state.pickedImages;
     if (pickedImages == null) {
+      assert(result.isEmpty);
       return result;
     }
 
     for (int index = 0; index < pickedImages.length; index++) {
       final current = pickedImages[index];
-      final currentUploadedImageLink = await FileUpload()(current);
-      result += "\n$currentUploadedImageLink";
+      final currentUploadedImageLink = await fileUploadService(current);
+      result += "\n";
+      result += "$currentUploadedImageLink";
     }
 
     return result;
   }
 
-  void onYoutubeUrlChanged(String value) {
-    emit(state.copyWith(youtubeUrl: value));
+  /// Sets the given [youtubeUrl] to the current state.
+  void onYoutubeUrlChanged(String youtubeUrl) {
+    emit(state.copyWith(youtubeUrl: youtubeUrl));
   }
 
+  /// Shows the widget of the [PostAssetSectionItem] as the selected one.
   void showWidgetAt(int index) {
     emit(state.copyWith(currentPostAssetsSectionIndex: index));
   }
 
+  /// A wrapper to show the bottom sheet of validating the accepted youtube video
   void showYoutubeVideoBottomSheet(BuildContext context) {
     final text = youtubeUrlController?.text;
     if (text == null || text.isEmpty) {
@@ -204,11 +224,18 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     }
   }
 
+  /// Accepts & validate the selected youtube video
   void onAcceptYoutubeVideo() {
     emit(state.copyWith(acceptedYoutubeUrl: state.youtubeUrl));
   }
 
+  /// Removes the selected youtube video
   void onRemoveYoutubeVideo() {
     emit(state.copyWith(acceptedYoutubeUrl: ""));
+  }
+
+  void _init(String? initialNoteContent) {
+    textController = TextEditingController()..text = initialNoteContent ?? "";
+    youtubeUrlController = TextEditingController();
   }
 }

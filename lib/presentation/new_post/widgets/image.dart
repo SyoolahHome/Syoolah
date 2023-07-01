@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../constants/abstractions/new_post_asset_widget.dart';
 import '../../general/widget/margined_body.dart';
 
-class PostImage extends StatelessWidget {
+class PostImage extends NewPostAssetWidget {
   const PostImage({super.key});
 
   @override

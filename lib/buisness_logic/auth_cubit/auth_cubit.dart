@@ -19,62 +19,36 @@ import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../constants/app_enums.dart';
 import '../../presentation/privacy/privacy.dart';
 
 part 'auth_state.dart';
 
+/// {@template auth_cubit}
+/// The cubit responsible about any authentication process in the app
+/// {@endtemplate}
 class AuthCubit extends Cubit<AuthState> {
+  /// The responsible controller about the steps flow for signing up
   PageController? pageController;
+
+  /// The name text field controller.
   TextEditingController? nameController;
+
+  /// The existent key (for direct auth) text field controller.
   TextEditingController? existentKeyController;
+
+  /// The bio text field controller.
   TextEditingController? bioController;
+
+  /// The username text field controller.
   TextEditingController? usernameController;
+
+  /// The name text field focus node, used to manage the focus while navigating back/to the first flow step.
   FocusNode? nameFocusNode;
 
-  AuthCubit() : super(const AuthInitial()) {
+  /// {@macro auth_cubit}
+  AuthCubit() : super(AuthState.initial()) {
     _init();
-  }
-
-  Future<void> authenticate() async {
-    try {
-      String? imageLink;
-      final pickedImage = state.pickedImage;
-
-      if (pickedImage != null) {
-        imageLink = await FileUpload()(pickedImage);
-      }
-
-      NostrService.instance.send.setCurrentUserMetaData(
-        metadata: UserMetaData(
-          name: nameController?.text ?? '',
-          picture: imageLink,
-          banner: null,
-          username: usernameController?.text ?? '',
-          about: bioController?.text ?? '',
-          displayName: nameController?.text.split(" ").join("-") ?? '',
-          nip05Identifier: '',
-        ),
-      );
-      emit(
-        state.copyWith(
-          authenticated: true,
-          pickedImage: state.pickedImage,
-        ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          error: e.toString(),
-          pickedImage: state.pickedImage,
-        ),
-      );
-    } finally {
-      emit(
-        state.copyWith(
-          pickedImage: state.pickedImage,
-        ),
-      );
-    }
   }
 
   @override
@@ -89,25 +63,56 @@ class AuthCubit extends Cubit<AuthState> {
     return super.close();
   }
 
-  Future<void> handleExistentKey() async {
-    final existentKey = existentKeyController?.text ?? '';
-    if (existentKey.isEmpty) {
-      emit(
-        state.copyWith(
-          error: "pleaseEnterKey".tr(),
-          pickedImage: state.pickedImage,
+  /// Authenticates the user with all the collected informations such name, image, bio...
+  /// if an avatar image is picked, it will need first to upload it using the file upload service.
+  /// Any unspecified field will be replaced with an empty string.
+  Future<void> createNewAccount() async {
+    try {
+      String? imageLink;
+      final pickedImage = state.pickedImage;
+
+      final fileUploadService = FileUpload();
+      if (pickedImage != null) {
+        imageLink = await fileUploadService(pickedImage);
+      }
+
+      NostrService.instance.send.setCurrentUserMetaData(
+        metadata: UserMetaData(
+          name: nameController?.text ?? '',
+          picture: imageLink,
+          banner: null,
+          username: usernameController?.text ?? '',
+          about: bioController?.text ?? '',
+          displayName: nameController?.text.split(" ").join("-") ?? '',
+          nip05Identifier: '',
         ),
       );
+      emit(state.copyWith(authenticated: true, pickedImage: state.pickedImage));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString(), pickedImage: state.pickedImage));
+    } finally {
+      emit(state.copyWith(pickedImage: state.pickedImage));
+    }
+  }
+
+  /// Authenticates with an existent set key, works like a login functionality.
+  /// if the no key is set or an invalid one, it will will emit an error state.
+  Future<void> authenticateWithExistentKey() async {
+    final existentKey = existentKeyController?.text ?? '';
+    if (existentKey.isEmpty) {
+      emit(state.copyWith(
+        error: "pleaseEnterKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
 
       return;
     }
+
     if (!Nostr.instance.keysService.isValidPrivateKey(existentKey)) {
-      emit(
-        state.copyWith(
-          error: "invalidKey".tr(),
-          pickedImage: state.pickedImage,
-        ),
-      );
+      emit(state.copyWith(
+        error: "invalidKey".tr(),
+        pickedImage: state.pickedImage,
+      ));
 
       return;
     }
@@ -140,8 +145,15 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void signOut() {
-    LocalDatabase.instance.setPrivateKey(null);
+  /// Signs Out the current user if any is already authenticated
+  void signOut() async {
+    assert(
+      LocalDatabase.instance.getPrivateKey() != null,
+      "There is no point of calling signOut while no user is already authenticated",
+    );
+
+    await LocalDatabase.instance.setPrivateKey(null);
+
     emit(
       state.copyWith(
         isSignedOut: true,
@@ -150,22 +162,28 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void copyPrivateKey() {
-    try {
-      Clipboard.setData(
-        ClipboardData(text: LocalDatabase.instance.getPrivateKey() ?? ""),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          error: "couldNotCopyKey".tr(),
-          pickedImage: state.pickedImage,
-        ),
-      );
-    }
-  }
+  // void copyPrivateKey() {
+  //   try {
+  //     Clipboard.setData(
+  //       ClipboardData(text: LocalDatabase.instance.getPrivateKey() ?? ""),
+  //     );
+  //   } catch (e) {
+  //     emit(
+  //       state.copyWith(
+  //         error: "couldNotCopyKey".tr(),
+  //         pickedImage: state.pickedImage,
+  //       ),
+  //     );
+  //   }
+  // }
 
-  void gotoNext() {
+  /// Move to the next sign up step during the flow steps.
+  /// if the [pageController] is not initialized, it will be ignored.
+  /// if the current step page is the last one, it will be ignored.
+  void gotoNextSignUpStep({
+    Curve animationCurve = Curves.easeInOut,
+    Duration animationDuration = const Duration(milliseconds: 300),
+  }) {
     final internalPageController = pageController;
     if (internalPageController == null) {
       return;
@@ -177,13 +195,16 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (internalPageControllerPage.round() + 1 < signUpScreens.length) {
       internalPageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+        duration: animationDuration,
+        curve: animationCurve,
       );
     }
   }
 
-  void previousStep() {
+  /// Moves back to the previous step in the sign up flow.
+  /// if the [pageController] is not initialized, it will be ignored.
+  /// if the current step is the first one, it will be ignored.
+  void goBackToPreviousSignUpStep() {
     final internalPageController = pageController;
     if (internalPageController == null) {
       return;
@@ -201,10 +222,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> pickImageFromGallery() async {
+  /// Picks an image from the given [source], saving it in the urrent state
+  /// if any error occur, an error state will be handled.
+  Future<void> pickImage(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.gallery,
+        source: source,
       );
       if (pickedFile != null) {
         final image = File(pickedFile.path);
@@ -219,33 +242,23 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> pickImageFromCamera() async {
-    try {
-      final pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.camera,
-      );
-      if (pickedFile != null) {
-        final image = File(pickedFile.path);
-        emit(
-          state.copyWith(pickedImage: image),
-        );
-      }
-    } catch (e) {
-      emit(state.copyWith(error: e.toString()));
-    } finally {
-      emit(state.copyWith(pickedImage: state.pickedImage));
-    }
+  /// Picks an image from the gallery, see [pickImage] method.
+  Future<void> pickImageFromGallery() {
+    return pickImage(ImageSource.gallery);
+  }
+
+  /// Picks an image from the camera, see [pickImage] method.
+  Future<void> pickImageFromCamera() {
+    return pickImage(ImageSource.camera);
   }
 
   Future<void> _generatePrivateKeyAndSetInfoToNostr() async {
-    emit(state.copyWith(isGeneratingNewPrivateKey: true));
     final name = nameController?.text ?? '';
+
+    emit(state.copyWith(isGeneratingNewPrivateKey: true));
+
     if (name.isEmpty) {
-      emit(
-        state.copyWith(
-          isGeneratingNewPrivateKey: false,
-        ),
-      );
+      emit(state.copyWith(isGeneratingNewPrivateKey: false));
 
       throw "pleaseEnterName".tr();
     }
@@ -333,17 +346,11 @@ class AuthCubit extends Cubit<AuthState> {
         },
       ),
 
-      SignUpStepView(
+      SignUpStepView.withOnlyTextField(
         title: "whatsYourName".tr(),
         subtitle: "whateverYouPutHereWillBeUsedInYourProfile".tr(),
-        widgetBody: CustomTextField(
-          showClearButton: true,
-          controller: nameController,
-          // label: "yourName".tr(),
-          hint: "typeYourName".tr(),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        ),
+        controller: nameController,
+        hint: "typeYourName".tr(),
         nextViewAllower: () {
           final fullName = nameController?.text ?? '';
 
@@ -356,18 +363,11 @@ class AuthCubit extends Cubit<AuthState> {
           );
         },
       ),
-      SignUpStepView(
+      SignUpStepView.withOnlyTextField(
         title: "bio".tr(),
         subtitle: "addSomethingAboutYouForYourProfileCoupleLines".tr(),
-        widgetBody: CustomTextField(
-          showClearButton: true,
-          controller: bioController,
-          // label: "recommendedOneLines".tr(),
-          hint: "typeYourBio".tr(),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          isMultiline: true,
-        ),
+        controller: bioController,
+        hint: "typeYourBio".tr(),
         nextViewAllower: () {
           final bio = bioController?.text ?? '';
 
@@ -382,16 +382,11 @@ class AuthCubit extends Cubit<AuthState> {
           return Future.value(true);
         },
       ),
-      SignUpStepView(
+      SignUpStepView.withOnlyTextField(
         title: "addUsername".tr(),
         subtitle: "pickAUsername".tr(),
-        widgetBody: CustomTextField(
-          showClearButton: true,
-          controller: usernameController,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          hint: "typeYourUsername".tr(),
-        ),
+        controller: usernameController,
+        hint: "typeYourUsername".tr(),
         nextViewAllower: () {
           final username = usernameController?.text ?? '';
 
@@ -440,13 +435,13 @@ class AuthCubit extends Cubit<AuthState> {
           return Future.value(isPrivateKeyCopied);
         },
         onButtonTap: () async {
-          await authenticate();
+          await createNewAccount();
         },
       ),
-      SignUpStepView(
+      SignUpStepView.keyShowcase(
         title: "publicKey".tr(),
         subtitle: "publicKeySubtitle".tr(),
-        widgetBody: const KeySection(type: KeySectionType.publicKey),
+        keyType: KeySectionType.publicKey,
         nextViewAllower: () {
           return Future.value(true);
         },

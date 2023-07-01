@@ -14,7 +14,7 @@ class AboutMunawarahTitle extends StatelessWidget {
         SlideEffect(begin: Offset(0, 0.45)),
       ],
       child: Text(
-        "aboutMunawarahWe".tr(),
+        "inAllahWeTrust".tr(),
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.background,

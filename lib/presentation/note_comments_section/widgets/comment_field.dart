@@ -24,7 +24,7 @@ class CommentField extends StatelessWidget {
       children: <Widget>[
         CustomTextField(
           controller: cubit.commentTextController,
-          hint: "yourCommentHere".tr(),
+          hint: "newYourCommentHere".tr(),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 10,
             vertical: 15,

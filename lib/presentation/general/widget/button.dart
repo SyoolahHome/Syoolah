@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 class MunawarahButton extends StatelessWidget {
   const MunawarahButton({
@@ -132,6 +133,27 @@ class MunawarahButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  factory MunawarahButton.bottomSheetApply({
+    required String buttonText,
+    required Locale locale,
+    required bool isCurrentApplied,
+    required void Function() onTap,
+  }) {
+    return MunawarahButton(
+      onTap: () {
+        if (isCurrentApplied) {
+          return;
+        }
+
+        onTap();
+      },
+      isOnlyBorder: isCurrentApplied,
+      text: isCurrentApplied ? null : buttonText,
+      icon: isCurrentApplied ? FlutterRemix.check_line : null,
+      isSmall: true,
     );
   }
 }

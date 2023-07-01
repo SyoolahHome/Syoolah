@@ -18,18 +18,21 @@ class AboutMunawarahContent extends StatelessWidget {
         throw Exception("labelLarge is null");
       }
 
-      return Animate(
-        effects: const <Effect>[
-          FadeEffect(),
-          SlideEffect(begin: Offset(0, 0.45)),
-        ],
-        delay: Duration(
-          milliseconds: startingDurationMs +
-              (index * Animate.defaultDuration.inMilliseconds),
-        ),
-        child: Text(
-          current,
-          style: labelLarge.copyWith(fontWeight: FontWeight.w300),
+      return Container(
+        padding: EdgeInsets.only(bottom: 10),
+        child: Animate(
+          effects: const <Effect>[
+            FadeEffect(),
+            SlideEffect(begin: Offset(0, 0.45)),
+          ],
+          delay: Duration(
+            milliseconds: startingDurationMs +
+                (index * Animate.defaultDuration.inMilliseconds),
+          ),
+          child: Text(
+            current,
+            style: labelLarge.copyWith(fontWeight: FontWeight.w300),
+          ),
         ),
       );
     }

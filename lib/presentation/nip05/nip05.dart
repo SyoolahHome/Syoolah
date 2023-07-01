@@ -62,7 +62,7 @@ class Nip05Verification extends StatelessWidget {
                     ],
                     delay: animationDuration,
                     child: Text(
-                      "lightningAddressesSubtitle".tr(),
+                      "newLightningAddressesSubtitle".tr(),
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             fontWeight: FontWeight.w300,
                           ),
@@ -77,7 +77,7 @@ class Nip05Verification extends StatelessWidget {
                         // label: "yourLightAdress".tr(),
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 10),
-                        hint: "hintLightAdress".tr(),
+                        hint: "newHintLightAdress".tr(),
                       ),
                       Container(
                         margin: EdgeInsets.only(

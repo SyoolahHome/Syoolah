@@ -21,12 +21,3 @@ class ReportOption extends Equatable {
     );
   }
 }
-
-// source: https://github.com/nostr-protocol/nips/blob/master/56.md
-enum ReportType {
-  nudity,
-  profanity,
-  illegal,
-  spam,
-  impersonation,
-}

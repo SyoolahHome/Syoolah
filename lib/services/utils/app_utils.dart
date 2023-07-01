@@ -80,8 +80,3 @@ abstract class AppUtils {
     return context.setLocale(locale);
   }
 }
-
-enum AppLogoStyle {
-  white,
-  black,
-}

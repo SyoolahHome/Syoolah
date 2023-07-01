@@ -54,8 +54,8 @@ abstract class AlertsService {
 
   static Future showRemoveRelayDialog(
     BuildContext context, {
-    required void Function() onRemove,
-    required RelayConfiguration relayConfig,
+    required void Function(RelayConfiguration relay) onRemoveTap,
+    required RelayConfiguration relay,
   }) {
     return showDialog(
       context: context,
@@ -64,7 +64,7 @@ abstract class AlertsService {
 
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          title: HeadTitle(title: "removeRelay".tr(args: [relayConfig.url])),
+          title: HeadTitle(title: "removeRelay".tr(args: [relay.url])),
           contentPadding: const EdgeInsets.only(top: 16),
           actions: <Widget>[
             CustomTextButton(
@@ -77,7 +77,7 @@ abstract class AlertsService {
             CustomTextButton(
               text: "remove".tr(),
               onTap: () {
-                onRemove();
+                onRemoveTap(relay);
                 Navigator.of(context).pop();
               },
               textColor: DefaultTextStyle.of(context)

@@ -5,11 +5,6 @@ import 'package:ditto/services/database/local/local_database.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-enum HiddenPrivateKeySectionType {
-  privateKey,
-  nsecKey,
-}
-
 class HiddenPrivateKeySection extends StatelessWidget {
   const HiddenPrivateKeySection({
     super.key,

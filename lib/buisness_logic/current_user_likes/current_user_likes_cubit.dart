@@ -30,7 +30,10 @@ class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
         currentUserLikedPosts.stream.listen((event) {
       emit(
         state.copyWith(
-          currentUserLikedPosts: [...state.currentUserLikedPosts, event],
+          currentUserLikedPosts: [
+            event,
+            ...state.currentUserLikedPosts,
+          ],
         ),
       );
     });

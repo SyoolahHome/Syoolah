@@ -13,6 +13,7 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../buisness_logic/settings/settings_cubit.dart';
+import '../model/relay_configuration.dart';
 import '../model/report_option.dart';
 
 abstract class AppConfigs {
@@ -29,6 +30,11 @@ abstract class AppConfigs {
     'wss://relay.current.fyi',
     // 'wss://nostr.relayer.se',
   ];
+
+  static List<RelayConfiguration> get relaysConfigurations =>
+      relaysUrls.map((url) {
+        return RelayConfiguration(url: url);
+      }).toList();
 
   static final List<FeedCategory> categories = [
     FeedCategory(
@@ -309,13 +315,4 @@ abstract class AppConfigs {
 
   static const showPreviewMode = false;
   static const version = '1.0.0';
-}
-
-enum MunawarahTopics {
-  dua,
-  quran,
-  hadith,
-  sirah,
-  fiqh,
-  sharia,
 }

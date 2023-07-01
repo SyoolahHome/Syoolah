@@ -29,7 +29,7 @@ class CurrentUserPostsCubit extends Cubit<CurrentUserPostsState> {
         currentUserPostsStream.stream.listen((event) {
       emit(
         state.copyWith(
-          currentUserPosts: [...state.currentUserPosts, event],
+          currentUserPosts: [event, ...state.currentUserPosts],
         ),
       );
     });

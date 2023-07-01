@@ -56,7 +56,7 @@ class CustomAppBar extends PreferredSize {
                   "$commentsLength",
                   key: ValueKey(commentsLength),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.background,
                         fontWeight: FontWeight.bold,
                       ),
                 ),

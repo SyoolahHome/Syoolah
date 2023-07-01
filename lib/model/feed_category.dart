@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_configs.dart';
+import '../constants/app_enums.dart';
 
 class FeedCategory extends Equatable {
   final String name;
@@ -28,6 +29,17 @@ class FeedCategory extends Equatable {
     required this.path,
     required this.enumValue,
   });
+
+  FeedCategory toggleSelected(bool value) {
+    return FeedCategory(
+      name: this.name,
+      description: this.description,
+      icon: this.icon,
+      isSelected: value,
+      path: this.path,
+      enumValue: this.enumValue,
+    );
+  }
 
   FeedCategory copyWith({
     String? name,

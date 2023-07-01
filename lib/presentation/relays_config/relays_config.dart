@@ -20,37 +20,38 @@ class RelaysConfig extends StatelessWidget {
         builder: (context, state) {
           return SingleChildScrollView(
             child: Column(
-                children: AnimateList(
-              interval: 100.ms,
-              effects: [
-                const FadeEffect(),
-                const SlideEffect(
-                  begin: Offset(0, 0.5),
-                ),
-              ],
-              children: <Widget>[
-                MarginedBody(
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(height: height * 2),
-                      HeadTitle(title: "manageRelays".tr()),
-                      const SizedBox(height: height * 2),
-                    ],
+              children: AnimateList(
+                interval: 100.ms,
+                effects: <Effect>[
+                  const FadeEffect(),
+                  const SlideEffect(
+                    begin: Offset(0, 0.5),
                   ),
-                ),
-                ...List.generate(
-                  state.relaysConfigurations.length,
-                  (index) {
-                    final current = state.relaysConfigurations[index];
+                ],
+                children: <Widget>[
+                  MarginedBody(
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(height: height * 2),
+                        HeadTitle(title: "newManageRelays".tr()),
+                        const SizedBox(height: height * 2),
+                      ],
+                    ),
+                  ),
+                  ...List.generate(
+                    state.relaysConfigurations.length,
+                    (index) {
+                      final current = state.relaysConfigurations[index];
 
-                    return RelayConfigTile(
-                      index: index,
-                      relayConfig: current,
-                    );
-                  },
-                ),
-              ],
-            ),),
+                      return RelayConfigTile(
+                        index: index,
+                        relayConfig: current,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
