@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
                 height: 50,
                 child: MunawarahButton(
                   onTap: () {
-                    cubit.handleExistentKey();
+                    cubit.authenticateWithExistentKey();
                   },
                   text: "login".tr(),
                 ),

@@ -8,6 +8,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../constants/app_enums.dart';
+
 part 'private_key_gen_success_state.dart';
 
 class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {

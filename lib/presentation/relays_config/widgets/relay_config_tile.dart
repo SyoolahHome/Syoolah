@@ -21,8 +21,8 @@ class RelayConfigTile extends StatelessWidget {
     return InkWell(
       onLongPress: () {
         Routing.appCubit.showRemoveRelayDialog(
-          context: context,
-          relayConfig: relayConfig,
+          context,
+          relay: relayConfig,
         );
       },
       splashFactory: NoSplash.splashFactory,
@@ -67,7 +67,7 @@ class RelayConfigTile extends StatelessWidget {
               scale: 0.65,
               child: Switch(
                 onChanged: (value) {
-                  Routing.appCubit.changeRelayState(
+                  Routing.appCubit.selectRelay(
                     index: index,
                     isActive: value,
                   );

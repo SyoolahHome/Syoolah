@@ -12,7 +12,10 @@ class AddRelayIcon extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       onPressed: () {
-        Routing.appCubit.showAddRelaySheet(context);
+        Routing.appCubit.showAddRelaySheet(
+          context,
+          onAdd: Routing.appCubit.addRelay,
+        );
       },
       icon: const Icon(
         FlutterRemix.add_line,

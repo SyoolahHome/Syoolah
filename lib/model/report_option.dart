@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../constants/app_enums.dart';
+
 class ReportOption extends Equatable {
   ReportOption({
     this.isSelected = false,

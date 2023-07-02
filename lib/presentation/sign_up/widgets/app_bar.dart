@@ -38,7 +38,7 @@ class CustomAppBar extends PreferredSize {
               if (state.currentStepIndex == 1) {
                 Navigator.of(context).pop();
               } else {
-                cubit.previousStep();
+                cubit.goBackToPreviousSignUpStep();
               }
             },
             icon: Icon(

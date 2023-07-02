@@ -7,6 +7,7 @@ import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constants/app_enums.dart';
 import '../general/pattern_widget.dart';
 
 class PrivateKey extends StatelessWidget {

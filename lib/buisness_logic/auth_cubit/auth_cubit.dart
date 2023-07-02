@@ -21,6 +21,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../constants/app_enums.dart';
 import '../../presentation/privacy/privacy.dart';
+import '../../services/utils/app_utils.dart';
 
 part 'auth_state.dart';
 
@@ -162,20 +163,9 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  // void copyPrivateKey() {
-  //   try {
-  //     Clipboard.setData(
-  //       ClipboardData(text: LocalDatabase.instance.getPrivateKey() ?? ""),
-  //     );
-  //   } catch (e) {
-  //     emit(
-  //       state.copyWith(
-  //         error: "couldNotCopyKey".tr(),
-  //         pickedImage: state.pickedImage,
-  //       ),
-  //     );
-  //   }
-  // }
+  void copyPrivateKey() {
+    AppUtils.copy(LocalDatabase.instance.getPrivateKey() ?? "");
+  }
 
   /// Move to the next sign up step during the flow steps.
   /// if the [pageController] is not initialized, it will be ignored.

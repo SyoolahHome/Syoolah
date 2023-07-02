@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../constants/abstractions/new_post_asset_widget.dart';
+import '../../../constants/abstractions/abstractions.dart';
 
 class PostYoutube extends NewPostAssetWidget {
   const PostYoutube({super.key});

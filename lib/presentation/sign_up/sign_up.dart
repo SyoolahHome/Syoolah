@@ -45,7 +45,7 @@ class SignUp extends StatelessWidget {
           if (index == 0) {
             return true;
           }
-          cubit.previousStep();
+          cubit.goBackToPreviousSignUpStep();
           return false;
         },
         child: MarginedBody(
@@ -164,7 +164,7 @@ class SignUp extends StatelessWidget {
                           // final val = Navigator.of(context)
                           //     .pushNamed(Paths.successAccountMade);
                         } else {
-                          cubit.gotoNext();
+                          cubit.gotoNextSignUpStep();
                         }
                       }
                     }

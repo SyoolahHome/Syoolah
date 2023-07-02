@@ -32,7 +32,7 @@ class ChatModuleItem extends Equatable {
     required String subtitle,
   }) {
     return ChatModuleItem(
-      title: "Beginner" ??  ,
+      title: "Beginner",
       icon: icon,
       instruction: instruction,
       recommendedQuestions: recommendedQuestions,
@@ -62,12 +62,10 @@ class ChatModuleItem extends Equatable {
   }) {
     return ChatModuleItem(
       title: "Advanced" /* ?? "chatInstructorTitle".tr() */,
-          
       icon: icon,
       instruction: instruction,
       recommendedQuestions: recommendedQuestions,
       subtitle: subtitle,
     );
   }
-
-  }
+}

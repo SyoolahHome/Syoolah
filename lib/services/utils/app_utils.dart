@@ -6,6 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../constants/app_enums.dart';
+
 abstract class AppUtils {
   static int chatUserIdCounter = 0;
   static int chatSystemIdCounter = 0;
