@@ -298,15 +298,17 @@ class AuthCubit extends Cubit<AuthState> {
           ),
         );
       });
+
     nameController = TextEditingController();
     bioController = TextEditingController();
     usernameController = TextEditingController();
+    existentKeyController = TextEditingController();
 
     if (kDebugMode) {
       nameController?.text = 'test name';
       bioController?.text = 'test bio';
     }
-    existentKeyController = TextEditingController();
+
     nameFocusNode = FocusNode();
   }
 

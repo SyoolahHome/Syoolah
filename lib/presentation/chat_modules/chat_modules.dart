@@ -10,12 +10,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisness_logic/chat_modules/chat_modules_cubit.dart';
+import '../../constants/abstractions/abstractions.dart';
 import '../../services/utils/paths.dart';
 import '../general/pattern_widget.dart';
 import '../general/widget/bottom_sheet_title_with_button.dart';
 import '../general/widget/button.dart';
 
-class ChatModules extends StatelessWidget {
+class ChatModules extends BottomBarScreen {
   const ChatModules({super.key});
 
   @override

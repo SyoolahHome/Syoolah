@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../constants/abstractions/abstractions.dart';
+
 @immutable
 class BottomBarItem {
-  final Widget screen;
+  final BottomBarScreen screen;
   final String label;
   final IconData icon;
   final IconData selectedIcon;

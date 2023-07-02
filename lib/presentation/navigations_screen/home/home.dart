@@ -12,7 +12,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class Home extends StatelessWidget {
+import '../../../constants/abstractions/abstractions.dart';
+
+class Home extends BottomBarScreen {
   const Home({super.key});
   @override
   Widget build(BuildContext context) {

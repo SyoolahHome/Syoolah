@@ -24,4 +24,50 @@ class ChatModuleItem extends Equatable {
         instruction,
         recommendedQuestions,
       ];
-}
+
+  factory ChatModuleItem.beginner({
+    required IconData icon,
+    required String instruction,
+    required List<String> recommendedQuestions,
+    required String subtitle,
+  }) {
+    return ChatModuleItem(
+      title: "Beginner" ??  ,
+      icon: icon,
+      instruction: instruction,
+      recommendedQuestions: recommendedQuestions,
+      subtitle: subtitle,
+    );
+  }
+
+  factory ChatModuleItem.intermediate({
+    required IconData icon,
+    required String instruction,
+    required List<String> recommendedQuestions,
+    required String subtitle,
+  }) {
+    return ChatModuleItem(
+      title: 'Intermediate' /* ?? "chatInstructorTitle".tr() */,
+      icon: icon,
+      instruction: instruction,
+      recommendedQuestions: recommendedQuestions,
+      subtitle: subtitle,
+    );
+  }
+  factory ChatModuleItem.advanced({
+    required IconData icon,
+    required String instruction,
+    required List<String> recommendedQuestions,
+    required String subtitle,
+  }) {
+    return ChatModuleItem(
+      title: "Advanced" /* ?? "chatInstructorTitle".tr() */,
+          
+      icon: icon,
+      instruction: instruction,
+      recommendedQuestions: recommendedQuestions,
+      subtitle: subtitle,
+    );
+  }
+
+  }

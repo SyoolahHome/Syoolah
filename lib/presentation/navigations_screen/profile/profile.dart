@@ -16,11 +16,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../constants/abstractions/abstractions.dart';
 import '../../general/widget/title.dart';
 import '../../private_succes/widgets/key_section.dart';
 import 'widgets/pub_key_section.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends BottomBarScreen {
   const Profile({super.key});
 
   @override

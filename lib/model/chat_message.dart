@@ -48,4 +48,43 @@ class ChatMessage extends Equatable {
       content: message,
     );
   }
+
+  factory ChatMessage.user({
+    required String message,
+    required String id,
+    DateTime? createdAt,
+  }) {
+    return ChatMessage(
+      message: message,
+      role: OpenAIChatMessageRole.user,
+      id: id,
+      createdAt: createdAt ?? DateTime.now(),
+    );
+  }
+  factory ChatMessage.system({
+    required String message,
+    required String id,
+    DateTime? createdAt,
+  }) {
+    return ChatMessage(
+      message: message,
+      role: OpenAIChatMessageRole.system,
+      id: id,
+      createdAt: createdAt ?? DateTime.now(),
+    );
+  }
+
+  factory ChatMessage.assistant({
+    required String message,
+    required String id,
+    DateTime? createdAt,
+  }) {
+    return ChatMessage(
+      message: message,
+      role: OpenAIChatMessageRole.assistant,
+      id: id,
+      createdAt: createdAt ?? DateTime.now(),
+    );
+    ;
+  }
 }

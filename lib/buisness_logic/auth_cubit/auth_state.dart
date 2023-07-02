@@ -1,14 +1,33 @@
 part of 'auth_cubit.dart';
 
 @immutable
+
+/// {@template auth_state}
+/// The state if [AuthCubit].
+/// {@endtemplate}
 class AuthState extends Equatable {
+  /// Weither a user is authenticated.
   final bool authenticated;
+
+  /// The error String if it exists
   final String? error;
+
+  /// Weither is generaing anew Nostr key pair for the user.
   final bool isGeneratingNewPrivateKey;
+
+  /// Weither it is saving the existent key for the user.
   final bool isSavingExistentKey;
+
+  /// Weither the user is signed out.
   final bool isSignedOut;
+
+  /// The current Sign up flow step's index.
   final int currentStepIndex;
+
+  /// The picked image for the user avatar.
   final File? pickedImage;
+
+  /// The generated private key for the user, since it is the source of all others.
   final String privateKey;
 
   @override
@@ -23,6 +42,7 @@ class AuthState extends Equatable {
         privateKey,
       ];
 
+  /// {@macro auth_state}
   const AuthState({
     this.pickedImage,
     this.currentStepIndex = 1,
@@ -34,6 +54,7 @@ class AuthState extends Equatable {
     this.privateKey = "",
   });
 
+  /// {@macro auth_state}
   AuthState copyWith({
     bool? isGeneratingNewPrivateKey,
     String? error,
@@ -57,9 +78,12 @@ class AuthState extends Equatable {
     );
   }
 
+  /// {@macro auth_state}
   factory AuthState.initial() {
     return AuthInitial();
   }
+
+  /// {@macro auth_state}
   AuthState copyWithNullPickedImage() {
     return AuthState(
       pickedImage: null,
@@ -74,6 +98,7 @@ class AuthState extends Equatable {
   }
 }
 
+/// {@macro auth_state}
 class AuthInitial extends AuthState {
   const AuthInitial();
 }

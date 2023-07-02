@@ -15,6 +15,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../buisness_logic/settings/settings_cubit.dart';
 import '../model/relay_configuration.dart';
 import '../model/report_option.dart';
+import 'app_enums.dart';
 
 abstract class AppConfigs {
   static const relaysUrls = [
@@ -308,6 +309,27 @@ abstract class AppConfigs {
     'What is the Islamic stance on alcohol and drugs?',
     'What is the significance of the Friday prayer in Islam?',
     'What is the Islamic view on democracy and secularism?',
+  ];
+
+  static final beginnerRecommendedQuestions = const <String>[
+    "What is islam?",
+    "What is the message of islam?",
+    "What is the message of the prophet?",
+    "What are the five pillars of islam?",
+    "What is the name of the last prophet?",
+    "How many prophets are there in islam?",
+  ];
+
+  static final intermediateRecommendQuestions = const <String>[
+    "Who is the prophet of islam?",
+    "What is the name of the last prophet?",
+    "What is Sirah?",
+    "What was the message of the prophet?",
+    "Who is the prophet's wifes?",
+  ];
+
+  static final advancedRecommendQuestions = const <String>[
+    // TODO:
   ];
 
   static List<ReportOption> reportOptions =

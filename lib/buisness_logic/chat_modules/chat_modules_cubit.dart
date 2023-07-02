@@ -6,26 +6,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
+import '../../constants/app_configs.dart';
+
 part 'chat_modules_state.dart';
 
+/// {@template chat_modules_cubit}
+/// The responsible cubit for the chat modules UI that will enable to select and configure the Imam
+/// {@endtemplate}
 class ChatModulesCubit extends Cubit<ChatModulesState> {
+  /// The responsible controller for the chat modules UI that will respond to the [state.sliderValue] to show it.
   PageController? pageController;
 
+  /// {@macro chat_modules_cubit}
   ChatModulesCubit() : super(ChatModulesInitial()) {
-    pageController = PageController(
-      initialPage: state.sliderValue.toInt(),
-      viewportFraction: 0.7,
-    );
+    _init();
   }
 
+  @override
   Future<void> close() {
-    pageController!.dispose();
+    pageController?.dispose();
+
     return super.close();
   }
 
+  /// A list of available and allowed chat modules that will be shown in the UI.
   List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
-        ChatModuleItem(
-          title: "Beginner" /* ?? "chatInstructorTitle".tr() */,
+        ChatModuleItem.beginner(
           subtitle:
               "This will guide you with all information about islam" /* ??
               "chatInstructorSubtitle".tr() */
@@ -33,17 +39,9 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           icon: FlutterIslamicIcons.solidKowtow,
           instruction:
               "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions: const [
-            "What is islam?",
-            "What is the message of islam?",
-            "What is the message of the prophet?",
-            "What are the five pillars of islam?",
-            "What is the name of the last prophet?",
-            "How many prophets are there in islam?",
-          ],
+          recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
         ),
-        ChatModuleItem(
-          title: 'Intermediate' /* ?? "chatInstructorTitle".tr() */,
+        ChatModuleItem.intermediate(
           subtitle:
               "This will guide you with all information about Sirah of Prophet Muhammad (PBUH)" /* ??
                   "chatInstructorSubtitle".tr() */
@@ -51,25 +49,18 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           icon: FlutterIslamicIcons.solidMosque,
           instruction:
               "You are an islamic imam who will guide with all information about Sirah of Prophet Muhammad (PBUH)",
-          recommendedQuestions: const [
-            "Who is the prophet of islam?",
-            "What is the name of the last prophet?",
-            "What is Sirah?",
-            "What was the message of the prophet?",
-            "Who is the prophet's wifes?",
-          ],
+          recommendedQuestions: AppConfigs.intermediateRecommendQuestions,
         ),
-        ChatModuleItem(
-          title: "Advanced" /* ?? "chatInstructorTitle".tr() */,
+        ChatModuleItem.advanced(
           subtitle: "chatInstructorSubtitle".tr(),
           icon: FlutterIslamicIcons.solidQuran2,
           instruction:
               "You are an islamic imam who will guide with all information about islam",
-          recommendedQuestions:
-              List.generate(7, (index) => "This is the question number $index"),
+          recommendedQuestions: AppConfigs.advancedRecommendQuestions,
         ),
       ];
 
+  /// emit the new slider state to be shown in the UI.
   void changeSliderValue(double value) {
     emit(state.copyWith(sliderValue: value));
 
@@ -77,6 +68,13 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
       value.toInt(),
       duration: Animate.defaultDuration,
       curve: Curves.easeInOut,
+    );
+  }
+
+  void _init() {
+    pageController = PageController(
+      initialPage: state.sliderValue.toInt(),
+      viewportFraction: 0.7,
     );
   }
 }

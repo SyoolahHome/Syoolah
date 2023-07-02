@@ -17,17 +17,29 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 part 'chat_state.dart';
 
+/// {@template chat_cubit}
+/// The responsible cubit for the chat chat Imam functionality & UI
+/// {@endtemplate}
 class ChatCubit extends Cubit<ChatState> {
+  /// The AI instruction (OpenAI system instruction) that will be used to inform and instruct the Imam to respond based on it.
   final String instruction;
+
+  /// The responsible controller for the user input where the user can ask.
   TextEditingController? userMessageController;
+
+  /// The focus node associated with the text field that uses the [userMessageController].
   FocusNode? focusNode;
 
+  /// {@macro chat_cubit}
   ChatCubit({
     required this.instruction,
-  }) : super(ChatInitial()) {
+  }) : super(ChatState.initial()) {
     _init();
   }
 
+  /// Sends a new message with the user input that contains the question, in order to start the functionality and start the AI Imam to respond to it, the message will be added to the [state.messages].
+  /// if the [userMessageController] is not initialized, it will be ignored.
+  /// when this method is called, the text field will lose the focus using the [focusNode].
   void sendMessageByCurrentUser() {
     final controller = userMessageController;
     assert(state.currentHint != null || controller?.text != null);
@@ -46,35 +58,39 @@ class ChatCubit extends Cubit<ChatState> {
     final currentMessagesList = state.messages;
     final newMessageId = AppUtils.getChatUserId();
 
-    final newMessage = ChatMessage(
+    final newMessage = ChatMessage.user(
       message: userMessage,
-      role: OpenAIChatMessageRole.user,
       id: newMessageId,
       createdAt: DateTime.now(),
     );
 
-    final newMessagesList = [...currentMessagesList, newMessage];
+    final newMessagesList = <ChatMessage>[
+      ...currentMessagesList,
+      newMessage,
+    ];
 
     emit(state.copyWith(messages: newMessagesList));
 
     controller.clear();
   }
 
+  /// Sends the message of the system which all will rely on it, basically the [instruction].
   void _sendMessageBySystem(String message) {
     final currentMessagesList = state.messages;
 
     final newMessageId = AppUtils.getChatSystemId();
 
+    var systemMessage = ChatMessage.system(
+      message: "",
+      id: newMessageId,
+      createdAt: DateTime.now(),
+    );
+
     emit(
       state.copyWith(
-        messages: [
+        messages: <ChatMessage>[
           ...currentMessagesList,
-          ChatMessage(
-            message: "",
-            role: OpenAIChatMessageRole.system,
-            id: newMessageId,
-            createdAt: DateTime.now(),
-          ),
+          systemMessage,
         ],
       ),
     );
@@ -91,6 +107,7 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
+  ///
   void emitMessageContentForSystemMessageWithId(
     String systemChatMessageId,
     String newValue,

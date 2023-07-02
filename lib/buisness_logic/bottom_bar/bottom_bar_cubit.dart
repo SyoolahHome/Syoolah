@@ -11,9 +11,15 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import '../../presentation/dms/dms.dart';
 
 class BottomBarCubit extends Cubit<int> {
+  /// {@template _shouldShowLeadingOnProfile}
+  /// Weither to show a leading back icon button on the profile screen.
+  /// {@endtemplate}
   bool _shouldShowLeadingOnProfile = false;
+
+  /// {@macro _shouldShowLeadingOnProfile}
   bool get shouldShowLeadingOnProfile => _shouldShowLeadingOnProfile;
 
+  /// A List of items to be shown and handled by the bottom bar in the UI..
   List<BottomBarItem> get items => <BottomBarItem>[
         BottomBarItem(
           screen: const Home(),
@@ -58,6 +64,7 @@ class BottomBarCubit extends Cubit<int> {
     emit(indexOfProfile);
   }
 
+  /// Emits a new state on the tapped bottom bar item and reflects changes in the UI.
   void onItemTapped(
     int index, {
     bool shouldShowLeadingOnProfile = false,

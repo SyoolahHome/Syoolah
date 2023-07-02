@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class DMS extends StatelessWidget {
+import '../../constants/abstractions/abstractions.dart';
+
+class DMS extends BottomBarScreen {
   const DMS({super.key});
 
   @override
