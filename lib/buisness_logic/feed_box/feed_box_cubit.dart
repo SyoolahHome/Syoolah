@@ -16,30 +16,45 @@ import '../../services/nostr/nostr_service.dart';
 
 part 'feed_box_state.dart';
 
+/// {@template feed_box_cubit}
+/// The responsible cubit about the feed box that is shown at the home page.
+/// {@endtemplate}
 class FeedBoxCubit extends Cubit<FeedBoxState> {
-  FeedBoxCubit() : super(FeedBoxInitial());
+  FeedBoxCubit() : super(FeedBoxState.initial());
 
+  /// highlights a feed box when it is pressed by a user
   void highlightBox() {
     emit(const FeedBoxState(isHighlighted: true));
   }
 
+  /// unhighlight a feed box when it is not pressed by a user.
   void unHighlightBox() {
     emit(const FeedBoxState());
   }
 
+  /// Triggers tha bottom sheet that contains options related to feed box.
   void showOptions(
     BuildContext context, {
     required Note note,
     required VoidCallback onCommentsSectionTapped,
   }) {
     final cubit = context.read<GlobalCubit>();
-    final publicKey = Nostr.instance.keysService
-        .derivePublicKey(privateKey: LocalDatabase.instance.getPrivateKey()!);
+    final userPrivateKey = LocalDatabase.instance.getPrivateKey();
+
+    if (userPrivateKey == null) {
+      return;
+    }
+
+    final publicKey = Nostr.instance.keysService.derivePublicKey(
+      privateKey: userPrivateKey,
+    );
 
     final isFollowed = cubit.isNoteOwnerFollowed(note.event.pubkey);
+
     BottomSheetService.showNoteCardSheet(
       context,
-      options: [
+      // TODO: move those options toa separated class, file.
+      options: <BottomSheetOption>[
         if (note.event.pubkey != publicKey)
           BottomSheetOption(
             title: isFollowed ? "unfollow".tr() : "follow".tr(),

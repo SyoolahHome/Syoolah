@@ -7,10 +7,17 @@ import 'package:equatable/equatable.dart';
 
 part 'current_user_likes_state.dart';
 
+/// {@template current_user_likes_cubit}
+/// The responsible cubit about the current user likes
+/// {@endtemplate}
 class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
+  /// The Nostr stream that will receive like events.
   NostrEventsStream currentUserLikedPosts;
+
+  /// The subscription that will manage the listening to the [currentUserLikedPosts.stream].
   StreamSubscription<NostrEvent>? _currentUserLikedPostsSubscription;
 
+  /// {@macro current_user_likes_cubit}
   CurrentUserLikesCubit({
     required this.currentUserLikedPosts,
   }) : super(CurrentUserLikesInitial()) {
@@ -25,17 +32,16 @@ class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
     return super.close();
   }
 
+  /// Insert new event state to ours reflecting changes to UI.
   void _handleCurrentUserLikedPosts() {
     _currentUserLikedPostsSubscription =
         currentUserLikedPosts.stream.listen((event) {
-      emit(
-        state.copyWith(
-          currentUserLikedPosts: [
-            event,
-            ...state.currentUserLikedPosts,
-          ],
-        ),
-      );
+      final newList = <NostrEvent>[
+        event,
+        ...state.currentUserLikedPosts,
+      ];
+
+      emit(state.copyWith(currentUserLikedPosts: newList));
     });
   }
 }

@@ -8,28 +8,52 @@ import 'package:equatable/equatable.dart';
 
 part 'global_state.dart';
 
+/// {@template global_cubit}
+/// The responsible cubit for some related global funtionalities that are needed in many places..
+/// {@endtemplate}
 class GlobalCubit extends Cubit<GlobalState> {
+  /// The nostr stream for the user following.
   NostrEventsStream currentUserFollowing;
+
+  /// The nostr stream for the user followers.
   NostrEventsStream currentUserFollowers;
 
+  /// The subscription that is used to listen to [currentUserFollowing.stream].
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
+
+  /// The subscription that is used to listen to [currentUserFollowers.stream].
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
 
+  /// {@macro global_cubit}
   GlobalCubit({
     required this.currentUserFollowing,
     required this.currentUserFollowers,
-  }) : super(GlobalInitial()) {
+  }) : super(GlobalState.initial()) {
     _handleCurrentUserFollowers();
     _handleCurrentUserFollowing();
   }
 
-  bool isNoteOwnerFollowed(String pubkey) {
-    return state.currentUserFollowing?.tags
-            .map((elem) => elem[1])
-            .contains(pubkey) ??
-        false;
+  @override
+  Future<void> close() {
+    currentUserFollowing.close();
+    currentUserFollowers.close();
+
+    _currentUserFollowersSubscription?.cancel();
+    _currentUserFollowingSubscription?.cancel();
+
+    return super.close();
   }
 
+  /// Weither the user with the [pubKey] is followed or not.
+  bool isNoteOwnerFollowed(String pubkey) {
+    dynamic tags = state.currentUserFollowing?.tags;
+    tags = tags.map((elem) => elem[1]);
+
+    return tags.contains(pubkey);
+  }
+
+  /// Follows the user which have the given [pubKey] by the current authenticated user.
+  /// if no user is authnticated, this method will do nothing.
   void followUser(String pubKey) {
     NostrEvent newEvent;
 
@@ -46,7 +70,7 @@ class GlobalCubit extends Cubit<GlobalState> {
         kind: nostrEventContactListKind,
         content: "",
         keyPairs: NostrKeyPairs(private: currentUserPrivateKey),
-        tags: [
+        tags: <List<String>>[
           ["p", pubKey],
         ],
       );
@@ -57,7 +81,7 @@ class GlobalCubit extends Cubit<GlobalState> {
       }
 
       newEvent = currentUserFollowing.copyWith(
-        tags: [
+        tags: <List<String>>[
           ...currentUserFollowing.tags,
           ["p", pubKey],
         ],
@@ -67,21 +91,24 @@ class GlobalCubit extends Cubit<GlobalState> {
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
+  /// Removes and unfollow a followed user with the given [pubKey]
   void unfollowUser(String pubKey) {
     final currentUserFollowing = state.currentUserFollowing;
     if (currentUserFollowing == null) {
       return;
     }
 
+    var tags = currentUserFollowing.tags;
+    tags = tags.where((element) => element[1] != pubKey).toList();
+
     NostrEvent newEvent = currentUserFollowing.copyWith(
-      tags: [
-        ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
-      ],
+      tags: tags,
     );
 
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
+  /// A Wrapper to handling follow functionality, if a user is not followed, this will call the [followUser] method, otherwise it will [unfollowUser].
   void handleFollowButtonTap(String pubkey) {
     if (isNoteOwnerFollowed(pubkey)) {
       unfollowUser(pubkey);
@@ -90,17 +117,7 @@ class GlobalCubit extends Cubit<GlobalState> {
     }
   }
 
-  @override
-  Future<void> close() {
-    currentUserFollowing.close();
-    currentUserFollowers.close();
-
-    _currentUserFollowersSubscription?.cancel();
-    _currentUserFollowingSubscription?.cancel();
-
-    return super.close();
-  }
-
+  ///  Emits the new followers event
   void _handleCurrentUserFollowers() {
     _currentUserFollowersSubscription = currentUserFollowers.stream.listen(
       (event) {
@@ -109,6 +126,7 @@ class GlobalCubit extends Cubit<GlobalState> {
     );
   }
 
+  ///  Emits the new following event
   void _handleCurrentUserFollowing() {
     _currentUserFollowingSubscription = currentUserFollowing.stream.listen(
       (event) {
