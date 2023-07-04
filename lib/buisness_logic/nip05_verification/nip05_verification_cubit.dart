@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
@@ -12,40 +13,55 @@ import '../../../services/nostr/nostr_service.dart';
 
 part 'nip05_verification_state.dart';
 
+/// {@template nip_05_verification_cubit}
+/// The responsible cubit about the Lightning adresses (nip 05) verification.
+/// {@endtemplate}
 class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
+  /// The text field controller that will take the adress or identifier to continue the verification process.
   TextEditingController? nip05Controller;
+
+  /// The Nostr stream of the current user metadata.
   NostrEventsStream currentUserMetadata;
 
+  /// The subscription of the [currentUserMetadata.stream].
+  StreamSubscription? currentUserMetadataSubscription;
+
+  /// {@macro nip_05_verification_cubit}
   Nip05VerificationCubit({
     required this.currentUserMetadata,
-  }) : super(Nip05VerificationInitial()) {
+  }) : super(Nip05VerificationState.initial()) {
     _init();
   }
 
   @override
   Future<void> close() {
     nip05Controller?.dispose();
-
+    currentUserMetadataSubscription?.cancel();
     return super.close();
   }
 
+  /// Starts & runs the verification process with the input of [nip05Controller].
+  /// if the the input is not a valid adress, an error state will be emitted.
+  /// if there is not existent initialuser metadata, the method will emit an error state as well, since we will need to update the profile with the new existent user metadata but with the verified field marked.
+  /// The [onSuccess] will be called if the verification process is successful.
   Future<void> handleNip05Verification({
     required VoidCallback onSuccess,
   }) async {
-    bool isVerified = await verifyInputNip05();
+    bool isVerified = await _verifyInputNip05();
     final currentUserMetadata = state.currentUserMetadata;
 
     if (isVerified &&
         nip05Controller!.text.isNotEmpty &&
         currentUserMetadata != null) {
       _updateCurrentUserProfileWithNip05(state.currentUserMetadata!);
+      onSuccess.call();
     } else {
       emit(state.copyWith(error: "invalidLightAdress".tr()));
       emit(state.copyWith(error: null));
     }
   }
 
-  Future<bool> verifyInputNip05() {
+  Future<bool> _verifyInputNip05() {
     final privateKey = LocalDatabase.instance.getPrivateKey();
     if (privateKey == null) {
       return Future.value(false);
@@ -83,10 +99,11 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
 
   void _init() {
     nip05Controller = TextEditingController();
-    currentUserMetadata.stream.listen((event) {
-      UserMetaData metadata = UserMetaData.fromJson(
-        jsonDecode(event.content) as Map<String, dynamic>,
-      );
+
+    currentUserMetadataSubscription =
+        currentUserMetadata.stream.listen((event) {
+      final decoded = jsonDecode(event.content) as Map<String, dynamic>;
+      final metadata = UserMetaData.fromJson(decoded);
 
       emit(state.copyWith(currentUserMetadata: metadata));
     });

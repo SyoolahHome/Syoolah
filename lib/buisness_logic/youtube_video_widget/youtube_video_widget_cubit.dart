@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
 import '../../presentation/youtube_video_full_screen/youtube_video_full_screen.dart';
 
-part 'youtube_video_widget_state.dart';
-
-class YoutubeVideoWidgetCubit extends Cubit<YoutubeVideoWidgetState> {
+/// {@template youtube_video_widget_cubit}
+/// The responsible cubit about youtube video widget that is used to preview a video in the app.
+/// {@endtemplate}
+class YoutubeVideoWidgetCubit extends Cubit<Null> {
+  // The youtube video url.
   final String url;
+
+  /// The youtube video controller.
   YoutubePlayerController? controller;
 
-  YoutubeVideoWidgetCubit(this.url) : super(YoutubeVideoWidgetInitial()) {
-    controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(url)!,
-      flags: const YoutubePlayerFlags(autoPlay: false),
-    );
+  /// {@macro youtube_video_widget_cubit}
+  YoutubeVideoWidgetCubit(this.url) : super(null) {
+    _init();
   }
 
+  /// TODO: review this feature.
+  /// Opens the youtube video widget in full screen mode.
   void fullScreen(BuildContext context) async {
     final navigator = Navigator.of(context);
 
@@ -37,5 +39,12 @@ class YoutubeVideoWidgetCubit extends Cubit<YoutubeVideoWidgetState> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+
+  void _init() {
+    controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(url)!,
+      flags: const YoutubePlayerFlags(autoPlay: false),
+    );
   }
 }

@@ -11,27 +11,54 @@ import 'package:equatable/equatable.dart';
 
 part 'note_card_state.dart';
 
+/// The responsible cubit about the note/post card.
+/// {@endtemplate}
 class NoteCardCubit extends Cubit<NoteCardState> {
+  // The note associated with this instance of cubit.
   Note note;
+
+  /// The Nostr Stream for the current user metadata.
   NostrEventsStream currentUserMetadataStream;
+
+  /// The Nostr Stream for the note likes.
   NostrEventsStream noteLikesStream;
 
+  /// The subscription for the [currentUserMetadataStream.stream].
   StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
+
+  /// The subscription for the [noteLikesStream.stream].
   StreamSubscription<NostrEvent>? _noteLikesSubscription;
 
+  /// {@macro note_card_cubit}
   NoteCardCubit({
     required this.note,
     required this.currentUserMetadataStream,
     required this.noteLikesStream,
-  }) : super(NoteCardInitial()) {
+  }) : super(NoteCardState.initial()) {
+    _init();
+  }
+
+  void _init() {
     _handleStreams();
   }
 
+  @override
+  Future<void> close() {
+    currentUserMetadataStream.close();
+    noteLikesStream.close();
+    _currentUserMetadataSubscription?.cancel();
+    _noteLikesSubscription?.cancel();
+
+    return super.close();
+  }
+
+  /// Likes the note.
   void likeNote() {
     NostrService.instance.send.likePost(note.event.id);
     emitIfOpen(state.copyWith(localLiked: true));
   }
 
+  /// Weither the current user already liked the note or not.
   bool isUserAlreadyLiked() {
     final currentUserPrivateKey = LocalDatabase.instance.getPrivateKey();
     if (currentUserPrivateKey == null) {
@@ -43,6 +70,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     return likers.contains(pubKey);
   }
 
+  /// Copy the note id to the clipboard.
   Future<void> copyNoteId() async {
     await AppUtils.copy(
       note.event.id,
@@ -52,6 +80,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     );
   }
 
+  /// Copy the note image links to the clipboard.
   Future<void> copyImagesLinks() async {
     if (note.imageLinks.isNotEmpty) {
       await AppUtils.copy(
@@ -67,6 +96,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     }
   }
 
+  /// Copy the note event to the clipboard.
   Future<void> copyNoteEvent() async {
     await AppUtils.copy(
       note.event.serialized(),
@@ -76,6 +106,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     );
   }
 
+  /// Copy the note owner pubkey to the clipboard.
   Future<void> copyNoteOwnerPubKey() async {
     await AppUtils.copy(
       note.event.pubkey,
@@ -85,6 +116,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     );
   }
 
+  /// Copy the note text content to the clipboard.
   Future<void> copyNoteContent() async {
     await AppUtils.copy(
       note.noteOnly,
@@ -94,20 +126,18 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     );
   }
 
+  /// emits a new state conditionally when the cubit is not closed.
   void emitIfOpen(NoteCardState copyWith) {
     if (!isClosed) {
       emit(copyWith);
     }
   }
 
-  @override
-  Future<void> close() {
-    currentUserMetadataStream.close();
-    noteLikesStream.close();
-    _currentUserMetadataSubscription?.cancel();
-    _noteLikesSubscription?.cancel();
-
-    return super.close();
+  /// Reposts the note.
+  void repostNote() {
+    NostrService.instance.send.sendRepostEventFromCurrentUser(note);
+    emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
+    emit(state.copyWith());
   }
 
   void _handleStreams() {
@@ -117,14 +147,9 @@ class NoteCardCubit extends Cubit<NoteCardState> {
         emitIfOpen(state.copyWith(noteOwnerMetadata: event));
       }
     });
+
     _noteLikesSubscription = noteLikesStream.stream.listen((event) {
       emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
     });
-  }
-
-  void repostNote() {
-    NostrService.instance.send.sendRepostEventFromCurrentUser(note);
-    emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
-    emit(state.copyWith());
   }
 }

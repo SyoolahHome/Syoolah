@@ -11,15 +11,28 @@ import 'package:flutter/material.dart';
 
 part 'global_feed_state.dart';
 
+/// {@template global_feed}
+/// The responsible cubit about the global feed.
+/// {@endtemplate}
 class GlobalFeedCubit extends Cubit<GlobalFeedState> {
+  /// The scroll controller to manage user scroll.
   ScrollController? scrollController;
+
+  /// The text field search controller which will receive user's search inpuy.git
   TextEditingController? searchController;
+
+  /// The Nostr feed posts stream.
   NostrEventsStream feedPostsStream;
+
+  /// The subscription where we will listen to [feedPostsStream.stream].
   StreamSubscription? _streamSubscription;
 
+  /// {@macro global_feed}
   GlobalFeedCubit({
     required this.feedPostsStream,
-  }) : super(GlobalFeedInitial(searchOptions: AppConfigs.feedsSearchOptions)) {
+  }) : super(GlobalFeedState.initial(
+          searchOptions: AppConfigs.feedsSearchOptions,
+        )) {
     _init();
   }
 
@@ -35,15 +48,18 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     return super.close();
   }
 
+  /// Shows the advanced search functionality bottom sheet where the user can search for events that are shown.
   Future<void> showSearch(BuildContext context) {
     return BottomSheetService.showSearch(context, this);
   }
 
+  /// Selects the search option at the given [index] assigning the [value] to it.
   void selectedSearchOption(int index, bool value) {
-    final searchOptions = [...state.searchOptions];
+    final searchOptions = List<SearchOption>.of(state.searchOptions);
     searchOptions[index] = searchOptions[index].copyWith(isSelected: value);
     emit(state.copyWith(searchOptions: searchOptions));
 
+    //! The previous implementation.
     // final searchOptions = <SearchOption>[];
 
     // for (int i = 0; i < state.searchOptions.length; i++) {
@@ -60,11 +76,16 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     // emit(state.copyWith(searchOptions: searchOptions));
   }
 
-  Future<void> pickDateRange(BuildContext context) async {
+  /// Shows the date range picker with the given [lastDate] & [firstDate] where the user can select a date range.
+  Future<void> pickDateRange(
+    BuildContext context, {
+    DateTime? firstDate,
+    DateTime? lastDate,
+  }) async {
     final rangeDate = await showDateRangePicker(
       context: context,
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime.now(),
+      firstDate: firstDate ?? AppConfigs.feedDateRangePickerFirstDate,
+      lastDate: lastDate ?? AppConfigs.feedDateRangePickerLastDate,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (context, widget) {
         return Theme(
@@ -83,6 +104,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     }
   }
 
+  /// Runs the search query with all the selected options.
   void executeSearch() {
     try {
       List<Note> notes = state.feedPosts.map((e) => Note.fromEvent(e)).toList();
@@ -125,16 +147,32 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     }
   }
 
+  /// Resets the search query & sheet to it's initial state
   void resetSearch() {
     searchController?.clear();
+    final unselectedSearchOptions =
+        state.searchOptions.map((e) => e.copyWith(isSelected: false)).toList();
+
     emit(
       state.copyWith(
         searchedFeedNotesPosts: [],
-        searchOptions: state.searchOptions
-            .map((e) => e.copyWith(isSelected: false))
-            .toList(),
+        searchOptions: unselectedSearchOptions,
         feedPosts: state.feedPosts,
       ),
+    );
+  }
+
+  /// Shows the newest posts to the UI.
+  void showNewestPostsToUI() {
+    emit(state.copyWith(shownFeedPosts: state.feedPosts));
+  }
+
+  /// Navigates Top of the screen.
+  void goTop() {
+    scrollController?.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
     );
   }
 
@@ -146,10 +184,12 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
 
   void _handleStreams() {
     bool shouldWaitXSecondsToUpdateFirstUI = true;
-
     _streamSubscription = feedPostsStream.stream.listen(
       (event) {
-        final sortedList = [event, ...state.feedPosts];
+        final sortedList = <NostrEvent>[
+          event,
+          ...state.feedPosts,
+        ];
         sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
         if (!isClosed) {
@@ -163,18 +203,6 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
           });
         }
       },
-    );
-  }
-
-  void showNewestPostsToUI() {
-    emit(state.copyWith(shownFeedPosts: state.feedPosts));
-  }
-
-  void goTop() {
-    scrollController?.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
     );
   }
 }

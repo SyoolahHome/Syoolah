@@ -4,11 +4,16 @@ import 'package:equatable/equatable.dart';
 
 part 'home_page_after_login_state.dart';
 
+/// {@template home_page_after_login_state}
+/// The responsible cubit about the home page that is shown after the auth.
+/// {@endtemplate}
 class HomePageAfterLoginCubit extends Cubit<HomePageAfterLoginState> {
-  HomePageAfterLoginCubit() : super(const HomePageAfterLoginInitial()) {
+  /// {@macro home_page_after_login_state}
+  HomePageAfterLoginCubit() : super(HomePageAfterLoginState.initial()) {
     connectToRelaysAndSubscribeToTopics();
   }
 
+  /// Connects and starts the connection to the relays
   void connectToRelaysAndSubscribeToTopics() {
     try {
       emit(state.copyWith(isLoading: true));

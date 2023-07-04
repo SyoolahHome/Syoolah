@@ -9,54 +9,76 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../constants/app_enums.dart';
+import '../../services/utils/app_utils.dart';
 
 part 'private_key_gen_success_state.dart';
 
+/// {@template private_key_gen_success_cubit}
+/// The responsible cubit about the private key generation success UI.
+/// {@endtemplate}
 class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
-  PrivateKeyGenSuccessCubit() : super(const PrivateKeyGenSuccessInitial()) {
-    _initKeys();
+  /// {@macro private_key_gen_success_cubit}
+  PrivateKeyGenSuccessCubit() : super(PrivateKeyGenSuccessState.initial()) {
+    _init();
   }
 
+  /// Toggles the visibility of the private key field.
   void togglePrivateKeyFieldVisibility() {
-    emit(
-      state.copyWith(
-        isPasswordVisible: !state.isPasswordVisible,
-      ),
+    final isPasswordVisible = !state.isPasswordVisible;
+
+    emit(state.copyWith(isPasswordVisible: isPasswordVisible));
+  }
+
+  /// Copies the private key.
+  Future<void> copyPrivateKey(BuildContext context) async {
+    return AppUtils.copy(
+      state.privateKey ?? "",
+      onSuccess: () => SnackBars.text(context, "privateKeyCopied".tr()),
+      onError: () => SnackBars.text(context, "error".tr()),
+    );
+
+    // TODO: check this once more.
+//
+// //     try {
+// //       await Clipboard.setData(ClipboardData(text: ));
+// //
+// //       return ;
+// //     } catch (e) {
+// //       return SnackBars.text(context, e.toString());
+// //     }
+  }
+
+  /// Copies the public key.
+  void copyPublicKey(BuildContext context) async {
+// //     try {
+// //       final privateKey = LocalDatabase.instance.getPrivateKey();
+// //       if (privateKey == null) {
+// //         return;
+// //       }
+// //
+// //       await Clipboard.setData(
+// //         ClipboardData(
+// //           text: state.publicKey ??
+// //               Nostr.instance.keysService
+// //                   .derivePublicKey(privateKey: privateKey),
+// //         ),
+// //       );
+// //
+// //       return;
+// //     } catch (e) {
+// //       return SnackBars.text(context, e.toString());
+// //     }
+// //
+    return AppUtils.copy(
+      state.publicKey ??
+          Nostr.instance.keysService.derivePublicKey(
+              privateKey: LocalDatabase.instance.getPrivateKey()!),
+      onError: () => SnackBars.text(context, "error".tr()),
+      onSuccess: () => SnackBars.text(context, "publicKeyCopied".tr()),
     );
   }
 
-  Future<ScaffoldFeatureController<Widget, dynamic>> copyPrivateKey(
-      BuildContext context) async {
-    try {
-      await Clipboard.setData(ClipboardData(text: state.privateKey ?? ""));
-
-      return SnackBars.text(context, "privateKeyCopied".tr());
-    } catch (e) {
-      return SnackBars.text(context, e.toString());
-    }
-  }
-
-  copyPublicKey(BuildContext context) async {
-    try {
-      final privateKey = LocalDatabase.instance.getPrivateKey();
-      if (privateKey == null) {
-        return;
-      }
-
-      await Clipboard.setData(
-        ClipboardData(
-          text: state.publicKey ??
-              Nostr.instance.keysService
-                  .derivePublicKey(privateKey: privateKey),
-        ),
-      );
-
-      return SnackBars.text(context, "publicKeyCopied".tr());
-    } catch (e) {
-      return SnackBars.text(context, e.toString());
-    }
-  }
-
+  /// Returns the relevent key based on the [type].
   String decideWhichKeyToShow(KeySectionType type) {
     switch (type) {
       case KeySectionType.publicKey:
@@ -85,5 +107,9 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
         nsecKey: nsecKey,
       ),
     );
+  }
+
+  void _init() {
+    _initKeys();
   }
 }

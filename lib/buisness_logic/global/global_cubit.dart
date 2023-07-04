@@ -52,8 +52,10 @@ class GlobalCubit extends Cubit<GlobalState> {
     return tags.contains(pubkey);
   }
 
+  /// {@template follow_user}
   /// Follows the user which have the given [pubKey] by the current authenticated user.
   /// if no user is authnticated, this method will do nothing.
+  /// {@endtemplate}
   void followUser(String pubKey) {
     NostrEvent newEvent;
 
@@ -91,7 +93,9 @@ class GlobalCubit extends Cubit<GlobalState> {
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
-  /// Removes and unfollow a followed user with the given [pubKey]
+  /// {@template unfollow_user}
+  /// Removes and unfollow a followed user with the given [pubKey].
+  /// {@endtemplate}
   void unfollowUser(String pubKey) {
     final currentUserFollowing = state.currentUserFollowing;
     if (currentUserFollowing == null) {
@@ -108,7 +112,9 @@ class GlobalCubit extends Cubit<GlobalState> {
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
+  /// {@template handle_follow_button_tap}
   /// A Wrapper to handling follow functionality, if a user is not followed, this will call the [followUser] method, otherwise it will [unfollowUser].
+  /// {@endtemplate}
   void handleFollowButtonTap(String pubkey) {
     if (isNoteOwnerFollowed(pubkey)) {
       unfollowUser(pubkey);

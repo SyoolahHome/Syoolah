@@ -337,4 +337,7 @@ abstract class AppConfigs {
 
   static const showPreviewMode = false;
   static const version = '1.0.0';
+
+  static final feedDateRangePickerFirstDate = DateTime(2015, 8);
+  static DateTime get feedDateRangePickerLastDate => DateTime.now();
 }

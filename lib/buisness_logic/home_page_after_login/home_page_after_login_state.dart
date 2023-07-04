@@ -1,10 +1,19 @@
-// ignore_for_file: , sort_constructors_first
 part of 'home_page_after_login_cubit.dart';
 
+/// {@template home_page_after_login_state}
+/// The state of [HomePageAfterLoginCubit].
+/// {@endtemplate}
 class HomePageAfterLoginState extends Equatable {
+  /// Weither connection to relays are established successfully.
   final bool didConnectedToRelaysAndSubscribedToTopics;
+
+  /// Weither is loading state.
   final bool isLoading;
+
+  /// An error to be shown if it exists.
   final String? error;
+
+  /// All users cached metadata.
   final Map<String, NostrEvent> allUsersMetadata;
 
   @override
@@ -15,6 +24,7 @@ class HomePageAfterLoginState extends Equatable {
         allUsersMetadata,
       ];
 
+  /// {@macro home_page_after_login_state}
   const HomePageAfterLoginState({
     this.didConnectedToRelaysAndSubscribedToTopics = false,
     this.isLoading = false,
@@ -22,6 +32,7 @@ class HomePageAfterLoginState extends Equatable {
     this.allUsersMetadata = const {},
   });
 
+  /// {@macro home_page_after_login_state}
   HomePageAfterLoginState copyWith({
     bool? didConnectedToRelaysAndSubscribedToTopics,
     bool? isLoading,
@@ -37,8 +48,14 @@ class HomePageAfterLoginState extends Equatable {
       allUsersMetadata: allUsersMetadata ?? this.allUsersMetadata,
     );
   }
+
+  /// {@macro home_page_after_login_state}
+  factory HomePageAfterLoginState.initial() {
+    return HomePageAfterLoginInitial();
+  }
 }
 
+/// {@macro home_page_after_login_state}
 class HomePageAfterLoginInitial extends HomePageAfterLoginState {
   const HomePageAfterLoginInitial();
 }

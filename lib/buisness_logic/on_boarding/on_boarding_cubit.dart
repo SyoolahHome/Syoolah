@@ -4,40 +4,68 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 part 'on_boarding_state.dart';
 
+/// {@template on_boarding_cubit}
+/// The responsible cubit about the on boarding UI.
+/// {@endtemplate}
 class OnBoardingCubit extends Cubit<OnBoardingState> {
+  /// The text field controller where the user can search for users via pubkey or identifier.
   TextEditingController? searchController;
+
+  /// The focus node of the [searchController].
   FocusNode? searchNodeFocus;
+
+  /// The Nostr stream for the user metadata.
   NostrEventsStream? userStream;
 
+  /// The stream subscription for the [userStream.stream].
   StreamSubscription? userSearchSub;
-  OnBoardingCubit() : super(OnBoardingInitial()) {
+
+  /// {@macro on_boarding_cubit}
+  OnBoardingCubit() : super(OnBoardingState.initial()) {
     _init();
   }
 
+  @override
+  Future<void> close() {
+    resetSearch();
+    userStream?.close();
+    searchNodeFocus?.dispose();
+    searchController?.dispose();
+    userSearchSub?.cancel();
+
+    return super.close();
+  }
+
+  /// Shows the search bottom sheet.
   void showSearchSheet(BuildContext context) {
     BottomSheetService.showOnBoardingSearchSheet(context);
   }
 
+  /// Shows the relays bottom sheet.
   void showRelaysSheet(BuildContext context) {
     BottomSheetService.showOnBoardingRelaysSheet(context);
   }
 
+  /// Executes the search functioality using the [searchController] input.
+  /// if the controller is not initialized, it does nothing.
+  /// if the controller text is empty, it does nothing.
+  /// TODO: rafactor and clarify more this code.
   Future<void> executeSearch() async {
     searchNodeFocus?.unfocus();
-    if (userSearchSub != null) {
-      userSearchSub?.cancel();
-      userSearchSub = null;
-    }
+
+    _restartSubscription();
+
     String pubKey;
     final searchQuery = searchController?.text;
 
     if (searchQuery == null || searchQuery.isEmpty) {
-      emit(state.copyWith(error: "search query is empty"));
+      emit(state.copyWith(error: "searchQueryEmpty".tr()));
 
       return;
     }
@@ -46,12 +74,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       const lengthOfEmailElems = 2;
 
       if (searchQuery.split("@").length != lengthOfEmailElems) {
-        emit(
-          state.copyWith(
-            error:
-                "the search query is not a valid identifier, it should be like an email",
-          ),
-        );
+        emit(state.copyWith(error: "invalidOnBoardingSearchInput".tr()));
 
         return;
       }
@@ -59,15 +82,11 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     } else {
       const requiredHexLength = 64;
       if (searchQuery.length != requiredHexLength) {
-        emit(
-          state.copyWith(
-            error:
-                "the search query is not a valid identifier or 64 hex string (pubkey)",
-          ),
-        );
+        emit(state.copyWith(error: "invalidIdentifierOrPubKey".tr()));
 
         return;
       }
+
       pubKey = searchQuery;
     }
 
@@ -85,20 +104,10 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
   }
 
+  /// Resets the search functionality.
   void resetSearch() {
     searchController?.clear();
     emit(state.copyWith());
-  }
-
-  @override
-  Future<void> close() {
-    resetSearch();
-    userStream?.close();
-    searchNodeFocus?.dispose();
-    searchController?.dispose();
-    userSearchSub?.cancel();
-
-    return super.close();
   }
 
   void _init() {
@@ -116,5 +125,12 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
           ),
         );
       });
+  }
+
+  Future<void> _restartSubscription() async {
+    if (userSearchSub != null) {
+      await userSearchSub?.cancel();
+      userSearchSub = null;
+    }
   }
 }

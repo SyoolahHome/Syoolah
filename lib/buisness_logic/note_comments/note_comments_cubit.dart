@@ -8,17 +8,24 @@ import 'package:flutter/material.dart';
 
 part 'note_comments_state.dart';
 
+/// {@template note_comments_cubit}
+/// The responsible cubit about the note/post comments.
+/// {@endtemplate}
 class NoteCommentsCubit extends Cubit<NoteCommentsState> {
+  /// The text field controller to hold the user comment input.
   TextEditingController? commentTextController;
 
+  /// The Nostr stream for the note comments.
   NostrEventsStream noteCommentsStream;
+
+  /// The stream subscription for the [noteCommentsStream.stream].
   StreamSubscription? _noteCommentsStreamSubscription;
 
+  /// {@macro note_comments_cubit}
   NoteCommentsCubit({
     required this.noteCommentsStream,
-  }) : super(NoteCommentsInitial()) {
-    commentTextController = TextEditingController();
-    _handleStreams();
+  }) : super(NoteCommentsState.initial()) {
+    _init();
   }
 
   @override
@@ -28,16 +35,19 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
     return super.close();
   }
 
-  void noteComment({
-    required String postEventId,
-    required String text,
-  }) {
-    NostrService.instance.send.addCommentToPost(
-      postEventId: postEventId,
-      text: text,
-    );
-  }
+  // void noteComment({
+  //   required String postEventId,
+  //   required String text,
+  // }) {
+  //   NostrService.instance.send.addCommentToPost(
+  //     postEventId: postEventId,
+  //     text: text,
+  //   );
+  // }
 
+  /// Sends the comment event with the user's input of [commentTextController].
+  /// if the controller is not initialized, it does nothing.
+  /// if the controller is empty, it does nothing.
   void postComment(String postEventId) {
     final comment = commentTextController?.text;
     if (comment == null || comment.isEmpty) {
@@ -54,7 +64,17 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
 
   void _handleStreams() {
     _noteCommentsStreamSubscription = noteCommentsStream.stream.listen((event) {
-      emit(state.copyWith(noteComments: [...state.noteComments, event]));
+      final newCommentsList = <NostrEvent>[
+        ...state.noteComments,
+        event,
+      ];
+
+      emit(state.copyWith(noteComments: newCommentsList));
     });
+  }
+
+  void _init() {
+    commentTextController = TextEditingController();
+    _handleStreams();
   }
 }

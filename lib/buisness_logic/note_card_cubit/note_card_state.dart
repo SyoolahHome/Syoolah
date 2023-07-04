@@ -1,12 +1,28 @@
 part of 'note_card_cubit.dart';
 
+/// {@template note_card_state}
+/// The state of [NoteCardCubit].
+/// {@endtemplate}
 class NoteCardState extends Equatable {
+  /// The metadata of the note owner.
   final NostrEvent? noteOwnerMetadata;
+
+  /// The like events of the note.
   final List<NostrEvent> noteLikes;
+
+  /// The comment events of the note.
   final List<NostrEvent> noteComments;
+
+  /// A local variable to simulat ethe user action when the like icon button is pressed.
   final bool localLiked;
+
+  /// An error message to be shown if it exists.
   final String? error;
+
+  /// A success message to be shown if it exists.
   final String? success;
+
+  /// A local variable to simulate the user action when the repost icon button is pressed.
   final bool markAsReposted;
 
   @override
@@ -20,6 +36,7 @@ class NoteCardState extends Equatable {
         markAsReposted,
       ];
 
+  /// {@macro note_card_state}
   const NoteCardState({
     this.noteOwnerMetadata,
     this.noteLikes = const [],
@@ -30,6 +47,7 @@ class NoteCardState extends Equatable {
     this.markAsReposted = false,
   });
 
+  /// Copies the current state with some new values.
   NoteCardState copyWith({
     NostrEvent? noteOwnerMetadata,
     List<NostrEvent>? noteLikes,
@@ -49,6 +67,11 @@ class NoteCardState extends Equatable {
       markAsReposted: markAsReposted ?? this.markAsReposted,
     );
   }
+
+  factory NoteCardState.initial() {
+    return const NoteCardState();
+  }
 }
 
+/// {@macro note_card_state}
 class NoteCardInitial extends NoteCardState {}

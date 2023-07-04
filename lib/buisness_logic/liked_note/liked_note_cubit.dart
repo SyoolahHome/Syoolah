@@ -7,13 +7,18 @@ import 'package:equatable/equatable.dart';
 
 part 'liked_note_state.dart';
 
+/// {@template like_note_cubit}
+/// The responsible cubit about the like note
+/// {@endtemplate}
 class LikedNoteCubit extends Cubit<LikedNoteState> {
+  /// The Nostr stream for the like note.
   NostrEventsStream likedNoteStream;
   StreamSubscription<NostrEvent>? _likedNoteSubscription;
 
+  /// {@macro like_note_cubit}
   LikedNoteCubit({
     required this.likedNoteStream,
-  }) : super(LikedNoteInitial()) {
+  }) : super(LikedNoteState.initial()) {
     _handleStreams();
   }
 
@@ -27,11 +32,9 @@ class LikedNoteCubit extends Cubit<LikedNoteState> {
 
   void _handleStreams() {
     _likedNoteSubscription = likedNoteStream.stream.listen((event) {
-      emit(
-        state.copyWith(
-          likedNote: Note.fromEvent(event),
-        ),
-      );
+      final likedNote = Note.fromEvent(event);
+
+      emit(state.copyWith(likedNote: likedNote));
     });
   }
 }

@@ -9,23 +9,35 @@ import 'package:equatable/equatable.dart';
 
 part 'users_list_to_follow_state.dart';
 
+/// {@template users_list_to_follow_cubit}
+/// The responsible cubit about the users-to-follow (recommendations) list.
+/// {@endtemplate}
 class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
+  /// The Nostr stream for the current user following.
   NostrEventsStream currentUserFollowing;
+
+  /// The Nostr stream for the current user followers.
   NostrEventsStream currentUserFollowers;
+
+  /// The Nostr stream for the users list metadata.
   NostrEventsStream usersListMetadata;
 
+  /// The subscription for the [currentUserFollowing.stream].
   StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
+
+  /// The subscription for the [currentUserFollowers.stream].
   StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
+
+  /// The subscription for the [usersListMetadata.stream].
   StreamSubscription<NostrEvent>? _usersListMetadataSubscription;
 
+  /// {@macro users_list_to_follow_cubit}
   UsersListToFollowCubit({
     required this.currentUserFollowers,
     required this.currentUserFollowing,
     required this.usersListMetadata,
   }) : super(UsersListToFollowInitial()) {
-    _handleCurrentUserFollowers();
-    _handleCurrentUserFollowing();
-    _handleContacts();
+    _init();
   }
 
   @override
@@ -33,6 +45,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     currentUserFollowing.close();
     currentUserFollowers.close();
     usersListMetadata.close();
+
     _currentUserFollowersSubscription?.cancel();
     _currentUserFollowingSubscription?.cancel();
     _usersListMetadataSubscription?.cancel();
@@ -40,6 +53,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     return super.close();
   }
 
+  /// Weither the note owner is followed by the current user.
   bool isNoteOwnerFollowed(String pubkey) {
     return state.currentUserFollowing?.tags
             .map((elem) => elem[1])
@@ -47,6 +61,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
         false;
   }
 
+  /// {@macro follow_user}
   void followUser(String pubKey) {
     NostrEvent newEvent;
 
@@ -81,6 +96,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
+  /// {@macro unfollow_user}
   void unfollowUser(String pubKey) {
     final currentUserFollowing = state.currentUserFollowing;
     if (currentUserFollowing == null) {
@@ -96,6 +112,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
     NostrService.instance.send.setFollowingsEvent(newEvent);
   }
 
+  /// {@macro handle_follow_button_tap}
   void handleFollowButtonTap(String pubkey) {
     if (isNoteOwnerFollowed(pubkey)) {
       unfollowUser(pubkey);
@@ -132,5 +149,11 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
         );
       },
     );
+  }
+
+  void _init() {
+    _handleCurrentUserFollowers();
+    _handleCurrentUserFollowing();
+    _handleContacts();
   }
 }
