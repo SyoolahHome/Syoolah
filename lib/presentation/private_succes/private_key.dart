@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/private_key_gen_success_cubit/private_key_gen_success_cubit.dart';
-import 'package:ditto/presentation/current_user_keys/widgets/private_key_section.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/presentation/private_succes/widgets/button.dart';

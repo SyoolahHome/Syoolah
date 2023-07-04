@@ -1,7 +1,6 @@
 import 'package:ditto/presentation/current_user_keys/widgets/danger_box.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,5 @@
 import 'package:ditto/services/database/local/base/local_database_base.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:http/http.dart';
 
 class LocalDatabase implements LocalDatabaseBase {
   final String dbName = "local_database";

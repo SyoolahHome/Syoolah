@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/add_new_post/add_new_post_cubit.dart';
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
-import 'package:equatable/equatable.dart';
 
 /// {@template nostr_service_loading_cubit}
 /// The responsible cubit about the nostr service loading.

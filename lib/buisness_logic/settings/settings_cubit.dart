@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditto/services/database/local/local_database.dart';
-import 'package:equatable/equatable.dart';
 
 /// {@template settings_cubit}
 /// The responsible cubit about the settings UI.

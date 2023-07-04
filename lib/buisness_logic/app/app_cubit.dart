@@ -3,7 +3,6 @@ import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/relay_configuration.dart';
-import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/alerts_service.dart';

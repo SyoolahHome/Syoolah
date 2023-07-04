@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_configs.dart';
 import '../constants/app_enums.dart';
 
 class FeedCategory extends Equatable {

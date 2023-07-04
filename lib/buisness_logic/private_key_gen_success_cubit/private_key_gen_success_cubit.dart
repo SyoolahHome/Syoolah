@@ -1,12 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
-import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../constants/app_enums.dart';
 import '../../services/utils/app_utils.dart';

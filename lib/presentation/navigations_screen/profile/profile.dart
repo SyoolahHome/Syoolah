@@ -11,16 +11,13 @@ import 'package:ditto/presentation/navigations_screen/profile/widgets/tab_view.d
 import 'package:ditto/presentation/navigations_screen/profile/widgets/tabs.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constants/abstractions/abstractions.dart';
 import '../../../constants/app_enums.dart';
-import '../../general/widget/title.dart';
 import '../../private_succes/widgets/key_section.dart';
-import 'widgets/pub_key_section.dart';
 
 class Profile extends BottomBarScreen {
   const Profile({super.key});

@@ -1,8 +1,6 @@
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/presentation/chat_modules/widgets/modules_page_view.dart';
 import 'package:ditto/presentation/chat_modules/widgets/sub_title.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

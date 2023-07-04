@@ -4,7 +4,6 @@ import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../chat_modules/chat_modules.dart';

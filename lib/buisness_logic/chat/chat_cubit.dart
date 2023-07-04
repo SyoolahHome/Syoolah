@@ -4,7 +4,6 @@ import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
-import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/open_ai/openai.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/utils/app_utils.dart';

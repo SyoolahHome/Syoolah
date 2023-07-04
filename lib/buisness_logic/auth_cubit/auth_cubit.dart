@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/sign_up_step_view.dart';
 import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/presentation/general/text_field.dart';
-import 'package:ditto/presentation/private_succes/widgets/key_section.dart';
 import 'package:ditto/presentation/sign_up/widgets/avatar_upload.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
@@ -15,7 +13,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 

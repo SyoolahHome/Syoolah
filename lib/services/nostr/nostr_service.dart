@@ -1,14 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/constants/app_configs.dart';
-import 'package:ditto/model/note.dart';
-import 'package:ditto/model/report_option.dart';
-import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/routing.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import 'sub_modules/send.dart';
 import 'sub_modules/sub.dart';

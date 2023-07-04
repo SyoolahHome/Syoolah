@@ -96,13 +96,14 @@ class Note extends Equatable {
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
       event: NostrEvent.deserialized(json['event'] as String),
-      links: List<String>.from(json['links'] as List) ?? [],
+      links: json['links'] != null ? List<String>.from(json['links']) : [],
       noteOnly: json['noteOnly'] as String,
-      imageLinks: List<String>.from(json['imageLinks'] as List) ?? [],
-      youtubeVideoLinks: List<String>.from(
-          json['youtubeVideoLinks'] as List) /* ??
-          [] */
-      ,
+      imageLinks: json['imageLinks'] != null
+          ? List<String>.from(json['imageLinks'])
+          : [],
+      youtubeVideoLinks: json['youtubeVideoLinks'] != null
+          ? List<String>.from(json['youtubeVideoLinks'])
+          : [],
     );
   }
 }
