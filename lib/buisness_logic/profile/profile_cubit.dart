@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:meta/meta.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
@@ -23,17 +25,25 @@ import 'package:image_picker/image_picker.dart';
 
 part 'profile_state.dart';
 
+/// {@template profile_cubit}
+/// The responsible cubit for the user's profile.
+/// {@endtemplate}
 class ProfileCubit extends Cubit<ProfileState> {
+  /// The Nostr stream for the current user meta data.
   NostrEventsStream currentUserMetadataStream;
 
+  /// The stream subscription for [currentUserMetadataStream.stream].
   StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
 
+  /// {@macro profile_cubit}
   ProfileCubit({
     required this.currentUserMetadataStream,
   }) : super(
-          ProfileInitial(profileTabsItems: GeneralProfileTabs.profileTabsItems),
+          ProfileState.initial(
+            profileTabsItems: GeneralProfileTabs.profileTabsItems,
+          ),
         ) {
-    _handleStreams();
+    _init();
   }
 
   @override
@@ -45,11 +55,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     return super.close();
   }
 
-  Future<void> pickAvatarFromGallery() async {
+  /// {@macro pick_image}
+  Future<void> pickImage(ImageSource source) async {
     try {
       final imagePicker = ImagePicker();
-      final pickedImage =
-          await imagePicker.pickImage(source: ImageSource.gallery);
+      final pickedImage = await imagePicker.pickImage(source: source);
       if (pickedImage != null) {
         emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
       }
@@ -60,23 +70,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> pickAvatarFromCamera() async {
-    try {
-      final imagePicker = ImagePicker();
-      final pickedImage =
-          await imagePicker.pickImage(source: ImageSource.camera);
-      if (pickedImage != null) {
-        emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
-      }
-    } catch (e) {
-      emit(state.copyWith(error: "error".tr()));
-    } finally {
-      emit(
-        state.copyWith(),
-      );
-    }
+  /// {@macro pick_avatar_from_gallery}
+  Future<void> pickAvatarFromGallery() {
+    return pickImage(ImageSource.gallery);
   }
 
+  /// {@macro pick_avatar_from_camera}
+  Future<void> pickAvatarFromCamera() {
+    return pickImage(ImageSource.camera);
+  }
+
+  /// Removes the picked image ([state.pickedAvatarImage]).
   void removeAvatar() {
     emit(state.copyWith());
     try {
@@ -97,6 +101,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  /// Uploads the picked image and apply it as well in the app UI.
   Future<bool> uploadPictureAndSet() async {
     final pickedAvatarImage = state.pickedAvatarImage;
     if (pickedAvatarImage == null) {
@@ -142,15 +147,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  /// Scales down the avatar UI box.
   void scaleAvatarDown() {
     final scaleDownVal = state.profileAvatarScale - 0.05;
     emit(state.copyWith(profileAvatarScale: scaleDownVal));
   }
 
+  /// Scales back to normal scale the avatar UI box.
   void scaleAvatarToNormal() {
     emit(state.copyWith(profileAvatarScale: 1.0));
   }
 
+  /// Shows the avatar alert menu that contains the option for the current user.
   void showAvatarMenu(
     BuildContext context, {
     required Future<void> Function() onEnd,
@@ -169,12 +177,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
+  /// Log outs the current user.
   Future<void> logout({
     required VoidCallback onSuccess,
   }) async {
     return LocalDatabase.instance.logoutUser(onSuccess: onSuccess);
   }
 
+  /// Shows the bottom sheet that contains more options that relates to the current user and the profile.
+  /// TODO: move these options to a separated class, file.
   void onMorePressed(
     BuildContext context, {
     required void Function() onEditProfile,
@@ -282,22 +293,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  void _handleStreams() {
-    _handleCurrentUserMetadata();
-  }
-
-  void _handleCurrentUserMetadata() {
-    _currentUserMetadataSubscription = currentUserMetadataStream.stream.listen(
-      (event) {
-        emit(
-          state.copyWith(
-            currentUserMetadata: event,
-          ),
-        );
-      },
-    );
-  }
-
+  /// Shows more options in the followings section.
   Future<void> onFollowingsMorePressed(
     BuildContext context, {
     required List<String> followings,
@@ -324,6 +320,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
+  /// Shows more options in the followers section.
   Future<void> onFollowersMorePressed(
     BuildContext context, {
     required List<String> followings,
@@ -338,5 +335,25 @@ class ProfileCubit extends Cubit<ProfileState> {
         ),
       ],
     );
+  }
+
+  void _handleStreams() {
+    _handleCurrentUserMetadata();
+  }
+
+  void _handleCurrentUserMetadata() {
+    _currentUserMetadataSubscription = currentUserMetadataStream.stream.listen(
+      (event) {
+        emit(
+          state.copyWith(
+            currentUserMetadata: event,
+          ),
+        );
+      },
+    );
+  }
+
+  void _init() {
+    _handleStreams();
   }
 }

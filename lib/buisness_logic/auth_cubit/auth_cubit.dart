@@ -212,8 +212,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// {@template pick_image}
   /// Picks an image from the given [source], saving it in the urrent state
   /// if any error occur, an error state will be handled.
+  /// {@endtemplate}
   Future<void> pickImage(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(
@@ -232,12 +234,16 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// {@template pick_avatar_from_gallery}
   /// Picks an image from the gallery, see [pickImage] method.
+  /// {@endtemplate}
   Future<void> pickImageFromGallery() {
     return pickImage(ImageSource.gallery);
   }
 
+  /// {@template pick_avatar_from_camera}
   /// Picks an image from the camera, see [pickImage] method.
+  /// {@endtemplate}
   Future<void> pickImageFromCamera() {
     return pickImage(ImageSource.camera);
   }

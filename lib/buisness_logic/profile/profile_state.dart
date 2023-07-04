@@ -1,15 +1,34 @@
 part of 'profile_cubit.dart';
 
+/// {@template profile_state}
+///  The state of [ProfileCubit].
+/// {@endtemplate}
 class ProfileState extends Equatable {
+  /// The event containing the current user meta data.
   final NostrEvent? currentUserMetadata;
+
+  /// The profile tabs items to be represented in the UI.
   final List<TabItem> profileTabsItems;
+
+  /// The picker avatar image.
   final File? pickedAvatarImage;
+
+  /// The picked banner image.
   final File? pickedBannerImage;
+
+  /// An error if it exists to be represented.
   final String? error;
 
+  /// The number of user's followers.
   final int followersCount;
+
+  /// The number of user's followings.
   final int followingCount;
+
+  /// The scale value of the avatar UI box.
   final double profileAvatarScale;
+
+  /// Weither is loading.
   final bool isLoading;
 
   @override
@@ -25,6 +44,7 @@ class ProfileState extends Equatable {
         isLoading,
       ];
 
+  /// {@macro profile_state}
   const ProfileState({
     this.profileTabsItems = const [],
     this.error,
@@ -37,6 +57,7 @@ class ProfileState extends Equatable {
     this.isLoading = false,
   });
 
+// {@macro profile_state}
   ProfileState copyWith({
     NostrEvent? currentUserMetadata,
     File? pickedAvatarImage,
@@ -60,7 +81,16 @@ class ProfileState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
     );
   }
+
+  /// {@macro profile_state}
+  factory ProfileState.initial({
+    required List<TabItem> profileTabsItems,
+  }) {
+    return ProfileInitial(profileTabsItems: profileTabsItems);
+  }
 }
+
+/// {@macro profile_state}
 
 class ProfileInitial extends ProfileState {
   const ProfileInitial({
