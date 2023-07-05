@@ -6,11 +6,15 @@ import '../constants/abstractions/abstractions.dart';
 /// {template post_asset_section_item}
 /// Represents an model that holds data about a post asset option that will we shown while adding new notes by users
 /// {@endtemplate}
+@immutable
 class PostAssetSectionItem extends Equatable {
+  /// An icon to be shown for the post asset section.
   final IconData icon;
 
+  /// A callback that wil run whe the suer will clicks on the UI that represnts this.
   final VoidCallback onPressed;
 
+  /// The widget to switched to when this is tapped.
   final NewPostAssetWidget widget;
 
   /// {@macro post_asset_section_item}
