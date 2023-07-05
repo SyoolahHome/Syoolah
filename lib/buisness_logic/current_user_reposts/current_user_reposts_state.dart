@@ -6,20 +6,26 @@ part of 'current_user_reposts_cubit.dart';
 class CurrentUserRepostsState extends Equatable {
   final List<NostrEvent> currentUserReposts;
 
+  final bool shouldShowLoadingIndicator;
+
   /// {@macro current_user_reposts_state}
   const CurrentUserRepostsState({
     this.currentUserReposts = const [],
+    this.shouldShowLoadingIndicator = true,
   });
 
   @override
-  List<Object> get props => [currentUserReposts];
+  List<Object> get props => [currentUserReposts, shouldShowLoadingIndicator];
 
   /// {@macro current_user_reposts_state}
   CurrentUserRepostsState copyWith({
     List<NostrEvent>? currentUserReposts,
+    bool? shouldShowLoadingIndicator,
   }) {
     return CurrentUserRepostsState(
       currentUserReposts: currentUserReposts ?? this.currentUserReposts,
+      shouldShowLoadingIndicator:
+          shouldShowLoadingIndicator ?? this.shouldShowLoadingIndicator,
     );
   }
 

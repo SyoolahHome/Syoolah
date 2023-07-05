@@ -47,9 +47,9 @@ class GlobalCubit extends Cubit<GlobalState> {
   /// Weither the user with the [pubKey] is followed or not.
   bool isNoteOwnerFollowed(String pubkey) {
     dynamic tags = state.currentUserFollowing?.tags;
-    tags = tags.map((elem) => elem[1]);
+    tags = tags?.map((elem) => elem[1]);
 
-    return tags.contains(pubkey);
+    return tags?.contains(pubkey) ?? false;
   }
 
   /// {@template follow_user}

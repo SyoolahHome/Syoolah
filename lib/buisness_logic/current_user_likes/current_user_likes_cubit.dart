@@ -5,12 +5,16 @@ import 'package:dart_nostr/dart_nostr.dart';
 
 import 'package:equatable/equatable.dart';
 
+import '../../constants/abstractions/abstractions.dart';
+import '../../constants/app_configs.dart';
+
 part 'current_user_likes_state.dart';
 
 /// {@template current_user_likes_cubit}
 /// The responsible cubit about the current user likes
 /// {@endtemplate}
-class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
+class CurrentUserLikesCubit
+    extends CurrentUserTabViewCubit<CurrentUserLikesState> {
   /// The Nostr stream that will receive like events.
   NostrEventsStream currentUserLikedPosts;
 
@@ -21,7 +25,7 @@ class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
   CurrentUserLikesCubit({
     required this.currentUserLikedPosts,
   }) : super(CurrentUserLikesInitial()) {
-    _handleCurrentUserLikedPosts();
+    init();
   }
 
   @override
@@ -30,6 +34,14 @@ class CurrentUserLikesCubit extends Cubit<CurrentUserLikesState> {
     _currentUserLikedPostsSubscription?.cancel();
 
     return super.close();
+  }
+
+  @override
+  void init() {
+    _handleCurrentUserLikedPosts();
+    Future.delayed(durationToWaitBeforeHidingLoadingIndicator, () {
+      emit(state.copyWith(shouldShowLoadingIndicator: false));
+    });
   }
 
   /// Insert new event state to ours reflecting changes to UI.

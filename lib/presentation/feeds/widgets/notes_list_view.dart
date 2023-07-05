@@ -4,6 +4,7 @@ import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/feeds/widgets/feed_page_heading.dart';
+import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/note_card/note_card.dart';
 import 'package:ditto/services/database/local/local_database.dart';
@@ -20,6 +21,7 @@ class NotesListView extends StatelessWidget {
     this.hideCount = false,
     this.cardMargin,
     this.endTitleWithAdditionalText = true,
+    this.showLoadingIndicator = true,
   });
 
   final List<Note> notes;
@@ -30,6 +32,7 @@ class NotesListView extends StatelessWidget {
   final EdgeInsets? cardMargin;
   final ScrollController? scrollController;
   final bool endTitleWithAdditionalText;
+  final bool showLoadingIndicator;
   @override
   Widget build(BuildContext context) {
     final String appCurrentUserPublicKey =
@@ -94,11 +97,11 @@ class NotesListView extends StatelessWidget {
           builder: (context) {
             if (notes.isEmpty) {
               return Column(
-                children: [
+                children: <Widget>[
                   const SizedBox(height: 20),
-                  Center(
-                    child: nothingToShow,
-                  ),
+                  Center(child: nothingToShow),
+                  SizedBox(height: 10),
+                  LoadingWidget.minor(isVisible: showLoadingIndicator),
                 ],
               );
             }

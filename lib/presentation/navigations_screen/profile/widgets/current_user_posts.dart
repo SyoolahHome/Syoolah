@@ -29,6 +29,7 @@ class CurrentUserPosts extends StatelessWidget {
                 shrinkWrap: true,
                 // feedName: "posts".tr(),
                 endTitleWithAdditionalText: false,
+                showLoadingIndicator: state.shouldShowLoadingIndicator,
                 hideCount: true,
                 physics: const NeverScrollableScrollPhysics(),
                 notes: currentUserNotes.map((e) => Note.fromEvent(e)).toList(),

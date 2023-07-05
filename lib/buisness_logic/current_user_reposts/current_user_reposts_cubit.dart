@@ -4,12 +4,15 @@ import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../constants/abstractions/abstractions.dart';
+
 part 'current_user_reposts_state.dart';
 
 /// {@template current_users_reposts_cubit}
 /// The responsible cubit about the user reposts.
 /// {@endtemplate}
-class CurrentUserRepostsCubit extends Cubit<CurrentUserRepostsState> {
+class CurrentUserRepostsCubit
+    extends CurrentUserTabViewCubit<CurrentUserRepostsState> {
   NostrEventsStream currentUserReposts;
   StreamSubscription<NostrEvent>? _currentUserRepostsSubscription;
 
@@ -17,7 +20,21 @@ class CurrentUserRepostsCubit extends Cubit<CurrentUserRepostsState> {
   CurrentUserRepostsCubit({
     required this.currentUserReposts,
   }) : super(CurrentUserRepostsInitial()) {
+    init();
+  }
+
+  Future<void> close() {
+    _currentUserRepostsSubscription?.cancel();
+
+    return super.close();
+  }
+
+  @override
+  void init() {
     _handleCurrentUserRepostsStream();
+    Future.delayed(durationToWaitBeforeHidingLoadingIndicator, () {
+      if (!isClosed) emit(state.copyWith(shouldShowLoadingIndicator: false));
+    });
   }
 
   /// Insert new event state to ours reflecting changes to UI.
