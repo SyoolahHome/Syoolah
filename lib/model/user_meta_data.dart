@@ -107,6 +107,7 @@ class UserMetaData extends Equatable {
     };
   }
 
+  /// The name holder to be shown in a name place on the UI.
   String nameToShow() {
     if (name.isNotEmpty) {
       return name;
@@ -119,6 +120,7 @@ class UserMetaData extends Equatable {
     }
   }
 
+  /// {@macro user_meta_data}
   UserMetaData copyWith({
     String? username,
     String? name,
