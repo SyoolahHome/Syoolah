@@ -1,12 +1,26 @@
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+/// {@template note}
+///  A model class that holds the Nostr event of a note and a parsed data that relates only to M such as a youtube video link, or images...
+/// {@endtemplate}
+@immutable
 class Note extends Equatable {
+  ///The source Nostr event of this note, where all data is derived from.
   final NostrEvent event;
+
+  /// A list of links that are parsed from the note.
   final List<String> links;
+
+  /// A list of image links that are parsed from the note.
   final List<String> imageLinks;
+
+  ///A list of youtube videos links that are parsed from the note.
   final List<String> youtubeVideoLinks;
+
+  /// The text only/content of this note excluding all other parsed members
   String noteOnly;
 
   @override
@@ -18,6 +32,7 @@ class Note extends Equatable {
         youtubeVideoLinks,
       ];
 
+  /// {@macro note}
   Note({
     required this.event,
     this.links = const [],
@@ -26,9 +41,9 @@ class Note extends Equatable {
     this.youtubeVideoLinks = const [],
   });
 
-  factory Note.fromEvent(
-    NostrEvent event,
-  ) {
+  /// {@macro note}
+  /// Derives a Note directly from a Nostr event object.
+  factory Note.fromEvent(NostrEvent event) {
     final links = extractLinks(event.content);
     final noteOnly = removeLinksFromInitial(event.content);
     final imageLinks = filterImageLinks(links);
