@@ -17,3 +17,5 @@ abstract class CurrentUserTabViewCubit<T> extends Cubit<T> {
 
   void init();
 }
+
+abstract class SignUpStepViewWidget extends Widget {}
