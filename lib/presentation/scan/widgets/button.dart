@@ -26,9 +26,9 @@ class CustomButton extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state.authenticated) {
-            Navigator.of(context).pushNamed(Paths.bottomBar);
+            Navigator.of(context).pushReplacementNamed(Paths.bottomBar);
           } else if (state.isSignedOut) {
-            Navigator.of(context).pushNamed(Paths.SignUp);
+            Navigator.of(context).pushReplacementNamed(Paths.SignUp);
           } else if (state.error != null) {
             SnackBars.text(context, state.error!);
           }

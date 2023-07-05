@@ -5,26 +5,72 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class AvatarSheetWidget extends StatelessWidget {
-  const AvatarSheetWidget({
+class ImageUpdateSheetWidget extends StatelessWidget {
+  const ImageUpdateSheetWidget({
     super.key,
     required this.onPickFromGallery,
     required this.onTakePhoto,
     required this.onRemove,
     required this.onEnd,
-    required this.onAvatarPickedOrTaken,
+    required this.onPickedOrTaken,
     required this.cubitContext,
     required this.cubit,
     required this.onFullView,
   });
+
+  factory ImageUpdateSheetWidget.avatar({
+    required BuildContext cubitContext,
+    required Future<void> Function() onPickFromGallery,
+    required Future<void> Function() onTakePhoto,
+    required Future<void> Function() onRemove,
+    required Future<void> Function() onEnd,
+    required Future<bool> Function() onAvatarPickedOrTaken,
+    required void Function() onFullView,
+    required BlocBase cubit,
+  }) {
+    return ImageUpdateSheetWidget(
+      onPickFromGallery: onPickFromGallery,
+      onTakePhoto: onTakePhoto,
+      onRemove: onRemove,
+      onEnd: onEnd,
+      onPickedOrTaken: onAvatarPickedOrTaken,
+      cubitContext: cubitContext,
+      cubit: cubit,
+      onFullView: onFullView,
+    );
+  }
+
+  factory ImageUpdateSheetWidget.banner({
+    required Future<void> Function() onPickFromGallery,
+    required Future<void> Function() onTakePhoto,
+    required Future<void> Function() onRemove,
+    required Future<void> Function() onEnd,
+    required Future<bool> Function() onBannerPickedOrTaken,
+    required BuildContext cubitContext,
+    required void Function() onFullView,
+    required BlocBase cubit,
+  }) {
+    return ImageUpdateSheetWidget(
+      onPickFromGallery: onPickFromGallery,
+      onTakePhoto: onTakePhoto,
+      onRemove: onRemove,
+      onEnd: onEnd,
+      onPickedOrTaken: onBannerPickedOrTaken,
+      cubitContext: cubitContext,
+      cubit: cubit,
+      onFullView: onFullView,
+    );
+  }
+
   final BuildContext cubitContext;
   final Future<void> Function() onPickFromGallery;
   final Future<void> Function() onTakePhoto;
   final Future<void> Function() onRemove;
   final Future<void> Function() onEnd;
-  final Future<bool> Function() onAvatarPickedOrTaken;
+  final Future<bool> Function() onPickedOrTaken;
   final void Function() onFullView;
   final BlocBase cubit;
+
   @override
   Widget build(BuildContext context) {
     assert(cubit is ProfileCubit);
@@ -89,7 +135,7 @@ class AvatarSheetWidget extends StatelessWidget {
                             ),
                             onTap: () {
                               onTakePhoto()
-                                  .then((_) => onAvatarPickedOrTaken())
+                                  .then((_) => onPickedOrTaken())
                                   .then((isUploaded) {
                                 if (isUploaded) {
                                   onEnd();
@@ -111,7 +157,7 @@ class AvatarSheetWidget extends StatelessWidget {
                             ),
                             onTap: () {
                               onPickFromGallery()
-                                  .then((_) => onAvatarPickedOrTaken())
+                                  .then((_) => onPickedOrTaken())
                                   .then((isUploaded) {
                                 if (isUploaded) {
                                   onEnd();

@@ -25,6 +25,7 @@ class UserMetaData extends Equatable {
   /// The nip05 identifier of the user.
   final String? nip05Identifier;
 
+  final DateTime? userCreatedAt;
   @override
   List<Object?> get props => [
         name,
@@ -34,6 +35,7 @@ class UserMetaData extends Equatable {
         about,
         displayName,
         nip05Identifier,
+        userCreatedAt,
       ];
 
   /// {@macro user_meta_data}
@@ -45,6 +47,7 @@ class UserMetaData extends Equatable {
     required this.about,
     this.displayName,
     this.nip05Identifier,
+    this.userCreatedAt,
   });
 
   /// {@macro user_meta_data}
@@ -66,11 +69,14 @@ class UserMetaData extends Equatable {
     return UserMetaData(
       name: json['name'] as String? ?? placeholderMetadata.name,
       picture: json['picture'] as String? ?? placeholderMetadata.picture,
-      banner: json['banner'] as String? ?? placeholderMetadata.banner,
+      banner: json['banner'] as String? /* ?? placeholderMetadata.banner */,
       username: json['username'] as String? ?? placeholderMetadata.username,
       about: json['about'] as String? ?? placeholderMetadata.about,
       displayName: json['display_name'] as String?,
       nip05Identifier: json['nip05'] as String?,
+      userCreatedAt: json['creationDate'] != null
+          ? DateTime.parse(json['creationDate'])
+          : null,
     );
   }
 
@@ -121,6 +127,7 @@ class UserMetaData extends Equatable {
     String? about,
     String? displayName,
     String? nip05Identifier,
+    DateTime? userCreatedAt,
   }) {
     return UserMetaData(
       name: name ?? this.name,
@@ -130,6 +137,7 @@ class UserMetaData extends Equatable {
       about: about ?? this.about,
       nip05Identifier: nip05Identifier ?? this.nip05Identifier,
       displayName: displayName ?? this.displayName,
+      userCreatedAt: userCreatedAt ?? this.userCreatedAt,
     );
   }
 }

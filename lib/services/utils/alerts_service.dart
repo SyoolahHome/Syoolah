@@ -25,7 +25,7 @@ abstract class AlertsService {
 
         return AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          content: AvatarSheetWidget(
+          content: ImageUpdateSheetWidget.avatar(
             onPickFromGallery: onPickFromGallery,
             onTakePhoto: onTakePhoto,
             onRemove: onRemove,
@@ -133,6 +133,50 @@ abstract class AlertsService {
                 });
               },
               textColor: DefaultTextStyle.of(context).style.color,
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
+        );
+      },
+    );
+  }
+
+  static Future<void> showBannerMenu(
+    BuildContext context, {
+    required Future<void> Function() onPickFromGallery,
+    required Future<void> Function() onTakePhoto,
+    required Future<bool> Function() onBannerPickedOrTaken,
+    required Future<void Function()> Function() onRemove,
+    required Future<void> Function() onEnd,
+    required void Function() onFullView,
+    required BlocBase cubit,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        const textOpacity = 0.5;
+
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          content: ImageUpdateSheetWidget.banner(
+            onPickFromGallery: onPickFromGallery,
+            onTakePhoto: onTakePhoto,
+            onRemove: onRemove,
+            onEnd: onEnd,
+            onBannerPickedOrTaken: onBannerPickedOrTaken,
+            cubitContext: context,
+            cubit: cubit,
+            onFullView: onFullView,
+          ),
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: "close".tr(),
+              onTap: () => Navigator.of(context).pop(),
+              textColor:
+                  Theme.of(context).colorScheme.error.withOpacity(textOpacity),
             ),
           ],
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),

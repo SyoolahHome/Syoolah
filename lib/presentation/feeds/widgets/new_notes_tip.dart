@@ -1,4 +1,5 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,7 @@ class NewNotesTip extends StatelessWidget {
               label: Animate(
                 key: ValueKey<int>(newTweets),
                 effects: [FadeEffect(duration: 50.ms)],
-                child: Text("New $newTweets Notes"),
+                child: Text("xNewNotes".tr(args: [newTweets.toString()])),
               ),
               icon: const Icon(
                 FlutterRemix.arrow_up_s_line,

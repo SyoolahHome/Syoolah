@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
@@ -21,6 +20,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../constants/app_enums.dart';
 
 part 'profile_state.dart';
 
@@ -55,12 +56,26 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// {@macro pick_image}
-  Future<void> pickImage(ImageSource source) async {
+  Future<void> pickImage(
+    ImageSource source,
+    ImagePickType imagePickType,
+  ) async {
     try {
       final imagePicker = ImagePicker();
       final pickedImage = await imagePicker.pickImage(source: source);
+
       if (pickedImage != null) {
-        emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
+        switch (imagePickType) {
+          case ImagePickType.avatar:
+            emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
+            break;
+          case ImagePickType.banner:
+            emit(state.copyWith(pickedBannerImage: File(pickedImage.path)));
+            break;
+
+          default:
+            throw Exception("[$imagePickType] not supported");
+        }
       }
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
@@ -71,12 +86,20 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   /// {@macro pick_avatar_from_gallery}
   Future<void> pickAvatarFromGallery() {
-    return pickImage(ImageSource.gallery);
+    return pickImage(ImageSource.gallery, ImagePickType.avatar);
   }
 
   /// {@macro pick_avatar_from_camera}
   Future<void> pickAvatarFromCamera() {
-    return pickImage(ImageSource.camera);
+    return pickImage(ImageSource.camera, ImagePickType.avatar);
+  }
+
+  Future<void> pickBannerFromGallery() {
+    return pickImage(ImageSource.gallery, ImagePickType.banner);
+  }
+
+  Future<void> pickBannerFromCamera() {
+    return pickImage(ImageSource.camera, ImagePickType.banner);
   }
 
   /// Removes the picked image ([state.pickedAvatarImage]).
@@ -92,6 +115,28 @@ class ProfileCubit extends Cubit<ProfileState> {
         metadata: currentUsermetadata.copyWith(
           picture: "",
         ),
+      );
+    } catch (e) {
+      emit(state.copyWith(error: "error".tr()));
+    } finally {
+      emit(state.copyWith());
+    }
+  }
+
+  void removeBanner() {
+    try {
+      emit(state.copyWith());
+      final currentUsermetadata = UserMetaData.fromJson(
+        jsonDecode(state.currentUserMetadata?.content ?? "{}")
+            as Map<String, dynamic>,
+      );
+
+      final newM = currentUsermetadata.copyWith(
+        banner: "",
+      );
+
+      NostrService.instance.send.setCurrentUserMetaData(
+        metadata: newM,
       );
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
@@ -118,6 +163,37 @@ class ProfileCubit extends Cubit<ProfileState> {
       NostrService.instance.send.setCurrentUserMetaData(
         metadata: currentUsermetadata.copyWith(
           picture: uploadedAvatarUrl,
+        ),
+      );
+
+      return true;
+    } catch (e) {
+      emit(state.copyWith(error: "error".tr()));
+
+      return false;
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<bool> uploadBannerAndSet() async {
+    final pickedBannerImage = state.pickedBannerImage;
+
+    if (pickedBannerImage == null) {
+      return false;
+    }
+    try {
+      emit(state.copyWith(isLoading: true));
+      final uploadedBannerUrl = await FileUpload()(pickedBannerImage);
+
+      final currentUsermetadata = UserMetaData.fromJson(
+        jsonDecode(state.currentUserMetadata?.content ?? "{}")
+            as Map<String, dynamic>,
+      );
+
+      NostrService.instance.send.setCurrentUserMetaData(
+        metadata: currentUsermetadata.copyWith(
+          banner: uploadedBannerUrl,
         ),
       );
 
@@ -173,6 +249,24 @@ class ProfileCubit extends Cubit<ProfileState> {
       onEnd: onEnd,
       cubit: cubit,
       onFullView: onFullView,
+    );
+  }
+
+  void showBannerMenu(
+    BuildContext context, {
+    required Future<void> Function() onEnd,
+    required void Function() onFullView,
+    required BlocBase cubit,
+  }) {
+    AlertsService.showBannerMenu(
+      context,
+      onPickFromGallery: pickBannerFromGallery,
+      onTakePhoto: pickBannerFromCamera,
+      onBannerPickedOrTaken: uploadBannerAndSet,
+      onRemove: () async => removeBanner,
+      onEnd: onEnd,
+      onFullView: onFullView,
+      cubit: cubit,
     );
   }
 

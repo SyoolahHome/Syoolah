@@ -44,3 +44,5 @@ enum MunawarahTopics {
   fiqh,
   sharia,
 }
+
+enum ImagePickType { banner, avatar }

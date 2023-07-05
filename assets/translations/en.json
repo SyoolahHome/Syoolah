@@ -336,5 +336,6 @@
   "inAllahWeTrust": "In Allah We Trust!",
   "invalidOnBoardingSearchInput": "The search query is not a valid identifier, it should be like an email",
   "searchQueryEmpty": "The search query is empty",
-  "invalidIdentifierOrPubKey": "The search query is not a valid identifier or 64 hex string (pubkey)"
+  "invalidIdentifierOrPubKey": "The search query is not a valid identifier or 64 hex string (pubkey)",
+  "xNewNotes": "{} New Notes"
 }

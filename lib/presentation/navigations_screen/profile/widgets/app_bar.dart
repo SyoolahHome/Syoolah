@@ -44,6 +44,10 @@ class CustomAppBar extends PreferredSize {
       actions: <Widget>[
         IconButton(
           icon: const Icon(FlutterRemix.more_2_line),
+          style: IconButton.styleFrom(
+            backgroundColor:
+                Theme.of(context).colorScheme.onBackground.withOpacity(.2),
+          ),
           onPressed: () {
             cubit.onMorePressed(
               context,

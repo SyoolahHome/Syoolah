@@ -8,6 +8,8 @@ import '../../presentation/youtube_video_full_screen/youtube_video_full_screen.d
 /// The responsible cubit about youtube video widget that is used to preview a video in the app.
 /// {@endtemplate}
 class YoutubeVideoWidgetCubit extends Cubit<Null> {
+  static final cubitsCache = <String, YoutubeVideoWidgetCubit>{};
+
   // The youtube video url.
   final String url;
 
@@ -44,7 +46,13 @@ class YoutubeVideoWidgetCubit extends Cubit<Null> {
   void _init() {
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
-      flags: const YoutubePlayerFlags(autoPlay: false),
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+      ),
     );
+
+    if (!cubitsCache.containsKey(url)) {
+      cubitsCache[url] = this;
+    }
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/custom_cached_network_image.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/about.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/app_bar.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants/abstractions/abstractions.dart';
 import '../../../constants/app_enums.dart';
 import '../../private_succes/widgets/key_section.dart';
+import 'widgets/banner.dart';
 
 class Profile extends BottomBarScreen {
   const Profile({super.key});
@@ -50,50 +53,76 @@ class Profile extends BottomBarScreen {
                     );
 
                     return Scaffold(
-                      appBar: CustomAppBar(userMetadata: metadata),
+                      backgroundColor: Colors.transparent,
                       body: NestedScrollView(
                         headerSliverBuilder: (context, innerBoxIsScrolled) {
                           return <Widget>[
-                            // SliverToBoxAdapter(
-                            //   child: MarginedBody(
-                            //     child: HeadTitle(title: "profile".tr()),
-                            //   ),
-                            // ),
                             SliverToBoxAdapter(
                               child: Builder(
                                 builder: (context) {
-                                  return MarginedBody(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        const SizedBox(height: height * 2),
-                                        ProfileHeader(metadata: metadata),
-                                        const SizedBox(height: height * 2),
-                                        ProfileName(
-                                          metadata: metadata,
-                                          pubKey: event?.pubkey ?? "",
-                                        ),
-                                        const SizedBox(height: height),
-                                        ProfileAbout(metadata: metadata),
-                                        const SizedBox(height: height * 2),
-                                        KeySection(
-                                          type: KeySectionType.publicKey,
-                                          showEyeIconButton: false,
-                                        ),
-                                        // PublicKeySection(),
-                                        const SizedBox(height: height * 2),
-                                        Animate(
-                                          effects: const <Effect>[
-                                            FadeEffect(),
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Stack(
+                                        fit: StackFit.loose,
+                                        children: <Widget>[
+                                          ProfileBanner(
+                                            metadata: metadata,
+                                            child: MarginedBody(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  CustomAppBar(
+                                                    userMetadata: metadata,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: height * 2,
+                                                  ),
+                                                  ProfileHeader(
+                                                    metadata: metadata,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: height * 3,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      MarginedBody(
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(
+                                              height: height * 2,
+                                            ),
+                                            ProfileName(
+                                              metadata: metadata,
+                                              pubKey: event?.pubkey ?? "",
+                                            ),
+                                            const SizedBox(height: height),
+                                            ProfileAbout(metadata: metadata),
+                                            const SizedBox(height: height * 2),
+                                            KeySection(
+                                              type: KeySectionType.publicKey,
+                                              showEyeIconButton: false,
+                                            ),
+                                            // PublicKeySection(),
+                                            const SizedBox(height: height * 2),
+                                            Animate(
+                                              effects: const <Effect>[
+                                                FadeEffect(),
+                                              ],
+                                              delay: 1000.ms,
+                                              child: const OrDivider(),
+                                            ),
+                                            const SizedBox(height: height * 2),
+                                            const ProfileTabs(),
                                           ],
-                                          delay: 1000.ms,
-                                          child: const OrDivider(),
                                         ),
-                                        const SizedBox(height: height * 2),
-                                        const ProfileTabs(),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   );
                                 },
                               ),

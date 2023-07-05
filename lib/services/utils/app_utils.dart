@@ -1,12 +1,18 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/app_enums.dart';
+import '../database/local/local_database.dart';
+import '../nostr/nostr_service.dart';
 
 abstract class AppUtils {
   static int chatUserIdCounter = 0;
@@ -80,5 +86,37 @@ abstract class AppUtils {
 
   static Future<void> changeLocale(BuildContext context, Locale locale) {
     return context.setLocale(locale);
+  }
+
+  static Future<void> initialize() async {
+    final binding = WidgetsFlutterBinding.ensureInitialized();
+
+    HttpOverrides.global = MyHttpOverrides();
+
+    Animate.restartOnHotReload = kDebugMode;
+    Animate.defaultCurve = Curves.easeInOut;
+
+    final box = await LocalDatabase.instance.init();
+
+    NostrService.instance.init();
+
+    await EasyLocalization.ensureInitialized();
+
+    Bloc.observer = Routing.blocObserver;
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) {
+        return true;
+      };
   }
 }

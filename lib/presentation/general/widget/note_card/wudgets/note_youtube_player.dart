@@ -20,7 +20,9 @@ class NoteYoutubePlayer extends StatelessWidget {
           create: (context) => YoutubeVideoWidgetCubit(url),
           child: Builder(
             builder: (context) {
-              final cubit = context.read<YoutubeVideoWidgetCubit>();
+              final cubit = YoutubeVideoWidgetCubit.cubitsCache[url] ??
+                  context.read<YoutubeVideoWidgetCubit>();
+
               final youtubeController = cubit.controller;
 
               return YoutubePlayer(
