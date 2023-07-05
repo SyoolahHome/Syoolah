@@ -1,12 +1,23 @@
 import 'package:dart_openai/openai.dart';
 import 'package:equatable/equatable.dart';
 
+/// {@template chat_message}
+/// A model that holds data related to one Imam conversation message.
+/// {@endtemplate}
 class ChatMessage extends Equatable {
+  /// The actual message text.
   final String message;
+
+  /// The role of the owner of this system, this leverages the enum from [dart_openai] package.
   final OpenAIChatMessageRole role;
+
+  /// The identifier of this message, this is necessary for the cubit state that create & manage messages.
   final String id;
+
+  /// THe date of creation of this message
   final DateTime createdAt;
 
+  /// {@macro chat_message}
   const ChatMessage({
     required this.message,
     required this.role,
@@ -22,6 +33,7 @@ class ChatMessage extends Equatable {
         createdAt,
       ];
 
+  /// {@macro chat_message}
   ChatMessage copyWith({
     String? message,
     OpenAIChatMessageRole? role,
@@ -36,12 +48,14 @@ class ChatMessage extends Equatable {
     );
   }
 
+  /// Return a new [ChatMessage] instance using the current one, but accumulating the given [message] with the current's, so we get like-stream functionality to be used.
   ChatMessage accumulateMessage(String message) {
     return copyWith(
       message: this.message + message,
     );
   }
 
+  /// returns a [OpenAIChatCompletionChoiceMessageModel] object which is the wrapper model that is accepted by the [dart_openai] package, so it make it more easier to leverage commutation between dependencies.
   OpenAIChatCompletionChoiceMessageModel toOpenAIChatMessage() {
     return OpenAIChatCompletionChoiceMessageModel(
       role: role,
@@ -49,6 +63,8 @@ class ChatMessage extends Equatable {
     );
   }
 
+  /// {@macro chat_message}
+  /// This is an message for the user [role].
   factory ChatMessage.user({
     required String message,
     required String id,
@@ -61,6 +77,9 @@ class ChatMessage extends Equatable {
       createdAt: createdAt ?? DateTime.now(),
     );
   }
+
+  /// {@macro chat_message}
+  /// This is an message for the system [role].
   factory ChatMessage.system({
     required String message,
     required String id,
@@ -74,6 +93,8 @@ class ChatMessage extends Equatable {
     );
   }
 
+  /// {@macro chat_message}
+  /// This is an message for the assistant [role].
   factory ChatMessage.assistant({
     required String message,
     required String id,
