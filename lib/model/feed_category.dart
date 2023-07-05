@@ -3,13 +3,29 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_enums.dart';
 
+/// {@template feed_category}
+/// A model class that represents a category of M feeds.
+/// {@endtemplate}
+@immutable
 class FeedCategory extends Equatable {
+  /// Th name of the feed to be shown.
   final String name;
+
+  /// The route path to be navigated to when the user taps on the box that represents the feed category.
   final String path;
+
+  /// The description to be shown for this feed category.
   final String description;
+
+  /// Weither this feed is selected or not by the user.
   final bool isSelected;
+
+  /// An icon that will be shown in the box representing the feed category.
   final IconData icon;
+
+  /// An enum that represents the topic/category of this feed.
   final MunawarahTopics enumValue;
+
   @override
   List<Object?> get props => [
         name,
@@ -20,6 +36,7 @@ class FeedCategory extends Equatable {
         enumValue,
       ];
 
+  /// {@macro feed_category}
   const FeedCategory({
     required this.name,
     required this.description,
@@ -29,17 +46,12 @@ class FeedCategory extends Equatable {
     required this.enumValue,
   });
 
+  /// returns a new [FeedCategory], with [isSelected] field set to [value].
   FeedCategory toggleSelected(bool value) {
-    return FeedCategory(
-      name: this.name,
-      description: this.description,
-      icon: this.icon,
-      isSelected: value,
-      path: this.path,
-      enumValue: this.enumValue,
-    );
+    return copyWith(isSelected: value);
   }
 
+  /// {@macro feed_category}
   FeedCategory copyWith({
     String? name,
     String? description,
