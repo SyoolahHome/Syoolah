@@ -148,7 +148,7 @@ abstract class AlertsService {
     required Future<void> Function() onPickFromGallery,
     required Future<void> Function() onTakePhoto,
     required Future<bool> Function() onBannerPickedOrTaken,
-    required Future<void Function()> Function() onRemove,
+    required Future<void> Function() onRemove,
     required Future<void> Function() onEnd,
     required void Function() onFullView,
     required BlocBase cubit,

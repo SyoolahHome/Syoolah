@@ -55,9 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<AppCubit>.value(value: Routing.appCubit),
       ],
-      child: StreamBuilder(
+      child: StreamBuilder<bool>(
         stream: LocalDatabase.instance.themeStateListenable(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           return MaterialApp(
             useInheritedMediaQuery: true,
             locale: AppConfigs.showPreviewMode

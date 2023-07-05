@@ -104,7 +104,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   /// Removes the picked image ([state.pickedAvatarImage]).
   void removeAvatar() {
-    emit(state.copyWith());
+    emit(state.copyWithNullAvatar());
     try {
       final currentUsermetadata = UserMetaData.fromJson(
         jsonDecode(state.currentUserMetadata?.content ?? "{}")
@@ -125,7 +125,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void removeBanner() {
     try {
-      emit(state.copyWith());
+      emit(state.copyWithNullBanner());
       final currentUsermetadata = UserMetaData.fromJson(
         jsonDecode(state.currentUserMetadata?.content ?? "{}")
             as Map<String, dynamic>,
@@ -245,7 +245,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       onPickFromGallery: pickAvatarFromGallery,
       onTakePhoto: pickAvatarFromCamera,
       onAvatarPickedOrTaken: uploadPictureAndSet,
-      onRemove: () async => removeAvatar,
+      onRemove: () async => removeAvatar(),
       onEnd: onEnd,
       cubit: cubit,
       onFullView: onFullView,
@@ -263,7 +263,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       onPickFromGallery: pickBannerFromGallery,
       onTakePhoto: pickBannerFromCamera,
       onBannerPickedOrTaken: uploadBannerAndSet,
-      onRemove: () async => removeBanner,
+      onRemove: () async => removeBanner(),
       onEnd: onEnd,
       onFullView: onFullView,
       cubit: cubit,

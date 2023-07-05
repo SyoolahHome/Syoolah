@@ -82,6 +82,36 @@ class ProfileState extends Equatable {
     );
   }
 
+// {@macro profile_state}
+  ProfileState copyWithNullAvatar() {
+    return ProfileState(
+      profileTabsItems: this.profileTabsItems,
+      error: this.error,
+      currentUserMetadata: this.currentUserMetadata,
+      pickedAvatarImage: null,
+      pickedBannerImage: this.pickedBannerImage,
+      followersCount: this.followersCount,
+      followingCount: this.followingCount,
+      profileAvatarScale: this.profileAvatarScale,
+      isLoading: this.isLoading,
+    );
+  }
+
+// {@macro profile_state}
+  ProfileState copyWithNullBanner() {
+    return ProfileState(
+      profileTabsItems: this.profileTabsItems,
+      error: this.error,
+      currentUserMetadata: this.currentUserMetadata,
+      pickedAvatarImage: this.pickedAvatarImage,
+      pickedBannerImage: null,
+      followersCount: this.followersCount,
+      followingCount: this.followingCount,
+      profileAvatarScale: this.profileAvatarScale,
+      isLoading: this.isLoading,
+    );
+  }
+
   /// {@macro profile_state}
   factory ProfileState.initial({
     required List<TabItem> profileTabsItems,

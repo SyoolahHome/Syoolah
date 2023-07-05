@@ -56,10 +56,7 @@ class UserMetaData extends Equatable {
     final json = {...jsonData};
 
     json.forEach((key, value) {
-      if (
-          // value == ""
-          // ||
-          value == null) {
+      if (value == "" || value == null) {
         json[key] = null;
       }
     });
