@@ -5,13 +5,27 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../presentation/general/widget/button.dart';
 import 'loclal_item.dart';
 
+/// {@template bottom_sheet_option}
+/// A model holding data related to one bottom sheet to be shown as a standalone option.
+/// {@endtemplate}
 class BottomSheetOption extends Equatable {
+  /// The title to be shown, like an order/description of the option.
   final String title;
+
+  /// The icon to be shown in the leading of the option tile.
   final IconData icon;
+
+  /// The callback of the option when it is clicked by the user.
+  final VoidCallback? onPressed;
+
+  /// The message to be used when the [onPressed] is resolved succesfully.
   final String? successMessage;
+
+  /// The message to be shown when the [onPressed] is resolved with an error.
   final String? errorMessage;
+
+  /// The trailing of the bottom sheet option if it exists.
   final Widget? trailing;
-  final void Function()? onPressed;
 
   @override
   List<Object?> get props => [
@@ -23,6 +37,7 @@ class BottomSheetOption extends Equatable {
         trailing,
       ];
 
+  /// {@macro bottom_sheet_option}
   const BottomSheetOption({
     required this.title,
     required this.icon,
