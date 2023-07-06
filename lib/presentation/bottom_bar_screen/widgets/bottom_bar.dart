@@ -5,6 +5,7 @@ import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../chat_modules/chat_modules.dart';
 
@@ -35,13 +36,26 @@ class CustomBottomBar extends StatelessWidget {
             animationDuration: Animate.defaultDuration,
             destinations: items.indexedMap(
               (index, item) {
+                final isImam =
+                    item.screen is ChatModules && item.svgIconPath != null;
+
                 Widget possibleWidget = NavigationDestination(
-                  icon: Icon(item.icon),
+                  icon: isImam
+                      ? SvgPicture.asset(
+                          item.svgIconPath!,
+                          width: 45,
+                          height: 45,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.background,
+                            BlendMode.srcIn,
+                          ),
+                        )
+                      : Icon(item.icon),
                   selectedIcon: Icon(item.selectedIcon),
                   label: item.label,
                 );
 
-                if (item.screen is ChatModules) {
+                if (isImam) {
                   possibleWidget = Stack(
                     clipBehavior: Clip.none,
                     alignment: Alignment.bottomCenter,

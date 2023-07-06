@@ -36,6 +36,7 @@ class BottomBarCubit extends Cubit<int> {
         BottomBarItem(
           screen: const ChatModules(),
           label: 'imam'.tr(),
+          svgIconPath: "assets/images/imam.svg",
           icon: FlutterRemix.message_3_line,
           selectedIcon: FlutterRemix.message_3_fill,
         ),

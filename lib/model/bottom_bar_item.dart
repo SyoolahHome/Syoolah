@@ -20,24 +20,30 @@ class BottomBarItem extends Equatable {
   /// An icon to be shown in the bottom bar when this item is selected
   final IconData selectedIcon;
 
+  /// an svg icon path if it exists for the current item.
+  final String? svgIconPath;
+
   /// {@macro bottom_bar_item}
   const BottomBarItem({
     required this.screen,
     required this.label,
     required this.icon,
     required this.selectedIcon,
+    this.svgIconPath,
   });
 
   factory BottomBarItem.withExclusiveIcon({
     required BottomBarScreen screen,
     required String label,
     required IconData exclusiveIcon,
+    String? svgIconPath,
   }) {
     return BottomBarItem(
       screen: screen,
       label: label,
       icon: exclusiveIcon,
       selectedIcon: exclusiveIcon,
+      svgIconPath: svgIconPath,
     );
   }
 
@@ -47,5 +53,6 @@ class BottomBarItem extends Equatable {
         label,
         icon,
         selectedIcon,
+        svgIconPath,
       ];
 }
