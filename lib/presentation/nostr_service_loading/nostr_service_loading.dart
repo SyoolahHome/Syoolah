@@ -20,7 +20,10 @@ class NostrServiceLoading extends StatelessWidget {
                 final weAreGood = state == true;
 
                 if (weAreGood) {
-                  Navigator.of(context).pushReplacementNamed(Paths.bottomBar);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    Paths.bottomBar,
+                    (_) => false,
+                  );
                 }
               },
               builder: (context, state) {

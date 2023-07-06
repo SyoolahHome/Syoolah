@@ -86,7 +86,7 @@ class SuccessAccountMade extends StatelessWidget {
                   icon: FlutterRemix.arrow_right_line,
                   isSmall: true,
                   onTap: () {
-                    final val = Navigator.of(context)
+                    Navigator.of(context)
                         .pushReplacementNamed(Paths.nostrServiceLoading);
                   },
                   text: 'letsGo'.tr(),

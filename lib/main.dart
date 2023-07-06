@@ -21,7 +21,7 @@ Future<void> main() async {
   if (AppConfigs.showPreviewMode) {
     appMainWidget = DevicePreview(
         enabled: true,
-        builder: (context) {
+        builder: (BuildContext context) {
           return EasyLocalization(
             supportedLocales: AppConfigs.locales,
             path: AppConfigs.translationsPath,
@@ -35,14 +35,17 @@ Future<void> main() async {
       path: AppConfigs.translationsPath,
       fallbackLocale: AppConfigs.fallbackLocale,
       child: appMainWidget,
-    ); // Wrap your app
+    );
+    // Wrap your app
   }
 
   runApp(appMainWidget);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -15,6 +15,7 @@ class ProfileBanner extends StatelessWidget {
   });
 
   final UserMetaData metadata;
+
   final Widget child;
   @override
   Widget build(BuildContext context) {
