@@ -318,6 +318,16 @@ abstract class AppConfigs {
     "What are the five pillars of islam?",
     "What is the name of the last prophet?",
     "How many prophets are there in islam?",
+    'What is the significance of the Five Pillars of Islam?',
+    'Can you explain the concept of tawhid in Islam?',
+    'What is the holy book of Islam called? Who is its final prophet?',
+    'What are the basic requirements for performing Salah (Islamic prayer)?',
+    'What are the major Islamic holidays and their significance?',
+    'What is the meaning and purpose of the Islamic call to prayer (Adhan)?',
+    'Can you explain the concept of halal and haram in Islam?',
+    'What is the role of mosques in Islamic worship and community life?',
+    'What is the importance of fasting during the month of Ramadan?',
+    'Can you explain the concept of zakat and its significance in Islam?',
   ];
 
   static final intermediateRecommendQuestions = const <String>[
@@ -326,10 +336,42 @@ abstract class AppConfigs {
     "What is Sirah?",
     "What was the message of the prophet?",
     "Who is the prophet's wifes?",
+    "What is the meaning of the word \"Islam\"?",
+    "Who is the prophet of Islam?",
+    "What is the holy book of Islam called?",
+    'How does the concept of jihad in Islam differ from its popular portrayal?',
+    'Can you explain the different schools of thought in Islamic jurisprudence?',
+    'What are the main principles of Islamic finance and banking?',
+    'How does the Hajj pilgrimage contribute to the unity of the Muslim community?',
+    'What are the ethical guidelines for conducting business transactions in Islam?',
+    'What is the role of women in Islamic scholarship and leadership?',
+    'Can you explain the concept of qiyas (analogical reasoning) in Islamic law?',
+    'What are the main teachings and practices of Sufism in Islam?',
+    'How does Islam view the relationship between science and religion?',
+    'What is the concept of martyrdom (shahada) in Islam and its significance?',
   ];
 
   static final advancedRecommendQuestions = const <String>[
-    // TODO:
+    "What is the meaning of the word \"Islam\"?",
+    "Who is the prophet of Islam?",
+    "What is the holy book of Islam called?",
+    "What is the significance of the Kaaba in Islam?",
+    "What is the difference between Sunni and Shia Muslims?",
+    "What are the Five Pillars of Islam?",
+    "What is the importance of prayer in Islam?",
+    "What is the month of Ramadan and why is it important in Islam?",
+    "What is Zakat and why is it important in Islam?",
+    "Which are the two major sects of Islam?",
+    'What are the various interpretations of the Quranic verses related to women\'s rights?',
+    'Can you discuss the historical development of Sufism in the Islamic tradition?',
+    'What are the different branches and sects within Islam, and what differentiates them?',
+    'How has Islamic art and architecture evolved throughout history?',
+    'Can you explain the concept of predestination (qadar) in Islam and the debates surrounding it?',
+    'What is the Islamic perspective on human rights and social justice?',
+    'What are the major contributions of Muslim scholars to various fields of knowledge?',
+    'Can you explain the concept of ijma (consensus) in Islamic decision-making?',
+    'How does Islamic environmental ethics emphasize stewardship of the Earth?',
+    'What are the key teachings and practices of the Ahl al-Bayt (the family of Prophet Muhammad) in Shia Islam?',
   ];
 
   static List<ReportOption> reportOptions =
