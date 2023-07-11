@@ -1,4 +1,5 @@
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
+import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -60,40 +61,36 @@ class NoteCommentsSection extends StatelessWidget {
                   return Scaffold(
                     appBar: CustomAppBar(noteContents: note!.noteOnly),
                     body: MarginedBody(
-                      child: Column(
-                        children: <Widget>[
-                          const SizedBox(height: 10.0),
-                          NotePlaceholderCard(
-                            note: note!,
-                            avatarUrl: avatarUrl!,
-                            nameToShow: nameToShow!,
-                            appCurrentUserPublicKey: appCurrentUserPublicKey!,
-                            noteOwnerUserPubKey: noteOwnerUserPubKey!,
-                          ),
-                          const SizedBox(height: 15),
-                          HeadTitle(
-                            title: "comments".tr(),
-                            isForSection: true,
-                            minimizeFontSizeBy: 10.0,
-                          ),
-                          const SizedBox(height: 10.0),
-                          Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.noteComments.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                final current = state.noteComments[index];
-
-                                return CommentWidget(
-                                  commentEvent: current,
-                                  index: index,
-                                );
-                              },
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const SizedBox(height: 10.0),
+                            NotePlaceholderCard(
+                              note: note!,
+                              avatarUrl: avatarUrl!,
+                              nameToShow: nameToShow!,
+                              appCurrentUserPublicKey: appCurrentUserPublicKey!,
+                              noteOwnerUserPubKey: noteOwnerUserPubKey!,
                             ),
-                          ),
-                          CommentField(noteId: note!.event.id),
-                          SizedBox(height: MarginedBody.defaultMargin.left),
-                        ],
+                            const SizedBox(height: 15),
+                            HeadTitle(
+                              title: "comments".tr(),
+                              isForSection: true,
+                              minimizeFontSizeBy: 10.0,
+                            ),
+                            const SizedBox(height: 10.0),
+                            ...state.noteComments.indexedMap(
+                              (index, current) => CommentWidget(
+                                commentEvent: current,
+                                index: index,
+                              ),
+                            ),
+                            const SizedBox(height: 10.0),
+                            SizedBox(height: MarginedBody.defaultMargin.left),
+                            CommentField(noteId: note!.event.id),
+                          ],
+                        ),
                       ),
                     ),
                   );
