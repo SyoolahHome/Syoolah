@@ -1,5 +1,3 @@
-// ignore_for_file: no-equal-arguments
-
 import 'package:ditto/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 

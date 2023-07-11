@@ -1,7 +1,9 @@
+import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/title.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class About extends StatefulWidget {
   const About({super.key});
@@ -14,6 +16,7 @@ class AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
+    final pars = "aboutContent".tr().split("\n");
 
     return Scaffold(
       appBar: AppBar(
@@ -23,15 +26,31 @@ class AboutState extends State<About> {
         child: Column(
           children: <Widget>[
             SizedBox(height: height * 3),
-            HeadTitle(
-              title: "about".tr(),
-              isForSection: true,
+            Animate(
+              effects: <Effect>[
+                FadeEffect(),
+                SlideEffect(
+                  begin: Offset(0, 0.5),
+                ),
+              ],
+              child: HeadTitle(
+                title: "about".tr(),
+                isForSection: true,
+              ),
             ),
             SizedBox(height: height * 3),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text("aboutContent".tr()),
-            ),
+            ...pars.indexedMap(
+              (index, item) => Animate(
+                delay: (200 + index * 100).ms,
+                effects: <Effect>[
+                  FadeEffect(),
+                  SlideEffect(
+                    begin: Offset(0, 0.5),
+                  ),
+                ],
+                child: Text(item),
+              ),
+            )
           ],
         ),
       ),

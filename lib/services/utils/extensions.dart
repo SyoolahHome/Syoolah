@@ -229,3 +229,7 @@ extension LocalItemListExtension on List<LocaleItem> {
     ).toList();
   }
 }
+
+extension BuildContextExtension on BuildContext {
+  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+}

@@ -21,7 +21,6 @@ class YoutubeVideoWidgetCubit extends Cubit<Null> {
     _init();
   }
 
-  /// TODO: review this feature.
   /// Opens the youtube video widget in full screen mode.
   void fullScreen(BuildContext context) async {
     final navigator = Navigator.of(context);

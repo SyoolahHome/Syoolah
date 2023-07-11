@@ -46,7 +46,7 @@ class CustomBottomBar extends StatelessWidget {
                           width: 45,
                           height: 45,
                           colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).iconTheme.color!,
                             BlendMode.srcIn,
                           ),
                         )

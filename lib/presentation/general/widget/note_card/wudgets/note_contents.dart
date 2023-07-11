@@ -5,6 +5,7 @@ import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:hashtagable/hashtagable.dart';
 
+import '../../../../../constants/app_colors.dart';
 import '../../../../multi_images_full_screens/multi_images_full_screens.dart';
 
 class NoteContents extends StatelessWidget {
@@ -32,7 +33,7 @@ class NoteContents extends StatelessWidget {
           textAlign: TextAlign.left,
           basicStyle: Theme.of(context).textTheme.labelLarge!,
           decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: Theme.of(context).primaryColor,
+                color: AppColors.blue,
               ),
         ),
         const SizedBox(height: 10),

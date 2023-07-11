@@ -17,27 +17,21 @@ Future<void> main() async {
   await AppUtils.initialize();
 
   Widget appMainWidget = MyApp();
+  Widget localizationWidget = EasyLocalization(
+    supportedLocales: AppConfigs.locales,
+    path: AppConfigs.translationsPath,
+    fallbackLocale: AppConfigs.fallbackLocale,
+    child: appMainWidget,
+  );
 
-  if (AppConfigs.showPreviewMode) {
-    appMainWidget = DevicePreview(
-        enabled: true,
-        builder: (BuildContext context) {
-          return EasyLocalization(
-            supportedLocales: AppConfigs.locales,
-            path: AppConfigs.translationsPath,
-            fallbackLocale: AppConfigs.fallbackLocale,
-            child: appMainWidget,
-          );
-        });
-  } else {
-    appMainWidget = EasyLocalization(
-      supportedLocales: AppConfigs.locales,
-      path: AppConfigs.translationsPath,
-      fallbackLocale: AppConfigs.fallbackLocale,
-      child: appMainWidget,
-    );
-    // Wrap your app
-  }
+  appMainWidget = AppConfigs.showPreviewMode
+      ? DevicePreview(
+          enabled: AppConfigs.showPreviewMode,
+          builder: (context) {
+            return localizationWidget;
+          },
+        )
+      : localizationWidget;
 
   runApp(appMainWidget);
 }
@@ -50,7 +44,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
-            create: (context) => Routing.authCubit, lazy: false),
+          create: (context) => Routing.authCubit,
+          lazy: false,
+        ),
         BlocProvider<HomePageAfterLoginCubit>.value(
           value: Routing.homePageAfterLoginCubit,
         ),

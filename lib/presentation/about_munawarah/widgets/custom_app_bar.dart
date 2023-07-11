@@ -11,6 +11,8 @@ class CustomAppBar extends PreferredSize {
 
   @override
   Widget build(BuildContext context) {
+    print("directionality: ${Directionality.of(context)}");
+
     return AppBar(
       backgroundColor: Colors.transparent,
       title: const MunawarahLogo(width: 50),

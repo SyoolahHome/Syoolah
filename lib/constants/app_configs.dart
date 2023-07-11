@@ -4,6 +4,7 @@ import 'package:ditto/model/loclal_item.dart';
 import 'package:ditto/model/search_option.dart';
 import 'package:ditto/model/settings_item.dart';
 import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -92,6 +93,11 @@ abstract class AppConfigs {
       applyText: "Apply",
       locale: Locale('en'),
       titleName: "English",
+    ),
+    const LocaleItem(
+      applyText: "تطبيق",
+      locale: Locale('ar'),
+      titleName: "Arabic",
     ),
     const LocaleItem(
       applyText: "Appliquer",
@@ -267,7 +273,7 @@ abstract class AppConfigs {
           alignment: Alignment.centerRight,
           scale: .75,
           child: Switch(
-            value: LocalDatabase.instance.getThemeState() ?? false,
+            value: LocalDatabase.instance.getThemeState() ?? context.isDarkMode,
             onChanged: (value) {
               cubit.switchDarkMode();
             },

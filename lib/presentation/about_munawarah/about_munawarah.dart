@@ -26,9 +26,7 @@ class AboutMunawarah extends StatelessWidget {
               SizedBox(height: height * 3),
               AboutMunawarahTitle(),
               SizedBox(height: height * 3),
-              Center(
-                child: OrDivider(color: AppColors.black),
-              ),
+              Center(child: OrDivider(color: AppColors.black)),
               SizedBox(height: height * 3),
               AboutMunawarahContent(),
               SizedBox(height: height * 3),
