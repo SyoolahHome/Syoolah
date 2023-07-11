@@ -36,32 +36,24 @@ class CommentWidget extends StatelessWidget {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               color: index % 2 == 0
-                  ? AppColors.lighGrey.withOpacity(.45)
+                  ? Theme.of(context)
+                      .colorScheme
+                      .onSurfaceVariant
+                      .withOpacity(.45)
                   : Colors.transparent,
               child: ListTile(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 7.5,
                   vertical: 5,
                 ),
-                title: Text(ownerMetadata.nameToShow()),
+                title: Text(
+                  ownerMetadata.nameToShow(),
+                ),
                 subtitle: Text(
                   commentEvent.content.capitalized,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                leading:
-                    // ClipOval(
-                    //   child: Container(
-                    //     width: 25,
-                    //     height: 25,
-                    //     decoration: BoxDecoration(
-                    //       color: Theme.of(context)
-                    //           .colorScheme
-                    //           .background
-                    //           .withOpacity(.2),
-                    //     ),
-                    //   ),
-                    // ),
-                    NoteOwnerAvatar(
+                leading: NoteOwnerAvatar(
                   size: 25,
                   avatarUrl: ownerMetadata.picture ??
                       commentOwnerPlaceholderMetadata.picture!,
@@ -76,9 +68,9 @@ class CommentWidget extends StatelessWidget {
                         isSmall: true,
                       ),
                       const SizedBox(width: 5.0),
-                      const Icon(
+                      Icon(
                         FlutterRemix.more_2_line,
-                        color: AppColors.black,
+                        color: Theme.of(context).colorScheme.background,
                       ),
                     ],
                   ),

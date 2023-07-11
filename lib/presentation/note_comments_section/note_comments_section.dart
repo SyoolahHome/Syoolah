@@ -60,38 +60,47 @@ class NoteCommentsSection extends StatelessWidget {
                 builder: (context, state) {
                   return Scaffold(
                     appBar: CustomAppBar(noteContents: note!.noteOnly),
-                    body: MarginedBody(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const SizedBox(height: 10.0),
-                            NotePlaceholderCard(
-                              note: note!,
-                              avatarUrl: avatarUrl!,
-                              nameToShow: nameToShow!,
-                              appCurrentUserPublicKey: appCurrentUserPublicKey!,
-                              noteOwnerUserPubKey: noteOwnerUserPubKey!,
+                    body: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: <Widget>[
+                        MarginedBody(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                const SizedBox(height: 10.0),
+                                NotePlaceholderCard(
+                                  note: note!,
+                                  avatarUrl: avatarUrl!,
+                                  nameToShow: nameToShow!,
+                                  appCurrentUserPublicKey:
+                                      appCurrentUserPublicKey!,
+                                  noteOwnerUserPubKey: noteOwnerUserPubKey!,
+                                ),
+                                const SizedBox(height: 15),
+                                HeadTitle(
+                                  title: "comments".tr(),
+                                  isForSection: true,
+                                  minimizeFontSizeBy: 10.0,
+                                ),
+                                const SizedBox(height: 10.0),
+                                ...state.noteComments.indexedMap(
+                                  (index, current) => CommentWidget(
+                                    key: ValueKey<String>(current.id),
+                                    commentEvent: current,
+                                    index: index,
+                                  ),
+                                ),
+                                const SizedBox(height: 10.0),
+                                SizedBox(
+                                  height: 200,
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 15),
-                            HeadTitle(
-                              title: "comments".tr(),
-                              isForSection: true,
-                              minimizeFontSizeBy: 10.0,
-                            ),
-                            const SizedBox(height: 10.0),
-                            ...state.noteComments.indexedMap(
-                              (index, current) => CommentWidget(
-                                commentEvent: current,
-                                index: index,
-                              ),
-                            ),
-                            const SizedBox(height: 10.0),
-                            SizedBox(height: MarginedBody.defaultMargin.left),
-                            CommentField(noteId: note!.event.id),
-                          ],
+                          ),
                         ),
-                      ),
+                        CommentField(noteId: note!.event.id),
+                      ],
                     ),
                   );
                 },

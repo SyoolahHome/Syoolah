@@ -9,14 +9,28 @@ import 'package:equatable/equatable.dart';
 
 part 'comment_state.dart';
 
+/// {@template comment_cubit}
+/// A responsible cubit for managing the state of a comment widget.
+/// {@endtemplate}
 class CommentWidgetCubit extends Cubit<CommentState> {
+  /// A Caching system for the user metadata, so we don't have to fetch it every time.
+  static final _cache = <String, UserMetaData>{};
+
+  /// The event of the comment.
   final NostrEvent commentEvent;
+
+  /// TODO: move the stream to be set from the outside.
   StreamSubscription? commentEventOwnerMetadataSub;
 
+  /// {@macro comment_cubit}
   CommentWidgetCubit({
     required this.commentEvent,
   }) : super(CommentInitial()) {
-    _init();
+    if (_cache.containsKey(commentEvent.pubkey)) {
+      emit(state.copyWith(commentOwnerMetadata: _cache[commentEvent.pubkey]));
+    } else {
+      _init();
+    }
   }
 
   @override
@@ -37,6 +51,8 @@ class CommentWidgetCubit extends Cubit<CommentState> {
       emit(state.copyWith(
         commentOwnerMetadata: metadata,
       ));
+
+      _cache[commentEvent.pubkey] = metadata;
     });
   }
 }
