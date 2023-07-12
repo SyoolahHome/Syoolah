@@ -2,9 +2,9 @@ import 'dart:math' as math;
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/note_comments/note_comments_cubit.dart';
+import '../../../services/utils/app_utils.dart';
 import '../../general/widget/margined_body.dart';
 
 class CustomAppBar extends PreferredSize {
@@ -24,7 +24,7 @@ class CustomAppBar extends PreferredSize {
       elevation: 0,
       leading: Navigator.canPop(context)
           ? IconButton(
-              icon: const Icon(FlutterRemix.arrow_left_line),
+              icon: Icon(AppUtils.directionality_arrow_left_line(context)),
               onPressed: () => Navigator.pop(context),
             )
           : null,

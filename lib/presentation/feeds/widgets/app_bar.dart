@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../services/utils/app_utils.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
@@ -20,8 +22,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       leading: Navigator.of(context).canPop()
           ? IconButton(
-              icon: const Icon(
-                FlutterRemix.arrow_left_fill,
+              icon: Icon(
+                AppUtils.directionality_arrow_left_fill(context),
                 size: 20,
               ),
               onPressed: () => Navigator.of(context).pop(),

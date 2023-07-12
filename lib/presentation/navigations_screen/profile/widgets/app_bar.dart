@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
+import '../../../../services/utils/app_utils.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -38,7 +39,7 @@ class CustomAppBar extends PreferredSize {
 
                 bottomBarCubit.onItemTapped(indexOfHomeScreen);
               },
-              icon: const Icon(FlutterRemix.arrow_left_fill),
+              icon: Icon(AppUtils.directionality_arrow_left_fill(context)),
             )
           : null,
       actions: <Widget>[

@@ -4,7 +4,8 @@ import 'package:ditto/presentation/sign_up/widgets/page_view_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../services/utils/app_utils.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -42,7 +43,7 @@ class CustomAppBar extends PreferredSize {
               }
             },
             icon: Icon(
-              FlutterRemix.arrow_left_line,
+              AppUtils.directionality_arrow_left_line(context),
               color: Theme.of(context).colorScheme.background,
             ),
           ),

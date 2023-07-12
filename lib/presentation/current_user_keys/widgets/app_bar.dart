@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../services/utils/app_utils.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -14,7 +15,7 @@ class CustomAppBar extends PreferredSize {
       elevation: 0,
       backgroundColor: Colors.transparent,
       leading: IconButton(
-        icon: const Icon(FlutterRemix.arrow_left_line),
+        icon: Icon(AppUtils.directionality_arrow_left_line(context)),
         onPressed: () => Navigator.pop(context),
       ),
     );

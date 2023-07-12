@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/abstractions/abstractions.dart';
 import '../constants/app_enums.dart';
 import '../presentation/general/text_field.dart';
 import '../presentation/private_succes/widgets/key_section.dart';

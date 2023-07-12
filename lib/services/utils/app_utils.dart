@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/app_enums.dart';
 import '../database/local/local_database.dart';
@@ -108,6 +109,22 @@ abstract class AppUtils {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+
+  static IconData directionality_arrow_left_fill(BuildContext context) {
+    final locale = context.locale;
+
+    return locale.languageCode.toLowerCase() == "ar"
+        ? FlutterRemix.arrow_right_fill
+        : AppUtils.directionality_arrow_left_fill(context);
+  }
+
+  static IconData directionality_arrow_left_line(BuildContext context) {
+    final locale = context.locale;
+
+    return locale.languageCode.toLowerCase() == "ar"
+        ? FlutterRemix.arrow_right_line
+        : AppUtils.directionality_arrow_left_line(context);
   }
 }
 

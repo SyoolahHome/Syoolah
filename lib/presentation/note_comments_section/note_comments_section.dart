@@ -91,10 +91,7 @@ class NoteCommentsSection extends StatelessWidget {
                                     index: index,
                                   ),
                                 ),
-                                const SizedBox(height: 10.0),
-                                SizedBox(
-                                  height: 200,
-                                ),
+                                const SizedBox(height: 200.0),
                               ],
                             ),
                           ),

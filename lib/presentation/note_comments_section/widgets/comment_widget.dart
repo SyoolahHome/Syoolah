@@ -1,5 +1,4 @@
 import 'package:dart_nostr/nostr/model/event.dart';
-import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
 import 'package:ditto/services/utils/extensions.dart';

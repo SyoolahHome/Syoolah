@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/profile/profile_cubit.dart';
-import '../../../general/custom_cached_network_image.dart';
 import '../../../general/widget/note_card/wudgets/image_full_view..dart';
 
 class ProfileBanner extends StatelessWidget {

@@ -5,6 +5,7 @@ import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/relay_configuration.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -232,4 +233,18 @@ extension LocalItemListExtension on List<LocaleItem> {
 
 extension BuildContextExtension on BuildContext {
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+}
+
+extension FlutterRemixExtension on FlutterRemix {
+  static IconData directionality_arrow_left_fill(BuildContext context) {
+    return context.locale.countryCode?.toLowerCase() == "ar"
+        ? FlutterRemix.arrow_right_fill
+        : FlutterRemix.arrow_left_fill;
+  }
+
+  static IconData directionality_arrow_left_line(BuildContext context) {
+    return context.locale.countryCode?.toLowerCase() == "ar"
+        ? FlutterRemix.arrow_right_line
+        : FlutterRemix.arrow_left_line;
+  }
 }

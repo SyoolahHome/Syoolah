@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditto/buisness_logic/profile/profile_cubit.dart';
 import 'package:ditto/model/user_meta_data.dart';
-import 'package:ditto/presentation/general/custom_cached_network_image.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/about.dart';
 import 'package:ditto/presentation/navigations_screen/profile/widgets/app_bar.dart';

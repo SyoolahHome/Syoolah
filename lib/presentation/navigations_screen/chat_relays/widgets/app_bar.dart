@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../../services/utils/app_utils.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -16,7 +17,7 @@ class CustomAppBar extends PreferredSize {
       backgroundColor: Theme.of(context).primaryColor,
       centerTitle: true,
       leading: InkWell(
-        child: const Icon(FlutterRemix.arrow_left_line),
+        child: Icon(AppUtils.directionality_arrow_left_line(context)),
         onTap: () {
           Navigator.pop(context);
         },

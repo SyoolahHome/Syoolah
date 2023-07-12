@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../services/utils/app_utils.dart';
+
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
     super.key,
@@ -20,7 +22,7 @@ class CustomAppBar extends PreferredSize {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: const Icon(FlutterRemix.arrow_left_line),
+        icon: Icon(AppUtils.directionality_arrow_left_line(context)),
       ),
       actions: <Widget>[
         MunawarahButton(
