@@ -127,7 +127,8 @@ abstract class BottomSheetService {
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
-        return AppUtils.widgetFromRoutePath(Paths.onBoardingSearch, context);
+        return AppUtils.instance
+            .widgetFromRoutePath(Paths.onBoardingSearch, context);
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
@@ -140,7 +141,8 @@ abstract class BottomSheetService {
       context: context,
       backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
       builder: (context) {
-        return AppUtils.widgetFromRoutePath(Paths.onBoardingRelays, context);
+        return AppUtils.instance
+            .widgetFromRoutePath(Paths.onBoardingRelays, context);
       },
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
@@ -199,7 +201,7 @@ abstract class BottomSheetService {
       builder: (context) {
         return SizedBox(
           height: height,
-          child: AppUtils.widgetFromRoutePath(route, context),
+          child: AppUtils.instance.widgetFromRoutePath(route, context),
         );
       },
       clipBehavior: Clip.hardEdge,

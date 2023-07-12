@@ -39,7 +39,8 @@ class CustomAppBar extends PreferredSize {
 
                 bottomBarCubit.onItemTapped(indexOfHomeScreen);
               },
-              icon: Icon(AppUtils.directionality_arrow_left_fill(context)),
+              icon: Icon(
+                  AppUtils.instance.directionality_arrow_left_fill(context)),
             )
           : null,
       actions: <Widget>[

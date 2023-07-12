@@ -161,7 +161,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void copyPrivateKey() {
-    AppUtils.copy(LocalDatabase.instance.getPrivateKey() ?? "");
+    AppUtils.instance.copy(LocalDatabase.instance.getPrivateKey() ?? "");
   }
 
   /// Move to the next sign up step during the flow steps.

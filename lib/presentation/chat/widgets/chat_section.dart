@@ -15,7 +15,7 @@ class MessageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ChatCubit>();
-    final hint = AppUtils.randomChatMessagePlaceholder();
+    final hint = AppUtils.instance.randomChatMessagePlaceholder();
 
     return Animate(
       delay: 1400.ms,

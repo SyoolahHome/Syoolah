@@ -17,7 +17,7 @@ class CustomAppBar extends PreferredSize {
       backgroundColor: Theme.of(context).primaryColor,
       centerTitle: true,
       leading: InkWell(
-        child: Icon(AppUtils.directionality_arrow_left_line(context)),
+        child: Icon(AppUtils.instance.directionality_arrow_left_line(context)),
         onTap: () {
           Navigator.pop(context);
         },

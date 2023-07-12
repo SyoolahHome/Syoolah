@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../services/utils/app_utils.dart';
 import '../../general/widget/button.dart';
 
 class GetStarted extends StatelessWidget {
@@ -18,7 +19,7 @@ class GetStarted extends StatelessWidget {
       ],
       delay: const Duration(milliseconds: 800),
       child: Stack(
-        alignment: Alignment.centerRight,
+        alignment: AppUtils.instance.centerHorizontalAlignment(context),
         children: <Widget>[
           SizedBox(
             width: double.infinity,
@@ -34,9 +35,9 @@ class GetStarted extends StatelessWidget {
             effects: const <Effect>[FadeEffect()],
             delay: const Duration(milliseconds: 1800),
             child: Padding(
-              padding: const EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Icon(
-                FlutterRemix.arrow_right_s_line,
+                AppUtils.instance.directionality_arrow_right_s_line(context),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),

@@ -55,7 +55,7 @@ class ChatCubit extends Cubit<ChatState> {
         controller.text.isEmpty ? state.currentHint! : controller.text;
 
     final currentMessagesList = state.messages;
-    final newMessageId = AppUtils.getChatUserId();
+    final newMessageId = AppUtils.instance.getChatUserId();
 
     final newMessage = ChatMessage.user(
       message: userMessage,
@@ -77,7 +77,7 @@ class ChatCubit extends Cubit<ChatState> {
   void _sendMessageBySystem(String message) {
     final currentMessagesList = state.messages;
 
-    final newMessageId = AppUtils.getChatSystemId();
+    final newMessageId = AppUtils.instance.getChatSystemId();
 
     var systemMessage = ChatMessage.system(
       message: "",
@@ -200,7 +200,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> copyMessage(ChatMessage message) {
-    return AppUtils.copy(
+    return AppUtils.instance.copy(
       message.message,
     );
   }
@@ -234,7 +234,7 @@ class ChatCubit extends Cubit<ChatState> {
   void copyMessages() {
     final messages = state.messages;
     final messagesText = messages.map((e) => e.message).join("\n");
-    AppUtils.copy(messagesText);
+    AppUtils.instance.copy(messagesText);
   }
 
   void clearMessages() {

@@ -14,29 +14,35 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../constants/app_enums.dart';
 import '../database/local/local_database.dart';
 import '../nostr/nostr_service.dart';
+import 'arabix_adapter_utils.dart';
 
-abstract class AppUtils {
-  static int chatUserIdCounter = 0;
-  static int chatSystemIdCounter = 0;
+class AppUtils with ArabicAdapterUtils {
+  static AppUtils _instance = AppUtils._();
+  static AppUtils get instance => _instance;
 
-  static String randomChatMessagePlaceholder() {
+  AppUtils._();
+
+  int chatUserIdCounter = 0;
+  int chatSystemIdCounter = 0;
+
+  String randomChatMessagePlaceholder() {
     final randomNumber =
         Random().nextInt(AppConfigs.chatMessagePlaceholders.length);
 
     return AppConfigs.chatMessagePlaceholders[randomNumber];
   }
 
-  static String getChatUserId() {
+  String getChatUserId() {
     chatUserIdCounter--;
     return chatUserIdCounter.toString();
   }
 
-  static String getChatSystemId() {
+  String getChatSystemId() {
     chatSystemIdCounter++;
     return chatSystemIdCounter.toString();
   }
 
-  static ScaffoldFeatureController displaySnackBar(
+  ScaffoldFeatureController displaySnackBar(
     BuildContext context,
     String content,
   ) {
@@ -48,7 +54,7 @@ abstract class AppUtils {
     return ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  static Future<void> copy(
+  Future<void> copy(
     String text, {
     void Function()? onSuccess,
     void Function()? onError,
@@ -64,7 +70,7 @@ abstract class AppUtils {
     }
   }
 
-  static String appLogoSelector(AppLogoStyle style) {
+  String appLogoSelector(AppLogoStyle style) {
     switch (style) {
       case AppLogoStyle.white:
         return 'assets/logo/white_no_bg.png';
@@ -77,7 +83,7 @@ abstract class AppUtils {
     }
   }
 
-  static Widget widgetFromRoutePath(String path, BuildContext context) {
+  Widget widgetFromRoutePath(String path, BuildContext context) {
     if (Routing.routes[path] != null) {
       return Routing.routes[path]!(context);
     } else {
@@ -85,11 +91,11 @@ abstract class AppUtils {
     }
   }
 
-  static Future<void> changeLocale(BuildContext context, Locale locale) {
+  Future<void> changeLocale(BuildContext context, Locale locale) {
     return context.setLocale(locale);
   }
 
-  static Future<void> initialize() async {
+  Future<void> initialize() async {
     final binding = WidgetsFlutterBinding.ensureInitialized();
 
     HttpOverrides.global = MyHttpOverrides();
@@ -111,20 +117,32 @@ abstract class AppUtils {
     ]);
   }
 
-  static IconData directionality_arrow_left_fill(BuildContext context) {
-    final locale = context.locale;
-
-    return locale.languageCode.toLowerCase() == "ar"
-        ? FlutterRemix.arrow_right_fill
-        : FlutterRemix.arrow_left_fill;
+  IconData directionality_arrow_left_fill(BuildContext context) {
+    return directionalityIcon(
+      context,
+      onArabicIcon: FlutterRemix.arrow_right_fill,
+      onNonArabicIcon: FlutterRemix.arrow_left_fill,
+    );
   }
 
-  static IconData directionality_arrow_left_line(BuildContext context) {
-    final locale = context.locale;
+  IconData directionality_arrow_left_line(BuildContext context) {
+    return directionalityIcon(
+      context,
+      onArabicIcon: FlutterRemix.arrow_right_line,
+      onNonArabicIcon: FlutterRemix.arrow_left_line,
+    );
+  }
 
-    return locale.languageCode.toLowerCase() == "ar"
-        ? FlutterRemix.arrow_right_line
-        : FlutterRemix.arrow_left_line;
+  IconData directionality_arrow_right_s_line(BuildContext context) {
+    return directionalityIcon(
+      context,
+      onArabicIcon: FlutterRemix.arrow_left_s_line,
+      onNonArabicIcon: FlutterRemix.arrow_right_s_line,
+    );
+  }
+
+  Alignment centerHorizontalAlignment(BuildContext context) {
+    return isArabic(context) ? Alignment.centerLeft : Alignment.centerRight;
   }
 }
 

@@ -147,7 +147,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Name: ${relayInformations?.name}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.name ?? '',
             );
           },
@@ -156,7 +156,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Description: ${relayInformations?.description}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.description ?? '',
             );
           },
@@ -165,7 +165,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Author: ${relayInformations?.pubkey}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.pubkey ?? '',
             );
           },
@@ -174,7 +174,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Contact: ${relayInformations?.contact}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.contact ?? '',
             );
           },
@@ -183,7 +183,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Software: ${relayInformations?.software}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.software ?? '',
             );
           },
@@ -192,7 +192,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Version: ${relayInformations?.version}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.version ?? '',
             );
           },
@@ -201,7 +201,7 @@ class AppCubit extends Cubit<AppState> {
           title: "Supported Nips: ${relayInformations?.supportedNips}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               relayInformations?.supportedNips.toString() ?? '',
             );
           },
@@ -218,7 +218,7 @@ class AppCubit extends Cubit<AppState> {
       options: AppConfigs.localeItems.toBottomSheetTranslationOptions(
         context,
         onEachTap: (localeItem) async {
-          await AppUtils.changeLocale(context, localeItem.locale);
+          await AppUtils.instance.changeLocale(context, localeItem.locale);
           Navigator.of(context).pop();
           SnackBars.text(
             context,

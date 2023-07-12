@@ -35,7 +35,7 @@ class MunawarahLogo extends StatelessWidget {
     final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
 
     final widget = Image.asset(
-      AppUtils.appLogoSelector(
+      AppUtils.instance.appLogoSelector(
         isDarkTheme ? AppLogoStyle.white : AppLogoStyle.black,
       ),
       width: width,

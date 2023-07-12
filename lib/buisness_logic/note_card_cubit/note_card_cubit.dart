@@ -72,7 +72,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Copy the note id to the clipboard.
   Future<void> copyNoteId() async {
-    await AppUtils.copy(
+    await AppUtils.instance.copy(
       note.event.id,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
@@ -83,7 +83,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   /// Copy the note image links to the clipboard.
   Future<void> copyImagesLinks() async {
     if (note.imageLinks.isNotEmpty) {
-      await AppUtils.copy(
+      await AppUtils.instance.copy(
         note.imageLinks.join('\n'),
         onSuccess: () =>
             emitIfOpen(state.copyWith(success: "copySuccess".tr())),
@@ -98,7 +98,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Copy the note event to the clipboard.
   Future<void> copyNoteEvent() async {
-    await AppUtils.copy(
+    await AppUtils.instance.copy(
       note.event.serialized(),
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
@@ -108,7 +108,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Copy the note owner pubkey to the clipboard.
   Future<void> copyNoteOwnerPubKey() async {
-    await AppUtils.copy(
+    await AppUtils.instance.copy(
       note.event.pubkey,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
@@ -118,7 +118,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Copy the note text content to the clipboard.
   Future<void> copyNoteContent() async {
-    await AppUtils.copy(
+    await AppUtils.instance.copy(
       note.noteOnly,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),

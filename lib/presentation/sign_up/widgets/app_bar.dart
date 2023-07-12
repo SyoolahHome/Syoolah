@@ -43,7 +43,7 @@ class CustomAppBar extends PreferredSize {
               }
             },
             icon: Icon(
-              AppUtils.directionality_arrow_left_line(context),
+              AppUtils.instance.directionality_arrow_left_line(context),
               color: Theme.of(context).colorScheme.background,
             ),
           ),

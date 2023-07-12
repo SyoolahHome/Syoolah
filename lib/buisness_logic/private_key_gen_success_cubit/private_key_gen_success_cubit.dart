@@ -29,7 +29,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
 
   /// Copies the private key.
   Future<void> copyPrivateKey(BuildContext context) async {
-    return AppUtils.copy(
+    return AppUtils.instance.copy(
       state.privateKey ?? "",
       onSuccess: () => SnackBars.text(context, "privateKeyCopied".tr()),
       onError: () => SnackBars.text(context, "error".tr()),
@@ -67,7 +67,7 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
 // //       return SnackBars.text(context, e.toString());
 // //     }
 // //
-    return AppUtils.copy(
+    return AppUtils.instance.copy(
       state.publicKey ??
           Nostr.instance.keysService.derivePublicKey(
               privateKey: LocalDatabase.instance.getPrivateKey()!),

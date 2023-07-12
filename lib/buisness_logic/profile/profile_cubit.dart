@@ -314,7 +314,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyPubKey".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               currentUserMetadataPubkey ?? "",
               onSuccess: () {
                 final shownSnackbarController = SnackBars.text(
@@ -329,7 +329,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyMetaDataEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               currentUserMetadataContent ?? "",
               onSuccess: () {
                 final shownSnackbarController =
@@ -342,7 +342,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyProfileEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               currentUserMetadata?.serialized() ?? "",
               onSuccess: () {
                 final shownSnackbarController =
@@ -355,7 +355,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyImageUrl".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               metadata.picture ?? "",
               onSuccess: () {
                 final shownSnackbarController =
@@ -368,7 +368,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           title: "copyUsername".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               metadata.username,
               onSuccess: () {
                 final shownSnackbarController =
@@ -399,7 +399,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.copyleft_line,
           title: "copyFollowingsKeys".tr(),
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               followings.join("\n"),
             );
           },

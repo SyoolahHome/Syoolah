@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-
 part 'feed_box_state.dart';
 
 /// {@template feed_box_cubit}
@@ -74,7 +73,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             title: "copyImagesLinks".tr(),
             icon: FlutterRemix.file_copy_line,
             onPressed: () {
-              AppUtils.copy(
+              AppUtils.instance.copy(
                 note.imageLinks.join("\n"),
                 onSuccess: () {
                   final shownSnackbarController =
@@ -92,7 +91,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
             title: "copyYoutubeUrl".tr(),
             icon: FlutterRemix.file_copy_line,
             onPressed: () {
-              AppUtils.copy(
+              AppUtils.instance.copy(
                 note.youtubeVideoLinks.first,
                 onSuccess: () {
                   final shownSnackbarController =
@@ -109,7 +108,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           title: "copyEventId".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               note.event.id,
               onSuccess: () {
                 final shownSnackbarController =
@@ -126,7 +125,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           title: "copyEvent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               note.event.serialized(),
               onSuccess: () {
                 final shownSnackbarController =
@@ -143,7 +142,7 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           title: "copyContent".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
-            AppUtils.copy(
+            AppUtils.instance.copy(
               note.noteOnly,
               onSuccess: () {
                 final shownSnackbarController =

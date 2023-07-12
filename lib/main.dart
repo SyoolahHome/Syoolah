@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'services/utils/app_utils.dart';
 
 Future<void> main() async {
-  await AppUtils.initialize();
+  await AppUtils.instance.initialize();
 
   Widget appMainWidget = MyApp();
   Widget localizationWidget = EasyLocalization(

@@ -21,7 +21,7 @@ class CustomAppBar extends PreferredSize {
       elevation: 0,
       leading: IconButton(
         icon: Icon(
-          AppUtils.directionality_arrow_left_line(context),
+          AppUtils.instance.directionality_arrow_left_line(context),
           color: Theme.of(context).colorScheme.background,
         ),
         onPressed: () {

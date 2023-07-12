@@ -17,10 +17,10 @@ class TweetWidget extends StatelessWidget {
   });
 
   String formatDate(int secondsUnixTimestamp) {
-    final date = DateTime.fromMillisecondsSinceEpoch(secondsUnixTimestamp * 1000,
-            isUtc: true,)
-        .toLocal()
-        .toString();
+    final date = DateTime.fromMillisecondsSinceEpoch(
+      secondsUnixTimestamp * 1000,
+      isUtc: true,
+    ).toLocal().toString();
     return date.substring(0, date.length - 4);
   }
 
@@ -57,7 +57,8 @@ class TweetWidget extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    AppUtils.displaySnackBar(context, "Soon In sha'Allah");
+                    AppUtils.instance
+                        .displaySnackBar(context, "Soon In sha'Allah");
                   },
                 ),
               ),
@@ -79,9 +80,12 @@ class TweetWidget extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   Clipboard.setData(
-                                      ClipboardData(text: pubkey),);
-                                  AppUtils.displaySnackBar(
-                                      context, 'Copied to clipboard: $pubkey',);
+                                    ClipboardData(text: pubkey),
+                                  );
+                                  AppUtils.instance.displaySnackBar(
+                                    context,
+                                    'Copied to clipboard: $pubkey',
+                                  );
                                 },
                               ),
                             ),
@@ -100,7 +104,7 @@ class TweetWidget extends StatelessWidget {
                             color: Colors.white70,
                           ),
                           onPressed: () {
-                            AppUtils.displaySnackBar(
+                            AppUtils.instance.displaySnackBar(
                               context,
                               "I'm useless for the moment",
                             );

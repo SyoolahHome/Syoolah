@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Navigator.of(context).canPop()
           ? IconButton(
               icon: Icon(
-                AppUtils.directionality_arrow_left_fill(context),
+                AppUtils.instance.directionality_arrow_left_fill(context),
                 size: 20,
               ),
               onPressed: () => Navigator.of(context).pop(),
