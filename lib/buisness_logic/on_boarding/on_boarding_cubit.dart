@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,6 +16,9 @@ part 'on_boarding_state.dart';
 /// The responsible cubit about the on boarding UI.
 /// {@endtemplate}
 class OnBoardingCubit extends Cubit<OnBoardingState> {
+  /// A public key - metadata nostr event (NIP01) pair caching system
+  static final _cache = <String, NostrEvent>{};
+
   /// The text field controller where the user can search for users via pubkey or identifier.
   TextEditingController? searchController;
 
@@ -70,6 +75,19 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       return;
     }
 
+    if (_cache.containsKey(searchQuery)) {
+      final event = _cache[searchQuery];
+      emit(state.copyWith(searchedUserEvent: event));
+
+      return;
+    }
+
+    emit(state.copyWith(searchingForUser: true));
+
+    Future.delayed(const Duration(seconds: 5), () {
+      emit(state.copyWith(searchingForUser: false));
+    });
+
     if (searchQuery.contains("@")) {
       const lengthOfEmailElems = 2;
 
@@ -94,13 +112,15 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       userStream = NostrService.instance.subs.userMetadata(pubKey);
       userSearchSub = userStream!.stream.listen(
         (event) {
-          emit(state.copyWith(searchedUser: event));
+          emit(state.copyWith(searchedUserEvent: event));
+          _cache[searchQuery] = event;
+          _cache[event.pubkey] = _cache[searchQuery]!;
         },
       );
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
-      emit(state.copyWith());
+      emit(state.copyWith(searchingForUser: false));
     }
   }
 

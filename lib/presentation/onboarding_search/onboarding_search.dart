@@ -4,6 +4,7 @@ import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
@@ -120,30 +121,37 @@ class OnBoardingSearch extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: height * 2),
-                          if (state.searchedUser != null)
-                            Builder(
-                              builder: (context) {
-                                final searchedUserMetadata =
-                                    UserMetaData.fromJson(
-                                  jsonDecode(state.searchedUser!.content)
-                                      as Map<String, dynamic>,
-                                );
+                          Builder(
+                            builder: (context) {
+                              if (state.searchedUserEvent != null) {
+                                final decoded =
+                                    jsonDecode(state.searchedUserEvent!.content)
+                                        as Map<String, dynamic>;
+
+                                final searchedUserEventMetadata =
+                                    UserMetaData.fromJson(decoded);
 
                                 return GestureDetector(
                                   onTap: () {},
                                   child: NoteAvatarAndName(
                                     appCurrentUserPublicKey:
                                         appCurrentUserPublicKey ?? "",
-                                    userPubKey: state.searchedUser!.pubkey,
-                                    avatarUrl: searchedUserMetadata.picture!,
+                                    userPubKey: state.searchedUserEvent!.pubkey,
+                                    avatarUrl:
+                                        searchedUserEventMetadata.picture!,
                                     memeberShipStartedAt:
-                                        state.searchedUser!.createdAt,
+                                        state.searchedUserEvent!.createdAt,
                                     nameToShow:
-                                        searchedUserMetadata.nameToShow(),
+                                        searchedUserEventMetadata.nameToShow(),
                                   ),
                                 );
-                              },
-                            ),
+                              } else if (state.searchingForUser) {
+                                return LoadingWidget();
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            },
+                          ),
                         ],
                       ),
                     ),

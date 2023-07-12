@@ -8,32 +8,44 @@ class OnBoardingState extends Equatable {
   final bool shouldShowSearchButton;
 
   /// The searched user.
-  final NostrEvent? searchedUser;
+  final NostrEvent? searchedUserEvent;
 
   /// An error if it exists.
   final String? error;
 
+  /// Weither or not the user is searching for a another user via identifier or pubkey.
+  ///
+  final bool searchingForUser;
+
   @override
-  List<Object?> get props => [shouldShowSearchButton, searchedUser, error];
+  List<Object?> get props => [
+        shouldShowSearchButton,
+        searchedUserEvent,
+        error,
+        searchingForUser,
+      ];
 
   /// {@macro on_boarding_state}
   const OnBoardingState({
     this.shouldShowSearchButton = false,
-    this.searchedUser,
+    this.searchedUserEvent,
     this.error,
+    this.searchingForUser = false,
   });
 
   /// {@macro on_boarding_state}
   OnBoardingState copyWith({
     bool? shouldShowSearchButton,
-    NostrEvent? searchedUser,
+    NostrEvent? searchedUserEvent,
     String? error,
+    bool? searchingForUser,
   }) {
     return OnBoardingState(
       shouldShowSearchButton:
           shouldShowSearchButton ?? this.shouldShowSearchButton,
-      searchedUser: searchedUser,
+      searchedUserEvent: searchedUserEvent,
       error: error,
+      searchingForUser: searchingForUser ?? this.searchingForUser,
     );
   }
 
