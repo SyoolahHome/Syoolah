@@ -42,123 +42,121 @@ class OnBoardingSearch extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final cubit = context.read<OnBoardingCubit>();
-
-          return BlocConsumer<OnBoardingCubit, OnBoardingState>(
+          return BlocListener<OnBoardingCubit, OnBoardingState>(
             listener: (context, state) {
               if (state.error != null) {
                 SnackBars.text(widgetContext, state.error!);
               }
             },
-            builder: (context, state) {
-              return SizedBox(
-                height: 575,
-                child: Scaffold(
-                  floatingActionButton: Animate(
-                    delay: const Duration(milliseconds: 1000),
-                    effects: const <Effect>[
-                      FadeEffect(),
-                      RotateEffect(begin: 0.1),
-                    ],
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        cubit.executeSearch();
+            child: SizedBox(
+              height: 575,
+              child: Scaffold(
+                floatingActionButton: Animate(
+                  delay: const Duration(milliseconds: 1000),
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    RotateEffect(begin: 0.1),
+                  ],
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      cubit.executeSearch();
+                    },
+                    child: BlocSelector<OnBoardingCubit, OnBoardingState, bool>(
+                      selector: (state) => state.shouldShowSearchButton,
+                      builder: (context, shouldShowSearchButton) {
+                        return AnimatedScale(
+                          duration: 200.ms,
+                          scale: shouldShowSearchButton ? 1.0 : 0.95,
+                          child: const Icon(FlutterRemix.search_line),
+                        );
                       },
-                      child: AnimatedScale(
-                        duration: const Duration(milliseconds: 200),
-                        scale: state.shouldShowSearchButton ? 1.0 : 0.95,
-                        child: const Icon(
-                          FlutterRemix.search_line,
-                        ),
-                      ),
-                    ),
-                  ),
-                  body: PatternWidget(
-                    child: MarginedBody(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const SizedBox(height: height * 2),
-                          BottomSheetTitleWithIconButton(
-                            title: "searchUser".tr(),
-                            onPop: () {
-                              cubit.resetSearch();
-                            },
-                          ),
-                          const SizedBox(height: height * 2),
-                          Animate(
-                            delay: const Duration(milliseconds: 200),
-                            effects: const <Effect>[
-                              FadeEffect(),
-                              SlideEffect(
-                                begin: Offset(0, 0.5),
-                              )
-                            ],
-                            child: Text(
-                              "identifierOrPuKey".tr(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(
-                                      color: Theme.of(context).hintColor),
-                            ),
-                          ),
-                          const SizedBox(height: height),
-                          const SearchField(),
-                          const SizedBox(height: height * 2),
-                          Animate(
-                            delay: const Duration(milliseconds: 600),
-                            effects: const <Effect>[
-                              FadeEffect(),
-                              SlideEffect(
-                                begin: Offset(0, 0.5),
-                              )
-                            ],
-                            child: const Center(
-                              child: OrDivider(
-                                color: AppColors.black,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: height * 2),
-                          Builder(
-                            builder: (context) {
-                              if (state.searchedUserEvent != null) {
-                                final decoded =
-                                    jsonDecode(state.searchedUserEvent!.content)
-                                        as Map<String, dynamic>;
-
-                                final searchedUserEventMetadata =
-                                    UserMetaData.fromJson(decoded);
-
-                                return GestureDetector(
-                                  onTap: () {},
-                                  child: NoteAvatarAndName(
-                                    appCurrentUserPublicKey:
-                                        appCurrentUserPublicKey ?? "",
-                                    userPubKey: state.searchedUserEvent!.pubkey,
-                                    avatarUrl:
-                                        searchedUserEventMetadata.picture!,
-                                    memeberShipStartedAt:
-                                        state.searchedUserEvent!.createdAt,
-                                    nameToShow:
-                                        searchedUserEventMetadata.nameToShow(),
-                                  ),
-                                );
-                              } else if (state.searchingForUser) {
-                                return LoadingWidget();
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ),
-              );
-            },
+                body: PatternWidget(
+                  child: MarginedBody(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: height * 2),
+                        BottomSheetTitleWithIconButton(
+                          title: "searchUser".tr(),
+                          onPop: () {
+                            cubit.resetSearch();
+                          },
+                        ),
+                        const SizedBox(height: height * 2),
+                        Animate(
+                          delay: const Duration(milliseconds: 200),
+                          effects: const <Effect>[
+                            FadeEffect(),
+                            SlideEffect(
+                              begin: Offset(0, 0.5),
+                            )
+                          ],
+                          child: Text(
+                            "identifierOrPuKey".tr(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: Theme.of(context).hintColor),
+                          ),
+                        ),
+                        const SizedBox(height: height),
+                        const SearchField(),
+                        const SizedBox(height: height * 2),
+                        Animate(
+                          delay: const Duration(milliseconds: 600),
+                          effects: const <Effect>[
+                            FadeEffect(),
+                            SlideEffect(
+                              begin: Offset(0, 0.5),
+                            )
+                          ],
+                          child: const Center(
+                            child: OrDivider(
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: height * 2),
+                        BlocBuilder<OnBoardingCubit, OnBoardingState>(
+                          builder: (context, state) {
+                            if (state.searchedUserEvent != null) {
+                              final decoded =
+                                  jsonDecode(state.searchedUserEvent!.content)
+                                      as Map<String, dynamic>;
+
+                              final searchedUserEventMetadata =
+                                  UserMetaData.fromJson(decoded);
+
+                              return GestureDetector(
+                                onTap: () {},
+                                child: NoteAvatarAndName(
+                                  appCurrentUserPublicKey:
+                                      appCurrentUserPublicKey ?? "",
+                                  userPubKey: state.searchedUserEvent!.pubkey,
+                                  avatarUrl: searchedUserEventMetadata.picture!,
+                                  memeberShipStartedAt:
+                                      state.searchedUserEvent!.createdAt,
+                                  nameToShow:
+                                      searchedUserEventMetadata.nameToShow(),
+                                ),
+                              );
+                            } else if (state.searchingForUser) {
+                              return LoadingWidget();
+                            } else {
+                              return SizedBox.shrink();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           );
         },
       ),
