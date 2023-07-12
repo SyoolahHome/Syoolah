@@ -7,6 +7,7 @@ import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import 'package:ditto/presentation/onboarding_search/widgets/search_field.dart';
@@ -15,6 +16,7 @@ import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,9 +29,10 @@ class OnBoardingSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext widgetContext) {
+    final privateKey = LocalDatabase.instance.getPrivateKey();
+
     const height = 10.0;
     String? appCurrentUserPublicKey;
-    final privateKey = LocalDatabase.instance.getPrivateKey();
 
     if (privateKey != null) {
       Nostr.instance.keysService.derivePublicKey(
@@ -42,6 +45,7 @@ class OnBoardingSearch extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final cubit = context.read<OnBoardingCubit>();
+
           return BlocListener<OnBoardingCubit, OnBoardingState>(
             listener: (context, state) {
               if (state.error != null) {
@@ -145,12 +149,19 @@ class OnBoardingSearch extends StatelessWidget {
                                 ),
                               );
                             } else if (state.searchingForUser) {
-                              return LoadingWidget();
+                              return Center(child: LoadingWidget());
                             } else {
                               return SizedBox.shrink();
                             }
                           },
                         ),
+                        if (kDebugMode)
+                          Center(
+                            child: MunawarahButton(
+                              onTap: cubit.clearCache,
+                              text: "clear cache (dev)",
+                            ),
+                          ),
                       ],
                     ),
                   ),

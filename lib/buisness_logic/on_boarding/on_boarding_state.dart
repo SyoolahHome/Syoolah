@@ -45,13 +45,15 @@ class OnBoardingState extends Equatable {
           shouldShowSearchButton ?? this.shouldShowSearchButton,
       searchedUserEvent: searchedUserEvent,
       error: error,
-      searchingForUser: searchingForUser ?? this.searchingForUser,
+      searchingForUser: error != null && this.searchingForUser
+          ? false
+          : (searchingForUser ?? this.searchingForUser),
     );
   }
 
   /// {@macro on_boarding_state}s
   factory OnBoardingState.initial() {
-    return const OnBoardingState();
+    return OnBoardingInitial();
   }
 }
 

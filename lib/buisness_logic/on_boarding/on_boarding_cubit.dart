@@ -10,6 +10,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/app_annotations.dart';
+
 part 'on_boarding_state.dart';
 
 /// {@template on_boarding_cubit}
@@ -88,27 +90,28 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       emit(state.copyWith(searchingForUser: false));
     });
 
-    if (searchQuery.contains("@")) {
-      const lengthOfEmailElems = 2;
-
-      if (searchQuery.split("@").length != lengthOfEmailElems) {
-        emit(state.copyWith(error: "invalidOnBoardingSearchInput".tr()));
-
-        return;
-      }
-      pubKey = await NostrService.instance.send.getPubKeyFromEmail(searchQuery);
-    } else {
-      const requiredHexLength = 64;
-      if (searchQuery.length != requiredHexLength) {
-        emit(state.copyWith(error: "invalidIdentifierOrPubKey".tr()));
-
-        return;
-      }
-
-      pubKey = searchQuery;
-    }
-
     try {
+      if (searchQuery.contains("@")) {
+        const lengthOfEmailElems = 2;
+
+        if (searchQuery.split("@").length != lengthOfEmailElems) {
+          emit(state.copyWith(error: "invalidOnBoardingSearchInput".tr()));
+
+          return;
+        }
+        pubKey =
+            await NostrService.instance.send.getPubKeyFromEmail(searchQuery);
+      } else {
+        const requiredHexLength = 64;
+        if (searchQuery.length != requiredHexLength) {
+          emit(state.copyWith(error: "invalidIdentifierOrPubKey".tr()));
+
+          return;
+        }
+
+        pubKey = searchQuery;
+      }
+
       userStream = NostrService.instance.subs.userMetadata(pubKey);
       userSearchSub = userStream!.stream.listen(
         (event) {
@@ -120,7 +123,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
-      emit(state.copyWith(searchingForUser: false));
+      // emit(state.copyWith(searchingForUser: false));
     }
   }
 
@@ -152,5 +155,13 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       await userSearchSub?.cancel();
       userSearchSub = null;
     }
+  }
+
+  /// Clears the cache of the [OnBoardingCubit], so we can test the search functionality.
+  @DevOnly()
+  void clearCache() {
+    final cachePassedByRef = _cache;
+
+    cachePassedByRef.clear();
   }
 }
