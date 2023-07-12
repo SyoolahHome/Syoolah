@@ -116,7 +116,7 @@ abstract class AppUtils {
 
     return locale.languageCode.toLowerCase() == "ar"
         ? FlutterRemix.arrow_right_fill
-        : AppUtils.directionality_arrow_left_fill(context);
+        : FlutterRemix.arrow_left_fill;
   }
 
   static IconData directionality_arrow_left_line(BuildContext context) {
@@ -124,7 +124,7 @@ abstract class AppUtils {
 
     return locale.languageCode.toLowerCase() == "ar"
         ? FlutterRemix.arrow_right_line
-        : AppUtils.directionality_arrow_left_line(context);
+        : FlutterRemix.arrow_left_line;
   }
 }
 
