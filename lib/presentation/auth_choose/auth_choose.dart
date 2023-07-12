@@ -18,33 +18,28 @@ class AuthChoose extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
-    final isShownInBottomSheet =
-        ModalRoute.of(context)?.settings.name != Paths.authChoose;
+    final routeSettings = ModalRoute.of(context)?.settings;
+
+    if (routeSettings == null) {
+      throw Exception(
+        "routeSettings is null, are you sure you're using this"
+        "widget in a route?",
+      );
+    }
+
+    final isShownInBottomSheet = routeSettings.name != Paths.authChoose;
 
     return Scaffold(
       body: PatternWidget(
         showPattern: isShownInBottomSheet,
         child: Stack(
           children: <Widget>[
-            if (isShownInBottomSheet) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: height * 2),
-                child: MarginedBody(
-                  child: BottomSheetTitleWithIconButton(
-                    title: "chooseAuth".tr(),
-                  ),
-                ),
-              ),
-            ] else ...[
-              const CustomAppBar(),
-            ],
+            CustomAppBar(isShownInBottomSheet: isShownInBottomSheet),
             MarginedBody(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // if (!isShownInBottomSheet) ...[
                   const SizedBox(height: kToolbarHeight),
-                  // ],
                   AuthChooseBox(
                     isShownInBottomSheet: isShownInBottomSheet,
                     additionalDelay: 0.ms,
@@ -55,10 +50,7 @@ class AuthChoose extends StatelessWidget {
                     targetRoutePath: Paths.SignUp,
                   ),
                   const SizedBox(height: height * 3),
-                  const OrDivider(
-                    onlyDivider: true,
-                    // color: Theme.of(context).primaryColorDark,
-                  ),
+                  const OrDivider(onlyDivider: true),
                   const SizedBox(height: height * 3),
                   AuthChooseBox(
                     isShownInBottomSheet: isShownInBottomSheet,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../services/utils/app_utils.dart';
+
 class AuthChooseBox extends StatelessWidget {
   const AuthChooseBox({
     super.key,
@@ -80,17 +82,30 @@ class AuthChooseBox extends StatelessWidget {
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      FlutterRemix.arrow_right_line,
-                      size: 15,
+                  children: <Widget>[
+                    Animate(
+                      delay: additionalDelay * 2,
+                      effects: <Effect>[
+                        SlideEffect(
+                          begin: Offset(-0.35, 0),
+                          end: Offset(0.35, 0),
+                          duration: 2500.ms,
+                        ),
+                      ],
+                      onComplete: (controller) =>
+                          controller.repeat(reverse: true),
+                      child: Icon(
+                        AppUtils.instance.directionalityIcon(
+                          context,
+                          onArabicIcon: FlutterRemix.arrow_left_fill,
+                          onNonArabicIcon: FlutterRemix.arrow_right_fill,
+                        ),
+                        size: 15,
+                      ),
                     ),
                     Animate(
-                      delay:
-                          const Duration(milliseconds: 1500) + additionalDelay,
-                      effects: const <Effect>[
-                        FadeEffect(),
-                      ],
+                      delay: 1500.ms + additionalDelay,
+                      effects: const <Effect>[FadeEffect()],
                       child: MunawarahButton(
                         isSmall: true,
                         onTap: onTap,
