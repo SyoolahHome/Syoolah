@@ -24,6 +24,7 @@ import '../../constants/app_enums.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
+import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
 
 abstract class BottomSheetService {
@@ -396,6 +397,24 @@ abstract class BottomSheetService {
       useRootNavigator: true,
       builder: (context) {
         return screen;
+      },
+    );
+  }
+
+  static void showOnBoardingSearchUserMetadataPropertiesSheet(
+    BuildContext context, {
+    required Iterable<MapEntry<String, dynamic>> properties,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return OnBoardingSearchUserMetadataPropertiesSheet(
+          properties: properties,
+        );
       },
     );
   }

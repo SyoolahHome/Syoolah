@@ -12,6 +12,7 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_avatat_and_name.dart';
 import 'package:ditto/presentation/onboarding_search/widgets/search_field.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:ditto/services/utils/snackbars.dart';
@@ -135,18 +136,35 @@ class OnBoardingSearch extends StatelessWidget {
                               final searchedUserEventMetadata =
                                   UserMetaData.fromJson(decoded);
 
-                              return GestureDetector(
-                                onTap: () {},
-                                child: NoteAvatarAndName(
-                                  appCurrentUserPublicKey:
-                                      appCurrentUserPublicKey ?? "",
-                                  userPubKey: state.searchedUserEvent!.pubkey,
-                                  avatarUrl: searchedUserEventMetadata.picture!,
-                                  memeberShipStartedAt:
-                                      state.searchedUserEvent!.createdAt,
-                                  nameToShow:
-                                      searchedUserEventMetadata.nameToShow(),
-                                ),
+                              return Column(
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: NoteAvatarAndName(
+                                      appCurrentUserPublicKey:
+                                          appCurrentUserPublicKey ?? "",
+                                      userPubKey:
+                                          state.searchedUserEvent!.pubkey,
+                                      avatarUrl:
+                                          searchedUserEventMetadata.picture!,
+                                      memeberShipStartedAt:
+                                          state.searchedUserEvent!.createdAt,
+                                      nameToShow: searchedUserEventMetadata
+                                          .nameToShow(),
+                                    ),
+                                  ),
+                                  SizedBox(height: height * 2),
+                                  IconButton(
+                                    icon: Icon(FlutterRemix.more_line),
+                                    onPressed: () {
+                                      BottomSheetService
+                                          .showOnBoardingSearchUserMetadataPropertiesSheet(
+                                        context,
+                                        properties: decoded.entries,
+                                      );
+                                    },
+                                  ),
+                                ],
                               );
                             } else if (state.searchingForUser) {
                               return Center(child: LoadingWidget());

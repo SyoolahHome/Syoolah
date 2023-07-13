@@ -10,6 +10,11 @@ class BottomSheetTitleWithIconButton extends StatelessWidget {
 
   final String title;
   final VoidCallback? onPop;
+
+  factory BottomSheetTitleWithIconButton.onlyCloseButton() {
+    return BottomSheetTitleWithIconButton(title: "");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
