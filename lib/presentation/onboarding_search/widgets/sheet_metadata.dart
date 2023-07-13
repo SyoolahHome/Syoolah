@@ -34,6 +34,7 @@ class OnBoardingSearchUserMetadataPropertiesSheet extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: propertiesAsList.indexedMap(
                     (index, entry) {
+                      // TODO: show the actual image from it's link directly.
                       return Container(
                         padding: EdgeInsets.all(10.0),
                         color: index % 2 == 0

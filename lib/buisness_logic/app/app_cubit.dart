@@ -198,7 +198,8 @@ class AppCubit extends Cubit<AppState> {
           },
         ),
         BottomSheetOption(
-          title: "Supported Nips: ${relayInformations?.supportedNips}",
+          title:
+              "Supported Nips: ${relayInformations?.supportedNips.map((e) => e.toString().padLeft(2, '0')).join(', ')}",
           icon: FlutterRemix.file_copy_2_line,
           onPressed: () {
             AppUtils.instance.copy(
