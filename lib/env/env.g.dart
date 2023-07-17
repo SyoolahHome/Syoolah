@@ -8,4 +8,5 @@ part of 'env.dart';
 
 class _Env {
   static const apiKey = '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';
+  static const appVersion = '1.0.0';
 }

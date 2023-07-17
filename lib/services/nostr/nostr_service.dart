@@ -18,6 +18,7 @@ class NostrService {
 
   Future<void> init({
     List<String>? relaysUrls,
+    bool disconnectFromAllFirst = false,
   }) async {
     relaysConnectionCompleter = Completer();
     final defaultRelaysUrls =
@@ -28,6 +29,7 @@ class NostrService {
       retryOnClose: true,
       shouldReconnectToRelayOnNotice: true,
       connectionTimeout: const Duration(seconds: 4),
+      ensureToClearRegistriesBeforeStarting: disconnectFromAllFirst,
     );
 
     relaysConnectionCompleter!.complete();

@@ -7,4 +7,7 @@ part 'env.g.dart';
 abstract class Env {
   @EnviedField(varName: 'OPEN_AI_KEY')
   static const apiKey = _Env.apiKey;
+
+  @EnviedField(varName: 'APP_VERSION')
+  static const appVersion = _Env.appVersion;
 }

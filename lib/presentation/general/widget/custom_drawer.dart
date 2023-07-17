@@ -107,6 +107,7 @@ class CustomDrawer extends StatelessWidget {
               delay: 1200.ms,
               effects: const <Effect>[FadeEffect()],
               child: Container(
+                alignment: Alignment.centerLeft,
                 padding: MarginedBody.defaultMargin,
                 child: Text(
                   "Munwarah App ${AppConfigs.version}",

@@ -99,11 +99,14 @@ class EmptyChatWidget extends StatelessWidget {
                                 const EdgeInsets.symmetric(vertical: 15.0),
                             child: Row(
                               children: <Widget>[
-                                Text(
-                                  current,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                Expanded(
+                                  child: Text(
+                                    current,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
                                 ),
-                                const Spacer(),
+                                const SizedBox(width: 5.0),
                                 const Icon(
                                   FlutterRemix.bubble_chart_line,
                                   size: 20,

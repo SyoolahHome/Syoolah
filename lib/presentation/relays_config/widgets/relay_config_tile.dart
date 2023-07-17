@@ -26,7 +26,9 @@ class RelayConfigTile extends StatelessWidget {
         );
       },
       splashFactory: NoSplash.splashFactory,
-      overlayColor: MaterialStateProperty.all(AppColors.lighGrey),
+      overlayColor: MaterialStateProperty.all(
+        Theme.of(context).colorScheme.onSecondaryContainer,
+      ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         padding: MarginedBody.defaultMargin,

@@ -1,3 +1,4 @@
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -70,7 +71,8 @@ class Nip05Verification extends StatelessWidget {
                   ),
                   Spacer(),
                   Stack(
-                    alignment: Alignment.centerRight,
+                    alignment:
+                        AppUtils.instance.centerHorizontalAlignment(context),
                     children: <Widget>[
                       CustomTextField(
                         controller: cubit.nip05Controller,
@@ -80,8 +82,8 @@ class Nip05Verification extends StatelessWidget {
                         hint: "newHintLightAdress".tr(),
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                          right: MarginedBody.defaultMargin.right,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: MarginedBody.defaultMargin.right,
                         ),
                         child: MunawarahButton(
                           additonalFontSize: 1,

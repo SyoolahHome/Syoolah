@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../services/utils/app_utils.dart';
 import '../general/pattern_widget.dart';
 import '../general/widget/bottom_sheet_title_with_button.dart';
 
@@ -83,7 +84,8 @@ class SuccessAccountMade extends StatelessWidget {
                 width: double.infinity,
                 height: 45,
                 child: MunawarahButton(
-                  icon: FlutterRemix.arrow_right_line,
+                  icon: AppUtils.instance
+                      .directionality_arrow_right_line(context),
                   isSmall: true,
                   onTap: () {
                     Navigator.of(context)

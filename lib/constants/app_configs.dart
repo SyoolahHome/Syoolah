@@ -14,6 +14,7 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../buisness_logic/settings/settings_cubit.dart';
+import '../env/env.dart';
 import '../model/relay_configuration.dart';
 import '../model/report_option.dart';
 import 'app_enums.dart';
@@ -384,7 +385,7 @@ abstract class AppConfigs {
       ReportType.values.map((type) => ReportOption(reportType: type)).toList();
 
   static const showPreviewMode = false;
-  static const version = '1.0.0';
+  static const version = Env.appVersion;
 
   static final feedDateRangePickerFirstDate = DateTime(2015, 8);
   static DateTime get feedDateRangePickerLastDate => DateTime.now();

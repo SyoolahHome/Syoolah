@@ -24,8 +24,8 @@ class ProfileIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         onTap: () {
           BottomSheetService.showRouteAsBottomSheet(
-            Paths.authChoose,
             context,
+            route: Paths.authChoose,
             height: 575,
           );
         },

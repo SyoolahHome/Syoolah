@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/utils/app_utils.dart';
+
 class HeadTitle extends StatelessWidget {
   const HeadTitle({
     super.key,
@@ -16,7 +18,8 @@ class HeadTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: alignment ?? Alignment.centerLeft,
+      alignment:
+          alignment ?? AppUtils.instance.centerTextHorizontalAlignment(context),
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(

@@ -83,15 +83,20 @@ class AppCubit extends Cubit<AppState> {
     final newRelaysConfigurations = state.relaysConfigurations.without(relay);
 
     emit(state.copyWith(relaysConfigurations: newRelaysConfigurations));
+    reconnectToRelays(disconnectFromAllFirst: true);
   }
 
   /// Reconnects/connects to all relays found from the current state
-  Future<void> reconnectToRelays() async {
+  Future<void> reconnectToRelays({
+    bool disconnectFromAllFirst = false,
+  }) async {
     try {
       emit(state.copyWith(isReconnecting: true));
+      final activeRelays = state.relaysConfigurations.activeUrls();
 
       await NostrService.instance.init(
-        relaysUrls: state.relaysConfigurations.activeUrls(),
+        relaysUrls: activeRelays,
+        disconnectFromAllFirst: disconnectFromAllFirst,
       );
     } catch (e) {
     } finally {
@@ -110,6 +115,8 @@ class AppCubit extends Cubit<AppState> {
         newRelaysConfigurations[index].copyWith(isActive: isActive);
 
     emit(state.copyWith(relaysConfigurations: newRelaysConfigurations));
+
+    reconnectToRelays(disconnectFromAllFirst: true);
   }
 
   /// A wrapper for showing the responsible bottom sheet about adding a new relay.

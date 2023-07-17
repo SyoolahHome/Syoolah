@@ -192,8 +192,8 @@ abstract class BottomSheetService {
   }
 
   static Future<void> showRouteAsBottomSheet(
-    String route,
     BuildContext context, {
+    required String route,
     double? height,
   }) {
     return showModalBottomSheet(

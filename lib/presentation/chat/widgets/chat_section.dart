@@ -26,7 +26,7 @@ class MessageSection extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 10) +
               MarginedBody.defaultMargin / 2,
           child: Stack(
-            alignment: Alignment.centerRight,
+            alignment: AppUtils.instance.centerHorizontalAlignment(context),
             children: <Widget>[
               CustomTextField(
                 focusNode: cubit.focusNode,

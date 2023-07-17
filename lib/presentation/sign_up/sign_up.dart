@@ -158,8 +158,8 @@ class SignUp extends StatelessWidget {
                         }
                         if (isLastView) {
                           BottomSheetService.showRouteAsBottomSheet(
-                            Paths.successAccountMade,
                             context,
+                            route: Paths.successAccountMade,
                           );
                           // final val = Navigator.of(context)
                           //     .pushNamed(Paths.successAccountMade);

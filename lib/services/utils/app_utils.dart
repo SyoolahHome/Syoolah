@@ -141,8 +141,20 @@ class AppUtils with ArabicAdapterUtils {
     );
   }
 
+  IconData directionality_arrow_right_line(BuildContext context) {
+    return directionalityIcon(
+      context,
+      onArabicIcon: FlutterRemix.arrow_left_line,
+      onNonArabicIcon: FlutterRemix.arrow_right_line,
+    );
+  }
+
   Alignment centerHorizontalAlignment(BuildContext context) {
     return isArabic(context) ? Alignment.centerLeft : Alignment.centerRight;
+  }
+
+  Alignment centerTextHorizontalAlignment(BuildContext context) {
+    return isArabic(context) ? Alignment.centerRight : Alignment.centerLeft;
   }
 }
 

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../services/utils/app_utils.dart';
+
 class FeedBox extends StatelessWidget {
   const FeedBox({
     super.key,
@@ -104,7 +106,8 @@ class FeedBox extends StatelessWidget {
                     ),
                     const SizedBox(height: 10.0),
                     Align(
-                      alignment: Alignment.centerRight,
+                      alignment:
+                          AppUtils.instance.centerHorizontalAlignment(context),
                       child: Animate(
                         delay: 800.ms,
                         effects: const [
