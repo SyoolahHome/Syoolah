@@ -14,6 +14,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../services/utils/app_utils.dart';
+
 class SignUp extends StatelessWidget {
   const SignUp({
     super.key,
@@ -209,7 +211,8 @@ class SignUp extends StatelessWidget {
                           width: double.infinity,
                           height: height,
                           child: Stack(
-                            alignment: Alignment.centerRight,
+                            alignment: AppUtils.instance
+                                .centerTextHorizontalAlignment(context),
                             fit: StackFit.expand,
                             children: <Widget>[
                               MunawarahButton(
@@ -221,12 +224,15 @@ class SignUp extends StatelessWidget {
                                 Animate(
                                   effects: const <Effect>[FadeEffect()],
                                   delay: 2000.ms,
-                                  child: Positioned(
-                                    right:
-                                        MarginedBody.defaultMargin.horizontal /
-                                            2,
+                                  child: Positioned.directional(
+                                    textDirection: Directionality.of(context),
+                                    end: MarginedBody.defaultMargin.horizontal /
+                                        2,
                                     child: Icon(
-                                      FlutterRemix.arrow_right_line,
+                                      AppUtils.instance
+                                          .directionality_arrow_right_line(
+                                        context,
+                                      ),
                                       size: 21,
                                       color: Theme.of(context)
                                           .colorScheme

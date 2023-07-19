@@ -11,47 +11,34 @@ class YoutubeVideoWidgetCubit extends Cubit<Null> {
   static final cubitsCache = <String, YoutubeVideoWidgetCubit>{};
 
   // The youtube video url.
-  final String url;
+  final String id;
 
   /// The youtube video controller.
   YoutubePlayerController? controller;
 
   /// {@macro youtube_video_widget_cubit}
-  YoutubeVideoWidgetCubit(this.url) : super(null) {
+  YoutubeVideoWidgetCubit(this.id) : super(null) {
     _init();
   }
 
-  /// Opens the youtube video widget in full screen mode.
-  void fullScreen(BuildContext context) async {
-    final navigator = Navigator.of(context);
-
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-
-    await navigator.push(
-      MaterialPageRoute(
-        builder: (context) => YoutubeVideoFullScreen(controller: controller!),
-      ),
-    );
-
-    await SystemChrome.setPreferredOrientations([
+  @override
+  Future<void> close() {
+    SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    return super.close();
   }
 
   void _init() {
     controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(url)!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-      ),
+      initialVideoId: id,
+      flags: const YoutubePlayerFlags(),
     );
 
-    if (!cubitsCache.containsKey(url)) {
-      cubitsCache[url] = this;
+    if (!cubitsCache.containsKey(id)) {
+      cubitsCache[id] = this;
     }
   }
 }

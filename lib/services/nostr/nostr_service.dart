@@ -11,6 +11,8 @@ class NostrService {
   static NostrService get instance => _instance;
   NostrService._();
 
+  final consts = _MunawarahNostrConstants();
+
   final subs = NostrServiceSub();
   final send = NostrServiceSend();
 
@@ -35,3 +37,5 @@ class NostrService {
     relaysConnectionCompleter!.complete();
   }
 }
+
+class _MunawarahNostrConstants {}

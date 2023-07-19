@@ -42,8 +42,9 @@ class NotesListView extends StatelessWidget {
 
     final nothingToShow = Text(
       'There is nothing here yet.',
+
       style: Theme.of(context).textTheme.labelMedium!.copyWith(
-            color: AppColors.grey,
+            color: AppColors.grey
           ),
     );
 
@@ -66,6 +67,9 @@ class NotesListView extends StatelessWidget {
               );
             }
             return ListView.builder(
+              addAutomaticKeepAlives: true,
+              addRepaintBoundaries: true,
+              cacheExtent: 10,
               physics: physics,
               shrinkWrap: shrinkWrap,
               controller: scrollController,

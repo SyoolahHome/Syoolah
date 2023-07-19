@@ -355,7 +355,7 @@ class NostrServiceSub {
     final randomId = Nostr.instance.utilsService.random64HexChars();
 
     final eventTags = [
-      "global",
+      "globalMunawarah",
       ...AppConfigs.categories
           .map((category) => category.enumValue.name)
           .toList()
@@ -429,7 +429,7 @@ class NostrServiceSub {
         NostrFilter(
           authors: [userProfilePubKey],
           kinds: const [1],
-          t: ["global"],
+          t: ["globalMunawarah"],
         ),
       ],
     );

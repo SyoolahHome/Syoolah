@@ -36,7 +36,7 @@ class NostrServiceSend {
     );
 
     final eventTags = [
-      ["t", "global"]
+      ["t", "globalMunawarah"]
     ];
 
     if (tags != null) {

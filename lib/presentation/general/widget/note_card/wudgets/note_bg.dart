@@ -26,54 +26,29 @@ class NoteContainer extends StatelessWidget {
           final feedBoxCubit = context.read<FeedBoxCubit>();
           return BlocBuilder<FeedBoxCubit, FeedBoxState>(
             builder: (context, state) {
-              return GestureDetector(
-                onPanDown: (details) {
-                  feedBoxCubit.highlightBox();
-                },
-                onPanCancel: () {
-                  feedBoxCubit.unHighlightBox();
-                },
-                onPanEnd: (details) {
-                  feedBoxCubit.unHighlightBox();
-                },
-                onPanStart: (details) {
-                  feedBoxCubit.highlightBox();
-                },
-                onLongPress: () {
-                  feedBoxCubit.showOptions(
-                    context,
-                    note: note,
-                    onCommentsSectionTapped: () {},
-                  );
-                },
-                onTap: onTap,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MarginedBody.defaultMargin.horizontal / 2,
-                    vertical: MarginedBody.defaultMargin.horizontal / 4,
-                  ),
-                  margin: margin ??
-                      EdgeInsets.only(
-                        bottom: MarginedBody.defaultMargin.horizontal / 2,
-                      ),
-                  decoration: BoxDecoration(
-                    color: state.isHighlighted
-                        ? Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withOpacity(0.3)
-                        : Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withOpacity(0.6),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: child,
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: MarginedBody.defaultMargin.horizontal / 2,
+                  vertical: MarginedBody.defaultMargin.horizontal / 4,
                 ),
+                margin: margin ??
+                    EdgeInsets.only(
+                      bottom: MarginedBody.defaultMargin.horizontal / 2,
+                    ),
+                decoration: BoxDecoration(
+                  color: state.isHighlighted
+                      ? Theme.of(context).colorScheme.onPrimary.withOpacity(0.3)
+                      : Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withOpacity(0.6),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: child,
               );
             },
           );
