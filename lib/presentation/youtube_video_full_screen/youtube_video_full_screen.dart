@@ -35,11 +35,13 @@ class YoutubeVideoFullScreen extends StatelessWidget {
       );
     });
 
-    return BlocProvider(
-      create: (context) =>
-          YoutubeVideoWidgetCubit.cubitsCache[id] ??
-          YoutubeVideoWidgetCubit(id),
-      child: youtubePlayer,
+    return Container(
+      height: 500,
+      color: Colors.green,
+      child: BlocProvider(
+        create: (context) => YoutubeVideoWidgetCubit(id),
+        child: youtubePlayer,
+      ),
     );
   }
 }
