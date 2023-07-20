@@ -64,35 +64,43 @@ class NoteCommentsSection extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       children: <Widget>[
                         MarginedBody(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const SizedBox(height: 10.0),
-                                NotePlaceholderCard(
-                                  note: note!,
-                                  avatarUrl: avatarUrl!,
-                                  nameToShow: nameToShow!,
-                                  appCurrentUserPublicKey:
-                                      appCurrentUserPublicKey!,
-                                  noteOwnerUserPubKey: noteOwnerUserPubKey!,
-                                ),
-                                const SizedBox(height: 15),
-                                HeadTitle(
-                                  title: "comments".tr(),
-                                  isForSection: true,
-                                  minimizeFontSizeBy: 10.0,
-                                ),
-                                const SizedBox(height: 10.0),
-                                ...state.noteComments.indexedMap(
-                                  (index, current) => CommentWidget(
-                                    key: ValueKey<String>(current.id),
-                                    commentEvent: current,
-                                    index: index,
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: MediaQuery.of(context).size.height,
+                              maxWidth: MediaQuery.of(context).size.width,
+                              minWidth: MediaQuery.of(context).size.width,
+                              minHeight: MediaQuery.of(context).size.height,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const SizedBox(height: 10.0),
+                                  NotePlaceholderCard(
+                                    note: note!,
+                                    avatarUrl: avatarUrl!,
+                                    nameToShow: nameToShow!,
+                                    appCurrentUserPublicKey:
+                                        appCurrentUserPublicKey!,
+                                    noteOwnerUserPubKey: noteOwnerUserPubKey!,
                                   ),
-                                ),
-                                const SizedBox(height: 200.0),
-                              ],
+                                  const SizedBox(height: 15),
+                                  HeadTitle(
+                                    title: "comments".tr(),
+                                    isForSection: true,
+                                    minimizeFontSizeBy: 10.0,
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  ...state.noteComments.indexedMap(
+                                    (index, current) => CommentWidget(
+                                      key: ValueKey<String>(current.id),
+                                      commentEvent: current,
+                                      index: index,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 200.0),
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -4,6 +4,8 @@ import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../../../general/nip_05_verification_symbol_check_widget.dart';
+
 class ProfileName extends StatelessWidget {
   const ProfileName({
     super.key,
@@ -17,18 +19,6 @@ class ProfileName extends StatelessWidget {
   Widget build(BuildContext context) {
     final String toShow = metadata.nameToShow();
     final String internetIdentifier = metadata.nip05Identifier ?? "";
-
-    Future<bool> future() async {
-      if (Nostr.instance.utilsService
-          .isValidNip05Identifier(internetIdentifier)) {
-        return Nostr.instance.relaysService.verifyNip05(
-          internetIdentifier: internetIdentifier,
-          pubKey: pubKey,
-        );
-      } else {
-        return false;
-      }
-    }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -46,26 +36,9 @@ class ProfileName extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 5),
-        FutureBuilder<bool>(
-          future: future(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!) {
-                return Animate(
-                  effects: const [FadeEffect()],
-                  child: const Icon(
-                    Icons.verified,
-                    color: Colors.green,
-                    size: 15,
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
+        NIP05VerificationSymbolWidget(
+          internetIdentifier: internetIdentifier,
+          pubKey: pubKey,
         ),
       ],
     );

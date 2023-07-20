@@ -3,9 +3,15 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/app_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 part 'comment_state.dart';
 
@@ -54,5 +60,29 @@ class CommentWidgetCubit extends Cubit<CommentState> {
 
       _cache[commentEvent.pubkey] = metadata;
     });
+  }
+
+  Future<void> showCommentOptions(BuildContext context) {
+    final commentOwnerMetadata = state.commentOwnerMetadata;
+
+    return BottomSheetService.showCommentOptions(
+      context,
+      options: [
+        BottomSheetOption(
+          title: "copyCommentText".tr(),
+          icon: FlutterRemix.file_copy_fill,
+          onPressed: () {
+            AppUtils.instance.copy(commentEvent.content);
+          },
+        ),
+        BottomSheetOption(
+          title: "copyCommentEventId".tr(),
+          icon: FlutterRemix.file_copy_fill,
+          onPressed: () {
+            AppUtils.instance.copy(commentEvent.id);
+          },
+        ),
+      ],
+    );
   }
 }

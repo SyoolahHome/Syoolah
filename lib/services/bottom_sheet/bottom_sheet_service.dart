@@ -418,4 +418,19 @@ abstract class BottomSheetService {
       },
     );
   }
+
+  static Future<void> showCommentOptions(
+    BuildContext context, {
+    required List<BottomSheetOption> options,
+  }) async {
+    return await showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheetOptionsWidget(options: options);
+      },
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+    );
+  }
 }

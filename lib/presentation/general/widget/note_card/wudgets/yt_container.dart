@@ -15,12 +15,14 @@ class YoutubeVideoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _onTap() {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => YoutubeVideoFullScreen(id: id),
+      ));
+    }
+
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => YoutubeVideoFullScreen(id: id),
-        ));
-      },
+      onTap: _onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: AspectRatio(
@@ -45,9 +47,14 @@ class YoutubeVideoContainer extends StatelessWidget {
                   errorBuilder: (context, _, __) => Container(),
                 ),
               ),
-              Icon(
-                FlutterRemix.play_fill,
-                size: 40.0,
+              Center(
+                child: IconButton(
+                  onPressed: _onTap,
+                  icon: Icon(
+                    FlutterRemix.play_fill,
+                    size: 40.0,
+                  ),
+                ),
               )
             ],
           ),
