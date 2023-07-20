@@ -2,6 +2,7 @@ import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/constants/app_colors.dart';
 import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/relays_config/widgets/relay_config_more.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -37,42 +38,14 @@ class RelayConfigTile extends StatelessWidget {
           children: <Widget>[
             Text(relayConfig.url),
             const Spacer(),
-            FutureBuilder(
-              future: Nostr.instance.relaysService
-                  .relayInformationsDocumentNip11(relayUrl: relayConfig.url),
-              builder: (context, snapshot) {
-                void onRelayBoxTap(BuildContext context) {
-                  if (!snapshot.hasData) {
-                    return;
-                  }
-
-                  return Routing.appCubit.showRelayOptionsSheet(
-                    context,
-                    relay: relayConfig,
-                    relayInformations: snapshot.data,
-                  );
-                }
-
-                return Animate(
-                  effects: const <Effect>[FadeEffect()],
-                  target: snapshot.hasData ? 1 : 0,
-                  child: GestureDetector(
-                    onTap: () => onRelayBoxTap(context),
-                    child: const Icon(
-                      FlutterRemix.information_line,
-                    ),
-                  ),
-                );
-              },
+            RelayConfigMore(
+              relayConfig: relayConfig,
             ),
             Transform.scale(
               scale: 0.65,
               child: Switch(
                 onChanged: (value) {
-                  Routing.appCubit.selectRelay(
-                    index: index,
-                    isActive: value,
-                  );
+                  Routing.appCubit.selectRelay(index: index, isActive: value);
                 },
                 value: relayConfig.isActive,
               ),

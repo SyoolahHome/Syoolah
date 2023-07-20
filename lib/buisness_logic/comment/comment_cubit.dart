@@ -67,7 +67,7 @@ class CommentWidgetCubit extends Cubit<CommentState> {
 
     return BottomSheetService.showCommentOptions(
       context,
-      options: [
+      options: <BottomSheetOption>[
         BottomSheetOption(
           title: "copyCommentText".tr(),
           icon: FlutterRemix.file_copy_fill,
