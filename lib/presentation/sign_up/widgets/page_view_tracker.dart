@@ -36,12 +36,26 @@ class PageViewTracker extends StatelessWidget {
               stepsLength,
               (index) => Column(
                 children: [
-                  AnimatedOpacity(
-                    duration: 200.ms,
-                    opacity: currentStepIndex - 1 == index ? 1 : 0,
-                    child: Text(
-                      currentStepIndex.toString(),
-                      style: Theme.of(context).textTheme.labelSmall,
+                  Animate(
+                    effects: <Effect>[
+                      FadeEffect(
+                        duration: 200.ms,
+                      ),
+                    ],
+                    target: currentStepIndex - 1 == index ? 1 : 0,
+                    child: Animate(
+                      effects: <Effect>[
+                        SlideEffect(
+                          end: Offset(0, 0.2),
+                          duration: 2000.ms,
+                        ),
+                      ],
+                      onComplete: (controller) =>
+                          controller.repeat(reverse: true),
+                      child: Text(
+                        currentStepIndex.toString(),
+                        style: Theme.of(context).textTheme.labelSmall,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 2.5),

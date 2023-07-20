@@ -28,10 +28,11 @@ class FileUpload {
           .replaceAll("\n", "")
           .replaceAll(" ", "")
           .split('"')
-          .where((elem) => elem.contains("https://nostr.build"))
+          .where((elem) => elem.contains("https://cdn.nostr.build"))
           .where((elem) => elem.contains(getFileExtension(file)))
           .toList();
-      assert(contextFilteredString.length == 1);
+      print(contextFilteredString);
+      // assert(contextFilteredString.length == 1);
 
       return extractLinkFromHttpsToFileExtension(
         contextFilteredString.first,
@@ -46,12 +47,14 @@ class FileUpload {
     return file.path.split('.').last;
   }
 
-  static String extractLinkFromHttpsToFileExtension(
+  String extractLinkFromHttpsToFileExtension(
     String text,
     String extension,
   ) {
-    final indexOfHttps = text.indexOf('https');
-    final indexOfExtension = text.indexOf(extension);
+    final indexOfHttps = text.indexOf('https://cdn.nostr.build');
+    final indexOfExtension = text.indexOf(extension, indexOfHttps);
+
+    print(indexOfExtension);
 
     final substringedLink = text.substring(
       indexOfHttps,

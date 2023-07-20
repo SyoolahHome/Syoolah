@@ -36,9 +36,19 @@ class GetStarted extends StatelessWidget {
             delay: const Duration(milliseconds: 1800),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Icon(
-                AppUtils.instance.directionality_arrow_right_s_line(context),
-                color: Theme.of(context).colorScheme.onBackground,
+              child: Animate(
+                effects: <Effect>[
+                  SlideEffect(
+                    begin: Offset(-0.1, 0),
+                    end: Offset(0.1, 0),
+                    duration: 2000.ms,
+                  ),
+                ],
+                onComplete: (controller) => controller.repeat(reverse: true),
+                child: Icon(
+                  AppUtils.instance.directionality_arrow_right_s_line(context),
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
             ),
           ),

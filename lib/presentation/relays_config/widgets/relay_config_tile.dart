@@ -6,7 +6,11 @@ import 'package:ditto/presentation/relays_config/widgets/relay_config_more.dart'
 import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../../buisness_logic/app/app_cubit.dart';
+import 'relay_config_switch.dart';
 
 class RelayConfigTile extends StatelessWidget {
   const RelayConfigTile({
@@ -21,10 +25,9 @@ class RelayConfigTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onLongPress: () {
-        Routing.appCubit.showRemoveRelayDialog(
-          context,
-          relay: relayConfig,
-        );
+        context
+            .read<AppCubit>()
+            .showRemoveRelayDialog(context, relay: relayConfig);
       },
       splashFactory: NoSplash.splashFactory,
       overlayColor: MaterialStateProperty.all(
@@ -38,18 +41,8 @@ class RelayConfigTile extends StatelessWidget {
           children: <Widget>[
             Text(relayConfig.url),
             const Spacer(),
-            RelayConfigMore(
-              relayConfig: relayConfig,
-            ),
-            Transform.scale(
-              scale: 0.65,
-              child: Switch(
-                onChanged: (value) {
-                  Routing.appCubit.selectRelay(index: index, isActive: value);
-                },
-                value: relayConfig.isActive,
-              ),
-            ),
+            RelayConfigMore(relayConfig: relayConfig),
+            RelayConfigSwitch(value: relayConfig.isActive, index: index),
           ],
         ),
       ),

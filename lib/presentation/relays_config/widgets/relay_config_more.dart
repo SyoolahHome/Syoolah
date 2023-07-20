@@ -1,8 +1,10 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../buisness_logic/app/app_cubit.dart';
 import '../../../services/utils/routing.dart';
 
 class RelayConfigMore extends StatelessWidget {
@@ -24,17 +26,15 @@ class RelayConfigMore extends StatelessWidget {
             return;
           }
 
-          return Routing.appCubit.showRelayOptionsSheet(
-            context,
-            relay: relayConfig,
-            relayInformations: snapshot.data,
-          );
+          return context.read<AppCubit>().showRelayOptionsSheet(
+                context,
+                relay: relayConfig,
+                relayInformations: snapshot.data,
+              );
         }
 
         return Animate(
-          effects: const <Effect>[
-            FadeEffect(),
-          ],
+          effects: const <Effect>[FadeEffect()],
           target: snapshot.hasData ? 1 : 0,
           child: GestureDetector(
             onTap: () => onRelayBoxTap(context),
