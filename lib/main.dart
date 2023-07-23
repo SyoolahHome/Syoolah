@@ -17,6 +17,7 @@ Future<void> main() async {
   await AppUtils.instance.initialize();
 
   Widget appMainWidget = MyApp();
+
   final localizationWidget = EasyLocalization(
     supportedLocales: AppConfigs.locales,
     path: AppConfigs.translationsPath,

@@ -25,10 +25,13 @@ class OpenAIService {
     );
 
     return OpenAI.instance.chat
-        .createStream(model: modelId, messages: [
-          systemInstructionMessage,
-          ...messages,
-        ],)
+        .createStream(
+          model: modelId,
+          messages: [
+            systemInstructionMessage,
+            ...messages,
+          ],
+        )
         .where(_responseMessageIsValid)
         .map(_extractOnlyResposeMessage);
   }

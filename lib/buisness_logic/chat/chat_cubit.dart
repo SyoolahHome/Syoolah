@@ -74,36 +74,54 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   /// Sends the message of the system which all will rely on it, basically the [instruction].
-  void _sendMessageBySystem(String message) {
+  void _sendMessageBySystem(
+    String message, {
+    bool isError = false,
+  }) {
+    emit(state.copyWith(isDoneFromGeneratingResponse: false));
+
     final currentMessagesList = state.messages;
 
     final newMessageId = AppUtils.instance.getChatSystemId();
 
     var systemMessage = ChatMessage.system(
-      message: "",
+      message: isError ? message : "",
       id: newMessageId,
       createdAt: DateTime.now(),
     );
 
     emit(
       state.copyWith(
-        messages: <ChatMessage>[
-          ...currentMessagesList,
-          systemMessage,
-        ],
+        messages: <ChatMessage>[...currentMessagesList, systemMessage],
       ),
     );
+
+    if (isError) {
+      return;
+    }
 
     Stream<String> messageReponseStream =
         OpenAIService.instance.messageResponseStream(
       chatMessages: currentMessagesList,
       instruction: instruction,
     );
+
     messageReponseStream
         .intervalDuration(AppConfigs.durationBetweenAIChatMessages)
-        .listen((responseMessage) {
-      emitMessageContentForSystemMessageWithId(newMessageId, responseMessage);
-    });
+        .listen(
+      (responseMessage) {
+        emitMessageContentForSystemMessageWithId(newMessageId, responseMessage);
+      },
+      onDone: () {
+        print("done from message");
+        emit(state.copyWith(isDoneFromGeneratingResponse: true));
+      },
+      onError: (err) {
+        print("error throw message");
+        _sendMessageBySystem("error".tr(), isError: true);
+      },
+      cancelOnError: true,
+    );
   }
 
   ///
@@ -133,31 +151,37 @@ class ChatCubit extends Cubit<ChatState> {
       });
     focusNode = FocusNode();
 
-    stream.where((event) => event.messages.isNotEmpty).listen(
-          (event) {
-            final lastMessage = event.messages.last;
-            if (lastMessage.role == OpenAIChatMessageRole.user) {
-              _sendMessageBySystem(lastMessage.message);
-            }
-          },
-          onError: (e) {
-            String errorMessage;
-            if (kDebugMode) {
-              errorMessage = e.toString();
-            } else {
-              errorMessage = "error".tr();
-            }
-            if (!isClosed) {
-              emit(state.copyWith(errorMessage: errorMessage));
-            }
-          },
-          cancelOnError: true,
-          onDone: () {
-            if (!isClosed) {
-              emit(state.copyWith());
-            }
-          },
-        );
+    stream.where((event) => event.messages.isNotEmpty).distinct(
+      (prev, curr) {
+        return prev.messages.last.role == curr.messages.last.role;
+      },
+    ).listen(
+      (event) {
+        final lastMessage = event.messages.last;
+        final role = lastMessage.role;
+
+        if (role == OpenAIChatMessageRole.user) {
+          _sendMessageBySystem(lastMessage.message);
+        }
+      },
+      onError: (e) {
+        String errorMessage;
+        if (kDebugMode) {
+          errorMessage = e.toString();
+        } else {
+          errorMessage = "error".tr();
+        }
+        if (!isClosed) {
+          emit(state.copyWith(errorMessage: errorMessage));
+        }
+      },
+      cancelOnError: true,
+      onDone: () {
+        if (!isClosed) {
+          // emit(state.copyWith());
+        }
+      },
+    );
   }
 
   void setCurrentHint(String hint) {
@@ -200,9 +224,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> copyMessage(ChatMessage message) {
-    return AppUtils.instance.copy(
-      message.message,
-    );
+    return AppUtils.instance.copy(message.message);
   }
 
   Future<void> showChatOptionsSheet(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:ditto/presentation/general/text_field.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/services/utils/app_utils.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -34,7 +35,7 @@ class MessageSection extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 bgColor: Color(Theme.of(context).colorScheme.onPrimary.value),
                 controller: cubit.userMessageController,
-                hint: "dropYourUQuestionHere".tr() /* ?? hint */,
+                hint: "dropYourUQuestionHere".tr().capitalized /* ?? hint */,
                 fontWight: FontWeight.w300,
                 isMultiline: true,
               ),
