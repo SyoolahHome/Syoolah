@@ -1,6 +1,7 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class Umah extends BottomBarScreen {
     globalCubit ??= context.read<GlobalCubit>();
 
     final followingsPubKeysList =
-        globalCubit!.state.currentUserFollowing?.tags.map((e) => e[1]).toList();
+        globalCubit!.state.currentUserFollowing?.tagsPublicKeys;
 
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,

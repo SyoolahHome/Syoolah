@@ -12,6 +12,7 @@ class FollowingsFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     globalCubit = ModalRoute.of(context)!.settings.arguments as GlobalCubit;
+
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(

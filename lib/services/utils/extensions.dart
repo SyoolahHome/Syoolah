@@ -13,7 +13,7 @@ import '../../model/feed_category.dart';
 import '../../model/loclal_item.dart';
 import '../database/local/local_database.dart';
 
-extension Extensions on List<NostrEvent> {
+extension NostrEventqListExtensions on List<NostrEvent> {
   List<NostrEvent> removeDuplicatedEvents() {
     final List<NostrEvent> result = [];
 
@@ -246,5 +246,15 @@ extension FlutterRemixExtension on FlutterRemix {
     return context.locale.countryCode?.toLowerCase() == "ar"
         ? FlutterRemix.arrow_right_line
         : FlutterRemix.arrow_left_line;
+  }
+}
+
+extension NostrEventExtension on NostrEvent? {
+  List<String>? get tagsPublicKeys {
+    return this
+        ?.tags
+        .where((tag) => tag[0] == "p")
+        .map((tag) => tag[1])
+        .toList();
   }
 }
