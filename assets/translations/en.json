@@ -339,5 +339,10 @@
   "invalidIdentifierOrPubKey": "The search query is not a valid identifier or 64 hex string (pubkey)",
   "xNewNotes": "{} New Notes",
   "copyCommentText": "Copy Comment",
-  "copyCommentEventId": "Copy Comment Id"
+  "copyCommentEventId": "Copy Comment Id",
+  "nDay": "{} day",
+  "nHour": "{} hour",
+  "nMinute": "{} minute",
+  "nMonth": "{} month",
+  "nYear": "{} year"
 }

@@ -70,17 +70,28 @@ extension DateTimeExt on DateTime {
     String memebership = '';
 
     if (years > 0) {
-      memebership = "nYears".tr(args: ["$years"]);
+      memebership = years > 1
+          ? "nYears".tr(args: ["$years"])
+          : "nYear".tr(args: ["$years"]);
     } else if (months > 0) {
-      memebership = "nMonths".tr(args: ["$months"]);
+      memebership = months > 1
+          ? "nMonths".tr(args: ["$months"])
+          : "nMonth".tr(args: ["$months"]);
     } else if (days > 0) {
-      memebership = "nDays".tr(args: ["$days"]);
+      memebership =
+          days > 1 ? "nDays".tr(args: ["$days"]) : "nDay".tr(args: ["$days"]);
     } else if (hours > 0) {
-      memebership = "nHours".tr(args: ["$hours"]);
+      memebership = hours > 1
+          ? "nHours".tr(args: ["$hours"])
+          : "nHour".tr(args: ["$hours"]);
     } else if (minutes > 0) {
-      memebership = "nMinutes".tr(args: ["$minutes"]);
+      memebership = minutes > 1
+          ? "nMinutes".tr(args: ["$minutes"])
+          : "nMinute".tr(args: ["$minutes"]);
     } else if (seconds > 0) {
-      memebership = "nSeconds".tr(args: ["$seconds"]);
+      memebership = seconds > 1
+          ? "nSeconds".tr(args: ["$seconds"])
+          : "nSecond".tr(args: ["$seconds"]);
     }
 
     return 'Last updated $memebership ago';

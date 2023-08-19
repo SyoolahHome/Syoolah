@@ -498,3 +498,7 @@ Imlemntation of a comments section screen for each post, not completed yet but t
   - When a user is not following anyone, all Munawrah notes created b all users will be shown.
   - When a user starts to follow people, they will be added to followings list as expexted that already happen in the app. And from now, there notes will be shown in the ummah feed only.
 - Ensured that the text field will be unfocussed forcelly when a user sends a new note by clicking the send button, on the note creation bottom sheet.
+
+## 140
+
+- set the app so it defaults to the dark theme initially and not adapted to the system theme, all new users will use the app in first time with the dark.
