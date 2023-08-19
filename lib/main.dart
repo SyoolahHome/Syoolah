@@ -28,9 +28,7 @@ Future<void> main() async {
   appMainWidget = AppConfigs.showPreviewMode
       ? DevicePreview(
           enabled: AppConfigs.showPreviewMode,
-          builder: (context) {
-            return localizationWidget;
-          },
+          builder: (context) => localizationWidget,
         )
       : localizationWidget;
 

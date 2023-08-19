@@ -19,40 +19,46 @@ class NoteContainer extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FeedBoxCubit>(
-      create: (context) => FeedBoxCubit(),
-      child: Builder(
-        builder: (context) {
-          final feedBoxCubit = context.read<FeedBoxCubit>();
-          return BlocBuilder<FeedBoxCubit, FeedBoxState>(
-            builder: (context, state) {
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: MarginedBody.defaultMargin.horizontal / 2,
-                  vertical: MarginedBody.defaultMargin.horizontal / 4,
-                ),
-                margin: margin ??
-                    EdgeInsets.only(
-                      bottom: MarginedBody.defaultMargin.horizontal / 2,
-                    ),
-                decoration: BoxDecoration(
-                  color: state.isHighlighted
-                      ? Theme.of(context).colorScheme.onPrimary.withOpacity(0.3)
-                      : Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withOpacity(0.6),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
+    return GestureDetector(
+      onTap: onTap,
+      child: BlocProvider<FeedBoxCubit>(
+        create: (context) => FeedBoxCubit(),
+        child: Builder(
+          builder: (context) {
+            final feedBoxCubit = context.read<FeedBoxCubit>();
+            return BlocBuilder<FeedBoxCubit, FeedBoxState>(
+              builder: (context, state) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MarginedBody.defaultMargin.horizontal / 2,
+                    vertical: MarginedBody.defaultMargin.horizontal / 4,
                   ),
-                ),
-                child: child,
-              );
-            },
-          );
-        },
+                  margin: margin ??
+                      EdgeInsets.only(
+                        bottom: MarginedBody.defaultMargin.horizontal / 2,
+                      ),
+                  decoration: BoxDecoration(
+                    color: state.isHighlighted
+                        ? Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(0.3)
+                        : Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(0.6),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: child,
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

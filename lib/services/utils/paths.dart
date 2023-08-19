@@ -41,4 +41,5 @@ abstract class Paths {
   static const String successAccountMade = '/successAccountMade';
   static const String privacyPolicy = '/privacyPolicy';
   static const String nip05Verification = '/nip05Verification';
+  static const String tangemAuth = "tangemAuth";
 }

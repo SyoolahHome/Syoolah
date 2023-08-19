@@ -1,6 +1,28 @@
 # Munawarah
 
 ![Munawarah Cover Image](assets/images/cover.png)
+<br>
+
+
+## Screenshots
+<br>
+
+<p align="center">
+<img src="assets/store screenshots/iPhone 14 Pro – 1.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 2.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 3.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 4.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 5.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 6.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 7.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 8.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 9.png" width="100"/>
+<img src="assets/store screenshots/iPhone 14 Pro – 10.png" width="100"/>
+</p>
+
+> **The app still under heavy development, so some of the features may not work as expected, and some of the features are on our road map and will be implemented sooner.**
+
+## What is Munawarah?
 
 Munawarah is an Islamic social app where you can share & discover Islamic content, connect with friends and get instant answers to your questions.
 
@@ -48,3 +70,4 @@ With Munawarah, say goodbye to Centralized Feeds, Distractions, Ads and algorith
   - Much more..
 
 Start using Munawarah now, and be part of the future of social networks.
+
