@@ -353,7 +353,7 @@ abstract class AppThemes {
       contentPadding:
           const EdgeInsets.symmetric(vertical: 12.5, horizontal: 16),
       filled: true,
-      fillColor: AppColors.white.withOpacity(0.15),
+      fillColor: AppColors.white.withOpacity(0.25),
       errorBorder: const OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(Radius.circular(10)),

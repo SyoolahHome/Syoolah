@@ -502,3 +502,5 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 ## 140
 
 - set the app so it defaults to the dark theme initially and not adapted to the system theme, all new users will use the app in first time with the dark.
+- Added pluralization for used strings that represents time, such days(s), hour(s)... and its use in the app.
+- Adjusted the opacity of the text field of the note creation bottom sheet.
