@@ -381,3 +381,113 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 ## 93 - 94
 
 - Added privacy & policy as a step of the onboarding flow of the app, including the accept checkbox  and logic so the user will not go further until he accepts it..
+
+## 96-97
+
+- Creation of app screenshots (10), and the cover used in the store listing.
+- The writing of the app details such as title, subtitle, description, features...
+
+## 98
+
+- Migrations of some components/widgets to show animations used in the app.
+- Addition and translations of newest texts/strings to supported languages.
+- Implementation of the account creations success bottom sheet that is shown right when the user finishes creating his account, so he can go to the home of the app.
+
+## 99 - 100
+
+- Implementation of the report feature UI, bottom sheet & logic for notes, so the user can send Nostr report events to used relays, which can be one of the options:
+- nudity.
+- profanity
+- illegal
+- spam
+-impersonation
+- Medium general widgets UI fixes related to sizing which caused some of the unexpected grey screens.
+101-102
+- Update/Correctness of all the reported texts/strings such as the NIP05's to lightning address, new post bottom sheet...
+103
+- Changing the Imam On Duty from a stand-alone screen to a bottom sheet that is triggered from the same previous button but shows it instead of opening it in a whole screen.
+- Update the Imam On Duty represented icon in the bottom bar.
+
+## 104
+
+- Re-implementation of the assets placeholder inside the new note bottom sheet as requested to make it identifiable by the user, added callbacks to the placeholder itself to show the options of camera & gallery.
+
+## 105
+
+- Separation of the Nostr service used internally in the app by modules/roles for sending new notes for various use-cases in the app and listening to events subscriptions to use them, since its codebase get very large.
+106
+- Fixed the Imam on Duty text field which was not allowing to preview a long input.
+- Minor UI edits such as profile section icon, texts, and Imam On Duty Questions.
+
+## 107-108-109-110
+
+- Coverage of all the app logic blocs with appropriate developer-friendly documentation including their members, methods, and constructors... since the codebase gets large and getting lost is easy when trying to find or remember a single item goal of implementation, also to avoid code conflicts and breaking changes.
+- Editing some behaviors related to showing note events such as reverse sorting (from Z-A instead of A-Z).
+- Re-organized many modules by their types in separated files to make it more easier to access them such as user Dart's enums, environment variables, services, and extensions...
+- Editing some components appearance to have the used app animations.
+- Addition/translations of more strings/texts used in previous changes.
+
+## 111
+
+- Add of more convenient questions for intermediate-advanced questions of the Imam On Duty for random hint selection for first message usage by the user.
+
+## 112-113
+
+- Add of loading indicator for the user profile's posts, takes, likes tabs notes, so he knows whether to expect something to show or not.
+- More code reactivation and appliance of more SOLID principles.
+
+## 114-115
+
+- Implementation of a profile banner feature to show a banner in the user's profile and be able to manage, delete, change, and add his own from either the device camera or gallery, the app handles the rest internally.
+116-117-118-119
+- Bug fixes
+- disallowed the user to return back to onboarding after getting inside the home of the app
+- Applied the new Imam On Duty SVG icon by creating a new widget handler for SVG icons and making them work as others in the bottom bar.
+
+## 120-121-123-124-125 (accumulation of total hours for this task)
+
+- Support the Arabic language by translating all English.
+- Implementation of its option in the app for choose.
+- Implementation of rtl Alignment for the whole app components when the Arabic lang is chosen.
+- Bug fixes and handling unexpected behaviors.
+
+## 126-127
+
+- Addition of more Imam On Duty questions by level.
+- Add app animations to more components that need it such as the "about" screen.
+
+## 128-129
+
+- Re-implementation of the note comments feature, re-creating its components to adapt to previous changes.
+- Fixing the grey screen showing in some cases
+- Fixing the non-scrollable screen when a note is too large.
+- Loading of the comment owner metadata to present it such as name & profile.
+
+## 130
+
+- More Bug fixes in the level of some blocs that causes the "StackOverflow" error which caused some lagging in the app.
+
+## 131
+
+- Added caching mechanism for the onboarding search feature.
+- optimized the state management of the onboarding search UI by minimizing the area of the bloc consumer to the units that will actually update and be listened to.
+
+## 132
+
+- Implementation of a bottom sheet for showing additional information about a user when pressing on the comment three dots.
+- Update of the OpenAI API key to the newly created account for the support@munawarah.engineering email.
+
+## 133
+
+- Re-implementation & optimization of the youtube feature to avoid lagging while scrolling, and wasting internet data of the uncontrolled pre-loading of video buffers that affect the Nostr operation (sending & getting events) success rates and retrievals.
+- Support & Bug fixes for a full screen that caused also some lags.
+134-135-136
+- Addition & translations for all the newly added strings/texts to the app-supported languages from the previous changes.
+- Add more copy options for note comments, such as copying the comment itself or its id.
+
+## 137-138
+
+- Fixed & adapted to the new nostr.build implementation so we can use it to upload assets in the app.
+(They changed the whole website and endpoints of uploading files, in addition to changing their used domain for assets which is https://cdn.nostr.build now).
+- UI error handling for the Imam On Duty, so when there is something wrong, the user will get a message informing that. and not the empty behavior that doesn't inform anything.
+- Addition/Translations of more text/strings from the previous changes.
