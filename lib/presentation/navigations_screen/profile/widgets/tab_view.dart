@@ -13,14 +13,10 @@ class ProfileTabView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 20),
       child: Animate(
-        effects: const <Effect>[
-          FadeEffect(),
-        ],
+        effects: const <Effect>[FadeEffect()],
         delay: 1200.ms,
         child: TabBarView(
-          children: cubit.state.profileTabsItems.map((e) {
-            return e.widget;
-          }).toList(),
+          children: cubit.state.profileTabsItems.map((e) => e.widget).toList(),
         ),
       ),
     );

@@ -19,12 +19,17 @@ class Umah extends BottomBarScreen {
 
     globalCubit ??= context.read<GlobalCubit>();
 
+    final followingsPubKeysList =
+        globalCubit!.state.currentUserFollowing?.tags.map((e) => e[1]).toList();
+
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
         feedName: "umah".tr(),
         endFeedTitleWithAdditionalText: false,
-        feedPostsStream: NostrService.instance.subs.globalFeed(),
+        feedPostsStream: NostrService.instance.subs.globalFeed(
+          followings: followingsPubKeysList,
+        ),
       ),
     );
   }

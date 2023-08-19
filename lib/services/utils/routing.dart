@@ -34,6 +34,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
+import '../../presentation/tangem_auth/tangem_auth.dart';
 
 abstract class Routing {
   static final routes = {
@@ -69,6 +70,7 @@ abstract class Routing {
           onAccept: (v) {},
         ),
     Paths.nip05Verification: (context) => const Nip05Verification(),
+    Paths.tangemAuth: (context) => const TangemAuth(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

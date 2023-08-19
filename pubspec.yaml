@@ -1,9 +1,7 @@
 name: ditto
 description: A new Flutter project.
 
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -17,12 +15,12 @@ dependencies:
 
   cupertino_icons:
   provider:
-  web_socket_channel:
-  logger:
-  google_fonts: ^4.0.3
+  # web_socket_channel:
+  # logger:
+  google_fonts:
   crypto:
-  sqlite3_flutter_libs:
-  sqlite3:
+  # sqlite3_flutter_libs:
+  # sqlite3:
   path_provider:
   progress_indicators:
   flutter_bloc:
@@ -31,25 +29,26 @@ dependencies:
   equatable:
   dart_nostr:
     git: https://github.com/anasfik/nostr.git
-
+  tangem_sdk:
+    path: ./packs/tangem-sdk-flutter-master/
   convert:
 
   image_picker:
   cached_network_image:
-  http: ^0.13.5
+  http:
   timeago:
-  easy_localization: ^3.0.1
+  easy_localization:
   dart_openai: ^1.9.1
-  hashtagable: ^2.1.0
-  transitioned_indexed_stack: ^1.0.2
-  flutter_islamic_icons: ^1.0.2
-  process_run: ^0.12.5+3
-  flutter_animate: ^4.1.1+1
-  envied: ^0.3.0
+  hashtagable:
+  transitioned_indexed_stack:
+  flutter_islamic_icons:
+  # process_run: ^0.12.5+3
+  flutter_animate:
+  envied:
   youtube_player_flutter:
-  device_preview: ^1.1.0
-  flutter_html: ^3.0.0-beta.2
-  flutter_widget_from_html: ^0.10.1
+  device_preview:
+  # flutter_html: ^3.0.0-beta.2
+  flutter_widget_from_html:
   flutter_svg: ^2.0.5
 
 dev_dependencies:
@@ -58,20 +57,20 @@ dev_dependencies:
     sdk: flutter
   dart_code_metrics: ^5.7.2
   # flutter_app_name:
-  change_app_package_name: ^1.1.0
+  # change_app_package_name: ^1.1.0
 
-  flutter_lints:
-  build_runner: ^2.3.3
-  envied_generator: ^0.3.0
-  flutter_native_splash: ^2.2.0+1
+  # flutter_lints:
+  # build_runner: ^2.3.3
+  # envied_generator: ^0.3.0
+  # flutter_native_splash: ^2.2.0+1
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path_android: "assets/logo/logo_letter_no_bg.png"
-  image_path_ios: "assets/logo/logo_letter_no_bg.png"
-  min_sdk_android: 21
-  remove_alpha_ios: true
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path_android: "assets/logo/logo_letter_no_bg.png"
+#   image_path_ios: "assets/logo/logo_letter_no_bg.png"
+#   min_sdk_android: 21
+#   remove_alpha_ios: true
 
 flutter:
   # The following line ensures that the Material Icons font is
@@ -87,40 +86,39 @@ flutter:
     - assets/logo/black_no_bg.png
     - assets/logo/white_no_bg.png
     - assets/translations/
-
-flutter_app_name:
-  name: "Munawarah"
-
-flutter_native_splash:
-  color: "#ffffff"
-  image: "assets/logo/icon_rounded.png"
-
-  # The branding property allows you to specify an image used as branding in the splash screen.
-  # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
-  # see the Android 12 section below.
-  #branding: assets/dart.png
-
-  # To position the branding image at the bottom of the screen you can use bottom, bottomRight,
-  # and bottomLeft. The default values is bottom if not specified or specified something else.
-  #branding_mode: bottom
-
-  # The color_dark, background_image_dark, image_dark, branding_dark are parameters that set the background
-  # and image when the device is in dark mode. If they are not specified, the app will use the
-  # parameters from above. If the image_dark parameter is specified, color_dark or
-  # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
-  # set.
-  color_dark: "#000000"
-
-  # Android 12 handles the splash screen differently than previous versions.  Please visit
-  # https://developer.android.com/guide/topics/ui/splash-screen
-  # Following are Android 12 specific parameter.
-  android_12:
-    color: "#ffffff"
-    color_dark: "#000000"
-
-    # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
-    # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
-    # do not remove any spaces:
-    #info_plist_files:
-    #  - 'ios/Runner/Info-Debug.plist'
-    #  - 'ios/Runner/Info-Release.plist'
+# flutter_app_name:
+#   name: "Munawarah"
+#
+# flutter_native_splash:
+#   color: "#ffffff"
+#   image: "assets/logo/icon_rounded.png"
+#
+#   # The branding property allows you to specify an image used as branding in the splash screen.
+#   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
+#   # see the Android 12 section below.
+#   #branding: assets/dart.png
+#
+#   # To position the branding image at the bottom of the screen you can use bottom, bottomRight,
+#   # and bottomLeft. The default values is bottom if not specified or specified something else.
+#   #branding_mode: bottom
+#
+#   # The color_dark, background_image_dark, image_dark, branding_dark are parameters that set the background
+#   # and image when the device is in dark mode. If they are not specified, the app will use the
+#   # parameters from above. If the image_dark parameter is specified, color_dark or
+#   # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
+#   # set.
+#   color_dark: "#000000"
+#
+#   # Android 12 handles the splash screen differently than previous versions.  Please visit
+#   # https://developer.android.com/guide/topics/ui/splash-screen
+#   # Following are Android 12 specific parameter.
+#   android_12:
+#     color: "#ffffff"
+#     color_dark: "#000000"
+#
+#     # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s)
+#     # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+#     # do not remove any spaces:
+#     #info_plist_files:
+#     #  - 'ios/Runner/Info-Debug.plist'
+#     #  - 'ios/Runner/Info-Release.plist'
