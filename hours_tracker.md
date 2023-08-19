@@ -497,4 +497,4 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 - Implmentation of the feature to show the latest followings notes in the ummah feed, instead of all Munawarah notes, so now:
   - When a user is not following anyone, all Munawrah notes created b all users will be shown.
   - When a user starts to follow people, they will be added to followings list as expexted that already happen in the app. And from now, there notes will be shown in the ummah feed only.
-  
+- Ensured that the text field will be unfocussed forcelly when a user sends a new note by clicking the send button, on the note creation bottom sheet.

@@ -26,8 +26,9 @@ class LocalDatabase implements LocalDatabaseBase {
   @override
   Future<Box> init() async {
     await Hive.initFlutter();
+    final box = await Hive.openBox(dbName);
 
-    return await Hive.openBox(dbName);
+    return box;
   }
 
   Future<String> setPrivateKey(String? value) async {

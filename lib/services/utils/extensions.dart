@@ -184,7 +184,7 @@ extension ThemeModeExtension on ThemeMode {
     if (themeStateFromLocal != null) {
       return themeStateFromLocal ? ThemeMode.dark : ThemeMode.light;
     } else {
-      return ThemeMode.system;
+      return ThemeMode.dark;
     }
   }
 }
