@@ -30,6 +30,9 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   /// A List of available categories to be selected from the user
   List<FeedCategory> categories;
 
+  /// A Focus Node for the post text field.
+  FocusNode? _postFieldFocusNode;
+
   /// The options to select assets from in the note, such images, video urls..
   List<PostAssetSectionItem> get postAssetsSectionsWidgets => [
         PostAssetSectionItem(
@@ -55,6 +58,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   Future<void> close() {
     textController?.dispose();
     youtubeUrlController?.dispose();
+    _postFieldFocusNode?.dispose();
 
     return super.close();
   }
@@ -65,7 +69,10 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   /// if any assets are selected, they will be added as well
   /// if any assets are selected, they need to be uploaded in order to get URLs first, then use it.
   Future<void> createNote() async {
+    _unFocusPostField();
+
     final controller = textController;
+
     if (controller == null) {
       return;
     }
@@ -237,5 +244,12 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   void _init(String? initialNoteContent) {
     textController = TextEditingController()..text = initialNoteContent ?? "";
     youtubeUrlController = TextEditingController();
+    _postFieldFocusNode = FocusNode();
+  }
+
+  void _unFocusPostField() {
+    if (_postFieldFocusNode?.hasFocus ?? false) {
+      _postFieldFocusNode?.unfocus();
+    }
   }
 }

@@ -491,3 +491,10 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 (They changed the whole website and endpoints of uploading files, in addition to changing their used domain for assets which is https://cdn.nostr.build now).
 - UI error handling for the Imam On Duty, so when there is something wrong, the user will get a message informing that. and not the empty behavior that doesn't inform anything.
 - Addition/Translations of more text/strings from the previous changes.
+
+## 139
+
+- Implmentation of the feature to show the latest followings notes in the ummah feed, instead of all Munawarah notes, so now:
+  - When a user is not following anyone, all Munawrah notes created b all users will be shown.
+  - When a user starts to follow people, they will be added to followings list as expexted that already happen in the app. And from now, there notes will be shown in the ummah feed only.
+  
