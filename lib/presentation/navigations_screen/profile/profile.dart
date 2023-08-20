@@ -95,7 +95,7 @@ class Profile extends BottomBarScreen {
                                       ),
                                       MarginedBody(
                                         child: Column(
-                                          children: [
+                                          children: <Widget>[
                                             const SizedBox(
                                               height: height * 2,
                                             ),
@@ -106,7 +106,7 @@ class Profile extends BottomBarScreen {
                                             ProfileAbout(metadata: metadata),
                                             const SizedBox(height: height * 2),
                                             KeySection(
-                                              type: KeySectionType.publicKey,
+                                              type: KeySectionType.nPubKey,
                                               showEyeIconButton: false,
                                             ),
                                             // PublicKeySection(),

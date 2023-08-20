@@ -34,9 +34,7 @@ class NoteOwnerAvatar extends StatelessWidget {
                       value: context.read<GlobalCubit>(),
                     ),
                   ],
-                  child: Profile(
-                    userPubKey: userPubKey!,
-                  ),
+                  child: Profile(userPubKey: userPubKey!),
                 );
               },
             ),

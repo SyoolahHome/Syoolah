@@ -18,6 +18,7 @@ class CustomAppBar extends PreferredSize {
   });
 
   final UserMetaData userMetadata;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
@@ -42,7 +43,14 @@ class CustomAppBar extends PreferredSize {
               icon: Icon(
                   AppUtils.instance.directionality_arrow_left_fill(context)),
             )
-          : null,
+          : !context.read<ProfileCubit>().isCurrentUser
+              ? IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    AppUtils.instance.directionality_arrow_left_fill(context),
+                  ),
+                )
+              : null,
       actions: <Widget>[
         IconButton(
           icon: const Icon(FlutterRemix.more_2_line),

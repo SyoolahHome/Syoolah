@@ -508,3 +508,7 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 ## 141-142
 
 - Implmentation of profile for all users as well like the current user's, so a user can see other users profiles, their notes, their likes..., but it is not finished, it require more adaption for the user's owned data only so it doesn't conflict with the current user's data.
+
+## 143
+
+- Adapted the profile followings and followers to match all users, including the current one.
