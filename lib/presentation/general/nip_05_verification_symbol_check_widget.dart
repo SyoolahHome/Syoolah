@@ -9,17 +9,21 @@ class NIP05VerificationSymbolWidget extends StatelessWidget {
     required this.pubKey,
   });
 
-  final String pubKey;
+  final String? pubKey;
   final String internetIdentifier;
 
   @override
   Widget build(BuildContext context) {
+    if (pubKey == null) {
+      return const SizedBox.shrink();
+    }
+
     Future<bool> future() async {
       if (Nostr.instance.utilsService
           .isValidNip05Identifier(internetIdentifier)) {
         return Nostr.instance.relaysService.verifyNip05(
           internetIdentifier: internetIdentifier,
-          pubKey: pubKey,
+          pubKey: pubKey!,
         );
       } else {
         return false;

@@ -24,8 +24,8 @@ class ProfileBanner extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ImageFullView(
-            link: metadata.picture!,
-            heroTag: metadata.picture!,
+            link: metadata.banner!,
+            heroTag: metadata.banner!,
           ),
         ),
       );
@@ -55,6 +55,7 @@ class ProfileBanner extends StatelessWidget {
               ? DecorationImage(
                   fit: BoxFit.cover,
                   image: CachedNetworkImageProvider(
+                    cacheKey: metadata.banner!,
                     metadata.banner!,
                   ),
                 )

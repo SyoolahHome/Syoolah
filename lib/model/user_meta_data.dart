@@ -1,3 +1,4 @@
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 
 /// {@template user_meta_data}
@@ -25,7 +26,12 @@ class UserMetaData extends Equatable {
   /// The nip05 identifier of the user.
   final String? nip05Identifier;
 
+  /// The creation date of the user.
   final DateTime? userCreatedAt;
+
+  /// The source nostr event .
+  final NostrEvent? userMetadataEvent;
+
   @override
   List<Object?> get props => [
         name,
@@ -45,6 +51,7 @@ class UserMetaData extends Equatable {
     required this.banner,
     required this.username,
     required this.about,
+    this.userMetadataEvent,
     this.displayName,
     this.nip05Identifier,
     this.userCreatedAt,
@@ -52,7 +59,10 @@ class UserMetaData extends Equatable {
 
   /// {@macro user_meta_data}
   /// Instantiate a [UserMetaData] from a json.
-  factory UserMetaData.fromJson(Map<String, dynamic> jsonData) {
+  factory UserMetaData.fromJson({
+    required Map<String, dynamic> jsonData,
+    required NostrEvent sourceNostrEvent,
+  }) {
     final json = {...jsonData};
 
     json.forEach((key, value) {
@@ -74,6 +84,7 @@ class UserMetaData extends Equatable {
       userCreatedAt: json['creationDate'] != null
           ? DateTime.parse(json['creationDate'])
           : null,
+      userMetadataEvent: sourceNostrEvent,
     );
   }
 
@@ -127,8 +138,10 @@ class UserMetaData extends Equatable {
     String? displayName,
     String? nip05Identifier,
     DateTime? userCreatedAt,
+    NostrEvent? userMetadataEvent,
   }) {
     return UserMetaData(
+      userMetadataEvent: userMetadataEvent ?? this.userMetadataEvent,
       name: name ?? this.name,
       picture: picture ?? this.picture,
       banner: banner ?? this.banner,

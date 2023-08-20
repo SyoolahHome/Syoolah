@@ -65,7 +65,10 @@ class UsersListToFollow extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final current = state.pubKeysMetadata[index];
                     final metadata = UserMetaData.fromJson(
-                        jsonDecode(current.content) as Map<String, dynamic>);
+                      jsonData:
+                          jsonDecode(current.content) as Map<String, dynamic>,
+                      sourceNostrEvent: current,
+                    );
 
                     return Animate(
                       delay: Duration(milliseconds: 200 + index * 200),

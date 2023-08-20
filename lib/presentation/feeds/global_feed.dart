@@ -1,4 +1,6 @@
+import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
+import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/extensions.dart';
@@ -23,8 +25,12 @@ class Umah extends BottomBarScreen {
     final followingsPubKeysList =
         globalCubit!.state.currentUserFollowing?.tagsPublicKeys;
 
-    return BlocProvider<GlobalCubit>.value(
-      value: globalCubit!,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GlobalCubit>.value(value: globalCubit!),
+        BlocProvider<BottomBarCubit>.value(
+            value: context.read<BottomBarCubit>()),
+      ],
       child: GeneralFeed(
         feedName: "umah".tr(),
         endFeedTitleWithAdditionalText: false,

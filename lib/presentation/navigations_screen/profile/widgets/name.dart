@@ -10,11 +10,9 @@ class ProfileName extends StatelessWidget {
   const ProfileName({
     super.key,
     required this.metadata,
-    required this.pubKey,
   });
 
   final UserMetaData metadata;
-  final String pubKey;
   @override
   Widget build(BuildContext context) {
     final String toShow = metadata.nameToShow();
@@ -38,7 +36,7 @@ class ProfileName extends StatelessWidget {
         const SizedBox(width: 5),
         NIP05VerificationSymbolWidget(
           internetIdentifier: internetIdentifier,
-          pubKey: pubKey,
+          pubKey: metadata.userMetadataEvent?.pubkey,
         ),
       ],
     );

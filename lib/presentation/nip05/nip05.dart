@@ -1,3 +1,5 @@
+import 'package:dart_nostr/nostr/dart_nostr.dart';
+import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +22,15 @@ class Nip05Verification extends StatelessWidget {
     const height = 10.0;
     final animationDuration = Animate.defaultDuration;
 
+    final currentUserPrivateKey = LocalDatabase.instance.getPrivateKey()!;
+    final currentUserPublicKey = Nostr.instance.keysService
+        .derivePublicKey(privateKey: currentUserPrivateKey);
+
     return BlocProvider<Nip05VerificationCubit>(
       create: (context) => Nip05VerificationCubit(
-        currentUserMetadata:
-            NostrService.instance.subs.currentUserMetaDataStream(),
+        currentUserMetadata: NostrService.instance.subs.userMetaData(
+          userPubKey: currentUserPublicKey,
+        ),
       ),
       child: Builder(builder: (context) {
         final cubit = context.read<Nip05VerificationCubit>();

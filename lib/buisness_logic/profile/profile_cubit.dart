@@ -29,18 +29,34 @@ part 'profile_state.dart';
 /// The responsible cubit for the user's profile.
 /// {@endtemplate}
 class ProfileCubit extends Cubit<ProfileState> {
-  /// The Nostr stream for the current user meta data.
-  NostrEventsStream currentUserMetadataStream;
+  /// The Nostr stream for the user meta data.
+  NostrEventsStream userMetadataStream;
 
-  /// The stream subscription for [currentUserMetadataStream.stream].
-  StreamSubscription<NostrEvent>? _currentUserMetadataSubscription;
+  /// the public key of the user which the profile page is opened.
+  String userPubKey;
+
+  /// The stream subscription for [userMetadataStream.stream].
+  StreamSubscription<NostrEvent>? _userMetadataSubscription;
+
+  ///
+  bool get isCurrentUser {
+    final privateKey = LocalDatabase.instance.getPrivateKey()!;
+
+    final currentUserPubKey =
+        Nostr.instance.keysService.derivePublicKey(privateKey: privateKey);
+
+    return currentUserPubKey == userPubKey;
+  }
 
   /// {@macro profile_cubit}
   ProfileCubit({
-    required this.currentUserMetadataStream,
+    required this.userMetadataStream,
+    required this.userPubKey,
   }) : super(
           ProfileState.initial(
-            profileTabsItems: GeneralProfileTabs.profileTabsItems,
+            profileTabsItems: GeneralProfileTabs.profileTabsItems(
+              userPubKey: userPubKey,
+            ),
           ),
         ) {
     _init();
@@ -48,9 +64,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   @override
   Future<void> close() {
-    currentUserMetadataStream.close();
-
-    _currentUserMetadataSubscription?.cancel();
+    userMetadataStream.close();
+    _userMetadataSubscription?.cancel();
 
     return super.close();
   }
@@ -106,13 +121,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   void removeAvatar() {
     emit(state.copyWithNullAvatar());
     try {
-      final currentUsermetadata = UserMetaData.fromJson(
-        jsonDecode(state.currentUserMetadata?.content ?? "{}")
-            as Map<String, dynamic>,
-      );
+      final userMetadata = state.metadata;
 
       NostrService.instance.send.setCurrentUserMetaData(
-        metadata: currentUsermetadata.copyWith(
+        metadata: userMetadata!.copyWith(
           picture: "",
         ),
       );
@@ -126,12 +138,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   void removeBanner() {
     try {
       emit(state.copyWithNullBanner());
-      final currentUsermetadata = UserMetaData.fromJson(
-        jsonDecode(state.currentUserMetadata?.content ?? "{}")
-            as Map<String, dynamic>,
-      );
 
-      final newM = currentUsermetadata.copyWith(
+      final newM = state.metadata!.copyWith(
         banner: "",
       );
 
@@ -155,13 +163,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(state.copyWith(isLoading: true));
       final uploadedAvatarUrl = await FileUpload()(pickedAvatarImage);
 
-      final currentUsermetadata = UserMetaData.fromJson(
-        jsonDecode(state.currentUserMetadata?.content ?? "{}")
-            as Map<String, dynamic>,
-      );
-
       NostrService.instance.send.setCurrentUserMetaData(
-        metadata: currentUsermetadata.copyWith(
+        metadata: state.metadata!.copyWith(
           picture: uploadedAvatarUrl,
         ),
       );
@@ -186,13 +189,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(state.copyWith(isLoading: true));
       final uploadedBannerUrl = await FileUpload()(pickedBannerImage);
 
-      final currentUsermetadata = UserMetaData.fromJson(
-        jsonDecode(state.currentUserMetadata?.content ?? "{}")
-            as Map<String, dynamic>,
-      );
-
       NostrService.instance.send.setCurrentUserMetaData(
-        metadata: currentUsermetadata.copyWith(
+        metadata: state.metadata!.copyWith(
           banner: uploadedBannerUrl,
         ),
       );
@@ -285,17 +283,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     required void Function() onLogout,
     required void Function() onMyKeysPressed,
   }) {
-    final metadata = UserMetaData.fromJson(
-      jsonDecode(
-        state.currentUserMetadata?.content ?? "{}",
-      ) as Map<String, dynamic>,
-    );
+    final metadata = state.metadata;
 
-    final currentUserMetadata = state.currentUserMetadata;
+    final userMetadataPubkey = metadata?.userMetadataEvent?.pubkey;
 
-    final currentUserMetadataPubkey = currentUserMetadata?.pubkey;
-
-    final currentUserMetadataContent = currentUserMetadata?.content;
+    final userMetadataContent = metadata?.userMetadataEvent?.content;
 
     BottomSheetService.showProfileBottomSheet(
       context,
@@ -315,7 +307,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.instance.copy(
-              currentUserMetadataPubkey ?? "",
+              userMetadataPubkey ?? "",
               onSuccess: () {
                 final shownSnackbarController = SnackBars.text(
                   context,
@@ -330,7 +322,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.instance.copy(
-              currentUserMetadataContent ?? "",
+              userMetadataContent ?? "",
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -343,7 +335,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.instance.copy(
-              currentUserMetadata?.serialized() ?? "",
+              metadata!.userMetadataEvent!.serialized(),
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -356,7 +348,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.instance.copy(
-              metadata.picture ?? "",
+              metadata!.picture!,
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -369,7 +361,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
             AppUtils.instance.copy(
-              metadata.username,
+              metadata!.username,
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());
@@ -431,15 +423,22 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void _handleStreams() {
-    _handleCurrentUserMetadata();
+    _handleUserMetadata();
   }
 
-  void _handleCurrentUserMetadata() {
-    _currentUserMetadataSubscription = currentUserMetadataStream.stream.listen(
+  void _handleUserMetadata() {
+    _userMetadataSubscription = userMetadataStream.stream.listen(
       (event) {
+        dynamic decoded = jsonDecode(event.content);
+        decoded = decoded as Map<String, dynamic>;
+
         emit(
           state.copyWith(
-            currentUserMetadata: event,
+            userMetadataEvent: event,
+            metadata: UserMetaData.fromJson(
+              jsonData: decoded,
+              sourceNostrEvent: event,
+            ),
           ),
         );
       },

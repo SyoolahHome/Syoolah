@@ -134,7 +134,10 @@ class OnBoardingSearch extends StatelessWidget {
                                       as Map<String, dynamic>;
 
                               final searchedUserEventMetadata =
-                                  UserMetaData.fromJson(decoded);
+                                  UserMetaData.fromJson(
+                                jsonData: decoded,
+                                sourceNostrEvent: state.searchedUserEvent!,
+                              );
 
                               return Column(
                                 children: <Widget>[

@@ -26,18 +26,16 @@ class NostrServiceSub {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  NostrEventsStream currentUserMetaDataStream() {
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
-
+  NostrEventsStream userMetaData({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: [
         NostrFilter(
-          authors: [nostrKeyPairs.public],
+          authors: [userPubKey],
           kinds: const [0],
           since: DateTime.now().subtract(const Duration(days: 100)),
         )
@@ -48,18 +46,16 @@ class NostrServiceSub {
         .startEventsSubscription(request: requestWithFilter);
   }
 
-  NostrEventsStream currentUserTextNotesStream() {
+  NostrEventsStream userTextNotesStream({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
-
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: [nostrKeyPairs.public],
+          authors: [userPubKey],
           kinds: const [1],
           since: DateTime.now().subtract(const Duration(days: 100)),
         )
@@ -140,27 +136,6 @@ class NostrServiceSub {
         NostrFilter(
           e: [postEventId],
           kinds: const [7],
-        )
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream currentUserLikes() {
-    final randomId = randomHexString;
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          authors: [nostrKeyPairs.public],
-          kinds: const [7],
-          until: DateTime.now().add(const Duration(days: 10)),
         )
       ],
     );
@@ -425,26 +400,9 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream userTextNotesStream(String userProfilePubKey) {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          authors: [userProfilePubKey],
-          kinds: const [1],
-          t: ["globalMunawarah"],
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream userMetaDataStream(String userProfilePubKey) {
+  NostrEventsStream userMetaDataStream({
+    required String userProfilePubKey,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
@@ -462,14 +420,16 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream userLikes(String userProfilePubKey) {
+  NostrEventsStream userLikes({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: [userProfilePubKey],
+          authors: [userPubKey],
           kinds: const [7],
         )
       ],
@@ -480,14 +440,16 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream userFollowers(String userProfilePubKey) {
+  NostrEventsStream userFollowers({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          p: [userProfilePubKey],
+          p: [userPubKey],
           kinds: const [3],
         )
       ],
@@ -498,14 +460,16 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream userFollowing(String userProfilePubKey) {
+  NostrEventsStream userFollowings({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: [userProfilePubKey],
+          authors: [userPubKey],
           kinds: const [3],
         ),
       ],
@@ -534,17 +498,16 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream currentUserReposts() {
+  NostrEventsStream userReposts({
+    required String userPubKey,
+  }) {
     final randomId = randomHexString;
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
-    );
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: [nostrKeyPairs.public],
+          authors: [userPubKey],
           kinds: const [6],
         ),
       ],

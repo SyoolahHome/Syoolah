@@ -7,16 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/current_user_posts/current_user_posts_cubit.dart';
+import '../../../../constants/abstractions/abstractions.dart';
 
-class CurrentUserPosts extends StatelessWidget {
-  const CurrentUserPosts({super.key});
+class CurrentUserPosts extends UserProfileTab {
+  CurrentUserPosts({
+    super.key,
+    required super.userPubKey,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CurrentUserPostsCubit>(
       create: (context) => CurrentUserPostsCubit(
-        currentUserPostsStream:
-            NostrService.instance.subs.currentUserTextNotesStream(),
+        currentUserPostsStream: NostrService.instance.subs.userTextNotesStream(
+          userPubKey: userPubKey,
+        ),
       ),
       child: Builder(
         builder: (context) {

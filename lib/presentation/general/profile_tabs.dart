@@ -7,23 +7,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 abstract class GeneralProfileTabs {
-  static List<TabItem> profileTabsItems = [
-    TabItem(
-      label: "notes".tr(),
-      widget: const CurrentUserPosts(),
-      icon: FlutterRemix.line_height,
-    ),
-    TabItem(
-      label: "takes".tr(),
-      widget: const CurrentUserReposts(),
-      icon: FlutterRemix.repeat_2_line,
-    ),
-    TabItem(
-      label: "likes".tr(),
-      widget: const Center(
-        child: CurrentUserLikes(),
-      ),
-      icon: FlutterRemix.heart_3_line,
-    ),
-  ];
+  static List<TabItem> profileTabsItems({
+    required String userPubKey,
+  }) =>
+      [
+        TabItem(
+          label: "notes".tr(),
+          widget: CurrentUserPosts(
+            userPubKey: userPubKey,
+          ),
+          icon: FlutterRemix.line_height,
+        ),
+        TabItem(
+          label: "takes".tr(),
+          widget: CurrentUserReposts(
+            userPubKey: userPubKey,
+          ),
+          icon: FlutterRemix.repeat_2_line,
+        ),
+        TabItem(
+          label: "likes".tr(),
+          widget: Center(
+            child: CurrentUserLikes(
+              userPubKey: userPubKey,
+            ),
+          ),
+          icon: FlutterRemix.heart_3_line,
+        ),
+      ];
 }

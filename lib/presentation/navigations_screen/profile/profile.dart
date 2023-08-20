@@ -21,16 +21,23 @@ import '../../private_succes/widgets/key_section.dart';
 import 'widgets/banner.dart';
 
 class Profile extends BottomBarScreen {
-  const Profile({super.key});
+  const Profile({
+    super.key,
+    required this.userPubKey,
+  });
+
+  final String userPubKey;
 
   @override
   Widget build(BuildContext context) {
     const height = 10.0;
 
     return BlocProvider<ProfileCubit>(
-      create: (context) => ProfileCubit(
-        currentUserMetadataStream:
-            NostrService.instance.subs.currentUserMetaDataStream(),
+      create: (_) => ProfileCubit(
+        userMetadataStream: NostrService.instance.subs.userMetaData(
+          userPubKey: userPubKey,
+        ),
+        userPubKey: userPubKey,
       ),
       child: Builder(
         builder: (context) {
@@ -42,13 +49,10 @@ class Profile extends BottomBarScreen {
               builder: (context) {
                 return BlocBuilder<ProfileCubit, ProfileState>(
                   builder: (context, state) {
-                    final event = state.currentUserMetadata;
-                    UserMetaData metadata;
+                    final placeholderMetadata =
+                        UserMetaData.placeholder(name: "");
 
-                    metadata = UserMetaData.fromJson(
-                      jsonDecode(event?.content ?? "{}")
-                          as Map<String, dynamic>,
-                    );
+                    final metadata = state.metadata ?? placeholderMetadata;
 
                     return Scaffold(
                       backgroundColor: Colors.transparent,
@@ -97,7 +101,6 @@ class Profile extends BottomBarScreen {
                                             ),
                                             ProfileName(
                                               metadata: metadata,
-                                              pubKey: event?.pubkey ?? "",
                                             ),
                                             const SizedBox(height: height),
                                             ProfileAbout(metadata: metadata),

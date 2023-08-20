@@ -32,7 +32,10 @@ class NoteAvatarAndName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        NoteOwnerAvatar(avatarUrl: avatarUrl),
+        NoteOwnerAvatar(
+          avatarUrl: avatarUrl,
+          userPubKey: userPubKey,
+        ),
         const SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,8 +4,11 @@ part of 'profile_cubit.dart';
 ///  The state of [ProfileCubit].
 /// {@endtemplate}
 class ProfileState extends Equatable {
-  /// The event containing the current user meta data.
-  final NostrEvent? currentUserMetadata;
+  /// The event containing the user meta data.
+  final NostrEvent? userMetadataEvent;
+
+  /// The decoded user meta data.
+  final UserMetaData? metadata;
 
   /// The profile tabs items to be represented in the UI.
   final List<TabItem> profileTabsItems;
@@ -33,7 +36,7 @@ class ProfileState extends Equatable {
 
   @override
   List<Object?> get props => [
-        currentUserMetadata,
+        userMetadataEvent,
         pickedAvatarImage,
         pickedBannerImage,
         error,
@@ -46,9 +49,10 @@ class ProfileState extends Equatable {
 
   /// {@macro profile_state}
   const ProfileState({
+    this.metadata,
     this.profileTabsItems = const [],
     this.error,
-    this.currentUserMetadata,
+    this.userMetadataEvent,
     this.pickedAvatarImage,
     this.pickedBannerImage,
     this.followersCount = 0,
@@ -59,7 +63,7 @@ class ProfileState extends Equatable {
 
 // {@macro profile_state}
   ProfileState copyWith({
-    NostrEvent? currentUserMetadata,
+    NostrEvent? userMetadataEvent,
     File? pickedAvatarImage,
     File? pickedBannerImage,
     String? error,
@@ -68,17 +72,19 @@ class ProfileState extends Equatable {
     int? followingCount,
     double? profileAvatarScale,
     bool? isLoading,
+    UserMetaData? metadata,
   }) {
     return ProfileState(
       profileTabsItems: profileTabsItems ?? this.profileTabsItems,
       error: error ?? this.error,
-      currentUserMetadata: currentUserMetadata ?? this.currentUserMetadata,
+      userMetadataEvent: userMetadataEvent ?? this.userMetadataEvent,
       pickedAvatarImage: pickedAvatarImage ?? this.pickedAvatarImage,
       pickedBannerImage: pickedBannerImage ?? this.pickedBannerImage,
       followersCount: followersCount ?? this.followersCount,
       followingCount: followingCount ?? this.followingCount,
       profileAvatarScale: profileAvatarScale ?? this.profileAvatarScale,
       isLoading: isLoading ?? this.isLoading,
+      metadata: metadata ?? this.metadata,
     );
   }
 
@@ -87,13 +93,14 @@ class ProfileState extends Equatable {
     return ProfileState(
       profileTabsItems: this.profileTabsItems,
       error: this.error,
-      currentUserMetadata: this.currentUserMetadata,
+      userMetadataEvent: this.userMetadataEvent,
       pickedAvatarImage: null,
       pickedBannerImage: this.pickedBannerImage,
       followersCount: this.followersCount,
       followingCount: this.followingCount,
       profileAvatarScale: this.profileAvatarScale,
       isLoading: this.isLoading,
+      metadata: this.metadata,
     );
   }
 
@@ -102,13 +109,14 @@ class ProfileState extends Equatable {
     return ProfileState(
       profileTabsItems: this.profileTabsItems,
       error: this.error,
-      currentUserMetadata: this.currentUserMetadata,
+      userMetadataEvent: this.userMetadataEvent,
       pickedAvatarImage: this.pickedAvatarImage,
       pickedBannerImage: null,
       followersCount: this.followersCount,
       followingCount: this.followingCount,
       profileAvatarScale: this.profileAvatarScale,
       isLoading: this.isLoading,
+      metadata: this.metadata,
     );
   }
 

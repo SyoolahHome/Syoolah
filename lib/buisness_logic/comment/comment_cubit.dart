@@ -48,11 +48,14 @@ class CommentWidgetCubit extends Cubit<CommentState> {
 
   void _init() {
     commentEventOwnerMetadataSub = NostrService.instance.subs
-        .userMetaDataStream(commentEvent.pubkey)
+        .userMetaData(userPubKey: commentEvent.pubkey)
         .stream
         .listen((event) {
       final decoded = jsonDecode(event.content) as Map<String, dynamic>;
-      final metadata = UserMetaData.fromJson(decoded);
+      final metadata = UserMetaData.fromJson(
+        jsonData: decoded,
+        sourceNostrEvent: event,
+      );
 
       emit(state.copyWith(
         commentOwnerMetadata: metadata,

@@ -8,11 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../buisness_logic/current_user_likes/current_user_likes_cubit.dart';
+import '../../../../constants/abstractions/abstractions.dart';
 import '../../../../constants/app_colors.dart';
 import '../../../general/loading_widget.dart';
 
-class CurrentUserLikes extends StatelessWidget {
-  const CurrentUserLikes({super.key});
+class CurrentUserLikes extends UserProfileTab {
+  CurrentUserLikes({
+    super.key,
+    required super.userPubKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,9 @@ class CurrentUserLikes extends StatelessWidget {
 
     return BlocProvider<CurrentUserLikesCubit>(
       create: (context) => CurrentUserLikesCubit(
-        currentUserLikedPosts: NostrService.instance.subs.currentUserLikes(),
+        currentUserLikedPosts: NostrService.instance.subs.userLikes(
+          userPubKey: userPubKey,
+        ),
       ),
       child: Builder(
         builder: (context) {

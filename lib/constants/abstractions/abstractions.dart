@@ -19,3 +19,12 @@ abstract class CurrentUserTabViewCubit<T> extends Cubit<T> {
 }
 
 abstract class SignUpStepViewWidget extends Widget {}
+
+abstract class UserProfileTab extends StatelessWidget {
+  final String userPubKey;
+
+  UserProfileTab({
+    super.key,
+    required this.userPubKey,
+  });
+}

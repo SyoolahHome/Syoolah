@@ -1,4 +1,8 @@
 {
   "editor.acceptSuggestionOnEnter": "off",
-  "cSpell.words": ["Munawarah", "Nostr"]
-}
+  "cSpell.words": [
+    "Munawarah",
+    "Nostr"
+  ],
+  "dart.flutterSdkPath": "C:\\tools\\flutter",
+ } 
