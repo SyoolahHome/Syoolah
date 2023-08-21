@@ -512,3 +512,4 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 ## 143
 
 - Adapted the profile followings and followers to match all users, including the current one.
+- Made the profile to show the npub formatted key intead of the raw hex key.

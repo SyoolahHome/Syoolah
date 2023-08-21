@@ -431,7 +431,8 @@ class NostrServiceSub {
         NostrFilter(
           authors: [userPubKey],
           kinds: const [7],
-        )
+          limit: 10,
+        ),
       ],
     );
 

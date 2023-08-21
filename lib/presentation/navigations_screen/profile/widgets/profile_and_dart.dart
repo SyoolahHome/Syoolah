@@ -60,12 +60,12 @@ class ProfileHeader extends StatelessWidget {
               builder: (context, state) {
                 return FollowInfo(
                   label: "followers".tr(),
-                  count: state.currentUserFollowers?.tags.length ?? 0,
+                  count: state.currentUserFollowers.length,
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       Paths.followers,
                       arguments: {
-                        "tags": state.currentUserFollowers?.tags ?? [],
+                        "userFollowersEvents": state.currentUserFollowers,
                         "profileCubit": profileCubit,
                         "globalCubit": globalCubit,
                       },
@@ -126,12 +126,12 @@ class ProfileHeader extends StatelessWidget {
                 builder: (context, state) {
                   return FollowInfo(
                     label: "followers".tr(),
-                    count: state.userFollowersEvent?.tags.length ?? 0,
+                    count: state.userFollowersEvents.length,
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         Paths.followers,
                         arguments: {
-                          "tags": state.userFollowersEvent?.tags ?? [],
+                          "userFollowersEvents": state.userFollowersEvents,
                           "profileCubit": profileCubit,
                           "globalCubit": globalCubit,
                         },

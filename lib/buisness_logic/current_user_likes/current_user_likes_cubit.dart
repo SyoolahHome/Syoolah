@@ -47,8 +47,8 @@ class CurrentUserLikesCubit
     _currentUserLikedPostsSubscription =
         currentUserLikedPosts.stream.listen((event) {
       final newList = <NostrEvent>[
-        event,
         ...state.currentUserLikedPosts,
+        event,
       ];
 
       emit(state.copyWith(currentUserLikedPosts: newList));

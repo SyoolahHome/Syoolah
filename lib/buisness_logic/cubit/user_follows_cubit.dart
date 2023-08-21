@@ -53,7 +53,10 @@ class UserFollowsCubit extends Cubit<UserFollowsState> {
   void _handleUserFollowers() {
     followersSubscription = userFollowersNostrStream.stream.listen(
       (event) {
-        emit(state.copyWith(userFollowersEvent: event));
+        emit(state.copyWith(userFollowersEvents: [
+          event,
+          ...state.userFollowersEvents,
+        ]));
       },
     );
   }

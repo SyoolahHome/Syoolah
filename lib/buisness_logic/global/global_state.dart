@@ -8,7 +8,7 @@ class GlobalState extends Equatable {
   final NostrEvent? currentUserFollowing;
 
   /// The event holding followers.
-  final NostrEvent? currentUserFollowers;
+  final List<NostrEvent> currentUserFollowers;
 
   /// Weither follow is perfermoed succesfully.
   final bool followedSuccessfully;
@@ -22,7 +22,7 @@ class GlobalState extends Equatable {
 
   /// {@macro global_state}
   const GlobalState({
-    this.currentUserFollowers,
+    this.currentUserFollowers = const [],
     this.currentUserFollowing,
     this.followedSuccessfully = false,
   });
@@ -30,7 +30,7 @@ class GlobalState extends Equatable {
   /// {@macro global_state}
   GlobalState copyWith({
     NostrEvent? currentUserFollowing,
-    NostrEvent? currentUserFollowers,
+    List<NostrEvent>? currentUserFollowers,
     bool? followedSuccessfully,
   }) {
     return GlobalState(

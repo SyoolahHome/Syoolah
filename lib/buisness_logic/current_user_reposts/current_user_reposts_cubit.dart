@@ -42,8 +42,8 @@ class CurrentUserRepostsCubit
       emit(
         state.copyWith(
           currentUserReposts: <NostrEvent>[
-            event,
             ...state.currentUserReposts,
+            event,
           ],
         ),
       );

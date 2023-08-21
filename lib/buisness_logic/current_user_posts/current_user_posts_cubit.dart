@@ -37,7 +37,9 @@ class CurrentUserPostsCubit
   void init() {
     _handleCurrentUserPosts();
     Future.delayed(durationToWaitBeforeHidingLoadingIndicator, () {
-      emit(state.copyWith(shouldShowLoadingIndicator: false));
+      emit(state.copyWith(
+        shouldShowLoadingIndicator: false,
+      ));
     });
   }
 
@@ -46,12 +48,7 @@ class CurrentUserPostsCubit
     _currentUserPostsSubscription =
         currentUserPostsStream.stream.listen((event) {
       emit(
-        state.copyWith(
-          currentUserPosts: [
-            event,
-            ...state.currentUserPosts,
-          ],
-        ),
+        state.copyWith(currentUserPosts: [...state.currentUserPosts, event]),
       );
     });
   }
