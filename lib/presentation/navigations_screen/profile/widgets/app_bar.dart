@@ -8,6 +8,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../../services/utils/app_utils.dart';
+import '../../../../services/utils/routing.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -22,7 +23,7 @@ class CustomAppBar extends PreferredSize {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
-    final bottomBarCubit = context.read<BottomBarCubit>();
+    final bottomBarCubit = Routing.bottomBarCubit;
 
     final shouldShowLeading = bottomBarCubit.shouldShowLeadingOnProfile;
 

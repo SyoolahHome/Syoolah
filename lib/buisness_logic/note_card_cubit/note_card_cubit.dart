@@ -46,6 +46,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   Future<void> close() {
     currentUserMetadataStream.close();
     noteLikesStream.close();
+
     _currentUserMetadataSubscription?.cancel();
     _noteLikesSubscription?.cancel();
 

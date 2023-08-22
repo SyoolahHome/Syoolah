@@ -88,19 +88,19 @@ class ChatModules extends BottomBarScreen {
                               child: AnimatedSwitcher(
                                 duration: Animate.defaultDuration,
                                 child: Text(
-                                  currentViewedLevel.subtitle,
+                                  currentViewedLevel.title,
                                   key: ValueKey(currentViewedLevel.subtitle),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .labelLarge
+                                      .titleLarge
                                       ?.copyWith(
                                         color: Theme.of(context)
                                             .colorScheme
                                             .background
                                             .withOpacity(.6),
                                         fontWeight: FontWeight.normal,
-                                        fontStyle: FontStyle.italic,
+                                        fontStyle: FontStyle.normal,
                                       ),
                                 ),
                               ),

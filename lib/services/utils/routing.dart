@@ -32,6 +32,7 @@ import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/tangem_auth/tangem_auth.dart';
@@ -77,6 +78,7 @@ abstract class Routing {
   static final authCubit = AuthCubit();
   static final appCubit = AppCubit();
   static final onBoardingCubit = OnBoardingCubit();
+  static final bottomBarCubit = BottomBarCubit();
 
   static BlocObserver blocObserver = MyBlocObserver();
 }

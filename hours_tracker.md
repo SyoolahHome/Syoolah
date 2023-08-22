@@ -513,3 +513,7 @@ Imlemntation of a comments section screen for each post, not completed yet but t
 
 - Adapted the profile followings and followers to match all users, including the current one.
 - Made the profile to show the npub formatted key intead of the raw hex key.
+
+# 144-154
+
+- Finally, fixing the issue related to the followers part of the profile, because it used to show the tags of the events that actually represented the followers instead of counting them directly, applied changes to profile page.

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/abstractions/abstractions.dart';
+import '../../services/utils/routing.dart';
 
 class Umah extends BottomBarScreen {
   Umah({super.key});
@@ -28,8 +29,7 @@ class Umah extends BottomBarScreen {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GlobalCubit>.value(value: globalCubit!),
-        BlocProvider<BottomBarCubit>.value(
-            value: context.read<BottomBarCubit>()),
+        BlocProvider<BottomBarCubit>.value(value: Routing.bottomBarCubit),
       ],
       child: GeneralFeed(
         feedName: "umah".tr(),

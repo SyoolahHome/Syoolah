@@ -42,10 +42,10 @@ class NotesListView extends StatelessWidget {
 
     final nothingToShow = Text(
       'There is nothing here yet.',
-
-      style: Theme.of(context).textTheme.labelMedium!.copyWith(
-            color: AppColors.grey
-          ),
+      style: Theme.of(context)
+          .textTheme
+          .labelMedium!
+          .copyWith(color: AppColors.grey),
     );
 
     if (feedName != null) {

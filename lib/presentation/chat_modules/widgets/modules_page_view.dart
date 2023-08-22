@@ -65,8 +65,11 @@ class ChatModulesPageView extends StatelessWidget {
                             );
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(30),
-                            child: Icon(item.icon),
+                            padding: const EdgeInsets.all(40),
+                            child: Icon(
+                              item.icon,
+                              size: 35,
+                            ),
                           ),
                         ),
                       ),

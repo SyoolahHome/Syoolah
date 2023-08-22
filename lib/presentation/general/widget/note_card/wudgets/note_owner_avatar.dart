@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
+import '../../../../../services/utils/routing.dart';
 import '../../../../navigations_screen/profile/profile.dart';
 
 class NoteOwnerAvatar extends StatelessWidget {
@@ -28,7 +29,7 @@ class NoteOwnerAvatar extends StatelessWidget {
                 return MultiBlocProvider(
                   providers: [
                     BlocProvider<BottomBarCubit>.value(
-                      value: context.read<BottomBarCubit>(),
+                      value: Routing.bottomBarCubit,
                     ),
                     BlocProvider<GlobalCubit>.value(
                       value: context.read<GlobalCubit>(),

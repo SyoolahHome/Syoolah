@@ -3,6 +3,7 @@ import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,11 +28,11 @@ class BottomBar extends StatelessWidget {
       ),
       child: BlocProvider.value(
         value: cubit,
-        child: BlocProvider(
-          create: (context) => BottomBarCubit(),
+        child: BlocProvider.value(
+          value: Routing.bottomBarCubit,
           child: Builder(
             builder: (context) {
-              final cubit = context.read<BottomBarCubit>();
+              final cubit = Routing.bottomBarCubit;
 
               return BlocBuilder<BottomBarCubit, int>(
                 builder: (context, state) {

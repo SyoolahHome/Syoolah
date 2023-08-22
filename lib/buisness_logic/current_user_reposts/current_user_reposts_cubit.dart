@@ -23,6 +23,7 @@ class CurrentUserRepostsCubit
   }
 
   Future<void> close() {
+    currentUserReposts.close();
     _currentUserRepostsSubscription?.cancel();
 
     return super.close();
