@@ -57,7 +57,9 @@ class NoteAvatarAndName extends StatelessWidget {
         const Spacer(),
         if (note != null) ...<Widget>[
           if (note!.event.pubkey != appCurrentUserPublicKey)
-            NoteFollowButton(note: note!),
+            NoteFollowButton(
+              userPubLickKey: note!.event.pubkey,
+            ),
         ],
         if (showFollowButton) ...<Widget>[
           MunawarahButton(

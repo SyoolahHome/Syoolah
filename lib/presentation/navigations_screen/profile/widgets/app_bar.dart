@@ -9,6 +9,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../../services/utils/app_utils.dart';
 import '../../../../services/utils/routing.dart';
+import '../../../general/widget/note_card/wudgets/note_follow_button.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({
@@ -53,6 +54,12 @@ class CustomAppBar extends PreferredSize {
                 )
               : null,
       actions: <Widget>[
+        // if (!context.read<ProfileCubit>().isCurrentUser) ...[
+        //   NoteFollowButton(
+        //     userPubLickKey: userMetadata.userMetadataEvent?.pubkey,
+        //   ),
+        //   SizedBox(width: 5),
+        // ],
         IconButton(
           icon: const Icon(FlutterRemix.more_2_line),
           style: IconButton.styleFrom(

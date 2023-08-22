@@ -55,8 +55,7 @@ class BottomSheetOption extends Equatable {
     return BottomSheetOption(
       title: localeItem.titleName,
       icon: icon,
-      trailing: MunawarahButton.bottomSheetApply(
-        buttonText: localeItem.applyText,
+      trailing: MunawarahButton.bottomSheetSwitch(
         locale: localeItem.locale,
         onTap: () {
           onTap();

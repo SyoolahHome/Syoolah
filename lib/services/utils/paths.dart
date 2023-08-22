@@ -25,7 +25,7 @@ abstract class Paths {
   static const String shariaFeed = '/shariaFeed';
   static const String hadithFeed = '/hadithFeed';
   static const String fiqhFeed = '/fiqhFeed';
-  static const String sirahFeed = '/sirahFeed';
+  static const String seerahFeed = '/seerahFeed';
   static const String followingFeed = '/followingFeed';
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';

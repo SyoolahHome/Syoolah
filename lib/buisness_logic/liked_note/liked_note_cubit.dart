@@ -13,6 +13,8 @@ part 'liked_note_state.dart';
 class LikedNoteCubit extends Cubit<LikedNoteState> {
   /// The Nostr stream for the like note.
   NostrEventsStream likedNoteStream;
+
+  /// The subscription where we will listen to [likedNoteStream.stream].
   StreamSubscription<NostrEvent>? _likedNoteSubscription;
 
   /// {@macro like_note_cubit}

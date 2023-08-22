@@ -42,9 +42,11 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   Future<void> close() {
     resetSearch();
     userStream?.close();
+
+    userSearchSub?.cancel();
+
     searchNodeFocus?.dispose();
     searchController?.dispose();
-    userSearchSub?.cancel();
 
     return super.close();
   }

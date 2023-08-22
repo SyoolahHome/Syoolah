@@ -16,7 +16,7 @@ import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/feeds/hadith_feed.dart';
 import 'package:ditto/presentation/feeds/quran_feed.dart';
 import 'package:ditto/presentation/feeds/sharia_feed.dart';
-import 'package:ditto/presentation/feeds/sirah_feed.dart';
+import 'package:ditto/presentation/feeds/seerah_feed.dart';
 import 'package:ditto/presentation/followers/followers.dart';
 import 'package:ditto/presentation/followings/followings.dart';
 import 'package:ditto/presentation/nostr_service_loading/nostr_service_loading.dart';
@@ -31,7 +31,6 @@ import 'package:ditto/presentation/sign_up/sign_up.dart';
 import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
@@ -48,7 +47,7 @@ abstract class Routing {
     Paths.shariaFeed: (context) => ShariaFeed(),
     Paths.hadithFeed: (context) => HadithFeed(),
     Paths.fiqhFeed: (context) => FiqhFeed(),
-    Paths.sirahFeed: (context) => SirahFeed(),
+    Paths.seerahFeed: (context) => SeerahFeed(),
     Paths.globalFeed: (context) => Umah(),
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),

@@ -30,7 +30,11 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
 
   @override
   Future<void> close() {
+    noteCommentsStream.close();
+
     _noteCommentsStreamSubscription?.cancel();
+
+    commentTextController?.dispose();
 
     return super.close();
   }

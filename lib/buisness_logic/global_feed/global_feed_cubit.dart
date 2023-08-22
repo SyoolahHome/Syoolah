@@ -39,8 +39,10 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
   @override
   Future<void> close() {
     feedPostsStream.close();
-    searchController?.dispose();
+
     _streamSubscription?.cancel();
+
+    searchController?.dispose();
     scrollController?.dispose();
 
     print("FeedCubit close");
@@ -164,7 +166,9 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
 
   /// Shows the newest posts to the UI.
   void showNewestPostsToUI() {
-    emit(state.copyWith(shownFeedPosts: state.feedPosts));
+    if (!isClosed) {
+      emit(state.copyWith(shownFeedPosts: state.feedPosts));
+    }
   }
 
   /// Navigates Top of the screen.

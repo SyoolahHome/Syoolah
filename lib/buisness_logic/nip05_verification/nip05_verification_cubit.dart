@@ -35,8 +35,12 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
 
   @override
   Future<void> close() {
-    nip05Controller?.dispose();
+    currentUserMetadata.close();
+
     currentUserMetadataSubscription?.cancel();
+
+    nip05Controller?.dispose();
+
     return super.close();
   }
 

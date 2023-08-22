@@ -309,14 +309,14 @@ class NostrServiceSub {
     );
   }
 
-  NostrEventsStream sirahFeedStream() {
+  NostrEventsStream seerahFeedStream() {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.dua.name],
+          t: [MunawarahTopics.seerah.name],
           kinds: const [1],
           limit: 10,
         ),

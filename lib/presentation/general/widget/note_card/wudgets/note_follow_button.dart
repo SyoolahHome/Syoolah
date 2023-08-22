@@ -8,23 +8,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NoteFollowButton extends StatelessWidget {
   const NoteFollowButton({
     super.key,
-    required this.note,
+    required this.userPubLickKey,
   });
 
-  final Note note;
+  final String? userPubLickKey;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<GlobalCubit>();
+
     return BlocBuilder<GlobalCubit, GlobalState>(
       builder: (context, state) {
-        final isNoteOwnerFollowed =
-            cubit.isNoteOwnerFollowed(note.event.pubkey);
+        final isNoteOwnerFollowed = userPubLickKey != null
+            ? cubit.isNoteOwnerFollowed(userPubLickKey!)
+            : false;
 
         return SizedBox(
           height: 27.5,
           child: MunawarahButton(
             onTap: () {
-              cubit.handleFollowButtonTap(note.event.pubkey);
+              if (userPubLickKey != null) {
+                cubit.handleFollowButtonTap(userPubLickKey!);
+              }
             },
             isOnlyBorder: isNoteOwnerFollowed,
             isSmall: true,

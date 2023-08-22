@@ -43,12 +43,12 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
         ),
         ChatModuleItem.intermediate(
           subtitle:
-              "This will guide you with all information about Sirah of Prophet Muhammad (PBUH)" /* ??
+              "This will guide you with all information about seerah of Prophet Muhammad (PBUH)" /* ??
                   "chatInstructorSubtitle".tr() */
           ,
           icon: FlutterIslamicIcons.solidMosque,
           instruction:
-              "You are an islamic imam who will guide with all information about Sirah of Prophet Muhammad (PBUH)",
+              "You are an islamic imam who will guide with all information about seerah of Prophet Muhammad (PBUH)",
           recommendedQuestions: AppConfigs.intermediateRecommendQuestions,
         ),
         ChatModuleItem.advanced(

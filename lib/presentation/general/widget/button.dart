@@ -156,4 +156,24 @@ class MunawarahButton extends StatelessWidget {
       isSmall: true,
     );
   }
+
+  static Widget bottomSheetSwitch({
+    required Locale locale,
+    required bool isCurrentApplied,
+    required void Function() onTap,
+  }) {
+    return Transform.scale(
+      scale: 0.65,
+      child: Switch(
+        onChanged: (value) {
+          if (isCurrentApplied) {
+            return;
+          }
+
+          onTap();
+        },
+        value: isCurrentApplied,
+      ),
+    );
+  }
 }

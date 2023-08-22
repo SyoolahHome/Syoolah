@@ -65,12 +65,12 @@ abstract class AppConfigs {
       enumValue: MunawarahTopics.hadith,
     ),
     FeedCategory(
-      name: "sirah".tr(),
-      description: "newSirahDescription".tr(),
+      name: "seerah".tr(),
+      description: "newseerahDescription".tr(),
       icon: FlutterIslamicIcons.solidMuslim,
       isSelected: false,
-      path: Paths.sirahFeed,
-      enumValue: MunawarahTopics.sirah,
+      path: Paths.seerahFeed,
+      enumValue: MunawarahTopics.seerah,
     ),
     FeedCategory(
       name: "fiqh".tr(),
@@ -340,7 +340,7 @@ abstract class AppConfigs {
   static final intermediateRecommendQuestions = const <String>[
     "Who is the prophet of islam?",
     "What is the name of the last prophet?",
-    "What is Sirah?",
+    "What is seerah?",
     "What was the message of the prophet?",
     "Who is the prophet's wifes?",
     "What is the meaning of the word \"Islam\"?",

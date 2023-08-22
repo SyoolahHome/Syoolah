@@ -12,7 +12,10 @@ part 'current_user_reposts_state.dart';
 /// {@endtemplate}
 class CurrentUserRepostsCubit
     extends CurrentUserTabViewCubit<CurrentUserRepostsState> {
+  /// The stream of the current user reposts.
   NostrEventsStream currentUserReposts;
+
+  /// The subscription of the current user reposts.
   StreamSubscription<NostrEvent>? _currentUserRepostsSubscription;
 
   /// {@macro current_users_reposts_cubit}

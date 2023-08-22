@@ -40,7 +40,7 @@ enum MunawarahTopics {
   dua,
   quran,
   hadith,
-  sirah,
+  seerah,
   fiqh,
   sharia,
 }

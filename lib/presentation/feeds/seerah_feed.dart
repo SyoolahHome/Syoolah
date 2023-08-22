@@ -5,8 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SirahFeed extends StatelessWidget {
-  SirahFeed({super.key});
+class SeerahFeed extends StatelessWidget {
+  SeerahFeed({super.key});
 
   GlobalCubit? globalCubit;
 
@@ -16,8 +16,8 @@ class SirahFeed extends StatelessWidget {
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,
       child: GeneralFeed(
-        feedName: "dua".tr(),
-        feedPostsStream: NostrService.instance.subs.sirahFeedStream(),
+        feedName: "seerah".tr(),
+        feedPostsStream: NostrService.instance.subs.seerahFeedStream(),
       ),
     );
   }

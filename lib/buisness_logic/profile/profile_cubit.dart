@@ -65,6 +65,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   @override
   Future<void> close() {
     userMetadataStream.close();
+
     _userMetadataSubscription?.cancel();
 
     return super.close();
