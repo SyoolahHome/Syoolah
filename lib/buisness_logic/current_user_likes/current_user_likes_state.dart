@@ -5,7 +5,7 @@ part of 'current_user_likes_cubit.dart';
 /// {@endtemplate}
 class CurrentUserLikesState extends Equatable {
   /// The current user like events.
-  final List<NostrEvent> currentUserLikedPosts;
+  final List<ReceivedNostrEvent> currentUserLikedPosts;
 
   /// Weither to show the loading indicator.
   final bool shouldShowLoadingIndicator;
@@ -24,7 +24,7 @@ class CurrentUserLikesState extends Equatable {
 
   /// {@macro current_state_likes_state}
   CurrentUserLikesState copyWith({
-    List<NostrEvent>? currentUserLikedPosts,
+    List<ReceivedNostrEvent>? currentUserLikedPosts,
     bool? shouldShowLoadingIndicator,
   }) {
     return CurrentUserLikesState(

@@ -21,7 +21,7 @@ class NIP05VerificationSymbolWidget extends StatelessWidget {
     Future<bool> future() async {
       if (Nostr.instance.utilsService
           .isValidNip05Identifier(internetIdentifier)) {
-        return Nostr.instance.relaysService.verifyNip05(
+        return Nostr.instance.utilsService.verifyNip05(
           internetIdentifier: internetIdentifier,
           pubKey: pubKey!,
         );

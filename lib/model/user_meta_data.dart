@@ -30,7 +30,7 @@ class UserMetaData extends Equatable {
   final DateTime? userCreatedAt;
 
   /// The source nostr event .
-  final NostrEvent? userMetadataEvent;
+  final ReceivedNostrEvent? userMetadataEvent;
 
   @override
   List<Object?> get props => [
@@ -61,7 +61,7 @@ class UserMetaData extends Equatable {
   /// Instantiate a [UserMetaData] from a json.
   factory UserMetaData.fromJson({
     required Map<String, dynamic> jsonData,
-    required NostrEvent sourceNostrEvent,
+    required ReceivedNostrEvent sourceReceivedNostrEvent,
   }) {
     final json = {...jsonData};
 
@@ -84,7 +84,7 @@ class UserMetaData extends Equatable {
       userCreatedAt: json['creationDate'] != null
           ? DateTime.parse(json['creationDate'])
           : null,
-      userMetadataEvent: sourceNostrEvent,
+      userMetadataEvent: sourceReceivedNostrEvent,
     );
   }
 
@@ -138,7 +138,7 @@ class UserMetaData extends Equatable {
     String? displayName,
     String? nip05Identifier,
     DateTime? userCreatedAt,
-    NostrEvent? userMetadataEvent,
+    ReceivedNostrEvent? userMetadataEvent,
   }) {
     return UserMetaData(
       userMetadataEvent: userMetadataEvent ?? this.userMetadataEvent,

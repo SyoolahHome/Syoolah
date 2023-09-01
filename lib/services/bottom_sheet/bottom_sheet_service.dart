@@ -163,7 +163,9 @@ abstract class BottomSheetService {
       builder: (context) {
         return BottomSheetOptionsWidget(
           options: options,
-          title: "relayName".tr(args: [relayInformations!.name]),
+          title: relayInformations?.name != null
+              ? "relayName".tr(args: [relayInformations!.name!])
+              : "",
         );
       },
       clipBehavior: Clip.hardEdge,

@@ -6,38 +6,47 @@ import 'package:ditto/presentation/sign_up/widgets/users_list_to_follow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../buisness_logic/global/global_cubit.dart';
+
 class Followers extends StatelessWidget {
   Followers({super.key});
 
-  List<NostrEvent>? followersEvents;
+  List<ReceivedNostrEvent>? followersEvents;
   ProfileCubit? profileCubit;
+  GlobalCubit? globalCubit;
+
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
     // todo:
-    followersEvents = args["userFollowersEvents"] as List<NostrEvent>;
+    followersEvents = args["userFollowersEvents"] as List<ReceivedNostrEvent>;
+
     profileCubit = args["profileCubit"] as ProfileCubit;
+    globalCubit = args["globalCubit"] as GlobalCubit;
 
-    return BlocProvider<ProfileCubit>.value(
-      value: profileCubit!,
-      child: Scaffold(
-        appBar: CustomAppBar(
-            followingsList: followersEvents!.map((e) => e.pubkey).toList()),
-        body: Builder(
-          builder: (context) {
-            final isEmptyFollowings = (followersEvents ?? []).isEmpty;
+    return BlocProvider<GlobalCubit>.value(
+      value: globalCubit!,
+      child: BlocProvider<ProfileCubit>.value(
+        value: profileCubit!,
+        child: Scaffold(
+          appBar: CustomAppBar(
+              followingsList: followersEvents!.map((e) => e.pubkey).toList()),
+          body: Builder(
+            builder: (context) {
+              final isEmptyFollowings = (followersEvents ?? []).isEmpty;
 
-            if (isEmptyFollowings) {
-              return const EmptyList();
-            } else {
-              return UsersListToFollow(
-                pubKeys: followersEvents!.map((e) => e.pubkey).toList(),
-                noBg: true,
-              );
-            }
-          },
+              if (isEmptyFollowings) {
+                return const EmptyList();
+              } else {
+                return UsersListToFollow(
+                  pubKeys: followersEvents!.map((e) => e.pubkey).toList(),
+                  noBg: true,
+                );
+              }
+            },
+          ),
         ),
       ),
     );

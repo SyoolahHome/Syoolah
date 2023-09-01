@@ -438,7 +438,7 @@ class ProfileCubit extends Cubit<ProfileState> {
             userMetadataEvent: event,
             metadata: UserMetaData.fromJson(
               jsonData: decoded,
-              sourceNostrEvent: event,
+              sourceReceivedNostrEvent: event,
             ),
           ),
         );

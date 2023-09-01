@@ -46,7 +46,7 @@ class CurrentUserLikesCubit
   void _handleCurrentUserLikedPosts() {
     _currentUserLikedPostsSubscription =
         currentUserLikedPosts.stream.listen((event) {
-      final newList = <NostrEvent>[
+      final newList = <ReceivedNostrEvent>[
         ...state.currentUserLikedPosts,
         event,
       ];

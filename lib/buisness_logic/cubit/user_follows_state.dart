@@ -1,8 +1,8 @@
 part of 'user_follows_cubit.dart';
 
 class UserFollowsState extends Equatable {
-  final NostrEvent? userFollowingEvent;
-  final List<NostrEvent> userFollowersEvents;
+  final ReceivedNostrEvent? userFollowingEvent;
+  final List<ReceivedNostrEvent> userFollowersEvents;
 
   const UserFollowsState({
     this.userFollowersEvents = const [],
@@ -20,8 +20,8 @@ class UserFollowsState extends Equatable {
   }
 
   UserFollowsState copyWith({
-    NostrEvent? userFollowingEvent,
-    List<NostrEvent>? userFollowersEvents,
+    ReceivedNostrEvent? userFollowingEvent,
+    List<ReceivedNostrEvent>? userFollowersEvents,
   }) {
     return UserFollowsState(
       userFollowersEvents: userFollowersEvents ?? this.userFollowersEvents,

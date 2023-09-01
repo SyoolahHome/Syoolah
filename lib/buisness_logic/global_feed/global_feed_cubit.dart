@@ -190,7 +190,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
     bool shouldWaitXSecondsToUpdateFirstUI = true;
     _streamSubscription = feedPostsStream.stream.listen(
       (event) {
-        final sortedList = <NostrEvent>[
+        final sortedList = <ReceivedNostrEvent>[
           event,
           ...state.feedPosts,
         ];

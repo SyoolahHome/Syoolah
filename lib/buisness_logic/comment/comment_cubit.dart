@@ -23,7 +23,7 @@ class CommentWidgetCubit extends Cubit<CommentState> {
   static final _cache = <String, UserMetaData>{};
 
   /// The event of the comment.
-  final NostrEvent commentEvent;
+  final ReceivedNostrEvent commentEvent;
 
   /// TODO: move the stream to be set from the outside.
   StreamSubscription? commentEventOwnerMetadataSub;
@@ -54,7 +54,7 @@ class CommentWidgetCubit extends Cubit<CommentState> {
       final decoded = jsonDecode(event.content) as Map<String, dynamic>;
       final metadata = UserMetaData.fromJson(
         jsonData: decoded,
-        sourceNostrEvent: event,
+        sourceReceivedNostrEvent: event,
       );
 
       emit(state.copyWith(

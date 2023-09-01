@@ -79,7 +79,7 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
         .isValidNip05Identifier(nip05Controller?.text ?? '');
 
     if (nip05Controller!.text.isNotEmpty && isValidNIP05) {
-      return Nostr.instance.relaysService.verifyNip05(
+      return Nostr.instance.utilsService.verifyNip05(
         internetIdentifier: internetIdentifier,
         pubKey: pubKey,
       );
@@ -109,7 +109,7 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
       final decoded = jsonDecode(event.content) as Map<String, dynamic>;
       final metadata = UserMetaData.fromJson(
         jsonData: decoded,
-        sourceNostrEvent: event,
+        sourceReceivedNostrEvent: event,
       );
 
       emit(state.copyWith(currentUserMetadata: metadata));

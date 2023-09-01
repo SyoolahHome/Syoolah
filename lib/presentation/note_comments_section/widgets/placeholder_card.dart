@@ -23,7 +23,7 @@ class NotePlaceholderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoteContainer(
-      key: ValueKey(note.event.uniqueTag()),
+      key: ValueKey(note.event.uniqueKey()),
       note: note,
       margin: EdgeInsets.zero,
       child: Column(
@@ -39,7 +39,7 @@ class NotePlaceholderCard extends StatelessWidget {
           const SizedBox(height: 15),
           NoteContents(
             youtubeVideosLinks: note.youtubeVideoLinks,
-            heroTag: note.event.uniqueTag(),
+            heroTag: note.event.uniqueKey().eventId,
             imageLinks: note.imageLinks,
             text: note.noteOnly,
           ),

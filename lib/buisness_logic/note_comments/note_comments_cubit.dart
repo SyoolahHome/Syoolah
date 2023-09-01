@@ -68,7 +68,7 @@ class NoteCommentsCubit extends Cubit<NoteCommentsState> {
 
   void _handleStreams() {
     _noteCommentsStreamSubscription = noteCommentsStream.stream.listen((event) {
-      final newCommentsList = <NostrEvent>[
+      final newCommentsList = <ReceivedNostrEvent>[
         event,
         ...state.noteComments,
       ];

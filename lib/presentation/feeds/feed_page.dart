@@ -38,7 +38,7 @@ class GeneralFeed extends StatelessWidget {
                   selector: (state) => state.searchedFeedNotesPosts,
                   builder: (context, notes) {
                     return BlocSelector<GlobalFeedCubit, GlobalFeedState,
-                        List<NostrEvent>>(
+                        List<ReceivedNostrEvent>>(
                       selector: (state) => state.shownFeedPosts,
                       builder: (context, shownFeedPosts) {
                         return NotesListView(

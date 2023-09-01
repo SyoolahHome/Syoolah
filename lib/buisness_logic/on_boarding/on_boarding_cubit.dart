@@ -19,7 +19,7 @@ part 'on_boarding_state.dart';
 /// {@endtemplate}
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   /// A public key - metadata nostr event (NIP01) pair caching system
-  static final _cache = <String, NostrEvent>{};
+  static final _cache = <String, ReceivedNostrEvent>{};
 
   /// The text field controller where the user can search for users via pubkey or identifier.
   TextEditingController? searchController;

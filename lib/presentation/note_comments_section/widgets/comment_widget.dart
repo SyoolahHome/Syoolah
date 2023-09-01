@@ -1,4 +1,4 @@
-import 'package:dart_nostr/nostr/model/event.dart';
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
 import 'package:ditto/services/utils/extensions.dart';
@@ -17,7 +17,7 @@ class CommentWidget extends StatelessWidget {
     required this.index,
   });
 
-  final NostrEvent commentEvent;
+  final ReceivedNostrEvent commentEvent;
   final int index;
   @override
   Widget build(BuildContext context) {

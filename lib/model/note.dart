@@ -9,7 +9,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 @immutable
 class Note extends Equatable {
   ///The source Nostr event of this note, where all data is derived from.
-  final NostrEvent event;
+  final ReceivedNostrEvent event;
 
   /// A list of links that are parsed from the note.
   final List<String> links;
@@ -43,7 +43,7 @@ class Note extends Equatable {
 
   /// {@macro note}
   /// Derives a Note directly from a Nostr event object.
-  factory Note.fromEvent(NostrEvent event) {
+  factory Note.fromEvent(ReceivedNostrEvent event) {
     final links = extractLinks(event.content);
     final noteOnly = removeLinksFromInitial(event.content);
     final imageLinks = filterImageLinks(links);
@@ -110,7 +110,7 @@ class Note extends Equatable {
   // generate fromJson method
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
-      event: NostrEvent.deserialized(json['event'] as String),
+      event: ReceivedNostrEvent.deserialized(json['event'] as String),
       links: json['links'] != null ? List<String>.from(json['links']) : [],
       noteOnly: json['noteOnly'] as String,
       imageLinks: json['imageLinks'] != null

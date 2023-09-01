@@ -67,7 +67,7 @@ class UsersListToFollow extends StatelessWidget {
                     final metadata = UserMetaData.fromJson(
                       jsonData:
                           jsonDecode(current.content) as Map<String, dynamic>,
-                      sourceNostrEvent: current,
+                      sourceReceivedNostrEvent: current,
                     );
 
                     return Animate(

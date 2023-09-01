@@ -5,10 +5,10 @@ part of 'global_cubit.dart';
 /// {@endtemplate}
 class GlobalState extends Equatable {
   /// The event holding followings.
-  final NostrEvent? currentUserFollowing;
+  final ReceivedNostrEvent? currentUserFollowing;
 
   /// The event holding followers.
-  final List<NostrEvent> currentUserFollowers;
+  final List<ReceivedNostrEvent> currentUserFollowers;
 
   /// Weither follow is perfermoed succesfully.
   final bool followedSuccessfully;
@@ -29,8 +29,8 @@ class GlobalState extends Equatable {
 
   /// {@macro global_state}
   GlobalState copyWith({
-    NostrEvent? currentUserFollowing,
-    List<NostrEvent>? currentUserFollowers,
+    ReceivedNostrEvent? currentUserFollowing,
+    List<ReceivedNostrEvent>? currentUserFollowers,
     bool? followedSuccessfully,
   }) {
     return GlobalState(
