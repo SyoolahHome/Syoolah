@@ -12,13 +12,13 @@ class FeedBox extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.title,
-    required this.imageIcon,
+    this.imageIcon,
     this.description,
   });
 
   final VoidCallback onTap;
   final String title;
-  final String imageIcon;
+  final String? imageIcon;
   final String? description;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class FeedBox extends StatelessWidget {
               child: AnimatedContainer(
                 padding: EdgeInsets.symmetric(
                   horizontal: state.isHighlighted ? 15 : 10,
-                  vertical: 15,
+                  vertical: 10,
                 ),
                 margin: const EdgeInsets.only(bottom: 15),
                 duration: const Duration(milliseconds: 200),
@@ -101,11 +101,12 @@ class FeedBox extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 15),
-                        Image.asset(
-                          imageIcon,
-                          width: 100,
-                          height: 100,
-                        )
+                        if (imageIcon != null)
+                          Image.asset(
+                            imageIcon!,
+                            width: 100,
+                            height: 100,
+                          )
                       ],
                     ),
                     Align(

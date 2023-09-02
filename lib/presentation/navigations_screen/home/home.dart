@@ -38,8 +38,8 @@ class Home extends BottomBarScreen {
                   HeadTitle(title: "globalFeeds".tr()),
                   const SizedBox(height: 10),
                   FeedBox(
-                    imageIcon: "assets/logo/black_no_bg.png",
                     title: "umah".tr(),
+                    description: "umahSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -49,8 +49,8 @@ class Home extends BottomBarScreen {
                     },
                   ),
                   FeedBox(
-                    imageIcon: "assets/logo/black_no_bg.png",
                     title: "following".tr(),
+                    description: "followingsFeedSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
