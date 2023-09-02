@@ -147,9 +147,11 @@ class NostrServiceSub {
 
   NostrEventsStream currentUserFollowings() {
     final randomId = randomHexString;
+
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
+
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[

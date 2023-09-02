@@ -84,10 +84,10 @@ class GlobalCubit extends Cubit<GlobalState> {
       }
 
       newEvent = currentUserFollowing.copyWith(
-        tags: <List<String>>[
+        tags: <List<String>>{
           ...currentUserFollowing.tags,
           ["p", pubKey],
-        ],
+        }.toList(),
       );
     }
 

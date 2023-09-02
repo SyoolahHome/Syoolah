@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:equatable/equatable.dart';
 
 part 'user_follows_state.dart';
@@ -53,6 +54,12 @@ class UserFollowsCubit extends Cubit<UserFollowsState> {
   void _handleUserFollowers() {
     followersSubscription = userFollowersNostrStream.stream.listen(
       (event) {
+        if (state.userFollowersEvents
+            .map((e) => e.pubkey)
+            .contains(event.pubkey)) {
+          return;
+        }
+
         emit(state.copyWith(userFollowersEvents: [
           event,
           ...state.userFollowersEvents,

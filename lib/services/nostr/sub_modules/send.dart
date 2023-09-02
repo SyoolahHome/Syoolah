@@ -109,18 +109,19 @@ class NostrServiceSend {
   }
 
   void setFollowingsEvent(SentNostrEvent newEvent) {
-    final nostrKeyPairs = NostrKeyPairs(
-      private: LocalDatabase.instance.getPrivateKey()!,
+    final keyPairs =
+        Nostr.instance.keysService.generateKeyPairFromExistingPrivateKey(
+      LocalDatabase.instance.getPrivateKey()!,
     );
 
-    final event = NostrEvent.fromPartialData(
+    final ev = SentNostrEvent.fromPartialData(
       kind: newEvent.kind,
-      keyPairs: nostrKeyPairs,
       content: newEvent.content,
+      keyPairs: keyPairs,
       tags: newEvent.tags,
     );
 
-    Nostr.instance.relaysService.sendEventToRelays(event);
+    Nostr.instance.relaysService.sendEventToRelays(ev);
   }
 
   void reSendNote(ReceivedNostrEvent event) {
