@@ -216,109 +216,16 @@ class NostrServiceSub {
     return stream;
   }
 
-  NostrEventsStream quranFeedStream() {
+  NostrEventsStream topic({
+    required SakhirTopics topic,
+  }) {
     final randomId = randomHexString;
 
     final requestWithFilter = NostrRequest(
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [SakhirTopics.quran.name],
-          kinds: const [1],
-          limit: 10,
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream duaFeedStream() {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          t: [SakhirTopics.dua.name],
-          kinds: const [1],
-          limit: 10,
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream hadithFeedStream() {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          t: [SakhirTopics.hadith.name],
-          kinds: const [1],
-          limit: 10,
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream shariaFeedStream() {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          t: [SakhirTopics.sharia.name],
-          kinds: const [1],
-          limit: 10,
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream fiqhFeedStream() {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          t: [SakhirTopics.fiqh.name],
-          kinds: const [1],
-          limit: 10,
-        ),
-      ],
-    );
-
-    return Nostr.instance.relaysService.startEventsSubscription(
-      request: requestWithFilter,
-    );
-  }
-
-  NostrEventsStream seerahFeedStream() {
-    final randomId = randomHexString;
-
-    final requestWithFilter = NostrRequest(
-      subscriptionId: randomId,
-      filters: <NostrFilter>[
-        NostrFilter(
-          t: [SakhirTopics.seerah.name],
+          t: [topic.name],
           kinds: const [1],
           limit: 10,
         ),

@@ -1,9 +1,11 @@
+import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/model/feed_category.dart';
 import 'package:ditto/model/loclal_item.dart';
 import 'package:ditto/model/search_option.dart';
 import 'package:ditto/model/settings_item.dart';
 import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/routing.dart';
@@ -42,83 +44,93 @@ abstract class AppConfigs {
   static final List<FeedCategory> categories = [
     FeedCategory(
       name: "red_bull".tr(),
-      description: "red_bull_description".tr(),
-      icon: FlutterRemix.global_line,
+      imageIcon: "assets/teams/red-bull-racing.png",
       isSelected: false,
-      path: Paths.red_bullFeed,
       enumValue: SakhirTopics.red_bull,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.red_bull,
+      ),
     ),
     FeedCategory(
       name: "mercedes".tr(),
-      description: "mercedes_description".tr(),
-      icon: FlutterIslamicIcons.prayer,
+      imageIcon: "assets/teams/mercedes.png",
       isSelected: false,
-      path: Paths.mercedesFeed,
       enumValue: SakhirTopics.mercedes,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.mercedes,
+      ),
     ),
     FeedCategory(
       name: "aston_martin".tr(),
-      description: "aston_martin_description".tr(),
-      icon: FlutterIslamicIcons.quran,
+      imageIcon: "assets/teams/aston-martin.png",
       isSelected: false,
-      path: Paths.astonMartinFeed,
       enumValue: SakhirTopics.astonMartin,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.astonMartin,
+      ),
     ),
     FeedCategory(
       name: "ferrari".tr(),
-      description: "ferrari_description".tr(),
-      icon: FlutterIslamicIcons.sajadah,
+      imageIcon: "assets/teams/ferrari.png",
       isSelected: false,
-      path: Paths.ferrariFeed,
       enumValue: SakhirTopics.ferrari,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.ferrari,
+      ),
     ),
     FeedCategory(
       name: "mclaren".tr(),
-      description: "mclaren_description".tr(),
-      icon: FlutterIslamicIcons.solidMuslim,
+      imageIcon: "assets/teams/mclaren.png",
       isSelected: false,
-      path: Paths.mclarenFeed,
       enumValue: SakhirTopics.mclaren,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.mclaren,
+      ),
     ),
     FeedCategory(
       name: "alpine".tr(),
-      description: "alpine_description".tr(),
-      icon: FlutterIslamicIcons.family,
+      imageIcon: "assets/teams/alpine.png",
       isSelected: false,
-      path: Paths.alpineFeed,
       enumValue: SakhirTopics.alpine,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.alpine,
+      ),
     ),
     FeedCategory(
       name: "williams".tr(),
-      description: "williams_description".tr(),
-      icon: FlutterIslamicIcons.family,
+      imageIcon: "assets/teams/williams.png",
       isSelected: false,
-      path: Paths.williamsFeed,
       enumValue: SakhirTopics.williams,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.williams,
+      ),
     ),
     FeedCategory(
       name: "haasf1team".tr(),
-      description: "haasf1team_description".tr(),
-      icon: FlutterIslamicIcons.family,
+      imageIcon: "assets/teams/haas-f1-team.png",
       isSelected: false,
-      path: Paths.haasf1teamFeed,
       enumValue: SakhirTopics.haasf1team,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.haasf1team,
+      ),
     ),
     FeedCategory(
       name: "alfaromeo".tr(),
-      description: "alfaromeo_description".tr(),
-      icon: FlutterIslamicIcons.family,
+      imageIcon: "assets/teams/alfa-romeo.png",
       isSelected: false,
-      path: Paths.alfaRomeoFeed,
       enumValue: SakhirTopics.alfaromeo,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.alfaromeo,
+      ),
     ),
     FeedCategory(
       name: "alphatauri".tr(),
-      description: "alphatauri_description".tr(),
-      icon: FlutterIslamicIcons.family,
+      imageIcon: "assets/teams/alphatauri.png",
       isSelected: false,
-      path: Paths.alphatauriFeed,
       enumValue: SakhirTopics.alphatauri,
+      feedPostsStream: NostrService.instance.subs.topic(
+        topic: SakhirTopics.alphatauri,
+      ),
     ),
   ];
 

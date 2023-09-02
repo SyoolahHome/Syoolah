@@ -12,15 +12,14 @@ class FeedBox extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.title,
-    required this.description,
-    required this.icon,
+    required this.imageIcon,
+    this.description,
   });
 
   final VoidCallback onTap;
   final String title;
-  final String description;
-  final IconData icon;
-
+  final String imageIcon;
+  final String? description;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FeedBoxCubit>(
@@ -82,29 +81,33 @@ class FeedBox extends StatelessWidget {
                                     ),
                               ),
                               const SizedBox(height: 5),
-                              Text(
-                                description,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelSmall!
-                                    .copyWith(
-                                      color: DefaultTextStyle.of(context)
-                                          .style
-                                          .color
-                                          ?.withOpacity(0.85),
-                                    ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              if (description != null)
+                                Text(
+                                  description!,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall!
+                                      .copyWith(
+                                        color: DefaultTextStyle.of(context)
+                                            .style
+                                            .color
+                                            ?.withOpacity(0.85),
+                                      ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               const SizedBox(height: 5),
                             ],
                           ),
                         ),
                         const SizedBox(width: 15),
-                        Icon(icon, color: Theme.of(context).iconTheme.color),
+                        Image.asset(
+                          imageIcon,
+                          width: 100,
+                          height: 100,
+                        )
                       ],
                     ),
-                    const SizedBox(height: 10.0),
                     Align(
                       alignment:
                           AppUtils.instance.centerHorizontalAlignment(context),

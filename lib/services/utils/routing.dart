@@ -9,14 +9,9 @@ import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
 import 'package:ditto/presentation/current_user_keys/current_user_keys.dart';
 import 'package:ditto/presentation/edit_profile/edit_Profile.dart';
-import 'package:ditto/presentation/feeds/dua_feed.dart';
-import 'package:ditto/presentation/feeds/fiqh_feed.dart';
+import 'package:ditto/presentation/feeds/red_bull_feed.dart';
 import 'package:ditto/presentation/feeds/following_feed.dart';
 import 'package:ditto/presentation/feeds/global_feed.dart';
-import 'package:ditto/presentation/feeds/hadith_feed.dart';
-import 'package:ditto/presentation/feeds/quran_feed.dart';
-import 'package:ditto/presentation/feeds/sharia_feed.dart';
-import 'package:ditto/presentation/feeds/seerah_feed.dart';
 import 'package:ditto/presentation/followers/followers.dart';
 import 'package:ditto/presentation/followings/followings.dart';
 import 'package:ditto/presentation/nostr_service_loading/nostr_service_loading.dart';
@@ -42,12 +37,6 @@ abstract class Routing {
     Paths.onBoarding: (context) => const OnBoarding(),
     Paths.SignUp: (context) => const SignUp(),
     Paths.editProfile: (context) => EditProfile(),
-    Paths.quranFeed: (context) => QuranFeed(),
-    Paths.duaFeed: (context) => DuaFeed(),
-    Paths.shariaFeed: (context) => ShariaFeed(),
-    Paths.hadithFeed: (context) => HadithFeed(),
-    Paths.fiqhFeed: (context) => FiqhFeed(),
-    Paths.seerahFeed: (context) => SeerahFeed(),
     Paths.globalFeed: (context) => Umah(),
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),

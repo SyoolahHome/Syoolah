@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../constants/abstractions/abstractions.dart';
+import '../../feeds/red_bull_feed.dart';
 
 class Home extends BottomBarScreen {
   const Home({super.key});
@@ -37,9 +38,8 @@ class Home extends BottomBarScreen {
                   HeadTitle(title: "globalFeeds".tr()),
                   const SizedBox(height: 10),
                   FeedBox(
-                    icon: FlutterRemix.global_line,
+                    imageIcon: "assets/logo/black_no_bg.png",
                     title: "umah".tr(),
-                    description: "umahSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -49,9 +49,8 @@ class Home extends BottomBarScreen {
                     },
                   ),
                   FeedBox(
-                    icon: FlutterRemix.user_add_line,
+                    imageIcon: "assets/logo/black_no_bg.png",
                     title: "following".tr(),
-                    description: "followingsFeedSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -67,15 +66,25 @@ class Home extends BottomBarScreen {
                     final current = AppConfigs.categories[index];
 
                     return FeedBox(
-                      icon: current.icon,
-                      description: current.description,
+                      imageIcon: current.imageIcon,
                       title: current.name,
                       onTap: () {
-                        Navigator.pushNamed(
+                        Navigator.push(
                           context,
-                          current.path,
-                          arguments: context.read<GlobalCubit>(),
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ReusableFeed(
+                                feedCategory: current,
+                              );
+                            },
+                          ),
                         );
+
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   current.path,
+                        //   arguments: context.read<GlobalCubit>(),
+                        // );
                       },
                     );
                   }),
