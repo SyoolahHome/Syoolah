@@ -87,7 +87,7 @@ flutter:
     - assets/logo/white_no_bg.png
     - assets/translations/
 flutter_app_name:
-  name: "Sakhir App"
+  name: "Sakhir"
 
 # flutter_native_splash:
 #   color: "#ffffff"
