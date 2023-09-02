@@ -11,6 +11,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../model/feed_category.dart';
 import '../../model/loclal_item.dart';
+import '../../model/note.dart';
 import '../database/local/local_database.dart';
 
 extension NostrEventqListExtensions on List<NostrEvent> {
@@ -38,6 +39,20 @@ extension NostrEventqListExtensions on List<NostrEvent> {
   List<NostrEvent> excludeCommentEvents() {
     return where((noteEvent) {
       final noteEventTags = noteEvent.tags;
+
+      return noteEventTags.any((tagList) {
+        final isNotComment = tagList.first != "e";
+
+        return isNotComment;
+      });
+    }).toList();
+  }
+}
+
+extension NotesListExtension on List<Note> {
+  List<Note> excludeCommentNotes() {
+    return where((note) {
+      final noteEventTags = note.event.tags;
 
       return noteEventTags.any((tagList) {
         final isNotComment = tagList.first != "e";

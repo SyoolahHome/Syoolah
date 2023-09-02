@@ -78,7 +78,7 @@ class AuthCubit extends Cubit<AuthState> {
         metadata: UserMetaData(
           name: nameController?.text ?? '',
           picture: imageLink,
-          banner: null,
+          banner: '',
           username: usernameController?.text ?? '',
           about: bioController?.text ?? '',
           displayName: nameController?.text.split(" ").join("-") ?? '',

@@ -8,6 +8,7 @@ import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/general/widget/note_card/note_card.dart';
 import 'package:ditto/services/database/local/local_database.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 class NotesListView extends StatelessWidget {
@@ -35,6 +36,10 @@ class NotesListView extends StatelessWidget {
   final bool showLoadingIndicator;
   @override
   Widget build(BuildContext context) {
+    List<Note> notesToUse = notes;
+    notesToUse = notesToUse.excludeCommentNotes();
+    notesToUse.sort((a, b) => b.event.createdAt.compareTo(a.event.createdAt));
+
     final String appCurrentUserPublicKey =
         Nostr.instance.keysService.derivePublicKey(
       privateKey: LocalDatabase.instance.getPrivateKey()!,
@@ -48,20 +53,18 @@ class NotesListView extends StatelessWidget {
           .copyWith(color: AppColors.grey),
     );
 
-    notes.sort((a, b) => b.event.createdAt.compareTo(a.event.createdAt));
-
     if (feedName != null) {
       return MarginedBody(
         child: Builder(
           builder: (context) {
-            if (notes.isEmpty) {
+            if (notesToUse.isEmpty) {
               return Column(
                 children: <Widget>[
                   FeedPageHeading(
                     endTitleWithAdditionalText: endTitleWithAdditionalText,
                     hideCount: hideCount,
                     feedName: feedName!,
-                    notesLength: max(notes.length - 1, 0),
+                    notesLength: max(notesToUse.length - 1, 0),
                   ),
                   const SizedBox(height: 20),
                   Center(child: nothingToShow),
@@ -75,17 +78,17 @@ class NotesListView extends StatelessWidget {
               physics: physics,
               shrinkWrap: shrinkWrap,
               controller: scrollController,
-              itemCount: notes.length + 1,
+              itemCount: notesToUse.length + 1,
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return FeedPageHeading(
                     endTitleWithAdditionalText: endTitleWithAdditionalText,
                     hideCount: hideCount,
                     feedName: feedName!,
-                    notesLength: max(notes.length - 1, 0),
+                    notesLength: max(notesToUse.length - 1, 0),
                   );
                 }
-                final current = notes[index - 1];
+                final current = notesToUse[index - 1];
                 return NoteCard(
                   key: ValueKey(current.event.id),
                   appCurrentUserPublicKey: appCurrentUserPublicKey,
@@ -101,7 +104,7 @@ class NotesListView extends StatelessWidget {
       return MarginedBody(
         child: Builder(
           builder: (context) {
-            if (notes.isEmpty) {
+            if (notesToUse.isEmpty) {
               return Column(
                 children: <Widget>[
                   const SizedBox(height: 20),
@@ -114,9 +117,9 @@ class NotesListView extends StatelessWidget {
             return ListView.builder(
               physics: physics,
               shrinkWrap: shrinkWrap,
-              itemCount: notes.length,
+              itemCount: notesToUse.length,
               itemBuilder: (context, index) {
-                final current = notes[index];
+                final current = notesToUse[index];
 
                 return NoteCard(
                   key: ValueKey(current.event.id),

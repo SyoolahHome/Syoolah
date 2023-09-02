@@ -43,7 +43,7 @@ class CurrentUserKeys extends StatelessWidget {
                 const SizedBox(height: height),
                 const KeySection(type: KeySectionType.publicKey),
                 const SizedBox(height: height * 2),
-                HeadTitle(title: "nPub".tr()),
+                HeadTitle(title: "npub".tr()),
                 const SizedBox(height: height),
                 const KeySection(type: KeySectionType.nPubKey),
                 const SizedBox(height: height * 4),
