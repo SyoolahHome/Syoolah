@@ -36,13 +36,17 @@ enum ReportType {
   impersonation,
 }
 
-enum MunawarahTopics {
-  dua,
-  quran,
-  hadith,
-  seerah,
-  fiqh,
-  sharia,
+enum SakhirTopics {
+  red_bull,
+  mercedes,
+  astonMartin,
+  ferrari,
+  mclaren,
+  alpine,
+  williams,
+  haasf1team,
+  alfaromeo,
+  alphatauri,
 }
 
 enum ImagePickType { banner, avatar }

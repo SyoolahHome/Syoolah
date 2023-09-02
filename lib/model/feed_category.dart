@@ -24,7 +24,7 @@ class FeedCategory extends Equatable {
   final IconData icon;
 
   /// An enum that represents the topic/category of this feed.
-  final MunawarahTopics enumValue;
+  final SakhirTopics enumValue;
 
   @override
   List<Object?> get props => [
@@ -58,7 +58,7 @@ class FeedCategory extends Equatable {
     bool? isSelected,
     IconData? icon,
     String? path,
-    MunawarahTopics? enumValue,
+    SakhirTopics? enumValue,
   }) {
     return FeedCategory(
       name: name ?? this.name,

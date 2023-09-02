@@ -223,7 +223,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.quran.name],
+          t: [SakhirTopics.quran.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -242,7 +242,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.dua.name],
+          t: [SakhirTopics.dua.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -261,7 +261,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.hadith.name],
+          t: [SakhirTopics.hadith.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -280,7 +280,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.sharia.name],
+          t: [SakhirTopics.sharia.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -299,7 +299,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.fiqh.name],
+          t: [SakhirTopics.fiqh.name],
           kinds: const [1],
           limit: 10,
         ),
@@ -318,7 +318,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [MunawarahTopics.seerah.name],
+          t: [SakhirTopics.seerah.name],
           kinds: const [1],
           limit: 10,
         ),
