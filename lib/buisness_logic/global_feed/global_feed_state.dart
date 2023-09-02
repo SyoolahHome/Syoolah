@@ -5,10 +5,10 @@ part of 'global_feed_cubit.dart';
 /// {@endtemplate}
 class GlobalFeedState extends Equatable {
   /// The list of feed posts.
-  final List<ReceivedNostrEvent> feedPosts;
+  final List<NostrEvent> feedPosts;
 
   /// The list of feed posts that are actually shown.
-  final List<ReceivedNostrEvent> shownFeedPosts;
+  final List<NostrEvent> shownFeedPosts;
 
   /// The list of feed posts that are actually searched/filtered for.
   final List<Note> searchedFeedNotesPosts;
@@ -39,8 +39,8 @@ class GlobalFeedState extends Equatable {
 
   /// {@macro global_feed_state}
   GlobalFeedState copyWith({
-    List<ReceivedNostrEvent>? feedPosts,
-    List<ReceivedNostrEvent>? shownFeedPosts,
+    List<NostrEvent>? feedPosts,
+    List<NostrEvent>? shownFeedPosts,
     List<Note>? searchedFeedNotesPosts,
     List<SearchOption>? searchOptions,
     DateTimeRange? dateRange,

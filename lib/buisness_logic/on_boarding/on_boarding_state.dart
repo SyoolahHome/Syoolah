@@ -8,7 +8,7 @@ class OnBoardingState extends Equatable {
   final bool shouldShowSearchButton;
 
   /// The searched user.
-  final ReceivedNostrEvent? searchedUserEvent;
+  final NostrEvent? searchedUserEvent;
 
   /// An error if it exists.
   final String? error;
@@ -36,7 +36,7 @@ class OnBoardingState extends Equatable {
   /// {@macro on_boarding_state}
   OnBoardingState copyWith({
     bool? shouldShowSearchButton,
-    ReceivedNostrEvent? searchedUserEvent,
+    NostrEvent? searchedUserEvent,
     String? error,
     bool? searchingForUser,
   }) {

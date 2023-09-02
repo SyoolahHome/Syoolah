@@ -144,13 +144,19 @@ class NoteCardCubit extends Cubit<NoteCardState> {
   void _handleStreams() {
     _currentUserMetadataSubscription =
         currentUserMetadataStream.stream.listen((event) {
-      if (!isClosed) {
+      if (state.noteOwnerMetadata == null) {
+        emitIfOpen(state.copyWith(noteOwnerMetadata: event));
+
+        return;
+      }
+
+      if (state.noteOwnerMetadata!.createdAt.compareTo(event.createdAt) < 0) {
         emitIfOpen(state.copyWith(noteOwnerMetadata: event));
       }
     });
 
     _noteLikesSubscription = noteLikesStream.stream.listen((event) {
-      emitIfOpen(state.copyWith(noteLikes: [...state.noteLikes, event]));
+      emitIfOpen(state.copyWith(noteLikes: [event, ...state.noteLikes]));
     });
   }
 }

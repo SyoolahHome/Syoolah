@@ -50,7 +50,7 @@ class NoteCard extends StatelessWidget {
                   noteOwnerMetadata = UserMetaData.fromJson(
                     jsonData: jsonDecode(state.noteOwnerMetadata!.content)
                         as Map<String, dynamic>,
-                    sourceReceivedNostrEvent: state.noteOwnerMetadata!,
+                    sourceNostrEvent: state.noteOwnerMetadata!,
                   );
                 }
 

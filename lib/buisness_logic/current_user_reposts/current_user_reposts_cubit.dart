@@ -45,7 +45,7 @@ class CurrentUserRepostsCubit
     _currentUserRepostsSubscription = currentUserReposts.stream.listen((event) {
       emit(
         state.copyWith(
-          currentUserReposts: <ReceivedNostrEvent>[
+          currentUserReposts: <NostrEvent>[
             ...state.currentUserReposts,
             event,
           ],

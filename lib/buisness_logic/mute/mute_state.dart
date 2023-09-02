@@ -5,7 +5,7 @@ part of 'mute_cubit.dart';
 /// {@endtemplate}
 class MuteState extends Equatable {
   /// TODO: separated private and public events for mute.
-  final ReceivedNostrEvent? muteEvent;
+  final NostrEvent? muteEvent;
 
   /// {@macro mute_state}
   const MuteState({
@@ -17,7 +17,7 @@ class MuteState extends Equatable {
 
   /// {@macro mute_state
   MuteState copyWith({
-    ReceivedNostrEvent? muteEvent,
+    NostrEvent? muteEvent,
   }) {
     return MuteState(
       muteEvent: muteEvent ?? this.muteEvent,

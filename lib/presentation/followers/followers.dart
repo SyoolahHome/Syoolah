@@ -11,7 +11,7 @@ import '../../buisness_logic/global/global_cubit.dart';
 class Followers extends StatelessWidget {
   Followers({super.key});
 
-  List<ReceivedNostrEvent>? followersEvents;
+  List<NostrEvent>? followersEvents;
   ProfileCubit? profileCubit;
   GlobalCubit? globalCubit;
 
@@ -21,7 +21,7 @@ class Followers extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
     // todo:
-    followersEvents = args["userFollowersEvents"] as List<ReceivedNostrEvent>;
+    followersEvents = args["userFollowersEvents"] as List<NostrEvent>;
 
     profileCubit = args["profileCubit"] as ProfileCubit;
     globalCubit = args["globalCubit"] as GlobalCubit;

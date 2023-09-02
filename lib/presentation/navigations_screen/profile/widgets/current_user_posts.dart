@@ -27,8 +27,7 @@ class CurrentUserPosts extends UserProfileTab {
         builder: (context) {
           return BlocBuilder<CurrentUserPostsCubit, CurrentUserPostsState>(
             builder: (context, state) {
-              List<ReceivedNostrEvent> currentUserNotes =
-                  state.currentUserPosts;
+              List<NostrEvent> currentUserNotes = state.currentUserPosts;
               currentUserNotes = currentUserNotes.excludeCommentEvents();
 
               return NotesListView(

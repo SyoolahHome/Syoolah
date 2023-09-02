@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:dart_nostr/nostr/model/event/send_event.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:equatable/equatable.dart';
@@ -20,10 +19,10 @@ class GlobalCubit extends Cubit<GlobalState> {
   NostrEventsStream currentUserFollowers;
 
   /// The subscription that is used to listen to [currentUserFollowing.stream].
-  StreamSubscription<ReceivedNostrEvent>? _currentUserFollowingSubscription;
+  StreamSubscription<NostrEvent>? _currentUserFollowingSubscription;
 
   /// The subscription that is used to listen to [currentUserFollowers.stream].
-  StreamSubscription<ReceivedNostrEvent>? _currentUserFollowersSubscription;
+  StreamSubscription<NostrEvent>? _currentUserFollowersSubscription;
 
   /// {@macro global_cubit}
   GlobalCubit({
@@ -58,7 +57,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   /// if no user is authnticated, this method will do nothing.
   /// {@endtemplate}
   void followUser(String pubKey) {
-    SentNostrEvent newEvent;
+    NostrEvent newEvent;
 
     final currentUserPrivateKey = LocalDatabase.instance.getPrivateKey();
 
@@ -106,7 +105,7 @@ class GlobalCubit extends Cubit<GlobalState> {
     var tags = currentUserFollowing.tags;
     tags = tags.where((element) => element[1] != pubKey).toList();
 
-    SentNostrEvent newEvent = currentUserFollowing.copyWith(
+    NostrEvent newEvent = currentUserFollowing.copyWith(
       tags: tags,
     );
 

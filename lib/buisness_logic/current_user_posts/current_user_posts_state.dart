@@ -4,7 +4,7 @@ part of 'current_user_posts_cubit.dart';
 /// The state of [CurrentUserPostsCubit].
 /// {@endtemplate}
 class CurrentUserPostsState extends Equatable {
-  final List<ReceivedNostrEvent> currentUserPosts;
+  final List<NostrEvent> currentUserPosts;
   final bool shouldShowLoadingIndicator;
 
   /// {@macro current_user_posts_state}
@@ -21,7 +21,7 @@ class CurrentUserPostsState extends Equatable {
 
   /// {@macro current_user_posts_state}
   CurrentUserPostsState copyWith({
-    List<ReceivedNostrEvent>? currentUserPosts,
+    List<NostrEvent>? currentUserPosts,
     bool? shouldShowLoadingIndicator,
   }) {
     return CurrentUserPostsState(

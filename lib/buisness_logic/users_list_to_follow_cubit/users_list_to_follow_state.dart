@@ -5,13 +5,13 @@ part of 'users_list_to_follow_cubit.dart';
 /// {@endtemplate}
 class UsersListToFollowState extends Equatable {
   /// The current user following list event.
-  final ReceivedNostrEvent? currentUserFollowing;
+  final NostrEvent? currentUserFollowing;
 
   ///The current user followers event.
-  final ReceivedNostrEvent? currentUserFollowers;
+  final NostrEvent? currentUserFollowers;
 
   /// A list of users metadata with the given metadata.
-  final List<ReceivedNostrEvent> pubKeysMetadata;
+  final List<NostrEvent> pubKeysMetadata;
 
   /// Weither the follow method ran succesfully.
   final bool followedSuccessfully;
@@ -33,9 +33,9 @@ class UsersListToFollowState extends Equatable {
 
   /// {@macro users_list_to_follow_state}
   UsersListToFollowState copyWith({
-    List<ReceivedNostrEvent>? pubKeysMetadata,
-    ReceivedNostrEvent? currentUserFollowing,
-    ReceivedNostrEvent? currentUserFollowers,
+    List<NostrEvent>? pubKeysMetadata,
+    NostrEvent? currentUserFollowing,
+    NostrEvent? currentUserFollowers,
     bool? followedSuccessfully,
   }) {
     return UsersListToFollowState(

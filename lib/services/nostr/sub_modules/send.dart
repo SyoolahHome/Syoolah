@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:dart_nostr/nostr/model/event/send_event.dart';
 
 import '../../../constants/app_configs.dart';
 import '../../../model/note.dart';
@@ -108,13 +107,13 @@ class NostrServiceSend {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
-  void setFollowingsEvent(SentNostrEvent newEvent) {
+  void setFollowingsEvent(NostrEvent newEvent) {
     final keyPairs =
         Nostr.instance.keysService.generateKeyPairFromExistingPrivateKey(
       LocalDatabase.instance.getPrivateKey()!,
     );
 
-    final ev = SentNostrEvent.fromPartialData(
+    final ev = NostrEvent.fromPartialData(
       kind: newEvent.kind,
       content: newEvent.content,
       keyPairs: keyPairs,
@@ -124,7 +123,7 @@ class NostrServiceSend {
     Nostr.instance.relaysService.sendEventToRelays(ev);
   }
 
-  void reSendNote(ReceivedNostrEvent event) {
+  void reSendNote(NostrEvent event) {
     Nostr.instance.relaysService.sendEventToRelays(event);
   }
 
@@ -177,7 +176,7 @@ class NostrServiceSend {
   }
 
   void muteUserWithPubKeyPublicly({
-    ReceivedNostrEvent? currentMuteEvent,
+    NostrEvent? currentMuteEvent,
     required String pubKey,
   }) {
     final nostrKeyPairs = NostrKeyPairs(

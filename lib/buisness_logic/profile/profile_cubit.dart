@@ -430,18 +430,38 @@ class ProfileCubit extends Cubit<ProfileState> {
   void _handleUserMetadata() {
     _userMetadataSubscription = userMetadataStream.stream.listen(
       (event) {
-        dynamic decoded = jsonDecode(event.content);
-        decoded = decoded as Map<String, dynamic>;
+        if (state.metadata == null) {
+          dynamic decoded = jsonDecode(event.content);
+          decoded = decoded as Map<String, dynamic>;
 
-        emit(
-          state.copyWith(
-            userMetadataEvent: event,
-            metadata: UserMetaData.fromJson(
-              jsonData: decoded,
-              sourceReceivedNostrEvent: event,
+          emit(
+            state.copyWith(
+              userMetadataEvent: event,
+              metadata: UserMetaData.fromJson(
+                jsonData: decoded,
+                sourceNostrEvent: event,
+              ),
             ),
-          ),
-        );
+          );
+          return;
+        }
+
+        if (state.metadata!.userMetadataEvent!.createdAt
+                .compareTo(event.createdAt) <
+            0) {
+          dynamic decoded = jsonDecode(event.content);
+          decoded = decoded as Map<String, dynamic>;
+
+          emit(
+            state.copyWith(
+              userMetadataEvent: event,
+              metadata: UserMetaData.fromJson(
+                jsonData: decoded,
+                sourceNostrEvent: event,
+              ),
+            ),
+          );
+        }
       },
     );
   }

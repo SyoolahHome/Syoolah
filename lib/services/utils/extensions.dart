@@ -13,9 +13,9 @@ import '../../model/feed_category.dart';
 import '../../model/loclal_item.dart';
 import '../database/local/local_database.dart';
 
-extension NostrEventqListExtensions on List<ReceivedNostrEvent> {
-  List<ReceivedNostrEvent> removeDuplicatedEvents() {
-    final List<ReceivedNostrEvent> result = [];
+extension NostrEventqListExtensions on List<NostrEvent> {
+  List<NostrEvent> removeDuplicatedEvents() {
+    final List<NostrEvent> result = [];
 
     for (final event in this) {
       if (result.isEmpty) {
@@ -35,7 +35,7 @@ extension NostrEventqListExtensions on List<ReceivedNostrEvent> {
     return result;
   }
 
-  List<ReceivedNostrEvent> excludeCommentEvents() {
+  List<NostrEvent> excludeCommentEvents() {
     return where((noteEvent) {
       final noteEventTags = noteEvent.tags;
 
@@ -260,7 +260,7 @@ extension FlutterRemixExtension on FlutterRemix {
   }
 }
 
-extension NostrEventExtension on ReceivedNostrEvent? {
+extension NostrEventExtension on NostrEvent? {
   List<String>? get tagsPublicKeys {
     return this
         ?.tags

@@ -17,7 +17,7 @@ class CommentWidget extends StatelessWidget {
     required this.index,
   });
 
-  final ReceivedNostrEvent commentEvent;
+  final NostrEvent commentEvent;
   final int index;
   @override
   Widget build(BuildContext context) {

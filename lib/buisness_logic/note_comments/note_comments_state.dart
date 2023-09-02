@@ -5,7 +5,7 @@ part of 'note_comments_cubit.dart';
 /// {@endtemplate}
 class NoteCommentsState extends Equatable {
   /// The list of comments of the note.
-  final List<ReceivedNostrEvent> noteComments;
+  final List<NostrEvent> noteComments;
 
   @override
   List<Object> get props => [noteComments];
@@ -17,7 +17,7 @@ class NoteCommentsState extends Equatable {
 
   /// {@macro note_comments_state}
   NoteCommentsState copyWith({
-    List<ReceivedNostrEvent>? noteComments,
+    List<NostrEvent>? noteComments,
   }) {
     return NoteCommentsState(noteComments: noteComments ?? this.noteComments);
   }

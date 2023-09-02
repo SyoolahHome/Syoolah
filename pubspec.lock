@@ -228,12 +228,10 @@ packages:
   dart_nostr:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "1ca24ce607d260917e6d06a5f4530c717985dc1d"
-      url: "https://github.com/anasfik/nostr.git"
-    source: git
-    version: "5.0.1"
+      path: "C:\\projects\\Flutter_and_Dart\\nostr_copy"
+      relative: false
+    source: path
+    version: "4.0.0"
   dart_openai:
     dependency: "direct main"
     description:

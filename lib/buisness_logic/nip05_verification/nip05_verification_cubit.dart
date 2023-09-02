@@ -109,7 +109,7 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
       final decoded = jsonDecode(event.content) as Map<String, dynamic>;
       final metadata = UserMetaData.fromJson(
         jsonData: decoded,
-        sourceReceivedNostrEvent: event,
+        sourceNostrEvent: event,
       );
 
       emit(state.copyWith(currentUserMetadata: metadata));

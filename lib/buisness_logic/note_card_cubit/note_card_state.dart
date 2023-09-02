@@ -5,13 +5,13 @@ part of 'note_card_cubit.dart';
 /// {@endtemplate}
 class NoteCardState extends Equatable {
   /// The metadata of the note owner.
-  final ReceivedNostrEvent? noteOwnerMetadata;
+  final NostrEvent? noteOwnerMetadata;
 
   /// The like events of the note.
-  final List<ReceivedNostrEvent> noteLikes;
+  final List<NostrEvent> noteLikes;
 
   /// The comment events of the note.
-  final List<ReceivedNostrEvent> noteComments;
+  final List<NostrEvent> noteComments;
 
   /// A local variable to simulat ethe user action when the like icon button is pressed.
   final bool localLiked;
@@ -49,10 +49,10 @@ class NoteCardState extends Equatable {
 
   /// Copies the current state with some new values.
   NoteCardState copyWith({
-    ReceivedNostrEvent? noteOwnerMetadata,
-    List<ReceivedNostrEvent>? noteLikes,
+    NostrEvent? noteOwnerMetadata,
+    List<NostrEvent>? noteLikes,
     bool? localLiked,
-    List<ReceivedNostrEvent>? noteComments,
+    List<NostrEvent>? noteComments,
     String? error,
     String? success,
     bool? markAsReposted,
