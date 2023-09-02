@@ -41,6 +41,10 @@ class AvatarLayers extends StatelessWidget {
         onPanEnd: (_) => cubit.scaleAvatarToNormal(),
         onTap: onFullView,
         onLongPress: () {
+          if (!cubit.isCurrentUser) {
+            return;
+          }
+
           cubit.showAvatarMenu(
             context,
             cubit: cubit,

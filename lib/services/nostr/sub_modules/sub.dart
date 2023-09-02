@@ -370,9 +370,11 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          authors: [".", ...followings],
+          authors: followings.isEmpty
+              ? ["something else to not retrieve all kind 1 posts ever."]
+              : [...followings],
           kinds: const [1],
-          limit: 10,
+          limit: 30,
         )
       ],
     );

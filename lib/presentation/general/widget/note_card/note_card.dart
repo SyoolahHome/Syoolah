@@ -11,6 +11,7 @@ import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../buisness_logic/global/global_cubit.dart';
 import '../../../../services/utils/paths.dart';
 
 class NoteCard extends StatelessWidget {
@@ -64,6 +65,7 @@ class NoteCard extends StatelessWidget {
                       'nameToShow': noteOwnerMetadata.nameToShow(),
                       'appCurrentUserPublicKey': appCurrentUserPublicKey,
                       'noteOwnerUserPubKey': state.noteOwnerMetadata?.pubkey,
+                      "globalCubit": context.read<GlobalCubit>(),
                     },
                   );
                 }

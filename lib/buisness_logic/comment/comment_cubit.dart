@@ -20,7 +20,7 @@ part 'comment_state.dart';
 /// {@endtemplate}
 class CommentWidgetCubit extends Cubit<CommentState> {
   /// A Caching system for the user metadata, so we don't have to fetch it every time.
-  static final _cache = <String, UserMetaData>{};
+  // static final _cache = <String, UserMetaData>{};
 
   /// The event of the comment.
   final NostrEvent commentEvent;
@@ -32,11 +32,7 @@ class CommentWidgetCubit extends Cubit<CommentState> {
   CommentWidgetCubit({
     required this.commentEvent,
   }) : super(CommentInitial()) {
-    if (_cache.containsKey(commentEvent.pubkey)) {
-      emit(state.copyWith(commentOwnerMetadata: _cache[commentEvent.pubkey]));
-    } else {
-      _init();
-    }
+    _init();
   }
 
   @override
@@ -57,11 +53,22 @@ class CommentWidgetCubit extends Cubit<CommentState> {
         sourceNostrEvent: event,
       );
 
-      emit(state.copyWith(
-        commentOwnerMetadata: metadata,
-      ));
+      if (state.commentOwnerMetadata == null) {
+        emit(state.copyWith(
+          commentOwnerMetadata: metadata,
+        ));
+        return;
+      }
 
-      _cache[commentEvent.pubkey] = metadata;
+      if (state.commentOwnerMetadata!.userMetadataEvent!.createdAt
+              .compareTo(event.createdAt) <
+          0) {
+        emit(state.copyWith(
+          commentOwnerMetadata: metadata,
+        ));
+      }
+
+      // _cache[commentEvent.pubkey] = metadata;
     });
   }
 

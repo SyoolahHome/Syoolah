@@ -239,6 +239,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     required void Function() onFullView,
     required BlocBase cubit,
   }) {
+    if (!isCurrentUser) {
+      return;
+    }
+
     AlertsService.showAvatarMenu(
       context,
       onPickFromGallery: pickAvatarFromGallery,
@@ -257,6 +261,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     required void Function() onFullView,
     required BlocBase cubit,
   }) {
+    if (!isCurrentUser) {
+      return;
+    }
+
     AlertsService.showBannerMenu(
       context,
       onPickFromGallery: pickBannerFromGallery,
@@ -277,7 +285,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   /// Shows the bottom sheet that contains more options that relates to the current user and the profile.
-  /// TODO: move these options to a separated class, file.
+
   void onMorePressed(
     BuildContext context, {
     required void Function() onEditProfile,
@@ -293,16 +301,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     BottomSheetService.showProfileBottomSheet(
       context,
       options: [
-        BottomSheetOption(
-          title: "editProfile".tr(),
-          icon: FlutterRemix.pencil_line,
-          onPressed: onEditProfile,
-        ),
-        BottomSheetOption(
-          title: "keys".tr(),
-          icon: FlutterRemix.key_line,
-          onPressed: onMyKeysPressed,
-        ),
+        if (isCurrentUser)
+          BottomSheetOption(
+            title: "editProfile".tr(),
+            icon: FlutterRemix.pencil_line,
+            onPressed: onEditProfile,
+          ),
+        if (isCurrentUser)
+          BottomSheetOption(
+            title: "keys".tr(),
+            icon: FlutterRemix.key_line,
+            onPressed: onMyKeysPressed,
+          ),
         BottomSheetOption(
           title: "copyPubKey".tr(),
           icon: FlutterRemix.file_copy_line,
@@ -370,11 +380,12 @@ class ProfileCubit extends Cubit<ProfileState> {
             );
           },
         ),
-        BottomSheetOption(
-          title: "logout".tr(),
-          icon: FlutterRemix.logout_box_line,
-          onPressed: onLogout,
-        ),
+        if (isCurrentUser)
+          BottomSheetOption(
+            title: "logout".tr(),
+            icon: FlutterRemix.logout_box_line,
+            onPressed: onLogout,
+          ),
       ],
     );
   }
