@@ -23,6 +23,7 @@ class NotesListView extends StatelessWidget {
     this.cardMargin,
     this.endTitleWithAdditionalText = true,
     this.showLoadingIndicator = true,
+    this.onlyCommentNotes = false,
   });
 
   final List<Note> notes;
@@ -34,10 +35,16 @@ class NotesListView extends StatelessWidget {
   final ScrollController? scrollController;
   final bool endTitleWithAdditionalText;
   final bool showLoadingIndicator;
+  final bool onlyCommentNotes;
+
   @override
   Widget build(BuildContext context) {
     List<Note> notesToUse = notes;
-    notesToUse = notesToUse.excludeCommentNotes();
+    if (onlyCommentNotes) {
+      notesToUse = notesToUse.onlyCommentNotes();
+    } else {
+      notesToUse = notesToUse.excludeCommentNotes();
+    }
     notesToUse.sort((a, b) => b.event.createdAt.compareTo(a.event.createdAt));
 
     final String appCurrentUserPublicKey =
@@ -125,6 +132,7 @@ class NotesListView extends StatelessWidget {
                   key: ValueKey(current.event.id),
                   appCurrentUserPublicKey: appCurrentUserPublicKey,
                   note: current,
+                  isComment: onlyCommentNotes,
                 );
               },
             );

@@ -522,4 +522,24 @@ class NostrServiceSub {
       request: requestWithFilter,
     );
   }
+
+  NostrEventsStream userComments({
+    required String userPubKey,
+  }) {
+    final randomId = randomHexString;
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: [
+        NostrFilter(
+          authors: [userPubKey],
+          kinds: const [1],
+        ),
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
 }

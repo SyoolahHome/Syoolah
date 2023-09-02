@@ -20,11 +20,13 @@ class NoteCard extends StatelessWidget {
     required this.note,
     this.cardMargin,
     required this.appCurrentUserPublicKey,
+    this.isComment = false,
   });
 
   final Note note;
   final EdgeInsets? cardMargin;
   final String appCurrentUserPublicKey;
+  final bool isComment;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +101,7 @@ class NoteCard extends StatelessWidget {
                       NoteActions(
                         note: note,
                         onCommentsIconClicked: onCommentsIconClicked,
+                        isComment: isComment,
                       ),
                     ],
                   ),

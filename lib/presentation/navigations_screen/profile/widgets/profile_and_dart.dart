@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../buisness_logic/cubit/user_follows_cubit.dart';
+import '../../../../buisness_logic/user_follow/user_follows_cubit.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({

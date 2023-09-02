@@ -18,6 +18,7 @@ class NoteActions extends StatelessWidget {
     // required this.appCurrentUserPublicKey,
     // required this.noteOwnerUserPubKey,
     required this.onCommentsIconClicked,
+    this.isComment = false,
   });
 
   final Note note;
@@ -27,6 +28,7 @@ class NoteActions extends StatelessWidget {
 //   final String? appCurrentUserPublicKey;
 //   final String? noteOwnerUserPubKey;
   final VoidCallback onCommentsIconClicked;
+  final bool isComment;
 
   @override
   Widget build(BuildContext context) {
@@ -42,87 +44,88 @@ class NoteActions extends StatelessWidget {
               createdAt: note.event.createdAt,
               isMedium: true,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                BlocBuilder<NoteCardCubit, NoteCardState>(
-                  builder: (context, state) {
-                    final noteLikes = state.noteLikes;
-                    int likes = noteLikes.length;
-                    // // if (state.localLiked)l,  {
-                    // //   likes += 1;
-                    // // }
+            if (!isComment)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  BlocBuilder<NoteCardCubit, NoteCardState>(
+                    builder: (context, state) {
+                      final noteLikes = state.noteLikes;
+                      int likes = noteLikes.length;
+                      // // if (state.localLiked)l,  {
+                      // //   likes += 1;
+                      // // }
 
-                    return Action(
-                      icon: FlutterRemix.heart_2_fill,
-                      onTap: () {
-                        if (!cubit.isUserAlreadyLiked()) {
-                          cubit.likeNote();
-                        }
-                      },
-                      bgColor: state.localLiked || cubit.isUserAlreadyLiked()
-                          ? AppColors.red.withOpacity(.1)
-                          : Theme.of(context).colorScheme.onPrimary,
-                      color: state.localLiked || cubit.isUserAlreadyLiked()
-                          ? AppColors.red
-                          : DefaultTextStyle.of(context).style.color!,
-                      text: likes.toString(),
-                    );
-                  },
-                ),
-                const SizedBox(width: 10),
-                BlocBuilder<NoteCardCubit, NoteCardState>(
-                  builder: (context, state) {
-                    return AnimatedSwitcher(
-                      duration: Animate.defaultDuration,
-                      child: Action(
-                        key: ValueKey(state.markAsReposted),
-                        icon: state.markAsReposted
-                            ? FlutterRemix.check_line
-                            : FlutterRemix.repeat_2_line,
+                      return Action(
+                        icon: FlutterRemix.heart_2_fill,
                         onTap: () {
-                          cubit.repostNote();
+                          if (!cubit.isUserAlreadyLiked()) {
+                            cubit.likeNote();
+                          }
                         },
-                        bgColor: state.markAsReposted
-                            ? Colors.green.withOpacity(.1)
+                        bgColor: state.localLiked || cubit.isUserAlreadyLiked()
+                            ? AppColors.red.withOpacity(.1)
                             : Theme.of(context).colorScheme.onPrimary,
-                        color: state.markAsReposted
-                            ? Colors.green
+                        color: state.localLiked || cubit.isUserAlreadyLiked()
+                            ? AppColors.red
                             : DefaultTextStyle.of(context).style.color!,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 10),
-                BlocBuilder<NoteCardCubit, NoteCardState>(
-                  builder: (context, state) {
-                    return Action(
-                      icon: FlutterRemix.chat_1_line,
-                      onTap: onCommentsIconClicked,
-                      bgColor: Theme.of(context).colorScheme.onPrimary,
-                      color: DefaultTextStyle.of(context).style.color!,
-                    );
-                  },
-                ),
-                const SizedBox(width: 10),
-                BlocBuilder<NoteCardCubit, NoteCardState>(
-                  builder: (context, state) {
-                    return Action(
-                      icon: FlutterRemix.more_line,
-                      onTap: () {
-                        context.read<FeedBoxCubit>().showOptions(
-                              context,
-                              note: note,
-                              onCommentsSectionTapped: () {},
-                            );
-                      },
-                      bgColor: Theme.of(context).colorScheme.onPrimary,
-                      color: DefaultTextStyle.of(context).style.color!,
-                    );
-                  },
-                ),
-              ],
-            ),
+                        text: likes.toString(),
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  BlocBuilder<NoteCardCubit, NoteCardState>(
+                    builder: (context, state) {
+                      return AnimatedSwitcher(
+                        duration: Animate.defaultDuration,
+                        child: Action(
+                          key: ValueKey(state.markAsReposted),
+                          icon: state.markAsReposted
+                              ? FlutterRemix.check_line
+                              : FlutterRemix.repeat_2_line,
+                          onTap: () {
+                            cubit.repostNote();
+                          },
+                          bgColor: state.markAsReposted
+                              ? Colors.green.withOpacity(.1)
+                              : Theme.of(context).colorScheme.onPrimary,
+                          color: state.markAsReposted
+                              ? Colors.green
+                              : DefaultTextStyle.of(context).style.color!,
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  BlocBuilder<NoteCardCubit, NoteCardState>(
+                    builder: (context, state) {
+                      return Action(
+                        icon: FlutterRemix.chat_1_line,
+                        onTap: onCommentsIconClicked,
+                        bgColor: Theme.of(context).colorScheme.onPrimary,
+                        color: DefaultTextStyle.of(context).style.color!,
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  BlocBuilder<NoteCardCubit, NoteCardState>(
+                    builder: (context, state) {
+                      return Action(
+                        icon: FlutterRemix.more_line,
+                        onTap: () {
+                          context.read<FeedBoxCubit>().showOptions(
+                                context,
+                                note: note,
+                                onCommentsSectionTapped: () {},
+                              );
+                        },
+                        bgColor: Theme.of(context).colorScheme.onPrimary,
+                        color: DefaultTextStyle.of(context).style.color!,
+                      );
+                    },
+                  ),
+                ],
+              ),
           ],
         ),
       ),

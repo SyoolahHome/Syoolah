@@ -61,6 +61,18 @@ extension NotesListExtension on List<Note> {
       });
     }).toList();
   }
+
+  List<Note> onlyCommentNotes() {
+    return where((note) {
+      final noteEventTags = note.event.tags;
+
+      return noteEventTags.any((tagList) {
+        final isComment = tagList.first == "e";
+
+        return isComment;
+      });
+    }).toList();
+  }
 }
 
 extension DateTimeExt on DateTime {

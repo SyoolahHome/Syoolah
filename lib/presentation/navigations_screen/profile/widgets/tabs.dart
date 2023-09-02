@@ -15,14 +15,18 @@ class ProfileTabs extends StatelessWidget {
       effects: const [FadeEffect()],
       delay: 1000.ms,
       child: TabBar(
+        isScrollable: true,
         labelColor: Theme.of(context).colorScheme.background,
         indicatorColor: Theme.of(context).colorScheme.background,
         indicatorWeight: 1,
         tabs: cubit.state.profileTabsItems.map(
           (e) {
-            return Tab(
-              icon: Icon(e.icon, size: 18),
-              text: e.label.capitalized,
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Tab(
+                icon: Icon(e.icon, size: 18),
+                text: e.label.capitalized,
+              ),
             );
           },
         ).toList(),

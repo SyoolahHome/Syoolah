@@ -6,6 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../navigations_screen/profile/widgets/current_user_comments.dart';
+
 abstract class GeneralProfileTabs {
   static List<TabItem> profileTabsItems({
     required String userPubKey,
@@ -33,6 +35,15 @@ abstract class GeneralProfileTabs {
             ),
           ),
           icon: FlutterRemix.heart_3_line,
+        ),
+        TabItem(
+          label: "comments".tr(),
+          widget: Center(
+            child: CurrentUserComments(
+              userPubKey: userPubKey,
+            ),
+          ),
+          icon: FlutterRemix.message_line,
         ),
       ];
 }
