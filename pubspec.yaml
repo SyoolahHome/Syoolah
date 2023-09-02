@@ -64,13 +64,13 @@ dev_dependencies:
   # envied_generator: ^0.3.0
   # flutter_native_splash: ^2.2.0+1
 
-# flutter_launcher_icons:
-#   android: "launcher_icon"
-#   ios: true
-#   image_path_android: "assets/logo/logo_letter_no_bg.png"
-#   image_path_ios: "assets/logo/logo_letter_no_bg.png"
-#   min_sdk_android: 21
-#   remove_alpha_ios: true
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path_android: "assets/logo/logo_letter_no_bg.png"
+  image_path_ios: "assets/logo/logo_letter_no_bg.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
 
 flutter:
   # The following line ensures that the Material Icons font is
