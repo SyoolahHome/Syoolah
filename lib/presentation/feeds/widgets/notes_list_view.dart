@@ -48,6 +48,8 @@ class NotesListView extends StatelessWidget {
           .copyWith(color: AppColors.grey),
     );
 
+    notes.sort((a, b) => b.event.createdAt.compareTo(a.event.createdAt));
+
     if (feedName != null) {
       return MarginedBody(
         child: Builder(
