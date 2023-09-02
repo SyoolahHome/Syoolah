@@ -29,7 +29,7 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: note.event.uniqueKey(),
+      tag: note.event.id,
       child: BlocProvider<NoteCardCubit>(
         create: (context) => NoteCardCubit(
           note: note,
@@ -71,7 +71,7 @@ class NoteCard extends StatelessWidget {
                 }
 
                 return NoteContainer(
-                  key: ValueKey(note.event.uniqueKey()),
+                  key: ValueKey(note.event.id),
                   note: note,
                   margin: cardMargin,
                   onTap: onCommentsIconClicked,
@@ -92,7 +92,7 @@ class NoteCard extends StatelessWidget {
                       const SizedBox(height: 15),
                       NoteContents(
                         youtubeVideosLinks: note.youtubeVideoLinks,
-                        heroTag: note.event.uniqueKey().eventId,
+                        heroTag: note.event.id,
                         imageLinks: note.imageLinks,
                         text: note.noteOnly,
                       ),
