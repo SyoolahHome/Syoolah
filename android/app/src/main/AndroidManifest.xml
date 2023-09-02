@@ -22,7 +22,7 @@
 
  
     <application
-        android:label="Munawarah"
+        android:label="Sakhir"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
 
