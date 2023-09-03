@@ -32,7 +32,7 @@ class OnBoarding extends StatelessWidget {
                 GetStarted(),
                 Spacer(),
                 SizedBox(height: height),
-                AboutMunawarah(),
+                AboutSakhir(),
                 SizedBox(height: height * 2),
               ],
             ),

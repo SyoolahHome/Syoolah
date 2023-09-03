@@ -32,7 +32,7 @@ class Umah extends BottomBarScreen {
         BlocProvider<BottomBarCubit>.value(value: Routing.bottomBarCubit),
       ],
       child: GeneralFeed(
-        feedName: "umah".tr(),
+        feedName: "global".tr(),
         endFeedTitleWithAdditionalText: false,
         feedPostsStream: NostrService.instance.subs.globalFeed(
           followings: followingsPubKeysList,

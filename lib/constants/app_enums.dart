@@ -37,7 +37,7 @@ enum ReportType {
 }
 
 enum SakhirTopics {
-  red_bull,
+  redbull,
   mercedes,
   astonMartin,
   ferrari,

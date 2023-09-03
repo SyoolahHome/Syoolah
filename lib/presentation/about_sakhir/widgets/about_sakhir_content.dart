@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AboutMunawarahContent extends StatelessWidget {
-  const AboutMunawarahContent({super.key});
+class AboutSakhirContent extends StatelessWidget {
+  const AboutSakhirContent({super.key});
 
   @override
   Widget build(BuildContext context) {

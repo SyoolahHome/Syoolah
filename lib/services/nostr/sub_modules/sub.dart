@@ -243,7 +243,7 @@ class NostrServiceSub {
     final randomId = randomHexString;
 
     final eventTags = [
-      "globalMunawarah",
+      "globalSakhir",
       ...AppConfigs.categories
           .map((category) => category.enumValue.name)
           .toList()

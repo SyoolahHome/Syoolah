@@ -314,7 +314,7 @@ class AuthCubit extends Cubit<AuthState> {
       //   title: "welcome".tr(),
       //   subtitle: "welcomeSubtitle".tr(),
       //   widgetBody: const Center(
-      //     child: MunawarahLogo(
+      //     child: SakhirLogo(
       //       width: 140,
       //       isHero: false,
       //     ),

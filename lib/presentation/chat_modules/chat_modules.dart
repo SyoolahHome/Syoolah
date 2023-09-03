@@ -33,7 +33,7 @@ class ChatModules extends BottomBarScreen {
             ),
             MarginedBody(
               child: BottomSheetTitleWithIconButton(
-                title: "imamOnDuty".tr().titleCapitalized,
+                title: "f1OnDuty".tr().titleCapitalized,
               ),
             ),
             const SizedBox(height: height),
@@ -47,7 +47,7 @@ class ChatModules extends BottomBarScreen {
                   //   isForSection: true,
                   // ),
                   // const SizedBox(height: height / 2),
-                  ChatModulesSubtitle(text: "newImamOnDutySubtitle".tr()),
+                  ChatModulesSubtitle(text: "f1OnDutySubtitle".tr()),
                 ],
               ),
             ),
@@ -120,7 +120,7 @@ class ChatModules extends BottomBarScreen {
                             SizedBox(
                               width: double.infinity,
                               height: 50,
-                              child: MunawarahButton(
+                              child: SakhirButton(
                                 text: "start".tr(),
                                 onTap: _triggerChatNavigation,
                               ),

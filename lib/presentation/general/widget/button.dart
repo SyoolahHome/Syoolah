@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class MunawarahButton extends StatelessWidget {
-  const MunawarahButton({
+class SakhirButton extends StatelessWidget {
+  const SakhirButton({
     super.key,
     required this.onTap,
     this.text,
@@ -136,13 +136,13 @@ class MunawarahButton extends StatelessWidget {
     );
   }
 
-  factory MunawarahButton.bottomSheetApply({
+  factory SakhirButton.bottomSheetApply({
     required String buttonText,
     required Locale locale,
     required bool isCurrentApplied,
     required void Function() onTap,
   }) {
-    return MunawarahButton(
+    return SakhirButton(
       onTap: () {
         if (isCurrentApplied) {
           return;

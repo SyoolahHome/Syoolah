@@ -14,15 +14,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: MunawarahLogo(
+      child: SakhirLogo(
         width: mq.size.width * .55,
       ),
     );
   }
 }
 
-class MunawarahLogo extends StatelessWidget {
-  const MunawarahLogo({
+class SakhirLogo extends StatelessWidget {
+  const SakhirLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -42,7 +42,7 @@ class MunawarahLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "MunawarahLogo",
+        tag: "SakhirLogo",
         child: widget,
       );
     } else {

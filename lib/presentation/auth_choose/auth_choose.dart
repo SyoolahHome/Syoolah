@@ -46,7 +46,7 @@ class AuthChoose extends StatelessWidget {
                     buttonText: "create".tr(),
                     icon: FlutterRemix.arrow_right_line,
                     title: "newCreateNewAcc".tr().titleCapitalized,
-                    description: "aPrivatePublicKeyPairToAccessMunawarah".tr(),
+                    description: "aPrivatePublicKeyPairToAccessSakhir".tr(),
                     targetRoutePath: Paths.SignUp,
                   ),
                   const SizedBox(height: height * 3),

@@ -117,7 +117,7 @@ class FeedBox extends StatelessWidget {
                         effects: const [
                           FadeEffect(),
                         ],
-                        child: MunawarahButton(
+                        child: SakhirButton(
                           isSmall: true,
                           onTap: onTap,
                           text: "explore".tr(),

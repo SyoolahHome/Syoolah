@@ -336,7 +336,7 @@ abstract class BottomSheetService {
                   children: <Widget>[
                     SizedBox(
                       height: 35,
-                      child: MunawarahButton(
+                      child: SakhirButton(
                         onTap: () {
                           onRemove();
                           Navigator.of(context).pop();
@@ -350,7 +350,7 @@ abstract class BottomSheetService {
                     ),
                     SizedBox(
                       height: 35,
-                      child: MunawarahButton(
+                      child: SakhirButton(
                         onTap: () {
                           onAccept();
                           Navigator.of(context).pop();

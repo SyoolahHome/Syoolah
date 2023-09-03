@@ -10,7 +10,7 @@ class SearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MunawarahButton(
+    return SakhirButton(
       onTap: () {
         Navigator.of(context).pop();
         context.read<GlobalFeedCubit>().executeSearch();

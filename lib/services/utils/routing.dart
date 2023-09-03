@@ -3,7 +3,7 @@ import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
 import 'package:ditto/presentation/about/about.dart';
-import 'package:ditto/presentation/about_munawarah/about_munawarah.dart';
+import 'package:ditto/presentation/about_sakhir/about_sakhir.dart';
 import 'package:ditto/presentation/auth_choose/auth_choose.dart';
 import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
@@ -41,7 +41,7 @@ abstract class Routing {
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
-    Paths.aboutMunawarah: (context) => const AboutMunawarah(),
+    Paths.aboutSakhir: (context) => const AboutSakhir(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentSignUp: (context) => const ExistentSignUp(),

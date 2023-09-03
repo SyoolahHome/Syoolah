@@ -43,11 +43,10 @@ class CustomBottomBar extends StatelessWidget {
                   icon: isImam
                       ? SvgPicture.asset(
                           item.svgIconPath!,
-                          width: 45,
-                          height: 45,
+                          width: 35,
+                          height: 35,
                           colorFilter: ColorFilter.mode(
-                            AppColors.white ??
-                                Theme.of(context).iconTheme.color!,
+                            AppColors.white,
                             BlendMode.srcIn,
                           ),
                         )

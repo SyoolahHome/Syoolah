@@ -2,6 +2,7 @@ import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../buisness_logic/chat_modules/chat_modules_cubit.dart';
 
@@ -66,10 +67,17 @@ class ChatModulesPageView extends StatelessWidget {
                           },
                           child: Container(
                             padding: const EdgeInsets.all(40),
-                            child: Icon(
-                              item.icon,
-                              size: 35,
-                            ),
+                            child: Builder(builder: (context) {
+                              return SvgPicture.asset(
+                                item.imageIcon,
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.background,
+                                  BlendMode.srcIn,
+                                ),
+                                width: 55,
+                                height: 55,
+                              );
+                            }),
                           ),
                         ),
                       ),
@@ -125,7 +133,7 @@ class ChatModulesPageView extends StatelessWidget {
     //                 color: Theme.of(context).primaryColor,
     //                 size: 27,
     //               ),
-    //               MunawarahButton(
+    //               SakhirButton(
     //                 onTap: () {
     //                   Navigator.of(context).pushNamed(
     //                     Paths.chat,

@@ -38,8 +38,8 @@ class Home extends BottomBarScreen {
                   HeadTitle(title: "globalFeeds".tr()),
                   const SizedBox(height: 10),
                   FeedBox(
-                    title: "umah".tr(),
-                    description: "umahSubtitle".tr(),
+                    title: "global".tr(),
+                    description: "globalSubtitle".tr(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -72,9 +72,10 @@ class Home extends BottomBarScreen {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) {
+                            builder: (_) {
                               return ReusableFeed(
                                 feedCategory: current,
+                                globalCubit: context.read<GlobalCubit>(),
                               );
                             },
                           ),

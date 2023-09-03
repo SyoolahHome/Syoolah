@@ -178,7 +178,7 @@ class OnBoardingSearch extends StatelessWidget {
                         ),
                         if (kDebugMode)
                           Center(
-                            child: MunawarahButton(
+                            child: SakhirButton(
                               onTap: cubit.clearCache,
                               text: "clear cache (dev)",
                             ),

@@ -32,30 +32,24 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
   /// A list of available and allowed chat modules that will be shown in the UI.
   List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
         ChatModuleItem.beginner(
-          subtitle:
-              "This will guide you with all information about islam" /* ??
-              "chatInstructorSubtitle".tr() */
-          ,
-          icon: FlutterIslamicIcons.solidKowtow,
+          subtitle: "chatBeginnerSubtitle".tr(),
+          imageIcon: "assets/images/f1-car.svg",
           instruction:
-              "You are an islamic imam who will guide with all information about islam",
+              "You are an F1 expert who will answers beginner questions related to F1, its rules & teams..",
           recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
         ),
         ChatModuleItem.intermediate(
-          subtitle:
-              "This will guide you with all information about seerah of Prophet Muhammad (PBUH)" /* ??
-                  "chatInstructorSubtitle".tr() */
-          ,
-          icon: FlutterIslamicIcons.solidMosque,
+          subtitle: "chatIntermediateSubtitle".tr(),
+          imageIcon: "assets/images/f1.svg",
           instruction:
-              "You are an islamic imam who will guide with all information about seerah of Prophet Muhammad (PBUH)",
+              "You are an F1 expert who will answers intermediate questions related to F1, its rules & teams..",
           recommendedQuestions: AppConfigs.intermediateRecommendQuestions,
         ),
         ChatModuleItem.advanced(
-          subtitle: "chatInstructorSubtitle".tr(),
-          icon: FlutterIslamicIcons.solidQuran2,
+          subtitle: "chatAdvancedSubtitle".tr(),
+          imageIcon: "assets/images/win-flag.svg",
           instruction:
-              "You are an islamic imam who will guide with all information about islam",
+              "You are an F1 expert who will answers advanced questions related to F1, its rules & teams..",
           recommendedQuestions: AppConfigs.advancedRecommendQuestions,
         ),
       ];

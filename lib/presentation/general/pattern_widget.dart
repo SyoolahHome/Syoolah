@@ -11,6 +11,8 @@ class PatternWidget extends StatelessWidget {
   final bool showPattern;
   @override
   Widget build(BuildContext context) {
+    return child;
+
     return DecoratedBox(
       decoration: BoxDecoration(
         image: showPattern

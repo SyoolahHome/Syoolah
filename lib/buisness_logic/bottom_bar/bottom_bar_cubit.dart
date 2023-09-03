@@ -6,6 +6,7 @@ import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
@@ -44,17 +45,17 @@ class BottomBarCubit extends Cubit<int> {
       ),
       BottomBarItem(
         screen: const ChatModules(),
-        label: 'imam'.tr(),
-        svgIconPath: "assets/images/imam.svg",
+        label: 'f1'.tr(),
+        svgIconPath: "assets/images/helmet.svg",
         icon: FlutterRemix.message_3_line,
         selectedIcon: FlutterRemix.message_3_fill,
       ),
       BottomBarItem(
         screen: Umah(),
         // const Home(),
-        label: 'umaxh'.tr(),
-        icon: FlutterIslamicIcons.community,
-        selectedIcon: FlutterIslamicIcons.solidCommunity,
+        label: 'global'.tr(),
+        icon: Icons.people_outline_sharp,
+        selectedIcon: Icons.people_sharp,
       ),
       BottomBarItem(
         screen: const DMS(),

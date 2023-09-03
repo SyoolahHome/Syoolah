@@ -32,7 +32,7 @@ class CustomAppBar extends PreferredSize {
     }
     return AppBar(
       backgroundColor: Colors.transparent,
-      title: const MunawarahLogo(width: 50),
+      title: const SakhirLogo(width: 50),
       titleSpacing: 5.0,
       elevation: 0,
       leading: IconButton(

@@ -20,16 +20,10 @@ abstract class Paths {
   static const String SignUp = '/SignUp';
   static const String globalFeed = '/globalFeed';
   static const String editProfile = '/editProfile';
-  static const String quranFeed = '/quranFeed';
-  static const String duaFeed = '/duaFeed';
-  static const String shariaFeed = '/shariaFeed';
-  static const String hadithFeed = '/hadithFeed';
-  static const String fiqhFeed = '/fiqhFeed';
-  static const String seerahFeed = '/seerahFeed';
   static const String followingFeed = '/followingFeed';
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';
-  static const String aboutMunawarah = '/aboutMunawarah';
+  static const String aboutSakhir = '/aboutSakhir';
   static const String onBoardingRelays = '/onBoardingRelays';
   static const String foreignProfile = '/foreignProfile';
   static const String followings = '/followings';
