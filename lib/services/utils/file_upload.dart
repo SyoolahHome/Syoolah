@@ -28,9 +28,10 @@ class FileUpload {
           .replaceAll("\n", "")
           .replaceAll(" ", "")
           .split('"')
-          .where((elem) => elem.contains("https://cdn.nostr.build"))
+          .where((elem) => elem.contains("https://image.nostr.build"))
           .where((elem) => elem.contains(getFileExtension(file)))
           .toList();
+
       print(contextFilteredString);
       // assert(contextFilteredString.length == 1);
 
@@ -51,7 +52,7 @@ class FileUpload {
     String text,
     String extension,
   ) {
-    final indexOfHttps = text.indexOf('https://cdn.nostr.build');
+    final indexOfHttps = text.indexOf('https://image.nostr.build');
     final indexOfExtension = text.indexOf(extension, indexOfHttps);
 
     print(indexOfExtension);
