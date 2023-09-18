@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/services/utils/extensions.dart';
 
 import '../../../constants/app_configs.dart';
 import '../../../model/note.dart';
@@ -36,7 +37,7 @@ class NostrServiceSend {
     );
 
     final eventTags = [
-      ["t", "globalSakhir"]
+      ["t", "globalSakhirApp"]
     ];
 
     if (tags != null) {
@@ -167,7 +168,7 @@ class NostrServiceSend {
         ["e", note.event.id, selectedReportType],
         ["p", note.event.pubkey, selectedReportType],
         ...AppConfigs.categories.map(
-          (e) => ["t", e.enumValue.name],
+          (e) => ["t", e.enumValue.sakhirName],
         )
       ],
     );

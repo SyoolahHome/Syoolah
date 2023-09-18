@@ -46,7 +46,7 @@ enum SakhirTopics {
   williams,
   haasf1team,
   alfaromeo,
-  alphatauri,
+  alphatauri;
 }
 
 enum ImagePickType { banner, avatar }

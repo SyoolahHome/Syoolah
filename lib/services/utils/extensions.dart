@@ -9,6 +9,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../constants/app_enums.dart';
 import '../../model/feed_category.dart';
 import '../../model/loclal_item.dart';
 import '../../model/note.dart';
@@ -230,7 +231,7 @@ extension ThemeModeExtension on ThemeMode {
 extension FeedCategoryListExtension on Iterable<FeedCategory> {
   Iterable<FeedCategory> get whereSelected => where((e) => e.isSelected);
   List<List<String>> toNostrTagsList() =>
-      map((e) => ["t", e.enumValue.name]).toList();
+      map((e) => ["t", e.enumValue.sakhirName]).toList();
 }
 
 extension XFileListExtension on List<XFile> {
@@ -295,4 +296,8 @@ extension NostrEventExtension on NostrEvent? {
         .map((tag) => tag[1])
         .toList();
   }
+}
+
+extension SakhirTopicsExt on SakhirTopics {
+  String get sakhirName => "sakhir_app$name";
 }

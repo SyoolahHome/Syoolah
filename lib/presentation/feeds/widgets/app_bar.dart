@@ -1,6 +1,7 @@
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,7 @@ Hello there!!!!
 https://www.youtube.com/watch?v=PMpNhbMjDj0
               """,
                 tags: [
-                  ["t", AppConfigs.categories.first.enumValue.name]
+                  ["t", AppConfigs.categories.first.enumValue.sakhirName]
                 ],
               );
             },

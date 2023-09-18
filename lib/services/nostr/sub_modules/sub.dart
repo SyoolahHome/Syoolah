@@ -1,4 +1,5 @@
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:ditto/services/utils/extensions.dart';
 
 import '../../../constants/app_configs.dart';
 import '../../../constants/app_enums.dart';
@@ -225,7 +226,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [topic.name],
+          t: [topic.sakhirName],
           kinds: const [1],
           limit: 10,
         ),
@@ -243,9 +244,9 @@ class NostrServiceSub {
     final randomId = randomHexString;
 
     final eventTags = [
-      "globalSakhir",
+      "globalSakhirApp",
       ...AppConfigs.categories
-          .map((category) => category.enumValue.name)
+          .map((category) => category.enumValue.sakhirName)
           .toList()
     ];
 
