@@ -1,0 +1,12 @@
+{
+   "message": "Please, if you think that this is an unexpected bug in LangSync, contact us so we can help",
+   "partitionId": "71a360c7-ff50-4370-8b1e-beb6969ed896",
+   "processedResponse": "{error: the output of this partition can't be decoded to JSON}",
+   "target_language": "tr",
+   "success_file_name": "tr.json",
+   "LocalizationTryDate": {
+      "human_readable_format": "10/10/2023 04:12:21",
+      "ISO_8601_format": "2023-10-10T04:12:21.264Z"
+   },
+   "contact_link": "https://langsync.app/#contact"
+}

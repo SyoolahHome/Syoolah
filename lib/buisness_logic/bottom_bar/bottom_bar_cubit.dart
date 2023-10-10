@@ -11,6 +11,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
 import '../../presentation/dms/dms.dart';
+import '../../presentation/lnd/lnd.dart';
 import '../../services/database/local/local_database.dart';
 
 class BottomBarCubit extends Cubit<int> {
@@ -58,10 +59,10 @@ class BottomBarCubit extends Cubit<int> {
         selectedIcon: Icons.people_sharp,
       ),
       BottomBarItem(
-        screen: const DMS(),
-        label: 'dms'.tr(),
-        icon: FlutterRemix.discuss_line,
-        selectedIcon: FlutterRemix.discuss_fill,
+        screen: LND(),
+        label: 'lnd'.tr(),
+        icon: FlutterRemix.flashlight_line,
+        selectedIcon: FlutterRemix.flashlight_fill,
       ),
     ];
   }

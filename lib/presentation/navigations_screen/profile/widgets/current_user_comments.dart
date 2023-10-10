@@ -8,7 +8,7 @@ import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../buisness_logic/cubit/current_user_comments_cubit.dart';
+import '../../../../buisness_logic/current_user_comments/current_user_comments_cubit.dart';
 import '../../../../constants/abstractions/abstractions.dart';
 import '../../../../constants/app_colors.dart';
 import '../../../../model/note.dart';

@@ -20,10 +20,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../buisness_logic/lnd/lnd_cubit.dart';
 import '../../constants/app_enums.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
+import '../../presentation/lnd/widgets/widgets/bottom_sheet_widget.dart';
 import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
 
@@ -433,6 +435,21 @@ abstract class BottomSheetService {
       clipBehavior: Clip.hardEdge,
       isScrollControlled: true,
       useRootNavigator: true,
+    );
+  }
+
+  static void createLndAddress(LndCubit lndCubit, BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
+      clipBehavior: Clip.hardEdge,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) {
+        return LndAdressCreationWidget(
+          lndCubit: lndCubit,
+        );
+      },
     );
   }
 }

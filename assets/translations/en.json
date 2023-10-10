@@ -327,5 +327,15 @@
   "f1OnDutySubtitle": "Tons of questions, Tons of answers. Ask anything related to F1.",
   "chatBeginnerSubtitle": "This will guide you with all information about F1 and its teams",
   "chatIntermediateSubtitle": "This will guide you with all information about F1 and its teams",
-  "chatAdvancedSubtitle": "You are an islamic imam who will guide with all information about islam"
+  "chatAdvancedSubtitle": "You are an islamic imam who will guide with all information about islam",
+  "lnd": "LND",
+  "lightning_adress": "Lightning Adress",
+  "create_lightning_address": "Create Lightning Address",
+  "lnd_description": "Get A Non-Custodial Lightning Address With Sakhir To receive Lightning Payments From Anyone, Anywhere In The World.",
+  "create_address_lnd": "Create LND Address",
+  "username": "Username",
+  "adress_username": "Adress Username",
+  "your_info": "Your Info",
+  "lnd_adress": "Adress",
+  "lnurl": "LNURL"
 }

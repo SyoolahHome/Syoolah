@@ -7,6 +7,7 @@ class SakhirButton extends StatelessWidget {
     super.key,
     required this.onTap,
     this.text,
+    this.padding,
     this.isSmall = false,
     this.isRounded = true,
     this.icon,
@@ -27,6 +28,8 @@ class SakhirButton extends StatelessWidget {
   final double? iconSize;
   final Color? mainColor;
   final double additonalFontSize;
+  final EdgeInsetsGeometry? padding;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
@@ -50,6 +53,7 @@ class SakhirButton extends StatelessWidget {
             disabledBackgroundColor:
                 Theme.of(context).colorScheme.background.withOpacity(.7),
           ),
+
           // ElevatedButton.styleFrom(
           //   backgroundColor: false
           //       ? Colors.transparent
@@ -99,37 +103,41 @@ class SakhirButton extends StatelessWidget {
           //   ),
           // ),
           //
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (customWidget != null) customWidget!,
-              if (text != null)
-                Text(
-                  text!,
-                  style: TextStyle(
+          child: Padding(
+            padding: padding ?? EdgeInsets.zero,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                if (customWidget != null) customWidget!,
+                if (text != null)
+                  Text(
+                    text!,
+                    style: TextStyle(
+                      color: isOnlyBorder
+                          ? mainColor ??
+                              Theme.of(context).colorScheme.background
+                          : Theme.of(context).colorScheme.onBackground,
+                      fontSize: (isSmall ? 11 : 17) + additonalFontSize,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                if (text != null && icon != null) const SizedBox(width: 7.5),
+                if (icon != null) ...[
+                  Icon(
+                    icon,
+                    size: iconSize != null
+                        ? iconSize!
+                        : isSmall
+                            ? 12.5
+                            : 15,
                     color: isOnlyBorder
                         ? mainColor ?? Theme.of(context).colorScheme.background
                         : Theme.of(context).colorScheme.onBackground,
-                    fontSize: (isSmall ? 11 : 17) + additonalFontSize,
-                    fontWeight: FontWeight.w400,
                   ),
-                ),
-              if (text != null && icon != null) const SizedBox(width: 7.5),
-              if (icon != null) ...[
-                Icon(
-                  icon,
-                  size: iconSize != null
-                      ? iconSize!
-                      : isSmall
-                          ? 12.5
-                          : 15,
-                  color: isOnlyBorder
-                      ? mainColor ?? Theme.of(context).colorScheme.background
-                      : Theme.of(context).colorScheme.onBackground,
-                ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),
