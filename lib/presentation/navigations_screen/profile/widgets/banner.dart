@@ -19,6 +19,7 @@ class ProfileBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
+    return child;
 
     Future<void> onFullView() async {
       Navigator.of(context).push(

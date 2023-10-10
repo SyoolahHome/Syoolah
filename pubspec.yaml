@@ -84,7 +84,9 @@ flutter:
     - assets/teams/
     - assets/images/
     - assets/logo/black_no_bg.png
+    - assets/logo/black_no_bg_big.png
     - assets/logo/white_no_bg.png
+    - assets/logo/white_no_bg_big.png
     - assets/translations/
 
 # flutter_app_name:

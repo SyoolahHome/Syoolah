@@ -63,7 +63,7 @@ abstract class Routing {
     Paths.nip05Verification: (context) => const Nip05Verification(),
     Paths.tangemAuth: (context) => const TangemAuth(),
     Paths.lndInfoFrom: (context) => LndInfoFrom(),
-    Paths.lndCreationSuccess: (context) => const LndCreationSuccess(),
+    Paths.lndCreationSuccess: (context) => LndCreationSuccess(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

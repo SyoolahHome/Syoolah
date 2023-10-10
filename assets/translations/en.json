@@ -318,7 +318,7 @@
   "privacyAndPolicyDescription": "Please, read Sakhir's privacy and policy and accept it to continue creating your account",
   "acceptPrivacyPolicy": "I read and accept Sakhir's privacy and policy",
   "aboutSakhirContent": "TODO: make a proper and valuable content for this 'about' section",
-  "aboutContent": "TODO: make a proper and valuable content for this 'about' section",
+  "aboutContent": "Social media banking for F1 fans.\nOpen, decentralized and always available so you'll never miss a circuit again.",
   "privacyPolicyContent": "By default, the application connects to a number of relays in the Nostr network to send and receive messages. The relays may not be operated by Sakhir developers. You can change the default relays at will..<br><br>On Nostr, private messages are encrypted, but anyone can see who you're chatting with and when..<br><br>The application wraps the web application at <a class='anchorLink' href='https://web.sakhir.app'>https: //web.sakhir.app</a>. The hosting provider logs user IP addresses and page-view counts, which are used to follow unique user count and usage by country..<br><br>Sakhir users can register an optional username for convenience that redirects to their Nostr public profile <a class='anchorLink' href='https://web.sakhir.app/username'>https://web.sakhir.app/username</a>. In this process, user IP address and country code are saved..<br><br>Otherwise, Sakhir developers do not collect any information about you or your usage of the application..<br><br>We reserve the right to modify this Privacy Policy at any time and without prior notice. Your continued use of the app after the posting of any modified Privacy Policy indicates your acceptance of the terms of the modified Privacy Policy.<br><br>If you have any questions about this Privacy Policy, please contact us at <a class='anchorLink' href='mailto:privacy@sakhir.engineering'>privacy@sakhir.engineering</a>",
   "f1": "F1",
   "global": "Global",
@@ -337,5 +337,7 @@
   "adress_username": "Adress Username",
   "your_info": "Your Info",
   "lnd_adress": "Adress",
-  "lnurl": "LNURL"
+  "lnurl": "LNURL",
+  "f1_zaplocker": "F1 Zaplocker",
+  "payments": "Payments"
 }

@@ -12,7 +12,9 @@ enum LoadingUserResourcesStatus {
 
 enum AppLogoStyle {
   white,
+  whiteBig,
   black,
+  blackBig,
 }
 
 enum KeySectionType {

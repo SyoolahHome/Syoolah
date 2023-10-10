@@ -36,7 +36,7 @@ class LndAdressCreationWidget extends StatelessWidget {
                 title: "create_address_lnd".tr(),
               ),
               SizedBox(height: 20),
-              Text("pubKey".tr()),
+              Text("myPublicKey".tr()),
               SizedBox(height: 7.5),
               KeySection(
                 type: KeySectionType.nPubKey,
@@ -47,16 +47,27 @@ class LndAdressCreationWidget extends StatelessWidget {
                 child: SakhirButton(
                   onTap: () {
                     Navigator.pop(context);
+
                     Navigator.of(context).pushNamed(
                       Paths.lndInfoFrom,
                       arguments: {
                         'cubit': lndCubit,
                       },
                     );
+                    // lndCubit.createAddress(
+                    //   onSuccess: () {
+                    //     Navigator.of(context).pushNamed(
+                    //       Paths.lndInfoFrom,
+                    //       arguments: {
+                    //         'cubit': lndCubit,
+                    //       },
+                    //     );
+                    //   },
+                    // );
                   },
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   isRounded: true,
-                  text: "Create",
+                  text: "create".tr(),
                   isSmall: true,
                   icon: FlutterRemix.flashlight_line,
                 ),

@@ -13,7 +13,7 @@ class LNDAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       title: Row(
         children: <Widget>[
-          Text("lightning_adress".tr()),
+          Text("f1_zaplocker".tr()),
         ],
       ),
       actions: [

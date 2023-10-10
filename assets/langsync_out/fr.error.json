@@ -1,12 +1,12 @@
 {
    "message": "Please, if you think that this is an unexpected bug in LangSync, contact us so we can help",
-   "partitionId": "88f3f04e-f770-4eaa-a551-7608c905d89a",
+   "partitionId": "c29e18c9-c2cc-4dec-8f1f-c4552d017f45",
    "processedResponse": "{error: the output of this partition can't be decoded to JSON}",
    "target_language": "fr",
    "success_file_name": "fr.json",
    "LocalizationTryDate": {
-      "human_readable_format": "10/10/2023 04:27:54",
-      "ISO_8601_format": "2023-10-10T04:27:54.351Z"
+      "human_readable_format": "10/10/2023 18:31:59",
+      "ISO_8601_format": "2023-10-10T18:31:59.954Z"
    },
    "contact_link": "https://langsync.app/#contact"
 }

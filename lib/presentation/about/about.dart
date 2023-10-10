@@ -5,6 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../onboarding/widgets/animated_logo.dart';
+
 class About extends StatefulWidget {
   const About({super.key});
 
@@ -24,6 +26,7 @@ class AboutState extends State<About> {
       ),
       body: MarginedBody(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: height * 3),
             Animate(
@@ -38,7 +41,9 @@ class AboutState extends State<About> {
                 isForSection: true,
               ),
             ),
-            SizedBox(height: height * 3),
+            SizedBox(height: height * 4),
+            Center(child: SakhirLogo(width: 100)),
+            SizedBox(height: height * 4),
             ...pars.indexedMap(
               (index, item) => Animate(
                 delay: (200 + index * 100).ms,
@@ -48,7 +53,15 @@ class AboutState extends State<About> {
                     begin: Offset(0, 0.5),
                   ),
                 ],
-                child: Text(item),
+                child: index != 0
+                    ? Text(item)
+                    : Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 10.0,
+                        ),
+                        child: Text(item,
+                            style: Theme.of(context).textTheme.titleLarge),
+                      ),
               ),
             )
           ],

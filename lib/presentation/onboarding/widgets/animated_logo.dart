@@ -36,7 +36,7 @@ class SakhirLogo extends StatelessWidget {
 
     final widget = Image.asset(
       AppUtils.instance.appLogoSelector(
-        isDarkTheme ? AppLogoStyle.white : AppLogoStyle.black,
+        isDarkTheme ? AppLogoStyle.whiteBig : AppLogoStyle.blackBig,
       ),
       width: width,
     );

@@ -39,20 +39,35 @@ class LndInfoFrom extends StatelessWidget {
               SizedBox(height: 25),
               LNDUsernameField(),
               Spacer(),
-              Text(
-                "anas@sakhir.me".tr(),
-                style: Theme.of(context).textTheme.headlineSmall,
+              BlocBuilder<LndCubit, LndState>(
+                builder: (context, state) {
+                  final username = state.username;
+
+                  return Text(
+                    username.isNotEmpty ? "${username}@sakhir.me".tr() : "",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                },
               ),
               Spacer(),
               SizedBox(
                 width: double.infinity,
-                child: SakhirButton(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(Paths.lndCreationSuccess);
+                child: BlocBuilder<LndCubit, LndState>(
+                  builder: (context, state) {
+                    return SakhirButton(
+                      onTap: state.username.isNotEmpty
+                          ? () {
+                              Navigator.of(context).pushNamed(
+                                Paths.lndCreationSuccess,
+                                arguments: {"cubit": cubit},
+                              );
+                            }
+                          : null,
+                      text: "submit".tr(),
+                      icon: AppUtils.instance
+                          .directionality_arrow_right_line(context),
+                    );
                   },
-                  text: "submit".tr(),
-                  icon: AppUtils.instance
-                      .directionality_arrow_right_line(context),
                 ),
               ),
               SizedBox(height: 15),
