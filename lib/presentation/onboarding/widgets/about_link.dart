@@ -20,7 +20,7 @@ class AboutSakhir extends StatelessWidget {
         },
         child: Center(
           child: Text(
-            "encryptYourDuaa".tr(),
+            "about_sakhir".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   // color: Theme.of(context).primaryColor,
                   decoration: TextDecoration.underline,
