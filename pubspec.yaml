@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 0.9.4+4
 
 environment:
   sdk: ">=2.18.0 <4.0.0"
@@ -27,7 +27,7 @@ dependencies:
   flutter_remix:
   hive_flutter:
   equatable:
-  dart_nostr: 
+  dart_nostr:
     path: "C:\\projects\\Flutter_and_Dart\\nostr_copy"
   tangem_sdk:
     path: ./packs/tangem-sdk-flutter-master/
@@ -88,7 +88,6 @@ flutter:
     - assets/logo/white_no_bg.png
     - assets/logo/white_no_bg_big.png
     - assets/translations/
-
 # flutter_app_name:
 #   name: "Sakhir"
 
