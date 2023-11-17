@@ -245,11 +245,28 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     textController = TextEditingController()..text = initialNoteContent ?? "";
     youtubeUrlController = TextEditingController();
     _postFieldFocusNode = FocusNode();
+    _listenToPostFieldTextLines();
   }
 
   void _unFocusPostField() {
     if (_postFieldFocusNode?.hasFocus ?? false) {
       _postFieldFocusNode?.unfocus();
     }
+  }
+
+  _listenToPostFieldTextLines() {
+    assert(textController != null);
+
+    textController!.addListener(() {
+      final text = textController!.text;
+      final lines = text.split("\n");
+      final linesCount = lines.length;
+
+      if (linesCount >= 2) {
+        emit(state.copyWith(collapseToFullScreen: true));
+      } else {
+        emit(state.copyWith(collapseToFullScreen: false));
+      }
+    });
   }
 }

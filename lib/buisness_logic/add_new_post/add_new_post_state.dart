@@ -28,6 +28,9 @@ class AddNewPostState extends Equatable {
   /// The index of the section to show for assets to the note
   final int currentPostAssetsSectionIndex;
 
+  /// Weither the post send sheet should collapse to full screen or not.
+  final bool collapseToFullScreen;
+
   @override
   List<Object?> get props => [
         pickedImages,
@@ -38,6 +41,7 @@ class AddNewPostState extends Equatable {
         youtubeUrl,
         currentPostAssetsSectionIndex,
         acceptedYoutubeUrl,
+        collapseToFullScreen,
       ];
 
   /// {@macro add_new_post_state}
@@ -50,6 +54,7 @@ class AddNewPostState extends Equatable {
     this.youtubeUrl,
     this.currentPostAssetsSectionIndex = 0,
     this.acceptedYoutubeUrl,
+    this.collapseToFullScreen = false,
   });
 
   /// {@macro add_new_post_state}
@@ -62,6 +67,7 @@ class AddNewPostState extends Equatable {
     String? youtubeUrl,
     String? acceptedYoutubeUrl,
     int? currentPostAssetsSectionIndex,
+    bool? collapseToFullScreen,
   }) {
     return AddNewPostState(
       pickedImages: pickedImages,
@@ -73,6 +79,7 @@ class AddNewPostState extends Equatable {
       acceptedYoutubeUrl: acceptedYoutubeUrl ?? this.acceptedYoutubeUrl,
       currentPostAssetsSectionIndex:
           currentPostAssetsSectionIndex ?? this.currentPostAssetsSectionIndex,
+      collapseToFullScreen: collapseToFullScreen ?? this.collapseToFullScreen,
     );
   }
 }

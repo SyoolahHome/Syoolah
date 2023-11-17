@@ -9,6 +9,7 @@ import 'package:ditto/presentation/new_post/widgets/posr_assets_section.dart';
 import 'package:ditto/presentation/new_post/widgets/post_field.dart';
 import 'package:ditto/presentation/new_post/widgets/title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../general/pattern_widget.dart';
@@ -29,64 +30,77 @@ class AddNewPost extends StatelessWidget {
 
     final mq = MediaQuery.of(context);
 
-    final sheetHeight =
-        initialNoteContent == null ? 575 : (mq.size.height - 20);
+    // final sheetHeight =
+    initialNoteContent == null ? 575 : (mq.size.height - 20);
 
-    return SizedBox(
-      height: sheetHeight.toDouble(),
-      width: MediaQuery.of(context).size.width,
-      child: BlocProvider<AddNewPostCubit>(
-        create: (context) => AddNewPostCubit(
-          categories: <FeedCategory>[...AppConfigs.categories],
-          initialNoteContent: initialNoteContent,
-        ),
-        child: Builder(
-          builder: (_) {
-            return PatternScaffold(
-              body: SingleChildScrollView(
-                child: SizedBox(
-                  height: sheetHeight.toDouble(),
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      MarginedBody(
+    return BlocProvider<AddNewPostCubit>(
+      create: (context) => AddNewPostCubit(
+        categories: <FeedCategory>[...AppConfigs.categories],
+        initialNoteContent: initialNoteContent,
+      ),
+      child: Builder(builder: (context) {
+        return BlocSelector<AddNewPostCubit, AddNewPostState, bool>(
+          selector: (state) => state.collapseToFullScreen,
+          builder: (context, collapseToFullScreen) {
+            final bottomSheetHeight = collapseToFullScreen
+                ? MediaQuery.of(context).size.height
+                : 575.0;
+
+            return AnimatedContainer(
+              duration: Animate.defaultDuration,
+              height: bottomSheetHeight,
+              width: MediaQuery.of(context).size.width,
+              child: Builder(
+                builder: (_) {
+                  return PatternScaffold(
+                    body: SingleChildScrollView(
+                      child: SizedBox(
+                        height: bottomSheetHeight,
+                        width: MediaQuery.of(context).size.width,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            SizedBox(height: height * 2),
-                            AddNewPostTitle(),
-                            Divider(color: AppColors.grey, thickness: 0.2),
-                            SizedBox(height: height),
-                            PostField(expectMultiLine: expectMultiLine),
-                            SizedBox(height: height * 2),
-                            CategoriesSelect(),
-                            SizedBox(height: height * 2),
+                            MarginedBody(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(height: height * 2),
+                                  AddNewPostTitle(),
+                                  Divider(
+                                      color: AppColors.grey, thickness: 0.2),
+                                  SizedBox(height: height),
+                                  PostField(expectMultiLine: expectMultiLine),
+                                  SizedBox(height: height * 2),
+                                  CategoriesSelect(),
+                                  SizedBox(height: height * 2),
+                                ],
+                              ),
+                            ),
+                            PostAssetsSection(),
+                            Spacer(),
+                            MarginedBody(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  PostButton(),
+                                  SizedBox(height: height * 2),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                      PostAssetsSection(),
-                      Spacer(),
-                      MarginedBody(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            PostButton(),
-                            SizedBox(height: height * 2),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             );
           },
-        ),
-      ),
+        );
+      }),
     );
   }
 }
