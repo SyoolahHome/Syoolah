@@ -30,9 +30,6 @@ class AddNewPost extends StatelessWidget {
 
     final mq = MediaQuery.of(context);
 
-    // final sheetHeight =
-    initialNoteContent == null ? 575 : (mq.size.height - 20);
-
     return BlocProvider<AddNewPostCubit>(
       create: (context) => AddNewPostCubit(
         categories: <FeedCategory>[...AppConfigs.categories],
@@ -43,7 +40,7 @@ class AddNewPost extends StatelessWidget {
           selector: (state) => state.collapseToFullScreen,
           builder: (context, collapseToFullScreen) {
             final bottomSheetHeight = collapseToFullScreen
-                ? MediaQuery.of(context).size.height
+                ? MediaQuery.of(context).size.height - 20
                 : 575.0;
 
             return AnimatedContainer(

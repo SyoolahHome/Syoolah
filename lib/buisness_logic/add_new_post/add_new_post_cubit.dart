@@ -242,10 +242,11 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   }
 
   void _init(String? initialNoteContent) {
-    textController = TextEditingController()..text = initialNoteContent ?? "";
+    textController = TextEditingController();
     youtubeUrlController = TextEditingController();
     _postFieldFocusNode = FocusNode();
     _listenToPostFieldTextLines();
+    textController!.text = initialNoteContent ?? "";
   }
 
   void _unFocusPostField() {
