@@ -27,8 +27,13 @@ class AddNewPost extends StatelessWidget {
   Widget build(BuildContext context) {
     const height = 10.0;
 
+    final mq = MediaQuery.of(context);
+
+    final sheetHeight =
+        initialNoteContent == null ? 575 : (mq.size.height - 20);
+
     return SizedBox(
-      height: 575,
+      height: sheetHeight.toDouble(),
       width: MediaQuery.of(context).size.width,
       child: BlocProvider<AddNewPostCubit>(
         create: (context) => AddNewPostCubit(
@@ -40,7 +45,7 @@ class AddNewPost extends StatelessWidget {
             return PatternScaffold(
               body: SingleChildScrollView(
                 child: SizedBox(
-                  height: 575,
+                  height: sheetHeight.toDouble(),
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
