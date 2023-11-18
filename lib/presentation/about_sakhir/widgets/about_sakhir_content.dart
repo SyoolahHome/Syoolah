@@ -7,7 +7,7 @@ class AboutSakhirContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contentParagraphs = "newEndryptYourDuaa".tr().split("\n");
+    final contentParagraphs = "aboutContent".tr().split("\n");
 
     const startingDurationMs = 400;
 

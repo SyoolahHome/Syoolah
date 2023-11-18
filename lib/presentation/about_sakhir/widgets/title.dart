@@ -14,7 +14,7 @@ class AboutSakhirTitle extends StatelessWidget {
         SlideEffect(begin: Offset(0, 0.45)),
       ],
       child: Text(
-        "inAllahWeTrust".tr(),
+        "about".tr(),
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w500,
               color: Theme.of(context).colorScheme.background,
