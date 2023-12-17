@@ -22,6 +22,13 @@ class ZapLockerReflectedUtils {
     return '$hexString';
   }
 
+  textTohex(String text) {
+    final bytes = utf8.encode(text);
+    final hex = bytesToHex(bytes);
+
+    return hex;
+  }
+
   Future<bool> isUsernameGood(String username) async {
     final url = Uri.parse(server + 'test_username/?username=${username}');
 
@@ -207,18 +214,18 @@ class ZapLockerReflectedUtils {
     }
   }
 
-  Future<String> sweepingHTLC(
-    txid,
-    txindex,
-    original_quantity_of_sats,
-    new_quantity_of_sats,
-    userPrivkey,
-    serverPubkey,
-    preimage,
-    timelock,
-    useraddress,
-    userPubkey,
-  ) async {
+  Future<String> sweepingHTLC({
+    required txid,
+    required txindex,
+    required original_quantity_of_sats,
+    required new_quantity_of_sats,
+    required userPrivkey,
+    required serverPubkey,
+    required preimage,
+    required timelock,
+    required useraddress,
+    required userPubkey,
+  }) async {
     final uri = Uri.parse(
       server +
           "sweepingHTLC/?txid=${txid}&txindex=${txindex}&original_quantity_of_sats=${original_quantity_of_sats}&new_quantity_of_sats=${new_quantity_of_sats}&userPrivkey=${userPrivkey}&serverPubkey=${serverPubkey}&preimage=${preimage}&timelock=${timelock}&useraddress=${useraddress}&userPubkey=${userPubkey}",
@@ -234,6 +241,82 @@ class ZapLockerReflectedUtils {
       }
     } catch (e) {
       throw Exception('Failed to sweep HTLC: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>?> getUserData(String userPublickKey) async {
+    try {
+      final uri = Uri.parse(
+        server + "test_pubkey/?pubkey=$userPublickKey",
+      );
+
+      final res = await http.get(uri);
+      if (res.body.toLowerCase().contains("error: ")) {
+        return null;
+      }
+
+      final jsonData = jsonDecode(res.body) as Map<String, dynamic>;
+
+      return jsonData;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+
+  Future<bool> verifyrelays({
+    required List relays,
+    required String signature,
+    required String publicKey,
+  }) async {
+    try {
+      final encodedRelays = jsonEncode(relays);
+      final uri = Uri.parse(
+        server +
+            "verifyrelays/?encodedRelays=$encodedRelays&signature=$signature&publicKey=$publicKey",
+      );
+
+      final res = await http.get(uri);
+
+      if (res.statusCode == 200) {
+        final jsonData = jsonDecode(res.body) as Map<String, dynamic>;
+
+        return jsonData["verifyrelays"] == true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future<Map<String, dynamic>> p2wsh({required witnessScript}) async {
+    throw UnimplementedError();
+  }
+
+  startSwap({
+    required String swapPubKey,
+    required String address,
+    required String pmtHash,
+  }) async {
+    try {
+      final uri = Uri.parse(
+        server +
+            "/start_swap/?swap_pubkey=${swapPubKey}&htlc_address=${address}&pmthash=${pmtHash}",
+      );
+
+      final res = await http.get(uri);
+
+      if (res.statusCode == 200) {
+        final jsonData = jsonDecode(res.body) as Map<String, dynamic>;
+
+        return jsonData;
+      } else {
+        throw Exception('Failed to start swap: ${res.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to start swap: $e');
     }
   }
 }

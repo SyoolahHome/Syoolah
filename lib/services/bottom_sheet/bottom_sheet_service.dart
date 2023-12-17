@@ -25,7 +25,7 @@ import '../../constants/app_enums.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
-import '../../presentation/lnd/widgets/widgets/bottom_sheet_widget.dart';
+import '../../presentation/lnd/widgets/bottom_sheet_widget.dart';
 import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
 

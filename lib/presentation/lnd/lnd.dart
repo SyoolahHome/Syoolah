@@ -9,7 +9,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../buisness_logic/lnd/lnd_cubit.dart';
 import '../../constants/abstractions/abstractions.dart';
 import '../general/widget/button.dart';
-import 'widgets/widgets/lnd_bar.dart';
+import 'widgets/lnd_bar.dart';
 
 class LND extends BottomBarScreen {
   const LND({
@@ -93,6 +93,7 @@ class LND extends BottomBarScreen {
                       text: "create_lightning_address".tr(),
                       additonalFontSize: 0,
                       isRounded: true,
+                    
                     ),
                     Spacer(),
                   ],

@@ -50,6 +50,10 @@ dependencies:
   # flutter_html: ^3.0.0-beta.2
   flutter_widget_from_html:
   flutter_svg: ^2.0.5
+  hex: ^0.2.0
+  kepler: ^1.0.3
+  sec: ^1.1.0
+  pointycastle: ^3.7.3
 
 dev_dependencies:
   flutter_test:

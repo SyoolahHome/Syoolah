@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../services/utils/paths.dart';
-import '../../../general/pattern_widget.dart';
-import '../../../private_succes/widgets/key_section.dart';
+import '../../../services/utils/paths.dart';
+import '../../general/pattern_widget.dart';
+import '../../private_succes/widgets/key_section.dart';
 
 class LndAdressCreationWidget extends StatelessWidget {
   const LndAdressCreationWidget({
