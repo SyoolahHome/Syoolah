@@ -1,6 +1,8 @@
 import 'package:ditto/model/pending.dart';
 import 'package:flutter/material.dart';
 
+import 'pending_item.dart';
+
 class PendingList extends StatelessWidget {
   const PendingList({
     super.key,

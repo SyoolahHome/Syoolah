@@ -44,7 +44,9 @@ class LndInfoFrom extends StatelessWidget {
                   final username = state.username;
 
                   return Text(
-                    username.isNotEmpty ? "${username}@sakhir.me".tr() : "",
+                    username?.isNotEmpty ?? false
+                        ? "${username}@sakhir.me".tr()
+                        : "",
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
                 },
@@ -55,7 +57,7 @@ class LndInfoFrom extends StatelessWidget {
                 child: BlocBuilder<LndCubit, LndState>(
                   builder: (context, state) {
                     return SakhirButton(
-                      onTap: state.username.isNotEmpty
+                      onTap: state.username?.isNotEmpty ?? false
                           ? () {
                               Navigator.of(context).pushNamed(
                                 Paths.lndCreationSuccess,
