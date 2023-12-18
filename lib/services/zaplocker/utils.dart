@@ -319,4 +319,6 @@ class ZapLockerReflectedUtils {
       throw Exception('Failed to start swap: $e');
     }
   }
+
+  payInvoice({required String invoice}) {}
 }

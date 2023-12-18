@@ -11,6 +11,7 @@ class PendingPayment extends Equatable {
   final String serverPubKey;
   final amountExpectedInSwapAddress;
   final amountExpectedLnurl;
+  final bool v2;
 
   PendingPayment({
     required this.amount,
@@ -23,6 +24,7 @@ class PendingPayment extends Equatable {
     required this.serverPubKey,
     required this.amountExpectedInSwapAddress,
     required this.amountExpectedLnurl,
+    required this.v2,
   });
 
   @override
@@ -37,5 +39,6 @@ class PendingPayment extends Equatable {
         serverPubKey,
         amountExpectedInSwapAddress,
         amountExpectedLnurl,
+        v2,
       ];
 }

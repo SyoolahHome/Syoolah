@@ -227,6 +227,7 @@ class LndCubit extends Cubit<LndState> {
           serverPubKey: pending_pmt["server_pubkey"],
           amountExpectedInSwapAddress: amountExpectedInSwapAddress,
           amountExpectedLnurl: acmountExpectedLnurl,
+          v2: v2,
         );
 
         emit(state.copyWith(
@@ -248,8 +249,11 @@ class LndCubit extends Cubit<LndState> {
     );
   }
 
-  Future<void> settleOnBaseLayer(PendingPayment pending) async {
-    var userAddress = await _promptUserForAddress();
+  Future<void> settleOnBaseLayer(
+    BuildContext context,
+    PendingPayment pending,
+  ) async {
+    var userAddress = await _promptUserForAddress(context);
 
     if (!await zaplocker.isValidAddress(userAddress)) {
       print("Please try again with a valid bitcoin address");
@@ -371,10 +375,6 @@ class LndCubit extends Cubit<LndState> {
     showTransactionSuccessModal(sweepTxid);
   }
 
-  Future<String> _promptUserForAddress() async {
-    throw UnimplementedError();
-  }
-
   pmtHashFromPreimage(String preImage) {
     final hexToBytes = zaplocker.hexToBytes(preImage);
     final sha256 = SHA256Digest();
@@ -397,5 +397,51 @@ class LndCubit extends Cubit<LndState> {
     //   `Your transaction was a success! Here is your txid: <a href="https://mempool.space/tx/${sweep_txid}" target="_blank">https://mempool.space/tx/${sweep_txid}</a>`,
     //   true
     // );
+  }
+
+  void settleOverLightning({
+    required BuildContext context,
+    required PendingPayment pending,
+    required void Function() onSettleSuccess,
+    required void Function() onUndefinedError,
+    required VoidCallback onSettleError,
+  }) async {
+    final preimage = pending.preimage;
+
+    final userInvoice = await _promptUserForInvoice(
+      context,
+      amountExpectedLn: pending.amountExpectedLnurl,
+      preimage: preimage,
+      onSubmit: (String userInvoice) async {
+        final status = await zaplocker.payInvoice(
+          invoice: userInvoice,
+        );
+        print("status: $status");
+
+        if (status.contains("success")) {
+          onSettleSuccess();
+        } else if (status.contains("undefined")) {
+          onUndefinedError();
+        } else {
+          onSettleError();
+        }
+      },
+    );
+  }
+
+  Future<String> _promptUserForAddress(BuildContext context) async {
+    throw BottomSheetService.promptUserForAddress(context);
+  }
+
+  Future<String> _promptUserForInvoice(
+    BuildContext context, {
+    required String preimage,
+    required int amountExpectedLn,
+    required void Function(String) onSubmit,
+  }) async {
+    throw BottomSheetService.promptUserForInvoice(
+      context: context,
+      onSubmit: onSubmit,
+    );
   }
 }

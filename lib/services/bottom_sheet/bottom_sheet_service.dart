@@ -26,6 +26,8 @@ import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 import '../../presentation/lnd/widgets/bottom_sheet_widget.dart';
+import '../../presentation/lnd/widgets/lnd_invoice_adress_prompt copy.dart';
+import '../../presentation/lnd/widgets/user_adress_prompt.dart';
 import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
 
@@ -448,6 +450,29 @@ abstract class BottomSheetService {
       builder: (context) {
         return LndAdressCreationWidget(
           lndCubit: lndCubit,
+        );
+      },
+    );
+  }
+
+  static Future<String> promptUserForAddress(BuildContext context) async {
+    return await showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return UserAddressPromptWidget();
+      },
+    );
+  }
+
+  static promptUserForInvoice({
+    required BuildContext context,
+    required void Function(String) onSubmit,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return UserLndInvoicePromptWidget(
+          onSubmit: onSubmit,
         );
       },
     );
