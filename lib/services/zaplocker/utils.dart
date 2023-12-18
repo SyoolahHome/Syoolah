@@ -320,5 +320,23 @@ class ZapLockerReflectedUtils {
     }
   }
 
-  payInvoice({required String invoice}) {}
+  Future<String> payInvoice({
+    required String invoice,
+  }) async {
+    try {
+      final uri = Uri.parse(
+        server + "/pay_invoice/?invoice=${invoice}",
+      );
+
+      final res = await http.get(uri);
+
+      if (res.statusCode == 200) {
+        return res.body;
+      } else {
+        throw Exception('Failed to pay invoice: ${res.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to pay invoice: $e');
+    }
+  }
 }

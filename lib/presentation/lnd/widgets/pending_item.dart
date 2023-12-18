@@ -42,7 +42,11 @@ class PendingItem extends StatelessWidget {
           ),
         ElevatedButton(
           onPressed: () {
-            cubit.settleOnBaseLayer(context, pending);
+            cubit.settleOnBaseLayer(
+              context: context,
+              pending: pending,
+              onRequestContext: () => context,
+            );
           },
           child: Text("Settle On Base Layer"),
         ),

@@ -7,6 +7,7 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
+import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/zaplocker/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -249,10 +250,11 @@ class LndCubit extends Cubit<LndState> {
     );
   }
 
-  Future<void> settleOnBaseLayer(
-    BuildContext context,
-    PendingPayment pending,
-  ) async {
+  Future<void> settleOnBaseLayer({
+    required BuildContext context,
+    required PendingPayment pending,
+    required BuildContext Function() onRequestContext,
+  }) async {
     var userAddress = await _promptUserForAddress(context);
 
     if (!await zaplocker.isValidAddress(userAddress)) {
@@ -366,13 +368,20 @@ class LndCubit extends Cubit<LndState> {
 
     print("txHex: $txHex");
     // sessionStorage.removeItem("modal_cleared");
-    showAlmostDoneModal();
+
+    showAlmostDoneModal(
+      context: onRequestContext(),
+      txid: txid,
+    );
 
     final sweepTxid = await zaplocker.pushBTCpmt(txHex);
 
     print("sweepTxid: $sweepTxid");
 
-    showTransactionSuccessModal(sweepTxid);
+    showTransactionSuccessModal(
+      sweepTxid: sweepTxid,
+      context: onRequestContext(),
+    );
   }
 
   pmtHashFromPreimage(String preImage) {
@@ -384,19 +393,26 @@ class LndCubit extends Cubit<LndState> {
     return bytesToHex;
   }
 
-  void showAlmostDoneModal() {
-    throw UnimplementedError();
-    //  showModal(
-    //       `You're almost done! Just X out of this popup when the following transaction has 1 confirmation: <a href="https://mempool.space/tx/${txid}" target="_blank">https://mempool.space/tx/${txid}</a>`,
-    //       true
-    //     );
+  void showAlmostDoneModal({
+    required BuildContext context,
+    required String txid,
+  }) {
+    AlertsService.showAlmostDoneModal(
+      context: context,
+      txid: txid,
+    );
   }
 
-  void showTransactionSuccessModal(String sweepTxid) {
-    //  showModal(
-    //   `Your transaction was a success! Here is your txid: <a href="https://mempool.space/tx/${sweep_txid}" target="_blank">https://mempool.space/tx/${sweep_txid}</a>`,
-    //   true
-    // );
+  void showTransactionSuccessModal({
+    required String sweepTxid,
+    required BuildContext context,
+  }) {
+    AlertsService.showTransactionSuccessModal(
+      context: context,
+      sweepTxid: sweepTxid,
+    );
+
+    throw UnimplementedError();
   }
 
   void settleOverLightning({

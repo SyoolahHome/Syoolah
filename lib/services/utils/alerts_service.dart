@@ -186,4 +186,76 @@ abstract class AlertsService {
       },
     );
   }
+
+  static void showTransactionSuccessModal({
+    required BuildContext context,
+    required String sweepTxid,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                """
+    Your transaction was a success! Here is your txid: <a href="https://mempool.space/tx/${sweepTxid}" target="_blank">https://mempool.space/tx/${sweepTxid}</a>
+    """,
+              )
+            ],
+          ),
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: "close".tr(),
+              onTap: () => Navigator.of(context).pop(),
+              textColor: Theme.of(context).colorScheme.error,
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
+        );
+      },
+    );
+  }
+
+  static void showAlmostDoneModal({
+    required BuildContext context,
+    required String txid,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                """
+You're almost done! Just X out of this popup when the following transaction has 1 confirmation: <a href="https://mempool.space/tx/${txid}" target="_blank">https://mempool.space/tx/${txid}</a>`,
+    """,
+              )
+            ],
+          ),
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: "close".tr(),
+              onTap: () => Navigator.of(context).pop(),
+              textColor: Theme.of(context).colorScheme.error,
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
+        );
+      },
+    );
+  }
 }
