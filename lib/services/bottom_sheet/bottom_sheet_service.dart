@@ -477,4 +477,10 @@ abstract class BottomSheetService {
       },
     );
   }
+
+  static String promptUserForNewLndUsername({
+    required BuildContext context,
+  }) {
+    throw UnimplementedError();
+  }
 }

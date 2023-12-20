@@ -54,6 +54,7 @@ dependencies:
   kepler: ^1.0.3
   sec: ^1.1.0
   pointycastle: ^3.7.3
+  bip39: ^1.0.6
 
 dev_dependencies:
   flutter_test:

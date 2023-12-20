@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:bip39/bip39.dart' as bip39;
 
 import 'package:bloc/bloc.dart';
 import 'package:crypto/crypto.dart';
@@ -47,26 +48,6 @@ class LndCubit extends Cubit<LndState> {
       });
   }
 
-  void createAddress({
-    required Null Function() onSuccess,
-  }) async {
-    final privateKey = LocalDatabase.instance.getPrivateKey()!;
-    final derivedPublicKey = Nostr.instance.keysService.derivePublicKey(
-      privateKey: privateKey,
-    );
-    try {
-      emit(state.copyWith(isLoading: true));
-      await _createLndAddress(derivedPublicKey);
-      onSuccess();
-    } catch (e) {
-      emit(state.copyWith(isLoading: false));
-    } finally {
-      emit(state.copyWith(isLoading: false));
-    }
-  }
-
-  Future<void> _createLndAddress(String userPubkey) async {}
-
   Future<void> login({
     required String userPublicKey,
     required void Function() onStartLoadingUser,
@@ -95,7 +76,20 @@ class LndCubit extends Cubit<LndState> {
       );
     } else {
       onUserDataNotLoaded();
-      // await createUser();
+
+      await createUser(
+        onGetUsername: () async {
+          return BottomSheetService.promptUserForNewLndUsername(
+            context: context,
+          );
+        },
+        userPubKey: userPublicKey,
+        onChosenUsernameEmpty: () => {},
+        onChosenUsernameNotGood: () => {},
+        onStartCreatingUserAndLoading: () => {},
+        onTrialEventToRelayFailed: () => {},
+        onUserCreatedSuccesfully: () => {},
+      );
     }
   }
 
@@ -459,5 +453,150 @@ class LndCubit extends Cubit<LndState> {
       context: context,
       onSubmit: onSubmit,
     );
+  }
+
+  Future<void> createUser({
+    required String userPubKey,
+    required void Function(String username) onChosenUsernameNotGood,
+    required void Function() onChosenUsernameEmpty,
+    required void Function() onStartCreatingUserAndLoading,
+    required void Function() onTrialEventToRelayFailed,
+    required void Function() onUserCreatedSuccesfully,
+    required Future<String> Function() onGetUsername,
+  }) async {
+    final wsRelay = "wss://relay.damus.io";
+
+    String username = await onGetUsername();
+
+    username = username.trim().toLowerCase();
+
+    if (username.isEmpty) {
+      onChosenUsernameEmpty();
+
+      return;
+    }
+
+    if (username.length > 60) {
+      print("Please try again with a shorter username");
+      onChosenUsernameNotGood(username);
+
+      return;
+    }
+
+    final isUsernameGood = await zaplocker.isUsernameGood(username);
+
+    if (!isUsernameGood) {
+      print("Please try again with a valid username");
+      onChosenUsernameNotGood(username);
+
+      return;
+    }
+
+    if (wsRelay.isEmpty ||
+        !wsRelay.startsWith("wss://") ||
+        wsRelay.length < 10 ||
+        !wsRelay.contains(".")) {
+      print("Please try again with a valid relay");
+      return;
+    }
+
+    // submit it.
+    onStartCreatingUserAndLoading();
+
+    final event = await NostrService.instance.zaplocker
+        .createEventSignedByNewKeysToBeSent(
+      message: "Test Message",
+      publicKey: userPubKey,
+    );
+
+    final didEventSentAndReceived =
+        await NostrService.instance.zaplocker.eventWasReplayedTilSeen(
+      event: event,
+      triesToLookForEvent: 5,
+    );
+
+    if (!didEventSentAndReceived) {
+      print("Please try again with a valid relay, the trial event failed");
+
+      onTrialEventToRelayFailed();
+      return;
+    }
+
+    String preimages = _generateThousandChainedBip39();
+    String hashes = "";
+    String sigs = "";
+
+    RegExp regex = RegExp(".{1,64}");
+    Iterable<RegExpMatch> split64lenghtsPreimages = regex.allMatches(preimages);
+
+    for (int index = 0; index < split64lenghtsPreimages.length; index++) {
+      final preimage = split64lenghtsPreimages.elementAt(index).group(0);
+
+      if (preimage == null) {
+        throw Exception("A preimage match at index $index was null");
+      }
+
+      final hash = zaplocker
+          .bytesToHex(sha256.convert(zaplocker.hexToBytes(preimage)).bytes);
+      hashes += hash;
+
+      final sig = NostrService.instance.zaplocker.signSchnorrHash(hash);
+      sigs += sig;
+    }
+
+    final ciphertext = await NostrService.instance.utils.nip04Encrypt(
+      userPubKey,
+      preimages,
+    );
+
+    final relaysList = [wsRelay];
+    final relaysListAsJson = jsonEncode(relaysList);
+
+    final relaysHash = sha256.convert(utf8.encode(relaysListAsJson)).bytes;
+    final relaysSig = NostrService.instance.zaplocker.signSchnorrHash(
+      relaysHash,
+    );
+
+    final lspPubkey = await zaplocker.getLspPubKey();
+    final lspPubKeyHash =
+        sha256.convert(zaplocker.hexToBytes(lspPubkey)).toString();
+
+    final lspPubKeySig = NostrService.instance.zaplocker.signSchnorrHash(
+      lspPubKeyHash,
+    );
+
+    final setUserRes = await zaplocker.setUser(
+      ciphertext: ciphertext,
+      relaysList: relaysList,
+      relaysSig: relaysSig,
+      lspPubKeySig: lspPubKeySig,
+      hashes: hashes,
+      sigs: sigs,
+      username: username,
+      lspPubKeyHash: lspPubKeyHash,
+      relay: wsRelay,
+      userPubKey: userPubKey,
+    );
+
+    if (setUserRes == "user created") {
+      final userData = await zaplocker.getUserData(userPubKey);
+
+      if (userData != null) {
+        onUserCreatedSuccesfully();
+      } else {
+        print("Please try again, the user was not created");
+      }
+    }
+  }
+
+  String _generateThousandChainedBip39() {
+    String result = "";
+
+    for (int index = 0; index < 1000; index++) {
+      final generatedMnemonic = bip39.generateMnemonic(strength: 256);
+      result += bip39.mnemonicToEntropy(generatedMnemonic);
+    }
+
+    return result;
   }
 }

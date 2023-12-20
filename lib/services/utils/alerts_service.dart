@@ -258,4 +258,10 @@ You're almost done! Just X out of this popup when the following transaction has 
       },
     );
   }
+
+  static Future<bool> showUserCreatedSuccessfullyModal({
+    required BuildContext context,
+  }) {
+    throw UnimplementedError();
+  }
 }

@@ -339,4 +339,64 @@ class ZapLockerReflectedUtils {
       throw Exception('Failed to pay invoice: $e');
     }
   }
+
+  Future<String> getLspPubKey() async {
+    try {
+      final uri = Uri.parse(
+        server + "/get_lsp_pubkey",
+      );
+
+      final res = await http.get(uri);
+
+      if (res.statusCode == 200) {
+        return res.body;
+      } else {
+        throw Exception('Failed to get lsp pubkey: ${res.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to get lsp pubkey: $e');
+    }
+  }
+
+  Future<String> setUser({
+    required username,
+    required userPubKey,
+    required relay,
+    required hashes,
+    required ciphertext,
+    required sigs,
+    required relaysList,
+    required relaysSig,
+    required lspPubKeyHash,
+    required lspPubKeySig,
+  }) async {
+    try {
+      final map = {
+        "username": username,
+        "user_pubkey": userPubKey,
+        "relay": relay,
+        "hashes": hashes,
+        "ciphertext": ciphertext,
+        "sigs": sigs,
+        "relays_array": relaysList,
+        "relays_sig": relaysSig,
+        "lsp_keyhash": lspPubKeyHash,
+        "lsp_keyhash_sig": lspPubKeySig,
+      };
+
+      final asJson = jsonEncode(map);
+
+      final uri = Uri.parse(server + "/set_user/${asJson}");
+
+      final res = await http.post(uri);
+
+      if (res.statusCode == 200) {
+        return res.body;
+      } else {
+        throw Exception('Failed to set user: ${res.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to set user: $e');
+    }
+  }
 }
