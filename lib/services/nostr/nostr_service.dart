@@ -5,6 +5,8 @@ import 'package:ditto/services/utils/routing.dart';
 
 import 'sub_modules/send.dart';
 import 'sub_modules/sub.dart';
+import 'sub_modules/utils.dart';
+import 'sub_modules/zaplocker.dart';
 
 class NostrService {
   static final NostrService _instance = NostrService._();
@@ -15,6 +17,8 @@ class NostrService {
 
   final subs = NostrServiceSub();
   final send = NostrServiceSend();
+  final utils = NostrServiceUtils();
+  final zaplocker = NostrForZaplocker();
 
   Completer? relaysConnectionCompleter;
 

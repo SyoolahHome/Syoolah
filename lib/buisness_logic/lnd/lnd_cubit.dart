@@ -56,6 +56,7 @@ class LndCubit extends Cubit<LndState> {
     required void Function() onUserDataNotLoaded,
     required void Function() onRelaysSigIsUnverifiedAndShouldNotBeUsed,
     required void Function() onRelaysSigIsVerifiedAndShouldBeUsed,
+    required Future<String> Function() onGetUsernameForUserCreation,
   }) async {
     onStartLoadingUser();
     final userData = await zaplocker.getUserData(userPublicKey);
@@ -78,17 +79,26 @@ class LndCubit extends Cubit<LndState> {
       onUserDataNotLoaded();
 
       await createUser(
-        onGetUsername: () async {
-          return BottomSheetService.promptUserForNewLndUsername(
-            context: context,
-          );
-        },
+        userPrivKey: LocalDatabase.instance.getPrivateKey()!,
+        onGetUsername: onGetUsernameForUserCreation,
         userPubKey: userPublicKey,
-        onChosenUsernameEmpty: () => {},
-        onChosenUsernameNotGood: () => {},
-        onStartCreatingUserAndLoading: () => {},
-        onTrialEventToRelayFailed: () => {},
-        onUserCreatedSuccesfully: () => {},
+        onChosenUsernameEmpty: () => {
+          print("Please try again with a valid username"),
+        },
+        onChosenUsernameNotGood: (username) => {
+          print(
+            "Please try again with a valid username, $username is not good.",
+          ),
+        },
+        onStartCreatingUserAndLoading: () => {
+          print("Creating user..."),
+        },
+        onTrialEventToRelayFailed: () => {
+          print("Please try again with a valid relay, the trial event failed"),
+        },
+        onUserCreatedSuccesfully: () => {
+          print("User created successfully"),
+        },
       );
     }
   }
@@ -405,8 +415,6 @@ class LndCubit extends Cubit<LndState> {
       context: context,
       sweepTxid: sweepTxid,
     );
-
-    throw UnimplementedError();
   }
 
   void settleOverLightning({
@@ -457,6 +465,7 @@ class LndCubit extends Cubit<LndState> {
 
   Future<void> createUser({
     required String userPubKey,
+    required String userPrivKey,
     required void Function(String username) onChosenUsernameNotGood,
     required void Function() onChosenUsernameEmpty,
     required void Function() onStartCreatingUserAndLoading,
@@ -505,13 +514,12 @@ class LndCubit extends Cubit<LndState> {
 
     final event = await NostrService.instance.zaplocker
         .createEventSignedByNewKeysToBeSent(
-      message: "Test Message",
-      publicKey: userPubKey,
-    );
+            message: "Test Message", recipientPubKey: userPubKey);
 
     final didEventSentAndReceived =
         await NostrService.instance.zaplocker.eventWasReplayedTilSeen(
       event: event,
+      relays: [wsRelay],
       triesToLookForEvent: 5,
     );
 
@@ -545,8 +553,9 @@ class LndCubit extends Cubit<LndState> {
     }
 
     final ciphertext = await NostrService.instance.utils.nip04Encrypt(
-      userPubKey,
-      preimages,
+      pubKey: userPubKey,
+      privKey: userPrivKey,
+      text: preimages,
     );
 
     final relaysList = [wsRelay];

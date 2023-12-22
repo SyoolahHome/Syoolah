@@ -259,9 +259,37 @@ You're almost done! Just X out of this popup when the following transaction has 
     );
   }
 
-  static Future<bool> showUserCreatedSuccessfullyModal({
+  static Future<bool?> showUserCreatedSuccessfullyModal({
     required BuildContext context,
   }) {
-    throw UnimplementedError();
+    return showDialog<bool?>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                """
+    Your account was created successfully!""",
+              )
+            ],
+          ),
+          contentPadding: const EdgeInsets.only(top: 16),
+          actions: <Widget>[
+            CustomTextButton(
+              text: "close".tr(),
+              onTap: () => Navigator.of(context).pop(true),
+              textColor: Theme.of(context).colorScheme.error,
+            ),
+          ],
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+          actionsAlignment: MainAxisAlignment.end,
+          insetPadding: EdgeInsets.zero,
+        );
+      },
+    );
   }
 }

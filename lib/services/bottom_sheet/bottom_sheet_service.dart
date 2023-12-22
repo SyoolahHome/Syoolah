@@ -478,9 +478,20 @@ abstract class BottomSheetService {
     );
   }
 
-  static String promptUserForNewLndUsername({
+  static Future<String?> promptUserForNewLndUsername({
     required BuildContext context,
-  }) {
+  }) async {
+    final random = Random().nextInt(100000).toString();
+
+    return "anas $random";
+
+// !
     throw UnimplementedError();
+    // return showModalBottomSheet<String?>(
+    //   context: context,
+    //   builder: (context) {
+    //     return UserLndUsernamePromptWidget();
+    //   },
+    // );
   }
 }

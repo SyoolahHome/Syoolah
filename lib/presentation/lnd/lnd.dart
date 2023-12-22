@@ -93,7 +93,6 @@ class LND extends BottomBarScreen {
                       text: "create_lightning_address".tr(),
                       additonalFontSize: 0,
                       isRounded: true,
-                    
                     ),
                     Spacer(),
                   ],
