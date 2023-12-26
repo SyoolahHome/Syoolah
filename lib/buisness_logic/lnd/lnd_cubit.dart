@@ -28,17 +28,13 @@ class LndCubit extends Cubit<LndState> {
 
   LndCubit() : super(LndInitial(domain: "sakhir.me")) {
     _init();
-    zaplocker = ZapLockerReflectedUtils("");
+    zaplocker = ZapLockerReflectedUtils("http://192.168.0.7:8082/");
   }
 
   Future<void> close() {
     usernameController?.dispose();
 
     return super.close();
-  }
-
-  void onCreateAdressClick(BuildContext context) {
-    BottomSheetService.createLndAddress(this, context);
   }
 
   _init() {
@@ -48,68 +44,55 @@ class LndCubit extends Cubit<LndState> {
       });
   }
 
-  Future<void> login({
-    required String userPublicKey,
-    required void Function() onStartLoadingUser,
-    required void Function() onEndLoadingUser,
-    required void Function(Map<String, dynamic> userData) onUserDataLoaded,
-    required void Function() onUserDataNotLoaded,
-    required void Function() onRelaysSigIsUnverifiedAndShouldNotBeUsed,
-    required void Function() onRelaysSigIsVerifiedAndShouldBeUsed,
-    required Future<String> Function() onGetUsernameForUserCreation,
-  }) async {
-    onStartLoadingUser();
+  void startLndLoading() async {
+    emit(state.copyWith(isLoading: true));
+
+    final userPrivateKey = LocalDatabase.instance.getPrivateKey()!;
+
+    final userPublicKey =
+        Nostr.instance.keysService.derivePublicKey(privateKey: userPrivateKey);
+
+    emit(state.copyWith(loadingMessages: [
+      ...(state.loadingMessages ?? []),
+      "Checking user data if it exists...",
+    ]));
+
     final userData = await zaplocker.getUserData(userPublicKey);
-    onEndLoadingUser();
 
     if (userData != null) {
-      onUserDataLoaded(userData);
-      final privateKey = LocalDatabase.instance.getPrivateKey()!;
-
-      await loadUser(
-        userPrivKey: privateKey,
-        userPubkey: userPublicKey,
+      emit(state.copyWith(
+        loadingMessages: [
+          ...(state.loadingMessages ?? []),
+          "User data exists, loading user data...",
+        ],
+        shouldLoadUser: true,
         userData: userData,
-        onRelaysSigIsUnverifiedAndShouldNotBeUsed:
-            onRelaysSigIsUnverifiedAndShouldNotBeUsed,
-        onRelaysSigIsVerifiedAndShouldBeUsed:
-            onRelaysSigIsVerifiedAndShouldBeUsed,
-      );
+      ));
     } else {
-      onUserDataNotLoaded();
-
-      await createUser(
-        userPrivKey: LocalDatabase.instance.getPrivateKey()!,
-        onGetUsername: onGetUsernameForUserCreation,
-        userPubKey: userPublicKey,
-        onChosenUsernameEmpty: () => {
-          print("Please try again with a valid username"),
-        },
-        onChosenUsernameNotGood: (username) => {
-          print(
-            "Please try again with a valid username, $username is not good.",
-          ),
-        },
-        onStartCreatingUserAndLoading: () => {
-          print("Creating user..."),
-        },
-        onTrialEventToRelayFailed: () => {
-          print("Please try again with a valid relay, the trial event failed"),
-        },
-        onUserCreatedSuccesfully: () => {
-          print("User created successfully"),
-        },
-      );
+      emit(state.copyWith(
+        loadingMessages: [
+          ...(state.loadingMessages ?? []),
+          "User data does not exist, creating a new user...",
+        ],
+        shouldCreateUser: true,
+        userData: null,
+      ));
     }
   }
 
   Future<void> loadUser({
-    required String userPubkey,
-    required String userPrivKey,
-    required Map<String, dynamic> userData,
     required void Function() onRelaysSigIsUnverifiedAndShouldNotBeUsed,
     required void Function() onRelaysSigIsVerifiedAndShouldBeUsed,
   }) async {
+    if (state.userData == null) throw Exception("state.userData is null");
+
+    final userData = state.userData!;
+
+    final privateKey = LocalDatabase.instance.getPrivateKey()!;
+
+    final userPublicKey =
+        Nostr.instance.keysService.derivePublicKey(privateKey: privateKey);
+
     bool v2 = false;
 
     final username = userData["username"];
@@ -146,7 +129,7 @@ class LndCubit extends Cubit<LndState> {
       final sigIsGood = await _verifyRelaysSig(
         relays: relays,
         relaysSig: relaysSig,
-        userPubkey: userPubkey,
+        userPubkey: userPublicKey,
       );
 
       if (!sigIsGood) {
@@ -163,8 +146,8 @@ class LndCubit extends Cubit<LndState> {
     final cipherText = userData["ciphertext"];
 
     final preimages = nip04.decrypt(
-      userPrivKey,
-      userPubkey,
+      privateKey,
+      userPublicKey,
       cipherText,
     );
 
@@ -464,18 +447,25 @@ class LndCubit extends Cubit<LndState> {
   }
 
   Future<void> createUser({
-    required String userPubKey,
-    required String userPrivKey,
     required void Function(String username) onChosenUsernameNotGood,
     required void Function() onChosenUsernameEmpty,
     required void Function() onStartCreatingUserAndLoading,
     required void Function() onTrialEventToRelayFailed,
     required void Function() onUserCreatedSuccesfully,
-    required Future<String> Function() onGetUsername,
+    required Future<String?> Function() onGetUsername,
   }) async {
+    final userPrivKey = LocalDatabase.instance.getPrivateKey()!;
+    final userPubKey = Nostr.instance.keysService.derivePublicKey(
+      privateKey: userPrivKey,
+    );
+
     final wsRelay = "wss://relay.damus.io";
 
-    String username = await onGetUsername();
+    String? username = await onGetUsername();
+
+    if (username == null) {
+      throw Exception("username is null");
+    }
 
     username = username.trim().toLowerCase();
 
@@ -510,11 +500,18 @@ class LndCubit extends Cubit<LndState> {
     }
 
     // submit it.
-    onStartCreatingUserAndLoading();
+    emit(state.copyWith(
+      loadingMessages: [
+        ...(state.loadingMessages ?? []),
+        "Creating account with username $username...",
+      ],
+    ));
 
     final event = await NostrService.instance.zaplocker
         .createEventSignedByNewKeysToBeSent(
-            message: "Test Message", recipientPubKey: userPubKey);
+      message: "Test Message",
+      recipientPubKey: userPubKey,
+    );
 
     final didEventSentAndReceived =
         await NostrService.instance.zaplocker.eventWasReplayedTilSeen(
@@ -537,7 +534,17 @@ class LndCubit extends Cubit<LndState> {
     RegExp regex = RegExp(".{1,64}");
     Iterable<RegExpMatch> split64lenghtsPreimages = regex.allMatches(preimages);
 
+    if (split64lenghtsPreimages
+        .any((element) => element.group(0)!.length != 64)) {
+      throw Exception("A preimage match was null");
+    }
+
+    final userKeyPair = Nostr.instance.keysService
+        .generateKeyPairFromExistingPrivateKey(userPrivKey);
+
     for (int index = 0; index < split64lenghtsPreimages.length; index++) {
+      print(index);
+
       final preimage = split64lenghtsPreimages.elementAt(index).group(0);
 
       if (preimage == null) {
@@ -546,9 +553,16 @@ class LndCubit extends Cubit<LndState> {
 
       final hash = zaplocker
           .bytesToHex(sha256.convert(zaplocker.hexToBytes(preimage)).bytes);
+
       hashes += hash;
 
-      final sig = NostrService.instance.zaplocker.signSchnorrHash(hash);
+      String sig = NostrService.instance.zaplocker.signSchnorrHash(
+        hash,
+        userKeyPair,
+      );
+
+      await Future.delayed(Duration(milliseconds: 50));
+
       sigs += sig;
     }
 
@@ -561,18 +575,17 @@ class LndCubit extends Cubit<LndState> {
     final relaysList = [wsRelay];
     final relaysListAsJson = jsonEncode(relaysList);
 
-    final relaysHash = sha256.convert(utf8.encode(relaysListAsJson)).bytes;
-    final relaysSig = NostrService.instance.zaplocker.signSchnorrHash(
-      relaysHash,
-    );
+    final relaysHash = sha256.convert(utf8.encode(relaysListAsJson)).toString();
+
+    final relaysSig = NostrService.instance.zaplocker
+        .signSchnorrHash(relaysHash, userKeyPair);
 
     final lspPubkey = await zaplocker.getLspPubKey();
     final lspPubKeyHash =
         sha256.convert(zaplocker.hexToBytes(lspPubkey)).toString();
 
-    final lspPubKeySig = NostrService.instance.zaplocker.signSchnorrHash(
-      lspPubKeyHash,
-    );
+    final lspPubKeySig = NostrService.instance.zaplocker
+        .signSchnorrHash(lspPubKeyHash, userKeyPair);
 
     final setUserRes = await zaplocker.setUser(
       ciphertext: ciphertext,
@@ -591,6 +604,12 @@ class LndCubit extends Cubit<LndState> {
       final userData = await zaplocker.getUserData(userPubKey);
 
       if (userData != null) {
+        emit(state.copyWith(
+          userData: userData,
+          shouldCreateUser: false,
+          shouldLoadUser: true,
+        ));
+
         onUserCreatedSuccesfully();
       } else {
         print("Please try again, the user was not created");

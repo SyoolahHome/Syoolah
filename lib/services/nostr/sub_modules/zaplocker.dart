@@ -5,13 +5,14 @@ import 'package:ditto/services/database/local/local_database.dart';
 import 'package:pointycastle/pointycastle.dart' as pc;
 
 class NostrForZaplocker {
-  String signSchnorrHash(hash) {
-    final privateKey = LocalDatabase.instance.getPrivateKey()!;
+  String signSchnorrHash(String hash, NostrKeyPairs keyPair) {
+    String sig = "";
 
-    final userKeyPair = Nostr.instance.keysService
-        .generateKeyPairFromExistingPrivateKey(privateKey);
+    while (sig.length != 128) {
+      sig = keyPair.sign(hash);
+    }
 
-    return userKeyPair.sign(hash);
+    return sig;
   }
 
   NostrEvent createEventSignedByNewKeysToBeSent({
@@ -82,16 +83,20 @@ class NostrForZaplocker {
 
     final completer = Completer<NostrEvent?>();
 
+    bool eventFound = false;
+
     // close the subscription after 3 seconds.
     Future.delayed(Duration(seconds: 3), () {
       nostrSub.close();
-      completer.complete(null);
+      if (!eventFound) completer.complete(null);
     });
 
     nostrSub.stream.listen((event) {
       assert(event.id == id);
 
       if (event.id == id) {
+        eventFound = true;
+
         completer.complete(event);
       }
     });

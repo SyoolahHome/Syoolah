@@ -343,7 +343,7 @@ class ZapLockerReflectedUtils {
   Future<String> getLspPubKey() async {
     try {
       final uri = Uri.parse(
-        server + "/get_lsp_pubkey",
+        server + "get_lsp_pubkey",
       );
 
       final res = await http.get(uri);
@@ -373,9 +373,9 @@ class ZapLockerReflectedUtils {
     try {
       final map = {
         "username": username,
+        "hashes": hashes,
         "user_pubkey": userPubKey,
         "relay": relay,
-        "hashes": hashes,
         "ciphertext": ciphertext,
         "sigs": sigs,
         "relays_array": relaysList,
@@ -384,11 +384,15 @@ class ZapLockerReflectedUtils {
         "lsp_keyhash_sig": lspPubKeySig,
       };
 
-      final asJson = jsonEncode(map);
+      final uri = Uri.parse(server + "set_user");
 
-      final uri = Uri.parse(server + "/set_user/${asJson}");
-
-      final res = await http.post(uri);
+      final res = await http.post(
+        uri,
+        body: jsonEncode(map),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
 
       if (res.statusCode == 200) {
         return res.body;

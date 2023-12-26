@@ -11,6 +11,7 @@ abstract class Paths {
     }
   }
 
+  static const String lndLoading = '/lndLoading';
   static const String authChoose = '/auth_choose';
   static const String existentSignUp = '/existentSignUp';
   static const String onBoarding = '/onBoarding';

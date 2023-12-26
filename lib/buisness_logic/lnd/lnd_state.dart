@@ -10,16 +10,25 @@ class LndState extends Equatable {
   final List? relays;
   final String? relaysSig;
   final List<PendingPayment> pendingPayments;
+  final List<String>? loadingMessages;
+  final bool shouldLoadUser;
+  final bool shouldCreateUser;
+  final Map<String, dynamic>? userData;
+
   const LndState({
     required this.domain,
     required this.isLoading,
+    required this.pendingPayments,
+    required this.shouldCreateUser,
+    required this.shouldLoadUser,
+    this.userData,
     this.username,
     this.lndAddress,
     this.lnurl,
     this.paycode,
     this.relays,
     this.relaysSig,
-    this.pendingPayments = const [],
+    this.loadingMessages,
   });
 
   @override
@@ -32,6 +41,10 @@ class LndState extends Equatable {
         relays,
         relaysSig,
         pendingPayments,
+        loadingMessages,
+        shouldCreateUser,
+        shouldLoadUser,
+        userData,
       ];
 
   LndState copyWith({
@@ -43,6 +56,10 @@ class LndState extends Equatable {
     List? relays,
     String? relaysSig,
     List<PendingPayment>? pendingPayments,
+    List<String>? loadingMessages,
+    bool? shouldCreateUser,
+    bool? shouldLoadUser,
+    Map<String, dynamic>? userData,
   }) {
     return LndState(
       domain: domain,
@@ -54,6 +71,10 @@ class LndState extends Equatable {
       relays: relays ?? this.relays,
       relaysSig: relaysSig ?? this.relaysSig,
       pendingPayments: pendingPayments ?? this.pendingPayments,
+      loadingMessages: loadingMessages ?? this.loadingMessages,
+      shouldCreateUser: shouldCreateUser ?? this.shouldCreateUser,
+      shouldLoadUser: shouldLoadUser ?? this.shouldLoadUser,
+      userData: userData ?? this.userData,
     );
   }
 }
@@ -69,5 +90,9 @@ class LndInitial extends LndState {
     super.relays,
     super.relaysSig,
     super.pendingPayments = const [],
+    super.loadingMessages,
+    super.shouldCreateUser = false,
+    super.shouldLoadUser = false,
+    super.userData,
   });
 }

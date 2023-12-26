@@ -27,6 +27,7 @@ import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
+import '../../presentation/lnd/loading/lnd_loading.dart';
 import '../../presentation/lnd_creation_success/lnd_creation_success.dart';
 import '../../presentation/lnd_info_from/lnd_info_from.dart';
 import '../../presentation/nip05/nip05.dart';
@@ -64,6 +65,7 @@ abstract class Routing {
     Paths.tangemAuth: (context) => const TangemAuth(),
     Paths.lndInfoFrom: (context) => LndInfoFrom(),
     Paths.lndCreationSuccess: (context) => LndCreationSuccess(),
+    Paths.lndLoading: (context) => LndLoading(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

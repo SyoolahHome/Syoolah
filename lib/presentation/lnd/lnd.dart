@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -88,9 +89,14 @@ class LND extends BottomBarScreen {
                         vertical: 10,
                       ),
                       onTap: () {
-                        cubit.onCreateAdressClick(context);
+                        Navigator.of(context).pushNamed(
+                          Paths.lndLoading,
+                          arguments: {
+                            'cubit': cubit,
+                          },
+                        );
                       },
-                      text: "create_lightning_address".tr(),
+                      text: "start".tr(),
                       additonalFontSize: 0,
                       isRounded: true,
                     ),
