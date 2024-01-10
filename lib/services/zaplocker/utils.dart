@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ZapLockerReflectedUtils {
-  final String server;
+  String get server => "http://192.168.0.7:8082/";
 
-  ZapLockerReflectedUtils(this.server);
+  ZapLockerReflectedUtils();
 
   List<int> hexToBytes(String a) {
     final length = a.length ~/ 2;
@@ -267,12 +267,13 @@ class ZapLockerReflectedUtils {
     required List relays,
     required String signature,
     required String publicKey,
+    required String relaysSig,
   }) async {
     try {
       final encodedRelays = jsonEncode(relays);
       final uri = Uri.parse(
         server +
-            "verifyrelays/?encodedRelays=$encodedRelays&signature=$signature&publicKey=$publicKey",
+            "verifyRelaysSign/?encodedRelays=$encodedRelays&signature=$signature&publicKey=$publicKey&relaysSig=$relaysSig",
       );
 
       final res = await http.get(uri);

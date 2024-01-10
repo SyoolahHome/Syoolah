@@ -26,7 +26,7 @@ class LndCubit extends Cubit<LndState> {
 
   LndCubit() : super(LndInitial(domain: "sakhir.me")) {
     _init();
-    zaplocker = ZapLockerReflectedUtils("http://192.168.0.7:8082/");
+    zaplocker = ZapLockerReflectedUtils();
   }
 
   Future<void> close() {
@@ -73,7 +73,6 @@ class LndCubit extends Cubit<LndState> {
           "User data does not exist, creating a new user...",
         ],
         shouldCreateUser: true,
-        userData: null,
       ));
     }
   }
@@ -81,11 +80,14 @@ class LndCubit extends Cubit<LndState> {
   Future<void> loadUser({
     required void Function() onRelaysSigIsUnverifiedAndShouldNotBeUsed,
     required void Function() onRelaysSigIsVerifiedAndShouldBeUsed,
+    required Map<String, dynamic> userData,
+    required void Function(
+      List pending,
+      String preimages,
+      bool v2,
+      Map<String, dynamic> userData,
+    ) onAllValidatedAndSuccess,
   }) async {
-    if (state.userData == null) throw Exception("state.userData is null");
-
-    final userData = state.userData!;
-
     final privateKey = LocalDatabase.instance.getPrivateKey()!;
 
     final userPublicKey =
@@ -151,76 +153,12 @@ class LndCubit extends Cubit<LndState> {
 
     final pending = userData["pending"] as List?;
 
-    if (pending == null || pending.isEmpty) {
-      return;
-    } else {
-      final nonNullablePending = pending;
-
-      for (int index = 0; index > nonNullablePending.length; index++) {
-        final pending_pmt = nonNullablePending[index];
-        var pmthash = pending_pmt["pmthash"];
-        var matching_preimage;
-
-        RegExp exp = RegExp(".{1,64}");
-        final matches = exp.allMatches(preimages).toList();
-
-        for (int matchIndex = 0; matchIndex < matches.length; matchIndex++) {
-          final preimage = matches[matchIndex].group(0);
-          //! 311
-          //  zaplocker.bytesToHex()
-          final hash = "";
-
-          if (hash == pmthash) {
-            matching_preimage = preimage;
-            break;
-          }
-        }
-
-        pending_pmt["preimage"] = matching_preimage;
-        userData["pending"][index] = pending_pmt;
-
-        final currentBlockHeight = await zaplocker.getBlockheight("");
-        print("currentBlockHeight: $currentBlockHeight");
-
-        final blocksTilExpiry = pending_pmt["expires"] - currentBlockHeight;
-
-        final feeRate = await zaplocker.getMinFeeRate();
-        final tryParsed = int.tryParse(feeRate);
-        if (tryParsed == null) {
-          return;
-        }
-
-        final singleMiningFee = tryParsed * 200;
-        final miningFee = tryParsed * 2 * 200;
-
-        final amountExpectedInSwapAddress =
-            pending_pmt["amount"] - pending_pmt["swap_fee"] - singleMiningFee;
-
-        final amountExpected =
-            pending_pmt["amount"] - pending_pmt["swap_fee"] - miningFee;
-
-        final acmountExpectedLnurl =
-            pending_pmt["amount"] - pending_pmt["swap_fee"];
-
-        final newPending = PendingPayment(
-          amount: pending_pmt["amount"],
-          swapFee: pending_pmt["swap_fee"],
-          miningFee: miningFee,
-          amountExpected: amountExpected,
-          blocksTilExpiry: blocksTilExpiry,
-          pmtHash: pending_pmt["pmthash"],
-          preimage: matching_preimage,
-          serverPubKey: pending_pmt["server_pubkey"],
-          amountExpectedInSwapAddress: amountExpectedInSwapAddress,
-          amountExpectedLnurl: acmountExpectedLnurl,
-          v2: v2,
-        );
-
-        emit(state.copyWith(
-          pendingPayments: [...state.pendingPayments, newPending],
-        ));
-      }
-    }
+    onAllValidatedAndSuccess(
+      pending!,
+      preimages,
+      v2,
+      userData,
+    );
   }
 
   Future<bool> _verifyRelaysSig({
@@ -232,6 +170,7 @@ class LndCubit extends Cubit<LndState> {
       relays: relays,
       signature: relaysSig,
       publicKey: userPubkey,
+      relaysSig: relaysSig,
     );
   }
 
@@ -449,8 +388,9 @@ class LndCubit extends Cubit<LndState> {
     required void Function() onChosenUsernameEmpty,
     required void Function() onStartCreatingUserAndLoading,
     required void Function() onTrialEventToRelayFailed,
-    required void Function() onUserCreatedSuccesfully,
-    required Future<String?> Function() onGetUsername,
+    required void Function(Map<String, dynamic> userData)
+        onUserCreatedSuccesfully,
+    required String? username,
   }) async {
     final userPrivKey = LocalDatabase.instance.getPrivateKey()!;
     final userPubKey = Nostr.instance.keysService.derivePublicKey(
@@ -458,8 +398,6 @@ class LndCubit extends Cubit<LndState> {
     );
 
     final wsRelay = "wss://relay.damus.io";
-
-    String? username = await onGetUsername();
 
     if (username == null) {
       throw Exception("username is null");
@@ -559,7 +497,7 @@ class LndCubit extends Cubit<LndState> {
         userKeyPair,
       );
 
-      await Future.delayed(Duration(milliseconds: 50));
+      // await Future.delayed(Duration(milliseconds: 50));
 
       sigs += sig;
     }
@@ -602,13 +540,7 @@ class LndCubit extends Cubit<LndState> {
       final userData = await zaplocker.getUserData(userPubKey);
 
       if (userData != null) {
-        emit(state.copyWith(
-          userData: userData,
-          shouldCreateUser: false,
-          shouldLoadUser: true,
-        ));
-
-        onUserCreatedSuccesfully();
+        onUserCreatedSuccesfully(userData);
       } else {
         print("Please try again, the user was not created");
       }

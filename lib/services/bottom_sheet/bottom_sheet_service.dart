@@ -25,6 +25,7 @@ import '../../constants/app_enums.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
+import '../../presentation/lnd/loading/widgets/username_input_widget.dart';
 import '../../presentation/lnd/widgets/bottom_sheet_widget.dart';
 import '../../presentation/lnd/widgets/lnd_invoice_adress_prompt copy.dart';
 import '../../presentation/lnd/widgets/user_adress_prompt.dart';
@@ -481,17 +482,11 @@ abstract class BottomSheetService {
   static Future<String?> promptUserForNewLndUsername({
     required BuildContext context,
   }) async {
-    final random = Random().nextInt(100000).toString();
-
-    return "anas $random";
-
-// !
-    throw UnimplementedError();
-    // return showModalBottomSheet<String?>(
-    //   context: context,
-    //   builder: (context) {
-    //     return UserLndUsernamePromptWidget();
-    //   },
-    // );
+    return showModalBottomSheet<String?>(
+      context: context,
+      builder: (context) {
+        return UserLndUsernamePromptWidget();
+      },
+    );
   }
 }

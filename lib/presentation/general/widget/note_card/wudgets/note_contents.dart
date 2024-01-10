@@ -3,7 +3,7 @@ import 'package:ditto/presentation/general/widget/note_card/wudgets/image_conten
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:hashtagable/hashtagable.dart';
+import 'package:hashtagable_v3/hashtagable.dart';
 
 import '../../../../../constants/app_colors.dart';
 import '../../../../multi_images_full_screens/multi_images_full_screens.dart';

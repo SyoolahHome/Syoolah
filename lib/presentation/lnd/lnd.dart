@@ -9,6 +9,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../buisness_logic/lnd/lnd_cubit.dart';
 import '../../constants/abstractions/abstractions.dart';
+import '../../services/bottom_sheet/bottom_sheet_service.dart';
 import '../general/widget/button.dart';
 import 'widgets/lnd_bar.dart';
 
@@ -88,11 +89,17 @@ class LND extends BottomBarScreen {
                         horizontal: 20,
                         vertical: 10,
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final username = await BottomSheetService
+                            .promptUserForNewLndUsername(
+                          context: context,
+                        );
+
                         Navigator.of(context).pushNamed(
                           Paths.lndLoading,
                           arguments: {
                             'cubit': cubit,
+                            'username': username,
                           },
                         );
                       },

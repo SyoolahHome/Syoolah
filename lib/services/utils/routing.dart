@@ -32,6 +32,7 @@ import '../../presentation/lnd_info_from/lnd_info_from.dart';
 import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
 import '../../presentation/tangem_auth/tangem_auth.dart';
+import '../../presentation/zaplocker_dashboard/zaplocker_dashboard.dart';
 
 abstract class Routing {
   static final routes = {
@@ -65,6 +66,7 @@ abstract class Routing {
     Paths.lndInfoFrom: (context) => LndInfoFrom(),
     Paths.lndCreationSuccess: (context) => LndCreationSuccess(),
     Paths.lndLoading: (context) => LndLoading(),
+    Paths.zaplockerDashboard: (context) => const ZaplockerDashboard(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

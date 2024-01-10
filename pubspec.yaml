@@ -38,7 +38,7 @@ dependencies:
   timeago:
   easy_localization:
   dart_openai: ^1.9.1
-  hashtagable:
+  hashtagable_v3:
   transitioned_indexed_stack:
   flutter_islamic_icons:
   # process_run: ^0.12.5+3

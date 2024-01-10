@@ -36,7 +36,8 @@ abstract class Paths {
   static const String successAccountMade = '/successAccountMade';
   static const String privacyPolicy = '/privacyPolicy';
   static const String nip05Verification = '/nip05Verification';
-  static const String tangemAuth = "tangemAuth";
-  static const String lndInfoFrom = "lndInfoFrom";
-  static const String lndCreationSuccess = "lndCreationSuccess";
+  static const String tangemAuth = "/tangemAuth";
+  static const String lndInfoFrom = "/lndInfoFrom";
+  static const String lndCreationSuccess = "/lndCreationSuccess";
+  static const String zaplockerDashboard = "/zaplockerDashboard";
 }
