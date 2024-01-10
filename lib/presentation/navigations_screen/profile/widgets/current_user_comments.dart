@@ -1,5 +1,5 @@
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
-import 'package:dart_nostr/nostr/model/event.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';

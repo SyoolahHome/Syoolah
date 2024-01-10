@@ -1,4 +1,4 @@
-import 'package:dart_openai/openai.dart';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:equatable/equatable.dart';
 
 /// {@template chat_module_item}

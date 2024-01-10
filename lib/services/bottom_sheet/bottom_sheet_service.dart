@@ -168,7 +168,7 @@ abstract class BottomSheetService {
         return BottomSheetOptionsWidget(
           options: options,
           title: relayInformations?.name != null
-              ? "relayName".tr(args: [relayInformations!.name])
+              ? "relayName".tr(args: [relayInformations!.name!])
               : "",
         );
       },

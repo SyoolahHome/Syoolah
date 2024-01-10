@@ -1,4 +1,4 @@
-import 'package:dart_openai/openai.dart';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/copy_icon.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/reload_icon.dart';

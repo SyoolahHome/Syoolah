@@ -4,13 +4,12 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../services/utils/paths.dart';
 
-class LNDAppBar extends StatelessWidget with PreferredSizeWidget {
+class LNDAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LNDAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       title: Row(
         children: <Widget>[
           Text("f1_zaplocker".tr()),

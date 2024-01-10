@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:dart_openai/openai.dart';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';

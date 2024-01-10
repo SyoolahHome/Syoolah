@@ -88,7 +88,14 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
 
       final newUserFollowTag = ["p", pubKey];
 
-      newEvent = currentUserFollowing.copyWith(
+      newEvent = NostrEvent(
+        content: currentUserFollowing.content,
+        createdAt: currentUserFollowing.createdAt,
+        id: currentUserFollowing.id,
+        kind: currentUserFollowing.kind,
+        ots: currentUserFollowing.ots,
+        pubkey: currentUserFollowing.pubkey,
+        sig: currentUserFollowing.sig,
         tags: [...currentUserFollowing.tags, newUserFollowTag],
       );
     }
@@ -103,7 +110,14 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
       return;
     }
 
-    NostrEvent newEvent = currentUserFollowing.copyWith(
+    NostrEvent newEvent = NostrEvent(
+      content: currentUserFollowing.content,
+      createdAt: currentUserFollowing.createdAt,
+      id: currentUserFollowing.id,
+      kind: currentUserFollowing.kind,
+      ots: currentUserFollowing.ots,
+      pubkey: currentUserFollowing.pubkey,
+      sig: currentUserFollowing.sig,
       tags: [
         ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
       ],
