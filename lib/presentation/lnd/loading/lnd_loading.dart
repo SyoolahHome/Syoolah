@@ -1,11 +1,9 @@
-import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/lnd/lnd_cubit.dart';
 import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../services/bottom_sheet/bottom_sheet_service.dart';
-import '../../../services/database/local/local_database.dart';
 
 class LndLoading extends StatelessWidget {
   LndLoading({
@@ -44,6 +42,8 @@ class LndLoading extends StatelessWidget {
           } else if (state.shouldCreateUser) {
             await cubit!.createUser(
               onGetUsername: () async {
+                return "anas 92081";
+
                 return BottomSheetService.promptUserForNewLndUsername(
                   context: context,
                 );

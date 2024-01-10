@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../../services/utils/app_utils.dart';
 import '../../../../services/utils/routing.dart';
-import '../../../general/widget/note_card/wudgets/note_follow_button.dart';
 
 class CustomAppBar extends PreferredSize {
   const CustomAppBar({

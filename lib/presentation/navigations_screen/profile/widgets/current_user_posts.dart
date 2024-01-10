@@ -2,7 +2,6 @@ import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/feeds/widgets/notes_list_view.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
-import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

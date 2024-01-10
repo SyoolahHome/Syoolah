@@ -13,9 +13,7 @@ import 'package:ditto/services/zaplocker/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hex/hex.dart';
-import 'package:http/http.dart' as http;
 import 'package:pointycastle/export.dart';
-import 'package:pointycastle/pointycastle.dart' as pointycastle;
 
 import '../../model/pending.dart';
 import '../../services/zaplocker/temporaryçnip04.dart';
@@ -156,7 +154,7 @@ class LndCubit extends Cubit<LndState> {
     if (pending == null || pending.isEmpty) {
       return;
     } else {
-      final nonNullablePending = pending as List;
+      final nonNullablePending = pending;
 
       for (int index = 0; index > nonNullablePending.length; index++) {
         final pending_pmt = nonNullablePending[index];

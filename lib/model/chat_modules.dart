@@ -1,6 +1,5 @@
 import 'package:dart_openai/openai.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 /// {@template chat_module_item}
 /// A model class representing one single Imam chat module to presented as an Imam level for the end user.

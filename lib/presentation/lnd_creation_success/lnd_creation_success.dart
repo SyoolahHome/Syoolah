@@ -61,7 +61,7 @@ class LndCreationSuccess extends StatelessWidget {
                   Text("username".tr()),
                   SizedBox(height: 5),
                   KeyField(
-                    text: cubit!.state?.username ?? "",
+                    text: cubit!.state.username ?? "",
                     isPasswordVisible: false,
                   ),
                   SizedBox(height: 20),

@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
-import 'package:ditto/constants/app_enums.dart';
 import 'package:ditto/model/feed_category.dart';
 import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:flutter/material.dart';

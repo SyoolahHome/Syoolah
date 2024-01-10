@@ -9,7 +9,6 @@ import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
 import 'package:ditto/presentation/current_user_keys/current_user_keys.dart';
 import 'package:ditto/presentation/edit_profile/edit_Profile.dart';
-import 'package:ditto/presentation/feeds/red_bull_feed.dart';
 import 'package:ditto/presentation/feeds/following_feed.dart';
 import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/followers/followers.dart';

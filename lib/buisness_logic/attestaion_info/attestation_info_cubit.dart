@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:sec/sec.dart' as s;
 
 part 'attestation_info_state.dart';
 

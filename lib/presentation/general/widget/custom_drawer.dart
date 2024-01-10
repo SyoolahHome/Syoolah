@@ -6,10 +6,8 @@ import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../services/utils/routing.dart';
 
 class CustomDrawer extends StatelessWidget {

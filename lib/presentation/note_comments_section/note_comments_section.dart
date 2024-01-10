@@ -2,7 +2,6 @@ import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
 import 'package:ditto/presentation/bottom_bar_screen/widgets/bottom_bar.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

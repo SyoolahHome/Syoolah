@@ -13,7 +13,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../constants/app_enums.dart';
 import '../database/local/local_database.dart';
-import '../database/local/local_database.dart';
 import '../nostr/nostr_service.dart';
 import 'arabix_adapter_utils.dart';
 

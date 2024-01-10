@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-import '../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../../services/utils/routing.dart';
 import '../../profile/profile.dart';
 

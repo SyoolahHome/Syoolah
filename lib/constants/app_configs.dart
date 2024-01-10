@@ -1,4 +1,3 @@
-import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/model/feed_category.dart';
 import 'package:ditto/model/loclal_item.dart';
@@ -12,7 +11,6 @@ import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../buisness_logic/settings/settings_cubit.dart';

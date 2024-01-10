@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/app/app_cubit.dart';
-import '../../../services/utils/routing.dart';
 
 class RelayConfigMore extends StatelessWidget {
   const RelayConfigMore({

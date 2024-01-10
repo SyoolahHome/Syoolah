@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/dart_nostr.dart';
-import 'package:ditto/services/utils/extensions.dart';
 import 'package:equatable/equatable.dart';
 
 part 'user_follows_state.dart';

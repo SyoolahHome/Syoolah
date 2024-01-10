@@ -1,5 +1,4 @@
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
-import 'package:ditto/model/note.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

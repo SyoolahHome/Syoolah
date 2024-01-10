@@ -8,9 +8,7 @@ import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
-import '../../presentation/dms/dms.dart';
 import '../../presentation/lnd/lnd.dart';
 import '../../services/database/local/local_database.dart';
 

@@ -1,8 +1,5 @@
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:dart_nostr/nostr/model/event.dart';
-import 'package:ditto/buisness_logic/liked_note/liked_note_cubit.dart';
-import 'package:ditto/presentation/general/widget/margined_body.dart';
-import 'package:ditto/presentation/general/widget/note_card/note_card.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +10,6 @@ import '../../../../constants/abstractions/abstractions.dart';
 import '../../../../constants/app_colors.dart';
 import '../../../../model/note.dart';
 import '../../../feeds/widgets/notes_list_view.dart';
-import '../../../general/loading_widget.dart';
 
 class CurrentUserComments extends UserProfileTab {
   CurrentUserComments({

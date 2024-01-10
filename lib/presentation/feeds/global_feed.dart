@@ -1,6 +1,5 @@
 import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
-import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/presentation/feeds/feed_page.dart';
 import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/extensions.dart';

@@ -2,7 +2,6 @@ import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../services/utils/routing.dart';
 
 class RelayConfigSwitch extends StatelessWidget {
   const RelayConfigSwitch({

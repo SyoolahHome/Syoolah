@@ -2,12 +2,10 @@ import 'package:ditto/buisness_logic/lnd/lnd_cubit.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/lnd_info_from/widgets/app_bar.dart';
-import 'package:ditto/presentation/scan/widgets/title_section.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../services/utils/paths.dart';
 import 'widgets/lnd_username_field.dart';

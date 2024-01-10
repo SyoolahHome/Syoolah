@@ -6,7 +6,7 @@ publish_to: "none"
 version: 0.9.45+5
 
 environment:
-  sdk: ">=2.18.0 <4.0.0"
+  sdk: ">=3.0.0 <3.9.9"
 
 dependencies:
   flutter:
@@ -27,8 +27,7 @@ dependencies:
   flutter_remix:
   hive_flutter:
   equatable:
-  dart_nostr:
-    path: "C:\\projects\\Flutter_and_Dart\\nostr_copy"
+  dart_nostr: ^6.0.2
   tangem_sdk:
     path: ./packs/tangem-sdk-flutter-master/
   convert:

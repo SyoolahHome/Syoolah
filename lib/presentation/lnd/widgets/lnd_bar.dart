@@ -1,4 +1,3 @@
-import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';

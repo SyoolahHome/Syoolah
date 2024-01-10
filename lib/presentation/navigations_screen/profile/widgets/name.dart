@@ -1,4 +1,3 @@
-import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/model/user_meta_data.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:flutter/material.dart';
