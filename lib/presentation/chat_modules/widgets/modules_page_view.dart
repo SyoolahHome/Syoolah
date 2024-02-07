@@ -18,7 +18,7 @@ class ChatModulesPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ChatModulesCubit>();
-    final modulesItems = cubit.modulesItems;
+    final modulesItems = ChatModulesCubit.modulesItems;
     const height = 10.0;
 
     return SizedBox(
@@ -133,7 +133,7 @@ class ChatModulesPageView extends StatelessWidget {
     //                 color: Theme.of(context).primaryColor,
     //                 size: 27,
     //               ),
-    //               SakhirButton(
+    //               UmrahtyButton(
     //                 onTap: () {
     //                   Navigator.of(context).pushNamed(
     //                     Paths.chat,

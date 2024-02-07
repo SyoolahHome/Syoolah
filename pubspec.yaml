@@ -59,7 +59,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   dart_code_metrics: ^5.7.2
-  # flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.13.1
   # flutter_app_name:
   # change_app_package_name: ^1.1.0
 
@@ -68,13 +68,13 @@ dev_dependencies:
   # envied_generator: ^0.3.0
   # flutter_native_splash: ^2.2.0+1
 
-# flutter_launcher_icons:
-#   android: "launcher_icon"
-#   ios: true
-#   image_path_android: "assets/logo/logo_letter_no_bg.png"
-#   image_path_ios: "assets/logo/logo_letter_no_bg.png"
-#   min_sdk_android: 21
-#   remove_alpha_ios: true
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path_android: "assets/logo/icon_rounded.png"
+  image_path_ios: "assets/logo/icon_rounded.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
 
 flutter:
   # The following line ensures that the Material Icons font is
@@ -85,20 +85,16 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/teams/
     - assets/images/
-    - assets/logo/black_no_bg.png
-    - assets/logo/black_no_bg_big.png
-    - assets/logo/white_no_bg.png
-    - assets/logo/white_no_bg_big.png
+    - assets/logo/
     - assets/translations/
 # flutter_app_name:
-#   name: "Sakhir"
+#   name: "Umrahty"
 
 # flutter_native_splash:
 #   color: "#ffffff"
-#   image: "assets/logo/white_no_bg.png"
-
+#   image: "assets/logo/icon_rounded.png"
+#   image_dark: assets/logo/icon_rounded.png
 #   # The branding property allows you to specify an image used as branding in the splash screen.
 #   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
 #   # see the Android 12 section below.

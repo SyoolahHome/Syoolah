@@ -55,7 +55,7 @@ class BottomSheetOption extends Equatable {
     return BottomSheetOption(
       title: localeItem.titleName,
       icon: icon,
-      trailing: SakhirButton.bottomSheetSwitch(
+      trailing: UmrahtyButton.bottomSheetSwitch(
         locale: localeItem.locale,
         onTap: () {
           onTap();

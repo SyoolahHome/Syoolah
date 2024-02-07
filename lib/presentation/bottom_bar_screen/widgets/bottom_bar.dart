@@ -1,4 +1,5 @@
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
+import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/constants/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../chat/chat.dart';
 import '../../chat_modules/chat_modules.dart';
 
 class CustomBottomBar extends StatelessWidget {
@@ -62,9 +64,8 @@ class CustomBottomBar extends StatelessWidget {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          BottomSheetService.showWidgetAsBottomSheet(
-                            item.screen,
-                            context,
+                          Navigator.of(context).pushNamed(
+                            Paths.chat,
                           );
                         },
                         child: AbsorbPointer(

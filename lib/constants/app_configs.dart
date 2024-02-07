@@ -21,6 +21,7 @@ import 'app_enums.dart';
 
 abstract class AppConfigs {
   static const relaysUrls = [
+    'wss://relay.umrahty.one',
     'wss://eden.nostr.land',
     'wss://nostr.fmt.wiz.biz',
     'wss://relay.damus.io',
@@ -39,98 +40,17 @@ abstract class AppConfigs {
         return RelayConfiguration(url: url);
       }).toList();
 
-  static final List<FeedCategory> categories = [
-    FeedCategory(
-      name: "redbull".tr(),
-      imageIcon: "assets/teams/red-bull-racing.png",
+  static final List<FeedCategory> categories =
+      UmrahtyTopics.values.map((topic) {
+    return FeedCategory(
+      name: topic.name.tr(),
       isSelected: false,
-      enumValue: SakhirTopics.redbull,
+      enumValue: topic,
       feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.redbull,
+        topic: topic,
       ),
-    ),
-    FeedCategory(
-      name: "mercedes".tr(),
-      imageIcon: "assets/teams/mercedes.png",
-      isSelected: false,
-      enumValue: SakhirTopics.mercedes,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.mercedes,
-      ),
-    ),
-    FeedCategory(
-      name: "aston_martin".tr(),
-      imageIcon: "assets/teams/aston-martin.png",
-      isSelected: false,
-      enumValue: SakhirTopics.astonMartin,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.astonMartin,
-      ),
-    ),
-    FeedCategory(
-      name: "ferrari".tr(),
-      imageIcon: "assets/teams/ferrari.png",
-      isSelected: false,
-      enumValue: SakhirTopics.ferrari,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.ferrari,
-      ),
-    ),
-    FeedCategory(
-      name: "mclaren".tr(),
-      imageIcon: "assets/teams/mclaren.png",
-      isSelected: false,
-      enumValue: SakhirTopics.mclaren,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.mclaren,
-      ),
-    ),
-    FeedCategory(
-      name: "alpine".tr(),
-      imageIcon: "assets/teams/alpine.png",
-      isSelected: false,
-      enumValue: SakhirTopics.alpine,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.alpine,
-      ),
-    ),
-    FeedCategory(
-      name: "williams".tr(),
-      imageIcon: "assets/teams/williams.png",
-      isSelected: false,
-      enumValue: SakhirTopics.williams,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.williams,
-      ),
-    ),
-    FeedCategory(
-      name: "haasf1team".tr(),
-      imageIcon: "assets/teams/haas-f1-team.png",
-      isSelected: false,
-      enumValue: SakhirTopics.haasf1team,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.haasf1team,
-      ),
-    ),
-    FeedCategory(
-      name: "alfaromeo".tr(),
-      imageIcon: "assets/teams/alfa-romeo.png",
-      isSelected: false,
-      enumValue: SakhirTopics.alfaromeo,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.alfaromeo,
-      ),
-    ),
-    FeedCategory(
-      name: "alphatauri".tr(),
-      imageIcon: "assets/teams/alphatauri.png",
-      isSelected: false,
-      enumValue: SakhirTopics.alphatauri,
-      feedPostsStream: NostrService.instance.subs.topic(
-        topic: SakhirTopics.alphatauri,
-      ),
-    ),
-  ];
+    );
+  }).toList();
 
   static final localeItems = <LocaleItem>[
     const LocaleItem(
@@ -345,27 +265,57 @@ abstract class AppConfigs {
   ];
 
   static final beginnerRecommendedQuestions = const <String>[
-    "Who is the current Formula 1 World Champion?",
-    "What is the name of the most famous Formula 1 team?",
-    "How many races are there in a typical F1 season?",
-    "Explain what DRS (Drag Reduction System) is.",
-    "What is the purpose of the Safety Car in F1 races?",
-    "Can you name a famous F1 race track?",
-    "What does 'pole position' mean in Formula 1?",
-    "Who is Lewis Hamilton, and why is he famous in F1?",
-    "What is the FIA in Formula 1?",
-    "What are the primary tire suppliers in F1?",
-        "What is the role of a race engineer in Formula 1?",
-    "Explain the concept of 'overtaking' in F1 races.",
-    "Who is the founder of Formula 1?",
-    "What is the F1 Constructors' Championship, and how is it determined?",
-    "Describe the function of F1 team principals.",
-    "What is the role of the FIA Stewards during an F1 race?",
-    "How are F1 drivers selected to join a team?",
-    "Explain the meaning of 'blue flags' in Formula 1.",
-    "What are the 'marbles' on the track, and how do they affect racing?",
-    "What is the significance of the F1 Drivers' Parade?"
- 
+    "How can I enhance the security and privacy of my online accounts?",
+    "What are the latest cybersecurity news and threats?",
+    "Can you share any recent reports or research findings on AI in healthcare?",
+    "Explain the role of cryptography in securing blockchain transactions.",
+    "What are the key applications of artificial intelligence in networking?",
+    "How can I start a career in programming with a focus on AI technologies?",
+    "What are the challenges and solutions in distributed systems networking?",
+    "Can you recommend a programming language for developing blockchain applications?",
+    "What are some real-world use cases of blockchain technology?",
+    "How do distributed systems contribute to cloud computing?",
+    "Tell me about data science techniques for analyzing IoT data.",
+    "What are the public safety implications of IoT devices?",
+    "Explain the role of cloud and virtualization in data science.",
+    "How does blockchain technology enhance data security?",
+    "What is the impact of artificial intelligence on public safety?",
+    "How can I secure my IoT devices from potential threats?",
+    "What are the emerging security and privacy challenges in IoT?",
+    "Can you provide news updates on recent blockchain developments?",
+    "What reports and research are available on the adoption of AI in education?",
+    "How does cryptography play a role in securing IoT communications?",
+    "What are the ethical considerations in artificial intelligence research?",
+    "What programming languages are commonly used in developing AI applications?",
+    "Tell me about the technologies used in distributed ledger systems.",
+    "What are some blockchain-based applications for supply chain management?",
+    "How can I implement AI-powered networking solutions in my organization?",
+    "What are the advantages of using virtualization in cloud computing?",
+    "Explain the concept of edge computing in IoT.",
+    "Can you recommend programming resources for learning about data science?",
+    "What is the significance of blockchain consensus mechanisms?",
+    "How does AI assist in public safety operations?",
+    "What are the networking challenges in building distributed systems?",
+    "How can I secure my cloud-based applications and data?",
+    "What tools and frameworks are commonly used in AI development?",
+    "Tell me about the role of blockchain in financial technologies (FinTech).",
+    "What are some examples of AI-driven networking optimization?",
+    "How do data science and machine learning intersect?",
+    "What are the security implications of AI-driven autonomous vehicles?",
+    "Can you provide updates on recent developments in IoT technology?",
+    "How does virtualization improve resource utilization in cloud environments?",
+    "What are the privacy concerns related to AI-powered surveillance systems?",
+    "Explain the concept of consensus algorithms in distributed systems.",
+    "What are the applications of blockchain beyond cryptocurrencies?",
+    "How can AI be used to enhance public safety in smart cities?",
+    "What are the challenges of implementing AI in networking infrastructure?",
+    "What is the role of data analytics in optimizing cloud performance?",
+    "Tell me about the advantages of decentralized applications (DApps) in blockchain.",
+    "How do edge devices communicate in an IoT ecosystem?",
+    "What programming languages are suitable for building secure IoT applications?",
+    "What are the cybersecurity measures for protecting cloud-based data?",
+    "How can I secure my IoT devices from potential threats?",
+    "What are the emerging security and privacy challenges in IoT?",
   ];
 
   static final intermediateRecommendQuestions = const <String>[
@@ -379,7 +329,7 @@ abstract class AppConfigs {
     "What are the differences between a wet and dry setup for an F1 car?",
     "How do F1 teams plan their pit stops during a race?",
     "What are the common pit stop strategies in Formula 1?",
-         "Describe the impact of F1 regulations on car design and performance.",
+    "Describe the impact of F1 regulations on car design and performance.",
     "Explain the concept of 'aero push' in Formula 1 racing.",
     "What are the different types of wet weather tires used in F1?",
     "How do F1 teams manage their budgets and sponsorships?",
@@ -389,7 +339,6 @@ abstract class AppConfigs {
     "Explain the concept of 'ground effect' in F1 aerodynamics.",
     "What is the 'parc fermé' rule in Formula 1, and when does it apply?",
     "Describe the role of race strategy engineers in F1 teams."
-   
   ];
 
   static final advancedRecommendQuestions = const <String>[
@@ -403,7 +352,7 @@ abstract class AppConfigs {
     "What are the key elements of an F1 team's race weekend strategy?",
     "How does DRS (Drag Reduction System) activation work?",
     "What is the role of the FIA Race Director in Formula 1?",
-      "Explain the impact of hybrid power units on F1 racing.",
+    "Explain the impact of hybrid power units on F1 racing.",
     "Describe the process of designing and building an F1 race circuit.",
     "What is the 'F1 Technical Working Group,' and what is its role?",
     "How do F1 teams manage their data security and protect intellectual property?",
@@ -413,7 +362,6 @@ abstract class AppConfigs {
     "How do F1 teams optimize fuel efficiency during a race?",
     "Explain the concept of 'dirty air' and its impact on car performance.",
     "What are the challenges of Formula 1 racing in extreme weather conditions?"
-  
   ];
 
   static List<ReportOption> reportOptions =

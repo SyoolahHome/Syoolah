@@ -28,27 +28,36 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
     return super.close();
   }
 
+  static ChatModuleItem defaultChatModule = ChatModuleItem(
+    title: "umrahtyGPT".tr(),
+    subtitle: "chatBeginnerSubtitle".tr(),
+    imageIcon: "",
+    instruction:
+        "You ar a cyber security expert who will answer all IT and cyber security questions.",
+    recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
+  );
+
   /// A list of available and allowed chat modules that will be shown in the UI.
-  List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
+  static List<ChatModuleItem> get modulesItems => <ChatModuleItem>[
         ChatModuleItem.beginner(
           subtitle: "chatBeginnerSubtitle".tr(),
-          imageIcon: "assets/images/f1-car.svg",
+          imageIcon: "",
           instruction:
-              "You are an F1 expert who will answers beginner questions related to F1, its rules & teams..",
+              "You ar a cyber security expert who will answer all IT and cyber security questions.",
           recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
         ),
         ChatModuleItem.intermediate(
           subtitle: "chatIntermediateSubtitle".tr(),
-          imageIcon: "assets/images/f1.svg",
+          imageIcon: "",
           instruction:
-              "You are an F1 expert who will answers intermediate questions related to F1, its rules & teams..",
+              "You ar a cyber security expert who will answer all IT and cyber security questions.",
           recommendedQuestions: AppConfigs.intermediateRecommendQuestions,
         ),
         ChatModuleItem.advanced(
           subtitle: "chatAdvancedSubtitle".tr(),
-          imageIcon: "assets/images/win-flag.svg",
+          imageIcon: "",
           instruction:
-              "You are an F1 expert who will answers advanced questions related to F1, its rules & teams..",
+              "You ar a cyber security expert who will answer all IT and cyber security questions.",
           recommendedQuestions: AppConfigs.advancedRecommendQuestions,
         ),
       ];

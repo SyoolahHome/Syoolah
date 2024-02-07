@@ -24,7 +24,7 @@ abstract class Paths {
   static const String followingFeed = '/followingFeed';
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';
-  static const String aboutSakhir = '/aboutSakhir';
+  static const String aboutUmrahty = '/aboutUmrahty';
   static const String onBoardingRelays = '/onBoardingRelays';
   static const String foreignProfile = '/foreignProfile';
   static const String followings = '/followings';
@@ -32,7 +32,6 @@ abstract class Paths {
   static const String settings = '/settings';
   static const String myKeys = '/myKeys';
   static const String chat = '/chat';
-  static const String aboutApp = '/aboutApp';
   static const String successAccountMade = '/successAccountMade';
   static const String privacyPolicy = '/privacyPolicy';
   static const String nip05Verification = '/nip05Verification';

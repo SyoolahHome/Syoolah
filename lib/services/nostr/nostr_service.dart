@@ -13,7 +13,7 @@ class NostrService {
   static NostrService get instance => _instance;
   NostrService._();
 
-  final consts = _SakhirNostrConstants();
+  final consts = _UmrahtyNostrConstants();
 
   final subs = NostrServiceSub();
   final send = NostrServiceSend();
@@ -42,4 +42,4 @@ class NostrService {
   }
 }
 
-class _SakhirNostrConstants {}
+class _UmrahtyNostrConstants {}

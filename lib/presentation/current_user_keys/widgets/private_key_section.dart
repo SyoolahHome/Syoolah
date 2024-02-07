@@ -38,7 +38,7 @@ class HiddenPrivateKeySection extends StatelessWidget {
           hiddenKey,
           style: Theme.of(context).textTheme.labelMedium,
         ),
-        SakhirButton(
+        UmrahtyButton(
           isSmall: true,
           text: "show".tr(),
           onTap: () {

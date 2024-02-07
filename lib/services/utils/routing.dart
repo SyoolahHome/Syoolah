@@ -2,8 +2,7 @@ import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
-import 'package:ditto/presentation/about/about.dart';
-import 'package:ditto/presentation/about_sakhir/about_sakhir.dart';
+import 'package:ditto/presentation/about_umrahty/about_umrahty.dart';
 import 'package:ditto/presentation/auth_choose/auth_choose.dart';
 import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
@@ -44,7 +43,7 @@ abstract class Routing {
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
-    Paths.aboutSakhir: (context) => const AboutSakhir(),
+    Paths.aboutUmrahty: (context) => const AboutUmrahty(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentSignUp: (context) => const ExistentSignUp(),
@@ -55,7 +54,6 @@ abstract class Routing {
     Paths.settings: (context) => const Settings(),
     Paths.myKeys: (context) => const CurrentUserKeys(),
     Paths.chat: (context) => const Chat(),
-    Paths.aboutApp: (context) => const About(),
     Paths.successAccountMade: (context) => const SuccessAccountMade(),
     Paths.privacyPolicy: (context) => PrivacyPolicy(
           shouldShowAcceptSwitchTile: false,

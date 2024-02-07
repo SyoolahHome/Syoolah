@@ -27,7 +27,7 @@ class LndUsernameState extends Equatable {
   }
 }
 
-final class LndUsernameInitial extends LndUsernameState {
+class LndUsernameInitial extends LndUsernameState {
   LndUsernameInitial({
     super.isValid = false,
   });

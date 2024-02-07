@@ -231,7 +231,7 @@ extension ThemeModeExtension on ThemeMode {
 extension FeedCategoryListExtension on Iterable<FeedCategory> {
   Iterable<FeedCategory> get whereSelected => where((e) => e.isSelected);
   List<List<String>> toNostrTagsList() =>
-      map((e) => ["t", e.enumValue.sakhirName]).toList();
+      map((e) => ["t", e.enumValue.umrahtyName]).toList();
 }
 
 extension XFileListExtension on List<XFile> {
@@ -298,6 +298,6 @@ extension NostrEventExtension on NostrEvent? {
   }
 }
 
-extension SakhirTopicsExt on SakhirTopics {
-  String get sakhirName => "sakhir_app$name";
+extension UmrahtyTopicsExt on UmrahtyTopics {
+  String get umrahtyName => "umrahty_app$name";
 }

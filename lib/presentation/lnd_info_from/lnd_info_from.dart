@@ -43,7 +43,7 @@ class LndInfoFrom extends StatelessWidget {
 
                   return Text(
                     username?.isNotEmpty ?? false
-                        ? "${username}@sakhir.me".tr()
+                        ? "${username}@umrahty.one".tr()
                         : "",
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
@@ -54,7 +54,7 @@ class LndInfoFrom extends StatelessWidget {
                 width: double.infinity,
                 child: BlocBuilder<LndCubit, LndState>(
                   builder: (context, state) {
-                    return SakhirButton(
+                    return UmrahtyButton(
                       onTap: state.username?.isNotEmpty ?? false
                           ? () {
                               Navigator.of(context).pushNamed(

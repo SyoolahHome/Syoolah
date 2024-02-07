@@ -38,17 +38,22 @@ enum ReportType {
   impersonation,
 }
 
-enum SakhirTopics {
-  redbull,
-  mercedes,
-  astonMartin,
-  ferrari,
-  mclaren,
-  alpine,
-  williams,
-  haasf1team,
-  alfaromeo,
-  alphatauri;
+enum UmrahtyTopics {
+  securityAndPrivacy,
+  news,
+  reportsAndResearch,
+  cryptography,
+  artificialIntelligence,
+  networking,
+  programming,
+  technologies,
+  blockchain,
+  distributedSystems,
+  applications,
+  cloudAndVirtualization,
+  dataScience,
+  // iot,
+  publicSafety;
 }
 
 enum ImagePickType { banner, avatar }

@@ -65,7 +65,6 @@ class Home extends BottomBarScreen {
                     final current = AppConfigs.categories[index];
 
                     return FeedBox(
-                      imageIcon: current.imageIcon,
                       title: current.name,
                       onTap: () {
                         Navigator.push(

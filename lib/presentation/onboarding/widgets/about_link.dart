@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AboutSakhir extends StatelessWidget {
-  const AboutSakhir({super.key});
+class AboutUmrahty extends StatelessWidget {
+  const AboutUmrahty({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,13 @@ class AboutSakhir extends StatelessWidget {
       delay: const Duration(milliseconds: 1000),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(Paths.aboutSakhir);
+          Navigator.of(context).pushNamed(Paths.aboutUmrahty, arguments: {
+            "showOnlyAppDescription": true,
+          });
         },
         child: Center(
           child: Text(
-            "about_sakhir".tr(),
+            "about_umrahty".tr(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   // color: Theme.of(context).primaryColor,
                   decoration: TextDecoration.underline,

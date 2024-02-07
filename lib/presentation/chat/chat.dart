@@ -1,3 +1,5 @@
+import 'package:ditto/buisness_logic/chat_modules/chat_modules_cubit.dart';
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/chat_modules.dart';
 import 'package:ditto/presentation/chat/widgets/app_bar.dart';
 import 'package:ditto/presentation/chat/widgets/chat_message_widget.dart';
@@ -17,9 +19,11 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    final chatModduleItem = args['chatModduleItem'] as ChatModuleItem;
+    ChatModuleItem chatModduleItem =
+        (args?['chatModduleItem'] as ChatModuleItem? ??
+            ChatModulesCubit.defaultChatModule);
 
     return BlocProvider<ChatCubit>(
       create: (context) => ChatCubit(instruction: chatModduleItem.instruction),

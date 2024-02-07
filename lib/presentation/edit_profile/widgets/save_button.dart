@@ -13,7 +13,7 @@ class SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: SakhirButton(
+      child: UmrahtyButton(
         onTap: onTap,
         text: "save".tr(),
       ),

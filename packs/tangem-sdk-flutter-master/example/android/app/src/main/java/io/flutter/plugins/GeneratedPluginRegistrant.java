@@ -17,7 +17,7 @@ public final class GeneratedPluginRegistrant {
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
       flutterEngine.getPlugins().add(new com.tangem.tangem_sdk.TangemSdkPlugin());
-    } catch (Exception e) {
+    } catch(Exception e) {
       Log.e(TAG, "Error registering plugin tangem_sdk, com.tangem.tangem_sdk.TangemSdkPlugin", e);
     }
   }

@@ -62,7 +62,7 @@ class NoteAvatarAndName extends StatelessWidget {
             ),
         ],
         if (showFollowButton) ...<Widget>[
-          SakhirButton(
+          UmrahtyButton(
             isSmall: true,
             text: context
                     .read<UsersListToFollowCubit>()

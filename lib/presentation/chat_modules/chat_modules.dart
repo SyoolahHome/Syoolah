@@ -33,7 +33,7 @@ class ChatModules extends BottomBarScreen {
             ),
             MarginedBody(
               child: BottomSheetTitleWithIconButton(
-                title: "f1OnDuty".tr().titleCapitalized,
+                title: "umrahtyGPT".tr().titleCapitalized,
               ),
             ),
             const SizedBox(height: height),
@@ -47,7 +47,7 @@ class ChatModules extends BottomBarScreen {
                   //   isForSection: true,
                   // ),
                   // const SizedBox(height: height / 2),
-                  ChatModulesSubtitle(text: "f1OnDutySubtitle".tr()),
+                  ChatModulesSubtitle(text: "UmrahtyGPTSubtitle".tr()),
                 ],
               ),
             ),
@@ -57,7 +57,7 @@ class ChatModules extends BottomBarScreen {
               builder: (context, sliderValue) {
                 final cubit = context.read<ChatModulesCubit>();
                 final currentViewedLevel =
-                    cubit.modulesItems[sliderValue.toInt()];
+                    ChatModulesCubit.modulesItems[sliderValue.toInt()];
                 void _triggerChatNavigation() {
                   Navigator.of(context).pop();
 
@@ -112,15 +112,18 @@ class ChatModules extends BottomBarScreen {
                                 cubit.changeSliderValue(value);
                               },
                               min: 0.0,
-                              max: cubit.modulesItems.length.toDouble() - 1,
-                              divisions: cubit.modulesItems.length - 1,
+                              max: ChatModulesCubit.modulesItems.length
+                                      .toDouble() -
+                                  1,
+                              divisions:
+                                  ChatModulesCubit.modulesItems.length - 1,
                               label: currentViewedLevel.title,
                             ),
                             SizedBox(height: height),
                             SizedBox(
                               width: double.infinity,
                               height: 50,
-                              child: SakhirButton(
+                              child: UmrahtyButton(
                                 text: "start".tr(),
                                 onTap: _triggerChatNavigation,
                               ),

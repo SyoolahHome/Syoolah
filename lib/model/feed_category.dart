@@ -25,22 +25,13 @@ class FeedCategory extends Equatable {
   // final IconData icon;
 
   /// An enum that represents the topic/category of this feed.
-  final SakhirTopics enumValue;
+  final UmrahtyTopics enumValue;
 
   /// the nostr events stream for the feed.
   final NostrEventsStream feedPostsStream;
 
-  /// the icon image to show.
-  final String imageIcon;
-
   @override
-  List<Object?> get props => [
-        name,
-        isSelected,
-        // icon,
-        enumValue,
-        imageIcon,
-      ];
+  List<Object?> get props => [name, isSelected, enumValue];
 
   /// {@macro feed_category}
   const FeedCategory({
@@ -49,7 +40,6 @@ class FeedCategory extends Equatable {
     required this.isSelected,
     required this.enumValue,
     required this.feedPostsStream,
-    required this.imageIcon,
   });
 
   /// returns a new [FeedCategory], with [isSelected] field set to [value].
@@ -61,7 +51,7 @@ class FeedCategory extends Equatable {
   FeedCategory copyWith({
     String? name,
     bool? isSelected,
-    SakhirTopics? enumValue,
+    UmrahtyTopics? enumValue,
     NostrEventsStream? feedPostsStream,
     String? imageIcon,
   }) {
@@ -70,7 +60,6 @@ class FeedCategory extends Equatable {
       isSelected: isSelected ?? this.isSelected,
       enumValue: enumValue ?? this.enumValue,
       feedPostsStream: feedPostsStream ?? this.feedPostsStream,
-      imageIcon: imageIcon ?? this.imageIcon,
     );
   }
 }

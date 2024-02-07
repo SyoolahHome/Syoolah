@@ -23,7 +23,7 @@ class GetStarted extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: 45,
-            child: SakhirButton(
+            child: UmrahtyButton(
               onTap: () {
                 Navigator.of(context).pushNamed(Paths.authChoose);
               },

@@ -17,7 +17,7 @@ class StartButton extends StatelessWidget {
       child: SizedBox(
         height: 45,
         width: double.infinity,
-        child: SakhirButton(
+        child: UmrahtyButton(
           onTap: () {
             Navigator.of(context).pop();
           },

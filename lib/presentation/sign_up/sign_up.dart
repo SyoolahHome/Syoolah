@@ -214,7 +214,7 @@ class SignUp extends StatelessWidget {
                                 .centerTextHorizontalAlignment(context),
                             fit: StackFit.expand,
                             children: <Widget>[
-                              SakhirButton(
+                              UmrahtyButton(
                                 onTap: onMainButtonPressed,
                                 text: textDecider(),
                                 customWidget: customWidgetDecider(),

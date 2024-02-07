@@ -43,7 +43,7 @@ class LndAdressCreationWidget extends StatelessWidget {
               SizedBox(height: 30),
               Align(
                 alignment: Alignment.centerRight,
-                child: SakhirButton(
+                child: UmrahtyButton(
                   onTap: () {
                     Navigator.pop(context);
 

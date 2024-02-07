@@ -1,4 +1,7 @@
+import 'package:ditto/buisness_logic/bottom_bar/bottom_bar_cubit.dart';
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/onboarding/widgets/animated_logo.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,6 +23,55 @@ class LND extends BottomBarScreen {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: LNDAppBar(),
+      body: Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * .9,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedLogo(),
+              SizedBox(height: 20),
+              Animate(
+                effects: const <Effect>[
+                  FadeEffect(),
+                  SlideEffect(begin: Offset(0, 0.45)),
+                ],
+                delay: Animate.defaultDuration * 3,
+                child: Text(
+                  "noLndSupport".tr(),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: Animate(
+                  effects: const <Effect>[
+                    FadeEffect(),
+                    SlideEffect(begin: Offset(0, 0.45)),
+                  ],
+                  delay: Animate.defaultDuration * 6,
+                  child: UmrahtyButton(
+                    isRounded: true,
+                    isSmall: false,
+                    text: "goHome".tr(),
+                    onTap: () {
+                      final cubit = context.read<BottomBarCubit>();
+
+                      cubit.onItemTapped(3);
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: kToolbarHeight),
+            ],
+          ),
+        ),
+      ),
+    );
+
     return BlocProvider<LndCubit>(
       create: (context) => LndCubit(),
       child: Builder(
@@ -84,7 +136,7 @@ class LND extends BottomBarScreen {
                           .withOpacity(.5),
                     ),
                     const SizedBox(height: 32.5),
-                    SakhirButton(
+                    UmrahtyButton(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 10,

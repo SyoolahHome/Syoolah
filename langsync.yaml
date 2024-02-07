@@ -1,7 +1,7 @@
 langsync:
 
-  source: './assets/translations/en.json' 
+  source: './assets/out/en.json' 
 
   output: './assets/out' 
 
-  target: [zh, tr, ar, fr, ru, pt, es, de, it] 
+  target: [ar, fr, it, pt, ru, tr, zh] 

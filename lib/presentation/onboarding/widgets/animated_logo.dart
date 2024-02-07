@@ -5,7 +5,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../constants/app_enums.dart';
 
 class AnimatedLogo extends StatelessWidget {
-  const AnimatedLogo({super.key});
+  const AnimatedLogo({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +16,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: SakhirLogo(
-        width: mq.size.width * .55,
+      child: UmrahtyLogo(
+        width: 125,
       ),
     );
   }
 }
 
-class SakhirLogo extends StatelessWidget {
-  const SakhirLogo({
+class UmrahtyLogo extends StatelessWidget {
+  const UmrahtyLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -42,7 +44,7 @@ class SakhirLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "SakhirLogo",
+        tag: "UmrahtyLogo",
         child: widget,
       );
     } else {

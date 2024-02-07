@@ -76,13 +76,13 @@ class AppUtils with ArabicAdapterUtils {
         return 'assets/logo/white_no_bg.png';
 
       case AppLogoStyle.whiteBig:
-        return 'assets/logo/white_no_bg_big.png';
+        return 'assets/logo/white_no_bg.png';
 
       case AppLogoStyle.black:
-        return 'assets/logo/black_no_bg.png';
+        return 'assets/logo/icon_rounded.png';
 
       case AppLogoStyle.blackBig:
-        return 'assets/logo/black_no_bg_big.png';
+        return 'assets/logo/icon_rounded.png';
 
       default:
         throw Exception('Invalid AppLogoStyle');

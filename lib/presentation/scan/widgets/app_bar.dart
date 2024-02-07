@@ -26,7 +26,7 @@ class CustomAppBar extends PreferredSize {
           Navigator.pop(context);
         },
       ),
-      title: const SakhirLogo(width: logoSize),
+      title: const UmrahtyLogo(width: logoSize),
     );
   }
 

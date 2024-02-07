@@ -41,7 +41,7 @@ class AddNewPost extends StatelessWidget {
           builder: (context, collapseToFullScreen) {
             final bottomSheetHeight = collapseToFullScreen
                 ? MediaQuery.of(context).size.height - 20
-                : 575.0;
+                : 700.0;
 
             return AnimatedContainer(
               duration: Animate.defaultDuration,
@@ -49,10 +49,10 @@ class AddNewPost extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Builder(
                 builder: (_) {
-                  return PatternScaffold(
-                    body: SingleChildScrollView(
-                      child: SizedBox(
-                        height: bottomSheetHeight,
+                  return SingleChildScrollView(
+                    child: PatternScaffold(
+                      body: SizedBox(
+                        // height: bottomSheetHeight,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -76,7 +76,7 @@ class AddNewPost extends StatelessWidget {
                               ),
                             ),
                             PostAssetsSection(),
-                            Spacer(),
+                            SizedBox(height: 20),
                             MarginedBody(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,

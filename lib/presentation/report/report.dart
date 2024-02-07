@@ -61,7 +61,7 @@ class ReportSheetWidget extends StatelessWidget {
                   SizedBox(height: height * 2),
                   SizedBox(
                     width: double.infinity,
-                    child: SakhirButton(
+                    child: UmrahtyButton(
                       onTap: atLeastOneSelected
                           ? () {
                               cubit.submitReport(

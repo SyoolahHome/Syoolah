@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sakhir.app">
+    package="com.umrahty.app">
 <queries>
     <intent>
         <action android:name="android.intent.action.VIEW" />
@@ -22,7 +22,7 @@
 
  
     <application
-        android:label="Sakhir"
+        android:label="Umrahty"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
 
