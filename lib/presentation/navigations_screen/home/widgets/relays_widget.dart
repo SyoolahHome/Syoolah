@@ -29,7 +29,7 @@ class RelaysWidget extends StatelessWidget {
             return Row(
               children: <Widget>[
                 Text(
-                  "${state.relaysConfigurations.map((e) => e.isActive).length}",
+                  "${state.relaysConfigurations.map((e) => e.isActive && e.url.contains("munawarah.me")).length}",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

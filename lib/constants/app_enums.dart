@@ -39,21 +39,15 @@ enum ReportType {
 }
 
 enum UmrahtyTopics {
-  securityAndPrivacy,
-  news,
-  reportsAndResearch,
-  cryptography,
-  artificialIntelligence,
-  networking,
-  programming,
-  technologies,
-  blockchain,
-  distributedSystems,
-  applications,
-  cloudAndVirtualization,
-  dataScience,
-  // iot,
-  publicSafety;
+  umrah,
+  hajj,
+  quranAndSunnah,
+  healthAndWellness,
+  culturalInsights,
+  travelAndAssistance,
+  languageAndCommunication,
+  alertsAndUpdates,
+  sadaqahOpportunities,
 }
 
 enum ImagePickType { banner, avatar }

@@ -35,6 +35,7 @@ class OnBoardingRelays extends StatelessWidget {
                 (index) {
                   final relay =
                       Routing.appCubit.state.relaysConfigurations[index];
+
                   return FutureBuilder(
                     future: Nostr.instance.relaysService
                         .relayInformationsDocumentNip11(relayUrl: relay.url),

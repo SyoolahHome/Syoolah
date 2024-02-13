@@ -42,6 +42,9 @@ class RelaysConfig extends StatelessWidget {
                     state.relaysConfigurations.length,
                     (index) {
                       final current = state.relaysConfigurations[index];
+                      if (!current.url.contains("munawarah.me")) {
+                        return SizedBox.shrink();
+                      }
 
                       return RelayConfigTile(
                         index: index,

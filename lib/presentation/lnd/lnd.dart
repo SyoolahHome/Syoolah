@@ -40,7 +40,7 @@ class LND extends BottomBarScreen {
                 ],
                 delay: Animate.defaultDuration * 3,
                 child: Text(
-                  "noLndSupport".tr(),
+                  "noLndSupport".tr().replaceAll("\n", "\n\n"),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -63,6 +63,32 @@ class LND extends BottomBarScreen {
                       cubit.onItemTapped(3);
                     },
                   ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Animate(
+                effects: const <Effect>[
+                  FadeEffect(),
+                  SlideEffect(begin: Offset(0, 0.45)),
+                ],
+                delay: Animate.defaultDuration * 9,
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "poweredBy".tr(),
+                      ),
+                      const TextSpan(text: " "),
+                      TextSpan(
+                        text: "AbuCash",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
               SizedBox(height: kToolbarHeight),

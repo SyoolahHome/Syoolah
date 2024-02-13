@@ -10,10 +10,10 @@ class AboutUmrahtyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final showOnlyAppDescription =
-        args?["showOnlyAppDescription"] as bool? ?? false;
+    // final args =
+    //     ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    // final showOnlyAppDescription =
+    //     args?["showOnlyAppDescription"] as bool? ?? false;
 
     const height = 10.0;
 
@@ -49,36 +49,36 @@ class AboutUmrahtyContent extends StatelessWidget {
                   )),
             ),
         SizedBox(height: height * 2),
-        if (!showOnlyAppDescription) ...[
-          Animate(
-            effects: <Effect>[
-              FadeEffect(),
-              SlideEffect(
-                begin: Offset(0, 0.5),
-              ),
-            ],
-            delay: 1000.ms,
-            child: HeadTitle(
-              title: "umrahtyNameTitle".tr(),
-              isForSection: true,
-              minimizeFontSizeBy: 8,
-            ),
-          ),
-          SizedBox(height: height),
-          ..."umrahtyNameAboutContent".tr().split("\n").indexedMap(
-                (index, item) => Animate(
-                    delay: (1400 + index * 100).ms,
-                    effects: <Effect>[
-                      FadeEffect(),
-                      SlideEffect(
-                        begin: Offset(0, 0.5),
-                      ),
-                    ],
-                    child: Text(
-                      item + "\n",
-                    )),
-              )
-        ],
+        // if (!showOnlyAppDescription) ...[
+        //   Animate(
+        //     effects: <Effect>[
+        //       FadeEffect(),
+        //       SlideEffect(
+        //         begin: Offset(0, 0.5),
+        //       ),
+        //     ],
+        //     delay: 1000.ms,
+        //     child: HeadTitle(
+        //       title: "umrahtyNameTitle".tr(),
+        //       isForSection: true,
+        //       minimizeFontSizeBy: 8,
+        //     ),
+        //   ),
+        //   SizedBox(height: height),
+        //   ..."umrahtyNameAboutContent".tr().split("\n").indexedMap(
+        //         (index, item) => Animate(
+        //             delay: (1400 + index * 100).ms,
+        //             effects: <Effect>[
+        //               FadeEffect(),
+        //               SlideEffect(
+        //                 begin: Offset(0, 0.5),
+        //               ),
+        //             ],
+        //             child: Text(
+        //               item + "\n",
+        //             )),
+        //       )
+        // ],
       ],
     );
   }

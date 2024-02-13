@@ -33,7 +33,7 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
     subtitle: "chatBeginnerSubtitle".tr(),
     imageIcon: "",
     instruction:
-        "You ar a cyber security expert who will answer all IT and cyber security questions.",
+        "You're an expert assistant that will answer any Umrah and Hajj questions.",
     recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
   );
 
@@ -43,21 +43,21 @@ class ChatModulesCubit extends Cubit<ChatModulesState> {
           subtitle: "chatBeginnerSubtitle".tr(),
           imageIcon: "",
           instruction:
-              "You ar a cyber security expert who will answer all IT and cyber security questions.",
+              "You're an expert assistant that will answer any Umrah and Hajj questions",
           recommendedQuestions: AppConfigs.beginnerRecommendedQuestions,
         ),
         ChatModuleItem.intermediate(
           subtitle: "chatIntermediateSubtitle".tr(),
           imageIcon: "",
           instruction:
-              "You ar a cyber security expert who will answer all IT and cyber security questions.",
+              "You're an expert assistant that will answer any Umrah and Hajj questions",
           recommendedQuestions: AppConfigs.intermediateRecommendQuestions,
         ),
         ChatModuleItem.advanced(
           subtitle: "chatAdvancedSubtitle".tr(),
           imageIcon: "",
           instruction:
-              "You ar a cyber security expert who will answer all IT and cyber security questions.",
+              "You're an expert assistant that will answer any Umrah and Hajj questions",
           recommendedQuestions: AppConfigs.advancedRecommendQuestions,
         ),
       ];
