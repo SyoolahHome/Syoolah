@@ -5,6 +5,7 @@ import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/open_ai/openai.dart';
+import 'package:ditto/services/translator/translator.dart';
 import 'package:ditto/services/utils/alerts_service.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/extensions.dart';
@@ -13,6 +14,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../services/tts/tts.dart';
 
 part 'chat_state.dart';
 
@@ -29,9 +32,13 @@ class ChatCubit extends Cubit<ChatState> {
   /// The focus node associated with the text field that uses the [userMessageController].
   FocusNode? focusNode;
 
+  /// The initial message that will be shown in the text field when the chat screen is opened.
+  final String? initialMessage;
+
   /// {@macro chat_cubit}
   ChatCubit({
     required this.instruction,
+    this.initialMessage,
   }) : super(ChatState.initial()) {
     _init();
   }
@@ -149,6 +156,14 @@ class ChatCubit extends Cubit<ChatState> {
       ..addListener(() {
         print("Text: ${userMessageController!.text}");
       });
+
+    if (initialMessage != null) {
+      Future.delayed(Duration(milliseconds: 100), () {
+        userMessageController!.text = initialMessage!;
+        sendMessageByCurrentUser();
+      });
+    }
+
     focusNode = FocusNode();
 
     stream.where((event) => event.messages.isNotEmpty).distinct(
@@ -285,5 +300,98 @@ class ChatCubit extends Cubit<ChatState> {
       context,
       initialNoteContent: messageToSend,
     );
+  }
+
+  void translateMessage(
+    BuildContext context, {
+    required ChatMessage message,
+  }) async {
+    try {
+      emit(state.copyWith(
+        loadingMessageId: message.id,
+      ));
+
+      final selectedLanguage = await BottomSheetService.showLangSelection(
+        context,
+        initialLang: null,
+      );
+
+      if (selectedLanguage == null) {
+        return;
+      }
+
+      final translatedMessage = await Translator.translate(
+        text: message.message,
+        targetLang: selectedLanguage.name,
+      );
+
+      final newMessages = <ChatMessage>[];
+
+      for (int index = 0; index < state.messages.length; index++) {
+        final current = state.messages[index];
+
+        if (current.id == message.id) {
+          final newMessage = current.copyWith(
+            message: translatedMessage,
+            isTranslated: true,
+          );
+
+          newMessages.add(newMessage);
+        } else {
+          newMessages.add(current);
+        }
+      }
+
+      emit(state.copyWith(messages: newMessages));
+    } catch (e) {
+      debugPrint(e.toString());
+      emit(state.copyWith(
+        errorMessage: 'error'.tr(),
+      ));
+    } finally {
+      emit(state.copyWith(
+        loadingMessageId: "",
+      ));
+    }
+  }
+
+  Future<void> speakMessage(
+    BuildContext context, {
+    required ChatMessage message,
+  }) async {
+    try {
+      emit(state.copyWith(
+        loadingMessageId: message.id,
+        speakingTTS: true,
+      ));
+
+      await TTS.speak(text: message.message);
+    } catch (e) {
+      debugPrint(e.toString());
+      emit(state.copyWith(
+        errorMessage: 'error'.tr(),
+      ));
+    } finally {
+      emit(state.copyWith(
+        loadingMessageId: "",
+        speakingTTS: false,
+      ));
+    }
+  }
+
+  Future<void> stopSpeaking() async {
+    try {
+      await TTS.stop();
+    } catch (e) {
+      debugPrint(e.toString());
+      emit(state.copyWith(
+        errorMessage: 'error'.tr(),
+      ));
+    } finally {
+      emit(state.copyWith(
+        loadingMessageId: "",
+        speakingTTS: false,
+      ));
+    }
   }
 }

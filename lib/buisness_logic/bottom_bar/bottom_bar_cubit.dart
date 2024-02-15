@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../presentation/lnd/lnd.dart';
+import '../../presentation/translation/translation.dart';
 import '../../services/database/local/local_database.dart';
 
 class BottomBarCubit extends Cubit<int> {
@@ -56,11 +57,17 @@ class BottomBarCubit extends Cubit<int> {
         icon: Icons.people_outline_sharp,
         selectedIcon: Icons.people_sharp,
       ),
+      // BottomBarItem(
+      //   screen: LND(),
+      //   label: 'lnd'.tr(),
+      //   icon: FlutterRemix.flashlight_line,
+      //   selectedIcon: FlutterRemix.flashlight_fill,
+      // ),
       BottomBarItem(
-        screen: LND(),
-        label: 'lnd'.tr(),
-        icon: FlutterRemix.flashlight_line,
-        selectedIcon: FlutterRemix.flashlight_fill,
+        screen: Translation(),
+        label: 'translate'.tr(),
+        icon: FlutterRemix.translate_2,
+        selectedIcon: FlutterRemix.translate_2,
       ),
     ];
   }

@@ -46,6 +46,12 @@ class UmrahtyButton extends StatelessWidget {
                 : mainColor ?? Theme.of(context).colorScheme.background,
             elevation: 0,
             shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: .5,
+                color: isOnlyBorder
+                    ? mainColor ?? Theme.of(context).colorScheme.background
+                    : Colors.transparent,
+              ),
               borderRadius: isSmall
                   ? BorderRadius.circular(100)
                   : BorderRadius.circular(10),

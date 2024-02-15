@@ -22,6 +22,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../buisness_logic/lnd/lnd_cubit.dart';
 import '../../constants/app_enums.dart';
+import '../../model/translation_lang.dart';
 import '../../presentation/general/widget/bottom_sheet_title_with_button.dart';
 import '../../presentation/general/widget/margined_body.dart';
 import '../../presentation/general/widget/note_card/wudgets/note_youtube_player.dart';
@@ -31,6 +32,7 @@ import '../../presentation/lnd/widgets/lnd_invoice_adress_prompt copy.dart';
 import '../../presentation/lnd/widgets/user_adress_prompt.dart';
 import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
+import '../../presentation/translation/widgets/widgets/langs_selection.dart';
 
 abstract class BottomSheetService {
   static Future showCreatePostBottomSheet(
@@ -486,6 +488,20 @@ abstract class BottomSheetService {
       context: context,
       builder: (context) {
         return UserLndUsernamePromptWidget();
+      },
+    );
+  }
+
+  static Future<TranslationLang?> showLangSelection(
+    BuildContext context, {
+    required TranslationLang? initialLang,
+  }) {
+    return showModalBottomSheet<TranslationLang>(
+      context: context,
+      builder: (context) {
+        return LangsSelectionWidget(
+          initial: initialLang,
+        );
       },
     );
   }

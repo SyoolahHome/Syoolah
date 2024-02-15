@@ -20,6 +20,9 @@ class CustomTextField extends StatelessWidget {
     this.bgColor,
     this.fontWight,
     this.showClearButton = false,
+    this.readOnly = false,
+    this.maxLines,
+    this.minLines = 1,
   });
 
   final TextEditingController? controller;
@@ -32,7 +35,9 @@ class CustomTextField extends StatelessWidget {
   final Color? bgColor;
   final FontWeight? fontWight;
   final bool showClearButton;
-
+  final bool readOnly;
+  final int? maxLines;
+  final int? minLines;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,9 +57,14 @@ class CustomTextField extends StatelessWidget {
           alignment: Alignment.centerRight,
           children: <Widget>[
             HashTagTextField(
-              minLines: 1,
+              minLines: minLines,
               focusNode: focusNode,
-              maxLines: isMultiline ? 5 : 1,
+              readOnly: readOnly,
+              maxLines: maxLines != null
+                  ? maxLines
+                  : isMultiline
+                      ? 5
+                      : 1,
               decoratedStyle: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: fontWight,

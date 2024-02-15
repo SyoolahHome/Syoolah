@@ -13,15 +13,22 @@ class ChatState extends Equatable {
   /// An error text if it exists.
   final String? errorMessage;
 
+  /// The id of the message that is currently loading.
+  final String loadingMessageId;
+
   /// Weither the response is done from generating or not.
   final bool isDoneFromGeneratingResponse;
+
+  final bool speakingTTS;
 
   /// {@macro chat_state}
   const ChatState({
     this.messages = const [],
     this.currentHint,
     this.errorMessage,
+    this.loadingMessageId = "",
     this.isDoneFromGeneratingResponse = false,
+    this.speakingTTS = false,
   });
 
   @override
@@ -30,6 +37,8 @@ class ChatState extends Equatable {
         currentHint,
         errorMessage,
         isDoneFromGeneratingResponse,
+        loadingMessageId,
+        speakingTTS,
       ];
 
   /// {@macro chat_state}
@@ -38,13 +47,17 @@ class ChatState extends Equatable {
     String? currentHint,
     String? errorMessage,
     bool? isDoneFromGeneratingResponse,
+    String? loadingMessageId,
+    bool? speakingTTS,
   }) {
     return ChatState(
+      loadingMessageId: loadingMessageId ?? this.loadingMessageId,
       messages: messages ?? this.messages,
       currentHint: currentHint ?? this.currentHint,
       errorMessage: errorMessage ?? this.errorMessage,
       isDoneFromGeneratingResponse:
           isDoneFromGeneratingResponse ?? this.isDoneFromGeneratingResponse,
+      speakingTTS: speakingTTS ?? this.speakingTTS,
     );
   }
 

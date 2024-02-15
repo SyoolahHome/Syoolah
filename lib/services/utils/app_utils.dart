@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:ditto/constants/app_configs.dart';
+import 'package:ditto/services/tts/tts.dart';
 import 'package:ditto/services/utils/routing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import '../../constants/app_enums.dart';
 import '../database/local/local_database.dart';
 import '../nostr/nostr_service.dart';
+import '../translator/translator.dart';
 import 'arabix_adapter_utils.dart';
 
 class AppUtils with ArabicAdapterUtils {
@@ -121,6 +123,9 @@ class AppUtils with ArabicAdapterUtils {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    Translator.loadPossibleLanguages();
+    TTS.init();
   }
 
   IconData directionality_arrow_left_fill(BuildContext context) {

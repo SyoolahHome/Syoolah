@@ -47,4 +47,25 @@ class OpenAIService {
   String _extractOnlyResposeMessage(OpenAIStreamChatCompletionModel event) {
     return event.choices.first.delta.content!;
   }
+
+  Future<String> asyncResponse({
+    required String input,
+    required String instruction,
+  }) async {
+    final response = await OpenAI.instance.chat.create(
+      model: modelId,
+      messages: [
+        OpenAIChatCompletionChoiceMessageModel(
+          content: instruction,
+          role: OpenAIChatMessageRole.system,
+        ),
+        OpenAIChatCompletionChoiceMessageModel(
+          content: input,
+          role: OpenAIChatMessageRole.user,
+        ),
+      ],
+    );
+
+    return response.choices.first.message.content;
+  }
 }

@@ -21,12 +21,16 @@ class Chat extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    ChatModuleItem chatModduleItem =
-        (args?['chatModduleItem'] as ChatModuleItem? ??
-            ChatModulesCubit.defaultChatModule);
+    final chatModduleItem = (args?['chatModduleItem'] as ChatModuleItem? ??
+        ChatModulesCubit.defaultChatModule);
+
+    final initialMessage = args?['initialMessage'] as String?;
 
     return BlocProvider<ChatCubit>(
-      create: (context) => ChatCubit(instruction: chatModduleItem.instruction),
+      create: (context) => ChatCubit(
+        instruction: chatModduleItem.instruction,
+        initialMessage: initialMessage,
+      ),
       child: Builder(
         builder: (context) {
           return Scaffold(

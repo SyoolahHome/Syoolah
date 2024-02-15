@@ -2,6 +2,7 @@ import 'package:dart_openai/dart_openai.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/copy_icon.dart';
 import 'package:ditto/presentation/chat/widgets/widgets/reload_icon.dart';
+import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -10,6 +11,9 @@ import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/chat/chat_cubit.dart';
 import 'widgets/post_as_note.dart';
+import 'widgets/speak_icon.dart';
+import 'widgets/stop_speak_icon.dart';
+import 'widgets/translation_icon.dart';
 
 class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget({
@@ -77,31 +81,53 @@ class ChatMessageWidget extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 12.5),
-                    Animate(
-                      effects: const <Effect>[
-                        FadeEffect(),
-                      ],
-                      child: Row(
-                        children: <Widget>[
-                          if (isCurrentUserMessage) ...<Widget>[
-                            ReloadIcon(message: message),
-                          ] else ...<Widget>[
-                            CopyIcon(message: message),
-                            SizedBox(width: 10.0),
-                            PostDirectlyAsNote(message: message),
+                    BlocBuilder<ChatCubit, ChatState>(
+                      builder: (context, state) {
+                        return Animate(
+                          effects: const <Effect>[
+                            FadeEffect(),
                           ],
-                          Spacer(),
-                          Align(
-                            alignment: isCurrentUserMessage
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            child: NoteDateOfCreationAgo(
-                              createdAt: message.createdAt,
-                              isMedium: true,
-                            ),
+                          child: Row(
+                            children: <Widget>[
+                              if (isCurrentUserMessage) ...<Widget>[
+                                ReloadIcon(message: message),
+                              ] else ...<Widget>[
+                                if (state.loadingMessageId.isNotEmpty &&
+                                        message.id == state.loadingMessageId ||
+                                    state.speakingTTS) ...[
+                                  const LoadingWidget(
+                                    size: 15,
+                                  ),
+                                  if (state.speakingTTS) ...[
+                                    SizedBox(width: 10.0),
+                                    StopSpeakingIcon(),
+                                  ],
+                                ] else ...[
+                                  CopyIcon(message: message),
+                                  SizedBox(width: 10.0),
+                                  PostDirectlyAsNote(message: message),
+                                  if (!message.isTranslated) ...[
+                                    SizedBox(width: 10.0),
+                                    TranslationIcon(message: message),
+                                  ],
+                                  SizedBox(width: 10.0),
+                                  SpeakIcon(message: message),
+                                ]
+                              ],
+                              Spacer(),
+                              Align(
+                                alignment: isCurrentUserMessage
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                child: NoteDateOfCreationAgo(
+                                  createdAt: message.createdAt,
+                                  isMedium: true,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),

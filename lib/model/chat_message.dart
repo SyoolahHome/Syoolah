@@ -17,12 +17,16 @@ class ChatMessage extends Equatable {
   /// THe date of creation of this message
   final DateTime createdAt;
 
+  /// A flag that indicates if the message is translated or not.
+  final bool isTranslated;
+
   /// {@macro chat_message}
   const ChatMessage({
     required this.message,
     required this.role,
     required this.id,
     required this.createdAt,
+    this.isTranslated = false,
   });
 
   @override
@@ -31,6 +35,7 @@ class ChatMessage extends Equatable {
         role,
         id,
         createdAt,
+        isTranslated,
       ];
 
   /// {@macro chat_message}
@@ -39,12 +44,14 @@ class ChatMessage extends Equatable {
     OpenAIChatMessageRole? role,
     String? id,
     DateTime? createdAt,
+    bool? isTranslated,
   }) {
     return ChatMessage(
       message: message ?? this.message,
       role: role ?? this.role,
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
+      isTranslated: isTranslated ?? this.isTranslated,
     );
   }
 
@@ -106,6 +113,5 @@ class ChatMessage extends Equatable {
       id: id,
       createdAt: createdAt ?? DateTime.now(),
     );
-    ;
   }
 }

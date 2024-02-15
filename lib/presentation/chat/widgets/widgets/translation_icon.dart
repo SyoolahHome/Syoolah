@@ -1,11 +1,12 @@
+import 'package:ditto/model/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import '../../../../buisness_logic/chat/chat_cubit.dart';
-import '../../../../model/chat_message.dart';
 
-class PostDirectlyAsNote extends StatelessWidget {
-  const PostDirectlyAsNote({
+import '../../../../buisness_logic/chat/chat_cubit.dart';
+
+class TranslationIcon extends StatelessWidget {
+  const TranslationIcon({
     super.key,
     required this.message,
   });
@@ -16,9 +17,14 @@ class PostDirectlyAsNote extends StatelessWidget {
     final cubit = context.read<ChatCubit>();
 
     return GestureDetector(
-      onTap: () => cubit.postMessageAsNoteOfCurrentUser(context, message),
+      onTap: () {
+        cubit.translateMessage(
+          context,
+          message: message,
+        );
+      },
       child: Icon(
-        FlutterRemix.quill_pen_fill,
+        FlutterRemix.translate,
         size: 14.0,
         color: Theme.of(context).colorScheme.onSecondary,
       ),
