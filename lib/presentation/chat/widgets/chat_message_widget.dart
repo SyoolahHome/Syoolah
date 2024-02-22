@@ -93,7 +93,7 @@ class ChatMessageWidget extends StatelessWidget {
                                 ReloadIcon(message: message),
                               ] else ...<Widget>[
                                 if (state.loadingMessageId.isNotEmpty &&
-                                        message.id == state.loadingMessageId ||
+                                    message.id == state.loadingMessageId &&
                                     state.speakingTTS) ...[
                                   const LoadingWidget(
                                     size: 15,

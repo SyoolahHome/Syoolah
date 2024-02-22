@@ -1,3 +1,4 @@
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -32,7 +33,8 @@ class CopyButtonOverlay extends StatelessWidget {
       children: <Widget>[
         child,
         Positioned(
-          right: 5,
+          left: AppUtils.instance.isArabic(context) ? 5 : null,
+          right: AppUtils.instance.isArabic(context) ? null : 5,
           bottom: 5,
           child: Animate(
             target: show ? 1 : 0,

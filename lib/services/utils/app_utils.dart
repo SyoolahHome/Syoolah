@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/services/tts/tts.dart';
@@ -105,6 +106,7 @@ class AppUtils with ArabicAdapterUtils {
 
   Future<void> initialize() async {
     final binding = WidgetsFlutterBinding.ensureInitialized();
+    timeago.setLocaleMessages("ar", timeago.ArMessages());
 
     HttpOverrides.global = MyHttpOverrides();
 

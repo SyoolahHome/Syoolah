@@ -109,7 +109,7 @@ class CustomDrawer extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: MarginedBody.defaultMargin,
                 child: Text(
-                  "Munwarah App ${AppConfigs.version}",
+                  "${AppConfigs.appName} App ${AppConfigs.version}",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                         fontWeight: FontWeight.w300,

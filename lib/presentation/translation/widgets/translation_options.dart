@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 import '../../../buisness_logic/translation/translation_cubit.dart';
+import '../../../services/utils/app_utils.dart';
 
 class TranslationOptions extends StatelessWidget {
   const TranslationOptions({super.key});
@@ -21,11 +22,13 @@ class TranslationOptions extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 0),
           onTap: () {},
           iconSize: 22,
-          text: "Auto Detect",
+          text: "auto_detect".tr(),
           isOnlyBorder: true,
         ),
         SizedBox(width: 5),
-        Icon(FlutterRemix.arrow_right_s_fill),
+        Icon(AppUtils.instance.isArabic(context)
+            ? FlutterRemix.arrow_left_s_fill
+            : FlutterRemix.arrow_right_s_fill),
         SizedBox(width: 5),
         BlocSelector<TranslationCubit, TranslationState, TranslationLang>(
           selector: (state) => state.selectedTargetLang,

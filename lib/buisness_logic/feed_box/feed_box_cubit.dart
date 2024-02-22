@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/buisness_logic/global/global_cubit.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
@@ -11,6 +13,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+
+import '../../services/tts/tts.dart';
+import '../translation/translation_cubit.dart';
 
 part 'feed_box_state.dart';
 

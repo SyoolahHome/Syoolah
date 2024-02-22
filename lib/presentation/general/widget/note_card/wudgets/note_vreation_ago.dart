@@ -1,4 +1,5 @@
 import 'package:ditto/services/utils/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
@@ -31,7 +32,7 @@ class NoteDateOfCreationAgo extends StatelessWidget {
           ),
           SizedBox(width: isSmall ? 2.5 : 5),
           Text(
-            createdAt.toReadableString(),
+            createdAt.toReadableString(context.locale.languageCode),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: fontSizeDecider(),
                   color: Theme.of(context).colorScheme.background,

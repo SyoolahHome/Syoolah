@@ -8,6 +8,10 @@ import 'package:ditto/services/nostr/nostr_service.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+import '../../services/tts/tts.dart';
+import '../translation/translation_cubit.dart';
 
 part 'note_card_state.dart';
 
@@ -139,6 +143,46 @@ class NoteCardCubit extends Cubit<NoteCardState> {
     NostrService.instance.send.sendRepostEventFromCurrentUser(note);
     emit(state.copyWith(success: "repostSuccess".tr(), markAsReposted: true));
     emit(state.copyWith());
+  }
+
+  void speak(
+    BuildContext context, {
+    required VoidCallback onError,
+  }) async {
+    try {
+      emit(state.copyWith(
+        isSpeaking: true,
+      ));
+
+      await TTS.speak(
+        text: note.noteOnly,
+        context: context,
+      );
+    } catch (e) {
+      debugPrint("Error: $e");
+
+      onError();
+    } finally {
+      emit(state.copyWith(
+        isSpeaking: false,
+      ));
+    }
+  }
+
+  void translate(
+    BuildContext context, {
+    required VoidCallback onError,
+    required VoidCallback onReadyToNavigateToTranslation,
+  }) {
+    try {
+      TranslationCubit.initialInputText = note.noteOnly;
+
+      onReadyToNavigateToTranslation();
+    } catch (e) {
+      debugPrint("Error: $e");
+
+      onError();
+    }
   }
 
   void _handleStreams() {

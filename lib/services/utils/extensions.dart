@@ -77,9 +77,10 @@ extension NotesListExtension on List<Note> {
 }
 
 extension DateTimeExt on DateTime {
-  String toReadableString() {
+  String toReadableString(String locale) {
     return timeago.format(
       this,
+      locale: locale,
       allowFromNow: true,
     );
   }
@@ -122,7 +123,7 @@ extension DateTimeExt on DateTime {
           : "nSecond".tr(args: ["$seconds"]);
     }
 
-    return 'Last updated $memebership ago';
+    return 'last_updated'.tr(args: [memebership]);
   }
 
   String get formatted {

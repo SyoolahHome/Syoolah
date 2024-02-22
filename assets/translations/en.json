@@ -349,5 +349,8 @@
   "select_lang": "Select Language",
   "search_lang": "Search from {} languages",
   "lang_selected": "Language selected: {}",
-  "available_voices": "Available Voices"
+  "available_voices": "Available Voices",
+  "last_updated": "Last updated {} ago",
+  "auto_detect": "Auto Detect",
+  "translation": "Translation"
 }

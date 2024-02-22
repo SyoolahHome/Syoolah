@@ -25,6 +25,9 @@ class NoteCardState extends Equatable {
   /// A local variable to simulate the user action when the repost icon button is pressed.
   final bool markAsReposted;
 
+  ///
+  final bool isSpeaking;
+
   @override
   List<Object?> get props => [
         noteOwnerMetadata,
@@ -34,6 +37,7 @@ class NoteCardState extends Equatable {
         error,
         success,
         markAsReposted,
+        isSpeaking,
       ];
 
   /// {@macro note_card_state}
@@ -45,6 +49,7 @@ class NoteCardState extends Equatable {
     this.error,
     this.success,
     this.markAsReposted = false,
+    this.isSpeaking = false,
   });
 
   /// Copies the current state with some new values.
@@ -56,6 +61,7 @@ class NoteCardState extends Equatable {
     String? error,
     String? success,
     bool? markAsReposted,
+    bool? isSpeaking,
   }) {
     return NoteCardState(
       noteOwnerMetadata: noteOwnerMetadata ?? this.noteOwnerMetadata,
@@ -65,6 +71,7 @@ class NoteCardState extends Equatable {
       error: error,
       success: success,
       markAsReposted: markAsReposted ?? this.markAsReposted,
+      isSpeaking: isSpeaking ?? this.isSpeaking,
     );
   }
 

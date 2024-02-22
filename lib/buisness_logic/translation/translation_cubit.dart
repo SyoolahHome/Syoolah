@@ -19,6 +19,8 @@ import '../../services/translator/translator.dart';
 part 'translation_state.dart';
 
 class TranslationCubit extends Cubit<TranslationState> {
+  static String? initialInputText;
+
   late final TextEditingController inputController;
   late final TextEditingController outputController;
 
@@ -37,6 +39,12 @@ class TranslationCubit extends Cubit<TranslationState> {
           inputText: inputController.text,
         ));
       });
+
+    if (initialInputText != null) {
+      inputController.text = initialInputText!;
+      initialInputText = null;
+    }
+
     outputController = TextEditingController();
   }
 

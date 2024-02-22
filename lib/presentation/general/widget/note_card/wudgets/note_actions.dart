@@ -1,12 +1,16 @@
 import 'package:ditto/buisness_logic/feed_box/feed_box_cubit.dart';
 import 'package:ditto/buisness_logic/note_card_cubit/note_card_cubit.dart';
 import 'package:ditto/model/note.dart';
+import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/note_vreation_ago.dart';
+import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+import '../../../../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
 import '../../../../../constants/app_colors.dart';
 
 class NoteActions extends StatelessWidget {
@@ -107,6 +111,59 @@ class NoteActions extends StatelessWidget {
                       );
                     },
                   ),
+                  if (note.noteOnly.isNotEmpty) ...[
+                    const SizedBox(width: 10),
+                    BlocBuilder<NoteCardCubit, NoteCardState>(
+                      builder: (context, state) {
+                        return Action(
+                          widget: state.isSpeaking
+                              ? SizedBox(
+                                  height: 7.5,
+                                  width: 7.5,
+                                  child: LoadingWidget(
+                                    strokeWidth: 0.5,
+                                  ),
+                                )
+                              : null,
+                          icon: Icons.multitrack_audio_rounded,
+                          onTap: () {
+                            cubit.speak(
+                              context,
+                              onError: () {
+                                SnackBars.text(context, "error".tr());
+                              },
+                            );
+                          },
+                          bgColor: Theme.of(context).colorScheme.onPrimary,
+                          color: DefaultTextStyle.of(context).style.color!,
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    BlocBuilder<NoteCardCubit, NoteCardState>(
+                      builder: (context, state) {
+                        return Action(
+                          icon: FlutterRemix.translate,
+                          onTap: () {
+                            cubit.translate(
+                              context,
+                              // note: note,
+                              onError: () {
+                                SnackBars.text(context, "error".tr());
+                              },
+                              onReadyToNavigateToTranslation: () {
+                                final cubit = context.read<BottomBarCubit>();
+
+                                cubit.onItemTapped(4);
+                              },
+                            );
+                          },
+                          bgColor: Theme.of(context).colorScheme.onPrimary,
+                          color: DefaultTextStyle.of(context).style.color!,
+                        );
+                      },
+                    ),
+                  ],
                   const SizedBox(width: 10),
                   BlocBuilder<NoteCardCubit, NoteCardState>(
                     builder: (context, state) {
@@ -141,6 +198,7 @@ class Action extends StatelessWidget {
     required this.color,
     this.text,
     required this.icon,
+    this.widget,
   });
 
   final void Function() onTap;
@@ -148,7 +206,7 @@ class Action extends StatelessWidget {
   final Color color;
   final String? text;
   final IconData icon;
-
+  final Widget? widget;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -166,11 +224,12 @@ class Action extends StatelessWidget {
               color: bgColor,
             ),
             child: Center(
-              child: Icon(
-                icon,
-                size: 12.5,
-                color: color,
-              ),
+              child: widget ??
+                  Icon(
+                    icon,
+                    size: 12.5,
+                    color: color,
+                  ),
             ),
           ),
         ),

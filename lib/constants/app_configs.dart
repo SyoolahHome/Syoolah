@@ -20,6 +20,7 @@ import '../model/report_option.dart';
 import 'app_enums.dart';
 
 abstract class AppConfigs {
+  static const appName = "Umrahty";
   static const relaysUrls = [
     'wss://relay.munawarah.me',
     'wss://umrah.relay.munawarah.me',
@@ -108,7 +109,7 @@ abstract class AppConfigs {
 
   static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
   static String translationsPath = 'assets/translations';
-  static Locale fallbackLocale = const Locale('en');
+  static Locale fallbackLocale = const Locale('ar');
 
   static final feedsSearchOptions = <SearchOption>[
     SearchOption(

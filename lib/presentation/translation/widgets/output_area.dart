@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/services/utils/snackbars.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,7 @@ class OutputArea extends StatelessWidget {
                 controller: cubit.outputController,
                 isMultiline: true,
                 minLines: 5,
-                hint: isLoading ? "" : "Translation",
+                hint: isLoading ? "" : "translation".tr(),
               ),
             ),
             Animate(

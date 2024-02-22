@@ -1,5 +1,6 @@
 import 'package:ditto/presentation/general/loading_widget.dart';
 import 'package:ditto/presentation/general/widget/bottom_sheet_title_with_button.dart';
+import 'package:ditto/services/utils/app_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,9 @@ class ElevenLabsVoicesSelection extends StatelessWidget {
                                       ?.copyWith(),
                                 ),
                                 trailing: Icon(
-                                  FlutterRemix.arrow_right_s_line,
+                                  AppUtils.instance.isArabic(context)
+                                      ? FlutterRemix.arrow_left_s_line
+                                      : FlutterRemix.arrow_right_s_line,
                                   size: 30,
                                 ),
                               ),
