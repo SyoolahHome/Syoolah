@@ -58,7 +58,7 @@ class CopyButtonOverlay extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      if (audioOn || disableCopyAndSound) {
+                      if (disableCopyAndSound) {
                         return;
                       }
 

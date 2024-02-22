@@ -21,7 +21,6 @@ part 'translation_state.dart';
 class TranslationCubit extends Cubit<TranslationState> {
   late final TextEditingController inputController;
   late final TextEditingController outputController;
-  late final FocusNode inputFocusNode;
 
   TranslationCubit()
       : super(TranslationInitial(
@@ -38,7 +37,6 @@ class TranslationCubit extends Cubit<TranslationState> {
           inputText: inputController.text,
         ));
       });
-    inputFocusNode = FocusNode();
     outputController = TextEditingController();
   }
 
@@ -103,16 +101,12 @@ class TranslationCubit extends Cubit<TranslationState> {
       emit(state.copyWith(selectedTargetLang: result));
 
       onLangSelected(result);
-      inputFocusNode.unfocus(
-        disposition: UnfocusDisposition.scope,
-      );
     }
   }
 
   void clearInput() {
     inputController.clear();
     outputController.clear();
-    inputFocusNode.dispose();
 
     emit(state.copyWith(
       error: null,
@@ -126,18 +120,17 @@ class TranslationCubit extends Cubit<TranslationState> {
     ));
   }
 
-  Future<void> speakInput() async {
+  Future<void> speakInput(BuildContext Function() context) async {
     try {
       emit(state.copyWith(
         speakingInput: true,
       ));
 
-      final currentLang = state.selectedTargetLang.code;
       final inputText = state.inputText;
 
       await TTS.speak(
         text: inputText,
-        language: currentLang,
+        context: context(),
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -151,18 +144,19 @@ class TranslationCubit extends Cubit<TranslationState> {
     }
   }
 
-  void speakOutput() async {
+  void speakOutput(
+    BuildContext Function() context,
+  ) async {
     try {
       emit(state.copyWith(
         speakingOutput: true,
       ));
 
-      final currentLang = state.selectedTargetLang.code;
       final outputText = state.translatedText;
 
       await TTS.speak(
         text: outputText,
-        language: currentLang,
+        context: context(),
       );
     } catch (e) {
       debugPrint(e.toString());

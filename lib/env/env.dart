@@ -10,4 +10,6 @@ abstract class Env {
 
   @EnviedField(varName: 'APP_VERSION')
   static const appVersion = _Env.appVersion;
+
+  static const elevenLabsApiKey = _Env.elevenLabsApiKey;
 }

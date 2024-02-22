@@ -29,7 +29,9 @@
     <application
         android:label="Umrahty"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:usesCleartextTraffic="true"
+        >
 
         <activity
             android:name=".MainActivity"

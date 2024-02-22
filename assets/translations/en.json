@@ -348,5 +348,6 @@
   "translate": "Translate",
   "select_lang": "Select Language",
   "search_lang": "Search from {} languages",
-  "lang_selected": "Language selected: {}"
+  "lang_selected": "Language selected: {}",
+  "available_voices": "Available Voices"
 }

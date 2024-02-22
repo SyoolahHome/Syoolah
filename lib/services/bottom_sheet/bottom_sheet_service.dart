@@ -33,6 +33,7 @@ import '../../presentation/lnd/widgets/user_adress_prompt.dart';
 import '../../presentation/onboarding_search/widgets/sheet_metadata.dart';
 import '../../presentation/report/report.dart';
 import '../../presentation/translation/widgets/widgets/langs_selection.dart';
+import '../../presentation/voices_selection/voices_selection.dart';
 
 abstract class BottomSheetService {
   static Future showCreatePostBottomSheet(
@@ -503,6 +504,13 @@ abstract class BottomSheetService {
           initial: initialLang,
         );
       },
+    );
+  }
+
+  static Future<String?> getVoiceId(BuildContext context) {
+    return showModalBottomSheet<String>(
+      context: context,
+      builder: (context) => ElevenLabsVoicesSelection(),
     );
   }
 }

@@ -56,7 +56,7 @@ class OutputArea extends StatelessWidget {
               onSoundTap: state.translatedText.isEmpty || isLoading
                   ? null
                   : () {
-                      cubit.speakOutput();
+                      cubit.speakOutput(() => context);
                     },
               child: CustomTextField(
                 readOnly: true,

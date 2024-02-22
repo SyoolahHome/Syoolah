@@ -365,7 +365,10 @@ class ChatCubit extends Cubit<ChatState> {
         speakingTTS: true,
       ));
 
-      await TTS.speak(text: message.message);
+      await TTS.speak(
+        text: message.message,
+        context: context,
+      );
     } catch (e) {
       debugPrint(e.toString());
       emit(state.copyWith(

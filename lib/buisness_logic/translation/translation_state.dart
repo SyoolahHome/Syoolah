@@ -45,7 +45,7 @@ class TranslationState extends Equatable {
     return TranslationState(
       selectedTargetLang: selectedTargetLang ?? this.selectedTargetLang,
       isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      error: error,
       translatedText: translatedText ?? this.translatedText,
       inputText: inputText ?? this.inputText,
       langsLoaderReady: langsLoaderReady ?? this.langsLoaderReady,

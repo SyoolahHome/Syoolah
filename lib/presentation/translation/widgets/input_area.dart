@@ -32,10 +32,9 @@ class InputArea extends StatelessWidget {
             cubit.clearInput();
           },
           onSoundTap: () {
-            cubit.speakInput();
+            cubit.speakInput(() => context);
           },
           child: CustomTextField(
-            focusNode: cubit.inputFocusNode,
             isMultiline: true,
             bgColor: Theme.of(context)
                 .inputDecorationTheme

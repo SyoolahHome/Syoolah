@@ -54,7 +54,7 @@ class ChatState extends Equatable {
       loadingMessageId: loadingMessageId ?? this.loadingMessageId,
       messages: messages ?? this.messages,
       currentHint: currentHint ?? this.currentHint,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: errorMessage,
       isDoneFromGeneratingResponse:
           isDoneFromGeneratingResponse ?? this.isDoneFromGeneratingResponse,
       speakingTTS: speakingTTS ?? this.speakingTTS,
