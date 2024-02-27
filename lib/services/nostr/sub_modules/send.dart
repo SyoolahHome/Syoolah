@@ -37,7 +37,7 @@ class NostrServiceSend {
     );
 
     final eventTags = [
-      ["t", "globalAlIttihadApp"]
+      ["t", "globalAlIttihadApp_1"]
     ];
 
     if (tags != null) {
