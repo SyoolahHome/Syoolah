@@ -2,7 +2,7 @@ import 'package:ditto/buisness_logic/app/app_cubit.dart';
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/buisness_logic/home_page_after_login/home_page_after_login_cubit.dart';
 import 'package:ditto/buisness_logic/on_boarding/on_boarding_cubit.dart';
-import 'package:ditto/presentation/about_umrahty/about_umrahty.dart';
+import 'package:ditto/presentation/about_app/about_app.dart';
 import 'package:ditto/presentation/auth_choose/auth_choose.dart';
 import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
@@ -30,7 +30,6 @@ import '../../presentation/lnd_creation_success/lnd_creation_success.dart';
 import '../../presentation/lnd_info_from/lnd_info_from.dart';
 import '../../presentation/nip05/nip05.dart';
 import '../../presentation/note_comments_section/note_comments_section.dart';
-import '../../presentation/tangem_auth/tangem_auth.dart';
 import '../../presentation/zaplocker_dashboard/zaplocker_dashboard.dart';
 
 abstract class Routing {
@@ -43,7 +42,7 @@ abstract class Routing {
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
-    Paths.aboutUmrahty: (context) => const AboutUmrahty(),
+    Paths.aboutKeshi: (context) => const AboutKeshi(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentSignUp: (context) => const ExistentSignUp(),
@@ -60,7 +59,6 @@ abstract class Routing {
           onAccept: (v) {},
         ),
     Paths.nip05Verification: (context) => const Nip05Verification(),
-    Paths.tangemAuth: (context) => const TangemAuth(),
     Paths.lndInfoFrom: (context) => LndInfoFrom(),
     Paths.lndCreationSuccess: (context) => LndCreationSuccess(),
     Paths.lndLoading: (context) => LndLoading(),

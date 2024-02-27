@@ -26,10 +26,22 @@ class AvatarUpload extends StatelessWidget {
                     fit: StackFit.expand,
                     alignment: Alignment.center,
                     children: <Widget>[
-                      Image.file(
-                        state.pickedImage!,
-                        fit: BoxFit.cover,
-                      ),
+                      FutureBuilder(
+                          future: state.pickedImage!.readAsBytes(),
+                          builder: (context, state) {
+                            if (state.connectionState ==
+                                ConnectionState.waiting) {
+                              return CircularProgressIndicator();
+                            }
+                            if (state.connectionState == ConnectionState.done) {
+                              return Image.memory(
+                                state.data!,
+                                fit: BoxFit.cover,
+                              );
+                            }
+
+                            return SizedBox.shrink();
+                          }),
                       GestureDetector(
                         onTap: () {
                           context.read<AuthCubit>().removePickedImage();

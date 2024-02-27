@@ -92,7 +92,7 @@ class Nip05Verification extends StatelessWidget {
                         margin: EdgeInsets.symmetric(
                           horizontal: MarginedBody.defaultMargin.right,
                         ),
-                        child: UmrahtyButton(
+                        child: KeshiButton(
                           additonalFontSize: 1,
                           onTap: () {
                             cubit.handleNip05Verification(

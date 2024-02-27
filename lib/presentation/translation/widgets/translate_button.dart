@@ -29,7 +29,7 @@ class TranslateButton extends StatelessWidget {
             effects: [
               FadeEffect(),
             ],
-            child: UmrahtyButton(
+            child: KeshiButton(
               icon: FlutterRemix.translate,
               onTap: allowBtnToBePressed ? cubit.applyTranslation : null,
               text: "translate".tr(),

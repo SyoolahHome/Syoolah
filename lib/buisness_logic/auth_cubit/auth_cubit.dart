@@ -219,9 +219,8 @@ class AuthCubit extends Cubit<AuthState> {
         source: source,
       );
       if (pickedFile != null) {
-        final image = File(pickedFile.path);
         emit(
-          state.copyWith(pickedImage: image),
+          state.copyWith(pickedImage: pickedFile),
         );
       }
     } catch (e) {
@@ -314,7 +313,7 @@ class AuthCubit extends Cubit<AuthState> {
       //   title: "welcome".tr(),
       //   subtitle: "welcomeSubtitle".tr(),
       //   widgetBody: const Center(
-      //     child: UmrahtyLogo(
+      //     child: KeshiLogo(
       //       width: 140,
       //       isHero: false,
       //     ),

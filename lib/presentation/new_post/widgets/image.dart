@@ -116,12 +116,27 @@ class PostImage extends NewPostAssetWidget {
                                                 const BorderRadius.all(
                                               Radius.circular(10),
                                             ),
-                                            child: Image.file(
-                                              current,
-                                              height: 75,
-                                              width: 75,
-                                              fit: BoxFit.cover,
-                                            ),
+                                            child: FutureBuilder(
+                                                future: current.readAsBytes(),
+                                                builder: (context, state) {
+                                                  if (state.connectionState ==
+                                                      ConnectionState.waiting) {
+                                                    return const CircularProgressIndicator();
+                                                  }
+
+                                                  if (state.connectionState ==
+                                                      ConnectionState.done) {
+                                                    return Image.memory(
+                                                      state.data!,
+                                                      height: 75,
+                                                      width: 75,
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  }
+
+                                                  return const SizedBox
+                                                      .shrink();
+                                                }),
                                           ),
                                           IconButton(
                                             iconSize: 15,

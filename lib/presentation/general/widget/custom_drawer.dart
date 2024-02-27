@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const UmrahtyLogo(width: logoSize),
+                    const KeshiLogo(width: logoSize),
                     IconButton(
                       style: IconButton.styleFrom(
                         backgroundColor: Theme.of(context)

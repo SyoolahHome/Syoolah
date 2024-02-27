@@ -62,7 +62,7 @@ class NoteAvatarAndName extends StatelessWidget {
             ),
         ],
         if (showFollowButton) ...<Widget>[
-          UmrahtyButton(
+          KeshiButton(
             isSmall: true,
             text: context
                     .read<UsersListToFollowCubit>()

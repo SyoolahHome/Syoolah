@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -109,16 +111,31 @@ class Note extends Equatable {
 
   // generate fromJson method
   factory Note.fromJson(Map<String, dynamic> json) {
-    return Note(
-      event: NostrEvent.deserialized(json['event'] as String),
-      links: json['links'] != null ? List<String>.from(json['links']) : [],
-      noteOnly: json['noteOnly'] as String,
-      imageLinks: json['imageLinks'] != null
-          ? List<String>.from(json['imageLinks'])
-          : [],
-      youtubeVideoLinks: json['youtubeVideoLinks'] != null
-          ? List<String>.from(json['youtubeVideoLinks'])
-          : [],
+    final globalDecoded = jsonDecode(json['event'] as String) as List;
+    final decoded = globalDecoded.last as Map<String, dynamic>;
+
+    final ev = NostrEvent(
+      content: decoded['content'] as String,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(
+        decoded['created_at'] * 1000,
+      ),
+      id: decoded['id'] as String,
+      pubkey: decoded['pubkey'] as String,
+      kind: decoded['kind'] as int,
+      sig: decoded['sig'] as String,
+      tags: List<List<String>>.from(
+        (decoded['tags'] as List).map(
+          (nestedElem) => (nestedElem as List)
+              .map(
+                (nestedElemContent) => nestedElemContent.toString(),
+              )
+              .toList(),
+        ),
+      ),
+      subscriptionId: null,
+      ots: null,
     );
+
+    return Note.fromEvent(ev);
   }
 }

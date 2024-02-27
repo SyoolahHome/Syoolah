@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class UmrahtyButton extends StatelessWidget {
-  const UmrahtyButton({
+class KeshiButton extends StatelessWidget {
+  const KeshiButton({
     super.key,
     required this.onTap,
     this.text,
@@ -126,6 +126,8 @@ class UmrahtyButton extends StatelessWidget {
                           : Theme.of(context).colorScheme.onBackground,
                       fontSize: (isSmall ? 11 : 17) + additonalFontSize,
                       fontWeight: FontWeight.w400,
+                      fontFamily:
+                          Theme.of(context).textTheme.bodyText1!.fontFamily,
                     ),
                   ),
                 if (text != null && icon != null) const SizedBox(width: 7.5),
@@ -150,13 +152,13 @@ class UmrahtyButton extends StatelessWidget {
     );
   }
 
-  factory UmrahtyButton.bottomSheetApply({
+  factory KeshiButton.bottomSheetApply({
     required String buttonText,
     required Locale locale,
     required bool isCurrentApplied,
     required void Function() onTap,
   }) {
-    return UmrahtyButton(
+    return KeshiButton(
       onTap: () {
         if (isCurrentApplied) {
           return;

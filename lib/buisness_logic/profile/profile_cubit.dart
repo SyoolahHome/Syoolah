@@ -83,10 +83,10 @@ class ProfileCubit extends Cubit<ProfileState> {
       if (pickedImage != null) {
         switch (imagePickType) {
           case ImagePickType.avatar:
-            emit(state.copyWith(pickedAvatarImage: File(pickedImage.path)));
+            emit(state.copyWith(pickedAvatarImage: pickedImage));
             break;
           case ImagePickType.banner:
-            emit(state.copyWith(pickedBannerImage: File(pickedImage.path)));
+            emit(state.copyWith(pickedBannerImage: pickedImage));
             break;
 
           default:
@@ -212,7 +212,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       final pickedImage =
           await imagePicker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
-        emit(state.copyWith(pickedBannerImage: File(pickedImage.path)));
+        emit(state.copyWith(pickedBannerImage: pickedImage));
       }
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));

@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../chat/chat.dart';
-import '../../chat_modules/chat_modules.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({
@@ -38,8 +37,7 @@ class CustomBottomBar extends StatelessWidget {
             animationDuration: Animate.defaultDuration,
             destinations: items.indexedMap(
               (index, item) {
-                final isImam =
-                    item.screen is ChatModules && item.svgIconPath != null;
+                final isImam = index == 2 && item.svgIconPath != null;
 
                 Widget possibleWidget = NavigationDestination(
                   icon: isImam

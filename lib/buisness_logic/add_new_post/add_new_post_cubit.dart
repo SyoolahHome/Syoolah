@@ -108,7 +108,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
     try {
       final imagePicker = ImagePicker();
       final images = await imagePicker.pickMultiImage();
-      emit(state.copyWith(pickedImages: images.toListOfFiles()));
+      emit(state.copyWith(pickedImages: images));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
@@ -149,7 +149,7 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
       return;
     }
 
-    final newList = <File>[];
+    final newList = <XFile>[];
     for (int index = 0; index < pickedImages.length; index++) {
       final isTargetItem = imageIndex == index;
       final current = pickedImages[index];
@@ -264,9 +264,15 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
       final linesCount = lines.length;
 
       if (linesCount >= 2) {
-        emit(state.copyWith(collapseToFullScreen: true));
+        emit(state.copyWith(
+          collapseToFullScreen: true,
+          pickedImages: state.pickedImages,
+        ));
       } else {
-        emit(state.copyWith(collapseToFullScreen: false));
+        emit(state.copyWith(
+          collapseToFullScreen: false,
+          pickedImages: state.pickedImages,
+        ));
       }
     });
   }

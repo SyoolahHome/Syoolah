@@ -60,7 +60,7 @@ class PostButton extends StatelessWidget {
           builder: (_, state) {
             return SizedBox(
               height: 40,
-              child: UmrahtyButton(
+              child: KeshiButton(
                 isSmall: true,
                 onTap: () {
                   cubit.createNote();

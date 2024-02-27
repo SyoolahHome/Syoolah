@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class UmrahtyTitle extends StatelessWidget {
-  const UmrahtyTitle({
+class KeshiTitle extends StatelessWidget {
+  const KeshiTitle({
     super.key,
     this.style,
     this.animate = true,

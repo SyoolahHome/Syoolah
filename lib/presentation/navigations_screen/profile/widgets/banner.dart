@@ -19,7 +19,7 @@ class ProfileBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
-    return child;
+    // return child;
 
     Future<void> onFullView() async {
       Navigator.of(context).push(
@@ -52,15 +52,15 @@ class ProfileBanner extends StatelessWidget {
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
-          image: metadata.banner != null
-              ? DecorationImage(
-                  fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(
-                    cacheKey: metadata.banner!,
-                    metadata.banner!,
-                  ),
-                )
-              : null,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: CachedNetworkImageProvider(
+              cacheKey: metadata.banner,
+              metadata.banner != null
+                  ? metadata.banner!
+                  : UserMetaData.placeholder(name: "name").banner!,
+            ),
+          ),
         ),
         child: DecoratedBox(
           decoration: BoxDecoration(

@@ -23,7 +23,7 @@ class NoteFollowButton extends StatelessWidget {
 
         return SizedBox(
           height: 27.5,
-          child: UmrahtyButton(
+          child: KeshiButton(
             onTap: () {
               if (userPubLickKey != null) {
                 cubit.handleFollowButtonTap(userPubLickKey!);

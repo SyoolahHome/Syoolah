@@ -232,7 +232,7 @@ extension ThemeModeExtension on ThemeMode {
 extension FeedCategoryListExtension on Iterable<FeedCategory> {
   Iterable<FeedCategory> get whereSelected => where((e) => e.isSelected);
   List<List<String>> toNostrTagsList() =>
-      map((e) => ["t", e.enumValue.umrahtyName]).toList();
+      map((e) => ["t", e.enumValue.keshiName]).toList();
 }
 
 extension XFileListExtension on List<XFile> {
@@ -299,6 +299,6 @@ extension NostrEventExtension on NostrEvent? {
   }
 }
 
-extension UmrahtyTopicsExt on UmrahtyTopics {
-  String get umrahtyName => "umrahty_app$name";
+extension KeshiTopicsExt on KeshiTopics {
+  String get keshiName => "keshi_app$name";
 }

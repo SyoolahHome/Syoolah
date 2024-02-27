@@ -117,7 +117,7 @@ class FeedBox extends StatelessWidget {
                         effects: const [
                           FadeEffect(),
                         ],
-                        child: UmrahtyButton(
+                        child: KeshiButton(
                           isSmall: true,
                           onTap: onTap,
                           text: "explore".tr(),

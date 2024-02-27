@@ -16,15 +16,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: UmrahtyLogo(
+      child: KeshiLogo(
         width: 125,
       ),
     );
   }
 }
 
-class UmrahtyLogo extends StatelessWidget {
-  const UmrahtyLogo({
+class KeshiLogo extends StatelessWidget {
+  const KeshiLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -44,7 +44,7 @@ class UmrahtyLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "UmrahtyLogo",
+        tag: "KeshiLogo",
         child: widget,
       );
     } else {

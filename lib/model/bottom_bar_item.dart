@@ -9,7 +9,7 @@ import '../constants/abstractions/abstractions.dart';
 @immutable
 class BottomBarItem extends Equatable {
   /// The [screen] to be shown that is associated to this item.
-  final BottomBarScreen screen;
+  final BottomBarScreen? screen;
 
   /// YjeThe name/label for this item.
   final String label;

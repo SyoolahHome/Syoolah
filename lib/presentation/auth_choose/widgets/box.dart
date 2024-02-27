@@ -106,7 +106,7 @@ class AuthChooseBox extends StatelessWidget {
                     Animate(
                       delay: 1500.ms + additionalDelay,
                       effects: const <Effect>[FadeEffect()],
-                      child: UmrahtyButton(
+                      child: KeshiButton(
                         isSmall: true,
                         onTap: onTap,
                         text: buttonText,

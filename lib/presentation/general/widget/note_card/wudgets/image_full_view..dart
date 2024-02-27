@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ditto/presentation/general/widget/note_card/wudgets/image_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageFullView extends StatelessWidget {
   const ImageFullView({
@@ -14,7 +15,7 @@ class ImageFullView extends StatelessWidget {
 
   final String? link;
   final String heroTag;
-  final File? imageFile;
+  final XFile? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class ImageFullView extends StatelessWidget {
                       heroTag: heroTag, link: link!, fit: BoxFit.fitWidth);
                 } else if (imageFile != null) {
                   return Image.file(
-                    imageFile!,
+                    File(imageFile!.path),
                     fit: BoxFit.fitWidth,
                   );
                 } else {

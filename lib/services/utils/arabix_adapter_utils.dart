@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 
 mixin ArabicAdapterUtils {
   bool isArabic(BuildContext context) {
-    return context.locale.languageCode.toLowerCase() == "ar";
+    final isA = context.locale.languageCode.toLowerCase() == "ar";
+
+    return isA;
   }
 
   IconData directionalityIcon(

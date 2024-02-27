@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+8
+version: 1.0.1+9
 
 environment:
   sdk: ">=3.0.0 <3.9.9"
@@ -28,10 +28,7 @@ dependencies:
   hive_flutter:
   equatable:
   dart_nostr: ^6.0.2
-  tangem_sdk:
-    path: ./packs/tangem-sdk-flutter-master/
   convert:
-
   image_picker:
   cached_network_image:
   http:
@@ -61,7 +58,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   dart_code_metrics: ^5.7.2
-  flutter_launcher_icons: ^0.13.1
+  # flutter_launcher_icons: ^0.13.1
   # flutter_app_name:
   # change_app_package_name: ^1.1.0
 
@@ -90,13 +87,13 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/translations/
-# flutter_app_name:
-#   name: "Umrahty"
+flutter_app_name:
+  name: "Keshi"
 
 flutter_native_splash:
   color: "#ffffff"
-  image: "assets/logo/icon_rounded.png"
-  image_dark: assets/logo/icon_rounded.png
+  image: "assets/logo/single_s_white_bg.png"
+  image_dark: "assets/logo/single_s_white_bg.png"
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
   # see the Android 12 section below.

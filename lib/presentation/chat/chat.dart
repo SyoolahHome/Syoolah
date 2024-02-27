@@ -1,4 +1,3 @@
-import 'package:ditto/buisness_logic/chat_modules/chat_modules_cubit.dart';
 import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/chat_modules.dart';
 import 'package:ditto/presentation/chat/widgets/app_bar.dart';
@@ -22,7 +21,7 @@ class Chat extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
     final chatModduleItem = (args?['chatModduleItem'] as ChatModuleItem? ??
-        ChatModulesCubit.defaultChatModule);
+        AppConfigs.defaultChatModule);
 
     final initialMessage = args?['initialMessage'] as String?;
 

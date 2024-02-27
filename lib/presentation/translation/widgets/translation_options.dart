@@ -18,7 +18,7 @@ class TranslationOptions extends StatelessWidget {
 
     return Row(
       children: <Widget>[
-        UmrahtyButton(
+        KeshiButton(
           padding: EdgeInsets.symmetric(horizontal: 0),
           onTap: () {},
           iconSize: 22,
@@ -35,7 +35,7 @@ class TranslationOptions extends StatelessWidget {
           builder: (context, selectedTargetLang) {
             return Expanded(
               child: SizedBox(
-                child: UmrahtyButton(
+                child: KeshiButton(
                   onTap: () {
                     cubit.openLangSelection(context, onLangSelected: (lang) {
                       FocusScopeNode currentFocus = FocusScope.of(context);

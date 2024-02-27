@@ -29,10 +29,9 @@ class AppUtils with ArabicAdapterUtils {
   int chatSystemIdCounter = 0;
 
   String randomChatMessagePlaceholder() {
-    final randomNumber =
-        Random().nextInt(AppConfigs.chatMessagePlaceholders.length);
+    final randomNumber = Random().nextInt(AppConfigs.defaultQuestions.length);
 
-    return AppConfigs.chatMessagePlaceholders[randomNumber];
+    return AppConfigs.defaultQuestions[randomNumber];
   }
 
   String getChatUserId() {

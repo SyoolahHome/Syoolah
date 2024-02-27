@@ -5,7 +5,7 @@ part of 'add_new_post_cubit.dart';
 /// {@endtemplate}
 class AddNewPostState extends Equatable {
   /// Picked images by user.
-  final List<File>? pickedImages;
+  final List<XFile>? pickedImages;
 
   /// feed categories which user will choose from.
   final List<FeedCategory> categories;
@@ -59,7 +59,7 @@ class AddNewPostState extends Equatable {
 
   /// {@macro add_new_post_state}
   AddNewPostState copyWith({
-    List<File>? pickedImages,
+    List<XFile>? pickedImages,
     List<FeedCategory>? categories,
     bool? isLoading,
     String? error,

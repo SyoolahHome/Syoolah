@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
-import 'package:ditto/presentation/chat_modules/chat_modules.dart';
 import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
@@ -44,9 +43,9 @@ class BottomBarCubit extends Cubit<int> {
         selectedIcon: FlutterRemix.user_fill,
       ),
       BottomBarItem(
-        screen: const ChatModules(),
+        screen: null,
         svgIconPath: "assets/images/keshiGPT.svg",
-        label: 'umrahtyGPT'.tr(),
+        label: 'keshiGPT'.tr(),
         icon: FlutterRemix.message_3_line,
         selectedIcon: FlutterRemix.message_3_fill,
       ),

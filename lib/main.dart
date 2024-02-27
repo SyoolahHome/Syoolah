@@ -23,6 +23,7 @@ Future<void> main() async {
     supportedLocales: AppConfigs.locales,
     path: AppConfigs.translationsPath,
     fallbackLocale: AppConfigs.fallbackLocale,
+    startLocale: AppConfigs.fallbackLocale,
     child: appMainWidget,
   );
 
@@ -64,11 +65,11 @@ class MyApp extends StatelessWidget {
                 AppConfigs.showPreviewMode ? DevicePreview.appBuilder : null,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
-            title: "Umrahty",
+            title: "Keshi",
             themeMode: ThemeMode.light
                 .decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime(),
-            theme: AppThemes.primary,
-            darkTheme: AppThemes.darkTheme,
+            theme: AppThemes.primary(context),
+            darkTheme: AppThemes.darkTheme(context),
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             debugShowCheckedModeBanner: false,

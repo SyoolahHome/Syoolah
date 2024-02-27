@@ -93,8 +93,8 @@ class UserMetaData extends Equatable {
   factory UserMetaData.placeholder({required String name}) {
     return UserMetaData(
       name: "No Name",
-      picture: "https://void.cat/d/REfBh6o8rhrtCURz6LRVVz",
-      banner: "https://void.cat/d/REfBh6o8rhrtCURz6LRVVz",
+      picture: "https://void.cat/d/NmkPXrWG6a5xgnd5WJCLFp",
+      banner: "https://void.cat/d/NmkPXrWG6a5xgnd5WJCLFp",
       username: "No Username",
       about: "No About",
       displayName: "No Display Name",

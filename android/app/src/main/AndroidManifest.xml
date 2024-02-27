@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.umrahty.app">
+    package="com.keshi.app">
 <queries>
     <intent>
         <action android:name="android.intent.action.VIEW" />
@@ -27,7 +27,7 @@
 
  
     <application
-        android:label="Umrahty"
+        android:label="Keshi"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"

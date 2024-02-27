@@ -25,7 +25,7 @@ class AuthState extends Equatable {
   final int currentStepIndex;
 
   /// The picked image for the user avatar.
-  final File? pickedImage;
+  final XFile? pickedImage;
 
   /// The generated private key for the user, since it is the source of all others.
   final String privateKey;
@@ -62,7 +62,7 @@ class AuthState extends Equatable {
     bool? authenticated,
     bool? isSignedOut,
     int? currentStepIndex,
-    File? pickedImage,
+    XFile? pickedImage,
     String? privateKey,
   }) {
     return AuthState(

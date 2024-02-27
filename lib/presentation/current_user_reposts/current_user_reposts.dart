@@ -33,10 +33,16 @@ class CurrentUserReposts extends UserProfileTab {
                 endTitleWithAdditionalText: false,
                 hideCount: true,
                 physics: const NeverScrollableScrollPhysics(),
-                notes: state.currentUserReposts
-                    .map((e) => Note.fromJson(
-                        jsonDecode(e.content) as Map<String, dynamic>))
-                    .toList(),
+                notes: state.currentUserReposts.map(
+                  (e) {
+                    final decoded =
+                        jsonDecode(e.content) as Map<String, dynamic>;
+
+                    return Note.fromJson(
+                      decoded,
+                    );
+                  },
+                ).toList(),
               );
             },
           );

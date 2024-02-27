@@ -14,10 +14,10 @@ class ProfileState extends Equatable {
   final List<TabItem> profileTabsItems;
 
   /// The picker avatar image.
-  final File? pickedAvatarImage;
+  final XFile? pickedAvatarImage;
 
   /// The picked banner image.
-  final File? pickedBannerImage;
+  final XFile? pickedBannerImage;
 
   /// An error if it exists to be represented.
   final String? error;
@@ -64,8 +64,8 @@ class ProfileState extends Equatable {
 // {@macro profile_state}
   ProfileState copyWith({
     NostrEvent? userMetadataEvent,
-    File? pickedAvatarImage,
-    File? pickedBannerImage,
+    XFile? pickedAvatarImage,
+    XFile? pickedBannerImage,
     String? error,
     List<TabItem>? profileTabsItems,
     int? followersCount,

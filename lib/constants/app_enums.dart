@@ -38,16 +38,20 @@ enum ReportType {
   impersonation,
 }
 
-enum UmrahtyTopics {
-  umrah,
-  hajj,
-  quranAndSunnah,
-  healthAndWellness,
-  culturalInsights,
-  travelAndAssistance,
-  languageAndCommunication,
-  alertsAndUpdates,
-  sadaqahOpportunities,
+enum KeshiTopics {
+  securityAndSafety,
+  news,
+  reportsAndResearch,
+  cryptoAndBlockchain,
+  artificialIntelligence,
+  networkingAndInternet,
+  programming,
+  technologies,
+  distributedSystems,
+  applications,
+  cloudAndVirtualization,
+  dataScience,
+  publicSafety,
 }
 
 enum ImagePickType { banner, avatar }
