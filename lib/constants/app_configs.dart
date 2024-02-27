@@ -21,9 +21,9 @@ import '../model/report_option.dart';
 import 'app_enums.dart';
 
 abstract class AppConfigs {
-  static const appName = "Keshi";
+  static const appName = "Al Ittihad";
+
   static const relaysUrls = [
-    'wss://relay.keshi.one',
     'wss://nostr.fmt.wiz.biz',
     'wss://relay.damus.io',
     'wss://nostr-pub.wellorder.net',
@@ -40,7 +40,8 @@ abstract class AppConfigs {
         return RelayConfiguration(url: url);
       }).toList();
 
-  static final List<FeedCategory> categories = KeshiTopics.values.map((topic) {
+  static final List<FeedCategory> categories =
+      AlIttihadTopics.values.map((topic) {
     return FeedCategory(
       name: topic.name.tr(),
       isSelected: false,
@@ -62,53 +63,53 @@ abstract class AppConfigs {
       locale: Locale('ar'),
       titleName: "Arabic",
     ),
-    const LocaleItem(
-      applyText: "Appliquer",
-      locale: Locale('fr'),
-      titleName: "Français",
-    ),
-    const LocaleItem(
-      applyText: "Uygula",
-      locale: Locale('tr'),
-      titleName: "Türkçe",
-    ),
-    const LocaleItem(
-      applyText: "Anwenden",
-      locale: Locale('de'),
-      titleName: "Deutsch",
-    ),
-    const LocaleItem(
-      applyText: "Applicare",
-      locale: Locale('it'),
-      titleName: "Italiano",
-    ),
-    const LocaleItem(
-      applyText: "Aplicar",
-      locale: Locale('es'),
-      titleName: "Español",
-    ),
-    const LocaleItem(
-      applyText: "Aplicar",
-      locale: Locale('pt'),
-      titleName: "Português",
-    ),
-    const LocaleItem(
-      applyText: "Применять",
-      locale: Locale('ru'),
-      titleName: "Русский",
-    ),
-    const LocaleItem(
-      applyText: "应用",
-      locale: Locale('zh'),
-      titleName: "中文",
-    ),
+    // const LocaleItem(
+    //   applyText: "Appliquer",
+    //   locale: Locale('fr'),
+    //   titleName: "Français",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Uygula",
+    //   locale: Locale('tr'),
+    //   titleName: "Türkçe",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Anwenden",
+    //   locale: Locale('de'),
+    //   titleName: "Deutsch",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Applicare",
+    //   locale: Locale('it'),
+    //   titleName: "Italiano",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Aplicar",
+    //   locale: Locale('es'),
+    //   titleName: "Español",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Aplicar",
+    //   locale: Locale('pt'),
+    //   titleName: "Português",
+    // ),
+    // const LocaleItem(
+    //   applyText: "Применять",
+    //   locale: Locale('ru'),
+    //   titleName: "Русский",
+    // ),
+    // const LocaleItem(
+    //   applyText: "应用",
+    //   locale: Locale('zh'),
+    //   titleName: "中文",
+    // ),
   ];
 
   static const durationBetweenAIChatMessages = Duration(milliseconds: 25);
 
   static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
   static String translationsPath = 'assets/translations';
-  static Locale fallbackLocale = const Locale('en');
+  static Locale fallbackLocale = const Locale('ar');
 
   static final feedsSearchOptions = <SearchOption>[
     SearchOption(
@@ -261,11 +262,11 @@ abstract class AppConfigs {
       "defaultQuestions".tr().split('\n');
 
   static ChatModuleItem get defaultChatModule => ChatModuleItem(
-        title: "keshiGPT".tr(),
+        title: "alIttihadGPT".tr(),
         subtitle: "chatSubtitle".tr(),
         imageIcon: "",
         instruction:
-            "You are a professional cyber security expert and you are chatting with a beginner. You are here to help them with their questions.",
+            "You are an assistant for users of the Al Ittihad FC team app. You can answer questions, provide information, and help users with their queries.",
         recommendedQuestions: AppConfigs.defaultQuestions,
       );
 

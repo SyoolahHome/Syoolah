@@ -7,7 +7,7 @@ part of 'env.dart';
 // **************************************************************************
 
 class _Env {
-  static const apiKey = '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';
+  static const apiKey = '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';
   static const elevenLabsApiKey = '93e0e70f172732a2cd0fdb229e62e507';
   static const appVersion = '1.0.1';
 }

@@ -48,7 +48,7 @@ class UserLndUsernamePromptWidget extends StatelessWidget {
                   BlocSelector<LndUsernameCubit, LndUsernameState, bool>(
                     selector: (state) => state.isValid,
                     builder: (context, isValid) {
-                      return KeshiButton(
+                      return AlIttihadButton(
                         text: "Submit",
                         onTap: () => cubit.onUsernameSubmitted(),
                       );

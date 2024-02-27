@@ -65,7 +65,7 @@ class Home extends BottomBarScreen {
                     final current = AppConfigs.categories[index];
 
                     return FeedBox(
-                      title: current.name,
+                      title: current.name.tr(),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -78,12 +78,6 @@ class Home extends BottomBarScreen {
                             },
                           ),
                         );
-
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   current.path,
-                        //   arguments: context.read<GlobalCubit>(),
-                        // );
                       },
                     );
                   }),

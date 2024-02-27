@@ -26,7 +26,7 @@ class CustomAppBar extends PreferredSize {
           Navigator.pop(context);
         },
       ),
-      title: const KeshiLogo(width: logoSize),
+      title: const AlIttihadLogo(width: logoSize),
     );
   }
 

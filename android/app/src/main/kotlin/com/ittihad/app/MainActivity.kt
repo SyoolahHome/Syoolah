@@ -1,4 +1,4 @@
-package com.keshi.app
+package com.ittihad.app
 
 import io.flutter.embedding.android.FlutterActivity
 

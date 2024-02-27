@@ -60,7 +60,7 @@ class DateRangePicker extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
-                trailing: KeshiButton(
+                trailing: AlIttihadButton(
                   onTap: () {
                     context.read<GlobalFeedCubit>().pickDateRange(context);
                   },

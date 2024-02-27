@@ -12,7 +12,7 @@ class LNDAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Row(
         children: <Widget>[
-          Text("keshiECash".tr()),
+          Text("alIttihadECash".tr()),
         ],
       ),
       actions: [

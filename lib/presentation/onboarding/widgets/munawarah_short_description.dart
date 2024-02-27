@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class KeshiShortDescription extends StatelessWidget {
-  const KeshiShortDescription({super.key});
+class AlIttihadShortDescription extends StatelessWidget {
+  const AlIttihadShortDescription({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -38,20 +38,17 @@ enum ReportType {
   impersonation,
 }
 
-enum KeshiTopics {
-  securityAndSafety,
+enum AlIttihadTopics {
   news,
-  reportsAndResearch,
-  cryptoAndBlockchain,
-  artificialIntelligence,
-  networkingAndInternet,
-  programming,
-  technologies,
-  distributedSystems,
-  applications,
-  cloudAndVirtualization,
-  dataScience,
-  publicSafety,
+  matchUpdates,
+  matchResults,
+  matchHighlights,
+  playerStats,
+  teamStats,
+  fans,
+  matchTickets,
+  clubEvents,
+  clubNews,
 }
 
 enum ImagePickType { banner, avatar }

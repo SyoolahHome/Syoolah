@@ -16,7 +16,7 @@ class CustomAppBar extends PreferredSize {
 
     return AppBar(
       backgroundColor: Colors.transparent,
-      title: const KeshiLogo(width: 50),
+      title: const AlIttihadLogo(width: 50),
       titleSpacing: 5.0,
       elevation: 0,
       leading: IconButton(

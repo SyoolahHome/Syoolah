@@ -57,7 +57,7 @@ class CustomAppBar extends PreferredSize {
             target:
                 // isFirstView ? 0.0 :
                 1.0,
-            child: const KeshiLogo(
+            child: const AlIttihadLogo(
               width: 50,
               isHero: false,
             ),

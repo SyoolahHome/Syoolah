@@ -24,7 +24,7 @@ abstract class Paths {
   static const String followingFeed = '/followingFeed';
   static const String commentsSection = '/commentsSection';
   static const String relaysConfig = '/relaysConfig';
-  static const String aboutKeshi = '/aboutKeshi';
+  static const String aboutAlIttihad = '/aboutAlIttihad';
   static const String onBoardingRelays = '/onBoardingRelays';
   static const String foreignProfile = '/foreignProfile';
   static const String followings = '/followings';

@@ -13,7 +13,7 @@ class SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: KeshiButton(
+      child: AlIttihadButton(
         onTap: onTap,
         text: "save".tr(),
       ),

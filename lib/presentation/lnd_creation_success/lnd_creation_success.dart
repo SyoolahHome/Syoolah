@@ -28,7 +28,7 @@ class LndCreationSuccess extends StatelessWidget {
           appBar: AppBar(
             title: Text("f1_zaplocker".tr()),
             actions: [
-              KeshiButton(
+              AlIttihadButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(Paths.relaysConfig);
                 },

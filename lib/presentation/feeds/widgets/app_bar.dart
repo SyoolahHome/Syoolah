@@ -42,7 +42,7 @@ Hello there!!!!
 https://www.youtube.com/watch?v=PMpNhbMjDj0
               """,
                 tags: [
-                  ["t", AppConfigs.categories.first.enumValue.keshiName]
+                  ["t", AppConfigs.categories.first.enumValue.alIttihadName]
                 ],
               );
             },

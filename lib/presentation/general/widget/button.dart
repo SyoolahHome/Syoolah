@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class KeshiButton extends StatelessWidget {
-  const KeshiButton({
+class AlIttihadButton extends StatelessWidget {
+  const AlIttihadButton({
     super.key,
     required this.onTap,
     this.text,
@@ -152,13 +152,13 @@ class KeshiButton extends StatelessWidget {
     );
   }
 
-  factory KeshiButton.bottomSheetApply({
+  factory AlIttihadButton.bottomSheetApply({
     required String buttonText,
     required Locale locale,
     required bool isCurrentApplied,
     required void Function() onTap,
   }) {
-    return KeshiButton(
+    return AlIttihadButton(
       onTap: () {
         if (isCurrentApplied) {
           return;

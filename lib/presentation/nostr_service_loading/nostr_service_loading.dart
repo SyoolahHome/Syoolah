@@ -38,7 +38,7 @@ class NostrServiceLoading extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const <Widget>[
-                        KeshiLogo(width: 150),
+                        AlIttihadLogo(width: 150),
                         SizedBox(height: 40),
                         LinearProgressIndicator(),
                       ],

@@ -65,7 +65,7 @@ dev_dependencies:
   # flutter_lints:
   # build_runner: ^2.3.3
   # envied_generator: ^0.3.0
-  flutter_native_splash: ^2.2.0+1
+  # flutter_native_splash: ^2.2.0+1
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -87,13 +87,14 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/translations/
+
 flutter_app_name:
-  name: "Keshi"
+  name: "Al Ittihad"
 
 flutter_native_splash:
   color: "#ffffff"
-  image: "assets/logo/single_s_white_bg.png"
-  image_dark: "assets/logo/single_s_white_bg.png"
+  image: "assets/logo/logo_no_bg_splash.png"
+
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,
   # see the Android 12 section below.

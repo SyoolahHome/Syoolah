@@ -16,15 +16,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: KeshiLogo(
+      child: AlIttihadLogo(
         width: 125,
       ),
     );
   }
 }
 
-class KeshiLogo extends StatelessWidget {
-  const KeshiLogo({
+class AlIttihadLogo extends StatelessWidget {
+  const AlIttihadLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -44,7 +44,7 @@ class KeshiLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "KeshiLogo",
+        tag: "AlIttihadLogo",
         child: widget,
       );
     } else {

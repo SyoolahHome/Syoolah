@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
                 AppConfigs.showPreviewMode ? DevicePreview.appBuilder : null,
             routes: Routing.routes,
             initialRoute: Paths.initialRoute,
-            title: "Keshi",
+            title: "AlIttihad",
             themeMode: ThemeMode.light
                 .decideBasedOnLocaleThemeStatusButDefaultToSystemOnFirstTime(),
             theme: AppThemes.primary(context),

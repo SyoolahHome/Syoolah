@@ -18,7 +18,7 @@ abstract class GeneralDrawerItems {
           icon: FlutterRemix.information_line,
           label: 'about'.tr(),
           onTap: () {
-            Navigator.of(context).pushNamed(Paths.aboutKeshi);
+            Navigator.of(context).pushNamed(Paths.aboutAlIttihad);
           },
         ),
         DrawerListTimeItem(
