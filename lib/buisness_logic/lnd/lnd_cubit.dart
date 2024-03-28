@@ -24,7 +24,7 @@ class LndCubit extends Cubit<LndState> {
   TextEditingController? usernameController;
   late ZapLockerReflectedUtils zaplocker;
 
-  LndCubit() : super(LndInitial(domain: "alIttihad.one")) {
+  LndCubit() : super(LndInitial(domain: "appBrand.one")) {
     _init();
     zaplocker = ZapLockerReflectedUtils();
   }

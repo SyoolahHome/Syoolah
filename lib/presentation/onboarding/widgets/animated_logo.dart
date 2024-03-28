@@ -16,15 +16,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: AlIttihadLogo(
+      child: AppBrandLogo(
         width: 125,
       ),
     );
   }
 }
 
-class AlIttihadLogo extends StatelessWidget {
-  const AlIttihadLogo({
+class AppBrandLogo extends StatelessWidget {
+  const AppBrandLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -44,7 +44,7 @@ class AlIttihadLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "AlIttihadLogo",
+        tag: "AppBrandLogo",
         child: widget,
       );
     } else {

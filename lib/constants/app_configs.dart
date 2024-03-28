@@ -24,15 +24,7 @@ abstract class AppConfigs {
   static const appName = "Al Ittihad";
 
   static const relaysUrls = [
-    'wss://nostr.fmt.wiz.biz',
-    'wss://relay.damus.io',
-    'wss://nostr-pub.wellorder.net',
-    'wss://relay.nostr.info',
-    'wss://offchain.pub',
-    'wss://nos.lol',
-    'wss://relay.nostr.band',
-    'wss://relay.snort.social',
-    'wss://relay.current.fyi',
+    'wss://relay.nostr.band/all',
   ];
 
   static List<RelayConfiguration> get relaysConfigurations =>
@@ -41,7 +33,7 @@ abstract class AppConfigs {
       }).toList();
 
   static final List<FeedCategory> categories =
-      AlIttihadTopics.values.map((topic) {
+      AppBrandTopics.values.map((topic) {
     return FeedCategory(
       name: topic.name.tr(),
       isSelected: false,
@@ -262,11 +254,10 @@ abstract class AppConfigs {
       "defaultQuestions".tr().split('\n');
 
   static ChatModuleItem get defaultChatModule => ChatModuleItem(
-        title: "alIttihadGPT".tr(),
+        title: "appBrandGPT".tr(),
         subtitle: "chatSubtitle".tr(),
         imageIcon: "",
-        instruction:
-            "You are an assistant for users of the Al Ittihad FC team app. You can answer questions, provide information, and help users with their queries.",
+        instruction: "The instruction of the Chat AI here",
         recommendedQuestions: AppConfigs.defaultQuestions,
       );
 

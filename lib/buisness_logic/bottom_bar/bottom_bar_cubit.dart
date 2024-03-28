@@ -44,8 +44,8 @@ class BottomBarCubit extends Cubit<int> {
       ),
       BottomBarItem(
         screen: null,
-        svgIconPath: "assets/images/keshiGPT.svg",
-        label: 'alIttihadGPT'.tr(),
+        svgIconPath: "assets/images/GPT.svg",
+        label: 'appBrandGPT'.tr(),
         icon: FlutterRemix.message_3_line,
         selectedIcon: FlutterRemix.message_3_fill,
       ),

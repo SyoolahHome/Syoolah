@@ -1,8 +1,15 @@
 - Change app icon launchers
 
-- Change app name
+```bash
+flutter pub run flutter_launcher_icons
+```
 
+- Change app name
 - Change app package name
+
+```bash
+rename ...
+```
 
 - Change app version
 
@@ -10,18 +17,22 @@
 
 - change splash screen
 
-- change app localization & default language
+```bash
+ dart  run flutter_native_splash:create
+```
 
-- change app topics
+- change app localization & default language (configs.dart & assets/)
 
-- change AI chat name and default questions
+- change app topics (enums.dart)
 
-- change brand names in code. (global search and replace)
+- change AI chat name and default questions (configs.dart & assets/)
 
-- update default relays.
+- change brand names in code. (global search and replace) (AppBrand, appbrand)
+
+- update default relays. (configs.dart)
 
 - update default things like names, profile pictures...
 
-- change AI chat prompts
+- change AI chat prompts (configs.dart)
 
-- change env variables
+- change env variables (OpenAI API key, ElevenLabs API key, etc.)

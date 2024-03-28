@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AboutAlIttihad extends StatelessWidget {
-  const AboutAlIttihad({super.key});
+class AboutAppBrand extends StatelessWidget {
+  const AboutAppBrand({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class AboutAlIttihad extends StatelessWidget {
       delay: const Duration(milliseconds: 1000),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(Paths.aboutAlIttihad, arguments: {
+          Navigator.of(context).pushNamed(Paths.aboutAppBrand, arguments: {
             "showOnlyAppDescription": true,
           });
         },

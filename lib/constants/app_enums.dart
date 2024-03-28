@@ -38,7 +38,7 @@ enum ReportType {
   impersonation,
 }
 
-enum AlIttihadTopics {
+enum AppBrandTopics {
   news,
   matchUpdates,
   matchResults,

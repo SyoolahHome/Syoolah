@@ -9,7 +9,7 @@ class ResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlIttihadButton(
+    return AppBrandButton(
       isOnlyBorder: true,
       onTap: () {
         Navigator.of(context).pop();

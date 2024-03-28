@@ -5,8 +5,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../general/widget/title.dart';
 
-class AboutAlIttihadContent extends StatelessWidget {
-  const AboutAlIttihadContent({super.key});
+class AboutAppBrandContent extends StatelessWidget {
+  const AboutAppBrandContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,13 @@ class AboutAlIttihadContent extends StatelessWidget {
           ],
           delay: 400.ms,
           child: HeadTitle(
-            title: "alIttihadAppAboutTitle".tr(),
+            title: "appBrandAppAboutTitle".tr(),
             isForSection: true,
             minimizeFontSizeBy: 8,
           ),
         ),
         SizedBox(height: height),
-        ..."alIttihadAppAboutContent".tr().split("\n").indexedMap(
+        ..."appBrandAppAboutContent".tr().split("\n").indexedMap(
               (index, item) => Animate(
                   delay: (600 + index * 100).ms,
                   effects: <Effect>[
@@ -59,13 +59,13 @@ class AboutAlIttihadContent extends StatelessWidget {
         //     ],
         //     delay: 1000.ms,
         //     child: HeadTitle(
-        //       title: "alIttihadNameTitle".tr(),
+        //       title: "appBrandNameTitle".tr(),
         //       isForSection: true,
         //       minimizeFontSizeBy: 8,
         //     ),
         //   ),
         //   SizedBox(height: height),
-        //   ..."alIttihadNameAboutContent".tr().split("\n").indexedMap(
+        //   ..."appBrandNameAboutContent".tr().split("\n").indexedMap(
         //         (index, item) => Animate(
         //             delay: (1400 + index * 100).ms,
         //             effects: <Effect>[

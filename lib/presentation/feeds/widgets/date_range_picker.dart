@@ -60,7 +60,7 @@ class DateRangePicker extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
-                trailing: AlIttihadButton(
+                trailing: AppBrandButton(
                   onTap: () {
                     context.read<GlobalFeedCubit>().pickDateRange(context);
                   },

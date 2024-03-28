@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class AlIttihadButton extends StatelessWidget {
-  const AlIttihadButton({
+class AppBrandButton extends StatelessWidget {
+  const AppBrandButton({
     super.key,
     required this.onTap,
     this.text,
@@ -152,13 +152,13 @@ class AlIttihadButton extends StatelessWidget {
     );
   }
 
-  factory AlIttihadButton.bottomSheetApply({
+  factory AppBrandButton.bottomSheetApply({
     required String buttonText,
     required Locale locale,
     required bool isCurrentApplied,
     required void Function() onTap,
   }) {
-    return AlIttihadButton(
+    return AppBrandButton(
       onTap: () {
         if (isCurrentApplied) {
           return;

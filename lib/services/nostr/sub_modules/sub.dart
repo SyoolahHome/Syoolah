@@ -218,7 +218,7 @@ class NostrServiceSub {
   }
 
   NostrEventsStream topic({
-    required AlIttihadTopics topic,
+    required AppBrandTopics topic,
   }) {
     final randomId = randomHexString;
 
@@ -226,7 +226,7 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: <NostrFilter>[
         NostrFilter(
-          t: [topic.alIttihadName],
+          t: [topic.appBrandName],
           kinds: const [1],
           limit: 10,
         ),
@@ -244,9 +244,9 @@ class NostrServiceSub {
     final randomId = randomHexString;
 
     final eventTags = [
-      "globalAlIttihadApp_1",
+      "globalAppBrandApp_1",
       ...AppConfigs.categories
-          .map((category) => category.enumValue.alIttihadName)
+          .map((category) => category.enumValue.appBrandName)
           .toList()
     ];
 

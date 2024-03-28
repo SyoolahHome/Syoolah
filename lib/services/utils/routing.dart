@@ -42,7 +42,7 @@ abstract class Routing {
     Paths.followingFeed: (context) => FollowingsFeed(),
     Paths.commentsSection: (context) => NoteCommentsSection(),
     Paths.relaysConfig: (context) => const RelaysConfig(),
-    Paths.aboutAlIttihad: (context) => const AboutAlIttihad(),
+    Paths.aboutAppBrand: (context) => const AboutAppBrand(),
     Paths.onBoardingSearch: (context) => const OnBoardingSearch(),
     Paths.authChoose: (context) => const AuthChoose(),
     Paths.existentSignUp: (context) => const ExistentSignUp(),

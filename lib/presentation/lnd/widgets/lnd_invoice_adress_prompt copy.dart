@@ -12,7 +12,7 @@ class UserLndInvoicePromptWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         CustomTextField(),
-        AlIttihadButton(
+        AppBrandButton(
           onTap: () {
             onSubmit("test");
           },

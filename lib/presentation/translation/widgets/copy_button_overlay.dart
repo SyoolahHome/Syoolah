@@ -67,7 +67,7 @@ class CopyButtonOverlay extends StatelessWidget {
                       onGoChat?.call();
                     },
                     icon: SvgPicture.asset(
-                      "assets/images/alIttihadGPT.svg",
+                      "assets/images/appBrandGPT.svg",
                       width: 20,
                       height: 20,
                     ),

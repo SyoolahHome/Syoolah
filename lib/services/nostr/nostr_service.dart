@@ -13,7 +13,7 @@ class NostrService {
   static NostrService get instance => _instance;
   NostrService._();
 
-  final consts = _AlIttihadNostrConstants();
+  final consts = _AppBrandNostrConstants();
 
   final subs = NostrServiceSub();
   final send = NostrServiceSend();
@@ -42,4 +42,4 @@ class NostrService {
   }
 }
 
-class _AlIttihadNostrConstants {}
+class _AppBrandNostrConstants {}

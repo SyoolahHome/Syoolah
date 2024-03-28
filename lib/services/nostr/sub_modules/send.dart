@@ -37,7 +37,7 @@ class NostrServiceSend {
     );
 
     final eventTags = [
-      ["t", "globalAlIttihadApp_1"]
+      ["t", "globalAppBrandApp_1"]
     ];
 
     if (tags != null) {
@@ -168,7 +168,7 @@ class NostrServiceSend {
         ["e", note.event.id, selectedReportType],
         ["p", note.event.pubkey, selectedReportType],
         ...AppConfigs.categories.map(
-          (e) => ["t", e.enumValue.alIttihadName],
+          (e) => ["t", e.enumValue.appBrandName],
         )
       ],
     );

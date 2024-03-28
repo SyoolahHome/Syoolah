@@ -117,7 +117,7 @@ class FeedBox extends StatelessWidget {
                         effects: const [
                           FadeEffect(),
                         ],
-                        child: AlIttihadButton(
+                        child: AppBrandButton(
                           isSmall: true,
                           onTap: onTap,
                           text: "explore".tr(),

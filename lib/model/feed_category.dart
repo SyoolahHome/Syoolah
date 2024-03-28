@@ -25,7 +25,7 @@ class FeedCategory extends Equatable {
   // final IconData icon;
 
   /// An enum that represents the topic/category of this feed.
-  final AlIttihadTopics enumValue;
+  final AppBrandTopics enumValue;
 
   /// the nostr events stream for the feed.
   final NostrEventsStream feedPostsStream;
@@ -51,7 +51,7 @@ class FeedCategory extends Equatable {
   FeedCategory copyWith({
     String? name,
     bool? isSelected,
-    AlIttihadTopics? enumValue,
+    AppBrandTopics? enumValue,
     NostrEventsStream? feedPostsStream,
     String? imageIcon,
   }) {

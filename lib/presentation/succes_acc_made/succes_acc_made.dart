@@ -69,7 +69,7 @@ class SuccessAccountMade extends StatelessWidget {
             const SizedBox(height: 20),
             // const SizedBox(height: 10),
             // const Text(
-            //   "You can now access all the features of the app and enjoy using AlIttihad app.",
+            //   "You can now access all the features of the app and enjoy using AppBrand app.",
             //   textAlign: TextAlign.center,
             // ),
             Animate(
@@ -83,7 +83,7 @@ class SuccessAccountMade extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 height: 45,
-                child: AlIttihadButton(
+                child: AppBrandButton(
                   icon: AppUtils.instance
                       .directionality_arrow_right_line(context),
                   isSmall: true,

@@ -6,8 +6,8 @@ import 'package:ditto/presentation/general/widget/margined_body.dart';
 import 'package:ditto/presentation/sign_up/widgets/or_divider.dart';
 import 'package:flutter/material.dart';
 
-class AboutAlIttihad extends StatelessWidget {
-  const AboutAlIttihad({super.key});
+class AboutAppBrand extends StatelessWidget {
+  const AboutAppBrand({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class AboutAlIttihad extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const <Widget>[
               SizedBox(height: height * 3),
-              AboutAlIttihadTitle(),
+              AboutAppBrandTitle(),
               Center(child: OrDivider(color: AppColors.black)),
               SizedBox(height: height * 3),
-              AboutAlIttihadContent(),
+              AboutAppBrandContent(),
               SizedBox(height: height * 3),
             ],
           ),
