@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AboutAppBrand extends StatelessWidget {
-  const AboutAppBrand({super.key});
+class AboutRoundabout extends StatelessWidget {
+  const AboutRoundabout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class AboutAppBrand extends StatelessWidget {
       delay: const Duration(milliseconds: 1000),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(Paths.aboutAppBrand, arguments: {
+          Navigator.of(context).pushNamed(Paths.aboutRoundabout, arguments: {
             "showOnlyAppDescription": true,
           });
         },

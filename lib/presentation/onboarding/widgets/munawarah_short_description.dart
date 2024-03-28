@@ -3,8 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AppBrandShortDescription extends StatelessWidget {
-  const AppBrandShortDescription({super.key});
+class RoundaboutShortDescription extends StatelessWidget {
+  const RoundaboutShortDescription({super.key});
 
   @override
   Widget build(BuildContext context) {

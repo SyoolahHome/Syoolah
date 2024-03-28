@@ -25,7 +25,7 @@ class CustomAppBar extends PreferredSize {
         icon: Icon(AppUtils.instance.directionality_arrow_left_line(context)),
       ),
       actions: <Widget>[
-        AppBrandButton(
+        RoundaboutButton(
           onTap: () {
             Navigator.of(context).pushNamed(Paths.myKeys);
           },

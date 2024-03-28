@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class AboutAppBrandTitle extends StatelessWidget {
-  const AboutAppBrandTitle({super.key});
+class AboutRoundaboutTitle extends StatelessWidget {
+  const AboutRoundaboutTitle({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -53,7 +53,7 @@ class LND extends BottomBarScreen {
                     SlideEffect(begin: Offset(0, 0.45)),
                   ],
                   delay: Animate.defaultDuration * 6,
-                  child: AppBrandButton(
+                  child: RoundaboutButton(
                     isRounded: true,
                     isSmall: false,
                     text: "goHome".tr(),
@@ -162,7 +162,7 @@ class LND extends BottomBarScreen {
                           .withOpacity(.5),
                     ),
                     const SizedBox(height: 32.5),
-                    AppBrandButton(
+                    RoundaboutButton(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 10,

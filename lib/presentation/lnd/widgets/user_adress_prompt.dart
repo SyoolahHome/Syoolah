@@ -10,7 +10,7 @@ class UserAddressPromptWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         CustomTextField(),
-        AppBrandButton(
+        RoundaboutButton(
           onTap: () {
             Navigator.of(context).pop();
           },

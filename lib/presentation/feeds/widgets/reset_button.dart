@@ -9,7 +9,7 @@ class ResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBrandButton(
+    return RoundaboutButton(
       isOnlyBorder: true,
       onTap: () {
         Navigator.of(context).pop();

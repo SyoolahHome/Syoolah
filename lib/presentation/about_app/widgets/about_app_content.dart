@@ -5,8 +5,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../general/widget/title.dart';
 
-class AboutAppBrandContent extends StatelessWidget {
-  const AboutAppBrandContent({super.key});
+class AboutRoundaboutContent extends StatelessWidget {
+  const AboutRoundaboutContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,13 @@ class AboutAppBrandContent extends StatelessWidget {
           ],
           delay: 400.ms,
           child: HeadTitle(
-            title: "appBrandAppAboutTitle".tr(),
+            title: "roundaboutAppAboutTitle".tr(),
             isForSection: true,
             minimizeFontSizeBy: 8,
           ),
         ),
         SizedBox(height: height),
-        ..."appBrandAppAboutContent".tr().split("\n").indexedMap(
+        ..."roundaboutAppAboutContent".tr().split("\n").indexedMap(
               (index, item) => Animate(
                   delay: (600 + index * 100).ms,
                   effects: <Effect>[
@@ -59,13 +59,13 @@ class AboutAppBrandContent extends StatelessWidget {
         //     ],
         //     delay: 1000.ms,
         //     child: HeadTitle(
-        //       title: "appBrandNameTitle".tr(),
+        //       title: "roundaboutNameTitle".tr(),
         //       isForSection: true,
         //       minimizeFontSizeBy: 8,
         //     ),
         //   ),
         //   SizedBox(height: height),
-        //   ..."appBrandNameAboutContent".tr().split("\n").indexedMap(
+        //   ..."roundaboutNameAboutContent".tr().split("\n").indexedMap(
         //         (index, item) => Animate(
         //             delay: (1400 + index * 100).ms,
         //             effects: <Effect>[

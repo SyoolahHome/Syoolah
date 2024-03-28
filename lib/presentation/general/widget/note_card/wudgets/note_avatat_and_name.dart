@@ -62,7 +62,7 @@ class NoteAvatarAndName extends StatelessWidget {
             ),
         ],
         if (showFollowButton) ...<Widget>[
-          AppBrandButton(
+          RoundaboutButton(
             isSmall: true,
             text: context
                     .read<UsersListToFollowCubit>()

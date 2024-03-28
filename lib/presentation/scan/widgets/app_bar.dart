@@ -26,7 +26,7 @@ class CustomAppBar extends PreferredSize {
           Navigator.pop(context);
         },
       ),
-      title: const AppBrandLogo(width: logoSize),
+      title: const RoundaboutLogo(width: logoSize),
     );
   }
 

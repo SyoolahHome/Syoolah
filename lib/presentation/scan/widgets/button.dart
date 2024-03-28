@@ -40,7 +40,7 @@ class CustomButton extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 50,
-                child: AppBrandButton(
+                child: RoundaboutButton(
                   onTap: () {
                     cubit.authenticateWithExistentKey();
                   },

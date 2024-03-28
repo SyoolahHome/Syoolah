@@ -38,7 +38,7 @@ class NostrServiceLoading extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const <Widget>[
-                        AppBrandLogo(width: 150),
+                        RoundaboutLogo(width: 150),
                         SizedBox(height: 40),
                         LinearProgressIndicator(),
                       ],

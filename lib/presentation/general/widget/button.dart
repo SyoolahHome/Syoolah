@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class AppBrandButton extends StatelessWidget {
-  const AppBrandButton({
+class RoundaboutButton extends StatelessWidget {
+  const RoundaboutButton({
     super.key,
     required this.onTap,
     this.text,
@@ -152,13 +152,13 @@ class AppBrandButton extends StatelessWidget {
     );
   }
 
-  factory AppBrandButton.bottomSheetApply({
+  factory RoundaboutButton.bottomSheetApply({
     required String buttonText,
     required Locale locale,
     required bool isCurrentApplied,
     required void Function() onTap,
   }) {
-    return AppBrandButton(
+    return RoundaboutButton(
       onTap: () {
         if (isCurrentApplied) {
           return;

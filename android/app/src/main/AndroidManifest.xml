@@ -27,7 +27,7 @@
 
  
     <application
-        android:label="App"
+        android:label="Roundabout"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"

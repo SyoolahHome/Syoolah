@@ -344,7 +344,7 @@ abstract class BottomSheetService {
                   children: <Widget>[
                     SizedBox(
                       height: 35,
-                      child: AppBrandButton(
+                      child: RoundaboutButton(
                         onTap: () {
                           onRemove();
                           Navigator.of(context).pop();
@@ -358,7 +358,7 @@ abstract class BottomSheetService {
                     ),
                     SizedBox(
                       height: 35,
-                      child: AppBrandButton(
+                      child: RoundaboutButton(
                         onTap: () {
                           onAccept();
                           Navigator.of(context).pop();

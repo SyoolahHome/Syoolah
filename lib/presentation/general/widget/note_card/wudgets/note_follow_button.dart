@@ -23,7 +23,7 @@ class NoteFollowButton extends StatelessWidget {
 
         return SizedBox(
           height: 27.5,
-          child: AppBrandButton(
+          child: RoundaboutButton(
             onTap: () {
               if (userPubLickKey != null) {
                 cubit.handleFollowButtonTap(userPubLickKey!);

@@ -33,7 +33,7 @@ abstract class AppConfigs {
       }).toList();
 
   static final List<FeedCategory> categories =
-      AppBrandTopics.values.map((topic) {
+      RoundaboutTopics.values.map((topic) {
     return FeedCategory(
       name: topic.name.tr(),
       isSelected: false,
@@ -254,10 +254,11 @@ abstract class AppConfigs {
       "defaultQuestions".tr().split('\n');
 
   static ChatModuleItem get defaultChatModule => ChatModuleItem(
-        title: "appBrandGPT".tr(),
+        title: "roundaboutGPT".tr(),
         subtitle: "chatSubtitle".tr(),
         imageIcon: "",
-        instruction: "The instruction of the Chat AI here",
+        instruction:
+            "Be a chatbot assistant and help users with their questions.",
         recommendedQuestions: AppConfigs.defaultQuestions,
       );
 

@@ -27,7 +27,7 @@ rename ...
 
 - change AI chat name and default questions (configs.dart & assets/)
 
-- change brand names in code. (global search and replace) (AppBrand, appbrand)
+- change brand names in code. (global search and replace) (Roundabout, roundabout)
 
 - update default relays. (configs.dart)
 

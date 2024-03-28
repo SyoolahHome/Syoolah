@@ -38,17 +38,8 @@ enum ReportType {
   impersonation,
 }
 
-enum AppBrandTopics {
-  news,
-  matchUpdates,
-  matchResults,
-  matchHighlights,
-  playerStats,
-  teamStats,
-  fans,
-  matchTickets,
-  clubEvents,
-  clubNews,
+enum RoundaboutTopics {
+
 }
 
 enum ImagePickType { banner, avatar }

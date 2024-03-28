@@ -16,15 +16,15 @@ class AnimatedLogo extends StatelessWidget {
     return Animate(
       delay: const Duration(milliseconds: 400),
       effects: const <Effect>[FadeEffect(), SlideEffect(begin: Offset(0, 0.5))],
-      child: AppBrandLogo(
+      child: RoundaboutLogo(
         width: 125,
       ),
     );
   }
 }
 
-class AppBrandLogo extends StatelessWidget {
-  const AppBrandLogo({
+class RoundaboutLogo extends StatelessWidget {
+  const RoundaboutLogo({
     super.key,
     required this.width,
     this.isHero = true,
@@ -44,7 +44,7 @@ class AppBrandLogo extends StatelessWidget {
     );
     if (isHero) {
       return Hero(
-        tag: "AppBrandLogo",
+        tag: "RoundaboutLogo",
         child: widget,
       );
     } else {

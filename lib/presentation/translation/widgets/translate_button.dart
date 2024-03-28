@@ -29,7 +29,7 @@ class TranslateButton extends StatelessWidget {
             effects: [
               FadeEffect(),
             ],
-            child: AppBrandButton(
+            child: RoundaboutButton(
               icon: FlutterRemix.translate,
               onTap: allowBtnToBePressed ? cubit.applyTranslation : null,
               text: "translate".tr(),

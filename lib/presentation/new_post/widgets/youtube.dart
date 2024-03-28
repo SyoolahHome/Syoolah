@@ -72,7 +72,7 @@ class PostYoutube extends NewPostAssetWidget {
                   padding: EdgeInsets.only(
                     right: MarginedBody.defaultMargin.right,
                   ),
-                  child: AppBrandButton(
+                  child: RoundaboutButton(
                     isSmall: true,
                     onTap: () {
                       cubit.showYoutubeVideoBottomSheet(context);
