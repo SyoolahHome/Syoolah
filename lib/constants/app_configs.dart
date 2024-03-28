@@ -21,7 +21,7 @@ import '../model/report_option.dart';
 import 'app_enums.dart';
 
 abstract class AppConfigs {
-  static const appName = "Al Ittihad";
+  static const appName = "Roundabout";
 
   static const relaysUrls = [
     'wss://relay.nostr.band/all',
