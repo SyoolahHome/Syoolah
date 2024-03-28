@@ -75,9 +75,9 @@ class RelayBox extends StatelessWidget {
         subtitle: Container(
           margin: const EdgeInsets.only(top: 7.5),
           child: Text(
-            snapshot?.hasData ?? false
+            (snapshot?.hasData ?? false) && snapshot?.data?.description != null
                 ? snapshot!.data!.description as String
-                : "relayDescriptionError".tr(),
+                : " " + "relayDescriptionError".tr() + " ",
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color:
                       Theme.of(context).colorScheme.background.withOpacity(.3),
