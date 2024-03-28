@@ -39,7 +39,7 @@ enum ReportType {
 }
 
 enum RoundaboutTopics {
-
+  exampleFeed,
 }
 
 enum ImagePickType { banner, avatar }

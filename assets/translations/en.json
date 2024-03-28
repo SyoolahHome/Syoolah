@@ -341,5 +341,6 @@
   "available_voices": "Available Voices",
   "last_updated": "Last updated {} ago",
   "auto_detect": "Auto Detect",
-  "translation": "Translation"
+  "translation": "Translation",
+  "exampleFeed": "Example Feed"
 }
