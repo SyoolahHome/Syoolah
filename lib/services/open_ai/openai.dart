@@ -20,7 +20,9 @@ class OpenAIService {
         chatMessages.map((message) => message.toOpenAIChatMessage()).toList();
 
     final systemInstructionMessage = OpenAIChatCompletionChoiceMessageModel(
-      content: instruction,
+      content: [
+        OpenAIChatCompletionChoiceMessageContentItemModel.text(instruction),
+      ],
       role: OpenAIChatMessageRole.system,
     );
 
@@ -37,7 +39,7 @@ class OpenAIService {
   }
 
   bool _responseMessageIsValid(OpenAIStreamChatCompletionModel event) {
-    final content = event.choices.first.delta.content;
+    final content = event.choices.first.delta.content?.first?.text;
     final isNotNull = content != null;
     final isNotEmpty = (content ?? "").isNotEmpty;
 
@@ -45,7 +47,7 @@ class OpenAIService {
   }
 
   String _extractOnlyResposeMessage(OpenAIStreamChatCompletionModel event) {
-    return event.choices.first.delta.content!;
+    return event.choices.first.delta.content?.first?.text ?? "";
   }
 
   Future<String> asyncResponse({
@@ -56,16 +58,20 @@ class OpenAIService {
       model: modelId,
       messages: [
         OpenAIChatCompletionChoiceMessageModel(
-          content: instruction,
+          content: [
+            OpenAIChatCompletionChoiceMessageContentItemModel.text(instruction),
+          ],
           role: OpenAIChatMessageRole.system,
         ),
         OpenAIChatCompletionChoiceMessageModel(
-          content: input,
+          content: [
+            OpenAIChatCompletionChoiceMessageContentItemModel.text(input),
+          ],
           role: OpenAIChatMessageRole.user,
         ),
       ],
     );
 
-    return response.choices.first.message.content;
+    return response.choices.first.message.content?.first.text ?? "";
   }
 }

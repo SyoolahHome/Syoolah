@@ -66,7 +66,11 @@ class ChatMessage extends Equatable {
   OpenAIChatCompletionChoiceMessageModel toOpenAIChatMessage() {
     return OpenAIChatCompletionChoiceMessageModel(
       role: role,
-      content: message,
+      content: [
+        OpenAIChatCompletionChoiceMessageContentItemModel.text(
+          message,
+        ),
+      ],
     );
   }
 
