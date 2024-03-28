@@ -50,11 +50,11 @@ abstract class AppConfigs {
       locale: Locale('en'),
       titleName: "English",
     ),
-    const LocaleItem(
-      applyText: "تطبيق",
-      locale: Locale('ar'),
-      titleName: "Arabic",
-    ),
+    // const LocaleItem(
+    //  applyText: "تطبيق",
+    //  locale: Locale('ar'),
+    // titleName: "Arabic",
+    //),
     // const LocaleItem(
     //   applyText: "Appliquer",
     //   locale: Locale('fr'),
@@ -101,7 +101,7 @@ abstract class AppConfigs {
 
   static List<Locale> get locales => localeItems.map((e) => e.locale).toList();
   static String translationsPath = 'assets/translations';
-  static Locale fallbackLocale = const Locale('ar');
+  static Locale fallbackLocale = const Locale('en');
 
   static final feedsSearchOptions = <SearchOption>[
     SearchOption(
