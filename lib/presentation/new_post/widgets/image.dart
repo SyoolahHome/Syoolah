@@ -10,8 +10,12 @@ import '../../../constants/abstractions/abstractions.dart';
 import '../../general/widget/margined_body.dart';
 
 class PostImage extends NewPostAssetWidget {
-  const PostImage({super.key});
+  const PostImage({
+    super.key,
+    required this.onActionPressed,
+  });
 
+  final VoidCallback onActionPressed;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddNewPostCubit>();
@@ -28,143 +32,123 @@ class PostImage extends NewPostAssetWidget {
           const SizedBox(height: 15),
           BlocBuilder<AddNewPostCubit, AddNewPostState>(
             builder: (context, state) {
-              final placeholderNum = 5;
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
+                      padding: MarginedBody.defaultMargin,
+                      child: Row(
+                        children: List.generate(
+                            (state.pickedImages?.length ?? 0) + 1, (index) {
+                          if (index == 0) {
+                            return GestureDetector(
+                              onTap: onActionPressed,
+                              child: Container(
+                                height: 75,
+                                width: 75,
+                                margin: EdgeInsets.only(right: 15.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .background
+                                      .withOpacity(.3),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    FlutterRemix.image_add_line,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background
+                                        .withOpacity(.8),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
 
-              return state.pickedImages == null ||
-                      (state.pickedImages?.isEmpty ?? false)
-                  ? Container(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          padding: MarginedBody.defaultMargin,
-                          child: Row(
-                            children: List.generate(
-                              5,
-                              (index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    cubit.addImage();
-                                  },
-                                  child: Container(
-                                    height: 75,
-                                    width: 75,
-                                    margin: EdgeInsets.only(right: 15.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background
-                                          .withOpacity((.1 * placeholderNum) -
-                                              (index * .1)),
+                          final newIndex = index - 1;
+                          final current = state.pickedImages![newIndex];
+
+                          return GestureDetector(
+                            onLongPress: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ImageFullView(
+                                    imageFile: current,
+                                    heroTag: current.path,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: AnimatedSwitcher(
+                              transitionBuilder: (child, animation) =>
+                                  ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              ),
+                              duration: const Duration(milliseconds: 300),
+                              child: Container(
+                                key: ValueKey(current.path),
+                                margin: const EdgeInsets.only(right: 5),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: <Widget>[
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      child: FutureBuilder(
+                                          future: current.readAsBytes(),
+                                          builder: (context, state) {
+                                            if (state.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            }
+
+                                            if (state.connectionState ==
+                                                ConnectionState.done) {
+                                              return Image.memory(
+                                                state.data!,
+                                                height: 75,
+                                                width: 75,
+                                                fit: BoxFit.cover,
+                                              );
+                                            }
+
+                                            return const SizedBox.shrink();
+                                          }),
                                     ),
-                                    child: Center(
-                                      child: Icon(
-                                        FlutterRemix.image_add_line,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background
-                                            .withOpacity(.8),
+                                    IconButton(
+                                      iconSize: 15,
+                                      // padding: EdgeInsets.zero,
+
+                                      style: IconButton.styleFrom(
+                                        backgroundColor:
+                                            AppColors.black.withOpacity(0.05),
+                                      ),
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        cubit.removePickedImage(newIndex);
+                                      },
+                                      icon: const Icon(
+                                        FlutterRemix.delete_bin_2_line,
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
-                    )
-                  : Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            padding: MarginedBody.defaultMargin,
-                            child: Row(
-                              children: List.generate(
-                                  state.pickedImages?.length ?? 0, (index) {
-                                final current = state.pickedImages![index];
-
-                                return GestureDetector(
-                                  onLongPress: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => ImageFullView(
-                                          imageFile: current,
-                                          heroTag: current.path,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: AnimatedSwitcher(
-                                    transitionBuilder: (child, animation) =>
-                                        ScaleTransition(
-                                      scale: animation,
-                                      child: child,
-                                    ),
-                                    duration: const Duration(milliseconds: 300),
-                                    child: Container(
-                                      key: ValueKey(current.path),
-                                      margin: const EdgeInsets.only(right: 5),
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: <Widget>[
-                                          ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                            child: FutureBuilder(
-                                                future: current.readAsBytes(),
-                                                builder: (context, state) {
-                                                  if (state.connectionState ==
-                                                      ConnectionState.waiting) {
-                                                    return const CircularProgressIndicator();
-                                                  }
-
-                                                  if (state.connectionState ==
-                                                      ConnectionState.done) {
-                                                    return Image.memory(
-                                                      state.data!,
-                                                      height: 75,
-                                                      width: 75,
-                                                      fit: BoxFit.cover,
-                                                    );
-                                                  }
-
-                                                  return const SizedBox
-                                                      .shrink();
-                                                }),
-                                          ),
-                                          IconButton(
-                                            iconSize: 15,
-                                            // padding: EdgeInsets.zero,
-
-                                            style: IconButton.styleFrom(
-                                              backgroundColor: AppColors.black
-                                                  .withOpacity(0.05),
-                                            ),
-                                            color: Colors.red,
-                                            onPressed: () {
-                                              cubit.removePickedImage(index);
-                                            },
-                                            icon: const Icon(
-                                              FlutterRemix.delete_bin_2_line,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
+                    ),
+                  ),
+                ],
+              );
             },
           ),
         ],

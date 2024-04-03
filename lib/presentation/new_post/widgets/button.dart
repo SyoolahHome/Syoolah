@@ -28,9 +28,6 @@ class PostButton extends StatelessWidget {
                 return IconButton(
                   onPressed: () {
                     cubit.showWidgetAt(index);
-                    if (isSelected) {
-                      current.onPressed();
-                    }
                   },
                   icon: Container(
                     color: isSelected

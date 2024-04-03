@@ -36,9 +36,20 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
   /// The options to select assets from in the note, such images, video urls..
   List<PostAssetSectionItem> get postAssetsSectionsWidgets => [
         PostAssetSectionItem(
-          widget: const PostImage(),
+          widget: PostImage(
+            onActionPressed: () {
+              pickMultiImages();
+            },
+          ),
           icon: FlutterRemix.image_add_line,
-          onPressed: addImage,
+        ),
+        PostAssetSectionItem(
+          widget: PostImage(
+            onActionPressed: () {
+              pickFromCamera();
+            },
+          ),
+          icon: FlutterRemix.camera_2_line,
         ),
         PostAssetSectionItem.withoutTapHandler(
           widget: const PostYoutube(),
@@ -104,11 +115,39 @@ class AddNewPostCubit extends Cubit<AddNewPostState> {
 
   /// Opens the native image picker from the device to be selected, then represent them in the UI.
   /// if something gets wrong during this operation, it will be handled
-  Future<void> addImage() async {
+  Future<void> pickMultiImages() async {
     try {
       final imagePicker = ImagePicker();
       final images = await imagePicker.pickMultiImage();
-      emit(state.copyWith(pickedImages: images));
+      emit(
+        state.copyWith(pickedImages: [...state.pickedImages ?? [], ...images]),
+      );
+    } catch (e) {
+      emit(state.copyWith(error: "error".tr()));
+    } finally {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          pickedImages: state.pickedImages,
+          currentPostAssetsSectionIndex: state.currentPostAssetsSectionIndex,
+        ),
+      );
+    }
+  }
+
+  Future<void> pickFromCamera() async {
+    try {
+      final imagePicker = ImagePicker();
+      final image = await imagePicker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (image == null) {
+        return;
+      }
+
+      emit(state.copyWith(
+        pickedImages: [...state.pickedImages ?? [], image],
+      ));
     } catch (e) {
       emit(state.copyWith(error: "error".tr()));
     } finally {
