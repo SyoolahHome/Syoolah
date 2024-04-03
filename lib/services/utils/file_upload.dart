@@ -32,9 +32,9 @@ abstract class Uploader {
 class FileUpload {
   /// The list of uploaders that are used to upload files.
   final uploaders = <Uploader>[
-    VoidCatUploader(),
     NostrImgUploader(),
     NostrBuildUploader(),
+    VoidCatUploader(),
   ];
 
   Future<String> call(XFile file) async {

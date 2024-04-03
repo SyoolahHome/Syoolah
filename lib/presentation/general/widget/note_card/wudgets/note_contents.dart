@@ -24,24 +24,26 @@ class NoteContents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // const SizedBox(height: 5),
-        HashTagText(
-          text: text.capitalized,
-          textAlign: TextAlign.left,
-          basicStyle: Theme.of(context).textTheme.labelLarge!,
-          decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: AppColors.blue,
-              ),
-        ),
-        const SizedBox(height: 10),
-        if (imageLinks.isNotEmpty)
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: HashTagText(
+              text: text.capitalized,
+              textAlign: TextAlign.left,
+              basicStyle: Theme.of(context).textTheme.labelLarge!,
+              decoratedStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: AppColors.blue,
+                  ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          if (imageLinks.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: imageLinks.indexedMap(
                 (index, link) {
                   return GestureDetector(
@@ -56,11 +58,10 @@ class NoteContents extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       child: ImageContent(
                         heroTag: heroTag,
                         link: link,
-                        size: 75,
                         fit: BoxFit.cover,
                         shouldOpenFullViewOnTap: false,
                       ),
@@ -69,12 +70,12 @@ class NoteContents extends StatelessWidget {
                 },
               ).toList(),
             ),
-          ),
-        // const SizedBox(height: 20),
-        if (youtubeVideosLinks.isNotEmpty)
-          NoteYoutubePlayer(url: youtubeVideosLinks.first),
-        const SizedBox(height: 20),
-      ],
+          // const SizedBox(height: 20),
+          if (youtubeVideosLinks.isNotEmpty)
+            NoteYoutubePlayer(url: youtubeVideosLinks.first),
+          const SizedBox(height: 20),
+        ],
+      ),
     );
   }
 }
