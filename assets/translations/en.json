@@ -328,8 +328,6 @@
   "roundaboutECash": "Roundabout eCash",
   "noLndSupport": "Roundabout Money Address powered by AbuCash - a Universal eCash Address for Bitcoin payments that's always available - even when your phone's offline!\nCurrently, Support for Roundabout eCash is not available in your area, but we're working on it.",
   "goHome": "Go Back",
-  "roundaboutAppAboutTitle": "About Roundabout",
-  "roundaboutAppAboutContent": "Roundabout app is a mobile app where you connect to people you care about everyday., Powered By Nostr. The new decentralized communication protocol that doesn't rely on blockchain technology to scale.\n",
   "roundaboutNameTitle": "What's with the name?",
   "roundaboutNameAboutContent": "",
   "poweredBy": "Powered by",
