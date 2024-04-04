@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dart_nostr/nostr/dart_nostr.dart';
+import 'package:ditto/constants/app_configs.dart';
 import 'package:ditto/model/bottom_bar_item.dart';
+import 'package:ditto/presentation/dms/dms.dart';
 import 'package:ditto/presentation/feeds/global_feed.dart';
 import 'package:ditto/presentation/navigations_screen/home/home.dart';
 import 'package:ditto/presentation/navigations_screen/profile/profile.dart';
@@ -51,23 +53,31 @@ class BottomBarCubit extends Cubit<int> {
       ),
       BottomBarItem(
         screen: Umah(),
-        // const Home(),
         label: 'global'.tr(),
         icon: Icons.people_outline_sharp,
         selectedIcon: Icons.people_sharp,
       ),
-      // BottomBarItem(
-      //   screen: LND(),
-      //   label: 'lnd'.tr(),
-      //   icon: FlutterRemix.flashlight_line,
-      //   selectedIcon: FlutterRemix.flashlight_fill,
-      // ),
-      BottomBarItem(
-        screen: Translation(),
-        label: 'translate'.tr(),
-        icon: FlutterRemix.translate_2,
-        selectedIcon: FlutterRemix.translate_2,
-      ),
+      if (AppConfigs.enableLnd)
+        BottomBarItem(
+          screen: LND(),
+          label: 'lnd'.tr(),
+          icon: FlutterRemix.flashlight_line,
+          selectedIcon: FlutterRemix.flashlight_fill,
+        ),
+      if (AppConfigs.enableTranslation)
+        BottomBarItem(
+          screen: Translation(),
+          label: 'translate'.tr(),
+          icon: FlutterRemix.translate_2,
+          selectedIcon: FlutterRemix.translate_2,
+        ),
+      if (AppConfigs.enableDms)
+        BottomBarItem(
+          screen: DMS(),
+          label: 'dms'.tr(),
+          icon: FlutterRemix.message_2_line,
+          selectedIcon: FlutterRemix.message_2_fill,
+        ),
     ];
   }
 
@@ -78,6 +88,7 @@ class BottomBarCubit extends Cubit<int> {
     final indexOfProfile = items.indexWhere(
       (element) => element.screen is Umah,
     );
+
     emit(indexOfProfile);
   }
 

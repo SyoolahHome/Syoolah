@@ -270,4 +270,8 @@ abstract class AppConfigs {
 
   static final feedDateRangePickerFirstDate = DateTime(2015, 8);
   static DateTime get feedDateRangePickerLastDate => DateTime.now();
+
+  static bool enableTranslation = true;
+  static bool enableLnd = false;
+  static bool enableDms = true;
 }
