@@ -40,6 +40,9 @@ extension NostrEventqListExtensions on List<NostrEvent> {
   List<NostrEvent> excludeCommentEvents() {
     return where((noteEvent) {
       final noteEventTags = noteEvent.tags;
+      if (noteEventTags == null) {
+        return false;
+      }
 
       return noteEventTags.any((tagList) {
         final isNotComment = tagList.first != "e";
@@ -55,6 +58,10 @@ extension NotesListExtension on List<Note> {
     return where((note) {
       final noteEventTags = note.event.tags;
 
+      if (noteEventTags == null) {
+        return false;
+      }
+
       return noteEventTags.any((tagList) {
         final isNotComment = tagList.first != "e";
 
@@ -66,6 +73,9 @@ extension NotesListExtension on List<Note> {
   List<Note> onlyCommentNotes() {
     return where((note) {
       final noteEventTags = note.event.tags;
+      if (noteEventTags == null) {
+        return false;
+      }
 
       return noteEventTags.any((tagList) {
         final isComment = tagList.first == "e";
@@ -291,8 +301,11 @@ extension FlutterRemixExtension on FlutterRemix {
 
 extension NostrEventExtension on NostrEvent? {
   List<String>? get tagsPublicKeys {
+    if (this?.tags == null) {
+      return [];
+    }
     return this
-        ?.tags
+        ?.tags!
         .where((tag) => tag[0] == "p")
         .map((tag) => tag[1])
         .toList();

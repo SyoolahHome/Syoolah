@@ -45,7 +45,7 @@ class NoteActions extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             NoteDateOfCreationAgo(
-              createdAt: note.event.createdAt,
+              createdAt: note.event.createdAt!,
               isMedium: true,
             ),
             if (!isComment)

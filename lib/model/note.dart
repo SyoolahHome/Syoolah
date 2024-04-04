@@ -46,8 +46,8 @@ class Note extends Equatable {
   /// {@macro note}
   /// Derives a Note directly from a Nostr event object.
   factory Note.fromEvent(NostrEvent event) {
-    final links = extractLinks(event.content);
-    final noteOnly = removeLinksFromInitial(event.content);
+    final links = extractLinks(event.content!);
+    final noteOnly = removeLinksFromInitial(event.content!);
     final imageLinks = filterImageLinks(links);
     final youtubeVideoLinks = filteryoutubeVideoLinks(links);
 
@@ -133,7 +133,6 @@ class Note extends Equatable {
         ),
       ),
       subscriptionId: null,
-      ots: null,
     );
 
     return Note.fromEvent(ev);

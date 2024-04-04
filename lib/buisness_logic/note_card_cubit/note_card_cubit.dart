@@ -59,7 +59,11 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Likes the note.
   void likeNote() {
-    NostrService.instance.send.likePost(note.event.id);
+    if(note.event.id == null) {
+ return;
+    }
+    
+    NostrService.instance.send.likePost(note.event.id!);
     emitIfOpen(state.copyWith(localLiked: true));
   }
 
@@ -77,8 +81,12 @@ class NoteCardCubit extends Cubit<NoteCardState> {
 
   /// Copy the note id to the clipboard.
   Future<void> copyNoteId() async {
+    if(note.event.id == null) {
+ return;
+    }
+    
     await AppUtils.instance.copy(
-      note.event.id,
+      note.event.id!,
       onSuccess: () => emitIfOpen(state.copyWith(success: "copySuccess".tr())),
       onError: () => emitIfOpen(state.copyWith(error: "copyError".tr())),
       onEnd: () => emitIfOpen(state.copyWith()),
@@ -194,7 +202,7 @@ class NoteCardCubit extends Cubit<NoteCardState> {
         return;
       }
 
-      if (state.noteOwnerMetadata!.createdAt.compareTo(event.createdAt) < 0) {
+      if (state.noteOwnerMetadata!.createdAt!.compareTo(event.createdAt!) < 0) {
         emitIfOpen(state.copyWith(noteOwnerMetadata: event));
       }
     });

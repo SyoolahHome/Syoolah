@@ -55,7 +55,7 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
 
   /// Weither the note owner is followed by the current user.
   bool isNoteOwnerFollowed(String pubkey) {
-    return state.currentUserFollowing?.tags
+    return state.currentUserFollowing?.tags!
             .map((elem) => elem[1])
             .contains(pubkey) ??
         false;
@@ -88,15 +88,15 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
 
       final newUserFollowTag = ["p", pubKey];
 
+//!
       newEvent = NostrEvent(
         content: currentUserFollowing.content,
         createdAt: currentUserFollowing.createdAt,
         id: currentUserFollowing.id,
         kind: currentUserFollowing.kind,
-        ots: currentUserFollowing.ots,
         pubkey: currentUserFollowing.pubkey,
         sig: currentUserFollowing.sig,
-        tags: [...currentUserFollowing.tags, newUserFollowTag],
+        tags: [...currentUserFollowing.tags!, newUserFollowTag],
       );
     }
 
@@ -115,11 +115,10 @@ class UsersListToFollowCubit extends Cubit<UsersListToFollowState> {
       createdAt: currentUserFollowing.createdAt,
       id: currentUserFollowing.id,
       kind: currentUserFollowing.kind,
-      ots: currentUserFollowing.ots,
       pubkey: currentUserFollowing.pubkey,
       sig: currentUserFollowing.sig,
       tags: [
-        ...currentUserFollowing.tags.where((element) => element[1] != pubKey),
+        ...currentUserFollowing.tags!.where((element) => element[1] != pubKey),
       ],
     );
 

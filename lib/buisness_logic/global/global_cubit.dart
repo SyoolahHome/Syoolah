@@ -87,11 +87,10 @@ class GlobalCubit extends Cubit<GlobalState> {
         createdAt: currentUserFollowing.createdAt,
         id: currentUserFollowing.id,
         kind: currentUserFollowing.kind,
-        ots: currentUserFollowing.ots,
         pubkey: currentUserFollowing.pubkey,
         sig: currentUserFollowing.sig,
         tags: <List<String>>{
-          ...currentUserFollowing.tags,
+          ...currentUserFollowing.tags!,
           ["p", pubKey],
         }.toList(),
       );
@@ -110,14 +109,13 @@ class GlobalCubit extends Cubit<GlobalState> {
     }
 
     var tags = currentUserFollowing.tags;
-    tags = tags.where((element) => element[1] != pubKey).toList();
+    tags = tags!.where((element) => element[1] != pubKey).toList();
 
     NostrEvent newEvent = NostrEvent(
       content: currentUserFollowing.content,
       createdAt: currentUserFollowing.createdAt,
       id: currentUserFollowing.id,
       kind: currentUserFollowing.kind,
-      ots: currentUserFollowing.ots,
       pubkey: currentUserFollowing.pubkey,
       sig: currentUserFollowing.sig,
       tags: tags,

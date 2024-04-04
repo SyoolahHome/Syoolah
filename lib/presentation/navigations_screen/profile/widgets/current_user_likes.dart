@@ -57,7 +57,7 @@ class CurrentUserLikes extends UserProfileTab {
                             value: LikedNoteCubit(
                               likedNoteStream:
                                   NostrService.instance.subs.noteStreamById(
-                                noteId: current.tags.firstWhere(
+                                noteId: current.tags!.firstWhere(
                                   (element) {
                                     return element.first.toLowerCase() == "e";
                                   },

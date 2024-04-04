@@ -31,14 +31,14 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: note.event.id,
+      tag: note.event.id!,
       child: BlocProvider<NoteCardCubit>(
         create: (context) => NoteCardCubit(
           note: note,
           currentUserMetadataStream:
               NostrService.instance.subs.userMetadata(note.event.pubkey),
           noteLikesStream: NostrService.instance.subs.noteLikes(
-            postEventId: note.event.id,
+            postEventId: note.event.id!,
           ),
         ),
         child: Builder(
@@ -51,7 +51,7 @@ class NoteCard extends StatelessWidget {
                   noteOwnerMetadata = UserMetaData.placeholder(name: "No Name");
                 } else {
                   noteOwnerMetadata = UserMetaData.fromJson(
-                    jsonData: jsonDecode(state.noteOwnerMetadata!.content)
+                    jsonData: jsonDecode(state.noteOwnerMetadata!.content!)
                         as Map<String, dynamic>,
                     sourceNostrEvent: state.noteOwnerMetadata!,
                   );
@@ -94,7 +94,7 @@ class NoteCard extends StatelessWidget {
                       const SizedBox(height: 15),
                       NoteContents(
                         youtubeVideosLinks: note.youtubeVideoLinks,
-                        heroTag: note.event.id,
+                        heroTag: note.event.id!,
                         imageLinks: note.imageLinks,
                         text: note.noteOnly,
                       ),

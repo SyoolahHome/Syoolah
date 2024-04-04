@@ -37,7 +37,7 @@ class ProfileHeader extends StatelessWidget {
               builder: (context, state) {
                 return FollowInfo(
                   label: "following".tr(),
-                  count: state.currentUserFollowing?.tags.length ?? 0,
+                  count: state.currentUserFollowing?.tags!.length ?? 0,
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       Paths.followings,
@@ -103,7 +103,7 @@ class ProfileHeader extends StatelessWidget {
                 builder: (context, state) {
                   return FollowInfo(
                     label: "following".tr(),
-                    count: state.userFollowingEvent?.tags.length ?? 0,
+                    count: state.userFollowingEvent?.tags!.length ?? 0,
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         Paths.followings,

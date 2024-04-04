@@ -51,7 +51,7 @@ class NoteCommentsSection extends StatelessWidget {
           create: (context) => NoteCommentsCubit(
             noteCommentsStream: NostrService.instance.subs.noteComments(
               note: note!,
-              postEventId: id,
+              postEventId: id!,
             ),
           ),
           child: Builder(
@@ -96,7 +96,7 @@ class NoteCommentsSection extends StatelessWidget {
                                     const SizedBox(height: 10.0),
                                     ...state.noteComments.indexedMap(
                                       (index, current) => CommentWidget(
-                                        key: ValueKey<String>(current.id),
+                                        key: ValueKey<String>(current.id!),
                                         commentEvent: current,
                                         index: index,
                                       ),
@@ -107,7 +107,7 @@ class NoteCommentsSection extends StatelessWidget {
                               ),
                             ),
                           ),
-                          CommentField(noteId: note!.event.id),
+                          CommentField(noteId: note!.event.id!),
                         ],
                       ),
                     );

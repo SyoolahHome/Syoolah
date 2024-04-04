@@ -113,8 +113,12 @@ class FeedBoxCubit extends Cubit<FeedBoxState> {
           title: "copyEventId".tr(),
           icon: FlutterRemix.file_copy_line,
           onPressed: () {
+            if (note.event.id == null) {
+              return;
+            }
+
             AppUtils.instance.copy(
-              note.event.id,
+              note.event.id!,
               onSuccess: () {
                 final shownSnackbarController =
                     SnackBars.text(context, "copySuccess".tr());

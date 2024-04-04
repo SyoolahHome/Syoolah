@@ -118,38 +118,44 @@ abstract class AppConfigs {
     SearchOption(
       name: 'newSearchbyKeyword'.tr(),
       isSelected: true,
-      searchFunction: (noteList, string) => noteList
-          .where(
-            (note) =>
-                note.event.content.toLowerCase().contains(string.toLowerCase()),
-          )
-          .toList(),
+      searchFunction: (noteList, string) => noteList.where(
+        (note) {
+          return note.event.content!
+              .toLowerCase()
+              .contains(string.toLowerCase());
+        },
+      ).toList(),
       useSearchQuery: true,
     ),
     SearchOption(
       name: 'newSearchByDate'.tr(),
       isSelected: false,
-      searchFunction: (noteList, string) => noteList
-          .where(
-            (note) =>
-                note.event.createdAt.toString().contains(string) ||
-                note.event.createdAt.millisecondsSinceEpoch
-                    .toString()
-                    .contains(string),
-          )
-          .toList(),
+      searchFunction: (noteList, string) => noteList.where((note) {
+        if (note.event.createdAt == null) {
+          return false;
+        }
+
+        return note.event.createdAt.toString().contains(string) ||
+            note.event.createdAt!.millisecondsSinceEpoch
+                .toString()
+                .contains(string);
+      }).toList(),
       useSearchQuery: true,
     ),
     SearchOption(
       name: 'newSearchByHashtag'.tr(),
       isSelected: false,
-      searchFunction: (noteList, string) => noteList
-          .where(
-            (note) => note.event.content
-                .toLowerCase()
-                .contains('#$string'.toLowerCase()),
-          )
-          .toList(),
+      searchFunction: (noteList, string) {
+        return noteList.where((note) {
+          if (note.event.content == null) {
+            return false;
+          }
+
+          return note.event.content!.toLowerCase().contains(
+                '#$string'.toLowerCase(),
+              );
+        }).toList();
+      },
       useSearchQuery: true,
     ),
     SearchOption(
@@ -163,7 +169,8 @@ abstract class AppConfigs {
       name: 'az'.tr(),
       isSelected: true,
       searchFunction: (noteList, string) {
-        noteList.sort((a, b) => a.event.content.compareTo(b.event.content));
+        noteList.sort((a, b) => a.event.content!.compareTo(b.event.content!));
+
         return noteList;
       },
       useSearchQuery: true,

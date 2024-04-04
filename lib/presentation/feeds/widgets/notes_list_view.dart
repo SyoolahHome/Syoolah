@@ -45,7 +45,7 @@ class NotesListView extends StatelessWidget {
     } else {
       notesToUse = notesToUse.excludeCommentNotes();
     }
-    notesToUse.sort((a, b) => b.event.createdAt.compareTo(a.event.createdAt));
+    notesToUse.sort((a, b) => b.event.createdAt!.compareTo(a.event.createdAt!));
 
     final String appCurrentUserPublicKey =
         Nostr.instance.keysService.derivePublicKey(

@@ -66,7 +66,7 @@ class UsersListToFollow extends StatelessWidget {
                     final current = state.pubKeysMetadata[index];
                     final metadata = UserMetaData.fromJson(
                       jsonData:
-                          jsonDecode(current.content) as Map<String, dynamic>,
+                          jsonDecode(current.content!) as Map<String, dynamic>,
                       sourceNostrEvent: current,
                     );
 

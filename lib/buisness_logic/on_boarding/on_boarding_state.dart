@@ -10,6 +10,7 @@ class OnBoardingState extends Equatable {
   /// The searched user.
   final Map<String, List<NostrEvent>> searchedUserEvents;
 
+  final String searchQuery;
 
   /// An error if it exists.
   final String? error;
@@ -32,6 +33,7 @@ class OnBoardingState extends Equatable {
     this.searchedUserEvents = const {},
     this.error,
     this.searchingForUser = false,
+    this.searchQuery = "",
   });
 
   /// {@macro on_boarding_state}
@@ -40,8 +42,10 @@ class OnBoardingState extends Equatable {
     Map<String, List<NostrEvent>>? searchedUserEvents,
     String? error,
     bool? searchingForUser,
+    String? searchQuery,
   }) {
     return OnBoardingState(
+      searchQuery: searchQuery ?? this.searchQuery,
       shouldShowSearchButton:
           shouldShowSearchButton ?? this.shouldShowSearchButton,
       searchedUserEvents: searchedUserEvents ?? this.searchedUserEvents,

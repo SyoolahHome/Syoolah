@@ -13,8 +13,9 @@ class FollowingsFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     globalCubit = ModalRoute.of(context)!.settings.arguments as GlobalCubit;
 
-    final followingsPubKeys =
-        globalCubit!.state.currentUserFollowing?.tags.map((e) => e[1]).toList();
+    final followingsPubKeys = globalCubit!.state.currentUserFollowing?.tags!
+        .map((e) => e[1])
+        .toList();
 
     return BlocProvider<GlobalCubit>.value(
       value: globalCubit!,

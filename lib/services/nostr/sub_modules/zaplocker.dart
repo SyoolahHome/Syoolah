@@ -42,9 +42,12 @@ class NostrForZaplocker {
     );
 
     Nostr.instance.relaysService.sendEventToRelays(event);
+    if (event.id == null) {
+      return false;
+    }
 
     final note = await getNostrNote(
-      id: event.id,
+      id: event.id!,
       relays: relays,
     );
 
@@ -105,7 +108,11 @@ class NostrForZaplocker {
     if (fetchedEvent == null) {
       return "time is up";
     } else {
-      return fetchedEvent.content;
+      if (fetchedEvent.content == null) {
+        return "";
+      }
+
+      return fetchedEvent.content!;
     }
   }
 

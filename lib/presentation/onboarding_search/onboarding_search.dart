@@ -128,46 +128,60 @@ class OnBoardingSearch extends StatelessWidget {
                         const SizedBox(height: height * 2),
                         BlocBuilder<OnBoardingCubit, OnBoardingState>(
                           builder: (context, state) {
-                            if (state.searchedUserEvent != null) {
-                              final decoded =
-                                  jsonDecode(state.searchedUserEvent!.content)
-                                      as Map<String, dynamic>;
+                            final sq = state.searchQuery;
 
-                              final searchedUserEventMetadata =
-                                  UserMetaData.fromJson(
-                                jsonData: decoded,
-                                sourceNostrEvent: state.searchedUserEvent!,
-                              );
+                            if (sq.isEmpty) {
+                              return SizedBox.shrink();
+                            }
 
-                              return Column(
-                                children: <Widget>[
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: NoteAvatarAndName(
-                                      appCurrentUserPublicKey:
-                                          appCurrentUserPublicKey ?? "",
-                                      userPubKey:
-                                          state.searchedUserEvent!.pubkey,
-                                      avatarUrl:
-                                          searchedUserEventMetadata.picture!,
-                                      memeberShipStartedAt:
-                                          state.searchedUserEvent!.createdAt,
-                                      nameToShow: searchedUserEventMetadata
-                                          .nameToShow(),
-                                    ),
-                                  ),
-                                  SizedBox(height: height * 2),
-                                  IconButton(
-                                    icon: Icon(FlutterRemix.more_line),
-                                    onPressed: () {
-                                      BottomSheetService
-                                          .showOnBoardingSearchUserMetadataPropertiesSheet(
-                                        context,
-                                        properties: decoded.entries,
-                                      );
-                                    },
-                                  ),
-                                ],
+                            final userEvents = state.searchedUserEvents[sq];
+
+                            if (userEvents != null) {
+                              final decodedUsers = userEvents.map((e) {
+                                final asMap = jsonDecode(e.content!)
+                                    as Map<String, dynamic>;
+                                return UserMetaData.fromJson(
+                                  jsonData: asMap,
+                                  sourceNostrEvent: e,
+                                );
+                              }).toList();
+
+                              return ListView.builder(
+                                itemCount: decodedUsers.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  final current = decodedUsers[index];
+
+                                  return Column(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: NoteAvatarAndName(
+                                          appCurrentUserPublicKey:
+                                              appCurrentUserPublicKey ?? "",
+                                          userPubKey:
+                                              current.userMetadataEvent!.pubkey,
+                                          avatarUrl: current.picture!,
+                                          memeberShipStartedAt: current
+                                              .userMetadataEvent!.createdAt,
+                                          nameToShow: current.nameToShow(),
+                                        ),
+                                      ),
+                                      SizedBox(height: height * 2),
+                                      IconButton(
+                                        icon: Icon(FlutterRemix.more_line),
+                                        onPressed: () {
+                                          BottomSheetService
+                                              .showOnBoardingSearchUserMetadataPropertiesSheet(
+                                            context,
+                                            properties:
+                                                current.toJson().entries,
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
                             } else if (state.searchingForUser) {
                               return Center(child: LoadingWidget());
@@ -176,13 +190,6 @@ class OnBoardingSearch extends StatelessWidget {
                             }
                           },
                         ),
-                        if (kDebugMode)
-                          Center(
-                            child: RoundaboutButton(
-                              onTap: cubit.clearCache,
-                              text: "clear cache (dev)",
-                            ),
-                          ),
                       ],
                     ),
                   ),

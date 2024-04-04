@@ -451,9 +451,6 @@ class NostrServiceSub {
     );
   }
 
-
-
-
   NostrEventsStream nip50Search({
     required String searchQuery,
   }) {
@@ -463,9 +460,8 @@ class NostrServiceSub {
       subscriptionId: randomId,
       filters: [
         NostrFilter(
-        search: searchQuery,  
+          search: searchQuery,
           kinds: const [0],
-
         )
       ],
     );

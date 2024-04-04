@@ -60,7 +60,7 @@ class CommentWidget extends StatelessWidget {
                   ],
                 ),
                 subtitle: Text(
-                  commentEvent.content.capitalized,
+                  commentEvent.content!.capitalized,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 leading: NoteOwnerAvatar(
@@ -72,7 +72,7 @@ class CommentWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     NoteDateOfCreationAgo(
-                      createdAt: commentEvent.createdAt,
+                      createdAt: commentEvent.createdAt!,
                       isSmall: true,
                     ),
                     const SizedBox(width: 5.0),

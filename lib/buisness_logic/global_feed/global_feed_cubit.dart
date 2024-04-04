@@ -137,8 +137,8 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
             return false;
           }
 
-          final isAfter = note.event.createdAt.isAfter(dateRange.start);
-          final isBefore = note.event.createdAt.isBefore(dateRange.end);
+          final isAfter = note.event.createdAt!.isAfter(dateRange.start);
+          final isBefore = note.event.createdAt!.isBefore(dateRange.end);
 
           return isAfter && isBefore;
         }).toList();
@@ -194,7 +194,7 @@ class GlobalFeedCubit extends Cubit<GlobalFeedState> {
           event,
           ...state.feedPosts,
         ];
-        sortedList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        sortedList.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
 
         if (!isClosed) {
           emit(state.copyWith(feedPosts: sortedList.toList()));

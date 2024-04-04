@@ -442,7 +442,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     _userMetadataSubscription = userMetadataStream.stream.listen(
       (event) {
         if (state.metadata == null) {
-          dynamic decoded = jsonDecode(event.content);
+          dynamic decoded = jsonDecode(event.content!);
           decoded = decoded as Map<String, dynamic>;
 
           emit(
@@ -457,10 +457,10 @@ class ProfileCubit extends Cubit<ProfileState> {
           return;
         }
 
-        if (state.metadata!.userMetadataEvent!.createdAt
-                .compareTo(event.createdAt) <
+        if (state.metadata!.userMetadataEvent!.createdAt!
+                .compareTo(event.createdAt!) <
             0) {
-          dynamic decoded = jsonDecode(event.content);
+          dynamic decoded = jsonDecode(event.content!);
           decoded = decoded as Map<String, dynamic>;
 
           emit(

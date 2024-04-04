@@ -36,7 +36,7 @@ class CurrentUserReposts extends UserProfileTab {
                 notes: state.currentUserReposts.map(
                   (e) {
                     final decoded =
-                        jsonDecode(e.content) as Map<String, dynamic>;
+                        jsonDecode(e.content!) as Map<String, dynamic>;
 
                     return Note.fromJson(
                       decoded,

@@ -16,17 +16,13 @@ part 'on_boarding_state.dart';
 /// The responsible cubit about the on boarding UI.
 /// {@endtemplate}
 class OnBoardingCubit extends Cubit<OnBoardingState> {
- 
-
   /// The text field controller where the user can search for users via pubkey or identifier.
   TextEditingController? searchController;
 
   /// The focus node of the [searchController].
   FocusNode? searchNodeFocus;
- 
- final searchSubIds = <String>[];
 
-
+  final searchSubIds = <String>[];
 
   /// {@macro on_boarding_cubit}
   OnBoardingCubit() : super(OnBoardingState.initial()) {
@@ -36,7 +32,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   @override
   Future<void> close() {
     resetSearch();
-  
 
     searchNodeFocus?.dispose();
     searchController?.dispose();
@@ -59,12 +54,13 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   /// if the controller text is empty, it does nothing.
   /// TODO: rafactor and clarify more this code.
   Future<void> executeSearch() async {
-    searchNodeFocus?.unfocus();
-
-closeAllOpenSearchSubs();
-    
-    
     final searchQuery = searchController?.text;
+    if (searchQuery?.isEmpty ?? true) {
+      return;
+    }
+
+    searchNodeFocus?.unfocus();
+    closeAllOpenSearchSubs();
 
     if (searchQuery == null || searchQuery.isEmpty) {
       emit(state.copyWith(error: "searchQueryEmpty".tr()));
@@ -72,17 +68,17 @@ closeAllOpenSearchSubs();
       return;
     }
 
-
-    emit(state.copyWith(searchingForUser: true));
+    emit(state.copyWith(
+      searchingForUser: true,
+      searchQuery: searchQuery,
+    ));
 
     Future.delayed(const Duration(seconds: 5), () {
       emit(state.copyWith(searchingForUser: false));
     });
 
     try {
-        const requiredHexLength = 64;
-        
-
+      const requiredHexLength = 64;
 
       if (searchQuery.contains("@")) {
         const lengthOfEmailElems = 2;
@@ -95,22 +91,14 @@ closeAllOpenSearchSubs();
 
         final pubKey =
             await NostrService.instance.send.getPubKeyFromEmail(searchQuery);
- startListeningToUserMetadata(pubKey);          
-
-      } else if(searchQuery.length == requiredHexLength) {
-
-
-          
-
+        startListeningToUserMetadata(pubKey);
+      } else if (searchQuery.length == requiredHexLength) {
         final pubKey = searchQuery;
 
- startListeningToUserMetadata(pubKey);          
-
-
+        startListeningToUserMetadata(pubKey);
       } else {
-          startNip50Search(searchQuery);
+        startNip50Search(searchQuery);
       }
-
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
@@ -141,7 +129,6 @@ closeAllOpenSearchSubs();
       });
   }
 
-  
   void closeAllOpenSearchSubs() {
     for (final subId in searchSubIds) {
       NostrService.instance.subs.close(subId);
@@ -150,30 +137,27 @@ closeAllOpenSearchSubs();
     searchSubIds.clear();
   }
 
-void startListeningToUserMetadata(String pubKey) {
-    
+  void startListeningToUserMetadata(String pubKey) {
     final sub = NostrService.instance.subs.userMetaData(
       userPubKey: pubKey,
     );
 
-searchSubIds.add(sub.subscriptionId);
+    searchSubIds.add(sub.subscriptionId);
 
     sub.stream.listen((event) {
       emit(state.copyWith(searchedUserEvents: {
         ...state.searchedUserEvents,
-        pubKey:  [event, ...state.searchedUserEvents[pubKey] ?? []],
+        pubKey: [event, ...state.searchedUserEvents[pubKey] ?? []],
       }));
     });
   }
 
   void startNip50Search(String searchQuery) {
-    
-    
     final sub = NostrService.instance.subs.nip50Search(
       searchQuery: searchQuery,
     );
 
-searchSubIds.add(sub.subscriptionId);
+    searchSubIds.add(sub.subscriptionId);
 
     sub.stream.listen((event) {
       emit(state.copyWith(searchedUserEvents: {
@@ -182,7 +166,4 @@ searchSubIds.add(sub.subscriptionId);
       }));
     });
   }
-    
 }
-
-

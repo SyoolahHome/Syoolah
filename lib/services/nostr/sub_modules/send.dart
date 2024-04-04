@@ -113,10 +113,16 @@ class NostrServiceSend {
         Nostr.instance.keysService.generateKeyPairFromExistingPrivateKey(
       LocalDatabase.instance.getPrivateKey()!,
     );
+    if (newEvent.kind == null) {
+      return;
+    }
+    if (newEvent.content == null) {
+      return;
+    }
 
     final ev = NostrEvent.fromPartialData(
-      kind: newEvent.kind,
-      content: newEvent.content,
+      kind: newEvent.kind!,
+      content: newEvent.content!,
       keyPairs: keyPairs,
       tags: newEvent.tags,
     );
@@ -138,13 +144,16 @@ class NostrServiceSend {
     final nostrKeyPairs = NostrKeyPairs(
       private: LocalDatabase.instance.getPrivateKey()!,
     );
+    if (note.event.id == null) {
+      return;
+    }
 
     final event = NostrEvent.fromPartialData(
       kind: 6,
       keyPairs: nostrKeyPairs,
       content: jsonEncode(note.toJson()),
       tags: [
-        ["e", note.event.id],
+        ["e", note.event.id!],
         ["p", note.event.pubkey],
       ],
     );
@@ -160,12 +169,16 @@ class NostrServiceSend {
       private: LocalDatabase.instance.getPrivateKey()!,
     );
 
+    if (note.event.id == null) {
+      return;
+    }
+
     final event = NostrEvent.fromPartialData(
       kind: 1984,
       keyPairs: nostrKeyPairs,
       content: jsonEncode(note.toJson()),
       tags: [
-        ["e", note.event.id, selectedReportType],
+        ["e", note.event.id!, selectedReportType],
         ["p", note.event.pubkey, selectedReportType],
         ...AppConfigs.categories.map(
           (e) => ["t", e.enumValue.roundaboutName],

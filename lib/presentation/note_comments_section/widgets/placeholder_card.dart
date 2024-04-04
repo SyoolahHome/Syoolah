@@ -39,7 +39,7 @@ class NotePlaceholderCard extends StatelessWidget {
           const SizedBox(height: 15),
           NoteContents(
             youtubeVideosLinks: note.youtubeVideoLinks,
-            heroTag: note.event.id,
+            heroTag: note.event.id!,
             imageLinks: note.imageLinks,
             text: note.noteOnly,
           ),
