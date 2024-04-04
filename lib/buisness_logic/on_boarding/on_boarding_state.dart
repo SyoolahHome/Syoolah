@@ -8,7 +8,8 @@ class OnBoardingState extends Equatable {
   final bool shouldShowSearchButton;
 
   /// The searched user.
-  final NostrEvent? searchedUserEvent;
+  final Map<String, List<NostrEvent>> searchedUserEvents;
+
 
   /// An error if it exists.
   final String? error;
@@ -20,7 +21,7 @@ class OnBoardingState extends Equatable {
   @override
   List<Object?> get props => [
         shouldShowSearchButton,
-        searchedUserEvent,
+        searchedUserEvents,
         error,
         searchingForUser,
       ];
@@ -28,7 +29,7 @@ class OnBoardingState extends Equatable {
   /// {@macro on_boarding_state}
   const OnBoardingState({
     this.shouldShowSearchButton = false,
-    this.searchedUserEvent,
+    this.searchedUserEvents = const {},
     this.error,
     this.searchingForUser = false,
   });
@@ -36,14 +37,14 @@ class OnBoardingState extends Equatable {
   /// {@macro on_boarding_state}
   OnBoardingState copyWith({
     bool? shouldShowSearchButton,
-    NostrEvent? searchedUserEvent,
+    Map<String, List<NostrEvent>>? searchedUserEvents,
     String? error,
     bool? searchingForUser,
   }) {
     return OnBoardingState(
       shouldShowSearchButton:
           shouldShowSearchButton ?? this.shouldShowSearchButton,
-      searchedUserEvent: searchedUserEvent,
+      searchedUserEvents: searchedUserEvents ?? this.searchedUserEvents,
       error: error,
       searchingForUser: error != null && this.searchingForUser
           ? false

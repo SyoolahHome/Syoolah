@@ -27,7 +27,7 @@ dependencies:
   flutter_remix:
   hive_flutter:
   equatable:
-  dart_nostr: ^8.1.1
+  dart_nostr: ^8.1.2
   convert:
   image_picker:
   cached_network_image:

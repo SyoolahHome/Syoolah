@@ -450,4 +450,31 @@ class NostrServiceSub {
       request: requestWithFilter,
     );
   }
+
+
+
+
+  NostrEventsStream nip50Search({
+    required String searchQuery,
+  }) {
+    final randomId = randomHexString;
+
+    final requestWithFilter = NostrRequest(
+      subscriptionId: randomId,
+      filters: [
+        NostrFilter(
+        search: searchQuery,  
+          kinds: const [0],
+
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService
+        .startEventsSubscription(request: requestWithFilter);
+  }
+
+  void close(String subscriptionId) {
+    Nostr.instance.relaysService.closeEventsSubscription(subscriptionId);
+  }
 }

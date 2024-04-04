@@ -47,7 +47,11 @@ class CommentWidgetCubit extends Cubit<CommentState> {
         .userMetaData(userPubKey: commentEvent.pubkey)
         .stream
         .listen((event) {
-      final decoded = jsonDecode(event.content) as Map<String, dynamic>;
+          if (event.content == null) {
+            return;
+          }
+
+      final decoded = jsonDecode(event.content!) as Map<String, dynamic>;
       final metadata = UserMetaData.fromJson(
         jsonData: decoded,
         sourceNostrEvent: event,
@@ -59,9 +63,15 @@ class CommentWidgetCubit extends Cubit<CommentState> {
         ));
         return;
       }
+if (state.commentOwnerMetadata?.userMetadataEvent?.createdAt == null) {
+        emit(state.copyWith(
+          commentOwnerMetadata: metadata,
+        ));
+        return;
+      }
 
       if (state.commentOwnerMetadata!.userMetadataEvent!.createdAt
-              .compareTo(event.createdAt) <
+              !.compareTo(event.createdAt!) <
           0) {
         emit(state.copyWith(
           commentOwnerMetadata: metadata,
@@ -82,14 +92,23 @@ class CommentWidgetCubit extends Cubit<CommentState> {
           title: "copyCommentText".tr(),
           icon: FlutterRemix.file_copy_fill,
           onPressed: () {
-            AppUtils.instance.copy(commentEvent.content);
+            if (commentEventOwnerMetadataSub == null) {
+              return;
+            }
+
+            AppUtils.instance.copy(commentEvent.content!);
+            
           },
         ),
         BottomSheetOption(
           title: "copyCommentEventId".tr(),
           icon: FlutterRemix.file_copy_fill,
-          onPressed: () {
-            AppUtils.instance.copy(commentEvent.id);
+          onPressed: () { 
+            if (commentEventOwnerMetadataSub == null) {
+              return;
+            }
+
+            AppUtils.instance.copy(commentEvent.id!);
           },
         ),
       ],

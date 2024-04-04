@@ -16,20 +16,17 @@ part 'on_boarding_state.dart';
 /// The responsible cubit about the on boarding UI.
 /// {@endtemplate}
 class OnBoardingCubit extends Cubit<OnBoardingState> {
-  /// A public key - metadata nostr event (NIP01) pair caching system
-  static final _cache = <String, NostrEvent>{};
+ 
 
   /// The text field controller where the user can search for users via pubkey or identifier.
   TextEditingController? searchController;
 
   /// The focus node of the [searchController].
   FocusNode? searchNodeFocus;
+ 
+ final searchSubIds = <String>[];
 
-  /// The Nostr stream for the user metadata.
-  NostrEventsStream? userStream;
 
-  /// The stream subscription for the [userStream.stream].
-  StreamSubscription? userSearchSub;
 
   /// {@macro on_boarding_cubit}
   OnBoardingCubit() : super(OnBoardingState.initial()) {
@@ -39,9 +36,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   @override
   Future<void> close() {
     resetSearch();
-    userStream?.close();
-
-    userSearchSub?.cancel();
+  
 
     searchNodeFocus?.dispose();
     searchController?.dispose();
@@ -66,9 +61,9 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   Future<void> executeSearch() async {
     searchNodeFocus?.unfocus();
 
-    _restartSubscription();
-
-    String pubKey;
+closeAllOpenSearchSubs();
+    
+    
     final searchQuery = searchController?.text;
 
     if (searchQuery == null || searchQuery.isEmpty) {
@@ -77,12 +72,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       return;
     }
 
-    if (_cache.containsKey(searchQuery)) {
-      final event = _cache[searchQuery];
-      emit(state.copyWith(searchedUserEvent: event));
-
-      return;
-    }
 
     emit(state.copyWith(searchingForUser: true));
 
@@ -91,6 +80,10 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     });
 
     try {
+        const requiredHexLength = 64;
+        
+
+
       if (searchQuery.contains("@")) {
         const lengthOfEmailElems = 2;
 
@@ -99,27 +92,25 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
           return;
         }
-        pubKey =
+
+        final pubKey =
             await NostrService.instance.send.getPubKeyFromEmail(searchQuery);
+ startListeningToUserMetadata(pubKey);          
+
+      } else if(searchQuery.length == requiredHexLength) {
+
+
+          
+
+        final pubKey = searchQuery;
+
+ startListeningToUserMetadata(pubKey);          
+
+
       } else {
-        const requiredHexLength = 64;
-        if (searchQuery.length != requiredHexLength) {
-          emit(state.copyWith(error: "invalidIdentifierOrPubKey".tr()));
-
-          return;
-        }
-
-        pubKey = searchQuery;
+          startNip50Search(searchQuery);
       }
 
-      userStream = NostrService.instance.subs.userMetadata(pubKey);
-      userSearchSub = userStream!.stream.listen(
-        (event) {
-          emit(state.copyWith(searchedUserEvent: event));
-          _cache[searchQuery] = event;
-          _cache[event.pubkey] = _cache[searchQuery]!;
-        },
-      );
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
     } finally {
@@ -150,18 +141,48 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
       });
   }
 
-  Future<void> _restartSubscription() async {
-    if (userSearchSub != null) {
-      await userSearchSub?.cancel();
-      userSearchSub = null;
+  
+  void closeAllOpenSearchSubs() {
+    for (final subId in searchSubIds) {
+      NostrService.instance.subs.close(subId);
     }
+
+    searchSubIds.clear();
   }
 
-  /// Clears the cache of the [OnBoardingCubit], so we can test the search functionality.
-  @DevOnly()
-  void clearCache() {
-    final cachePassedByRef = _cache;
+void startListeningToUserMetadata(String pubKey) {
+    
+    final sub = NostrService.instance.subs.userMetaData(
+      userPubKey: pubKey,
+    );
 
-    cachePassedByRef.clear();
+searchSubIds.add(sub.subscriptionId);
+
+    sub.stream.listen((event) {
+      emit(state.copyWith(searchedUserEvents: {
+        ...state.searchedUserEvents,
+        pubKey:  [event, ...state.searchedUserEvents[pubKey] ?? []],
+      }));
+    });
   }
+
+  void startNip50Search(String searchQuery) {
+    
+    
+    final sub = NostrService.instance.subs.nip50Search(
+      searchQuery: searchQuery,
+    );
+
+searchSubIds.add(sub.subscriptionId);
+
+    sub.stream.listen((event) {
+      emit(state.copyWith(searchedUserEvents: {
+        ...state.searchedUserEvents,
+        searchQuery: [event, ...state.searchedUserEvents[searchQuery] ?? []],
+      }));
+    });
+  }
+    
 }
+
+

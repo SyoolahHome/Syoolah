@@ -106,7 +106,12 @@ class Nip05VerificationCubit extends Cubit<Nip05VerificationState> {
 
     currentUserMetadataSubscription =
         currentUserMetadata.stream.listen((event) {
-      final decoded = jsonDecode(event.content) as Map<String, dynamic>;
+      if(event.content == null) {
+      debugPrint("No content in event");
+        return;
+      }
+
+      final decoded = jsonDecode(event.content!) as Map<String, dynamic>;
       final metadata = UserMetaData.fromJson(
         jsonData: decoded,
         sourceNostrEvent: event,

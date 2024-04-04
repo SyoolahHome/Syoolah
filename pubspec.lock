@@ -213,10 +213,10 @@ packages:
     dependency: "direct main"
     description:
       name: dart_nostr
-      sha256: "0779fba411f666cf8f58955e93b4b14131a8664447a691b9bd6ef558ec20ed3c"
+      sha256: "138115f2a77d920becc97cf2ef325a5e3ac4c94b1163ef9fbb6bbded845923bf"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.1"
+    version: "8.1.2"
   dart_openai:
     dependency: "direct main"
     description:
