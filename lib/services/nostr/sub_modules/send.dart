@@ -217,4 +217,15 @@ class NostrServiceSend {
   }) {
     throw UnimplementedError();
   }
+
+  Future<bool> sendDirectEvent({
+    required NostrEvent event,
+  }) async {
+    final okCommand = await Nostr.instance.relaysService.sendEventToRelaysAsync(
+      event,
+      timeout: const Duration(seconds: 4),
+    );
+
+    return okCommand.isEventAccepted ?? false;
+  }
 }

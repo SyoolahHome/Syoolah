@@ -315,3 +315,40 @@ extension NostrEventExtension on NostrEvent? {
 extension RoundaboutTopicsExt on RoundaboutTopics {
   String get roundaboutName => "roundabout_app$name";
 }
+
+extension ListListExtension on List<List<String>> {
+  List<List<String>> nostrTags(String tag) {
+    final tags = <List<String>>[];
+
+    try {
+      for (final tagList in this) {
+        if (tagList.first == tag) {
+          tags.add(tagList);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+
+      return tags;
+    }
+
+    return tags;
+  }
+}
+
+extension ListT<T> on List<T> {
+  T? firstWhereOrNull(bool Function(T element) test) {
+    try {
+      for (final element in this) {
+        if (test(element)) {
+          return element;
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+
+      return null;
+    }
+    return null;
+  }
+}

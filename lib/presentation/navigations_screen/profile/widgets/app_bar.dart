@@ -59,6 +59,17 @@ class CustomAppBar extends PreferredSize {
         //   SizedBox(width: 5),
         // ],
         IconButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              Paths.dmsScreen,
+              arguments: {
+                'user_data': userMetadata,
+              },
+            );
+          },
+          icon: Icon(FlutterRemix.message_line),
+        ),
+        IconButton(
           icon: const Icon(FlutterRemix.more_2_line),
           style: IconButton.styleFrom(
             backgroundColor:

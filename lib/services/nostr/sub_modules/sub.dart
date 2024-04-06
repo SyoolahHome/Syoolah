@@ -1,4 +1,6 @@
 import 'package:dart_nostr/dart_nostr.dart';
+import 'package:dart_nostr/nostr/model/ease.dart';
+import 'package:dart_nostr/nostr/model/request/eose.dart';
 import 'package:ditto/services/utils/extensions.dart';
 
 import '../../../constants/app_configs.dart';
@@ -8,6 +10,9 @@ import '../../database/local/local_database.dart';
 
 class NostrServiceSub {
   String get randomHexString => Nostr.instance.utilsService.random64HexChars();
+
+  Object get relayConnectionsLength =>
+      Nostr.instance.relaysService.relaysWebSocketsRegistry.length;
 
   NostrEventsStream userMetadata(String pubKey) {
     final randomId = randomHexString;
@@ -472,5 +477,99 @@ class NostrServiceSub {
 
   void close(String subscriptionId) {
     Nostr.instance.relaysService.closeEventsSubscription(subscriptionId);
+  }
+
+  NostrEventsStream userDms() {
+    final nostrKeyPairs = NostrKeyPairs(
+      private: LocalDatabase.instance.getPrivateKey()!,
+    );
+
+    final filters = [
+      NostrFilter(
+        kinds: const [4],
+        authors: [nostrKeyPairs.public],
+      ),
+      NostrFilter(
+        kinds: const [4, 1059],
+        p: [nostrKeyPairs.public],
+      ),
+    ];
+
+    final requestWithFilter = NostrRequest(
+      filters: filters,
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  NostrEventsStream userMetadatas(
+    List<String> list,
+  ) {
+    final requestWithFilter = NostrRequest(
+      filters: [
+        NostrFilter(
+          authors: list,
+          kinds: const [0],
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+    );
+  }
+
+  NostrEventsStream multiFilterEvents({
+    required List<NostrFilter> filters,
+    required Null Function(String relay, NostrRequestEoseCommand eose) onEose,
+  }) {
+    final requestWithFilter = NostrRequest(
+      filters: filters,
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+      onEose: onEose,
+    );
+  }
+
+  NostrEventsStream events({
+    List<String>? authors,
+    int? limit,
+    List<String>? e,
+    List<String>? ids,
+    List<int>? kinds,
+    List<String>? p,
+    List<String>? t,
+    List<String>? a,
+    String? search,
+    required void Function(String relay, NostrRequestEoseCommand eose) onEose,
+    DateTime? since,
+    DateTime? until,
+  }) {
+    final requestWithFilter = NostrRequest(
+      filters: [
+        NostrFilter(
+          authors: authors,
+          limit: limit,
+          e: e,
+          ids: ids,
+          kinds: kinds,
+          p: p,
+          t: t,
+          a: a,
+          search: search,
+          since: since,
+          until: until,
+        )
+      ],
+    );
+
+    return Nostr.instance.relaysService.startEventsSubscription(
+      request: requestWithFilter,
+      onEose: onEose,
+    );
   }
 }

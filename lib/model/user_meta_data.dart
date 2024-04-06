@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:equatable/equatable.dart';
 
@@ -151,5 +153,12 @@ class UserMetaData extends Equatable {
       displayName: displayName ?? this.displayName,
       userCreatedAt: userCreatedAt ?? this.userCreatedAt,
     );
+  }
+
+  static UserMetaData fromEvent(NostrEvent event) {
+    final content = event.content!;
+
+    final json = jsonDecode(content) as Map<String, dynamic>;
+    return UserMetaData.fromJson(jsonData: json, sourceNostrEvent: event);
   }
 }

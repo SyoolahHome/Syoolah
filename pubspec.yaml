@@ -53,6 +53,9 @@ dependencies:
   bip39: ^1.0.6
   flutter_tts: ^3.8.5
   just_audio: ^0.9.36
+  cryptography: ^2.7.0
+  flutter_chat_ui: ^1.6.12
+  flutter_chat_types: ^3.6.2
 
 dev_dependencies:
   flutter_test:

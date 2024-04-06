@@ -38,4 +38,5 @@ abstract class Paths {
   static const String lndInfoFrom = "/lndInfoFrom";
   static const String lndCreationSuccess = "/lndCreationSuccess";
   static const String zaplockerDashboard = "/zaplockerDashboard";
+  static const String dmsScreen = "/dmsScreen";
 }

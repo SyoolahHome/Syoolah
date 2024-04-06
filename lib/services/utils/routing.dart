@@ -7,6 +7,7 @@ import 'package:ditto/presentation/auth_choose/auth_choose.dart';
 import 'package:ditto/presentation/bottom_bar_screen/bottom_bar_screen.dart';
 import 'package:ditto/presentation/chat/chat.dart';
 import 'package:ditto/presentation/current_user_keys/current_user_keys.dart';
+import 'package:ditto/presentation/dms/dms_screen.dart';
 import 'package:ditto/presentation/edit_profile/edit_Profile.dart';
 import 'package:ditto/presentation/feeds/following_feed.dart';
 import 'package:ditto/presentation/feeds/global_feed.dart';
@@ -63,6 +64,7 @@ abstract class Routing {
     Paths.lndCreationSuccess: (context) => LndCreationSuccess(),
     Paths.lndLoading: (context) => LndLoading(),
     Paths.zaplockerDashboard: (context) => const ZaplockerDashboard(),
+    Paths.dmsScreen: (context) => DmsScreen(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();
