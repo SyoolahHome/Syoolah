@@ -4,15 +4,16 @@ class KeyField extends StatelessWidget {
   const KeyField({
     super.key,
     required this.text,
-    required this.isPasswordVisible,
+    required this.isVisible,
   });
 
   final String text;
-  final bool isPasswordVisible;
+  final bool isVisible;
+  
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: isPasswordVisible,
+      obscureText: isVisible,
       controller: TextEditingController(text: text),
       style: Theme.of(context).textTheme.labelSmall,
       enabled: false,

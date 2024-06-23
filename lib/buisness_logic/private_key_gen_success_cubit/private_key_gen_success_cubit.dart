@@ -22,9 +22,16 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
 
   /// Toggles the visibility of the private key field.
   void togglePrivateKeyFieldVisibility() {
-    final isPasswordVisible = !state.isPasswordVisible;
+    final isPrivateKeyVisible = !state.isPrivateKeyVisible;
 
-    emit(state.copyWith(isPasswordVisible: isPasswordVisible));
+    emit(state.copyWith(isPrivateKeyVisible: isPrivateKeyVisible));
+  }
+
+  /// Toggles the visibility of the mnemonic field.
+  void toggleMnemonicFieldVisibility() {
+    final isMnemonicVisible = !state.isMnemonicVisible;
+
+    emit(state.copyWith(isMnemonicVisible: isMnemonicVisible));
   }
 
   /// Copies the private key.
@@ -34,39 +41,10 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
       onSuccess: () => SnackBars.text(context, "privateKeyCopied".tr()),
       onError: () => SnackBars.text(context, "error".tr()),
     );
-
-    // TODO: check this once more.
-//
-// //     try {
-// //       await Clipboard.setData(ClipboardData(text: ));
-// //
-// //       return ;
-// //     } catch (e) {
-// //       return SnackBars.text(context, e.toString());
-// //     }
   }
 
   /// Copies the public key.
   void copyPublicKey(BuildContext context) async {
-// //     try {
-// //       final privateKey = LocalDatabase.instance.getPrivateKey();
-// //       if (privateKey == null) {
-// //         return;
-// //       }
-// //
-// //       await Clipboard.setData(
-// //         ClipboardData(
-// //           text: state.publicKey ??
-// //               Nostr.instance.keysService
-// //                   .derivePublicKey(privateKey: privateKey),
-// //         ),
-// //       );
-// //
-// //       return;
-// //     } catch (e) {
-// //       return SnackBars.text(context, e.toString());
-// //     }
-// //
     return AppUtils.instance.copy(
       state.publicKey ??
           Nostr.instance.keysService.derivePublicKey(
@@ -91,14 +69,21 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
   }
 
   void _initKeys() {
+    final mnemonic = LocalDatabase.instance.getMnemonic();
+
     final privateKey = LocalDatabase.instance.getPrivateKey()!;
+
     final publicKey =
         Nostr.instance.keysService.derivePublicKey(privateKey: privateKey);
+
     final nPubKey = Nostr.instance.keysService.encodePublicKeyToNpub(publicKey);
+
     final nsecKey =
         Nostr.instance.keysService.encodePrivateKeyToNsec(privateKey);
+
     emit(
       PrivateKeyGenSuccessInitial(
+        mnemonic: mnemonic,
         privateKey: privateKey,
         publicKey: publicKey,
         nPubKey: nPubKey,
@@ -109,5 +94,9 @@ class PrivateKeyGenSuccessCubit extends Cubit<PrivateKeyGenSuccessState> {
 
   void _init() {
     _initKeys();
+  }
+
+  void markAsBackedUp() {
+    emit(state.copyWith(mnemonicBackedUp: true));
   }
 }

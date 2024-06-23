@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:convert/convert.dart';
 import 'package:dart_nostr/dart_nostr.dart';
 import 'package:ditto/model/sign_up_step_view.dart';
 import 'package:ditto/model/user_meta_data.dart';
+import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/sign_up/widgets/avatar_upload.dart';
 import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/database/local/local_database.dart';
@@ -15,6 +17,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:bip39/bip39.dart' as bip39;
+import 'package:bip32/bip32.dart' as bip32;
 
 import '../../constants/app_enums.dart';
 import '../../presentation/privacy/privacy.dart';
@@ -254,12 +258,23 @@ class AuthCubit extends Cubit<AuthState> {
 
       throw "pleaseEnterName".tr();
     }
+    final mnemonic = bip39.generateMnemonic();
 
-    final newGeneratedPair = NostrKeyPairs.generate();
-    final privateKey = newGeneratedPair.private;
+    final seed = bip39.mnemonicToSeed(mnemonic);
+    final root = bip32.BIP32.fromSeed(seed);
+
+    final path = "m/44'/1237'/0'/0/0";
+    final privateKeyList = root.derivePath(path).privateKey;
+
+    if (privateKeyList == null) {
+      throw Exception('[!] could not derive private key');
+    }
+
+    final privateKey = hex.encode(privateKeyList);
 
     await LocalDatabase.instance.setAuthInformations(
       key: privateKey,
+      mnemonic: mnemonic,
       name: name,
     );
 
@@ -399,28 +414,39 @@ class AuthCubit extends Cubit<AuthState> {
             const iconColorOpacity = 0.05;
 
             return Center(
-              child: IconButton(
-                padding: const EdgeInsets.all(15),
-                onPressed: () {
-                  final val = BottomSheetService.showPrivateKeyGenSuccess(
-                    context,
-                    onCopy: () {
-                      isPrivateKeyCopied = true;
-                      Navigator.of(context).pop();
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RoundaboutButton(
+                    text: "Back up my keys",
+                    onTap: () {
+                      final val = BottomSheetService.showPrivateKeyGenSuccess(
+                        context,
+                        onCopy: () {
+                          isPrivateKeyCopied = true;
+
+                          Navigator.of(context).pop();
+                        },
+                        customText: "youNeedToCopyPrivateKey".tr(),
+                      );
                     },
-                    customText: "youNeedToCopyPrivateKey".tr(),
-                  );
-                },
-                style: IconButton.styleFrom(
-                  backgroundColor: Theme.of(context)
-                      .colorScheme
-                      .background
-                      .withOpacity(iconColorOpacity),
-                ),
-                icon: Icon(
-                  FlutterRemix.eye_2_line,
-                  color: Theme.of(context).iconTheme.color,
-                ),
+                  ),
+
+                  // IconButton(
+                  //   padding: const EdgeInsets.all(15),
+                  //   onPressed: () {},
+                  //   style: IconButton.styleFrom(
+                  //     backgroundColor: Theme.of(context)
+                  //         .colorScheme
+                  //         .background
+                  //         .withOpacity(iconColorOpacity),
+                  //   ),
+                  //   icon: Icon(
+                  //     FlutterRemix.eye_2_line,
+                  //     color: Theme.of(context).iconTheme.color,
+                  //   ),
+                  // ),
+                ],
               ),
             );
           },

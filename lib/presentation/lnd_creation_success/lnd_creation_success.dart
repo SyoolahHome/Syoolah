@@ -62,14 +62,14 @@ class LndCreationSuccess extends StatelessWidget {
                   SizedBox(height: 5),
                   KeyField(
                     text: cubit!.state.username ?? "",
-                    isPasswordVisible: false,
+                    isVisible: false,
                   ),
                   SizedBox(height: 20),
                   Text("lnd_adress".tr()),
                   SizedBox(height: 5),
                   KeyField(
                     text: cubit!.state.lndAddress ?? "",
-                    isPasswordVisible: false,
+                    isVisible: false,
                   ),
                   SizedBox(height: 20),
                   Text("lnurl".tr()),

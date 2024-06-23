@@ -127,7 +127,7 @@ class RoundaboutButton extends StatelessWidget {
                       fontSize: (isSmall ? 11 : 17) + additonalFontSize,
                       fontWeight: FontWeight.w400,
                       fontFamily:
-                          Theme.of(context).textTheme.bodyText1!.fontFamily,
+                          Theme.of(context).textTheme.bodySmall!.fontFamily,
                     ),
                   ),
                 if (text != null && icon != null) const SizedBox(width: 7.5),

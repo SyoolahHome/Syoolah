@@ -41,18 +41,28 @@ class LocalDatabase implements LocalDatabaseBase {
     return setValue("username", name);
   }
 
+  Future<void> setMnemonic(String mnemonic) {
+    return setValue("mnemonic", mnemonic);
+  }
+
   Future<void> setAuthInformations({
     required String key,
     required String name,
+    required String mnemonic,
   }) {
     return Future.wait([
       setPrivateKey(key),
       setName(name),
+      setMnemonic(mnemonic),
     ]);
   }
 
   String? getPrivateKey() {
     return getValue("privateKey") as String?;
+  }
+
+  String? getMnemonic() {
+    return getValue("mnemonic") as String?;
   }
 
   @override

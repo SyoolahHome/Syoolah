@@ -19,7 +19,7 @@ class LNURLKeyField extends StatelessWidget {
       children: <Widget>[
         KeyField(
           text: lnurl,
-          isPasswordVisible: false,
+          isVisible: false,
         ),
         IconButton(
           onPressed: () {

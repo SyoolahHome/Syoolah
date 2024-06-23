@@ -140,17 +140,6 @@ class MessagesListView extends StatelessWidget {
                 );
 
                 return Chat(
-                  theme: Theme.of(context).brightness == Brightness.dark
-                      ? DarkChatTheme(
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
-                          primaryColor: Theme.of(context).primaryColor,
-                        )
-                      : DefaultChatTheme(
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
-                          primaryColor: Theme.of(context).primaryColor,
-                        ),
                   showUserAvatars: true,
                   showUserNames: true,
                   user: currentUserData,

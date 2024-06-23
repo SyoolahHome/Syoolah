@@ -10,6 +10,7 @@ import 'package:ditto/presentation/add_relay/add_relay.dart';
 import 'package:ditto/presentation/feeds/widgets/search.dart';
 import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/presentation/mnemonic_words_backup/mnemonic_words_backup.dart';
 import 'package:ditto/presentation/new_post/add_new_post.dart';
 import 'package:ditto/presentation/private_succes/private_key.dart';
 import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
@@ -236,7 +237,7 @@ abstract class BottomSheetService {
         );
       },
       clipBehavior: Clip.hardEdge,
-      isScrollControlled: false,
+      isScrollControlled: true,
     );
   }
 
@@ -511,6 +512,21 @@ abstract class BottomSheetService {
     return showModalBottomSheet<String>(
       context: context,
       builder: (context) => ElevenLabsVoicesSelection(),
+    );
+  }
+
+  static Future<bool?> mnemonicBackup({
+    required BuildContext context,
+    required String mnemonic,
+  }) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return MnemonicWordsBackUp(
+          mnemonic: mnemonic,
+        );
+      },
     );
   }
 }

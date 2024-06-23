@@ -5,7 +5,13 @@ part of 'private_key_gen_success_cubit.dart';
 /// {@endtemplate}
 class PrivateKeyGenSuccessState extends Equatable {
   /// Weither the passord is visible.
-  final bool isPasswordVisible;
+  final bool isPrivateKeyVisible;
+
+  /// Weither the mnemonic is visible.
+  final bool isMnemonicVisible;
+
+  ///
+  final bool mnemonicBackedUp;
 
   /// The user private key.
   final String? privateKey;
@@ -19,38 +25,53 @@ class PrivateKeyGenSuccessState extends Equatable {
   /// The user nsec key.
   final String? nsecKey;
 
+  ///
+  final String? mnemonic;
+
   @override
   List<Object?> get props => [
-        isPasswordVisible,
+        isPrivateKeyVisible,
+        isMnemonicVisible,
+        mnemonicBackedUp,
         privateKey,
         publicKey,
         nPubKey,
         nsecKey,
+        mnemonic,
       ];
 
   /// {@macro private_key_gen_success_state}
   const PrivateKeyGenSuccessState({
-    this.isPasswordVisible = false,
+    this.isPrivateKeyVisible = false,
+    this.isMnemonicVisible = false,
+    this.mnemonicBackedUp = false,
     this.privateKey,
     this.publicKey,
     this.nPubKey,
     this.nsecKey,
+    this.mnemonic,
   });
 
   /// {@macro private_key_gen_success_state}
   PrivateKeyGenSuccessState copyWith({
-    bool? isPasswordVisible,
+    bool? isPrivateKeyVisible,
     String? privateKey,
     String? publicKey,
     String? nPubKey,
     String? nsecKey,
+    String? mnemonic,
+    bool? isMnemonicVisible,
+    bool? mnemonicBackedUp,
   }) {
     return PrivateKeyGenSuccessState(
       nPubKey: nPubKey ?? this.nPubKey,
       nsecKey: nsecKey ?? this.nsecKey,
-      isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
+      isPrivateKeyVisible: isPrivateKeyVisible ?? this.isPrivateKeyVisible,
       privateKey: privateKey ?? this.privateKey,
       publicKey: publicKey ?? this.publicKey,
+      mnemonic: mnemonic ?? this.mnemonic,
+      isMnemonicVisible: isMnemonicVisible ?? this.isMnemonicVisible,
+      mnemonicBackedUp: mnemonicBackedUp ?? this.mnemonicBackedUp,
     );
   }
 
@@ -67,5 +88,6 @@ class PrivateKeyGenSuccessInitial extends PrivateKeyGenSuccessState {
     super.publicKey,
     super.nPubKey,
     super.nsecKey,
+    super.mnemonic,
   });
 }

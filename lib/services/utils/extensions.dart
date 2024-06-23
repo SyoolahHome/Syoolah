@@ -142,6 +142,14 @@ extension DateTimeExt on DateTime {
 }
 
 extension StringExt on String {
+  String showOnlyFirstChars(int n, {String replaceBy = "-"}) {
+    if (length <= n) {
+      return this;
+    }
+
+    return substring(0, n) + substring(n).replaceAll(RegExp(r'\w'), replaceBy);
+  }
+
   String get titleCapitalized {
     // capitalize all words in title.
     final List<String> words = split(" ");
@@ -337,6 +345,17 @@ extension ListListExtension on List<List<String>> {
 }
 
 extension ListT<T> on List<T> {
+  List<T> shuffleAndGetNRandom(int n) {
+    if (n > length) {
+      throw Exception(
+          "n should be less than or equal to the length of the list");
+    }
+
+    final List<T> shuffledList = List.from(this)..shuffle();
+
+    return shuffledList.sublist(0, n);
+  }
+
   T? firstWhereOrNull(bool Function(T element) test) {
     try {
       for (final element in this) {

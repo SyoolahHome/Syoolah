@@ -56,6 +56,7 @@ dependencies:
   cryptography: ^2.7.0
   flutter_chat_ui: ^1.6.12
   flutter_chat_types: ^3.6.2
+  bip32: ^2.0.0
 
 dev_dependencies:
   flutter_test:

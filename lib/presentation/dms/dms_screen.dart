@@ -6,6 +6,7 @@ import 'package:ditto/presentation/dms/chat_screen_cubit/chat_screen_cubit.dart'
 import 'package:ditto/presentation/dms/messages_list_view.dart';
 import 'package:ditto/services/database/local/local_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DmsScreen extends StatelessWidget {
@@ -42,7 +43,22 @@ class DmsScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(targetUser?.name ?? 'DMS'),
+          leadingWidth: 10,
+          title: Row(
+            children: [
+              SizedBox(width: 10),
+              ClipOval(
+                child: Image.network(
+                  targetUser?.picture ??
+                      UserMetaData.placeholder(name: 'aa').picture!,
+                  height: 40,
+                  width: 40,
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(targetUser?.name ?? 'DMS'),
+            ],
+          ),
         ),
         body: MessagesListView(),
       ),

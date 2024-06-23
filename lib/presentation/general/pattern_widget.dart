@@ -12,19 +12,6 @@ class PatternWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return child;
-
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        image: showPattern
-            ? DecorationImage(
-                image: AssetImage('assets/images/pattern.jpg'),
-                opacity: 0.1,
-                repeat: ImageRepeat.repeat,
-              )
-            : null,
-      ),
-      child: child,
-    );
   }
 }
 
