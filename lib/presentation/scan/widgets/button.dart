@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:ditto/buisness_logic/auth_cubit/auth_cubit.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/services/bottom_sheet/bottom_sheet_service.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+class CustomButtons extends StatelessWidget {
+  const CustomButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,33 +37,56 @@ class CustomButton extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Stack(
-            alignment: Alignment.centerRight,
+          return Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              Stack(
+                alignment: Alignment.centerRight,
+                children: <Widget>[
+                  SizedBox(
+                    width: double.infinity,
+                    child: RoundaboutButton(
+                      onTap: () {
+                        cubit.authenticateWithExistentKey();
+                      },
+                      text: "login".tr(),
+                    ),
+                  ),
+                  if (state.isSavingExistentKey)
+                    Container(
+                      width: 20,
+                      height: 20,
+                      margin: context
+                          .findAncestorWidgetOfExactType<MarginedBody>()!
+                          .margin,
+                      child: CircularProgressIndicator(
+                        color: context
+                            .findAncestorWidgetOfExactType<Scaffold>()!
+                            .backgroundColor,
+                        strokeWidth: 1.75,
+                      ),
+                    ),
+                ],
+              ),
+              SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
-                height: 50,
                 child: RoundaboutButton(
-                  onTap: () {
-                    cubit.authenticateWithExistentKey();
+                  isOnlyBorder: true,
+                  text: "I have my seed phrase".tr(),
+                  onTap: () async {
+                    final privateKey =
+                        await BottomSheetService.privateKeyFromSeedPhrase(
+                            context);
+
+                    if (privateKey is String && privateKey.isNotEmpty) {
+                      cubit.existentKeyController!.text = privateKey;
+
+                      cubit.authenticateWithExistentKey();
+                    }
                   },
-                  text: "login".tr(),
                 ),
               ),
-              if (state.isSavingExistentKey)
-                Container(
-                  width: 20,
-                  height: 20,
-                  margin: context
-                      .findAncestorWidgetOfExactType<MarginedBody>()!
-                      .margin,
-                  child: CircularProgressIndicator(
-                    color: context
-                        .findAncestorWidgetOfExactType<Scaffold>()!
-                        .backgroundColor,
-                    strokeWidth: 1.75,
-                  ),
-                ),
             ],
           );
         },

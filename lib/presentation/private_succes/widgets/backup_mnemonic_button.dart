@@ -35,7 +35,7 @@ class BackUpMnemonicButton extends StatelessWidget {
               onBackedUpSuccess.call();
             }
           },
-          text: "backUpMnemonic".tr(),
+          text: "Back up My Seed Phrase".tr(),
         ),
       ),
     );

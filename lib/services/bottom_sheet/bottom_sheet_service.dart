@@ -15,6 +15,7 @@ import 'package:ditto/presentation/new_post/add_new_post.dart';
 import 'package:ditto/presentation/private_succes/private_key.dart';
 import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
 import 'package:ditto/presentation/profile_options/profile_options.dart';
+import 'package:ditto/presentation/mnemonic_words_backup/seed_phrase_deriver_to_private_key.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -526,6 +527,16 @@ abstract class BottomSheetService {
         return MnemonicWordsBackUp(
           mnemonic: mnemonic,
         );
+      },
+    );
+  }
+
+  static Future<String?> privateKeyFromSeedPhrase(BuildContext context) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return SeedPhrasePromptAndPrivateKeyDeriver();
       },
     );
   }

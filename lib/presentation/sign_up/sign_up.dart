@@ -147,7 +147,9 @@ class SignUp extends StatelessWidget {
                         shouldAllowToForward = false;
                       }
 
-                      if (!shouldAllowToForward) {
+                      if (false 
+                      // ?? !shouldAllowToForward
+                      ) {
                         final val = SnackBars.text(
                           context,
                           current.errorText ?? "finishThisStepFirst".tr(),

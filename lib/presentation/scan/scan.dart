@@ -27,7 +27,7 @@ class ExistentSignUp extends StatelessWidget {
               Spacer(flex: 2),
               KeyField(),
               SizedBox(height: heightSeparator * 2),
-              CustomButton(),
+              CustomButtons(),
               SizedBox(height: heightSeparator * 3),
             ],
           ),

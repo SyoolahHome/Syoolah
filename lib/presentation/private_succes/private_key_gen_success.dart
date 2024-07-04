@@ -48,10 +48,15 @@ class PrivateKeyGenSuccess extends StatelessWidget {
                 const SizedBox(height: heightSeparator * 4),
                 KeySection(onCopy: onCopy),
                 const SizedBox(height: heightSeparator * 4),
-                BlocSelector<PrivateKeyGenSuccessCubit,
-                    PrivateKeyGenSuccessState, String?>(
-                  selector: (state) => state.mnemonic,
-                  builder: (context, mnemonic) {
+                BlocBuilder<PrivateKeyGenSuccessCubit,
+                    PrivateKeyGenSuccessState>(
+                  builder: (context, state) {
+                    if (state.mnemonicBackedUp) {
+                      return const SizedBox.shrink();
+                    }
+
+                    final mnemonic = state.mnemonic;
+
                     if (mnemonic == null || mnemonic.isEmpty) {
                       return const SizedBox.shrink();
                     } else {

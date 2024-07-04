@@ -117,17 +117,20 @@ class RoundaboutButton extends StatelessWidget {
               children: <Widget>[
                 if (customWidget != null) customWidget!,
                 if (text != null)
-                  Text(
-                    text!,
-                    style: TextStyle(
-                      color: isOnlyBorder
-                          ? mainColor ??
-                              Theme.of(context).colorScheme.background
-                          : Theme.of(context).colorScheme.onBackground,
-                      fontSize: (isSmall ? 11 : 17) + additonalFontSize,
-                      fontWeight: FontWeight.w400,
-                      fontFamily:
-                          Theme.of(context).textTheme.bodySmall!.fontFamily,
+                  Flexible(
+                    child: Text(
+                      text!,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: isOnlyBorder
+                            ? mainColor ??
+                                Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.onBackground,
+                        fontSize: (isSmall ? 11 : 17) + additonalFontSize,
+                        fontWeight: FontWeight.w400,
+                        fontFamily:
+                            Theme.of(context).textTheme.bodySmall!.fontFamily,
+                      ),
                     ),
                   ),
                 if (text != null && icon != null) const SizedBox(width: 7.5),

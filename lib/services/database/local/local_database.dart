@@ -47,12 +47,12 @@ class LocalDatabase implements LocalDatabaseBase {
 
   Future<void> setAuthInformations({
     required String key,
-    required String name,
     required String mnemonic,
+    String? name,
   }) {
     return Future.wait([
       setPrivateKey(key),
-      setName(name),
+      if (name != null) setName(name),
       setMnemonic(mnemonic),
     ]);
   }

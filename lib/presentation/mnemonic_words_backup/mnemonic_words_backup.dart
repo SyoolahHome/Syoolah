@@ -3,6 +3,7 @@ import 'package:ditto/presentation/chat/widgets/text_field.dart';
 import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
 import 'package:ditto/presentation/general/widget/margined_body.dart';
+import 'package:ditto/presentation/mnemonic_words_backup/widgets/words_grid_view.dart';
 import 'package:ditto/presentation/profile_options/widgets/profile_title.dart';
 import 'package:ditto/services/utils/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -34,13 +35,18 @@ class MnemonicWordsBackUp extends StatelessWidget {
             body: MarginedBody(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: spaceHeight * 3),
+                  SizedBox(
+                    height:
+                        (spaceHeight * 5) + MediaQuery.of(context).padding.top,
+                  ),
                   ColoredBox(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     child: BottomSheetOptionsTitle(
-                      title: "BackupMnemonic".tr(),
+                      title: "Back up My Seed Phrase".tr(),
                     ),
                   ),
+                  SizedBox(height: spaceHeight * 2),
+                  
                   Expanded(
                     child: BlocBuilder<MnemonicWordsBackUpCubit,
                         MnemonicWordsBackUpState>(
@@ -48,54 +54,20 @@ class MnemonicWordsBackUp extends StatelessWidget {
                         final words = state.mnemonicWords;
                         final visibleWords = state.visibleWords;
 
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: words.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 3.5,
-                          ),
-                          itemBuilder: (context, index) {
-                            final word = words[index];
-                            final isVisible = visibleWords.contains(word);
-                            final enabled = state
-                                    .isConfirmationProcessStarted &&
+                        return MnemonicWordsGridView(
+                          words: words,
+                          onIsEnabled: (word) {
+                            return state.isConfirmationProcessStarted &&
                                 state.randomWordsToInputManually.contains(word);
-
-                            return Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                TextField(
-                                  enabled: enabled,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                  controller: cubit.controllers[word],
-                                  decoration: InputDecoration(
-                                    prefix: Text(
-                                      "${index + 1}.  ",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 10,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      cubit.toggleVisibility(index);
-                                    },
-                                    child: Icon(
-                                      isVisible
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
+                          },
+                          onIsVisible: (word) {
+                            return visibleWords.contains(word);
+                          },
+                          onEyeIconTap: (index) {
+                            cubit.toggleVisibility(index);
+                          },
+                          onGetWordController: (word) {
+                            return cubit.controllers[word];
                           },
                         );
                       },
@@ -111,16 +83,26 @@ class MnemonicWordsBackUp extends StatelessWidget {
                           selector: (state) =>
                               state.randomWordsToInputManually.isEmpty,
                           builder: (context, confirmed) {
-                            return SizedBox(
-                              width: double.infinity,
-                              child: RoundaboutButton(
-                                text: "Confirm",
-                                onTap: confirmed
-                                    ? () {
-                                        Navigator.of(context).pop(true);
-                                      }
-                                    : null,
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  "Please input the missing words above and confirm.",
+                                ),
+                                SizedBox(height: spaceHeight),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: RoundaboutButton(
+                                    text: "Confirm",
+                                    onTap: confirmed
+                                        ? () {
+                                            Navigator.of(context).pop(true);
+                                          }
+                                        : null,
+                                  ),
+                                ),
+                              ],
                             );
                           },
                         );
@@ -146,7 +128,8 @@ class MnemonicWordsBackUp extends StatelessWidget {
                               },
                             ),
                             RoundaboutButton(
-                              text: "I wrote them down".tr(),
+                              text: "I Confirm I Have Written Down My Phrase"
+                                  .tr(),
                               onTap: () {
                                 cubit.startConfirmationProcess();
                               },

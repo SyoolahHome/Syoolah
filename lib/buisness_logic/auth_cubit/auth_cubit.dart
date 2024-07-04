@@ -418,9 +418,14 @@ class AuthCubit extends Cubit<AuthState> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoundaboutButton(
-                    text: "Back up my keys",
-                    onTap: () {
-                      final val = BottomSheetService.showPrivateKeyGenSuccess(
+                    isRounded: true,
+                    isOnlyBorder: true,
+                    iconSize: 27,
+                    text: "Generate & Back up My Keys",
+                    icon: Icons.vpn_key,
+                    onTap: () async {
+                      final val =
+                          await BottomSheetService.showPrivateKeyGenSuccess(
                         context,
                         onCopy: () {
                           isPrivateKeyCopied = true;
