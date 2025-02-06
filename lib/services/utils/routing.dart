@@ -23,6 +23,8 @@ import 'package:ditto/presentation/scan/scan.dart';
 import 'package:ditto/presentation/settings/settings.dart';
 import 'package:ditto/presentation/sign_up/sign_up.dart';
 import 'package:ditto/presentation/succes_acc_made/succes_acc_made.dart';
+import 'package:ditto/presentation/wallet_two_history_payment_details/wallet_two_history_payment_details.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/history_page.dart';
 import 'package:ditto/services/utils/paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../buisness_logic/bottom_bar/bottom_bar_cubit.dart';
@@ -65,6 +67,9 @@ abstract class Routing {
     Paths.lndLoading: (context) => LndLoading(),
     Paths.zaplockerDashboard: (context) => const ZaplockerDashboard(),
     Paths.dmsScreen: (context) => DmsScreen(),
+    Paths.walletV2History: (context) => const WalletTwoHistory(),
+    Paths.historyPaymentDetails: (context) =>
+        const WalletTwoHistoryPaymentDetails(),
   };
 
   static final homePageAfterLoginCubit = HomePageAfterLoginCubit();

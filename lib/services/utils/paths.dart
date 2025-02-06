@@ -11,6 +11,8 @@ abstract class Paths {
     }
   }
 
+  static const String historyPaymentDetails = "/historyPaymentDetails";
+  static const String walletV2History = '/walletV2History';
   static const String lndLoading = '/lndLoading';
   static const String authChoose = '/auth_choose';
   static const String existentSignUp = '/existentSignUp';

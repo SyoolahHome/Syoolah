@@ -279,6 +279,6 @@ abstract class AppConfigs {
   static DateTime get feedDateRangePickerLastDate => DateTime.now();
 
   static bool enableTranslation = true;
-  static bool enableLnd = false;
+  static bool enableLnd = true;
   static bool enableDms = true;
 }

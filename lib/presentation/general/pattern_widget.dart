@@ -24,10 +24,12 @@ class PatternScaffold extends StatelessWidget {
   final Widget body;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: PatternWidget(
-        child: body,
+    return ScaffoldMessenger(
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: PatternWidget(
+          child: body,
+        ),
       ),
     );
   }

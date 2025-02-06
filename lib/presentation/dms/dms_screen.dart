@@ -43,10 +43,11 @@ class DmsScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 10,
+          automaticallyImplyLeading: false,
+          leadingWidth: 0,
           title: Row(
             children: [
-              SizedBox(width: 10),
+              BackButton(),
               ClipOval(
                 child: Image.network(
                   targetUser?.picture ??

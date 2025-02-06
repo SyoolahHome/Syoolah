@@ -151,6 +151,7 @@ class ChatMessageWidgetDots extends StatelessWidget {
   });
 
   final ChatMessage message;
+  
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ChatCubit>();

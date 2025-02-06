@@ -1,26 +1,43 @@
 import 'dart:math';
 
+import 'package:dart_nostr/dart_nostr.dart';
 import 'package:dart_nostr/nostr/model/relay_informations.dart';
 import 'package:ditto/buisness_logic/global_feed/global_feed_cubit.dart';
 import 'package:ditto/model/bottom_sheet_option.dart';
 import 'package:ditto/model/chat_message.dart';
 import 'package:ditto/model/note.dart';
+import 'package:ditto/model/phoenixD_node_info.dart';
 import 'package:ditto/model/relay_configuration.dart';
 import 'package:ditto/presentation/add_relay/add_relay.dart';
 import 'package:ditto/presentation/feeds/widgets/search.dart';
 import 'package:ditto/presentation/general/pattern_widget.dart';
 import 'package:ditto/presentation/general/widget/button.dart';
+import 'package:ditto/presentation/lnd/widgets/mint_url_prompt.dart';
+import 'package:ditto/presentation/lnd/widgets/npub_cash_claim_username.dart';
+import 'package:ditto/presentation/lnd/widgets/npub_cash_payment_invoice.dart';
+import 'package:ditto/presentation/lnd/widgets/npub_cash_payment_page.dart';
+import 'package:ditto/presentation/lnd/widgets/npub_cash_proofs_claim_render.dart';
 import 'package:ditto/presentation/mnemonic_words_backup/mnemonic_words_backup.dart';
 import 'package:ditto/presentation/new_post/add_new_post.dart';
 import 'package:ditto/presentation/private_succes/private_key.dart';
 import 'package:ditto/presentation/private_succes/private_key_gen_success.dart';
 import 'package:ditto/presentation/profile_options/profile_options.dart';
 import 'package:ditto/presentation/mnemonic_words_backup/seed_phrase_deriver_to_private_key.dart';
+import 'package:ditto/presentation/qr_code_scanner/qr_code_scanner.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/node_info_view.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/select_deposit_method.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/user_bolt11_prompt.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/user_bolt12_prompt.dart';
+import 'package:ditto/presentation/wallet_v2/widgets/withdraw_manual_input.dart';
 import 'package:ditto/services/utils/app_utils.dart';
 import 'package:ditto/services/utils/paths.dart';
+import 'package:ditto/services/utils/snackbars.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:http/src/response.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../buisness_logic/lnd/lnd_cubit.dart';
 import '../../constants/app_enums.dart';
@@ -537,6 +554,249 @@ abstract class BottomSheetService {
       isScrollControlled: true,
       builder: (context) {
         return SeedPhrasePromptAndPrivateKeyDeriver();
+      },
+    );
+  }
+
+  static Future<String?> tryClaimNpubCashUsername(
+    BuildContext context, {
+    required String domain,
+  }) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return NpubCashClaimUsername(
+          domain: domain,
+        );
+      },
+    );
+  }
+
+  static Future<bool?> showNpubCashPaymentRequest(
+    BuildContext context, {
+    required String invoice,
+    required String paymentToken,
+    required String fullDomain,
+    required NostrKeyPairs keyPair,
+    required String username,
+  }) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      isDismissible: false,
+      isScrollControlled: true,
+      builder: (context) {
+        return NpubCashPaymentInvoice(
+          invoice: invoice,
+          paymentToken: paymentToken,
+          fullDomain: fullDomain,
+          keyPair: keyPair,
+          username: username,
+        );
+      },
+    );
+  }
+
+  static Future<dynamic> handleProofsRenderingFromResponse(
+    BuildContext context, {
+    required Map<String, dynamic> data,
+    required int statusCode,
+    required NostrKeyPairs keyPair,
+    required String fullDomain,
+    required ProofsType type,
+  }) async {
+    return showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return NpubCashProofsClaimRender(
+          type: type,
+          data: data,
+          statusCode: statusCode,
+          keyPair: keyPair,
+          fullDomain: fullDomain,
+        );
+      },
+    );
+  }
+
+  static Future<dynamic> openPaymentPageAndQrCode(
+    BuildContext context, {
+    required String address,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return MyNpubCashPaymentPage(
+          address: address,
+        );
+      },
+    );
+  }
+
+  static Future<String?> promptNewMintUrl(
+    BuildContext context, {
+    required String? defaultMint,
+  }) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return MintUrlPrompt(
+          defaultMint: defaultMint,
+        );
+      },
+    );
+  }
+
+  static Future<(int, String)?> getBolt11InvoiceAmountAndDescription(
+    BuildContext context, {
+    required String initialDescription,
+    required bool enableMessageField,
+  }) async {
+    return showModalBottomSheet<(int, String)>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return UserBolt11InvoicePrompt(
+          initialDescription: initialDescription,
+          enableMessageField: enableMessageField,
+        );
+      },
+    );
+  }
+
+  static Future<void> presentTextValueAsQrCode(
+    BuildContext context, {
+    String? title,
+    required String value,
+  }) {
+    final heightSpace = 10.0;
+
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return PatternScaffold(
+          body: Builder(
+            builder: (context) {
+              return Container(
+                padding: EdgeInsets.all(MarginedBody.defaultMargin.left),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(height: heightSpace * 2),
+                    BottomSheetTitleWithIconButton(
+                      title: title ?? "",
+                    ),
+                    SizedBox(height: heightSpace * 2),
+                    Center(
+                      child: MarginedBody(
+                        child: QrImageView(
+                          data: value.toUpperCase(),
+                          version: QrVersions.auto,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: heightSpace * 2),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RoundaboutButton(
+                        text: "Copy to clipboard",
+                        onTap: () {
+                          AppUtils.instance.copy(
+                            value,
+                            onSuccess: () {
+                              SnackBars.text(context, "Copied to clipboard!");
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: heightSpace * 2),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  static Future<String?> promptUserForBolt12Offer(BuildContext context) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return UserBolt12OfferPrompt();
+      },
+    );
+  }
+
+  static Future<WalletV2DepositType?> promptUserToSelectDepositMethod(
+    BuildContext context,
+  ) async {
+    return showModalBottomSheet<WalletV2DepositType>(
+      context: context,
+      builder: (context) {
+        return UserEnumSelection(
+          title: "Select Your Deposit\nMethod",
+          enumValues: WalletV2DepositType.values.toList(),
+        );
+      },
+    );
+  }
+
+  static Future<WalletV2WithdrawType?> promptUserToSelectWithdrawMethod(
+    BuildContext context,
+  ) async {
+    return showModalBottomSheet<WalletV2WithdrawType>(
+      context: context,
+      builder: (context) {
+        return UserEnumSelection(
+          title: "Select Your Withdraw\nMethod",
+          enumValues: WalletV2WithdrawType.values.toList(),
+        );
+      },
+    );
+  }
+
+  static Future<String?> promptUserWithWithdrawInput(
+    BuildContext context,
+  ) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return WalletV2WithdrawInput();
+      },
+    );
+  }
+
+  static Future<void> presentNodeInfo(
+    BuildContext context, {
+    required PhoenixDNodeInfo nodeInfo,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return PhoenixDNodeInfoView(
+          nodeInfo: nodeInfo,
+        );
+      },
+    );
+  }
+
+  static Future<String?> scanQrCode(BuildContext context) async {
+    return showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return QrCodeScanner();
       },
     );
   }

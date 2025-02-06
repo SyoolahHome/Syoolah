@@ -87,6 +87,14 @@ extension NotesListExtension on List<Note> {
 }
 
 extension DateTimeExt on DateTime {
+  String ago() {
+    return timeago.format(
+      this,
+      allowFromNow: true,
+      locale: "en_short",
+    );
+  }
+
   String toReadableString(String locale) {
     return timeago.format(
       this,
@@ -142,6 +150,18 @@ extension DateTimeExt on DateTime {
 }
 
 extension StringExt on String {
+  String summarizeBothSides(int length) {
+    // write function that will show only first 5 and last 5 characters of the string.
+    if (length >= this.length) {
+      return this;
+    }
+    final halfLength = length ~/ 2;
+
+    return this.substring(0, halfLength) +
+        "..." +
+        this.substring(this.length - halfLength);
+  }
+
   String showOnlyFirstChars(int n, {String replaceBy = "-"}) {
     if (length <= n) {
       return this;
@@ -370,4 +390,8 @@ extension ListT<T> on List<T> {
     }
     return null;
   }
+}
+
+extension IntExt on int {
+  bool get isHttpStatusCodeOk => this >= 200 && this < 300;
 }
